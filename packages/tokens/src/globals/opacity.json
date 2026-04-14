@@ -1,0 +1,39 @@
+{
+  "opacity": {
+    "disabled": {
+      "$description": "Opacity scale disabled",
+      "$type": "number",
+      "$value": 0.4
+    },
+    "faint": {
+      "$description": "Opacity scale faint",
+      "$type": "number",
+      "$value": 0.08
+    },
+    "muted": {
+      "$description": "Opacity scale muted",
+      "$type": "number",
+      "$value": 0.12
+    },
+    "soft": {
+      "$description": "Opacity scale soft",
+      "$type": "number",
+      "$value": 0.18
+    },
+    "medium": {
+      "$description": "Opacity scale medium",
+      "$type": "number",
+      "$value": 0.24
+    },
+    "scrim": {
+      "$description": "Opacity scale scrim",
+      "$type": "number",
+      "$value": 0.56
+    },
+    "strong": {
+      "$description": "Opacity scale strong",
+      "$type": "number",
+      "$value": 0.72
+    }
+  }
+}

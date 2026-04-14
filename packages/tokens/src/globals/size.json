@@ -1,0 +1,114 @@
+{
+  "size": {
+    "icon": {
+      "xs": {
+        "$description": "Icon sizing xs",
+        "$type": "dimension",
+        "$value": {
+          "unit": "px",
+          "value": 12
+        }
+      },
+      "sm": {
+        "$description": "Icon sizing sm",
+        "$type": "dimension",
+        "$value": {
+          "unit": "px",
+          "value": 16
+        }
+      },
+      "md": {
+        "$description": "Icon sizing md",
+        "$type": "dimension",
+        "$value": {
+          "unit": "px",
+          "value": 20
+        }
+      },
+      "lg": {
+        "$description": "Icon sizing lg",
+        "$type": "dimension",
+        "$value": {
+          "unit": "px",
+          "value": 24
+        }
+      },
+      "xl": {
+        "$description": "Icon sizing xl",
+        "$type": "dimension",
+        "$value": {
+          "unit": "px",
+          "value": 32
+        }
+      },
+      "2xl": {
+        "$description": "Icon sizing 2xl",
+        "$type": "dimension",
+        "$value": {
+          "unit": "px",
+          "value": 40
+        }
+      }
+    },
+    "measure": {
+      "compact": {
+        "$description": "Measure sizing compact",
+        "$type": "dimension",
+        "$value": {
+          "unit": "px",
+          "value": 480
+        }
+      },
+      "content": {
+        "$description": "Measure sizing content",
+        "$type": "dimension",
+        "$value": {
+          "unit": "px",
+          "value": 720
+        }
+      },
+      "prose": {
+        "$description": "Measure sizing prose",
+        "$type": "dimension",
+        "$value": {
+          "unit": "px",
+          "value": 760
+        }
+      },
+      "wide": {
+        "$description": "Measure sizing wide",
+        "$type": "dimension",
+        "$value": {
+          "unit": "px",
+          "value": 1200
+        }
+      }
+    },
+    "touch": {
+      "comfortable": {
+        "$description": "Touch sizing comfortable",
+        "$type": "dimension",
+        "$value": {
+          "unit": "px",
+          "value": 44
+        }
+      },
+      "minimum": {
+        "$description": "Touch sizing minimum",
+        "$type": "dimension",
+        "$value": {
+          "unit": "px",
+          "value": 44
+        }
+      },
+      "spacious": {
+        "$description": "Touch sizing spacious",
+        "$type": "dimension",
+        "$value": {
+          "unit": "px",
+          "value": 48
+        }
+      }
+    }
+  }
+}

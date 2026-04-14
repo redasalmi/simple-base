@@ -1,0 +1,816 @@
+{
+  "family": {
+    "mono": {
+      "$description": "Monospace family",
+      "$type": "fontFamily",
+      "$value": "IBM Plex Mono"
+    },
+    "sans": {
+      "$description": "Primary sans-serif family",
+      "$type": "fontFamily",
+      "$value": "Manrope"
+    }
+  },
+  "line": {
+    "14": {
+      "$description": "Line height scale 14",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 14
+      }
+    },
+    "16": {
+      "$description": "Line height scale 16",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 16
+      }
+    },
+    "18": {
+      "$description": "Line height scale 18",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 18
+      }
+    },
+    "20": {
+      "$description": "Line height scale 20",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 20
+      }
+    },
+    "22": {
+      "$description": "Line height scale 22",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 22
+      }
+    },
+    "24": {
+      "$description": "Line height scale 24",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 24
+      }
+    },
+    "26": {
+      "$description": "Line height scale 26",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 26
+      }
+    },
+    "28": {
+      "$description": "Line height scale 28",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 28
+      }
+    },
+    "32": {
+      "$description": "Line height scale 32",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 32
+      }
+    },
+    "36": {
+      "$description": "Line height scale 36",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 36
+      }
+    },
+    "40": {
+      "$description": "Line height scale 40",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 40
+      }
+    },
+    "48": {
+      "$description": "Line height scale 48",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 48
+      }
+    },
+    "56": {
+      "$description": "Line height scale 56",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 56
+      }
+    },
+    "64": {
+      "$description": "Line height scale 64",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 64
+      }
+    },
+    "72": {
+      "$description": "Line height scale 72",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 72
+      }
+    }
+  },
+  "size": {
+    "10": {
+      "$description": "Font size scale 10",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 10
+      }
+    },
+    "11": {
+      "$description": "Font size scale 11",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 11
+      }
+    },
+    "12": {
+      "$description": "Font size scale 12",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 12
+      }
+    },
+    "14": {
+      "$description": "Font size scale 14",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 14
+      }
+    },
+    "16": {
+      "$description": "Font size scale 16",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 16
+      }
+    },
+    "18": {
+      "$description": "Font size scale 18",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 18
+      }
+    },
+    "20": {
+      "$description": "Font size scale 20",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 20
+      }
+    },
+    "24": {
+      "$description": "Font size scale 24",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 24
+      }
+    },
+    "28": {
+      "$description": "Font size scale 28",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 28
+      }
+    },
+    "32": {
+      "$description": "Font size scale 32",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 32
+      }
+    },
+    "40": {
+      "$description": "Font size scale 40",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 40
+      }
+    },
+    "48": {
+      "$description": "Font size scale 48",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 48
+      }
+    },
+    "56": {
+      "$description": "Font size scale 56",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 56
+      }
+    },
+    "64": {
+      "$description": "Font size scale 64",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 64
+      }
+    }
+  },
+  "type": {
+    "display": {
+      "xl": {
+        "fontFamily": {
+          "$description": "Display XL family",
+          "$type": "fontFamily",
+          "$value": "{family.sans}"
+        },
+        "fontSize": {
+          "$description": "Display XL size",
+          "$type": "dimension",
+          "$value": "{size.64}"
+        },
+        "fontWeight": {
+          "$description": "Display XL weight",
+          "$type": "number",
+          "$value": "{weight.bold}"
+        },
+        "letterSpacing": {
+          "$description": "Display XL letter spacing",
+          "$type": "dimension",
+          "$value": {
+            "unit": "px",
+            "value": -2.2
+          }
+        },
+        "lineHeight": {
+          "$description": "Display XL line height",
+          "$type": "dimension",
+          "$value": "{line.72}"
+        }
+      },
+      "lg": {
+        "fontFamily": {
+          "$description": "Display LG family",
+          "$type": "fontFamily",
+          "$value": "{family.sans}"
+        },
+        "fontSize": {
+          "$description": "Display LG size",
+          "$type": "dimension",
+          "$value": "{size.56}"
+        },
+        "fontWeight": {
+          "$description": "Display LG weight",
+          "$type": "number",
+          "$value": "{weight.bold}"
+        },
+        "letterSpacing": {
+          "$description": "Display LG letter spacing",
+          "$type": "dimension",
+          "$value": {
+            "unit": "px",
+            "value": -1.8
+          }
+        },
+        "lineHeight": {
+          "$description": "Display LG line height",
+          "$type": "dimension",
+          "$value": "{line.64}"
+        }
+      }
+    },
+    "headline": {
+      "lg": {
+        "fontFamily": {
+          "$description": "Headline LG family",
+          "$type": "fontFamily",
+          "$value": "{family.sans}"
+        },
+        "fontSize": {
+          "$description": "Headline LG size",
+          "$type": "dimension",
+          "$value": "{size.48}"
+        },
+        "fontWeight": {
+          "$description": "Headline LG weight",
+          "$type": "number",
+          "$value": "{weight.bold}"
+        },
+        "letterSpacing": {
+          "$description": "Headline LG letter spacing",
+          "$type": "dimension",
+          "$value": {
+            "unit": "px",
+            "value": -1.4
+          }
+        },
+        "lineHeight": {
+          "$description": "Headline LG line height",
+          "$type": "dimension",
+          "$value": "{line.56}"
+        }
+      },
+      "md": {
+        "fontFamily": {
+          "$description": "Headline MD family",
+          "$type": "fontFamily",
+          "$value": "{family.sans}"
+        },
+        "fontSize": {
+          "$description": "Headline MD size",
+          "$type": "dimension",
+          "$value": "{size.40}"
+        },
+        "fontWeight": {
+          "$description": "Headline MD weight",
+          "$type": "number",
+          "$value": "{weight.bold}"
+        },
+        "letterSpacing": {
+          "$description": "Headline MD letter spacing",
+          "$type": "dimension",
+          "$value": {
+            "unit": "px",
+            "value": -1.1
+          }
+        },
+        "lineHeight": {
+          "$description": "Headline MD line height",
+          "$type": "dimension",
+          "$value": "{line.48}"
+        }
+      },
+      "sm": {
+        "fontFamily": {
+          "$description": "Headline SM family",
+          "$type": "fontFamily",
+          "$value": "{family.sans}"
+        },
+        "fontSize": {
+          "$description": "Headline SM size",
+          "$type": "dimension",
+          "$value": "{size.32}"
+        },
+        "fontWeight": {
+          "$description": "Headline SM weight",
+          "$type": "number",
+          "$value": "{weight.semibold}"
+        },
+        "letterSpacing": {
+          "$description": "Headline SM letter spacing",
+          "$type": "dimension",
+          "$value": {
+            "unit": "px",
+            "value": -0.8
+          }
+        },
+        "lineHeight": {
+          "$description": "Headline SM line height",
+          "$type": "dimension",
+          "$value": "{line.40}"
+        }
+      }
+    },
+    "title": {
+      "lg": {
+        "fontFamily": {
+          "$description": "Title LG family",
+          "$type": "fontFamily",
+          "$value": "{family.sans}"
+        },
+        "fontSize": {
+          "$description": "Title LG size",
+          "$type": "dimension",
+          "$value": "{size.24}"
+        },
+        "fontWeight": {
+          "$description": "Title LG weight",
+          "$type": "number",
+          "$value": "{weight.semibold}"
+        },
+        "letterSpacing": {
+          "$description": "Title LG letter spacing",
+          "$type": "dimension",
+          "$value": {
+            "unit": "px",
+            "value": -0.6
+          }
+        },
+        "lineHeight": {
+          "$description": "Title LG line height",
+          "$type": "dimension",
+          "$value": "{line.32}"
+        }
+      },
+      "md": {
+        "fontFamily": {
+          "$description": "Title MD family",
+          "$type": "fontFamily",
+          "$value": "{family.sans}"
+        },
+        "fontSize": {
+          "$description": "Title MD size",
+          "$type": "dimension",
+          "$value": "{size.20}"
+        },
+        "fontWeight": {
+          "$description": "Title MD weight",
+          "$type": "number",
+          "$value": "{weight.semibold}"
+        },
+        "letterSpacing": {
+          "$description": "Title MD letter spacing",
+          "$type": "dimension",
+          "$value": {
+            "unit": "px",
+            "value": -0.4
+          }
+        },
+        "lineHeight": {
+          "$description": "Title MD line height",
+          "$type": "dimension",
+          "$value": "{line.28}"
+        }
+      },
+      "sm": {
+        "fontFamily": {
+          "$description": "Title SM family",
+          "$type": "fontFamily",
+          "$value": "{family.sans}"
+        },
+        "fontSize": {
+          "$description": "Title SM size",
+          "$type": "dimension",
+          "$value": "{size.18}"
+        },
+        "fontWeight": {
+          "$description": "Title SM weight",
+          "$type": "number",
+          "$value": "{weight.semibold}"
+        },
+        "letterSpacing": {
+          "$description": "Title SM letter spacing",
+          "$type": "dimension",
+          "$value": {
+            "unit": "px",
+            "value": -0.3
+          }
+        },
+        "lineHeight": {
+          "$description": "Title SM line height",
+          "$type": "dimension",
+          "$value": "{line.26}"
+        }
+      }
+    },
+    "body": {
+      "lg": {
+        "fontFamily": {
+          "$description": "Body LG family",
+          "$type": "fontFamily",
+          "$value": "{family.sans}"
+        },
+        "fontSize": {
+          "$description": "Body LG size",
+          "$type": "dimension",
+          "$value": "{size.16}"
+        },
+        "fontWeight": {
+          "$description": "Body LG weight",
+          "$type": "number",
+          "$value": "{weight.regular}"
+        },
+        "letterSpacing": {
+          "$description": "Body LG letter spacing",
+          "$type": "dimension",
+          "$value": {
+            "unit": "px",
+            "value": 0
+          }
+        },
+        "lineHeight": {
+          "$description": "Body LG line height",
+          "$type": "dimension",
+          "$value": "{line.24}"
+        }
+      },
+      "md": {
+        "fontFamily": {
+          "$description": "Body MD family",
+          "$type": "fontFamily",
+          "$value": "{family.sans}"
+        },
+        "fontSize": {
+          "$description": "Body MD size",
+          "$type": "dimension",
+          "$value": "{size.14}"
+        },
+        "fontWeight": {
+          "$description": "Body MD weight",
+          "$type": "number",
+          "$value": "{weight.regular}"
+        },
+        "letterSpacing": {
+          "$description": "Body MD letter spacing",
+          "$type": "dimension",
+          "$value": {
+            "unit": "px",
+            "value": 0
+          }
+        },
+        "lineHeight": {
+          "$description": "Body MD line height",
+          "$type": "dimension",
+          "$value": "{line.22}"
+        }
+      },
+      "sm": {
+        "fontFamily": {
+          "$description": "Body SM family",
+          "$type": "fontFamily",
+          "$value": "{family.sans}"
+        },
+        "fontSize": {
+          "$description": "Body SM size",
+          "$type": "dimension",
+          "$value": "{size.12}"
+        },
+        "fontWeight": {
+          "$description": "Body SM weight",
+          "$type": "number",
+          "$value": "{weight.regular}"
+        },
+        "letterSpacing": {
+          "$description": "Body SM letter spacing",
+          "$type": "dimension",
+          "$value": {
+            "unit": "px",
+            "value": 0
+          }
+        },
+        "lineHeight": {
+          "$description": "Body SM line height",
+          "$type": "dimension",
+          "$value": "{line.18}"
+        }
+      }
+    },
+    "label": {
+      "lg": {
+        "fontFamily": {
+          "$description": "Label LG family",
+          "$type": "fontFamily",
+          "$value": "{family.sans}"
+        },
+        "fontSize": {
+          "$description": "Label LG size",
+          "$type": "dimension",
+          "$value": "{size.14}"
+        },
+        "fontWeight": {
+          "$description": "Label LG weight",
+          "$type": "number",
+          "$value": "{weight.semibold}"
+        },
+        "letterSpacing": {
+          "$description": "Label LG letter spacing",
+          "$type": "dimension",
+          "$value": {
+            "unit": "px",
+            "value": 0.1
+          }
+        },
+        "lineHeight": {
+          "$description": "Label LG line height",
+          "$type": "dimension",
+          "$value": "{line.20}"
+        }
+      },
+      "md": {
+        "fontFamily": {
+          "$description": "Label MD family",
+          "$type": "fontFamily",
+          "$value": "{family.sans}"
+        },
+        "fontSize": {
+          "$description": "Label MD size",
+          "$type": "dimension",
+          "$value": "{size.12}"
+        },
+        "fontWeight": {
+          "$description": "Label MD weight",
+          "$type": "number",
+          "$value": "{weight.semibold}"
+        },
+        "letterSpacing": {
+          "$description": "Label MD letter spacing",
+          "$type": "dimension",
+          "$value": {
+            "unit": "px",
+            "value": 0.2
+          }
+        },
+        "lineHeight": {
+          "$description": "Label MD line height",
+          "$type": "dimension",
+          "$value": "{line.16}"
+        }
+      },
+      "sm": {
+        "fontFamily": {
+          "$description": "Label SM family",
+          "$type": "fontFamily",
+          "$value": "{family.sans}"
+        },
+        "fontSize": {
+          "$description": "Label SM size",
+          "$type": "dimension",
+          "$value": "{size.11}"
+        },
+        "fontWeight": {
+          "$description": "Label SM weight",
+          "$type": "number",
+          "$value": "{weight.semibold}"
+        },
+        "letterSpacing": {
+          "$description": "Label SM letter spacing",
+          "$type": "dimension",
+          "$value": {
+            "unit": "px",
+            "value": 0.2
+          }
+        },
+        "lineHeight": {
+          "$description": "Label SM line height",
+          "$type": "dimension",
+          "$value": "{line.16}"
+        }
+      }
+    },
+    "caption": {
+      "md": {
+        "fontFamily": {
+          "$description": "Caption MD family",
+          "$type": "fontFamily",
+          "$value": "{family.sans}"
+        },
+        "fontSize": {
+          "$description": "Caption MD size",
+          "$type": "dimension",
+          "$value": "{size.10}"
+        },
+        "fontWeight": {
+          "$description": "Caption MD weight",
+          "$type": "number",
+          "$value": "{weight.medium}"
+        },
+        "letterSpacing": {
+          "$description": "Caption MD letter spacing",
+          "$type": "dimension",
+          "$value": {
+            "unit": "px",
+            "value": 0.2
+          }
+        },
+        "lineHeight": {
+          "$description": "Caption MD line height",
+          "$type": "dimension",
+          "$value": "{line.14}"
+        }
+      }
+    }
+  },
+  "weight": {
+    "100": {
+      "$description": "Font weight scale 100",
+      "$type": "number",
+      "$value": 100
+    },
+    "200": {
+      "$description": "Font weight scale 200",
+      "$type": "number",
+      "$value": 200
+    },
+    "300": {
+      "$description": "Font weight scale 300",
+      "$type": "number",
+      "$value": 300
+    },
+    "400": {
+      "$description": "Font weight scale 400",
+      "$type": "number",
+      "$value": 400
+    },
+    "500": {
+      "$description": "Font weight scale 500",
+      "$type": "number",
+      "$value": 500
+    },
+    "600": {
+      "$description": "Font weight scale 600",
+      "$type": "number",
+      "$value": 600
+    },
+    "700": {
+      "$description": "Font weight scale 700",
+      "$type": "number",
+      "$value": 700
+    },
+    "800": {
+      "$description": "Font weight scale 800",
+      "$type": "number",
+      "$value": 800
+    },
+    "900": {
+      "$description": "Font weight scale 900",
+      "$type": "number",
+      "$value": 900
+    },
+    "thin": {
+      "$description": "Font weight scale thin",
+      "$type": "number",
+      "$value": "{weight.100}"
+    },
+    "extralight": {
+      "$description": "Font weight scale extralight",
+      "$type": "number",
+      "$value": "{weight.200}"
+    },
+    "light": {
+      "$description": "Font weight scale light",
+      "$type": "number",
+      "$value": "{weight.300}"
+    },
+    "normal": {
+      "$description": "Font weight scale normal",
+      "$type": "number",
+      "$value": "{weight.400}"
+    },
+    "bold": {
+      "$description": "Font weight scale bold",
+      "$type": "number",
+      "$value": "{weight.700}"
+    },
+    "extrabold": {
+      "$description": "Font weight scale extrabold",
+      "$type": "number",
+      "$value": "{weight.800}"
+    },
+    "black": {
+      "$description": "Font weight scale black",
+      "$type": "number",
+      "$value": "{weight.900}"
+    },
+    "medium": {
+      "$description": "Font weight scale medium",
+      "$type": "number",
+      "$value": "{weight.500}"
+    },
+    "regular": {
+      "$description": "Font weight scale regular",
+      "$type": "number",
+      "$value": "{weight.400}"
+    },
+    "semibold": {
+      "$description": "Font weight scale semibold",
+      "$type": "number",
+      "$value": "{weight.600}"
+    },
+    "heavy": {
+      "$description": "Font weight scale heavy",
+      "$type": "number",
+      "$value": "{weight.900}"
+    }
+  }
+}

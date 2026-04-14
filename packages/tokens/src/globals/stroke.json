@@ -1,0 +1,52 @@
+{
+  "stroke": {
+    "none": {
+      "$description": "Stroke widths none",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 0
+      }
+    },
+    "hairline": {
+      "$description": "Stroke widths hairline",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 0.5
+      }
+    },
+    "sm": {
+      "$description": "Stroke widths sm",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 1
+      }
+    },
+    "md": {
+      "$description": "Stroke widths md",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 1.5
+      }
+    },
+    "lg": {
+      "$description": "Stroke widths lg",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 2
+      }
+    },
+    "focus": {
+      "$description": "Stroke widths focus",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 3
+      }
+    }
+  }
+}

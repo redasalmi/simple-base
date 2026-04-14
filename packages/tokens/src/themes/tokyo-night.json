@@ -1,0 +1,1022 @@
+{
+  "action": {
+    "primary": {
+      "$description": "Semantic color brand",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.478431,
+          0.635294,
+          0.968627
+        ],
+        "hex": "#7AA2F7"
+      }
+    },
+    "primary-hover": {
+      "$description": "Semantic color brand-hover",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.521569,
+          0.662745,
+          0.972549
+        ],
+        "hex": "#85A9F8"
+      }
+    },
+    "primary-pressed": {
+      "$description": "Semantic color brand-pressed",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.560784,
+          0.694118,
+          0.972549
+        ],
+        "hex": "#8FB1F8"
+      }
+    },
+    "primary-subtle": {
+      "$description": "Semantic color brand-soft",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.396078,
+          0.517647,
+          0.788235
+        ],
+        "hex": "#6584C9"
+      }
+    },
+    "primary-subtle-hover": {
+      "$description": "Semantic color brand-soft-hover",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.364706,
+          0.478431,
+          0.721569
+        ],
+        "hex": "#5D7AB8"
+      }
+    },
+    "primary-subtle-pressed": {
+      "$description": "Semantic color brand-soft-pressed",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.337255,
+          0.435294,
+          0.658824
+        ],
+        "hex": "#566FA8"
+      }
+    },
+    "disabled": {
+      "$description": "Semantic color disabled",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.141176,
+          0.14902,
+          0.215686
+        ],
+        "hex": "#242637"
+      }
+    },
+    "inverse": {
+      "$description": "Semantic color inverse",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.752941,
+          0.792157,
+          0.960784
+        ],
+        "hex": "#C0CAF5"
+      }
+    },
+    "inverse-hover": {
+      "$description": "Semantic color inverse-hover",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.694118,
+          0.729412,
+          0.882353
+        ],
+        "hex": "#B1BAE1"
+      }
+    },
+    "inverse-pressed": {
+      "$description": "Semantic color inverse-pressed",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.631373,
+          0.666667,
+          0.807843
+        ],
+        "hex": "#A1AACE"
+      }
+    },
+    "neutral": {
+      "$description": "Semantic color neutral",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.196078,
+          0.215686,
+          0.309804
+        ],
+        "hex": "#32374F"
+      }
+    },
+    "neutral-hover": {
+      "$description": "Semantic color neutral-hover",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.254902,
+          0.282353,
+          0.407843
+        ],
+        "hex": "#414868"
+      }
+    },
+    "neutral-pressed": {
+      "$description": "Semantic color neutral-pressed",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.313725,
+          0.341176,
+          0.454902
+        ],
+        "hex": "#505774"
+      }
+    }
+  },
+  "border": {
+    "primary": {
+      "$description": "Semantic color brand",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.478431,
+          0.635294,
+          0.968627
+        ],
+        "hex": "#7AA2F7"
+      }
+    },
+    "default": {
+      "$description": "Semantic color default",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.211765,
+          0.231373,
+          0.337255
+        ],
+        "hex": "#363B56"
+      }
+    },
+    "focus": {
+      "$description": "Semantic color focus",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.478431,
+          0.635294,
+          0.968627
+        ],
+        "hex": "#7AA2F7"
+      }
+    },
+    "strong": {
+      "$description": "Semantic color strong",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.333333,
+          0.364706,
+          0.498039
+        ],
+        "hex": "#555D7F"
+      }
+    },
+    "subtle": {
+      "$description": "Semantic color subtle",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.094118,
+          0.098039,
+          0.137255
+        ],
+        "hex": "#181923"
+      }
+    },
+    "disabled": {
+      "$description": "Semantic color disabled",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.141176,
+          0.14902,
+          0.215686
+        ],
+        "hex": "#242637"
+      }
+    }
+  },
+  "focus": {
+    "ring": {
+      "$description": "Semantic color ring",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.478431,
+          0.635294,
+          0.968627
+        ],
+        "hex": "#7AA2F7"
+      }
+    },
+    "ring-offset": {
+      "$description": "Semantic color ring-offset",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.101961,
+          0.105882,
+          0.14902
+        ],
+        "hex": "#1A1B26"
+      }
+    }
+  },
+  "icon": {
+    "primary-accent": {
+      "$description": "Semantic color brand",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.478431,
+          0.635294,
+          0.968627
+        ],
+        "hex": "#7AA2F7"
+      }
+    },
+    "disabled": {
+      "$description": "Semantic color disabled",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.45098,
+          0.470588,
+          0.576471
+        ],
+        "hex": "#737893"
+      }
+    },
+    "inverse": {
+      "$description": "Semantic color inverse",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.082353,
+          0.086275,
+          0.117647
+        ],
+        "hex": "#15161E"
+      }
+    },
+    "primary": {
+      "$description": "Semantic color primary",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.752941,
+          0.792157,
+          0.960784
+        ],
+        "hex": "#C0CAF5"
+      }
+    },
+    "secondary": {
+      "$description": "Semantic color secondary",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.662745,
+          0.694118,
+          0.839216
+        ],
+        "hex": "#A9B1D6"
+      }
+    },
+    "tertiary": {
+      "$description": "Semantic color tertiary",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.662745,
+          0.694118,
+          0.839216
+        ],
+        "hex": "#A9B1D6"
+      }
+    },
+    "on-primary": {
+      "$description": "Semantic color on-brand",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0,
+          0,
+          0
+        ],
+        "hex": "#000000"
+      }
+    }
+  },
+  "overlay": {
+    "mask": {
+      "$description": "Semantic color mask",
+      "$type": "color",
+      "$value": {
+        "alpha": 0.819608,
+        "colorSpace": "srgb",
+        "components": [
+          0.082353,
+          0.086275,
+          0.117647
+        ],
+        "hex": "#15161E"
+      }
+    },
+    "scrim": {
+      "$description": "Semantic color scrim",
+      "$type": "color",
+      "$value": {
+        "alpha": 0.721569,
+        "colorSpace": "srgb",
+        "components": [
+          0.082353,
+          0.086275,
+          0.117647
+        ],
+        "hex": "#15161E"
+      }
+    }
+  },
+  "status": {
+    "critical": {
+      "border": {
+        "$description": "Semantic color border",
+        "$type": "color",
+        "$value": {
+          "alpha": 1,
+          "colorSpace": "srgb",
+          "components": [
+            0.552941,
+            0.290196,
+            0.360784
+          ],
+          "hex": "#8D4A5C"
+        }
+      },
+      "fill": {
+        "$description": "Semantic color fill",
+        "$type": "color",
+        "$value": {
+          "alpha": 1,
+          "colorSpace": "srgb",
+          "components": [
+            0.968627,
+            0.462745,
+            0.556863
+          ],
+          "hex": "#F7768E"
+        }
+      },
+      "fill-hover": {
+        "$description": "Semantic color fill-hover",
+        "$type": "color",
+        "$value": {
+          "alpha": 1,
+          "colorSpace": "srgb",
+          "components": [
+            0.972549,
+            0.505882,
+            0.592157
+          ],
+          "hex": "#F88197"
+        }
+      },
+      "surface": {
+        "$description": "Semantic color surface",
+        "$type": "color",
+        "$value": {
+          "alpha": 1,
+          "colorSpace": "srgb",
+          "components": [
+            0.776471,
+            0.384314,
+            0.466667
+          ],
+          "hex": "#C66277"
+        }
+      },
+      "text": {
+        "$description": "Semantic color text",
+        "$type": "color",
+        "$value": {
+          "alpha": 1,
+          "colorSpace": "srgb",
+          "components": [
+            0,
+            0,
+            0
+          ],
+          "hex": "#000000"
+        }
+      },
+      "on-fill": {
+        "$description": "Semantic color on-fill",
+        "$type": "color",
+        "$value": {
+          "alpha": 1,
+          "colorSpace": "srgb",
+          "components": [
+            0,
+            0,
+            0
+          ],
+          "hex": "#000000"
+        }
+      }
+    },
+    "info": {
+      "border": {
+        "$description": "Semantic color border",
+        "$type": "color",
+        "$value": {
+          "alpha": 1,
+          "colorSpace": "srgb",
+          "components": [
+            0.301961,
+            0.47451,
+            0.592157
+          ],
+          "hex": "#4D7997"
+        }
+      },
+      "fill": {
+        "$description": "Semantic color fill",
+        "$type": "color",
+        "$value": {
+          "alpha": 1,
+          "colorSpace": "srgb",
+          "components": [
+            0.490196,
+            0.811765,
+            1
+          ],
+          "hex": "#7DCFFF"
+        }
+      },
+      "fill-hover": {
+        "$description": "Semantic color fill-hover",
+        "$type": "color",
+        "$value": {
+          "alpha": 1,
+          "colorSpace": "srgb",
+          "components": [
+            0.529412,
+            0.827451,
+            1
+          ],
+          "hex": "#87D3FF"
+        }
+      },
+      "surface": {
+        "$description": "Semantic color surface",
+        "$type": "color",
+        "$value": {
+          "alpha": 1,
+          "colorSpace": "srgb",
+          "components": [
+            0.403922,
+            0.654902,
+            0.811765
+          ],
+          "hex": "#67A7CF"
+        }
+      },
+      "text": {
+        "$description": "Semantic color text",
+        "$type": "color",
+        "$value": {
+          "alpha": 1,
+          "colorSpace": "srgb",
+          "components": [
+            0,
+            0,
+            0
+          ],
+          "hex": "#000000"
+        }
+      },
+      "on-fill": {
+        "$description": "Semantic color on-fill",
+        "$type": "color",
+        "$value": {
+          "alpha": 1,
+          "colorSpace": "srgb",
+          "components": [
+            0,
+            0,
+            0
+          ],
+          "hex": "#000000"
+        }
+      }
+    },
+    "success": {
+      "border": {
+        "$description": "Semantic color border",
+        "$type": "color",
+        "$value": {
+          "alpha": 1,
+          "colorSpace": "srgb",
+          "components": [
+            0.372549,
+            0.470588,
+            0.286275
+          ],
+          "hex": "#5F7849"
+        }
+      },
+      "fill": {
+        "$description": "Semantic color fill",
+        "$type": "color",
+        "$value": {
+          "alpha": 1,
+          "colorSpace": "srgb",
+          "components": [
+            0.619608,
+            0.807843,
+            0.415686
+          ],
+          "hex": "#9ECE6A"
+        }
+      },
+      "fill-hover": {
+        "$description": "Semantic color fill-hover",
+        "$type": "color",
+        "$value": {
+          "alpha": 1,
+          "colorSpace": "srgb",
+          "components": [
+            0.65098,
+            0.823529,
+            0.462745
+          ],
+          "hex": "#A6D276"
+        }
+      },
+      "surface": {
+        "$description": "Semantic color surface",
+        "$type": "color",
+        "$value": {
+          "alpha": 1,
+          "colorSpace": "srgb",
+          "components": [
+            0.505882,
+            0.654902,
+            0.356863
+          ],
+          "hex": "#81A75B"
+        }
+      },
+      "text": {
+        "$description": "Semantic color text",
+        "$type": "color",
+        "$value": {
+          "alpha": 1,
+          "colorSpace": "srgb",
+          "components": [
+            0,
+            0,
+            0
+          ],
+          "hex": "#000000"
+        }
+      },
+      "on-fill": {
+        "$description": "Semantic color on-fill",
+        "$type": "color",
+        "$value": {
+          "alpha": 1,
+          "colorSpace": "srgb",
+          "components": [
+            0,
+            0,
+            0
+          ],
+          "hex": "#000000"
+        }
+      }
+    },
+    "warning": {
+      "border": {
+        "$description": "Semantic color border",
+        "$type": "color",
+        "$value": {
+          "alpha": 1,
+          "colorSpace": "srgb",
+          "components": [
+            0.505882,
+            0.407843,
+            0.282353
+          ],
+          "hex": "#816848"
+        }
+      },
+      "fill": {
+        "$description": "Semantic color fill",
+        "$type": "color",
+        "$value": {
+          "alpha": 1,
+          "colorSpace": "srgb",
+          "components": [
+            0.878431,
+            0.686275,
+            0.407843
+          ],
+          "hex": "#E0AF68"
+        }
+      },
+      "fill-hover": {
+        "$description": "Semantic color fill-hover",
+        "$type": "color",
+        "$value": {
+          "alpha": 1,
+          "colorSpace": "srgb",
+          "components": [
+            0.886275,
+            0.709804,
+            0.454902
+          ],
+          "hex": "#E2B574"
+        }
+      },
+      "surface": {
+        "$description": "Semantic color surface",
+        "$type": "color",
+        "$value": {
+          "alpha": 1,
+          "colorSpace": "srgb",
+          "components": [
+            0.705882,
+            0.556863,
+            0.34902
+          ],
+          "hex": "#B48E59"
+        }
+      },
+      "text": {
+        "$description": "Semantic color text",
+        "$type": "color",
+        "$value": {
+          "alpha": 1,
+          "colorSpace": "srgb",
+          "components": [
+            0,
+            0,
+            0
+          ],
+          "hex": "#000000"
+        }
+      },
+      "on-fill": {
+        "$description": "Semantic color on-fill",
+        "$type": "color",
+        "$value": {
+          "alpha": 1,
+          "colorSpace": "srgb",
+          "components": [
+            0,
+            0,
+            0
+          ],
+          "hex": "#000000"
+        }
+      }
+    }
+  },
+  "surface": {
+    "default": {
+      "$description": "Semantic color base",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.101961,
+          0.105882,
+          0.14902
+        ],
+        "hex": "#1A1B26"
+      }
+    },
+    "container": {
+      "$description": "Semantic color container",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.196078,
+          0.215686,
+          0.309804
+        ],
+        "hex": "#32374F"
+      }
+    },
+    "container-high": {
+      "$description": "Semantic color container-high",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.254902,
+          0.282353,
+          0.407843
+        ],
+        "hex": "#414868"
+      }
+    },
+    "disabled": {
+      "$description": "Semantic color disabled",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.141176,
+          0.14902,
+          0.215686
+        ],
+        "hex": "#242637"
+      }
+    },
+    "inverse": {
+      "$description": "Semantic color inverse",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.752941,
+          0.792157,
+          0.960784
+        ],
+        "hex": "#C0CAF5"
+      }
+    },
+    "overlay": {
+      "$description": "Semantic color overlay",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.294118,
+          0.321569,
+          0.45098
+        ],
+        "hex": "#4B5273"
+      }
+    },
+    "raised": {
+      "$description": "Semantic color raised",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.156863,
+          0.168627,
+          0.243137
+        ],
+        "hex": "#282B3E"
+      }
+    },
+    "sunken": {
+      "$description": "Semantic color sunken",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.082353,
+          0.086275,
+          0.117647
+        ],
+        "hex": "#15161E"
+      }
+    }
+  },
+  "background": {
+    "default": {
+      "$description": "Semantic color canvas",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.082353,
+          0.086275,
+          0.117647
+        ],
+        "hex": "#15161E"
+      }
+    }
+  },
+  "text": {
+    "primary-accent": {
+      "$description": "Semantic color brand",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.498039,
+          0.65098,
+          0.968627
+        ],
+        "hex": "#7FA6F7"
+      }
+    },
+    "disabled": {
+      "$description": "Semantic color disabled",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.45098,
+          0.470588,
+          0.576471
+        ],
+        "hex": "#737893"
+      }
+    },
+    "inverse": {
+      "$description": "Semantic color inverse",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.082353,
+          0.086275,
+          0.117647
+        ],
+        "hex": "#15161E"
+      }
+    },
+    "on-primary": {
+      "$description": "Semantic color on-brand",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0,
+          0,
+          0
+        ],
+        "hex": "#000000"
+      }
+    },
+    "primary": {
+      "$description": "Semantic color primary",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.752941,
+          0.792157,
+          0.960784
+        ],
+        "hex": "#C0CAF5"
+      }
+    },
+    "secondary": {
+      "$description": "Semantic color secondary",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.662745,
+          0.694118,
+          0.839216
+        ],
+        "hex": "#A9B1D6"
+      }
+    },
+    "tertiary": {
+      "$description": "Semantic color tertiary",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.45098,
+          0.470588,
+          0.576471
+        ],
+        "hex": "#737893"
+      }
+    },
+    "placeholder": {
+      "$description": "Semantic color placeholder",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.45098,
+          0.470588,
+          0.576471
+        ],
+        "hex": "#737893"
+      }
+    }
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "radius": {
+    "none": {
+      "$description": "Radius scale none",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 0
+      }
+    },
+    "xs": {
+      "$description": "Radius scale xs",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 4
+      }
+    },
+    "sm": {
+      "$description": "Radius scale sm",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 8
+      }
+    },
+    "md": {
+      "$description": "Radius scale md",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 12
+      }
+    },
+    "lg": {
+      "$description": "Radius scale lg",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 16
+      }
+    },
+    "xl": {
+      "$description": "Radius scale xl",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 20
+      }
+    },
+    "2xl": {
+      "$description": "Radius scale 2xl",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 28
+      }
+    },
+    "full": {
+      "$description": "Radius scale full",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 999
+      }
+    }
+  }
+}

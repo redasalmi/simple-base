@@ -1,0 +1,124 @@
+{
+  "space": {
+    "0": {
+      "$description": "Space scale 0",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 0
+      }
+    },
+    "2": {
+      "$description": "Space scale 2",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 2
+      }
+    },
+    "4": {
+      "$description": "Space scale 4",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 4
+      }
+    },
+    "6": {
+      "$description": "Space scale 6",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 6
+      }
+    },
+    "8": {
+      "$description": "Space scale 8",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 8
+      }
+    },
+    "12": {
+      "$description": "Space scale 12",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 12
+      }
+    },
+    "16": {
+      "$description": "Space scale 16",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 16
+      }
+    },
+    "24": {
+      "$description": "Space scale 24",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 24
+      }
+    },
+    "32": {
+      "$description": "Space scale 32",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 32
+      }
+    },
+    "40": {
+      "$description": "Space scale 40",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 40
+      }
+    },
+    "48": {
+      "$description": "Space scale 48",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 48
+      }
+    },
+    "64": {
+      "$description": "Space scale 64",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 64
+      }
+    },
+    "80": {
+      "$description": "Space scale 80",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 80
+      }
+    },
+    "96": {
+      "$description": "Space scale 96",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 96
+      }
+    },
+    "128": {
+      "$description": "Space scale 128",
+      "$type": "dimension",
+      "$value": {
+        "unit": "px",
+        "value": 128
+      }
+    }
+  }
+}

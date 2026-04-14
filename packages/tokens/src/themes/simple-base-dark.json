@@ -1,0 +1,1358 @@
+{
+  "action": {
+    "primary": {
+      "$extensions": {
+        "com.figma.aliasData": {
+          "targetVariableName": "color/brand/500",
+          "targetVariableSetName": "Simple Base Colors"
+        }
+      },
+      "$description": "Semantic color brand",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.207843,
+          0.396078,
+          1
+        ],
+        "hex": "#3565FF"
+      }
+    },
+    "primary-hover": {
+      "$extensions": {
+        "com.figma.aliasData": {
+          "targetVariableName": "color/brand/600",
+          "targetVariableSetName": "Simple Base Colors"
+        }
+      },
+      "$description": "Semantic color brand-hover",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.141176,
+          0.294118,
+          0.858824
+        ],
+        "hex": "#244BDB"
+      }
+    },
+    "primary-pressed": {
+      "$extensions": {
+        "com.figma.aliasData": {
+          "targetVariableName": "color/brand/700",
+          "targetVariableSetName": "Simple Base Colors"
+        }
+      },
+      "$description": "Semantic color brand-pressed",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.117647,
+          0.235294,
+          0.686275
+        ],
+        "hex": "#1E3CAF"
+      }
+    },
+    "primary-subtle": {
+      "$description": "Semantic color brand-soft",
+      "$type": "color",
+      "$value": {
+        "alpha": 0.180392,
+        "colorSpace": "srgb",
+        "components": [
+          0.207843,
+          0.396078,
+          1
+        ],
+        "hex": "#3565FF"
+      }
+    },
+    "primary-subtle-hover": {
+      "$description": "Semantic color brand-soft-hover",
+      "$type": "color",
+      "$value": {
+        "alpha": 0.239216,
+        "colorSpace": "srgb",
+        "components": [
+          0.207843,
+          0.396078,
+          1
+        ],
+        "hex": "#3565FF"
+      }
+    },
+    "primary-subtle-pressed": {
+      "$description": "Semantic color brand-soft-pressed",
+      "$type": "color",
+      "$value": {
+        "alpha": 0.321569,
+        "colorSpace": "srgb",
+        "components": [
+          0.207843,
+          0.396078,
+          1
+        ],
+        "hex": "#3565FF"
+      }
+    },
+    "disabled": {
+      "$extensions": {
+        "com.figma.aliasData": {
+          "targetVariableName": "color/neutral/850",
+          "targetVariableSetName": "Simple Base Colors"
+        }
+      },
+      "$description": "Semantic color disabled",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.109804,
+          0.141176,
+          0.192157
+        ],
+        "hex": "#1C2431"
+      }
+    },
+    "inverse": {
+      "$extensions": {
+        "com.figma.aliasData": {
+          "targetVariableName": "color/neutral/0",
+          "targetVariableSetName": "Simple Base Colors"
+        }
+      },
+      "$description": "Semantic color inverse",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          1,
+          1,
+          1
+        ],
+        "hex": "#FFFFFF"
+      }
+    },
+    "inverse-hover": {
+      "$extensions": {
+        "com.figma.aliasData": {
+          "targetVariableName": "color/neutral/25",
+          "targetVariableSetName": "Simple Base Colors"
+        }
+      },
+      "$description": "Semantic color inverse-hover",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.984314,
+          0.988235,
+          0.996078
+        ],
+        "hex": "#FBFCFE"
+      }
+    },
+    "inverse-pressed": {
+      "$extensions": {
+        "com.figma.aliasData": {
+          "targetVariableName": "color/neutral/50",
+          "targetVariableSetName": "Simple Base Colors"
+        }
+      },
+      "$description": "Semantic color inverse-pressed",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.960784,
+          0.968627,
+          0.980392
+        ],
+        "hex": "#F5F7FA"
+      }
+    },
+    "neutral": {
+      "$extensions": {
+        "com.figma.aliasData": {
+          "targetVariableName": "color/neutral/850",
+          "targetVariableSetName": "Simple Base Colors"
+        }
+      },
+      "$description": "Semantic color neutral",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.109804,
+          0.141176,
+          0.192157
+        ],
+        "hex": "#1C2431"
+      }
+    },
+    "neutral-hover": {
+      "$extensions": {
+        "com.figma.aliasData": {
+          "targetVariableName": "color/neutral/800",
+          "targetVariableSetName": "Simple Base Colors"
+        }
+      },
+      "$description": "Semantic color neutral-hover",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.137255,
+          0.168627,
+          0.227451
+        ],
+        "hex": "#232B3A"
+      }
+    },
+    "neutral-pressed": {
+      "$extensions": {
+        "com.figma.aliasData": {
+          "targetVariableName": "color/neutral/700",
+          "targetVariableSetName": "Simple Base Colors"
+        }
+      },
+      "$description": "Semantic color neutral-pressed",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.203922,
+          0.25098,
+          0.329412
+        ],
+        "hex": "#344054"
+      }
+    }
+  },
+  "border": {
+    "primary": {
+      "$extensions": {
+        "com.figma.aliasData": {
+          "targetVariableName": "color/brand/400",
+          "targetVariableSetName": "Simple Base Colors"
+        }
+      },
+      "$description": "Semantic color brand",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.372549,
+          0.54902,
+          1
+        ],
+        "hex": "#5F8CFF"
+      }
+    },
+    "default": {
+      "$extensions": {
+        "com.figma.aliasData": {
+          "targetVariableName": "color/neutral/800",
+          "targetVariableSetName": "Simple Base Colors"
+        }
+      },
+      "$description": "Semantic color default",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.137255,
+          0.168627,
+          0.227451
+        ],
+        "hex": "#232B3A"
+      }
+    },
+    "focus": {
+      "$extensions": {
+        "com.figma.aliasData": {
+          "targetVariableName": "color/brand/400",
+          "targetVariableSetName": "Simple Base Colors"
+        }
+      },
+      "$description": "Semantic color focus",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.372549,
+          0.54902,
+          1
+        ],
+        "hex": "#5F8CFF"
+      }
+    },
+    "strong": {
+      "$extensions": {
+        "com.figma.aliasData": {
+          "targetVariableName": "color/neutral/700",
+          "targetVariableSetName": "Simple Base Colors"
+        }
+      },
+      "$description": "Semantic color strong",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.203922,
+          0.25098,
+          0.329412
+        ],
+        "hex": "#344054"
+      }
+    },
+    "subtle": {
+      "$extensions": {
+        "com.figma.aliasData": {
+          "targetVariableName": "color/neutral/850",
+          "targetVariableSetName": "Simple Base Colors"
+        }
+      },
+      "$description": "Semantic color subtle",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.109804,
+          0.141176,
+          0.192157
+        ],
+        "hex": "#1C2431"
+      }
+    },
+    "disabled": {
+      "$extensions": {
+        "com.figma.aliasData": {
+          "targetVariableName": "color/neutral/850",
+          "targetVariableSetName": "Simple Base Colors"
+        }
+      },
+      "$description": "Semantic color disabled",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.109804,
+          0.141176,
+          0.192157
+        ],
+        "hex": "#1C2431"
+      }
+    }
+  },
+  "focus": {
+    "ring": {
+      "$extensions": {
+        "com.figma.aliasData": {
+          "targetVariableName": "color/brand/400",
+          "targetVariableSetName": "Simple Base Colors"
+        }
+      },
+      "$description": "Semantic color ring",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.372549,
+          0.54902,
+          1
+        ],
+        "hex": "#5F8CFF"
+      }
+    },
+    "ring-offset": {
+      "$extensions": {
+        "com.figma.aliasData": {
+          "targetVariableName": "color/neutral/900",
+          "targetVariableSetName": "Simple Base Colors"
+        }
+      },
+      "$description": "Semantic color ring-offset",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.086275,
+          0.109804,
+          0.152941
+        ],
+        "hex": "#161C27"
+      }
+    }
+  },
+  "icon": {
+    "primary-accent": {
+      "$extensions": {
+        "com.figma.aliasData": {
+          "targetVariableName": "color/brand/300",
+          "targetVariableSetName": "Simple Base Colors"
+        }
+      },
+      "$description": "Semantic color brand",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.560784,
+          0.701961,
+          1
+        ],
+        "hex": "#8FB3FF"
+      }
+    },
+    "disabled": {
+      "$extensions": {
+        "com.figma.aliasData": {
+          "targetVariableName": "color/neutral/500",
+          "targetVariableSetName": "Simple Base Colors"
+        }
+      },
+      "$description": "Semantic color disabled",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.372549,
+          0.439216,
+          0.533333
+        ],
+        "hex": "#5F7088"
+      }
+    },
+    "inverse": {
+      "$extensions": {
+        "com.figma.aliasData": {
+          "targetVariableName": "color/neutral/950",
+          "targetVariableSetName": "Simple Base Colors"
+        }
+      },
+      "$description": "Semantic color inverse",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.054902,
+          0.07451,
+          0.105882
+        ],
+        "hex": "#0E131B"
+      }
+    },
+    "primary": {
+      "$extensions": {
+        "com.figma.aliasData": {
+          "targetVariableName": "color/neutral/100",
+          "targetVariableSetName": "Simple Base Colors"
+        }
+      },
+      "$description": "Semantic color primary",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.905882,
+          0.92549,
+          0.952941
+        ],
+        "hex": "#E7ECF3"
+      }
+    },
+    "secondary": {
+      "$extensions": {
+        "com.figma.aliasData": {
+          "targetVariableName": "color/neutral/300",
+          "targetVariableSetName": "Simple Base Colors"
+        }
+      },
+      "$description": "Semantic color secondary",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.65098,
+          0.705882,
+          0.776471
+        ],
+        "hex": "#A6B4C6"
+      }
+    },
+    "tertiary": {
+      "$extensions": {
+        "com.figma.aliasData": {
+          "targetVariableName": "color/neutral/300",
+          "targetVariableSetName": "Simple Base Colors"
+        }
+      },
+      "$description": "Semantic color tertiary",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.65098,
+          0.705882,
+          0.776471
+        ],
+        "hex": "#A6B4C6"
+      }
+    },
+    "on-primary": {
+      "$extensions": {
+        "com.figma.aliasData": {
+          "targetVariableName": "color/neutral/0",
+          "targetVariableSetName": "Simple Base Colors"
+        }
+      },
+      "$description": "Semantic color on-brand",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          1,
+          1,
+          1
+        ],
+        "hex": "#FFFFFF"
+      }
+    }
+  },
+  "overlay": {
+    "mask": {
+      "$description": "Semantic color mask",
+      "$type": "color",
+      "$value": {
+        "alpha": 0.839216,
+        "colorSpace": "srgb",
+        "components": [
+          0.027451,
+          0.039216,
+          0.062745
+        ],
+        "hex": "#070A10"
+      }
+    },
+    "scrim": {
+      "$description": "Semantic color scrim",
+      "$type": "color",
+      "$value": {
+        "alpha": 0.721569,
+        "colorSpace": "srgb",
+        "components": [
+          0.027451,
+          0.039216,
+          0.062745
+        ],
+        "hex": "#070A10"
+      }
+    }
+  },
+  "status": {
+    "critical": {
+      "border": {
+        "$description": "Semantic color border",
+        "$type": "color",
+        "$value": {
+          "alpha": 0.439216,
+          "colorSpace": "srgb",
+          "components": [
+            1,
+            0.435294,
+            0.435294
+          ],
+          "hex": "#FF6F6F"
+        }
+      },
+      "fill": {
+        "$extensions": {
+          "com.figma.aliasData": {
+            "targetVariableName": "color/red/500",
+            "targetVariableSetName": "Simple Base Colors"
+          }
+        },
+        "$description": "Semantic color fill",
+        "$type": "color",
+        "$value": {
+          "alpha": 1,
+          "colorSpace": "srgb",
+          "components": [
+            0.898039,
+            0.282353,
+            0.301961
+          ],
+          "hex": "#E5484D"
+        }
+      },
+      "fill-hover": {
+        "$extensions": {
+          "com.figma.aliasData": {
+            "targetVariableName": "color/red/400",
+            "targetVariableSetName": "Simple Base Colors"
+          }
+        },
+        "$description": "Semantic color fill-hover",
+        "$type": "color",
+        "$value": {
+          "alpha": 1,
+          "colorSpace": "srgb",
+          "components": [
+            1,
+            0.435294,
+            0.435294
+          ],
+          "hex": "#FF6F6F"
+        }
+      },
+      "surface": {
+        "$description": "Semantic color surface",
+        "$type": "color",
+        "$value": {
+          "alpha": 0.180392,
+          "colorSpace": "srgb",
+          "components": [
+            0.898039,
+            0.282353,
+            0.301961
+          ],
+          "hex": "#E5484D"
+        }
+      },
+      "text": {
+        "$extensions": {
+          "com.figma.aliasData": {
+            "targetVariableName": "color/red/300",
+            "targetVariableSetName": "Simple Base Colors"
+          }
+        },
+        "$description": "Semantic color text",
+        "$type": "color",
+        "$value": {
+          "alpha": 1,
+          "colorSpace": "srgb",
+          "components": [
+            1,
+            0.631373,
+            0.631373
+          ],
+          "hex": "#FFA1A1"
+        }
+      },
+      "on-fill": {
+        "$extensions": {
+          "com.figma.aliasData": {
+            "targetVariableName": "color/neutral/0",
+            "targetVariableSetName": "Simple Base Colors"
+          }
+        },
+        "$description": "Semantic color on-fill",
+        "$type": "color",
+        "$value": {
+          "alpha": 1,
+          "colorSpace": "srgb",
+          "components": [
+            0,
+            0,
+            0
+          ],
+          "hex": "#000000"
+        }
+      }
+    },
+    "info": {
+      "border": {
+        "$description": "Semantic color border",
+        "$type": "color",
+        "$value": {
+          "alpha": 0.439216,
+          "colorSpace": "srgb",
+          "components": [
+            0.372549,
+            0.54902,
+            1
+          ],
+          "hex": "#5F8CFF"
+        }
+      },
+      "fill": {
+        "$extensions": {
+          "com.figma.aliasData": {
+            "targetVariableName": "color/brand/500",
+            "targetVariableSetName": "Simple Base Colors"
+          }
+        },
+        "$description": "Semantic color fill",
+        "$type": "color",
+        "$value": {
+          "alpha": 1,
+          "colorSpace": "srgb",
+          "components": [
+            0.207843,
+            0.396078,
+            1
+          ],
+          "hex": "#3565FF"
+        }
+      },
+      "fill-hover": {
+        "$extensions": {
+          "com.figma.aliasData": {
+            "targetVariableName": "color/brand/600",
+            "targetVariableSetName": "Simple Base Colors"
+          }
+        },
+        "$description": "Semantic color fill-hover",
+        "$type": "color",
+        "$value": {
+          "alpha": 1,
+          "colorSpace": "srgb",
+          "components": [
+            0.141176,
+            0.294118,
+            0.858824
+          ],
+          "hex": "#244BDB"
+        }
+      },
+      "surface": {
+        "$description": "Semantic color surface",
+        "$type": "color",
+        "$value": {
+          "alpha": 0.180392,
+          "colorSpace": "srgb",
+          "components": [
+            0.207843,
+            0.396078,
+            1
+          ],
+          "hex": "#3565FF"
+        }
+      },
+      "text": {
+        "$extensions": {
+          "com.figma.aliasData": {
+            "targetVariableName": "color/brand/300",
+            "targetVariableSetName": "Simple Base Colors"
+          }
+        },
+        "$description": "Semantic color text",
+        "$type": "color",
+        "$value": {
+          "alpha": 1,
+          "colorSpace": "srgb",
+          "components": [
+            0.560784,
+            0.701961,
+            1
+          ],
+          "hex": "#8FB3FF"
+        }
+      },
+      "on-fill": {
+        "$extensions": {
+          "com.figma.aliasData": {
+            "targetVariableName": "color/neutral/0",
+            "targetVariableSetName": "Simple Base Colors"
+          }
+        },
+        "$description": "Semantic color on-fill",
+        "$type": "color",
+        "$value": {
+          "alpha": 1,
+          "colorSpace": "srgb",
+          "components": [
+            1,
+            1,
+            1
+          ],
+          "hex": "#FFFFFF"
+        }
+      }
+    },
+    "success": {
+      "border": {
+        "$description": "Semantic color border",
+        "$type": "color",
+        "$value": {
+          "alpha": 0.439216,
+          "colorSpace": "srgb",
+          "components": [
+            0.215686,
+            0.776471,
+            0.490196
+          ],
+          "hex": "#37C67D"
+        }
+      },
+      "fill": {
+        "$extensions": {
+          "com.figma.aliasData": {
+            "targetVariableName": "color/green/500",
+            "targetVariableSetName": "Simple Base Colors"
+          }
+        },
+        "$description": "Semantic color fill",
+        "$type": "color",
+        "$value": {
+          "alpha": 1,
+          "colorSpace": "srgb",
+          "components": [
+            0.094118,
+            0.643137,
+            0.368627
+          ],
+          "hex": "#18A45E"
+        }
+      },
+      "fill-hover": {
+        "$extensions": {
+          "com.figma.aliasData": {
+            "targetVariableName": "color/green/400",
+            "targetVariableSetName": "Simple Base Colors"
+          }
+        },
+        "$description": "Semantic color fill-hover",
+        "$type": "color",
+        "$value": {
+          "alpha": 1,
+          "colorSpace": "srgb",
+          "components": [
+            0.215686,
+            0.776471,
+            0.490196
+          ],
+          "hex": "#37C67D"
+        }
+      },
+      "surface": {
+        "$description": "Semantic color surface",
+        "$type": "color",
+        "$value": {
+          "alpha": 0.180392,
+          "colorSpace": "srgb",
+          "components": [
+            0.094118,
+            0.643137,
+            0.368627
+          ],
+          "hex": "#18A45E"
+        }
+      },
+      "text": {
+        "$extensions": {
+          "com.figma.aliasData": {
+            "targetVariableName": "color/green/300",
+            "targetVariableSetName": "Simple Base Colors"
+          }
+        },
+        "$description": "Semantic color text",
+        "$type": "color",
+        "$value": {
+          "alpha": 1,
+          "colorSpace": "srgb",
+          "components": [
+            0.466667,
+            0.870588,
+            0.670588
+          ],
+          "hex": "#77DEAB"
+        }
+      },
+      "on-fill": {
+        "$description": "Semantic color on-fill",
+        "$type": "color",
+        "$value": {
+          "alpha": 1,
+          "colorSpace": "srgb",
+          "components": [
+            0,
+            0,
+            0
+          ],
+          "hex": "#000000"
+        }
+      }
+    },
+    "warning": {
+      "border": {
+        "$description": "Semantic color border",
+        "$type": "color",
+        "$value": {
+          "alpha": 0.439216,
+          "colorSpace": "srgb",
+          "components": [
+            0.960784,
+            0.682353,
+            0.078431
+          ],
+          "hex": "#F5AE14"
+        }
+      },
+      "fill": {
+        "$extensions": {
+          "com.figma.aliasData": {
+            "targetVariableName": "color/amber/500",
+            "targetVariableSetName": "Simple Base Colors"
+          }
+        },
+        "$description": "Semantic color fill",
+        "$type": "color",
+        "$value": {
+          "alpha": 1,
+          "colorSpace": "srgb",
+          "components": [
+            0.831373,
+            0.564706,
+            0.035294
+          ],
+          "hex": "#D49009"
+        }
+      },
+      "fill-hover": {
+        "$extensions": {
+          "com.figma.aliasData": {
+            "targetVariableName": "color/amber/400",
+            "targetVariableSetName": "Simple Base Colors"
+          }
+        },
+        "$description": "Semantic color fill-hover",
+        "$type": "color",
+        "$value": {
+          "alpha": 1,
+          "colorSpace": "srgb",
+          "components": [
+            0.960784,
+            0.682353,
+            0.078431
+          ],
+          "hex": "#F5AE14"
+        }
+      },
+      "surface": {
+        "$description": "Semantic color surface",
+        "$type": "color",
+        "$value": {
+          "alpha": 0.180392,
+          "colorSpace": "srgb",
+          "components": [
+            0.831373,
+            0.564706,
+            0.035294
+          ],
+          "hex": "#D49009"
+        }
+      },
+      "text": {
+        "$extensions": {
+          "com.figma.aliasData": {
+            "targetVariableName": "color/amber/200",
+            "targetVariableSetName": "Simple Base Colors"
+          }
+        },
+        "$description": "Semantic color text",
+        "$type": "color",
+        "$value": {
+          "alpha": 1,
+          "colorSpace": "srgb",
+          "components": [
+            1,
+            0.878431,
+            0.541176
+          ],
+          "hex": "#FFE08A"
+        }
+      },
+      "on-fill": {
+        "$description": "Semantic color on-fill",
+        "$type": "color",
+        "$value": {
+          "alpha": 1,
+          "colorSpace": "srgb",
+          "components": [
+            0,
+            0,
+            0
+          ],
+          "hex": "#000000"
+        }
+      }
+    }
+  },
+  "surface": {
+    "default": {
+      "$extensions": {
+        "com.figma.aliasData": {
+          "targetVariableName": "color/neutral/900",
+          "targetVariableSetName": "Simple Base Colors"
+        }
+      },
+      "$description": "Semantic color base",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.086275,
+          0.109804,
+          0.152941
+        ],
+        "hex": "#161C27"
+      }
+    },
+    "container": {
+      "$extensions": {
+        "com.figma.aliasData": {
+          "targetVariableName": "color/neutral/850",
+          "targetVariableSetName": "Simple Base Colors"
+        }
+      },
+      "$description": "Semantic color container",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.109804,
+          0.141176,
+          0.192157
+        ],
+        "hex": "#1C2431"
+      }
+    },
+    "container-high": {
+      "$extensions": {
+        "com.figma.aliasData": {
+          "targetVariableName": "color/neutral/800",
+          "targetVariableSetName": "Simple Base Colors"
+        }
+      },
+      "$description": "Semantic color container-high",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.137255,
+          0.168627,
+          0.227451
+        ],
+        "hex": "#232B3A"
+      }
+    },
+    "disabled": {
+      "$extensions": {
+        "com.figma.aliasData": {
+          "targetVariableName": "color/neutral/850",
+          "targetVariableSetName": "Simple Base Colors"
+        }
+      },
+      "$description": "Semantic color disabled",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.109804,
+          0.141176,
+          0.192157
+        ],
+        "hex": "#1C2431"
+      }
+    },
+    "inverse": {
+      "$extensions": {
+        "com.figma.aliasData": {
+          "targetVariableName": "color/neutral/0",
+          "targetVariableSetName": "Simple Base Colors"
+        }
+      },
+      "$description": "Semantic color inverse",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          1,
+          1,
+          1
+        ],
+        "hex": "#FFFFFF"
+      }
+    },
+    "overlay": {
+      "$extensions": {
+        "com.figma.aliasData": {
+          "targetVariableName": "color/neutral/800",
+          "targetVariableSetName": "Simple Base Colors"
+        }
+      },
+      "$description": "Semantic color overlay",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.137255,
+          0.168627,
+          0.227451
+        ],
+        "hex": "#232B3A"
+      }
+    },
+    "raised": {
+      "$extensions": {
+        "com.figma.aliasData": {
+          "targetVariableName": "color/neutral/850",
+          "targetVariableSetName": "Simple Base Colors"
+        }
+      },
+      "$description": "Semantic color raised",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.109804,
+          0.141176,
+          0.192157
+        ],
+        "hex": "#1C2431"
+      }
+    },
+    "sunken": {
+      "$extensions": {
+        "com.figma.aliasData": {
+          "targetVariableName": "color/neutral/950",
+          "targetVariableSetName": "Simple Base Colors"
+        }
+      },
+      "$description": "Semantic color sunken",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.054902,
+          0.07451,
+          0.105882
+        ],
+        "hex": "#0E131B"
+      }
+    }
+  },
+  "background": {
+    "default": {
+      "$extensions": {
+        "com.figma.aliasData": {
+          "targetVariableName": "color/neutral/1000",
+          "targetVariableSetName": "Simple Base Colors"
+        }
+      },
+      "$description": "Semantic color canvas",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.027451,
+          0.039216,
+          0.062745
+        ],
+        "hex": "#070A10"
+      }
+    }
+  },
+  "text": {
+    "primary-accent": {
+      "$extensions": {
+        "com.figma.aliasData": {
+          "targetVariableName": "color/brand/300",
+          "targetVariableSetName": "Simple Base Colors"
+        }
+      },
+      "$description": "Semantic color brand",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.560784,
+          0.701961,
+          1
+        ],
+        "hex": "#8FB3FF"
+      }
+    },
+    "disabled": {
+      "$extensions": {
+        "com.figma.aliasData": {
+          "targetVariableName": "color/neutral/500",
+          "targetVariableSetName": "Simple Base Colors"
+        }
+      },
+      "$description": "Semantic color disabled",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.372549,
+          0.439216,
+          0.533333
+        ],
+        "hex": "#5F7088"
+      }
+    },
+    "inverse": {
+      "$extensions": {
+        "com.figma.aliasData": {
+          "targetVariableName": "color/neutral/950",
+          "targetVariableSetName": "Simple Base Colors"
+        }
+      },
+      "$description": "Semantic color inverse",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.054902,
+          0.07451,
+          0.105882
+        ],
+        "hex": "#0E131B"
+      }
+    },
+    "on-primary": {
+      "$extensions": {
+        "com.figma.aliasData": {
+          "targetVariableName": "color/neutral/0",
+          "targetVariableSetName": "Simple Base Colors"
+        }
+      },
+      "$description": "Semantic color on-brand",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          1,
+          1,
+          1
+        ],
+        "hex": "#FFFFFF"
+      }
+    },
+    "primary": {
+      "$extensions": {
+        "com.figma.aliasData": {
+          "targetVariableName": "color/neutral/25",
+          "targetVariableSetName": "Simple Base Colors"
+        }
+      },
+      "$description": "Semantic color primary",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.984314,
+          0.988235,
+          0.996078
+        ],
+        "hex": "#FBFCFE"
+      }
+    },
+    "secondary": {
+      "$extensions": {
+        "com.figma.aliasData": {
+          "targetVariableName": "color/neutral/200",
+          "targetVariableSetName": "Simple Base Colors"
+        }
+      },
+      "$description": "Semantic color secondary",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.780392,
+          0.823529,
+          0.87451
+        ],
+        "hex": "#C7D2DF"
+      }
+    },
+    "tertiary": {
+      "$extensions": {
+        "com.figma.aliasData": {
+          "targetVariableName": "color/neutral/400",
+          "targetVariableSetName": "Simple Base Colors"
+        }
+      },
+      "$description": "Semantic color tertiary",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.494118,
+          0.564706,
+          0.654902
+        ],
+        "hex": "#7E90A7"
+      }
+    },
+    "placeholder": {
+      "$extensions": {
+        "com.figma.aliasData": {
+          "targetVariableName": "color/neutral/400",
+          "targetVariableSetName": "Simple Base Colors"
+        }
+      },
+      "$description": "Semantic color placeholder",
+      "$type": "color",
+      "$value": {
+        "alpha": 1,
+        "colorSpace": "srgb",
+        "components": [
+          0.494118,
+          0.564706,
+          0.654902
+        ],
+        "hex": "#7E90A7"
+      }
+    }
+  }
+}

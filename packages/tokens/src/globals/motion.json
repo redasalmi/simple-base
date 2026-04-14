@@ -1,0 +1,66 @@
+{
+  "duration": {
+    "deliberate": {
+      "$description": "Motion duration deliberate",
+      "$type": "duration",
+      "$value": {
+        "unit": "s",
+        "value": 0.32
+      }
+    },
+    "fast": {
+      "$description": "Motion duration fast",
+      "$type": "duration",
+      "$value": {
+        "unit": "s",
+        "value": 0.12
+      }
+    },
+    "instant": {
+      "$description": "Motion duration instant",
+      "$type": "duration",
+      "$value": {
+        "unit": "s",
+        "value": 0
+      }
+    },
+    "moderate": {
+      "$description": "Motion duration moderate",
+      "$type": "duration",
+      "$value": {
+        "unit": "s",
+        "value": 0.18
+      }
+    },
+    "slow": {
+      "$description": "Motion duration slow",
+      "$type": "duration",
+      "$value": {
+        "unit": "s",
+        "value": 0.48
+      }
+    }
+  },
+  "easing": {
+    "emphasized": {
+      "$description": "Motion easing emphasized",
+      "$type": "string",
+      "$value": "cubic-bezier(0.2, 0, 0, 1)"
+    },
+    "entrance": {
+      "$description": "Motion easing entrance",
+      "$type": "string",
+      "$value": "cubic-bezier(0.16, 1, 0.3, 1)"
+    },
+    "exit": {
+      "$description": "Motion easing exit",
+      "$type": "string",
+      "$value": "cubic-bezier(0.7, 0, 1, 1)"
+    },
+    "standard": {
+      "$description": "Motion easing standard",
+      "$type": "string",
+      "$value": "cubic-bezier(0.2, 0, 0, 1)"
+    }
+  }
+}

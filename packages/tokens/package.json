@@ -1,0 +1,14 @@
+{
+  "name": "@simple-base/tokens",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsx src/build.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.0",
+    "style-dictionary": "^5.4.0",
+    "tsx": "^4.21.0"
+  }
+}

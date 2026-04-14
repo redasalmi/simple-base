@@ -1,0 +1,39 @@
+{
+  "layer": {
+    "base": {
+      "$description": "Layer stack base",
+      "$type": "number",
+      "$value": 0
+    },
+    "dropdown": {
+      "$description": "Layer stack dropdown",
+      "$type": "number",
+      "$value": 20
+    },
+    "sticky": {
+      "$description": "Layer stack sticky",
+      "$type": "number",
+      "$value": 30
+    },
+    "popover": {
+      "$description": "Layer stack popover",
+      "$type": "number",
+      "$value": 40
+    },
+    "overlay": {
+      "$description": "Layer stack overlay",
+      "$type": "number",
+      "$value": 50
+    },
+    "modal": {
+      "$description": "Layer stack modal",
+      "$type": "number",
+      "$value": 60
+    },
+    "toast": {
+      "$description": "Layer stack toast",
+      "$type": "number",
+      "$value": 70
+    }
+  }
+}
