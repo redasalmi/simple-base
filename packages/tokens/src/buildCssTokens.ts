@@ -4,6 +4,23 @@ import { formats, transformGroups } from "style-dictionary/enums";
 import { listThemeFiles } from "./utils.js";
 import { TOKENS_CSS_OUTPUT_PATH } from "./config.js";
 
+StyleDictionary.registerTransform({
+  name: "duration/css",
+  type: "value",
+  filter: (token) => {
+    return token.$type === "duration" || token.type === "duration";
+  },
+  transform: (token) => {
+    const value = token.$value ?? token.value;
+
+    if (value && typeof value === "object" && "value" in value && "unit" in value) {
+      return `${value.value}${value.unit}`;
+    }
+
+    return value;
+  },
+});
+
 async function buildCssToken(theme: string, selector: string) {
   console.log(`\nProcessing: '${theme}'`);
   const sd = new StyleDictionary({
@@ -15,6 +32,7 @@ async function buildCssToken(theme: string, selector: string) {
       web: {
         prefix: "sb",
         transformGroup: transformGroups.web,
+        transforms: ["duration/css"],
         files: [
           {
             format: formats.cssVariables,
