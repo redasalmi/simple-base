@@ -3,8 +3,26 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
+  "main": "./dist/web/simple-base-tokens.js",
+  "module": "./dist/web/simple-base-tokens.js",
+  "types": "./dist/web/simple-base-tokens.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/web/simple-base-tokens.d.ts",
+      "import": "./dist/web/simple-base-tokens.js"
+    },
+    "./css": "./dist/web/simple-base.css",
+    "./tokens": {
+      "types": "./dist/web/simple-base-tokens.d.ts",
+      "import": "./dist/web/simple-base-tokens.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "tsx src/build.ts && tsc -p tsconfig.build.json"
+    "build": "tsx src/build.ts && tsc -p tsconfig.build.json",
+    "prepack": "pnpm build"
   },
   "devDependencies": {
     "@types/node": "^25.6.0",

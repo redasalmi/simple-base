@@ -1,9 +1,8 @@
 {
-  "name": "solid",
+  "name": "@simple-base/solid",
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "main": "./dist/simple-base-solid.umd.cjs",
   "module": "./dist/simple-base-solid.js",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -17,9 +16,10 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "tsc -p tsconfig.build.json && vite build",
-    "check-types": "tsc -p tsconfig.build.json --noEmit",
-    "preview": "vite preview"
+    "build": "vite build && tsc -p tsconfig.build.json",
+    "check-types": "tsc -p tsconfig.app.json --noEmit",
+    "preview": "vite preview",
+    "prepack": "pnpm build"
   },
   "dependencies": {
     "solid-js": "^1.9.12"

@@ -4,7 +4,6 @@ import solid from "vite-plugin-solid";
 export default defineConfig({
   plugins: [solid()],
   build: {
-    emptyOutDir: false,
     lib: {
       entry: "src/index.ts",
       name: "SimpleBaseSolid",
