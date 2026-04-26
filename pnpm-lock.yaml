@@ -22,17 +22,13 @@ importers:
         version: 5.9.2
 
   packages/solid:
-    dependencies:
-      solid-js:
-        specifier: ^1.9.12
-        version: 1.9.12
     devDependencies:
-      '@simple-base/tokens':
-        specifier: workspace:*
-        version: link:../tokens
       '@types/node':
         specifier: ^24.12.2
         version: 24.12.2
+      solid-js:
+        specifier: ^1.9.12
+        version: 1.9.12
       typescript:
         specifier: ~6.0.2
         version: 6.0.3
