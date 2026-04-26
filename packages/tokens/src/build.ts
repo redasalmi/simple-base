@@ -1,5 +1,5 @@
 import { rm } from "node:fs/promises";
-import { buildCssTokens } from "./buildc-css-tokens.js";
+import { buildCssTokens } from "./build-css-tokens.js";
 import { buildTsTokens } from "./build-typescript-tokens.js";
 import { DIST_OUTPUT_DIR, GENERATED_OUTPUT_DIR } from "./config.js";
 
