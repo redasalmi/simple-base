@@ -1,4 +1,4 @@
-import { writeFile } from "node:fs/promises";
+import { mkdir, writeFile } from "node:fs/promises";
 import StyleDictionary from "style-dictionary";
 import { transformGroups } from "style-dictionary/enums";
 import { listThemeFiles } from "./utils.js";
