@@ -1,0 +1,18 @@
+{
+  "extends": "./tsconfig.app.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "noEmit": false,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "declarationDir": "dist",
+    "outDir": "dist",
+    "allowImportingTsExtensions": false,
+  },
+  "include": [
+    "src/index.ts",
+    "src/components/**/*.tsx",
+    "src/components/**/*.ts",
+  ],
+  "exclude": ["src/preview/**/*.tsx", "src/preview/**/*.ts"],
+}

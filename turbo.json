@@ -10,6 +10,9 @@
     "@simple-base/tokens#build": {
       "outputs": ["dist/**"]
     },
+    "@simple-base/solid#build": {
+      "outputs": ["dist/**"]
+    },
     "//#quality": {
       "dependsOn": ["//#lint", "//#format"]
     },
