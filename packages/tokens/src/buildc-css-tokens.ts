@@ -2,7 +2,7 @@ import { mkdir, writeFile } from "node:fs/promises";
 import StyleDictionary from "style-dictionary";
 import { formats, transformGroups } from "style-dictionary/enums";
 import { listThemeFiles } from "./utils.js";
-import { DURATION_CSS_TRANSFORM, TOKENS_CSS_OUTPUT_PATH, TOKENS_OUTPUT_DIR } from "./config.js";
+import { DIST_OUTPUT_DIR, DURATION_CSS_TRANSFORM, TOKENS_CSS_OUTPUT_PATH } from "./config.js";
 
 StyleDictionary.registerTransform({
   name: DURATION_CSS_TRANSFORM,
@@ -65,6 +65,6 @@ export async function buildCssTokens() {
   );
 
   cssBlocks.push(globalsCss, ...themesCss);
-  await mkdir(TOKENS_OUTPUT_DIR, { recursive: true });
+  await mkdir(DIST_OUTPUT_DIR, { recursive: true });
   await writeFile(TOKENS_CSS_OUTPUT_PATH, cssBlocks.join("\n"));
 }

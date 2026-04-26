@@ -6,8 +6,8 @@ import {
   DEFAULT_DARK_THEME,
   DEFAULT_LIGHT_THEME,
   DEFAULT_THEME,
+  GENERATED_OUTPUT_DIR,
   STRICT_TOKENS_FORMAT,
-  TOKENS_OUTPUT_DIR,
   TOKENS_TS_OUTPUT_PATH,
 } from "./config.js";
 
@@ -89,7 +89,7 @@ export async function buildTsTokens() {
     .map(([name, exportName]) => `  ${JSON.stringify(name)}: ${exportName},`)
     .join("\n");
 
-  await mkdir(TOKENS_OUTPUT_DIR, { recursive: true });
+  await mkdir(GENERATED_OUTPUT_DIR, { recursive: true });
   await writeFile(
     TOKENS_TS_OUTPUT_PATH,
     `
