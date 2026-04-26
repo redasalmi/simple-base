@@ -24,7 +24,7 @@ function stripTokenMeta(node: unknown): unknown {
   if ("value" in record) return record.value;
 
   return Object.fromEntries(
-    Object.entries(record).map(([key, value]) => [key, stripTokenMeta(value)]),
+    Object.entries(record).map(([key, value]) => [toCamelCase(key), stripTokenMeta(value)]),
   );
 }
 
