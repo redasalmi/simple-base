@@ -1,11 +1,11 @@
-import { writeFile } from "node:fs/promises";
+import { mkdir, writeFile } from "node:fs/promises";
 import StyleDictionary from "style-dictionary";
 import { formats, transformGroups } from "style-dictionary/enums";
 import { listThemeFiles } from "./utils.js";
-import { TOKENS_CSS_OUTPUT_PATH } from "./config.js";
+import { DURATION_CSS_TRANSFORM, TOKENS_CSS_OUTPUT_PATH, TOKENS_OUTPUT_DIR } from "./config.js";
 
 StyleDictionary.registerTransform({
-  name: "duration/css",
+  name: DURATION_CSS_TRANSFORM,
   type: "value",
   filter: (token) => {
     return token.$type === "duration" || token.type === "duration";
@@ -32,7 +32,7 @@ async function buildCssToken(theme: string, selector: string) {
       web: {
         prefix: "sb",
         transformGroup: transformGroups.web,
-        transforms: ["duration/css"],
+        transforms: [DURATION_CSS_TRANSFORM],
         files: [
           {
             format: formats.cssVariables,
@@ -57,13 +57,14 @@ export async function buildCssTokens() {
   const cssBlocks: string[] = [];
   const globalsCss = await buildCssToken("src/globals/**/*.json", ":root");
 
-  const themes = await listThemeFiles();
+  const themeFiles = await listThemeFiles();
   const themesCss = await Promise.all(
-    themes.map((theme) =>
+    themeFiles.map((theme) =>
       buildCssToken(`src/themes/${theme}`, `[data-theme="${theme.replace(".json", "")}"]`),
     ),
   );
 
   cssBlocks.push(globalsCss, ...themesCss);
+  await mkdir(TOKENS_OUTPUT_DIR, { recursive: true });
   await writeFile(TOKENS_CSS_OUTPUT_PATH, cssBlocks.join("\n"));
 }
