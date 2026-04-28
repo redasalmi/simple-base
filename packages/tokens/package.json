@@ -3,18 +3,18 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "main": "./dist/web/simple-base-tokens.js",
-  "module": "./dist/web/simple-base-tokens.js",
-  "types": "./dist/web/simple-base-tokens.d.ts",
+  "main": "./dist/web/tokens.js",
+  "module": "./dist/web/tokens.js",
+  "types": "./dist/web/tokens.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/web/simple-base-tokens.d.ts",
-      "import": "./dist/web/simple-base-tokens.js"
+      "types": "./dist/web/tokens.d.ts",
+      "import": "./dist/web/tokens.js"
     },
-    "./css": "./dist/web/simple-base.css",
+    "./css": "./dist/web/tokens.css",
     "./tokens": {
-      "types": "./dist/web/simple-base-tokens.d.ts",
-      "import": "./dist/web/simple-base-tokens.js"
+      "types": "./dist/web/tokens.d.ts",
+      "import": "./dist/web/tokens.js"
     }
   },
   "files": [
