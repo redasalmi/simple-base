@@ -1018,5 +1018,236 @@
         "hex": "#6C6F85"
       }
     }
+  },
+  "button": {
+    "primary": {
+      "background": {
+        "$description": "Primary button background",
+        "$type": "color",
+        "$value": "{action.primary}"
+      },
+      "background-hover": {
+        "$description": "Primary button hover background",
+        "$type": "color",
+        "$value": "{action.primary-hover}"
+      },
+      "border": {
+        "$description": "Primary button border",
+        "$type": "color",
+        "$value": "{text.primary}"
+      },
+      "text": {
+        "$description": "Primary button text",
+        "$type": "color",
+        "$value": "{text.on-primary}"
+      },
+      "shadow": {
+        "$description": "Primary button shadow",
+        "$type": "color",
+        "$value": "{text.primary}"
+      }
+    },
+    "secondary": {
+      "background": {
+        "$description": "Secondary button background",
+        "$type": "color",
+        "$value": "{surface.default}"
+      },
+      "background-hover": {
+        "$description": "Secondary button hover background",
+        "$type": "color",
+        "$value": "{surface.default}"
+      },
+      "border": {
+        "$description": "Secondary button border",
+        "$type": "color",
+        "$value": "{text.primary}"
+      },
+      "text": {
+        "$description": "Secondary button text",
+        "$type": "color",
+        "$value": "{text.primary}"
+      },
+      "shadow": {
+        "$description": "Secondary button shadow",
+        "$type": "color",
+        "$value": "{text.primary}"
+      }
+    },
+    "tertiary": {
+      "background": {
+        "$description": "Tertiary button background",
+        "$type": "color",
+        "$value": "{surface.container}"
+      },
+      "background-hover": {
+        "$description": "Tertiary button hover background",
+        "$type": "color",
+        "$value": "{surface.container}"
+      },
+      "border": {
+        "$description": "Tertiary button border",
+        "$type": "color",
+        "$value": "{border.default}"
+      },
+      "text": {
+        "$description": "Tertiary button text",
+        "$type": "color",
+        "$value": "{text.primary}"
+      },
+      "shadow": {
+        "$description": "Tertiary button shadow",
+        "$type": "color",
+        "$value": "{text.primary}"
+      }
+    },
+    "ghost": {
+      "background": {
+        "$description": "Button transparent color",
+        "$type": "color",
+        "$value": {
+          "alpha": 0,
+          "colorSpace": "srgb",
+          "components": [
+            0,
+            0,
+            0
+          ],
+          "hex": "#000000"
+        }
+      },
+      "background-hover": {
+        "$description": "Button transparent color",
+        "$type": "color",
+        "$value": {
+          "alpha": 0,
+          "colorSpace": "srgb",
+          "components": [
+            0,
+            0,
+            0
+          ],
+          "hex": "#000000"
+        }
+      },
+      "border": {
+        "$description": "Button transparent color",
+        "$type": "color",
+        "$value": {
+          "alpha": 0,
+          "colorSpace": "srgb",
+          "components": [
+            0,
+            0,
+            0
+          ],
+          "hex": "#000000"
+        }
+      },
+      "text": {
+        "$description": "Ghost button text",
+        "$type": "color",
+        "$value": "{text.secondary}"
+      },
+      "shadow": {
+        "$description": "Button transparent color",
+        "$type": "color",
+        "$value": {
+          "alpha": 0,
+          "colorSpace": "srgb",
+          "components": [
+            0,
+            0,
+            0
+          ],
+          "hex": "#000000"
+        }
+      }
+    },
+    "danger": {
+      "background": {
+        "$description": "Danger button background",
+        "$type": "color",
+        "$value": "{status.critical.fill}"
+      },
+      "background-hover": {
+        "$description": "Danger button hover background",
+        "$type": "color",
+        "$value": "{status.critical.fill-hover}"
+      },
+      "border": {
+        "$description": "Danger button border",
+        "$type": "color",
+        "$value": "{text.primary}"
+      },
+      "text": {
+        "$description": "Danger button text",
+        "$type": "color",
+        "$value": "{status.critical.on-fill}"
+      },
+      "shadow": {
+        "$description": "Danger button shadow",
+        "$type": "color",
+        "$value": "{text.primary}"
+      }
+    },
+    "danger-subtle": {
+      "background": {
+        "$description": "Danger subtle button background",
+        "$type": "color",
+        "$value": "{status.critical.surface}"
+      },
+      "background-hover": {
+        "$description": "Danger subtle button hover background",
+        "$type": "color",
+        "$value": "{status.critical.surface}"
+      },
+      "border": {
+        "$description": "Danger subtle button border",
+        "$type": "color",
+        "$value": "{status.critical.fill}"
+      },
+      "text": {
+        "$description": "Danger subtle button text",
+        "$type": "color",
+        "$value": "{text.primary}"
+      },
+      "shadow": {
+        "$description": "Danger subtle button shadow",
+        "$type": "color",
+        "$value": "{status.critical.fill}"
+      }
+    },
+    "disabled": {
+      "background": {
+        "$description": "Disabled button background",
+        "$type": "color",
+        "$value": "{surface.container}"
+      },
+      "border": {
+        "$description": "Disabled button border",
+        "$type": "color",
+        "$value": "{border.default}"
+      },
+      "text": {
+        "$description": "Disabled button text",
+        "$type": "color",
+        "$value": "{text.disabled}"
+      },
+      "shadow": {
+        "$description": "Button transparent color",
+        "$type": "color",
+        "$value": {
+          "alpha": 0,
+          "colorSpace": "srgb",
+          "components": [
+            0,
+            0,
+            0
+          ],
+          "hex": "#000000"
+        }
+      }
+    }
   }
 }
