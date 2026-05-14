@@ -652,7 +652,7 @@
       "text": {
         "$extensions": {
           "com.figma.aliasData": {
-            "targetVariableName": "color/red/300",
+            "targetVariableName": "color/neutral/1000",
             "targetVariableSetName": "Simple Base Colors"
           }
         },
@@ -662,11 +662,11 @@
           "alpha": 1,
           "colorSpace": "srgb",
           "components": [
-            1,
-            0.631373,
-            0.631373
+            0.027451,
+            0.039216,
+            0.062745
           ],
-          "hex": "#FFA1A1"
+          "hex": "#070A10"
         }
       },
       "on-fill": {
@@ -749,20 +749,20 @@
         "$description": "Semantic color surface",
         "$type": "color",
         "$value": {
-          "alpha": 0.180392,
+          "alpha": 1,
           "colorSpace": "srgb",
           "components": [
-            0.207843,
-            0.396078,
+            0.372549,
+            0.54902,
             1
           ],
-          "hex": "#3565FF"
+          "hex": "#5F8CFF"
         }
       },
       "text": {
         "$extensions": {
           "com.figma.aliasData": {
-            "targetVariableName": "color/brand/300",
+            "targetVariableName": "color/neutral/1000",
             "targetVariableSetName": "Simple Base Colors"
           }
         },
@@ -772,11 +772,11 @@
           "alpha": 1,
           "colorSpace": "srgb",
           "components": [
-            0.560784,
-            0.701961,
-            1
+            0.027451,
+            0.039216,
+            0.062745
           ],
-          "hex": "#8FB3FF"
+          "hex": "#070A10"
         }
       },
       "on-fill": {
@@ -872,7 +872,7 @@
       "text": {
         "$extensions": {
           "com.figma.aliasData": {
-            "targetVariableName": "color/green/300",
+            "targetVariableName": "color/neutral/1000",
             "targetVariableSetName": "Simple Base Colors"
           }
         },
@@ -882,11 +882,11 @@
           "alpha": 1,
           "colorSpace": "srgb",
           "components": [
-            0.466667,
-            0.870588,
-            0.670588
+            0.027451,
+            0.039216,
+            0.062745
           ],
-          "hex": "#77DEAB"
+          "hex": "#070A10"
         }
       },
       "on-fill": {
@@ -976,7 +976,7 @@
       "text": {
         "$extensions": {
           "com.figma.aliasData": {
-            "targetVariableName": "color/amber/200",
+            "targetVariableName": "color/neutral/1000",
             "targetVariableSetName": "Simple Base Colors"
           }
         },
@@ -986,11 +986,11 @@
           "alpha": 1,
           "colorSpace": "srgb",
           "components": [
-            1,
-            0.878431,
-            0.541176
+            0.027451,
+            0.039216,
+            0.062745
           ],
-          "hex": "#FFE08A"
+          "hex": "#070A10"
         }
       },
       "on-fill": {
@@ -1546,7 +1546,7 @@
       "text": {
         "$description": "Danger subtle button text",
         "$type": "color",
-        "$value": "{text.primary}"
+        "$value": "{status.critical.text}"
       },
       "shadow": {
         "$description": "Danger subtle button shadow",

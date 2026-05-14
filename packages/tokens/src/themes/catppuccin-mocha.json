@@ -1210,7 +1210,7 @@
       "text": {
         "$description": "Danger subtle button text",
         "$type": "color",
-        "$value": "{text.primary}"
+        "$value": "{status.critical.text}"
       },
       "shadow": {
         "$description": "Danger subtle button shadow",

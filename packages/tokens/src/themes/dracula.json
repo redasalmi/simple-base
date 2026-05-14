@@ -997,11 +997,11 @@
         "alpha": 1,
         "colorSpace": "srgb",
         "components": [
-          0.384314,
-          0.447059,
-          0.643137
+          0.772549,
+          0.792157,
+          0.843137
         ],
-        "hex": "#6272A4"
+        "hex": "#C5CAD7"
       }
     },
     "placeholder": {
@@ -1011,11 +1011,11 @@
         "alpha": 1,
         "colorSpace": "srgb",
         "components": [
-          0.384314,
-          0.447059,
-          0.643137
+          0.772549,
+          0.792157,
+          0.843137
         ],
-        "hex": "#6272A4"
+        "hex": "#C5CAD7"
       }
     }
   },
@@ -1210,7 +1210,7 @@
       "text": {
         "$description": "Danger subtle button text",
         "$type": "color",
-        "$value": "{text.primary}"
+        "$value": "{status.critical.text}"
       },
       "shadow": {
         "$description": "Danger subtle button shadow",

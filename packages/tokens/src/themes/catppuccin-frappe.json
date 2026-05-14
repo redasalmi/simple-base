@@ -1011,11 +1011,11 @@
         "alpha": 1,
         "colorSpace": "srgb",
         "components": [
-          0.647059,
-          0.678431,
-          0.807843
+          0.709804,
+          0.74902,
+          0.886275
         ],
-        "hex": "#A5ADCE"
+        "hex": "#B5BFE2"
       }
     }
   },
@@ -1210,7 +1210,7 @@
       "text": {
         "$description": "Danger subtle button text",
         "$type": "color",
-        "$value": "{text.primary}"
+        "$value": "{status.critical.text}"
       },
       "shadow": {
         "$description": "Danger subtle button shadow",
