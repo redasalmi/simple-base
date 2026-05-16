@@ -816,16 +816,12 @@
         --sb-button-ghost-text: var(--sb-text-secondary);
         --sb-button-ghost-shadow: transparent;
         --sb-button-danger-background: var(--sb-status-critical-fill);
-        --sb-button-danger-background-hover: var(
-          --sb-status-critical-fill-hover
-        );
+        --sb-button-danger-background-hover: var(--sb-status-critical-fill-hover);
         --sb-button-danger-border: var(--sb-text-primary);
         --sb-button-danger-text: var(--sb-status-critical-on-fill);
         --sb-button-danger-shadow: var(--sb-text-primary);
         --sb-button-danger-subtle-background: var(--sb-status-critical-surface);
-        --sb-button-danger-subtle-background-hover: var(
-          --sb-status-critical-border
-        );
+        --sb-button-danger-subtle-background-hover: var(--sb-status-critical-border);
         --sb-button-danger-subtle-border: var(--sb-status-critical-fill);
         --sb-button-danger-subtle-text: var(--sb-text-primary);
         --sb-button-danger-subtle-shadow: transparent;
@@ -847,20 +843,10 @@
         font-family: var(--sb-font-family-base);
         font-variant-numeric: tabular-nums;
         background:
-          radial-gradient(
-            circle at 12% 0%,
-            rgba(232, 91, 63, 0.18),
-            transparent 28rem
-          ),
-          radial-gradient(
-            circle at 90% 8%,
-            rgba(29, 95, 209, 0.16),
-            transparent 26rem
-          ),
-          linear-gradient(90deg, rgba(32, 23, 19, 0.035) 1px, transparent 1px) 0
-            0 / 32px 32px,
-          linear-gradient(rgba(32, 23, 19, 0.026) 1px, transparent 1px) 0 0 /
-            32px 32px,
+          radial-gradient(circle at 12% 0%, rgba(232, 91, 63, 0.18), transparent 28rem),
+          radial-gradient(circle at 90% 8%, rgba(29, 95, 209, 0.16), transparent 26rem),
+          linear-gradient(90deg, rgba(32, 23, 19, 0.035) 1px, transparent 1px) 0 0 / 32px 32px,
+          linear-gradient(rgba(32, 23, 19, 0.026) 1px, transparent 1px) 0 0 / 32px 32px,
           var(--sb-background-default);
       }
 
@@ -1608,11 +1594,8 @@
         min-height: 150px;
         border: 1.5px solid var(--sb-border-default);
         border-radius: var(--sb-radius-md);
-        background: linear-gradient(
-            var(--sb-surface-raised) 31px,
-            var(--sb-border-default) 32px
-          )
-          0 0 / 100% 32px;
+        background: linear-gradient(var(--sb-surface-raised) 31px, var(--sb-border-default) 32px) 0
+          0 / 100% 32px;
         padding: 10px 14px;
         color: var(--sb-text-secondary);
         line-height: 32px;
@@ -1628,11 +1611,7 @@
         display: block;
         height: 100%;
         width: 72%;
-        background: linear-gradient(
-          90deg,
-          var(--sb-status-success-fill),
-          var(--sb-action-primary)
-        );
+        background: linear-gradient(90deg, var(--sb-status-success-fill), var(--sb-action-primary));
       }
 
       .toast {
@@ -1726,19 +1705,15 @@
           <p class="eyebrow">Productivity Suite · V3.1 · themed</p>
           <h1 id="page-title">A polished desk, in every theme.</h1>
           <p class="hero-copy">
-            A professional-but-alive component direction for invoicing,
-            pomodoro, todos, and notes. This version maps the design onto every
-            token theme in <strong>@simple-base/packages/tokens</strong>,
-            including Catppuccin, Dracula, Nord, Tokyo Night, and Simple Base.
+            A professional-but-alive component direction for invoicing, pomodoro, todos, and notes.
+            This version maps the design onto every token theme in
+            <strong>@simple-base/packages/tokens</strong>, including Catppuccin, Dracula, Nord,
+            Tokyo Night, and Simple Base.
           </p>
           <div class="theme-tools" aria-label="Theme controls">
             <label class="theme-label" for="themeSelect">Theme</label>
             <select class="field theme-select" id="themeSelect"></select>
-            <button
-              class="button secondary theme-next"
-              id="themeNext"
-              type="button"
-            >
+            <button class="button secondary theme-next" id="themeNext" type="button">
               Next theme
             </button>
           </div>
@@ -1752,10 +1727,7 @@
           </div>
           <div class="invoice-preview">
             <div class="invoice-top">
-              <div>
-                <strong>Invoice #1048</strong
-                ><span>Acme Studio · Apr 29, 2026</span>
-              </div>
+              <div><strong>Invoice #1048</strong><span>Acme Studio · Apr 29, 2026</span></div>
               <span class="badge warning">Pending</span>
             </div>
             <table class="mini-table" aria-label="Invoice line items">
@@ -1792,8 +1764,8 @@
         <div class="section-head">
           <h2 id="apps-title">Suite Components</h2>
           <p>
-            Examples tuned for productivity tools: financial clarity, focused
-            work, lightweight task flow, and fast note capture.
+            Examples tuned for productivity tools: financial clarity, focused work, lightweight task
+            flow, and fast note capture.
           </p>
         </div>
         <div class="grid three">
@@ -1804,15 +1776,11 @@
             </div>
             <div>
               <div class="invoice-row">
-                <div>
-                  <strong>Northstar Labs</strong><small>Due tomorrow</small>
-                </div>
+                <div><strong>Northstar Labs</strong><small>Due tomorrow</small></div>
                 <span class="money">$2,400</span>
               </div>
               <div class="invoice-row">
-                <div>
-                  <strong>Paper Plane Co.</strong><small>Paid today</small>
-                </div>
+                <div><strong>Paper Plane Co.</strong><small>Paid today</small></div>
                 <span class="badge success">Paid</span>
               </div>
               <div class="invoice-row">
@@ -1844,21 +1812,15 @@
               <span></span>
             </div>
             <label class="choice"
-              ><input type="checkbox" checked /><span
-                class="control check-control"
-              ></span
+              ><input type="checkbox" checked /><span class="control check-control"></span
               ><span>Send Q2 invoices</span></label
             >
             <label class="choice"
-              ><input type="checkbox" /><span
-                class="control check-control"
-              ></span
+              ><input type="checkbox" /><span class="control check-control"></span
               ><span>Clean up client notes</span></label
             >
             <label class="choice"
-              ><input type="checkbox" /><span
-                class="control check-control"
-              ></span
+              ><input type="checkbox" /><span class="control check-control"></span
               ><span>Plan next sprint</span></label
             >
           </article>
@@ -1869,8 +1831,8 @@
         <div class="section-head">
           <h2 id="type-title">Typography And Links</h2>
           <p>
-            Newsreader adds an editorial ledger character; IBM Plex Sans keeps
-            dense app screens legible and serious.
+            Newsreader adds an editorial ledger character; IBM Plex Sans keeps dense app screens
+            legible and serious.
           </p>
         </div>
         <div class="panel inked grid two">
@@ -1890,8 +1852,8 @@
             <div class="type-row">
               <span class="type-meta">body.md</span
               ><span class="type-body"
-                >Amounts, dates, timers, and task states use tabular numerals so
-                the interface feels precise.</span
+                >Amounts, dates, timers, and task states use tabular numerals so the interface feels
+                precise.</span
               >
             </div>
             <div class="type-row">
@@ -1906,16 +1868,14 @@
               before sending an invoice.
             </p>
             <div class="stack" aria-label="Link states">
-              <a class="link" href="#">Default</a
-              ><a class="link subtle" href="#">Subtle</a
+              <a class="link" href="#">Default</a><a class="link subtle" href="#">Subtle</a
               ><a class="link destructive" href="#">Void invoice</a
               ><a class="link" aria-disabled="true">Disabled</a>
             </div>
             <article class="toast">
               <span class="badge success">Saved</span>
               <p class="type-body">
-                Invoice draft autosaved at 14:32. Color supports status without
-                becoming childish.
+                Invoice draft autosaved at 14:32. Color supports status without becoming childish.
               </p>
             </article>
           </div>
@@ -1926,8 +1886,8 @@
         <div class="section-head">
           <h2 id="buttons-title">Buttons</h2>
           <p>
-            High-confidence actions for sending invoices and starting timers,
-            with tactile but professional interaction.
+            High-confidence actions for sending invoices and starting timers, with tactile but
+            professional interaction.
           </p>
         </div>
         <div class="panel grid">
@@ -1954,8 +1914,8 @@
         <div class="section-head">
           <h2 id="forms-title">Forms</h2>
           <p>
-            Semantic fields for invoicing workflows: clients, amounts, due
-            dates, status, descriptions, and validation.
+            Semantic fields for invoicing workflows: clients, amounts, due dates, status,
+            descriptions, and validation.
           </p>
         </div>
         <div class="panel grid two">
@@ -1968,12 +1928,7 @@
             <label class="label" for="amount">Amount</label>
             <div class="input-affix">
               <span class="affix" aria-hidden="true">$</span
-              ><input
-                class="field"
-                id="amount"
-                inputmode="decimal"
-                value="2400.00"
-              />
+              ><input class="field" id="amount" inputmode="decimal" value="2400.00" />
             </div>
           </div>
           <div class="form-field">
@@ -1999,9 +1954,7 @@
               value=""
               placeholder="Required before sending"
             />
-            <p class="help error" id="tax-error">
-              Add a tax ID or mark the client tax-exempt.
-            </p>
+            <p class="help error" id="tax-error">Add a tax ID or mark the client tax-exempt.</p>
           </div>
           <div class="form-field">
             <label class="label" for="search">Command search</label
@@ -2027,22 +1980,18 @@
         <div class="section-head">
           <h2 id="controls-title">Selection Controls</h2>
           <p>
-            Native controls styled for the suite: keyboard-friendly,
-            screen-reader friendly, and visually aligned.
+            Native controls styled for the suite: keyboard-friendly, screen-reader friendly, and
+            visually aligned.
           </p>
         </div>
         <div class="panel grid three">
           <fieldset class="grid" style="border: 0; padding: 0; margin: 0">
             <legend class="label">Invoice options</legend>
             <label class="choice"
-              ><input type="checkbox" checked /><span
-                class="control check-control"
-              ></span
+              ><input type="checkbox" checked /><span class="control check-control"></span
               ><span>Email client copy</span></label
             ><label class="choice"
-              ><input type="checkbox" /><span
-                class="control check-control"
-              ></span
+              ><input type="checkbox" /><span class="control check-control"></span
               ><span>Attach timesheet</span></label
             >
           </fieldset>
@@ -2054,9 +2003,7 @@
               ></span
               ><span>25 minutes</span></label
             ><label class="choice"
-              ><input type="radio" name="length" /><span
-                class="control radio-control"
-              ></span
+              ><input type="radio" name="length" /><span class="control radio-control"></span
               ><span>50 minutes</span></label
             >
           </fieldset>
@@ -2080,19 +2027,15 @@
         <div class="section-head">
           <h2 id="structure-title">Feedback And Structure</h2>
           <p>
-            Cards, badges, tabs, notes, tooltips, and modal patterns for a full
-            productivity suite.
+            Cards, badges, tabs, notes, tooltips, and modal patterns for a full productivity suite.
           </p>
         </div>
         <div class="panel grid two">
           <div class="grid">
             <div class="stack">
-              <span class="badge">Neutral</span
-              ><span class="badge info">Scheduled</span
-              ><span class="badge success">Paid</span
-              ><span class="badge warning">Pending</span
-              ><span class="badge critical">Overdue</span
-              ><span class="badge violet">Focus</span>
+              <span class="badge">Neutral</span><span class="badge info">Scheduled</span
+              ><span class="badge success">Paid</span><span class="badge warning">Pending</span
+              ><span class="badge critical">Overdue</span><span class="badge violet">Focus</span>
             </div>
             <div class="tabs" role="tablist" aria-label="Productivity sections">
               <button
@@ -2129,8 +2072,7 @@
               id="panel-invoices"
               aria-labelledby="tab-invoices"
             >
-              Track outstanding balances, drafts, payment state, and client
-              history.
+              Track outstanding balances, drafts, payment state, and client history.
             </div>
             <div
               class="tab-panel"
@@ -2156,19 +2098,14 @@
           </div>
           <div class="grid two">
             <article class="card feature">
-              <div class="metric">
-                <strong>$12.8k</strong><span>Receivable</span>
-              </div>
+              <div class="metric"><strong>$12.8k</strong><span>Receivable</span></div>
               <p>
-                Prominent financial metric with enough warmth to avoid sterile
-                accounting software.
+                Prominent financial metric with enough warmth to avoid sterile accounting software.
               </p>
             </article>
             <article class="card">
               <h3>Daily note</h3>
-              <div class="note">
-                Call Maya about retainer renewal. Prepare invoice before 4pm.
-              </div>
+              <div class="note">Call Maya about retainer renewal. Prepare invoice before 4pm.</div>
             </article>
           </div>
         </div>
@@ -2178,8 +2115,8 @@
         <div class="section-head">
           <h2 id="dialog-title">Dialog</h2>
           <p>
-            A static preview plus a real native dialog for testing keyboard
-            dismissal and focus return.
+            A static preview plus a real native dialog for testing keyboard dismissal and focus
+            return.
           </p>
         </div>
         <div class="panel modal-demo">
@@ -2187,23 +2124,16 @@
             <div class="dialog">
               <span class="badge warning">Confirm send</span>
               <h3>Send invoice #1048?</h3>
-              <p>
-                The client will receive an email with payment instructions and a
-                PDF copy.
-              </p>
+              <p>The client will receive an email with payment instructions and a PDF copy.</p>
               <div class="dialog-actions">
                 <button class="button secondary" type="button">Cancel</button
-                ><button class="button primary" type="button">
-                  Send invoice
-                </button>
+                ><button class="button primary" type="button">Send invoice</button>
               </div>
             </div>
           </div>
         </div>
         <p style="margin-top: 16px">
-          <button class="button primary" type="button" id="openDialog">
-            Open real dialog
-          </button>
+          <button class="button primary" type="button" id="openDialog">Open real dialog</button>
         </p>
       </section>
     </main>
@@ -2217,12 +2147,10 @@
       <span class="badge warning">Confirm send</span>
       <h3 id="real-dialog-title">Send invoice #1048?</h3>
       <p id="real-dialog-description">
-        This native dialog returns focus when closed and can be dismissed with
-        Escape.
+        This native dialog returns focus when closed and can be dismissed with Escape.
       </p>
       <div class="dialog-actions">
-        <button class="button secondary" type="button" id="closeDialog">
-          Cancel</button
+        <button class="button secondary" type="button" id="closeDialog">Cancel</button
         ><button class="button primary" type="button">Send invoice</button>
       </div>
     </dialog>
@@ -2256,16 +2184,10 @@
         option.textContent = themeLabels[theme];
         themeSelect.append(option);
       });
-      applyTheme(
-        themeNames.includes(savedTheme) ? savedTheme : "simple-base-light",
-      );
-      themeSelect.addEventListener("change", () =>
-        applyTheme(themeSelect.value),
-      );
+      applyTheme(themeNames.includes(savedTheme) ? savedTheme : "simple-base-light");
+      themeSelect.addEventListener("change", () => applyTheme(themeSelect.value));
       themeNext.addEventListener("click", () => {
-        const currentIndex = themeNames.indexOf(
-          document.documentElement.dataset.theme,
-        );
+        const currentIndex = themeNames.indexOf(document.documentElement.dataset.theme);
         applyTheme(themeNames[(currentIndex + 1) % themeNames.length]);
       });
 
@@ -2298,12 +2220,8 @@
         });
       });
       const dialog = document.getElementById("realDialog");
-      document
-        .getElementById("openDialog")
-        .addEventListener("click", () => dialog.showModal());
-      document
-        .getElementById("closeDialog")
-        .addEventListener("click", () => dialog.close());
+      document.getElementById("openDialog").addEventListener("click", () => dialog.showModal());
+      document.getElementById("closeDialog").addEventListener("click", () => dialog.close());
     </script>
   </body>
 </html>

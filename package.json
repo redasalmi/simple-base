@@ -8,13 +8,14 @@
     "lint:fix": "oxlint --fix .",
     "format": "oxfmt --check",
     "format:fix": "oxfmt .",
-    "check-types": "turbo run check-types"
+    "quality": "turbo run //#lint //#format",
+    "quality:fix": "turbo run //#lint:fix //#format:fix"
   },
   "devDependencies": {
-    "oxfmt": "^0.33.0",
-    "oxlint": "^1.61.0",
-    "turbo": "^2.9.6",
-    "typescript": "5.9.2"
+    "oxfmt": "^0.50.0",
+    "oxlint": "^1.65.0",
+    "turbo": "^2.9.14",
+    "typescript": "~6.0.3"
   },
   "engines": {
     "node": ">=18"

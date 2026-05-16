@@ -5,7 +5,7 @@
     "declaration": true,
     "emitDeclarationOnly": false,
     "outDir": "dist/web",
-    "rootDir": "generated",
+    "rootDir": "generated"
   },
-  "include": ["generated/**/*.ts"],
+  "include": ["generated/**/*.ts"]
 }

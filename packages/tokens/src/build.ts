@@ -14,4 +14,5 @@ try {
   await rm(GENERATED_OUTPUT_DIR, { recursive: true, force: true });
   await rm(DIST_OUTPUT_DIR, { recursive: true, force: true });
   console.error("Build failed:", err);
+  process.exit(1);
 }

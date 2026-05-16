@@ -2,6 +2,9 @@
   "name": "@simple-base/tokens",
   "version": "0.0.0",
   "private": true,
+  "files": [
+    "dist"
+  ],
   "type": "module",
   "main": "./dist/web/tokens.js",
   "module": "./dist/web/tokens.js",
@@ -17,16 +20,13 @@
       "import": "./dist/web/tokens.js"
     }
   },
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "build": "tsx src/build.ts && tsc -p tsconfig.build.json",
     "prepack": "pnpm build"
   },
   "devDependencies": {
-    "@types/node": "^25.6.0",
+    "@types/node": "^25.8.0",
     "style-dictionary": "^5.4.0",
-    "tsx": "^4.21.0"
+    "tsx": "^4.22.0"
   }
 }

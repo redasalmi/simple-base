@@ -5,30 +5,22 @@
     "build": {
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [".next/**", "!.next/cache/**"]
-    },
-    "@simple-base/tokens#build": {
       "outputs": ["dist/**"]
-    },
-    "@simple-base/solid#build": {
-      "outputs": ["dist/**"]
-    },
-    "//#quality": {
-      "dependsOn": ["//#lint", "//#format"]
-    },
-    "//#quality:fix": {
-      "dependsOn": ["//#lint:fix", "//#format:fix"]
-    },
-    "//#lint": {},
-    "//#lint:fix": {
-      "cache": false
-    },
-    "//#format": {},
-    "//#format:fix": {
-      "cache": false
     },
     "check-types": {
       "dependsOn": ["^check-types"]
+    },
+    "//#lint": {
+      "outputs": []
+    },
+    "//#lint:fix": {
+      "cache": false
+    },
+    "//#format": {
+      "outputs": []
+    },
+    "//#format:fix": {
+      "cache": false
     },
     "dev": {
       "cache": false,

@@ -1,7 +1,10 @@
 {
   "name": "@simple-base/solid",
-  "private": true,
   "version": "0.0.0",
+  "private": true,
+  "files": [
+    "dist"
+  ],
   "type": "module",
   "module": "./dist/simple-base-solid.js",
   "types": "./dist/index.d.ts",
@@ -11,9 +14,6 @@
       "import": "./dist/simple-base-solid.js"
     }
   },
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "dev": "vite",
     "build": "vite build && tsc -p tsconfig.build.json",
@@ -21,19 +21,18 @@
     "preview": "vite preview",
     "prepack": "pnpm build"
   },
-  "peerDependencies": {
-    "solid-js": "^1.9.12"
+  "dependencies": {
+    "@simple-base/css": "workspace:^"
   },
   "devDependencies": {
-    "@types/node": "^24.12.2",
-    "solid-js": "^1.9.12",
-    "typescript": "~6.0.2",
-    "vite": "^8.0.10",
+    "@tailwindcss/vite": "^4.3.0",
+    "@types/node": "^25.8.0",
+    "solid-js": "^1.9.13",
+    "tailwindcss": "^4.3.0",
+    "vite": "^8.0.13",
     "vite-plugin-solid": "^2.11.12"
   },
-  "dependencies": {
-    "@simple-base/css": "workspace:^",
-    "@tailwindcss/vite": "^4.2.4",
-    "tailwindcss": "^4.2.4"
+  "peerDependencies": {
+    "solid-js": "^1.9.12"
   }
 }
