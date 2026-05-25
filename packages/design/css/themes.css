@@ -1,0 +1,47 @@
+/* Theme token values are generated in ../../tokens/dist/web/tokens.css.
+   Keep this file for design-preview styling that is not part of the token API. */
+
+body {
+  background: var(--sb-gradient-page);
+}
+
+.sb-hero-card {
+  background: var(--sb-gradient-surface);
+}
+
+.sb-component-panel,
+.sb-button-showcase,
+.sb-token-showcase,
+.sb-typography-showcase,
+.sb-layout-showcase,
+.sb-data-showcase,
+.sb-feedback-showcase,
+.sb-navigation-showcase,
+.sb-forms-showcase,
+.sb-overlays-showcase,
+.sb-selection-showcase,
+.sb-media-showcase,
+.sb-docs-showcase,
+.sb-input-showcase,
+.sb-textarea-showcase,
+.sb-checkbox-showcase,
+.sb-radio-showcase,
+.sb-switch-showcase,
+.sb-badge-showcase,
+.sb-alert-dialog-showcase,
+.sb-toast-showcase,
+.sb-card-showcase,
+.sb-dialog-showcase,
+.sb-drawer-showcase,
+.sb-popover-showcase,
+.sb-tooltip-showcase,
+.sb-tabs-showcase,
+.sb-accordion-showcase,
+.sb-progress-showcase,
+.sb-avatar-showcase,
+.sb-combobox-showcase,
+.sb-divider-showcase,
+.sb-breadcrumb-showcase,
+.sb-select-showcase {
+  background: color-mix(in srgb, var(--sb-bg-surface-default) 82%, transparent);
+}
