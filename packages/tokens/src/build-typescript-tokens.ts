@@ -1,7 +1,6 @@
-import { mkdir, writeFile } from "node:fs/promises";
 import StyleDictionary from "style-dictionary";
 import { transformGroups } from "style-dictionary/enums";
-import { listThemeFiles } from "./utils.js";
+import { mkdir, writeFile } from "node:fs/promises";
 import {
   DEFAULT_DARK_THEME,
   DEFAULT_LIGHT_THEME,
@@ -10,6 +9,33 @@ import {
   STRICT_TOKENS_FORMAT,
   TOKENS_TS_OUTPUT_PATH,
 } from "./config.js";
+import simpleBaseTokens from "./tokens.dtcg.json" with { type: "json" };
+import simpleBaseResolver from "./simple-base.resolver.json" with { type: "json" };
+import type { DesignTokens } from "style-dictionary/types";
+
+type JsonObject = Record<string, unknown>;
+
+function isObject(value: unknown): value is JsonObject {
+  return Boolean(value) && typeof value === "object" && !Array.isArray(value);
+}
+
+function deepMerge<T extends JsonObject>(...objects: JsonObject[]): T {
+  const result: JsonObject = {};
+
+  for (const object of objects) {
+    for (const [key, value] of Object.entries(object)) {
+      const existingValue = result[key];
+
+      if (isObject(existingValue) && isObject(value)) {
+        result[key] = deepMerge(existingValue, value);
+      } else {
+        result[key] = value;
+      }
+    }
+  }
+
+  return result as T;
+}
 
 function toCamelCase(value: string) {
   return value.replace(/-([a-z])/g, (_, char: string) => char.toUpperCase());
@@ -35,10 +61,10 @@ StyleDictionary.registerFormat({
   },
 });
 
-async function buildTsToken(theme: string) {
+async function formatTokensForTypescript(tokens: DesignTokens, theme: string) {
   console.log(`\nProcessing: '${theme}'`);
   const sd = new StyleDictionary({
-    source: [theme],
+    tokens,
     log: {
       verbosity: "silent",
     },
@@ -63,28 +89,39 @@ async function buildTsToken(theme: string) {
 
   return output;
 }
-
 export async function buildTsTokens() {
-  const tokens = await buildTsToken("src/globals/**/*.json");
+  const tokens = await formatTokensForTypescript(simpleBaseTokens, "Global Tokens");
 
-  const themeFiles = await listThemeFiles();
+  const defaultTheme = simpleBaseResolver.modifiers.theme.default;
+  const themes = Object.entries(simpleBaseResolver.modifiers.theme.contexts);
+
   const themeEntries = await Promise.all(
-    themeFiles.map(async (theme) => {
-      const themeName = theme.replace(".json", "");
+    themes.map(async ([themeName, themeOverrides]) => {
       const exportName = toCamelCase(themeName);
-      const themeTokens = await buildTsToken(`src/themes/${theme}`);
+
+      const resolvedTokens =
+        themeName === defaultTheme
+          ? simpleBaseTokens
+          : deepMerge<DesignTokens>(simpleBaseTokens, ...themeOverrides);
+
+      const themeTokens = await formatTokensForTypescript(resolvedTokens, themeName);
 
       return [themeName, exportName, themeTokens] as const;
     }),
   );
 
   const themeNames = themeEntries.map(([name]) => name);
+
   const themeConstExports = themeEntries
-    .map(
-      ([_, exportName, theme]) =>
-        `export const ${exportName} = ${JSON.stringify(theme, null, 2)} as const;`,
-    )
+    .map(([themeName, exportName, theme]) => {
+      if (themeName === defaultTheme) {
+        return `export const ${exportName} = tokens;`;
+      }
+
+      return `export const ${exportName} = ${JSON.stringify(theme, null, 2)} as const;`;
+    })
     .join("\n\n");
+
   const themeReferences = themeEntries
     .map(([name, exportName]) => `  ${JSON.stringify(name)}: ${exportName},`)
     .join("\n");

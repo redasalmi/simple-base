@@ -3,10 +3,10 @@
     "oxfmt": {
       "initialization_options": {
         "settings": {
-          "fmt": { "configPath": null }
-        }
-      }
-    }
+          "fmt": { "configPath": null },
+        },
+      },
+    },
   },
   "languages": {
     "JavaScript": {
@@ -14,24 +14,24 @@
       "prettier": { "allowed": false },
       "formatter": [
         { "code_action": "source.fixAll.oxc" },
-        { "language_server": { "name": "oxfmt" } }
-      ]
+        { "language_server": { "name": "oxfmt" } },
+      ],
     },
     "TypeScript": {
       "format_on_save": "on",
       "prettier": { "allowed": false },
       "formatter": [
         { "code_action": "source.fixAll.oxc" },
-        { "language_server": { "name": "oxfmt" } }
-      ]
+        { "language_server": { "name": "oxfmt" } },
+      ],
     },
     "TSX": {
       "format_on_save": "on",
       "prettier": { "allowed": false },
       "formatter": [
         { "code_action": "source.fixAll.oxc" },
-        { "language_server": { "name": "oxfmt" } }
-      ]
-    }
-  }
+        { "language_server": { "name": "oxfmt" } },
+      ],
+    },
+  },
 }

@@ -1,0 +1,1188 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+  "$description": "Simple Base design tokens in DTCG JSON format. Primitive and semantic tokens for Simple Base Dark plus theme-overridable aliases.",
+  "color": {
+    "black": {
+      "950": {
+        "$type": "color",
+        "$value": "#040506"
+      },
+      "900": {
+        "$type": "color",
+        "$value": "#08090a"
+      },
+      "850": {
+        "$type": "color",
+        "$value": "#07080a"
+      }
+    },
+    "gray": {
+      "900": {
+        "$type": "color",
+        "$value": "#0f1011"
+      },
+      "850": {
+        "$type": "color",
+        "$value": "#111214"
+      },
+      "800": {
+        "$type": "color",
+        "$value": "#161718"
+      },
+      "750": {
+        "$type": "color",
+        "$value": "#1b1c1e"
+      },
+      "700": {
+        "$type": "color",
+        "$value": "#23252a"
+      },
+      "650": {
+        "$type": "color",
+        "$value": "#363739"
+      },
+      "600": {
+        "$type": "color",
+        "$value": "#383b3f"
+      },
+      "500": {
+        "$type": "color",
+        "$value": "#6a6b6c"
+      },
+      "400": {
+        "$type": "color",
+        "$value": "#9c9c9d"
+      },
+      "50": {
+        "$type": "color",
+        "$value": "#f7f7f7"
+      },
+      "100": {
+        "$type": "color",
+        "$value": "#e6e6e6"
+      }
+    },
+    "white": {
+      "$type": "color",
+      "$value": "#ffffff"
+    },
+    "porcelain": {
+      "$type": "color",
+      "$value": "#f7f8f8"
+    },
+    "lime": {
+      "300": {
+        "$type": "color",
+        "$value": "#f1fb52"
+      },
+      "400": {
+        "$type": "color",
+        "$value": "#e4f222"
+      },
+      "500": {
+        "$type": "color",
+        "$value": "#b8c918"
+      }
+    },
+    "red": {
+      "300": {
+        "$type": "color",
+        "$value": "#ff7373"
+      },
+      "400": {
+        "$type": "color",
+        "$value": "#ff6363"
+      }
+    },
+    "mint": {
+      "400": {
+        "$type": "color",
+        "$value": "#59d499"
+      }
+    },
+    "blue": {
+      "400": {
+        "$type": "color",
+        "$value": "#56c2ff"
+      }
+    },
+    "violet": {
+      "500": {
+        "$type": "color",
+        "$value": "#523091"
+      }
+    }
+  },
+  "space": {
+    "1": {
+      "$type": "dimension",
+      "$value": "4px"
+    },
+    "2": {
+      "$type": "dimension",
+      "$value": "8px"
+    },
+    "3": {
+      "$type": "dimension",
+      "$value": "12px"
+    },
+    "4": {
+      "$type": "dimension",
+      "$value": "16px"
+    },
+    "5": {
+      "$type": "dimension",
+      "$value": "20px"
+    },
+    "6": {
+      "$type": "dimension",
+      "$value": "24px"
+    },
+    "8": {
+      "$type": "dimension",
+      "$value": "32px"
+    },
+    "10": {
+      "$type": "dimension",
+      "$value": "40px"
+    },
+    "12": {
+      "$type": "dimension",
+      "$value": "48px"
+    },
+    "16": {
+      "$type": "dimension",
+      "$value": "64px"
+    },
+    "20": {
+      "$type": "dimension",
+      "$value": "80px"
+    }
+  },
+  "radius": {
+    "sm": {
+      "$type": "dimension",
+      "$value": "6px"
+    },
+    "md": {
+      "$type": "dimension",
+      "$value": "8px"
+    },
+    "lg": {
+      "$type": "dimension",
+      "$value": "12px"
+    },
+    "xl": {
+      "$type": "dimension",
+      "$value": "16px"
+    },
+    "2xl": {
+      "$type": "dimension",
+      "$value": "20px"
+    },
+    "full": {
+      "$type": "dimension",
+      "$value": "999px"
+    }
+  },
+  "font": {
+    "sans": {
+      "$type": "fontFamily",
+      "$value": "\"Inter\", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif"
+    },
+    "mono": {
+      "$type": "fontFamily",
+      "$value": "\"Geist Mono\", \"Berkeley Mono\", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace"
+    },
+    "weight": {
+      "regular": {
+        "$type": "fontWeight",
+        "$value": "400"
+      },
+      "medium": {
+        "$type": "fontWeight",
+        "$value": "500"
+      },
+      "semibold": {
+        "$type": "fontWeight",
+        "$value": "600"
+      },
+      "bold": {
+        "$type": "fontWeight",
+        "$value": "700"
+      },
+      "black": {
+        "$type": "fontWeight",
+        "$value": "800"
+      }
+    }
+  },
+  "dimension": {
+    "0-5": {
+      "$type": "dimension",
+      "$value": "0.5px"
+    },
+    "1": {
+      "$type": "dimension",
+      "$value": "1px"
+    },
+    "1-2": {
+      "$type": "dimension",
+      "$value": "1.2px"
+    },
+    "1-5": {
+      "$type": "dimension",
+      "$value": "1.5px"
+    },
+    "2": {
+      "$type": "dimension",
+      "$value": "2px"
+    },
+    "2-4": {
+      "$type": "dimension",
+      "$value": "2.4px"
+    },
+    "3": {
+      "$type": "dimension",
+      "$value": "3px"
+    },
+    "4": {
+      "$type": "dimension",
+      "$value": "4px"
+    },
+    "5": {
+      "$type": "dimension",
+      "$value": "5px"
+    },
+    "6": {
+      "$type": "dimension",
+      "$value": "6px"
+    },
+    "7": {
+      "$type": "dimension",
+      "$value": "7px"
+    },
+    "8": {
+      "$type": "dimension",
+      "$value": "8px"
+    },
+    "9": {
+      "$type": "dimension",
+      "$value": "9px"
+    },
+    "10": {
+      "$type": "dimension",
+      "$value": "10px"
+    },
+    "11": {
+      "$type": "dimension",
+      "$value": "11px"
+    },
+    "12": {
+      "$type": "dimension",
+      "$value": "12px"
+    },
+    "13": {
+      "$type": "dimension",
+      "$value": "13px"
+    },
+    "14": {
+      "$type": "dimension",
+      "$value": "14px"
+    },
+    "15": {
+      "$type": "dimension",
+      "$value": "15px"
+    },
+    "16": {
+      "$type": "dimension",
+      "$value": "16px"
+    },
+    "17": {
+      "$type": "dimension",
+      "$value": "17px"
+    },
+    "18": {
+      "$type": "dimension",
+      "$value": "18px"
+    },
+    "20": {
+      "$type": "dimension",
+      "$value": "20px"
+    },
+    "22": {
+      "$type": "dimension",
+      "$value": "22px"
+    },
+    "24": {
+      "$type": "dimension",
+      "$value": "24px"
+    },
+    "26": {
+      "$type": "dimension",
+      "$value": "26px"
+    },
+    "28": {
+      "$type": "dimension",
+      "$value": "28px"
+    },
+    "30": {
+      "$type": "dimension",
+      "$value": "30px"
+    },
+    "32": {
+      "$type": "dimension",
+      "$value": "32px"
+    },
+    "34": {
+      "$type": "dimension",
+      "$value": "34px"
+    },
+    "36": {
+      "$type": "dimension",
+      "$value": "36px"
+    },
+    "38": {
+      "$type": "dimension",
+      "$value": "38px"
+    },
+    "40": {
+      "$type": "dimension",
+      "$value": "40px"
+    },
+    "42": {
+      "$type": "dimension",
+      "$value": "42px"
+    },
+    "44": {
+      "$type": "dimension",
+      "$value": "44px"
+    },
+    "46": {
+      "$type": "dimension",
+      "$value": "46px"
+    },
+    "48": {
+      "$type": "dimension",
+      "$value": "48px"
+    },
+    "50": {
+      "$type": "dimension",
+      "$value": "50px"
+    },
+    "52": {
+      "$type": "dimension",
+      "$value": "52px"
+    },
+    "54": {
+      "$type": "dimension",
+      "$value": "54px"
+    },
+    "56": {
+      "$type": "dimension",
+      "$value": "56px"
+    },
+    "64": {
+      "$type": "dimension",
+      "$value": "64px"
+    },
+    "72": {
+      "$type": "dimension",
+      "$value": "72px"
+    },
+    "76": {
+      "$type": "dimension",
+      "$value": "76px"
+    },
+    "80": {
+      "$type": "dimension",
+      "$value": "80px"
+    },
+    "96": {
+      "$type": "dimension",
+      "$value": "96px"
+    },
+    "99": {
+      "$type": "dimension",
+      "$value": "99px"
+    },
+    "118": {
+      "$type": "dimension",
+      "$value": "118px"
+    },
+    "132": {
+      "$type": "dimension",
+      "$value": "132px"
+    },
+    "150": {
+      "$type": "dimension",
+      "$value": "150px"
+    },
+    "180": {
+      "$type": "dimension",
+      "$value": "180px"
+    },
+    "190": {
+      "$type": "dimension",
+      "$value": "190px"
+    },
+    "260": {
+      "$type": "dimension",
+      "$value": "260px"
+    },
+    "300": {
+      "$type": "dimension",
+      "$value": "300px"
+    },
+    "360": {
+      "$type": "dimension",
+      "$value": "360px"
+    },
+    "520": {
+      "$type": "dimension",
+      "$value": "520px"
+    },
+    "650": {
+      "$type": "dimension",
+      "$value": "650px"
+    },
+    "999": {
+      "$type": "dimension",
+      "$value": "999px"
+    },
+    "60": {
+      "$type": "dimension",
+      "$value": "60px"
+    }
+  },
+  "text": {
+    "xs": {
+      "$type": "dimension",
+      "$value": "11px"
+    },
+    "sm": {
+      "$type": "dimension",
+      "$value": "12px"
+    },
+    "md": {
+      "$type": "dimension",
+      "$value": "13px"
+    },
+    "base": {
+      "$type": "dimension",
+      "$value": "14px"
+    },
+    "lg": {
+      "$type": "dimension",
+      "$value": "16px"
+    },
+    "xl": {
+      "$type": "dimension",
+      "$value": "18px"
+    },
+    "2xl": {
+      "$type": "dimension",
+      "$value": "20px"
+    },
+    "3xl": {
+      "$type": "dimension",
+      "$value": "24px"
+    },
+    "4xl": {
+      "$type": "dimension",
+      "$value": "32px"
+    },
+    "5xl": {
+      "$type": "dimension",
+      "$value": "48px"
+    },
+    "display": {
+      "$type": "dimension",
+      "$value": "64px"
+    }
+  },
+  "leading": {
+    "none": {
+      "$type": "number",
+      "$value": "1"
+    },
+    "tight": {
+      "$type": "number",
+      "$value": "1.15"
+    },
+    "snug": {
+      "$type": "number",
+      "$value": "1.25"
+    },
+    "normal": {
+      "$type": "number",
+      "$value": "1.4"
+    },
+    "relaxed": {
+      "$type": "number",
+      "$value": "1.55"
+    }
+  },
+  "tracking": {
+    "tight": {
+      "$type": "dimension",
+      "$value": "-0.06em"
+    },
+    "snug": {
+      "$type": "dimension",
+      "$value": "-0.03em"
+    },
+    "normal": {
+      "$type": "dimension",
+      "$value": "-0.01em"
+    },
+    "wide": {
+      "$type": "dimension",
+      "$value": "0.04em"
+    },
+    "wider": {
+      "$type": "dimension",
+      "$value": "0.08em"
+    }
+  },
+  "size": {
+    "control": {
+      "xs": {
+        "$type": "dimension",
+        "$value": "30px"
+      },
+      "sm": {
+        "$type": "dimension",
+        "$value": "34px"
+      },
+      "md": {
+        "$type": "dimension",
+        "$value": "40px"
+      },
+      "lg": {
+        "$type": "dimension",
+        "$value": "42px"
+      },
+      "xl": {
+        "$type": "dimension",
+        "$value": "52px"
+      }
+    },
+    "icon": {
+      "xs": {
+        "$type": "dimension",
+        "$value": "16px"
+      },
+      "sm": {
+        "$type": "dimension",
+        "$value": "22px"
+      },
+      "md": {
+        "$type": "dimension",
+        "$value": "28px"
+      },
+      "lg": {
+        "$type": "dimension",
+        "$value": "36px"
+      }
+    },
+    "avatar": {
+      "sm": {
+        "$type": "dimension",
+        "$value": "32px"
+      },
+      "md": {
+        "$type": "dimension",
+        "$value": "40px"
+      },
+      "lg": {
+        "$type": "dimension",
+        "$value": "52px"
+      }
+    },
+    "spinner": {
+      "sm": {
+        "$type": "dimension",
+        "$value": "16px"
+      },
+      "md": {
+        "$type": "dimension",
+        "$value": "34px"
+      }
+    },
+    "badge": {
+      "$type": "dimension",
+      "$value": "24px"
+    }
+  },
+  "border": {
+    "width": {
+      "default": {
+        "$type": "dimension",
+        "$value": "1px"
+      },
+      "strong": {
+        "$type": "dimension",
+        "$value": "2px"
+      },
+      "focus": {
+        "$type": "dimension",
+        "$value": "2px"
+      }
+    },
+    "subtle": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [1.0, 1.0, 1.0],
+        "alpha": 0.08
+      }
+    },
+    "default": {
+      "$type": "color",
+      "$value": "{color.gray.700}"
+    },
+    "strong": {
+      "$type": "color",
+      "$value": "{color.gray.650}"
+    }
+  },
+  "divider": {
+    "width": {
+      "$type": "dimension",
+      "$value": "1px"
+    }
+  },
+  "duration": {
+    "fast": {
+      "$type": "duration",
+      "$value": "160ms"
+    },
+    "normal": {
+      "$type": "duration",
+      "$value": "200ms"
+    },
+    "slow": {
+      "$type": "duration",
+      "$value": "400ms"
+    },
+    "spinner": {
+      "$type": "duration",
+      "$value": "900ms"
+    },
+    "shimmer": {
+      "$type": "duration",
+      "$value": "1.4s"
+    }
+  },
+  "ease": {
+    "standard": {
+      "$type": "string",
+      "$value": "ease"
+    },
+    "out": {
+      "$type": "cubicBezier",
+      "$value": "cubic-bezier(0.23, 1, 0.32, 1)"
+    },
+    "spring": {
+      "$type": "cubicBezier",
+      "$value": "cubic-bezier(0.23, 1, 0.32, 1)"
+    }
+  },
+  "page": {
+    "max": {
+      "width": {
+        "$type": "dimension",
+        "$value": "1120px"
+      }
+    }
+  },
+  "content": {
+    "max": {
+      "width": {
+        "$type": "dimension",
+        "$value": "760px"
+      }
+    }
+  },
+  "panel": {
+    "max": {
+      "width": {
+        "$type": "dimension",
+        "$value": "720px"
+      }
+    }
+  },
+  "modal": {
+    "width": {
+      "$type": "dimension",
+      "$value": "560px"
+    }
+  },
+  "popover": {
+    "width": {
+      "$type": "dimension",
+      "$value": "320px"
+    }
+  },
+  "sidebar": {
+    "width": {
+      "$type": "dimension",
+      "$value": "220px"
+    }
+  },
+  "drawer": {
+    "width": {
+      "$type": "dimension",
+      "$value": "390px"
+    }
+  },
+  "breakpoint": {
+    "sm": {
+      "$type": "dimension",
+      "$value": "480px"
+    },
+    "md": {
+      "$type": "dimension",
+      "$value": "760px"
+    },
+    "lg": {
+      "$type": "dimension",
+      "$value": "1024px"
+    },
+    "xl": {
+      "$type": "dimension",
+      "$value": "1200px"
+    }
+  },
+  "z": {
+    "base": {
+      "$type": "number",
+      "$value": "0"
+    },
+    "raised": {
+      "$type": "number",
+      "$value": "10"
+    },
+    "dropdown": {
+      "$type": "number",
+      "$value": "100"
+    },
+    "sticky": {
+      "$type": "number",
+      "$value": "200"
+    },
+    "overlay": {
+      "$type": "number",
+      "$value": "500"
+    },
+    "modal": {
+      "$type": "number",
+      "$value": "700"
+    },
+    "toast": {
+      "$type": "number",
+      "$value": "900"
+    },
+    "skip": {
+      "link": {
+        "$type": "number",
+        "$value": "999"
+      }
+    }
+  },
+  "opacity": {
+    "disabled": {
+      "$type": "number",
+      "$value": "0.48"
+    },
+    "muted": {
+      "$type": "number",
+      "$value": "0.72"
+    },
+    "hover": {
+      "$type": "number",
+      "$value": "0.06"
+    },
+    "selected": {
+      "$type": "number",
+      "$value": "0.1"
+    },
+    "overlay": {
+      "$type": "number",
+      "$value": "0.58"
+    },
+    "border": {
+      "$type": "number",
+      "$value": "0.08"
+    },
+    "backdrop": {
+      "$type": "number",
+      "$value": "0.78"
+    }
+  },
+  "shadow": {
+    "key": {
+      "$type": "shadow",
+      "$value": "rgba(0, 0, 0, 0.4) 0 1.5px 0.5px 2.5px, rgb(0, 0, 0) 0 0 0.5px 1px, rgba(0, 0, 0, 0.25) 0 2px 1px 1px inset, rgba(255, 255, 255, 0.18) 0 1px 1px 1px inset",
+      "$description": "CSS value; preserve as string when transforming to CSS."
+    },
+    "ring": {
+      "$type": "shadow",
+      "$value": "rgba(255, 255, 255, 0.05) 0 1px 0 inset, rgba(255, 255, 255, 0.16) 0 0 0 1px, rgba(0, 0, 0, 0.2) 0 -1px 0 inset",
+      "$description": "CSS value; preserve as string when transforming to CSS."
+    },
+    "card": {
+      "$type": "shadow",
+      "$value": "rgba(0, 0, 0, 0.4) 0 2px 4px",
+      "$description": "CSS value; preserve as string when transforming to CSS."
+    },
+    "overlay": {
+      "$type": "shadow",
+      "$value": "rgba(0, 0, 0, 0.4) 0 4px 40px 8px",
+      "$description": "CSS value; preserve as string when transforming to CSS."
+    }
+  },
+  "gradient": {
+    "page": {
+      "$type": "gradient",
+      "$value": "radial-gradient(84% 74% at 50% 8%, rgba(4, 63, 150, 0.45), rgba(6, 18, 37, 0.1) 42%, transparent 70%), radial-gradient(56% 48% at 85% 25%, rgba(82, 48, 145, 0.34), transparent 62%), linear-gradient(180deg, {bg.canvas}, {bg.page})",
+      "$description": "CSS value; preserve as string when transforming to CSS."
+    },
+    "section": {
+      "blue": {
+        "$type": "gradient",
+        "$value": "radial-gradient(84% 74% at 50% 8%, rgba(4, 63, 150, 0.32), transparent 70%)",
+        "$description": "CSS value; preserve as string when transforming to CSS."
+      },
+      "violet": {
+        "$type": "gradient",
+        "$value": "radial-gradient(86% 75% at 50% 24%, rgba(82, 48, 145, 0.28), transparent 70%)",
+        "$description": "CSS value; preserve as string when transforming to CSS."
+      }
+    },
+    "action": {
+      "$type": "gradient",
+      "$value": "linear-gradient(180deg, #f1fb52, {accent.primary})",
+      "$description": "CSS value; preserve as string when transforming to CSS."
+    },
+    "danger": {
+      "$type": "gradient",
+      "$value": "linear-gradient(180deg, #ff7373, {accent.danger})",
+      "$description": "CSS value; preserve as string when transforming to CSS."
+    },
+    "surface": {
+      "$type": "gradient",
+      "$value": "linear-gradient(180deg, rgba(17, 18, 20, 0.84), rgba(7, 8, 10, 0.7))",
+      "$description": "CSS value; preserve as string when transforming to CSS."
+    }
+  },
+  "bg": {
+    "canvas": {
+      "$type": "color",
+      "$value": "{color.black.950}"
+    },
+    "page": {
+      "$type": "color",
+      "$value": "{color.black.900}"
+    },
+    "surface": {
+      "default": {
+        "$type": "color",
+        "$value": "{color.gray.900}"
+      },
+      "raised": {
+        "$type": "color",
+        "$value": "{color.gray.850}"
+      },
+      "overlay": {
+        "$type": "color",
+        "$value": "{color.gray.750}"
+      }
+    },
+    "muted": {
+      "$type": "color",
+      "$value": "{color.gray.600}"
+    }
+  },
+  "fg": {
+    "primary": {
+      "$type": "color",
+      "$value": "{color.white}"
+    },
+    "strong": {
+      "$type": "color",
+      "$value": "{color.porcelain}"
+    },
+    "secondary": {
+      "$type": "color",
+      "$value": "{color.gray.400}"
+    },
+    "muted": {
+      "$type": "color",
+      "$value": "{color.gray.500}"
+    },
+    "inverse": {
+      "$type": "color",
+      "$value": "{color.black.900}"
+    }
+  },
+  "accent": {
+    "primary": {
+      "$type": "color",
+      "$value": "{color.lime.400}"
+    },
+    "danger": {
+      "$type": "color",
+      "$value": "{color.red.400}"
+    },
+    "success": {
+      "$type": "color",
+      "$value": "{color.mint.400}"
+    },
+    "info": {
+      "$type": "color",
+      "$value": "{color.blue.400}"
+    }
+  },
+  "control": {
+    "radius": {
+      "$type": "dimension",
+      "$value": "{radius.md}"
+    }
+  },
+  "card": {
+    "radius": {
+      "$type": "dimension",
+      "$value": "{radius.xl}"
+    },
+    "bg": {
+      "$type": "color",
+      "$value": "{bg.surface.default}"
+    },
+    "border": {
+      "$type": "color",
+      "$value": "{border.default}"
+    },
+    "shadow": {
+      "$type": "shadow",
+      "$value": "{shadow.card}",
+      "$description": "CSS value; preserve as string when transforming to CSS."
+    }
+  },
+  "focus": {
+    "ring": {
+      "color": {
+        "$type": "color",
+        "$value": "{accent.primary}"
+      },
+      "offset": {
+        "$type": "dimension",
+        "$value": "3px"
+      },
+      "default": {
+        "$type": "shadow",
+        "$value": "{focus.ring.color} 0 0 0 {border.width.default} inset, rgba(228, 242, 34, 0.16) 0 0 0 3px",
+        "$description": "CSS value; preserve as string when transforming to CSS."
+      },
+      "danger": {
+        "$type": "shadow",
+        "$value": "{accent.danger} 0 0 0 {border.width.default} inset, rgba(255, 99, 99, 0.16) 0 0 0 3px",
+        "$description": "CSS value; preserve as string when transforming to CSS."
+      }
+    }
+  },
+  "state": {
+    "hover": {
+      "bg": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [1.0, 1.0, 1.0],
+          "alpha": 0.06
+        }
+      }
+    },
+    "active": {
+      "bg": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.894118, 0.94902, 0.133333],
+          "alpha": 0.1
+        }
+      }
+    },
+    "selected": {
+      "bg": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.894118, 0.94902, 0.133333],
+          "alpha": 0.1
+        }
+      }
+    },
+    "disabled": {
+      "bg": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [1.0, 1.0, 1.0],
+          "alpha": 0.03
+        }
+      }
+    },
+    "error": {
+      "bg": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [1.0, 0.388235, 0.388235],
+          "alpha": 0.1
+        }
+      }
+    },
+    "info": {
+      "bg": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.337255, 0.760784, 1.0],
+          "alpha": 0.1
+        }
+      }
+    },
+    "success": {
+      "bg": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.34902, 0.831373, 0.6],
+          "alpha": 0.1
+        }
+      }
+    }
+  },
+  "button": {
+    "primary": {
+      "bg": {
+        "$type": "color",
+        "$value": "{gradient.action}"
+      },
+      "fg": {
+        "$type": "color",
+        "$value": "{fg.inverse}"
+      }
+    },
+    "secondary": {
+      "bg": {
+        "$type": "color",
+        "$value": "{color.gray.100}"
+      },
+      "fg": {
+        "$type": "color",
+        "$value": "{color.gray.900}"
+      }
+    },
+    "tertiary": {
+      "bg": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [1.0, 1.0, 1.0],
+          "alpha": 0.03
+        }
+      },
+      "fg": {
+        "$type": "color",
+        "$value": "{fg.secondary}"
+      }
+    },
+    "danger": {
+      "bg": {
+        "$type": "color",
+        "$value": "{gradient.danger}"
+      },
+      "fg": {
+        "$type": "color",
+        "$value": "{color.white}"
+      }
+    }
+  },
+  "input": {
+    "bg": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [0.015686, 0.019608, 0.023529],
+        "alpha": 0.34
+      }
+    },
+    "fg": {
+      "$type": "color",
+      "$value": "{fg.strong}"
+    },
+    "border": {
+      "$type": "color",
+      "$value": "{border.default}"
+    },
+    "placeholder": {
+      "$type": "color",
+      "$value": "{fg.muted}"
+    },
+    "error": {
+      "border": {
+        "$type": "color",
+        "$value": "{accent.danger}"
+      }
+    }
+  },
+  "dialog": {
+    "bg": {
+      "$type": "color",
+      "$value": "{bg.surface.raised}"
+    },
+    "shadow": {
+      "$type": "shadow",
+      "$value": "{shadow.overlay}",
+      "$description": "CSS value; preserve as string when transforming to CSS."
+    }
+  },
+  "tooltip": {
+    "bg": {
+      "$type": "color",
+      "$value": "{bg.surface.overlay}"
+    },
+    "fg": {
+      "$type": "color",
+      "$value": "{fg.strong}"
+    }
+  },
+  "table": {
+    "row": {
+      "hover": {
+        "bg": {
+          "$type": "color",
+          "$value": "{state.hover.bg}"
+        }
+      },
+      "selected": {
+        "bg": {
+          "$type": "color",
+          "$value": "{state.selected.bg}"
+        }
+      }
+    }
+  },
+  "badge": {
+    "bg": {
+      "$type": "color",
+      "$value": "{bg.muted}"
+    },
+    "fg": {
+      "$type": "color",
+      "$value": "{fg.secondary}"
+    }
+  }
+}

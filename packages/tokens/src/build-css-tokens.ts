@@ -1,30 +1,15 @@
-import { mkdir, writeFile } from "node:fs/promises";
 import StyleDictionary from "style-dictionary";
 import { formats, transformGroups } from "style-dictionary/enums";
-import { listThemeFiles } from "./utils.js";
-import { DIST_OUTPUT_DIR, DURATION_CSS_TRANSFORM, TOKENS_CSS_OUTPUT_PATH } from "./config.js";
+import { mkdir, writeFile } from "node:fs/promises";
+import simpleBaseTokens from "./tokens.dtcg.json" with { type: "json" };
+import simpleBaseResolver from "./simple-base.resolver.json" with { type: "json" };
+import { DIST_OUTPUT_DIR, TOKENS_CSS_OUTPUT_PATH } from "./config.js";
+import type { DesignTokens } from "style-dictionary/types";
 
-StyleDictionary.registerTransform({
-  name: DURATION_CSS_TRANSFORM,
-  type: "value",
-  filter: (token) => {
-    return token.$type === "duration" || token.type === "duration";
-  },
-  transform: (token) => {
-    const value = token.$value ?? token.value;
-
-    if (value && typeof value === "object" && "value" in value && "unit" in value) {
-      return `${value.value}${value.unit}`;
-    }
-
-    return value;
-  },
-});
-
-async function buildCssToken(theme: string, selector: string) {
+async function formatTokensAsCssVariables(tokens: DesignTokens, theme: string, selector: string) {
   console.log(`\nProcessing: '${theme}'`);
   const sd = new StyleDictionary({
-    source: [theme],
+    tokens,
     log: {
       verbosity: "silent",
     },
@@ -32,13 +17,18 @@ async function buildCssToken(theme: string, selector: string) {
       web: {
         prefix: "sb",
         transformGroup: transformGroups.web,
-        transforms: [DURATION_CSS_TRANSFORM],
         files: [
           {
             format: formats.cssVariables,
             options: {
               selector,
               showFileHeader: false,
+              outputReferences: true,
+              outputReferenceFallbacks: false,
+              sort: "name",
+              formatting: {
+                commentStyle: "none",
+              },
             },
           },
         ],
@@ -55,16 +45,25 @@ async function buildCssToken(theme: string, selector: string) {
 
 export async function buildCssTokens() {
   const cssBlocks: string[] = [];
-  const globalsCss = await buildCssToken("src/globals/**/*.json", ":root");
-
-  const themeFiles = await listThemeFiles();
-  const themesCss = await Promise.all(
-    themeFiles.map((theme) =>
-      buildCssToken(`src/themes/${theme}`, `[data-theme="${theme.replace(".json", "")}"]`),
-    ),
+  const globalCss = await formatTokensAsCssVariables(
+    simpleBaseTokens,
+    "Global Tokens",
+    `:root, [data-theme="simple-base-dark"]`,
   );
+  cssBlocks.push(globalCss);
 
-  cssBlocks.push(globalsCss, ...themesCss);
+  for (const [theme, themeTokens] of Object.entries(simpleBaseResolver.modifiers.theme.contexts)) {
+    const tokensToBuild = themeTokens[0];
+    if (!tokensToBuild) continue;
+
+    const themeCss = await formatTokensAsCssVariables(
+      tokensToBuild,
+      theme,
+      `[data-theme="${theme}"]`,
+    );
+    cssBlocks.push(themeCss);
+  }
+
   await mkdir(DIST_OUTPUT_DIR, { recursive: true });
   await writeFile(TOKENS_CSS_OUTPUT_PATH, cssBlocks.join("\n"));
 }
