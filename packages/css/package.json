@@ -4,8 +4,8 @@
   "private": true,
   "files": [
     "styles.css",
-    "button.css",
-    "typography.css",
+    "styles/button.css",
+    "styles/typography.css",
     "styles.d.ts"
   ],
   "exports": {
