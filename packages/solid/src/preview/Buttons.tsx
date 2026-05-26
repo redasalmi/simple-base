@@ -17,7 +17,7 @@ const items = sizes.flatMap((size) =>
 export function Buttons() {
   return (
     <div class="flex flex-col gap-4">
-      <h1>Buttons</h1>
+      <h1 class="sb-heading-1">Buttons</h1>
       <div class="grid grid-cols-3 gap-4">
         <For each={items}>
           {({ variant, size, text }) => (

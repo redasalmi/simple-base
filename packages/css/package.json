@@ -5,6 +5,7 @@
   "files": [
     "styles.css",
     "button.css",
+    "typography.css",
     "styles.d.ts"
   ],
   "exports": {

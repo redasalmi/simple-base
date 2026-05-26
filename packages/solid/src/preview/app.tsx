@@ -1,7 +1,6 @@
 import { render } from "solid-js/web";
 import { Buttons } from "./Buttons";
 import "./tailwind.css";
-import "@simple-base/css";
 
 const root = document.getElementById("root");
 
