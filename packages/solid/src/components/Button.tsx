@@ -1,8 +1,14 @@
 import { splitProps, type JSX } from "solid-js";
 import { cn } from "../utils";
 
-type ButtonVariant = "primary" | "secondary" | "tertiary" | "ghost" | "danger" | "danger-subtle";
-type ButtonSize = "small" | "medium" | "large";
+export type ButtonVariant =
+  | "primary"
+  | "secondary"
+  | "tertiary"
+  | "ghost"
+  | "danger"
+  | "danger-subtle";
+export type ButtonSize = "small" | "medium" | "large";
 
 export type ButtonProps = JSX.ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: ButtonVariant;
@@ -17,6 +23,6 @@ export function Button(props: ButtonProps) {
   ]);
 
   return (
-    <button {...rest} class={cn(className, "button")} data-variant={variant} data-size={size} />
+    <button {...rest} class={cn(className, "sb-button")} data-variant={variant} data-size={size} />
   );
 }

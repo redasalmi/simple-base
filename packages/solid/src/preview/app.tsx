@@ -7,7 +7,7 @@ const root = document.getElementById("root");
 
 function App() {
   return (
-    <div class="p-8">
+    <div class="p-8 bg-(--sb-bg-page)">
       <Buttons />
     </div>
   );

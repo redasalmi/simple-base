@@ -1073,16 +1073,46 @@
       "fg": {
         "$type": "color",
         "$value": "{fg.inverse}"
+      },
+      "shadow": {
+        "$type": "shadow",
+        "$value": "{shadow.key}, rgba(228, 242, 34, 0.18) 0 0 {dimension.28}",
+        "$description": "CSS value; preserve as string when transforming to CSS."
+      },
+      "shadow-hover": {
+        "$type": "shadow",
+        "$value": "{shadow.key}, rgba(228, 242, 34, 0.28) 0 0 {dimension.34}",
+        "$description": "CSS value; preserve as string when transforming to CSS."
+      },
+      "highlight-bg": {
+        "$type": "gradient",
+        "$value": "linear-gradient(180deg, rgba(255, 255, 255, 0.42), transparent)",
+        "$description": "CSS value; preserve as string when transforming to CSS."
+      },
+      "highlight-opacity": {
+        "$type": "number",
+        "$value": "0.55"
       }
     },
     "secondary": {
       "bg": {
-        "$type": "color",
-        "$value": "{color.gray.100}"
+        "$type": "gradient",
+        "$value": "linear-gradient(180deg, {color.gray.50}, {color.gray.100})",
+        "$description": "CSS value; preserve as string when transforming to CSS."
       },
       "fg": {
         "$type": "color",
         "$value": "{color.gray.900}"
+      },
+      "shadow": {
+        "$type": "shadow",
+        "$value": "{shadow.key}",
+        "$description": "CSS value; preserve as string when transforming to CSS."
+      },
+      "shadow-hover": {
+        "$type": "shadow",
+        "$value": "{shadow.key}, rgba(255, 255, 255, 0.12) 0 0 {dimension.20}",
+        "$description": "CSS value; preserve as string when transforming to CSS."
       }
     },
     "tertiary": {
@@ -1097,6 +1127,53 @@
       "fg": {
         "$type": "color",
         "$value": "{fg.secondary}"
+      },
+      "bg-hover": {
+        "$type": "color",
+        "$value": "color-mix(in srgb, {fg.primary} 5%, transparent)",
+        "$description": "CSS value; preserve as string when transforming to CSS."
+      },
+      "fg-hover": {
+        "$type": "color",
+        "$value": "{fg.primary}"
+      },
+      "shadow": {
+        "$type": "shadow",
+        "$value": "{shadow.ring}",
+        "$description": "CSS value; preserve as string when transforming to CSS."
+      },
+      "shadow-hover": {
+        "$type": "shadow",
+        "$value": "rgba(255, 255, 255, 0.07) 0 {dimension.1} 0 inset, rgba(255, 255, 255, 0.24) 0 0 0 {dimension.1}, rgba(0, 0, 0, 0.2) 0 -1px 0 inset",
+        "$description": "CSS value; preserve as string when transforming to CSS."
+      }
+    },
+    "ghost": {
+      "bg": {
+        "$type": "color",
+        "$value": "transparent"
+      },
+      "fg": {
+        "$type": "color",
+        "$value": "{fg.secondary}"
+      },
+      "bg-hover": {
+        "$type": "color",
+        "$value": "{state.hover.bg}"
+      },
+      "fg-hover": {
+        "$type": "color",
+        "$value": "{fg.primary}"
+      },
+      "shadow": {
+        "$type": "shadow",
+        "$value": "none",
+        "$description": "CSS value; preserve as string when transforming to CSS."
+      },
+      "shadow-hover": {
+        "$type": "shadow",
+        "$value": "{shadow.ring}",
+        "$description": "CSS value; preserve as string when transforming to CSS."
       }
     },
     "danger": {
@@ -1107,6 +1184,44 @@
       "fg": {
         "$type": "color",
         "$value": "{color.white}"
+      },
+      "shadow": {
+        "$type": "shadow",
+        "$value": "{shadow.key}, rgba(255, 99, 99, 0.16) 0 0 {dimension.24}",
+        "$description": "CSS value; preserve as string when transforming to CSS."
+      },
+      "shadow-hover": {
+        "$type": "shadow",
+        "$value": "{shadow.key}, rgba(255, 99, 99, 0.24) 0 0 {dimension.30}",
+        "$description": "CSS value; preserve as string when transforming to CSS."
+      }
+    },
+    "danger-subtle": {
+      "bg": {
+        "$type": "color",
+        "$value": "{state.error.bg}"
+      },
+      "fg": {
+        "$type": "color",
+        "$value": "{accent.danger}"
+      },
+      "bg-hover": {
+        "$type": "color",
+        "$value": "{accent.danger}"
+      },
+      "fg-hover": {
+        "$type": "color",
+        "$value": "{button.danger.fg}"
+      },
+      "shadow": {
+        "$type": "shadow",
+        "$value": "{accent.danger} 0 0 0 {dimension.1} inset, rgba(255, 99, 99, 0.08) 0 0 {dimension.24}",
+        "$description": "CSS value; preserve as string when transforming to CSS."
+      },
+      "shadow-hover": {
+        "$type": "shadow",
+        "$value": "{button.danger.shadow}",
+        "$description": "CSS value; preserve as string when transforming to CSS."
       }
     }
   },

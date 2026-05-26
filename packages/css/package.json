@@ -3,11 +3,19 @@
   "version": "0.0.0",
   "private": true,
   "files": [
-    "styles.css"
+    "styles.css",
+    "button.css",
+    "styles.d.ts"
   ],
   "exports": {
-    ".": "./styles.css",
-    "./styles.css": "./styles.css"
+    ".": {
+      "types": "./styles.d.ts",
+      "default": "./styles.css"
+    },
+    "./styles.css": {
+      "types": "./styles.d.ts",
+      "default": "./styles.css"
+    }
   },
   "dependencies": {
     "@simple-base/tokens": "workspace:^"
