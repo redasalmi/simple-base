@@ -2,3 +2,7 @@
 @import "./styles/typography.css";
 @import "./styles/button.css";
 @import "./styles/checkbox.css";
+@import "./styles/input.css";
+@import "./styles/radio.css";
+@import "./styles/textarea.css";
+@import "./styles/switch.css";

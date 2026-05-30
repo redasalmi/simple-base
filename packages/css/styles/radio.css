@@ -1,0 +1,36 @@
+.sb-radio {
+  width: var(--sb-dimension-18);
+  height: var(--sb-dimension-18);
+  margin: 0;
+  border: 0;
+  border-radius: var(--sb-radius-full);
+  appearance: none;
+  background: var(--sb-button-tertiary-bg);
+  box-shadow:
+    var(--sb-border-default) 0 0 0 var(--sb-dimension-1) inset,
+    rgba(255, 255, 255, 0.08) 0 var(--sb-dimension-1) 0 inset;
+  cursor: pointer;
+  transition:
+    background var(--sb-duration-normal) var(--sb-ease-standard),
+    box-shadow var(--sb-duration-normal) var(--sb-ease-standard),
+    opacity var(--sb-duration-normal) var(--sb-ease-standard);
+}
+
+.sb-radio:checked {
+  background:
+    radial-gradient(circle, var(--sb-fg-inverse) 0 var(--sb-dimension-4), transparent var(--sb-dimension-5)),
+    var(--sb-button-primary-bg);
+  box-shadow:
+    var(--sb-shadow-key),
+    rgba(228, 242, 34, 0.18) 0 0 var(--sb-dimension-18);
+}
+
+.sb-radio:focus-visible {
+  outline: 0;
+  box-shadow: var(--sb-focus-ring-default);
+}
+
+.sb-radio:disabled {
+  cursor: not-allowed;
+  opacity: var(--sb-opacity-disabled);
+}

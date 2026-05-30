@@ -23,6 +23,6 @@ export function Button(props: ButtonProps) {
   ]);
 
   return (
-    <button {...rest} class={cn(className, "sb-button")} data-variant={variant} data-size={size} />
+    <button {...rest} class={cn("sb-button", className)} data-variant={variant} data-size={size} />
   );
 }

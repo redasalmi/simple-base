@@ -1,0 +1,72 @@
+.sb-switch {
+  position: relative;
+  display: inline-flex;
+  width: var(--sb-dimension-46);
+  height: var(--sb-dimension-26);
+  margin: 0;
+  border: 0;
+  border-radius: var(--sb-radius-full);
+  appearance: none;
+  background: color-mix(in srgb, var(--sb-fg-primary) 4%, transparent);
+  box-shadow:
+    var(--sb-border-default) 0 0 0 var(--sb-dimension-1) inset,
+    rgba(0, 0, 0, 0.25) 0 var(--sb-dimension-2) var(--sb-dimension-1)
+      var(--sb-dimension-1) inset,
+    rgba(255, 255, 255, 0.08) 0 var(--sb-dimension-1) 0 inset;
+  cursor: pointer;
+  transition:
+    background var(--sb-duration-normal) var(--sb-ease-standard),
+    box-shadow var(--sb-duration-normal) var(--sb-ease-standard),
+    opacity var(--sb-duration-normal) var(--sb-ease-standard);
+}
+
+.sb-switch::after {
+  position: absolute;
+  top: var(--sb-dimension-4);
+  left: var(--sb-dimension-4);
+  width: var(--sb-dimension-18);
+  height: var(--sb-dimension-18);
+  border-radius: var(--sb-radius-full);
+  background: var(--sb-button-secondary-bg);
+  box-shadow: var(--sb-shadow-key);
+  content: "";
+  transition:
+    translate var(--sb-duration-normal) var(--sb-ease-out),
+    background var(--sb-duration-normal) var(--sb-ease-standard),
+    box-shadow var(--sb-duration-normal) var(--sb-ease-standard);
+}
+
+.sb-switch:checked {
+  background: var(--sb-button-primary-bg);
+  box-shadow:
+    rgba(228, 242, 34, 0.18) 0 0 var(--sb-dimension-22),
+    rgba(0, 0, 0, 0.25) 0 var(--sb-dimension-2) var(--sb-dimension-1)
+      var(--sb-dimension-1) inset,
+    rgba(255, 255, 255, 0.22) 0 var(--sb-dimension-1) var(--sb-dimension-1)
+      inset;
+}
+
+.sb-switch:checked::after {
+  translate: var(--sb-dimension-20) 0;
+  background: var(--sb-fg-inverse);
+  box-shadow:
+    rgba(0, 0, 0, 0.35) 0 var(--sb-dimension-1-5) var(--sb-dimension-0-5)
+      var(--sb-dimension-1-5),
+    rgba(255, 255, 255, 0.12) 0 var(--sb-dimension-1) var(--sb-dimension-1)
+      inset;
+}
+
+.sb-switch:focus-visible {
+  outline: 0;
+  box-shadow: var(--sb-focus-ring-default);
+}
+
+.sb-switch:disabled {
+  cursor: not-allowed;
+  opacity: var(--sb-opacity-disabled);
+}
+
+.sb-switch:disabled::after {
+  background: var(--sb-fg-muted);
+  box-shadow: none;
+}

@@ -7,6 +7,10 @@
     "styles/button.css",
     "styles/typography.css",
     "styles/checkbox.css",
+    "styles/input.css",
+    "styles/radio.css",
+    "styles/textarea.css",
+    "styles/switch.css",
     "styles.d.ts"
   ],
   "exports": {
