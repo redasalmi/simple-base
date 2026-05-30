@@ -5,6 +5,7 @@
   "files": [
     "styles.css",
     "styles/button.css",
+    "styles/badge.css",
     "styles/typography.css",
     "styles/checkbox.css",
     "styles/input.css",
