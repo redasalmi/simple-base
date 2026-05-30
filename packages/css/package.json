@@ -6,6 +6,7 @@
     "styles.css",
     "styles/button.css",
     "styles/typography.css",
+    "styles/checkbox.css",
     "styles.d.ts"
   ],
   "exports": {
