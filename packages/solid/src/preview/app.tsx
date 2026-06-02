@@ -2,6 +2,7 @@ import { render } from "solid-js/web";
 import { Typography } from "./Typography";
 import { Buttons } from "./Buttons";
 import { Badges } from "./Badges";
+import { AlertDialogs } from "./AlertDialogs";
 import { Inputs } from "./Inputs";
 import "./tailwind.css";
 
@@ -13,6 +14,7 @@ function App() {
       <Typography />
       <Buttons />
       <Badges />
+      <AlertDialogs />
       <Inputs />
     </div>
   );

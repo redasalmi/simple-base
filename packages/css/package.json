@@ -4,6 +4,7 @@
   "private": true,
   "files": [
     "styles.css",
+    "styles/alert-dialog.css",
     "styles/button.css",
     "styles/badge.css",
     "styles/typography.css",

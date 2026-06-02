@@ -1,5 +1,6 @@
 @import "@simple-base/tokens/css";
 @import "./styles/typography.css";
+@import "./styles/alert-dialog.css";
 @import "./styles/button.css";
 @import "./styles/badge.css";
 @import "./styles/checkbox.css";
