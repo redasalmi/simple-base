@@ -12,9 +12,9 @@
     "quality:fix": "turbo run //#lint:fix //#format:fix"
   },
   "devDependencies": {
-    "oxfmt": "^0.50.0",
-    "oxlint": "^1.65.0",
-    "turbo": "^2.9.14",
+    "oxfmt": "^0.57.0",
+    "oxlint": "^1.72.0",
+    "turbo": "^2.10.3",
     "typescript": "~6.0.3"
   },
   "engines": {
