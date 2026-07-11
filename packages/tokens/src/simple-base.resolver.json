@@ -192,11 +192,11 @@
               },
               "secondary": {
                 "$type": "color",
-                "$value": "#5c5f77"
+                "$value": "#4c4f69"
               },
               "muted": {
                 "$type": "color",
-                "$value": "#5c5f77"
+                "$value": "#4c4f69"
               },
               "inverse": {
                 "$type": "color",
@@ -306,11 +306,11 @@
               },
               "secondary": {
                 "$type": "color",
-                "$value": "#a5adce"
+                "$value": "#c6d0f5"
               },
               "muted": {
                 "$type": "color",
-                "$value": "#b5bfe2"
+                "$value": "#c6d0f5"
               },
               "inverse": {
                 "$type": "color",
@@ -420,11 +420,11 @@
               },
               "secondary": {
                 "$type": "color",
-                "$value": "#a5adcb"
+                "$value": "#cad3f5"
               },
               "muted": {
                 "$type": "color",
-                "$value": "#a5adcb"
+                "$value": "#cad3f5"
               },
               "inverse": {
                 "$type": "color",
@@ -538,7 +538,7 @@
               },
               "muted": {
                 "$type": "color",
-                "$value": "#a6adc8"
+                "$value": "#bac2de"
               },
               "inverse": {
                 "$type": "color",

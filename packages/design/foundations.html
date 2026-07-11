@@ -1,0 +1,747 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Simple Base : Foundations</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link href="styles.css" rel="stylesheet" />
+  </head>
+  <body>
+    <a class="sb-skip-link" href="#main-content">Skip to content</a>
+    <main class="sb-page-shell" id="main-content">
+      <div class="sb-theme-switcher">
+        <label for="theme-select">Theme</label
+        ><select class="sb-select" data-theme-select="" id="theme-select">
+          <option value="simple-base-dark">Simple Base Dark</option>
+          <option value="simple-base-light">Simple Base Light</option>
+          <option value="catppuccin-latte">Catppuccin Latte</option>
+          <option value="catppuccin-frappe">Catppuccin Frappé</option>
+          <option value="catppuccin-macchiato">Catppuccin Macchiato</option>
+          <option value="catppuccin-mocha">Catppuccin Mocha</option>
+          <option value="dracula">Dracula</option>
+          <option value="tokyo-night">Tokyo Night</option>
+          <option value="nord">Nord</option>
+        </select>
+      </div>
+      <nav aria-label="Primary navigation" class="sb-command-dock">
+        <a href="index.html">Overview</a><a href="components.html">Components</a
+        ><a href="tokens.html">Tokens</a><a href="docs.html">Guidelines</a>
+      </nav>
+      <section aria-labelledby="page-title" class="sb-hero-card">
+        <p class="sb-eyebrow">Component family</p>
+        <h1 id="page-title">Foundations</h1>
+        <p class="sb-description">Build every interface from the same visual grammar.</p>
+        <nav aria-label="Components in this family" class="sb-family-index">
+          <strong>In this family</strong>
+          <div>
+            <a href="#typography">Typography</a><a href="#layout-primitives">Layout primitives</a
+            ><a href="#media-display">Media &amp; display</a><a href="#system-docs">System docs</a
+            ><a href="#component-states">Component states</a><a href="#divider">Divider</a>
+          </div>
+        </nav>
+        <div class="sb-family-content">
+          <div class="sb-component-panel" id="typography">
+            <div class="sb-panel-header">
+              <div>
+                <p class="sb-panel-kicker">Foundation</p>
+                <h2>Typography</h2>
+              </div>
+              <span class="sb-badge">Type scale</span>
+            </div>
+            <div aria-label="Typography system preview" class="sb-typography-showcase">
+              <div class="sb-type-card sb-type-card--hero">
+                <p class="sb-text-caption sb-text-muted">Display / 64px</p>
+                <p class="sb-type-display">Build in the dark.</p>
+              </div>
+              <div class="sb-type-scale-list">
+                <div class="sb-type-row">
+                  <span>H1</span>
+                  <p class="sb-heading-1">Command center interface</p>
+                </div>
+                <div class="sb-type-row">
+                  <span>H2</span>
+                  <h2 class="sb-heading-2">Workspace navigation</h2>
+                </div>
+                <div class="sb-type-row">
+                  <span>H3</span>
+                  <h3 class="sb-heading-3">Project settings</h3>
+                </div>
+                <div class="sb-type-row">
+                  <span>H4</span>
+                  <h4 class="sb-heading-4">Command shortcuts</h4>
+                </div>
+                <div class="sb-type-row">
+                  <span>H5</span>
+                  <h5 class="sb-heading-5">Metadata group</h5>
+                </div>
+                <div class="sb-type-row">
+                  <span>H6</span>
+                  <h6 class="sb-heading-6">Section label</h6>
+                </div>
+              </div>
+              <div class="sb-type-utility-grid">
+                <article>
+                  <p class="sb-text-body">
+                    Body text uses compact Linear rhythm with Raycast’s slightly wider, readable
+                    marketing tone for dense dark UI.
+                  </p>
+                  <p class="sb-text-caption">
+                    Caption text / compact metadata / 11px tracked label
+                  </p>
+                </article>
+                <article>
+                  <code class="sb-code-text">pnpm add @simple-base/ui</code>
+                  <pre class="sb-code-block"><code>const theme = "simple-base";
+applyTokens(theme);</code></pre>
+                </article>
+                <article class="sb-text-color-stack">
+                  <span class="sb-text-primary">Primary text</span>
+                  <span class="sb-text-secondary">Secondary text</span>
+                  <span class="sb-text-muted">Muted text</span>
+                  <span class="sb-text-accent">Accent text</span>
+                  <span class="sb-text-danger">Danger text</span>
+                  <span class="sb-text-success">Success text</span>
+                </article>
+              </div>
+            </div>
+            <div class="sb-spec-grid">
+              <article>
+                <span class="sb-spec-dot sb-spec-dot--type-heading"></span>
+                <h3>Headings</h3>
+                <p>
+                  Negative tracking and tight leading create the compressed Linear/Raycast headline
+                  feel.
+                </p>
+              </article>
+              <article>
+                <span class="sb-spec-dot sb-spec-dot--type-body"></span>
+                <h3>Body &amp; caption</h3>
+                <p>
+                  Body remains readable while captions use positive tracking for metadata scanning.
+                </p>
+              </article>
+              <article>
+                <span class="sb-spec-dot sb-spec-dot--type-code"></span>
+                <h3>Code &amp; color</h3>
+                <p>Mono text and utility colors cover technical snippets, states, and hierarchy.</p>
+              </article>
+            </div>
+
+            <details class="sb-component-contract">
+              <summary>Production contract for Typography</summary>
+              <div class="sb-contract-grid">
+                <section>
+                  <h3>Purpose &amp; anatomy</h3>
+                  <p>Type roles: display, six heading levels, body, caption, label, and code.</p>
+                </section>
+                <section>
+                  <h3>States</h3>
+                  <p>
+                    No interaction states. Preserve hierarchy and readable text contrast in every
+                    theme.
+                  </p>
+                </section>
+                <section>
+                  <h3>Keyboard</h3>
+                  <p>No custom keyboard behavior. Text selection and browser zoom remain native.</p>
+                </section>
+                <section>
+                  <h3>Accessibility</h3>
+                  <p>
+                    Use semantic headings in document order; never choose a heading level for
+                    appearance alone.
+                  </p>
+                </section>
+                <section>
+                  <h3>Theming</h3>
+                  <p>
+                    Use semantic foreground, surface, border, focus, and state roles; preserve WCAG
+                    2.2 AA across all nine themes.
+                  </p>
+                </section>
+                <section>
+                  <h3>Implementation boundary</h3>
+                  <p>
+                    CSS owns type tokens and utility classes; consuming markup owns semantic element
+                    choice.
+                  </p>
+                </section>
+                <section>
+                  <h3>Resilience</h3>
+                  <p>Allow 200% zoom, long localized headings, CJK, RTL, and 65–75ch prose.</p>
+                </section>
+              </div>
+            </details>
+          </div>
+          <div class="sb-component-panel" id="layout-primitives">
+            <div class="sb-panel-header">
+              <div>
+                <p class="sb-panel-kicker">Foundation</p>
+                <h2>Layout primitives</h2>
+              </div>
+              <span class="sb-badge">Structure</span>
+            </div>
+            <div aria-label="Layout primitives preview" class="sb-layout-showcase">
+              <section class="sb-section">
+                <div class="sb-container">
+                  <p class="sb-text-caption sb-text-muted">Container + section wrapper</p>
+                  <h3 class="sb-heading-3">Constrained content on an obsidian canvas</h3>
+                  <p class="sb-text-body">
+                    Use sections for vertical rhythm and containers to keep dense interfaces
+                    readable on wide screens.
+                  </p>
+                </div>
+              </section>
+              <div class="sb-layout-demo-grid">
+                <div class="sb-stack">
+                  <span class="sb-layout-block">Stack item</span>
+                  <span class="sb-layout-block">Stack item</span>
+                  <span class="sb-layout-block">Stack item</span>
+                </div>
+                <div class="sb-grid">
+                  <span class="sb-layout-block">Grid</span>
+                  <span class="sb-layout-block">Grid</span>
+                  <span class="sb-layout-block">Grid</span>
+                  <span class="sb-layout-block">Grid</span>
+                </div>
+              </div>
+              <div class="sb-sidebar-layout">
+                <aside class="sb-sidebar-layout__sidebar">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </aside>
+                <div class="sb-sidebar-layout__main">
+                  <span class="sb-layout-block">Main content</span>
+                  <span class="sb-layout-block sb-is-muted">Detail panel</span>
+                </div>
+              </div>
+            </div>
+            <div class="sb-spec-grid">
+              <article>
+                <span class="sb-spec-dot sb-spec-dot--layout-container"></span>
+                <h3>Container &amp; section</h3>
+                <p>Centered max-width and dark section rhythm for product pages and app shells.</p>
+              </article>
+              <article>
+                <span class="sb-spec-dot sb-spec-dot--layout-stack"></span>
+                <h3>Stack &amp; grid</h3>
+                <p>
+                  Composable primitives for vertical rhythm and responsive multi-column layouts.
+                </p>
+              </article>
+              <article>
+                <span class="sb-spec-dot sb-spec-dot--layout-sidebar"></span>
+                <h3>Sidebar layout</h3>
+                <p>App-like navigation structure inspired by Linear sidebars and Raycast panels.</p>
+              </article>
+            </div>
+
+            <details class="sb-component-contract">
+              <summary>Production contract for Layout primitives</summary>
+              <div class="sb-contract-grid">
+                <section>
+                  <h3>Purpose &amp; anatomy</h3>
+                  <p>
+                    Container, section, stack, grid, and sidebar compositions built from spacing
+                    tokens.
+                  </p>
+                </section>
+                <section>
+                  <h3>States</h3>
+                  <p>
+                    Layouts reflow at documented breakpoints; no hover or active state belongs to a
+                    layout primitive.
+                  </p>
+                </section>
+                <section>
+                  <h3>Keyboard</h3>
+                  <p>DOM order must match reading and tab order at every layout.</p>
+                </section>
+                <section>
+                  <h3>Accessibility</h3>
+                  <p>
+                    Use landmarks only when the region has a real navigational purpose and
+                    accessible name.
+                  </p>
+                </section>
+                <section>
+                  <h3>Theming</h3>
+                  <p>
+                    Use semantic foreground, surface, border, focus, and state roles; preserve WCAG
+                    2.2 AA across all nine themes.
+                  </p>
+                </section>
+                <section>
+                  <h3>Implementation boundary</h3>
+                  <p>
+                    CSS owns placement and reflow; consumers own source order and landmark
+                    semantics.
+                  </p>
+                </section>
+                <section>
+                  <h3>Resilience</h3>
+                  <p>
+                    Support narrow containers, 200% zoom, RTL logical flow, and unbroken
+                    100-character strings.
+                  </p>
+                </section>
+              </div>
+            </details>
+          </div>
+          <div class="sb-component-panel" id="media-display">
+            <div class="sb-panel-header">
+              <div>
+                <p class="sb-panel-kicker">Foundation</p>
+                <h2>Media &amp; display</h2>
+              </div>
+              <span class="sb-badge">Visual atoms</span>
+            </div>
+            <div aria-label="Media and display components preview" class="sb-media-showcase">
+              <div class="sb-icon-demo">
+                <span class="sb-icon sb-icon--default">⌘</span>
+                <span class="sb-icon sb-icon--accent">✦</span>
+                <span class="sb-icon sb-icon--danger">!</span>
+                <span class="sb-icon sb-icon--glass">↵</span>
+              </div>
+              <pre
+                class="sb-code-block sb-code-block--display"
+              ><code>&lt;button class="sb-button sb-button--primary"&gt;
+  Launch command
+&lt;/button&gt;</code></pre>
+              <div aria-label="Keyboard shortcut preview" class="sb-kbd-row">
+                <kbd class="sb-kbd">⌘</kbd>
+                <kbd class="sb-kbd">K</kbd>
+                <span>Open command palette</span>
+              </div>
+              <div class="sb-logo-card">
+                <span aria-label="Simple Base logo placeholder" class="sb-logo-mark" role="img"
+                  ><span></span
+                ></span>
+                <div>
+                  <strong>Simple Base</strong>
+                  <p>Obsidian UI system mark placeholder</p>
+                </div>
+              </div>
+            </div>
+            <div class="sb-spec-grid">
+              <article>
+                <span class="sb-spec-dot sb-spec-dot--media-icon"></span>
+                <h3>Icons</h3>
+                <p>Icon atoms use circular dark surfaces, restrained color, and tactile shadows.</p>
+              </article>
+              <article>
+                <span class="sb-spec-dot sb-spec-dot--media-code"></span>
+                <h3>Code &amp; KBD</h3>
+                <p>Mono code blocks and shortcut keys support developer-heavy product UIs.</p>
+              </article>
+              <article>
+                <span class="sb-spec-dot sb-spec-dot--media-logo"></span>
+                <h3>Logo mark</h3>
+                <p>A placeholder brand atom for navbars, splash screens, and app chrome.</p>
+              </article>
+            </div>
+
+            <details class="sb-component-contract">
+              <summary>Production contract for Media &amp; display</summary>
+              <div class="sb-contract-grid">
+                <section>
+                  <h3>Purpose &amp; anatomy</h3>
+                  <p>Image frame, logo mark, keyboard key, and media metadata patterns.</p>
+                </section>
+                <section>
+                  <h3>States</h3>
+                  <p>
+                    Images expose loading, loaded, missing, and error outcomes; keys expose default
+                    and pressed visuals only when interactive.
+                  </p>
+                </section>
+                <section>
+                  <h3>Keyboard</h3>
+                  <p>
+                    Interactive media uses native links or buttons; decorative previews receive no
+                    tab stop.
+                  </p>
+                </section>
+                <section>
+                  <h3>Accessibility</h3>
+                  <p>
+                    Provide meaningful alt text for informative images and empty alt text for
+                    decoration.
+                  </p>
+                </section>
+                <section>
+                  <h3>Theming</h3>
+                  <p>
+                    Use semantic foreground, surface, border, focus, and state roles; preserve WCAG
+                    2.2 AA across all nine themes.
+                  </p>
+                </section>
+                <section>
+                  <h3>Implementation boundary</h3>
+                  <p>
+                    CSS owns framing; consumers own image loading, fallback content, and accessible
+                    descriptions.
+                  </p>
+                </section>
+                <section>
+                  <h3>Resilience</h3>
+                  <p>
+                    Reserve dimensions to prevent layout shift and handle missing, portrait,
+                    landscape, and high-density assets.
+                  </p>
+                </section>
+              </div>
+            </details>
+          </div>
+          <div class="sb-component-panel" id="system-docs">
+            <div class="sb-panel-header">
+              <div>
+                <p class="sb-panel-kicker">Foundation</p>
+                <h2>System docs</h2>
+              </div>
+              <span class="sb-badge">Guidelines</span>
+            </div>
+            <div aria-label="System documentation preview" class="sb-docs-showcase">
+              <article class="sb-doc-card sb-doc-card--tokens">
+                <p class="sb-dialog-kicker">Design tokens</p>
+                <h3>Core primitives</h3>
+                <div class="sb-token-list">
+                  <span><b>Canvas</b><code>#040506</code></span>
+                  <span><b>Text</b><code>#f7f8f8</code></span>
+                  <span><b>Accent</b><code>#e4f222</code></span>
+                  <span><b>Radius</b><code>8px</code></span>
+                </div>
+              </article>
+              <article class="sb-doc-card">
+                <p class="sb-dialog-kicker">Usage</p>
+                <h3>Component guidelines</h3>
+                <p>
+                  Use default variants for structured forms, command variants for launcher/search
+                  flows, and muted variants for inactive metadata.
+                </p>
+              </article>
+              <article class="sb-doc-card">
+                <p class="sb-dialog-kicker">Naming</p>
+                <h3>Variant naming</h3>
+                <pre class="sb-code-block"><code>.sb-button
+.sb-button--primary
+.sb-card--glass
+.sb-input--muted</code></pre>
+              </article>
+              <article class="sb-doc-card">
+                <p class="sb-dialog-kicker">Accessibility</p>
+                <h3>Interaction notes</h3>
+                <ul class="sb-doc-list">
+                  <li>Use semantic elements first.</li>
+                  <li>Keep visible focus states.</li>
+                  <li>Provide labels for icon-only controls.</li>
+                </ul>
+              </article>
+              <article class="sb-doc-card sb-doc-card--do">
+                <p class="sb-dialog-kicker">Do</p>
+                <h3>Keep it restrained</h3>
+                <p>
+                  Layer near-black surfaces, use muted text hierarchy, and reserve lime for
+                  important active states.
+                </p>
+              </article>
+              <article class="sb-doc-card sb-doc-card--dont">
+                <p class="sb-dialog-kicker">Don’t</p>
+                <h3>Avoid visual noise</h3>
+                <p>
+                  Don’t use large bright fills, heavy gradients, or saturated colors beyond tiny
+                  semantic signals.
+                </p>
+              </article>
+            </div>
+            <div class="sb-spec-grid">
+              <article>
+                <span class="sb-spec-dot sb-spec-dot--docs-tokens"></span>
+                <h3>Tokens</h3>
+                <p>
+                  Document color, typography, spacing, radius, elevation, and surface decisions.
+                </p>
+              </article>
+              <article>
+                <span class="sb-spec-dot sb-spec-dot--docs-usage"></span>
+                <h3>Usage</h3>
+                <p>Guidelines explain when to use variants and how components compose together.</p>
+              </article>
+              <article>
+                <span class="sb-spec-dot sb-spec-dot--docs-accessibility"></span>
+                <h3>Accessibility</h3>
+                <p>Notes keep Simple Base usable while preserving its dark command-center style.</p>
+              </article>
+            </div>
+
+            <details class="sb-component-contract">
+              <summary>Production contract for System docs</summary>
+              <div class="sb-contract-grid">
+                <section>
+                  <h3>Purpose &amp; anatomy</h3>
+                  <p>
+                    Token lists, code samples, and implementation notes for technical reference.
+                  </p>
+                </section>
+                <section>
+                  <h3>States</h3>
+                  <p>
+                    Code samples support rest, focus, selection, and copied confirmation when copy
+                    is offered.
+                  </p>
+                </section>
+                <section>
+                  <h3>Keyboard</h3>
+                  <p>
+                    Tab reaches copy actions; code remains selectable with native keyboard commands.
+                  </p>
+                </section>
+                <section>
+                  <h3>Accessibility</h3>
+                  <p>
+                    Use code/pre semantics, descriptive copy labels, and live status for copy
+                    confirmation.
+                  </p>
+                </section>
+                <section>
+                  <h3>Theming</h3>
+                  <p>
+                    Use semantic foreground, surface, border, focus, and state roles; preserve WCAG
+                    2.2 AA across all nine themes.
+                  </p>
+                </section>
+                <section>
+                  <h3>Implementation boundary</h3>
+                  <p>CSS owns presentation; consumers own syntax content and clipboard behavior.</p>
+                </section>
+                <section>
+                  <h3>Resilience</h3>
+                  <p>
+                    Wrap or scroll long tokens without clipping; preserve punctuation in RTL and at
+                    200% zoom.
+                  </p>
+                </section>
+              </div>
+            </details>
+          </div>
+          <div class="sb-component-panel" id="component-states">
+            <div class="sb-panel-header">
+              <div>
+                <p class="sb-panel-kicker">Foundation</p>
+                <h2>Component states</h2>
+              </div>
+              <span class="sb-badge">Interaction</span>
+            </div>
+            <div aria-label="Component states preview" class="sb-states-showcase">
+              <button class="sb-button sb-button--tertiary sb-state-hover" type="button">
+                Hover
+              </button>
+              <button class="sb-button sb-button--tertiary sb-state-focus" type="button">
+                Focus
+              </button>
+              <button class="sb-button sb-button--primary sb-state-active" type="button">
+                <span aria-hidden="true" class="sb-button-glow"></span>Active
+              </button>
+              <button
+                class="sb-button sb-button--tertiary sb-state-disabled"
+                disabled=""
+                type="button"
+              >
+                Disabled
+              </button>
+              <label class="sb-form-field sb-form-field--error sb-state-error">
+                <span class="sb-form-label">Error</span>
+                <input
+                  aria-invalid="true"
+                  class="sb-input sb-input--default"
+                  value="Invalid value"
+                />
+                <span class="sb-error-text">This field needs attention.</span>
+              </label>
+              <button class="sb-button sb-button--secondary sb-state-loading" type="button">
+                <span aria-hidden="true" class="sb-spinner sb-spinner--inline"></span>Loading
+              </button>
+            </div>
+            <div class="sb-spec-grid">
+              <article>
+                <span class="sb-spec-dot sb-spec-dot--state-hover"></span>
+                <h3>Hover/focus</h3>
+                <p>Hover lifts surfaces; focus uses visible lime rings for keyboard navigation.</p>
+              </article>
+              <article>
+                <span class="sb-spec-dot sb-spec-dot--state-active"></span>
+                <h3>Active/error</h3>
+                <p>Active states use lime; error states use restrained red borders and copy.</p>
+              </article>
+              <article>
+                <span class="sb-spec-dot sb-spec-dot--state-loading"></span>
+                <h3>Disabled/loading</h3>
+                <p>Disabled recedes, while loading combines text with a compact spinner.</p>
+              </article>
+            </div>
+
+            <details class="sb-component-contract">
+              <summary>Production contract for Component states</summary>
+              <div class="sb-contract-grid">
+                <section>
+                  <h3>Purpose &amp; anatomy</h3>
+                  <p>
+                    Reference matrix for default, hover, focus-visible, active, disabled, loading,
+                    and error.
+                  </p>
+                </section>
+                <section>
+                  <h3>States</h3>
+                  <p>
+                    Each row demonstrates one named state; disabled controls are actually disabled
+                    and loading is announced.
+                  </p>
+                </section>
+                <section>
+                  <h3>Keyboard</h3>
+                  <p>
+                    Focus examples remain keyboard reachable; disabled examples are skipped by
+                    native tab order.
+                  </p>
+                </section>
+                <section>
+                  <h3>Accessibility</h3>
+                  <p>
+                    Pair state color with text, icon, shape, or status; loading uses aria-live or
+                    aria-busy.
+                  </p>
+                </section>
+                <section>
+                  <h3>Theming</h3>
+                  <p>
+                    Use semantic foreground, surface, border, focus, and state roles; preserve WCAG
+                    2.2 AA across all nine themes.
+                  </p>
+                </section>
+                <section>
+                  <h3>Implementation boundary</h3>
+                  <p>
+                    CSS defines visuals; component behavior sets native attributes and ARIA state.
+                  </p>
+                </section>
+                <section>
+                  <h3>Resilience</h3>
+                  <p>
+                    State labels survive high contrast, reduced motion, monochrome, and every
+                    supported theme.
+                  </p>
+                </section>
+              </div>
+            </details>
+          </div>
+          <div class="sb-component-panel" id="divider">
+            <div class="sb-panel-header">
+              <div>
+                <p class="sb-panel-kicker">Component</p>
+                <h2>Divider</h2>
+              </div>
+              <span class="sb-badge">Separation</span>
+            </div>
+            <div aria-label="Divider component preview" class="sb-divider-showcase">
+              <div class="sb-divider-card">
+                <p class="sb-divider-label">Default line</p>
+                <div class="sb-divider" role="separator"></div>
+                <p>Subtle Linear-style sb-divider for compact dark interfaces.</p>
+              </div>
+              <div class="sb-divider-card sb-divider-card--glass">
+                <p class="sb-divider-label">Labelled sb-divider</p>
+                <div class="sb-divider-with-label" role="separator">
+                  <span>Command group</span>
+                </div>
+                <p>Useful for grouped menu sections, drawers, and popovers.</p>
+              </div>
+              <div class="sb-divider-card sb-divider-card--vertical">
+                <span>Issues</span>
+                <div aria-orientation="vertical" class="sb-divider-vertical" role="separator"></div>
+                <span>Commands</span>
+                <div
+                  aria-orientation="vertical"
+                  class="sb-divider-vertical sb-divider-vertical--muted"
+                  role="separator"
+                ></div>
+                <span>Activity</span>
+              </div>
+            </div>
+            <div class="sb-spec-grid">
+              <article>
+                <span class="sb-spec-dot sb-spec-dot--divider-default"></span>
+                <h3>Default</h3>
+                <p>Low-contrast charcoal line separates content without creating visual walls.</p>
+              </article>
+              <article>
+                <span class="sb-spec-dot sb-spec-dot--divider-label"></span>
+                <h3>Labelled</h3>
+                <p>Muted text label works for command groups and metadata sections.</p>
+              </article>
+              <article>
+                <span class="sb-spec-dot sb-spec-dot--divider-muted"></span>
+                <h3>Vertical</h3>
+                <p>Compact vertical separators support dense nav, toolbar, and tab layouts.</p>
+              </article>
+            </div>
+
+            <details class="sb-component-contract">
+              <summary>Production contract for Divider</summary>
+              <div class="sb-contract-grid">
+                <section>
+                  <h3>Purpose &amp; anatomy</h3>
+                  <p>
+                    Horizontal or vertical separator used only where spacing cannot express
+                    grouping.
+                  </p>
+                </section>
+                <section>
+                  <h3>States</h3>
+                  <p>Static only; orientation changes with composition, not interaction.</p>
+                </section>
+                <section>
+                  <h3>Keyboard</h3>
+                  <p>No keyboard behavior and no tab stop.</p>
+                </section>
+                <section>
+                  <h3>Accessibility</h3>
+                  <p>
+                    Use hr for thematic breaks or role=separator with aria-orientation when
+                    structural.
+                  </p>
+                </section>
+                <section>
+                  <h3>Theming</h3>
+                  <p>
+                    Use semantic foreground, surface, border, focus, and state roles; preserve WCAG
+                    2.2 AA across all nine themes.
+                  </p>
+                </section>
+                <section>
+                  <h3>Implementation boundary</h3>
+                  <p>CSS owns stroke and spacing; markup owns semantic versus decorative intent.</p>
+                </section>
+                <section>
+                  <h3>Resilience</h3>
+                  <p>Remain visible in forced colors and avoid fixed lengths that overflow.</p>
+                </section>
+              </div>
+            </details>
+          </div>
+        </div>
+        <p class="sb-description">
+          <a class="sb-button sb-button--tertiary" href="index.html">Back to overview</a>
+        </p>
+      </section>
+    </main>
+    <script src="theme.js"></script>
+  </body>
+</html>

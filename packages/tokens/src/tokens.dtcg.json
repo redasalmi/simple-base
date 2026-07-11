@@ -1312,7 +1312,8 @@
       },
       "fg": {
         "$type": "color",
-        "$value": "{fg.inverse}"
+        "$value": "{color.black.900}",
+        "$description": "Near-black maintains AA contrast across the action gradient in every theme."
       },
       "shadow": {
         "$type": "shadow",
@@ -1336,13 +1337,13 @@
     },
     "secondary": {
       "bg": {
-        "$type": "gradient",
-        "$value": "linear-gradient(180deg, {color.gray.50}, {color.gray.100})",
-        "$description": "CSS value; preserve as string when transforming to CSS."
+        "$type": "color",
+        "$value": "{bg.surface.raised}",
+        "$description": "Theme-aware raised surface for an always-legible neutral action."
       },
       "fg": {
         "$type": "color",
-        "$value": "{color.gray.900}"
+        "$value": "{fg.primary}"
       },
       "shadow": {
         "$type": "shadow",

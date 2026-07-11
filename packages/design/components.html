@@ -1,0 +1,92 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Simple Base : Component index</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link href="styles.css" rel="stylesheet" />
+  </head>
+  <body>
+    <a class="sb-skip-link" href="#main-content">Skip to content</a>
+    <main class="sb-page-shell" id="main-content">
+      <div class="sb-theme-switcher">
+        <label for="theme-select">Theme</label>
+        <select class="sb-select" data-theme-select="" id="theme-select">
+          <option value="simple-base-dark">Simple Base Dark</option>
+          <option value="simple-base-light">Simple Base Light</option>
+          <option value="catppuccin-latte">Catppuccin Latte</option>
+          <option value="catppuccin-frappe">Catppuccin Frappé</option>
+          <option value="catppuccin-macchiato">Catppuccin Macchiato</option>
+          <option value="catppuccin-mocha">Catppuccin Mocha</option>
+          <option value="dracula">Dracula</option>
+          <option value="tokyo-night">Tokyo Night</option>
+          <option value="nord">Nord</option>
+        </select>
+      </div>
+      <nav aria-label="Primary navigation" class="sb-command-dock">
+        <a href="index.html">Overview</a>
+        <a aria-current="page" href="components.html">Components</a>
+        <a href="tokens.html">Tokens</a>
+        <a href="docs.html">Guidelines</a>
+      </nav>
+      <section aria-labelledby="page-title" class="sb-hero-card">
+        <div aria-hidden="true" class="sb-hero-signal">
+          <span class="sb-live-dot"></span><span>Chromatic Command Center</span>
+        </div>
+        <p class="sb-eyebrow">Simple Base / Components</p>
+        <h1 id="page-title">Find components by product role.</h1>
+        <p class="sb-description">
+          Five focused families cover foundations, input, navigation, feedback, and contextual
+          surfaces.
+        </p>
+
+        <section aria-labelledby="families-title" class="sb-overview-section">
+          <div class="sb-panel-header">
+            <div>
+              <p class="sb-panel-kicker">Browse by family</p>
+              <h2 id="families-title">
+                Choose a family to view examples and production contracts.
+              </h2>
+            </div>
+            <span class="sb-badge">33 components</span>
+          </div>
+          <div class="sb-family-grid">
+            <a class="sb-family-link sb-family-link--featured" href="foundations.html"
+              ><h3>Foundations</h3>
+              <p>Typography · Layout · Media · States · Divider</p>
+              <b>Explore foundations →</b></a
+            >
+            <a class="sb-family-link" href="forms.html"
+              ><h3>Forms &amp; selection</h3>
+              <p>Button · Input · Selection · Choice controls</p>
+              <b>Explore forms →</b></a
+            >
+            <a class="sb-family-link" href="navigation.html"
+              ><h3>Navigation</h3>
+              <p>Navigation · Tabs · Accordion · Breadcrumbs</p>
+              <b>Explore navigation →</b></a
+            >
+            <a class="sb-family-link" href="feedback.html"
+              ><h3>Feedback &amp; data</h3>
+              <p>Data · Alerts · Badges · Toasts · Progress</p>
+              <b>Explore feedback →</b></a
+            >
+            <a class="sb-family-link" href="overlays.html"
+              ><h3>Overlays</h3>
+              <p>Cards · Dialogs · Drawers · Popovers · Tooltips</p>
+              <b>Explore overlays →</b></a
+            >
+          </div>
+        </section>
+      </section>
+    </main>
+    <script src="theme.js"></script>
+  </body>
+</html>
