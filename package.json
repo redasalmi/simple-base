@@ -8,15 +8,10 @@
     "lint:fix": "oxlint --fix .",
     "format": "oxfmt --check",
     "format:fix": "oxfmt .",
-    "test:design": "playwright test",
-    "test:design:update": "playwright test visual.spec.ts --update-snapshots",
-    "test:design:ui": "playwright test --ui",
     "quality": "turbo run //#lint //#format",
     "quality:fix": "turbo run //#lint:fix //#format:fix"
   },
   "devDependencies": {
-    "@axe-core/playwright": "^4.12.1",
-    "@playwright/test": "^1.61.1",
     "oxfmt": "^0.57.0",
     "oxlint": "^1.72.0",
     "turbo": "^2.10.3",

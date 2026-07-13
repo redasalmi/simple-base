@@ -35,8 +35,8 @@
   inset: var(--sb-dimension-1) var(--sb-dimension-1) auto;
   z-index: -1;
   height: 45%;
-  border-radius: var(--sb-dimension-7) var(--sb-dimension-7)
-    var(--sb-dimension-12) var(--sb-dimension-12);
+  border-radius: var(--sb-dimension-7) var(--sb-dimension-7) var(--sb-dimension-12)
+    var(--sb-dimension-12);
   background: var(--sb-button-primary-highlight-bg);
   opacity: 0;
   pointer-events: none;

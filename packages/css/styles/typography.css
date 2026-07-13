@@ -128,8 +128,8 @@
   border-radius: var(--sb-dimension-7);
   color: var(--sb-fg-accent-readable, var(--sb-accent-primary));
   background: color-mix(in srgb, var(--sb-accent-primary) 8%, transparent);
-  box-shadow: color-mix(in srgb, var(--sb-accent-primary) 16%, transparent) 0 0
-    0 var(--sb-dimension-1) inset;
+  box-shadow: color-mix(in srgb, var(--sb-accent-primary) 16%, transparent) 0 0 0
+    var(--sb-dimension-1) inset;
 }
 
 .sb-code-block {

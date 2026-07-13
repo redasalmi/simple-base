@@ -1,4 +1,5 @@
 # Raycast — Style Reference
+
 > Obsidian command terminal — a near-black void where UI surfaces emerge like backlit glass panels, depth created by shadow layering rather than color contrast.
 
 **Theme:** dark
@@ -7,28 +8,29 @@ Raycast lives in near-total darkness — a #040506 void where UI surfaces emerge
 
 ## Tokens — Colors
 
-| Name | Value | Token | Role |
-|------|-------|-------|------|
-| Void Black | `#040506` | `--color-void-black` | Dominant page canvas and deepest shadow color — the ground state everything floats above |
-| Deep Charcoal | `#07080a` | `--color-deep-charcoal` | Primary card and section backgrounds; the first surface level above canvas |
-| Graphite 700 | `#111214` | `--color-graphite-700` | Secondary surface and elevated card backgrounds |
-| Graphite 600 | `#1b1c1e` | `--color-graphite-600` | Observed in other boxShadow, link boxShadow, badge backgroundColor. Extracted usage does not support a distinct primary control color. |
-| Graphite 500 | `#363739` | `--color-graphite-500` | Border color for dividers, shadow tones on elevated components |
-| Graphite 400 | `#454647` | `--color-graphite-400` | Subtle borders, muted button borders, body divider lines |
-| Slate 300 | `#6a6b6c` | `--color-slate-300` | Secondary body text, icon fills, disabled states |
-| Slate 200 | `#9c9c9d` | `--color-slate-200` | Tertiary text, muted links, placeholder-level labels |
-| Ash 50 | `#e6e6e6` | `--color-ash-50` | Primary download/CTA button background — warm near-white on black for maximum contrast without pure white aggression |
-| Snow | `#ffffff` | `--color-snow` | Primary text on dark surfaces, nav links, headline text, icon strokes, border highlights |
-| Ember Red | `#ff6363` | `--color-ember-red` | Observed in body borderColor, other backgroundColor, other fill. |
-| Ember Dark | `#452324` | `--color-ember-dark` | Observed in other backgroundColor, other borderColor. |
-| Mint Signal | `#59d499` | `--color-mint-signal` | Observed in other backgroundColor. Semantic/state role was not supported by extracted badge/input evidence. |
-| Sky Signal | `linear-gradient(135deg, rgb(86, 194, 255) 0%, rgb(19, 138, 242) 100%)` | `--color-sky-signal` | Observed in other backgroundColor. Semantic/state role was not supported by extracted badge/input evidence.; Hero gradient highlight — linear-gradient(135deg, #56c2ff 0%, #138af2 100%) used for product feature illustration accents |
-| Nebula Glow | `radial-gradient(84.6% 73.49% at 50% 26.51%, rgba(4, 63, 150, 0.7), rgba(6, 18, 37, 0.25))` | `--color-nebula-glow` | Radial section atmosphere gradient — low-opacity blue bloom behind hero and feature sections |
-| Violet Haze | `radial-gradient(86.88% 75.47% at 50% 24.53%, rgba(82, 48, 145, 0.7), rgba(26, 11, 51, 0.14))` | `--color-violet-haze` | Radial section atmosphere gradient — low-opacity purple bloom for alternate feature sections |
+| Name          | Value                                                                                          | Token                   | Role                                                                                                                                                                                                                                   |
+| ------------- | ---------------------------------------------------------------------------------------------- | ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Void Black    | `#040506`                                                                                      | `--color-void-black`    | Dominant page canvas and deepest shadow color — the ground state everything floats above                                                                                                                                               |
+| Deep Charcoal | `#07080a`                                                                                      | `--color-deep-charcoal` | Primary card and section backgrounds; the first surface level above canvas                                                                                                                                                             |
+| Graphite 700  | `#111214`                                                                                      | `--color-graphite-700`  | Secondary surface and elevated card backgrounds                                                                                                                                                                                        |
+| Graphite 600  | `#1b1c1e`                                                                                      | `--color-graphite-600`  | Observed in other boxShadow, link boxShadow, badge backgroundColor. Extracted usage does not support a distinct primary control color.                                                                                                 |
+| Graphite 500  | `#363739`                                                                                      | `--color-graphite-500`  | Border color for dividers, shadow tones on elevated components                                                                                                                                                                         |
+| Graphite 400  | `#454647`                                                                                      | `--color-graphite-400`  | Subtle borders, muted button borders, body divider lines                                                                                                                                                                               |
+| Slate 300     | `#6a6b6c`                                                                                      | `--color-slate-300`     | Secondary body text, icon fills, disabled states                                                                                                                                                                                       |
+| Slate 200     | `#9c9c9d`                                                                                      | `--color-slate-200`     | Tertiary text, muted links, placeholder-level labels                                                                                                                                                                                   |
+| Ash 50        | `#e6e6e6`                                                                                      | `--color-ash-50`        | Primary download/CTA button background — warm near-white on black for maximum contrast without pure white aggression                                                                                                                   |
+| Snow          | `#ffffff`                                                                                      | `--color-snow`          | Primary text on dark surfaces, nav links, headline text, icon strokes, border highlights                                                                                                                                               |
+| Ember Red     | `#ff6363`                                                                                      | `--color-ember-red`     | Observed in body borderColor, other backgroundColor, other fill.                                                                                                                                                                       |
+| Ember Dark    | `#452324`                                                                                      | `--color-ember-dark`    | Observed in other backgroundColor, other borderColor.                                                                                                                                                                                  |
+| Mint Signal   | `#59d499`                                                                                      | `--color-mint-signal`   | Observed in other backgroundColor. Semantic/state role was not supported by extracted badge/input evidence.                                                                                                                            |
+| Sky Signal    | `linear-gradient(135deg, rgb(86, 194, 255) 0%, rgb(19, 138, 242) 100%)`                        | `--color-sky-signal`    | Observed in other backgroundColor. Semantic/state role was not supported by extracted badge/input evidence.; Hero gradient highlight — linear-gradient(135deg, #56c2ff 0%, #138af2 100%) used for product feature illustration accents |
+| Nebula Glow   | `radial-gradient(84.6% 73.49% at 50% 26.51%, rgba(4, 63, 150, 0.7), rgba(6, 18, 37, 0.25))`    | `--color-nebula-glow`   | Radial section atmosphere gradient — low-opacity blue bloom behind hero and feature sections                                                                                                                                           |
+| Violet Haze   | `radial-gradient(86.88% 75.47% at 50% 24.53%, rgba(82, 48, 145, 0.7), rgba(26, 11, 51, 0.14))` | `--color-violet-haze`   | Radial section atmosphere gradient — low-opacity purple bloom for alternate feature sections                                                                                                                                           |
 
 ## Tokens — Typography
 
 ### Inter — Universal UI font covering everything from 11px badge labels to 64px hero headlines. The negative tracking at display sizes (-0.11em at 56px) is the anti-convention choice — most launcher/productivity tools use neutral tracking, but Raycast's headlines contract inward, creating pressure and density. Feature settings 'ss03' (alternate 'a') distinguish it from default Inter. At small sizes (11–13px), tracking goes strongly positive (up to +0.073em) making metadata scannable at tiny scales. · `--font-inter`
+
 - **Substitute:** Inter (Google Fonts) — identical; this is the Google-hosted version
 - **Weights:** 400, 500, 600
 - **Sizes:** 11px, 12px, 13px, 14px, 16px, 18px, 20px, 22px, 24px, 32px, 56px, 64px
@@ -38,6 +40,7 @@ Raycast lives in near-total darkness — a #040506 void where UI surfaces emerge
 - **Role:** Universal UI font covering everything from 11px badge labels to 64px hero headlines. The negative tracking at display sizes (-0.11em at 56px) is the anti-convention choice — most launcher/productivity tools use neutral tracking, but Raycast's headlines contract inward, creating pressure and density. Feature settings 'ss03' (alternate 'a') distinguish it from default Inter. At small sizes (11–13px), tracking goes strongly positive (up to +0.073em) making metadata scannable at tiny scales.
 
 ### GeistMono — Monospaced font for version strings (v1.104.14), code snippets, homebrew install commands, and keyboard shortcut labels. Weight 300 at 10px for ultra-minimal metadata; weight 500 at 14px for readable code. Positive tracking (+0.017em to +0.05em) keeps characters from colliding at small sizes. · `--font-geistmono`
+
 - **Substitute:** JetBrains Mono or IBM Plex Mono
 - **Weights:** 300, 400, 500
 - **Sizes:** 10px, 12px, 14px
@@ -47,6 +50,7 @@ Raycast lives in near-total darkness — a #040506 void where UI surfaces emerge
 - **Role:** Monospaced font for version strings (v1.104.14), code snippets, homebrew install commands, and keyboard shortcut labels. Weight 300 at 10px for ultra-minimal metadata; weight 500 at 14px for readable code. Positive tracking (+0.017em to +0.05em) keeps characters from colliding at small sizes.
 
 ### SF Pro Text — System font fallback appearing in macOS-rendered product screenshots and simulated app UI within the page. Not a deliberate web font choice — appears in contexts where the browser renders macOS system UI. · `--font-sf-pro-text`
+
 - **Substitute:** Inter weight 500/700
 - **Weights:** 500, 700
 - **Sizes:** 16px, 24px, 32px
@@ -55,6 +59,7 @@ Raycast lives in near-total darkness — a #040506 void where UI surfaces emerge
 - **Role:** System font fallback appearing in macOS-rendered product screenshots and simulated app UI within the page. Not a deliberate web font choice — appears in contexts where the browser renders macOS system UI.
 
 ### SF Pro — SF Pro — detected in extracted data but not described by AI · `--font-sf-pro`
+
 - **Weights:** 700
 - **Sizes:** 13px
 - **Line height:** 1.23
@@ -63,15 +68,15 @@ Raycast lives in near-total darkness — a #040506 void where UI surfaces emerge
 
 ### Type Scale
 
-| Role | Size | Line Height | Letter Spacing | Token |
-|------|------|-------------|----------------|-------|
-| caption | 11px | 1.45 | 0.8px | `--text-caption` |
-| body | 16px | 1.5 | 0.1px | `--text-body` |
-| subheading | 18px | 1.4 | 0.06px | `--text-subheading` |
-| heading-sm | 24px | 1.33 | -0.05px | `--text-heading-sm` |
-| heading | 32px | 1.2 | -0.06px | `--text-heading` |
-| heading-lg | 56px | 1.1 | -0.11px | `--text-heading-lg` |
-| display | 64px | 1 | -0.13px | `--text-display` |
+| Role       | Size | Line Height | Letter Spacing | Token               |
+| ---------- | ---- | ----------- | -------------- | ------------------- |
+| caption    | 11px | 1.45        | 0.8px          | `--text-caption`    |
+| body       | 16px | 1.5         | 0.1px          | `--text-body`       |
+| subheading | 18px | 1.4         | 0.06px         | `--text-subheading` |
+| heading-sm | 24px | 1.33        | -0.05px        | `--text-heading-sm` |
+| heading    | 32px | 1.2         | -0.06px        | `--text-heading`    |
+| heading-lg | 56px | 1.1         | -0.11px        | `--text-heading-lg` |
+| display    | 64px | 1           | -0.13px        | `--text-display`    |
 
 ## Tokens — Spacing & Shapes
 
@@ -81,51 +86,51 @@ Raycast lives in near-total darkness — a #040506 void where UI surfaces emerge
 
 ### Spacing Scale
 
-| Name | Value | Token |
-|------|-------|-------|
-| 8 | 8px | `--spacing-8` |
-| 16 | 16px | `--spacing-16` |
-| 24 | 24px | `--spacing-24` |
-| 32 | 32px | `--spacing-32` |
-| 40 | 40px | `--spacing-40` |
-| 48 | 48px | `--spacing-48` |
-| 56 | 56px | `--spacing-56` |
-| 64 | 64px | `--spacing-64` |
-| 80 | 80px | `--spacing-80` |
-| 96 | 96px | `--spacing-96` |
-| 120 | 120px | `--spacing-120` |
-| 224 | 224px | `--spacing-224` |
+| Name | Value | Token           |
+| ---- | ----- | --------------- |
+| 8    | 8px   | `--spacing-8`   |
+| 16   | 16px  | `--spacing-16`  |
+| 24   | 24px  | `--spacing-24`  |
+| 32   | 32px  | `--spacing-32`  |
+| 40   | 40px  | `--spacing-40`  |
+| 48   | 48px  | `--spacing-48`  |
+| 56   | 56px  | `--spacing-56`  |
+| 64   | 64px  | `--spacing-64`  |
+| 80   | 80px  | `--spacing-80`  |
+| 96   | 96px  | `--spacing-96`  |
+| 120  | 120px | `--spacing-120` |
+| 224  | 224px | `--spacing-224` |
 
 ### Border Radius
 
-| Element | Value |
-|---------|-------|
-| cards | 11px |
-| icons | 99999px |
-| badges | 6px |
-| inputs | 8px |
-| modals | 16px |
-| buttons | 8px |
-| cardLarge | 20px |
-| buttonPill | 86px |
+| Element    | Value   |
+| ---------- | ------- |
+| cards      | 11px    |
+| icons      | 99999px |
+| badges     | 6px     |
+| inputs     | 8px     |
+| modals     | 16px    |
+| buttons    | 8px     |
+| cardLarge  | 20px    |
+| buttonPill | 86px    |
 
 ### Shadows
 
-| Name | Value | Token |
-|------|-------|-------|
-| subtle | `rgba(0, 0, 0, 0.4) 0px 1.5px 0.5px 2.5px, rgb(0, 0, 0) 0p...` | `--shadow-subtle` |
-| subtle-2 | `rgb(27, 28, 30) 0px 0px 0px 1px, rgb(7, 8, 10) 0px 0px 0p...` | `--shadow-subtle-2` |
-| lg | `rgba(215, 201, 175, 0.05) 0px 0px 20px 5px, rgba(215, 201...` | `--shadow-lg` |
-| subtle-3 | `rgba(255, 255, 255, 0.05) 0px 1px 0px 0px inset, rgba(255...` | `--shadow-subtle-3` |
-| subtle-4 | `rgba(0, 0, 0, 0.03) 0px 7px 3px 0px, rgba(0, 0, 0, 0.25) ...` | `--shadow-subtle-4` |
-| subtle-5 | `rgba(255, 255, 255, 0.1) 0px 1px 0px 0px inset` | `--shadow-subtle-5` |
-| xl | `rgba(0, 0, 0, 0.4) 0px 4px 40px 8px, rgba(0, 0, 0, 0.8) 0...` | `--shadow-xl` |
-| subtle-6 | `rgba(255, 255, 255, 0.15) 0px 1px 1px 0px inset` | `--shadow-subtle-6` |
-| sm | `rgba(0, 0, 0, 0.25) 0px 4px 4px 0px` | `--shadow-sm` |
-| subtle-7 | `rgba(255, 255, 255, 0.1) 0px 1px 0px 0px inset, rgba(0, 0...` | `--shadow-subtle-7` |
-| xl-2 | `rgba(255, 255, 255, 0.03) 0px 0px 40px 20px, rgba(255, 25...` | `--shadow-xl-2` |
-| subtle-8 | `rgba(255, 255, 255, 0.19) 0px 0px 2px 0px, rgba(255, 255,...` | `--shadow-subtle-8` |
-| subtle-9 | `rgba(255, 255, 255, 0.1) 0px 1px 0px 0px inset, rgba(7, 1...` | `--shadow-subtle-9` |
+| Name      | Value                                                          | Token                |
+| --------- | -------------------------------------------------------------- | -------------------- |
+| subtle    | `rgba(0, 0, 0, 0.4) 0px 1.5px 0.5px 2.5px, rgb(0, 0, 0) 0p...` | `--shadow-subtle`    |
+| subtle-2  | `rgb(27, 28, 30) 0px 0px 0px 1px, rgb(7, 8, 10) 0px 0px 0p...` | `--shadow-subtle-2`  |
+| lg        | `rgba(215, 201, 175, 0.05) 0px 0px 20px 5px, rgba(215, 201...` | `--shadow-lg`        |
+| subtle-3  | `rgba(255, 255, 255, 0.05) 0px 1px 0px 0px inset, rgba(255...` | `--shadow-subtle-3`  |
+| subtle-4  | `rgba(0, 0, 0, 0.03) 0px 7px 3px 0px, rgba(0, 0, 0, 0.25) ...` | `--shadow-subtle-4`  |
+| subtle-5  | `rgba(255, 255, 255, 0.1) 0px 1px 0px 0px inset`               | `--shadow-subtle-5`  |
+| xl        | `rgba(0, 0, 0, 0.4) 0px 4px 40px 8px, rgba(0, 0, 0, 0.8) 0...` | `--shadow-xl`        |
+| subtle-6  | `rgba(255, 255, 255, 0.15) 0px 1px 1px 0px inset`              | `--shadow-subtle-6`  |
+| sm        | `rgba(0, 0, 0, 0.25) 0px 4px 4px 0px`                          | `--shadow-sm`        |
+| subtle-7  | `rgba(255, 255, 255, 0.1) 0px 1px 0px 0px inset, rgba(0, 0...` | `--shadow-subtle-7`  |
+| xl-2      | `rgba(255, 255, 255, 0.03) 0px 0px 40px 20px, rgba(255, 25...` | `--shadow-xl-2`      |
+| subtle-8  | `rgba(255, 255, 255, 0.19) 0px 0px 2px 0px, rgba(255, 255,...` | `--shadow-subtle-8`  |
+| subtle-9  | `rgba(255, 255, 255, 0.1) 0px 1px 0px 0px inset, rgba(7, 1...` | `--shadow-subtle-9`  |
 | subtle-10 | `rgba(255, 255, 255, 0.1) 0px 1px 0px 0px inset, rgba(0, 0...` | `--shadow-subtle-10` |
 | subtle-11 | `rgba(255, 255, 255, 0.1) 0px 1px 0px 0px inset, rgba(7, 1...` | `--shadow-subtle-11` |
 
@@ -139,61 +144,73 @@ Raycast lives in near-total darkness — a #040506 void where UI surfaces emerge
 ## Components
 
 ### Primary Download Button
+
 **Role:** Main CTA for app download
 
 Background #E6E6E6, text #2F3031, border-radius 8px, padding 8px 12px. Carries an Apple logo icon inline. On the dark canvas this near-white button reads as the highest-contrast interactive element without being a harsh pure white. Font Inter 14px weight 500.
 
 ### Ghost Navigation Link
+
 **Role:** Top navigation items
 
 Transparent background, text #9C9C9D at 14px Inter weight 400, no border. Zero padding on top/bottom. On hover text shifts toward #FFFFFF. The muted gray-on-black keeps nav from competing with hero content — links recede until needed.
 
 ### Keyboard Key Element
+
 **Role:** Interactive keyboard shortcut visualizer
 
 Transparent background, border-radius 86px (oval pill shape for key tops), padding 20px all sides. Shadow stack: `rgba(0,0,0,0.4) 0px 1.5px 0.5px 2.5px, rgb(0,0,0) 0px 0px 0.5px 1px, rgba(0,0,0,0.25) 0px 2px 1px 1px inset, rgba(255,255,255,0.2) 0px 1px 1px 1px inset` — the inset white/black pair creates a physical bevel. Text #6A6B6C. Animates --key-bg-start-color and --key-bg-end-color on interaction.
 
 ### Feature Card
+
 **Role:** Marketing feature section cards
 
 Background transparent (inherits surface), border-radius 16px, padding 24px all sides, no box-shadow. Used in 2–3 column grid layouts. Inner content arranged with 15px element gap. Border defined by 1px solid #222225 or the layered inset white shadow system.
 
 ### Glass Product Card
+
 **Role:** Product screenshot / app UI demo containers
 
 Background transparent, border-radius 12px, shadow `rgba(0,0,0,0.28) 0px 1.189px 2.377px 0px`. Backdrop filter blur(36px) to blur(48px) creates frosted glass effect behind app window mockups. Border 1px solid rgba(255,255,255,0.1).
 
 ### Outlined Highlight Card
+
 **Role:** Extension/store item cards with white ring
 
 Background transparent, border-radius 8px, padding 8px, shadow `rgba(255,255,255,0.05) 0px 1px 0px 0px inset, rgba(255,255,255,0.25) 0px 0px 0px 1px, rgba(0,0,0,0.2) 0px -1px 0px 0px inset`. The white 0.25 opacity outer ring makes cards appear to glow on the dark background — used to highlight selected/featured extensions.
 
 ### Dark Badge
+
 **Role:** Version numbers, category labels, status chips
 
 Background #1B1C1, text #FFFFFF, border-radius 6px, padding 0px 6px. Inter 12px weight 500, letter-spacing +0.04em. Used for version strings like 'v1.104.14' and feature category chips. The near-black background barely distinguishes from the canvas — a whisper label.
 
 ### Search Input
+
 **Role:** In-app filter/search within product demo
 
 Background rgba(255,255,255,0.05), text #FFFFFF, border rgba(255,255,255,0.05), border-radius 8px, padding 8px 12px. The 5% white background is nearly invisible against dark surfaces — maintains the low-contrast dark-mode aesthetic while still signaling an editable field.
 
 ### Muted Inline Button
+
 **Role:** Secondary text actions and version badges
 
 Transparent background, text #9C9C9D at 13px Inter, border-radius 0px, padding 1px 6px, border #9C9C9D. Used for subsidiary CTAs like 'Install via homebrew' that should not compete with primary download buttons.
 
 ### Navigation Ring Link
+
 **Role:** Circular icon links in nav or social areas
 
 Transparent background, border-radius 86px (full oval), padding 20px, border rgba(255,255,255,0.06). Shadow `rgba(215,201,175,0.05) 0px 0px 20px 5px, rgba(215,201,175,0.05) 0px 0px 16px -7px` — a barely-perceptible warm bloom. Text #6A6B6C.
 
 ### Ember Status Indicator
+
 **Role:** Colored dot or label for status signals inside product UI
 
 Background #FF6363 for red states, #59D499 for green online, #56C2FF for blue info. Border-radius 99999px (circular). 8px diameter. These appear inside the simulated app UI screenshots to represent clipboard colors, status dots, or category tags.
 
 ### Section Atmosphere Backdrop
+
 **Role:** Per-section colored radial glow behind content
 
 Full-bleed radial gradient positioned at top-center: `radial-gradient(84.6% 73.49% at 50% 26.51%, rgba(4,63,150,0.7), rgba(6,18,37,0.25))` for blue sections, or the purple variant for alternate sections. Sits behind all content at z-index 0. No border, no radius. Creates the impression of a distant colored light source without any surface color change.
@@ -201,6 +218,7 @@ Full-bleed radial gradient positioned at top-center: `radial-gradient(84.6% 73.4
 ## Do's and Don'ts
 
 ### Do
+
 - Use #040506 as the page canvas ground — never a warm or cool-tinted near-black, only this near-pure neutral void
 - Apply the keyboard key shadow stack (rgba(0,0,0,0.4) outer, rgba(255,255,255,0.2) inset top highlight) on any element meant to feel physically pressable
 - Keep headline letter-spacing negative at display sizes: -0.11em at 56px, -0.13em at 64px — critical to the compressed, dense headline feel
@@ -210,6 +228,7 @@ Full-bleed radial gradient positioned at top-center: `radial-gradient(84.6% 73.4
 - Use GeistMono weight 300–400 for all code, version strings, and terminal commands at 10–14px with +0.017em to +0.05em tracking
 
 ### Don't
+
 - Do not use any colored backgrounds for section containers — all surface backgrounds must be from the #040506 → #1B1C1 neutral stack only
 - Do not apply border-radius above 20px to cards — the design uses 8px, 11px, 16px, 20px; rounder forms break the precision instrument aesthetic
 - Do not use #FF6363 as a button fill or large background — it appears only as a small status dot, icon accent, or single-word label text
@@ -220,12 +239,12 @@ Full-bleed radial gradient positioned at top-center: `radial-gradient(84.6% 73.4
 
 ## Surfaces
 
-| Level | Name | Value | Purpose |
-|-------|------|-------|---------|
-| 0 | Canvas | `#040506` | Page background — the absolute ground state, near-pure black |
-| 1 | Base Surface | `#07080a` | Primary card and section backgrounds floating above canvas |
-| 2 | Raised Surface | `#111214` | Elevated cards, modals, dropdown containers |
-| 3 | Overlay Surface | `#1b1c1` | Badges, tooltip backgrounds, highest floating elements |
+| Level | Name            | Value     | Purpose                                                      |
+| ----- | --------------- | --------- | ------------------------------------------------------------ |
+| 0     | Canvas          | `#040506` | Page background — the absolute ground state, near-pure black |
+| 1     | Base Surface    | `#07080a` | Primary card and section backgrounds floating above canvas   |
+| 2     | Raised Surface  | `#111214` | Elevated cards, modals, dropdown containers                  |
+| 3     | Overlay Surface | `#1b1c1`  | Badges, tooltip backgrounds, highest floating elements       |
 
 ## Elevation
 
@@ -247,6 +266,7 @@ Max-width ~1200px centered on wide viewports, but hero section is full-bleed dar
 ## Agent Prompt Guide
 
 **Quick Color Reference**
+
 - text primary: #FFFFFF
 - text secondary: #9C9C9D
 - text tertiary: #6A6B6C
@@ -315,15 +335,29 @@ Rule: All section backgrounds must use transparent-to-transparent radial gradien
   --color-sky-signal: #56c2ff;
   --gradient-sky-signal: linear-gradient(135deg, rgb(86, 194, 255) 0%, rgb(19, 138, 242) 100%);
   --color-nebula-glow: #043f96;
-  --gradient-nebula-glow: radial-gradient(84.6% 73.49% at 50% 26.51%, rgba(4, 63, 150, 0.7), rgba(6, 18, 37, 0.25));
+  --gradient-nebula-glow: radial-gradient(
+    84.6% 73.49% at 50% 26.51%,
+    rgba(4, 63, 150, 0.7),
+    rgba(6, 18, 37, 0.25)
+  );
   --color-violet-haze: #523091;
-  --gradient-violet-haze: radial-gradient(86.88% 75.47% at 50% 24.53%, rgba(82, 48, 145, 0.7), rgba(26, 11, 51, 0.14));
+  --gradient-violet-haze: radial-gradient(
+    86.88% 75.47% at 50% 24.53%,
+    rgba(82, 48, 145, 0.7),
+    rgba(26, 11, 51, 0.14)
+  );
 
   /* Typography — Font Families */
-  --font-inter: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-geistmono: 'GeistMono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  --font-sf-pro-text: 'SF Pro Text', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-sf-pro: 'SF Pro', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-inter:
+    "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    sans-serif;
+  --font-geistmono: "GeistMono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-sf-pro-text:
+    "SF Pro Text", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    sans-serif;
+  --font-sf-pro:
+    "SF Pro", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    sans-serif;
 
   /* Typography — Scale */
   --text-caption: 11px;
@@ -399,21 +433,38 @@ Rule: All section backgrounds must use transparent-to-transparent radial gradien
   --radius-buttonpill: 86px;
 
   /* Shadows */
-  --shadow-subtle: rgba(0, 0, 0, 0.4) 0px 1.5px 0.5px 2.5px, rgb(0, 0, 0) 0px 0px 0.5px 1px, rgba(0, 0, 0, 0.25) 0px 2px 1px 1px inset, rgba(255, 255, 255, 0.2) 0px 1px 1px 1px inset;
+  --shadow-subtle:
+    rgba(0, 0, 0, 0.4) 0px 1.5px 0.5px 2.5px, rgb(0, 0, 0) 0px 0px 0.5px 1px,
+    rgba(0, 0, 0, 0.25) 0px 2px 1px 1px inset, rgba(255, 255, 255, 0.2) 0px 1px 1px 1px inset;
   --shadow-subtle-2: rgb(27, 28, 30) 0px 0px 0px 1px, rgb(7, 8, 10) 0px 0px 0px 1px inset;
-  --shadow-lg: rgba(215, 201, 175, 0.05) 0px 0px 20px 5px, rgba(215, 201, 175, 0.05) 0px 0px 16px -7px;
-  --shadow-subtle-3: rgba(255, 255, 255, 0.05) 0px 1px 0px 0px inset, rgba(255, 255, 255, 0.25) 0px 0px 0px 1px, rgba(0, 0, 0, 0.2) 0px -1px 0px 0px inset;
+  --shadow-lg:
+    rgba(215, 201, 175, 0.05) 0px 0px 20px 5px, rgba(215, 201, 175, 0.05) 0px 0px 16px -7px;
+  --shadow-subtle-3:
+    rgba(255, 255, 255, 0.05) 0px 1px 0px 0px inset, rgba(255, 255, 255, 0.25) 0px 0px 0px 1px,
+    rgba(0, 0, 0, 0.2) 0px -1px 0px 0px inset;
   --shadow-subtle-4: rgba(0, 0, 0, 0.03) 0px 7px 3px 0px, rgba(0, 0, 0, 0.25) 0px 4px 4px 0px;
   --shadow-subtle-5: rgba(255, 255, 255, 0.1) 0px 1px 0px 0px inset;
-  --shadow-xl: rgba(0, 0, 0, 0.4) 0px 4px 40px 8px, rgba(0, 0, 0, 0.8) 0px 0px 0px 0.5px, rgba(255, 255, 255, 0.3) 0px 0.5px 0px 0px inset;
+  --shadow-xl:
+    rgba(0, 0, 0, 0.4) 0px 4px 40px 8px, rgba(0, 0, 0, 0.8) 0px 0px 0px 0.5px,
+    rgba(255, 255, 255, 0.3) 0px 0.5px 0px 0px inset;
   --shadow-subtle-6: rgba(255, 255, 255, 0.15) 0px 1px 1px 0px inset;
   --shadow-sm: rgba(0, 0, 0, 0.25) 0px 4px 4px 0px;
-  --shadow-subtle-7: rgba(255, 255, 255, 0.1) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.4) 0px 30px 50px 0px, rgba(3, 15, 129, 0.09) 0px 4px 24px 0px, rgba(255, 255, 255, 0.06) 0px 0px 0px 1px inset;
-  --shadow-xl-2: rgba(255, 255, 255, 0.03) 0px 0px 40px 20px, rgba(255, 255, 255, 0.3) 0px 0.5px 0px 0px inset;
-  --shadow-subtle-8: rgba(255, 255, 255, 0.19) 0px 0px 2px 0px, rgba(255, 255, 255, 0.1) 0px 0.5px 0px 0px inset;
-  --shadow-subtle-9: rgba(255, 255, 255, 0.1) 0px 1px 0px 0px inset, rgba(7, 13, 79, 0.1) 0px 0px 20px 3px, rgba(85, 0, 98, 0.1) 0px 0px 40px 20px, rgba(255, 255, 255, 0.06) 0px 0px 0px 1px inset;
-  --shadow-subtle-10: rgba(255, 255, 255, 0.1) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.4) 0px 30px 50px 0px, rgba(51, 3, 129, 0.09) 0px 4px 24px 0px, rgba(255, 255, 255, 0.06) 0px 0px 0px 1px inset;
-  --shadow-subtle-11: rgba(255, 255, 255, 0.1) 0px 1px 0px 0px inset, rgba(7, 13, 79, 0.1) 0px 0px 20px 3px, rgba(7, 40, 79, 0.1) 0px 0px 40px 20px, rgba(255, 255, 255, 0.06) 0px 0px 0px 1px inset;
+  --shadow-subtle-7:
+    rgba(255, 255, 255, 0.1) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.4) 0px 30px 50px 0px,
+    rgba(3, 15, 129, 0.09) 0px 4px 24px 0px, rgba(255, 255, 255, 0.06) 0px 0px 0px 1px inset;
+  --shadow-xl-2:
+    rgba(255, 255, 255, 0.03) 0px 0px 40px 20px, rgba(255, 255, 255, 0.3) 0px 0.5px 0px 0px inset;
+  --shadow-subtle-8:
+    rgba(255, 255, 255, 0.19) 0px 0px 2px 0px, rgba(255, 255, 255, 0.1) 0px 0.5px 0px 0px inset;
+  --shadow-subtle-9:
+    rgba(255, 255, 255, 0.1) 0px 1px 0px 0px inset, rgba(7, 13, 79, 0.1) 0px 0px 20px 3px,
+    rgba(85, 0, 98, 0.1) 0px 0px 40px 20px, rgba(255, 255, 255, 0.06) 0px 0px 0px 1px inset;
+  --shadow-subtle-10:
+    rgba(255, 255, 255, 0.1) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.4) 0px 30px 50px 0px,
+    rgba(51, 3, 129, 0.09) 0px 4px 24px 0px, rgba(255, 255, 255, 0.06) 0px 0px 0px 1px inset;
+  --shadow-subtle-11:
+    rgba(255, 255, 255, 0.1) 0px 1px 0px 0px inset, rgba(7, 13, 79, 0.1) 0px 0px 20px 3px,
+    rgba(7, 40, 79, 0.1) 0px 0px 40px 20px, rgba(255, 255, 255, 0.06) 0px 0px 0px 1px inset;
 
   /* Surfaces */
   --surface-canvas: #040506;
@@ -446,10 +497,16 @@ Rule: All section backgrounds must use transparent-to-transparent radial gradien
   --color-violet-haze: #523091;
 
   /* Typography */
-  --font-inter: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-geistmono: 'GeistMono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  --font-sf-pro-text: 'SF Pro Text', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-sf-pro: 'SF Pro', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-inter:
+    "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    sans-serif;
+  --font-geistmono: "GeistMono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-sf-pro-text:
+    "SF Pro Text", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    sans-serif;
+  --font-sf-pro:
+    "SF Pro", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    sans-serif;
 
   /* Typography — Scale */
   --text-caption: 11px;
@@ -501,20 +558,37 @@ Rule: All section backgrounds must use transparent-to-transparent radial gradien
   --radius-full-3: 99999px;
 
   /* Shadows */
-  --shadow-subtle: rgba(0, 0, 0, 0.4) 0px 1.5px 0.5px 2.5px, rgb(0, 0, 0) 0px 0px 0.5px 1px, rgba(0, 0, 0, 0.25) 0px 2px 1px 1px inset, rgba(255, 255, 255, 0.2) 0px 1px 1px 1px inset;
+  --shadow-subtle:
+    rgba(0, 0, 0, 0.4) 0px 1.5px 0.5px 2.5px, rgb(0, 0, 0) 0px 0px 0.5px 1px,
+    rgba(0, 0, 0, 0.25) 0px 2px 1px 1px inset, rgba(255, 255, 255, 0.2) 0px 1px 1px 1px inset;
   --shadow-subtle-2: rgb(27, 28, 30) 0px 0px 0px 1px, rgb(7, 8, 10) 0px 0px 0px 1px inset;
-  --shadow-lg: rgba(215, 201, 175, 0.05) 0px 0px 20px 5px, rgba(215, 201, 175, 0.05) 0px 0px 16px -7px;
-  --shadow-subtle-3: rgba(255, 255, 255, 0.05) 0px 1px 0px 0px inset, rgba(255, 255, 255, 0.25) 0px 0px 0px 1px, rgba(0, 0, 0, 0.2) 0px -1px 0px 0px inset;
+  --shadow-lg:
+    rgba(215, 201, 175, 0.05) 0px 0px 20px 5px, rgba(215, 201, 175, 0.05) 0px 0px 16px -7px;
+  --shadow-subtle-3:
+    rgba(255, 255, 255, 0.05) 0px 1px 0px 0px inset, rgba(255, 255, 255, 0.25) 0px 0px 0px 1px,
+    rgba(0, 0, 0, 0.2) 0px -1px 0px 0px inset;
   --shadow-subtle-4: rgba(0, 0, 0, 0.03) 0px 7px 3px 0px, rgba(0, 0, 0, 0.25) 0px 4px 4px 0px;
   --shadow-subtle-5: rgba(255, 255, 255, 0.1) 0px 1px 0px 0px inset;
-  --shadow-xl: rgba(0, 0, 0, 0.4) 0px 4px 40px 8px, rgba(0, 0, 0, 0.8) 0px 0px 0px 0.5px, rgba(255, 255, 255, 0.3) 0px 0.5px 0px 0px inset;
+  --shadow-xl:
+    rgba(0, 0, 0, 0.4) 0px 4px 40px 8px, rgba(0, 0, 0, 0.8) 0px 0px 0px 0.5px,
+    rgba(255, 255, 255, 0.3) 0px 0.5px 0px 0px inset;
   --shadow-subtle-6: rgba(255, 255, 255, 0.15) 0px 1px 1px 0px inset;
   --shadow-sm: rgba(0, 0, 0, 0.25) 0px 4px 4px 0px;
-  --shadow-subtle-7: rgba(255, 255, 255, 0.1) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.4) 0px 30px 50px 0px, rgba(3, 15, 129, 0.09) 0px 4px 24px 0px, rgba(255, 255, 255, 0.06) 0px 0px 0px 1px inset;
-  --shadow-xl-2: rgba(255, 255, 255, 0.03) 0px 0px 40px 20px, rgba(255, 255, 255, 0.3) 0px 0.5px 0px 0px inset;
-  --shadow-subtle-8: rgba(255, 255, 255, 0.19) 0px 0px 2px 0px, rgba(255, 255, 255, 0.1) 0px 0.5px 0px 0px inset;
-  --shadow-subtle-9: rgba(255, 255, 255, 0.1) 0px 1px 0px 0px inset, rgba(7, 13, 79, 0.1) 0px 0px 20px 3px, rgba(85, 0, 98, 0.1) 0px 0px 40px 20px, rgba(255, 255, 255, 0.06) 0px 0px 0px 1px inset;
-  --shadow-subtle-10: rgba(255, 255, 255, 0.1) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.4) 0px 30px 50px 0px, rgba(51, 3, 129, 0.09) 0px 4px 24px 0px, rgba(255, 255, 255, 0.06) 0px 0px 0px 1px inset;
-  --shadow-subtle-11: rgba(255, 255, 255, 0.1) 0px 1px 0px 0px inset, rgba(7, 13, 79, 0.1) 0px 0px 20px 3px, rgba(7, 40, 79, 0.1) 0px 0px 40px 20px, rgba(255, 255, 255, 0.06) 0px 0px 0px 1px inset;
+  --shadow-subtle-7:
+    rgba(255, 255, 255, 0.1) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.4) 0px 30px 50px 0px,
+    rgba(3, 15, 129, 0.09) 0px 4px 24px 0px, rgba(255, 255, 255, 0.06) 0px 0px 0px 1px inset;
+  --shadow-xl-2:
+    rgba(255, 255, 255, 0.03) 0px 0px 40px 20px, rgba(255, 255, 255, 0.3) 0px 0.5px 0px 0px inset;
+  --shadow-subtle-8:
+    rgba(255, 255, 255, 0.19) 0px 0px 2px 0px, rgba(255, 255, 255, 0.1) 0px 0.5px 0px 0px inset;
+  --shadow-subtle-9:
+    rgba(255, 255, 255, 0.1) 0px 1px 0px 0px inset, rgba(7, 13, 79, 0.1) 0px 0px 20px 3px,
+    rgba(85, 0, 98, 0.1) 0px 0px 40px 20px, rgba(255, 255, 255, 0.06) 0px 0px 0px 1px inset;
+  --shadow-subtle-10:
+    rgba(255, 255, 255, 0.1) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.4) 0px 30px 50px 0px,
+    rgba(51, 3, 129, 0.09) 0px 4px 24px 0px, rgba(255, 255, 255, 0.06) 0px 0px 0px 1px inset;
+  --shadow-subtle-11:
+    rgba(255, 255, 255, 0.1) 0px 1px 0px 0px inset, rgba(7, 13, 79, 0.1) 0px 0px 20px 3px,
+    rgba(7, 40, 79, 0.1) 0px 0px 40px 20px, rgba(255, 255, 255, 0.06) 0px 0px 0px 1px inset;
 }
 ```

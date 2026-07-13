@@ -6,5 +6,10 @@
   "semi": true,
   "singleQuote": false,
   "trailingComma": "all",
-  "ignorePatterns": ["node_modules/**", ".turbo/**", "**/dist/**", "**/generated/**"]
+  "ignorePatterns": [
+    "node_modules/**",
+    ".turbo/**",
+    "**/dist/**",
+    "**/generated/**"
+  ]
 }

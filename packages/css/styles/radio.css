@@ -18,7 +18,11 @@
 
 .sb-radio:checked {
   background:
-    radial-gradient(circle, var(--sb-fg-inverse) 0 var(--sb-dimension-4), transparent var(--sb-dimension-5)),
+    radial-gradient(
+      circle,
+      var(--sb-fg-inverse) 0 var(--sb-dimension-4),
+      transparent var(--sb-dimension-5)
+    ),
     var(--sb-button-primary-bg);
   box-shadow:
     var(--sb-shadow-key),
