@@ -1,471 +1,173 @@
-# Linear — Style Reference
-
-> Midnight Command Center: A dark, layered interface lit by precise accents, like a high-tech control panel.
-
-**Theme:** dark
-
-Linear presents a sophisticated and focused dark-mode experience, reminiscent of a command center dashboard. A deep charcoal base creates a serious, immersive canvas, while subtle gradients and layered surfaces build depth without harsh contrasts. Distinctive muted text colors (#8a8f98 for secondary, #62666d for tertiary) maintain readability against the dark backdrop. Critically, interaction is marked by a single vivid lime green (#e4f222), applied selectively to primary calls to action, preventing visual clutter and guiding the user's eye with precision.
-
-## Tokens — Colors
-
-| Name          | Value     | Token                   | Role                                                                                                                    |
-| ------------- | --------- | ----------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| Pitch Black   | `#08090a` | `--color-pitch-black`   | Page background, primary surface for base elements, subtly integrated into shadows for depth.                           |
-| Graphite      | `#0f1011` | `--color-graphite`      | Elevated card backgrounds, slightly lighter than the canvas to denote layering.                                         |
-| Deep Slate    | `#161718` | `--color-deep-slate`    | Secondary elevated card backgrounds, providing another layer of visual hierarchy.                                       |
-| Charcoal Grey | `#23252a` | `--color-charcoal-grey` | Borders and some shadowed card surfaces, framing elements with a subtle distinction.                                    |
-| Muted Ash     | `#323334` | `--color-muted-ash`     | Subtle borders and dividers, indicating soft separations within the dark theme.                                         |
-| Gunmetal      | `#383b3f` | `--color-gunmetal`      | Tertiary background elements and input borders, a darker neutral for functional elements.                               |
-| Porcelain     | `#f7f8f8` | `--color-porcelain`     | Primary text and icons, providing strong contrast for readability against dark backgrounds.                             |
-| Light Steel   | `#d0d6e0` | `--color-light-steel`   | Secondary text and borders, for less prominent information or structural lines.                                         |
-| Storm Cloud   | `#8a8f98` | `--color-storm-cloud`   | Tertiary text, descriptive labels, and inactive states, recedes into the background for low-priority details.           |
-| Fog Grey      | `#62666d` | `--color-fog-grey`      | Muted text for metadata, timestamps, and further de-emphasized content.                                                 |
-| Alabaster     | `#e5e5e6` | `--color-alabaster`     | Informational borders and subtle fills, often seen in code blocks or explanatory components.                            |
-| Neon Lime     | `#e4f222` | `--color-neon-lime`     | Primary action indicators, active states, and focus elements — a high-energy focal point.                               |
-| Aether Blue   | `#5e6ad2` | `--color-aether-blue`   | Decorative highlights and occasional background elements, suggesting a technological or informational context.          |
-| Forest Green  | `#008d2c` | `--color-forest-green`  | Positive status indicators, success messages, and related iconography.                                                  |
-| Cyan Spark    | `#02b8cc` | `--color-cyan-spark`    | Informational highlights and unique icon fills, providing a cool accent.                                                |
-| Emerald       | `#27a644` | `--color-emerald`       | Success and completion states, often paired with green text.                                                            |
-| Warning Red   | `#eb5757` | `--color-warning-red`   | Observed in icon fill, body borderColor, other fill. Extracted usage does not support a distinct primary control color. |
-| Deep Violet   | `#6366f1` | `--color-deep-violet`   | Background accents in specific content blocks, indicating a distinct informational category.                            |
-| Amethyst      | `#8b5cf6` | `--color-amethyst`      | Another variant of violet for backgrounds, used interchangeably with Deep Violet for visual diversity.                  |
-
-## Tokens — Typography
-
-### Inter Variable — Primary UI typeface for all content including headings, body text, and interactive elements. Its variable weights provide a clean, modern aesthetic with strong technical readability. · `--font-inter-variable`
-
-- **Substitute:** Inter
-- **Weights:** 300, 400, 510, 590
-- **Sizes:** 10px, 11px, 12px, 13px, 14px, 15px, 16px, 17px, 20px, 24px, 32px, 48px, 64px, 72px
-- **Line height:** 1.00, 1.13, 1.20, 1.33, 1.40, 1.47, 1.50, 1.60, 2.00, 2.46, 2.75
-- **Letter spacing:** -0.22, -0.15, -0.13, -0.12, -0.11, -0.1
-- **OpenType features:** `"cv01", "ss03"`
-- **Role:** Primary UI typeface for all content including headings, body text, and interactive elements. Its variable weights provide a clean, modern aesthetic with strong technical readability.
-
-### Berkeley Mono — Monospaced font for code snippets, technical details, and certain data displays, ensuring consistent character alignment and technical clarity. · `--font-berkeley-mono`
-
-- **Substitute:** IBM Plex Mono
-- **Weights:** 400
-- **Sizes:** 12px, 13px, 14px
-- **Line height:** 1.30, 1.40, 1.50, 1.71
-- **Letter spacing:** -0.15
-- **Role:** Monospaced font for code snippets, technical details, and certain data displays, ensuring consistent character alignment and technical clarity.
+---
+name: linear
+description: Designs and implements focused dark interfaces inspired by Linear, using layered near-black surfaces, compact typography, restrained borders, and selective lime accents. Use for product dashboards, developer tools, issue trackers, and other dense application UIs that should follow this visual direction.
+---
 
-### Type Scale
+# Linear-Inspired Interface Design
 
-| Role       | Size | Line Height | Letter Spacing | Token               |
-| ---------- | ---- | ----------- | -------------- | ------------------- |
-| caption    | 10px | 1.4         | -0.1px         | `--text-caption`    |
-| body       | 14px | 1.4         | -0.13px        | `--text-body`       |
-| heading    | 24px | 1.33        | -0.22px        | `--text-heading`    |
-| heading-lg | 48px | 1.2         | -0.22px        | `--text-heading-lg` |
-| display    | 72px | 1           | -0.22px        | `--text-display`    |
+Use this reference to design or implement interfaces with Linear’s dark, compact, command-center aesthetic. Treat it as an implementation guide inspired by Linear, not as official brand documentation.
 
-## Tokens — Spacing & Shapes
+## Visual Direction
 
-**Base unit:** 4px
+Build a near-black interface with hierarchy created through subtly lighter surfaces, restrained borders, and precise spacing. Keep most of the UI neutral. Reserve vivid lime for the most important action or active state; use blue only for secondary informational accents.
 
-**Density:** compact
+The result should feel:
 
-### Spacing Scale
+- dark, focused, and technical;
+- compact without becoming cramped;
+- layered without relying on dramatic shadows;
+- precise, with clear hierarchy and minimal decoration.
 
-| Name | Value | Token           |
-| ---- | ----- | --------------- |
-| 4    | 4px   | `--spacing-4`   |
-| 8    | 8px   | `--spacing-8`   |
-| 12   | 12px  | `--spacing-12`  |
-| 16   | 16px  | `--spacing-16`  |
-| 20   | 20px  | `--spacing-20`  |
-| 24   | 24px  | `--spacing-24`  |
-| 28   | 28px  | `--spacing-28`  |
-| 32   | 32px  | `--spacing-32`  |
-| 36   | 36px  | `--spacing-36`  |
-| 40   | 40px  | `--spacing-40`  |
-| 48   | 48px  | `--spacing-48`  |
-| 56   | 56px  | `--spacing-56`  |
-| 64   | 64px  | `--spacing-64`  |
-| 80   | 80px  | `--spacing-80`  |
-| 96   | 96px  | `--spacing-96`  |
-| 128  | 128px | `--spacing-128` |
+## Core Tokens
 
-### Border Radius
+### Color
 
-| Element | Value  |
-| ------- | ------ |
-| pill    | 9999px |
-| tags    | 2px    |
-| cards   | 6px    |
-| badges  | 4px    |
-| inputs  | 6px    |
-| buttons | 6px    |
-| default | 6px    |
+| Purpose              | Value     | Guidance                                       |
+| -------------------- | --------- | ---------------------------------------------- |
+| Canvas               | `#08090a` | Page and app background                        |
+| Surface              | `#0f1011` | Default cards and panels                       |
+| Raised surface       | `#161718` | Focused or elevated regions                    |
+| Border               | `#23252a` | Standard boundaries and input outlines         |
+| Subtle border        | `#323334` | Dividers and low-emphasis boundaries           |
+| Control surface      | `#383b3f` | Secondary controls, badges, and filled inputs  |
+| Primary text         | `#f7f8f8` | Headings, active labels, and important icons   |
+| Secondary text       | `#d0d6e0` | Supporting copy and secondary labels           |
+| Muted text           | `#8a8f98` | Descriptions and inactive navigation           |
+| Tertiary text        | `#62666d` | Metadata and timestamps                        |
+| Primary action       | `#e4f222` | One dominant CTA, focus, or selected state     |
+| Informational accent | `#5e6ad2` | Charts, illustrations, or secondary highlights |
+| Success              | `#27a644` | Positive status and completion                 |
+| Danger               | `#eb5757` | Errors and destructive actions                 |
 
-### Shadows
+Do not spread lime across decorative elements. If several actions compete for attention, keep only the dominant action lime and render the rest as neutral or ghost controls.
 
-| Name     | Value                                                          | Token               |
-| -------- | -------------------------------------------------------------- | ------------------- |
-| sm       | `rgba(0, 0, 0, 0.4) 0px 2px 4px 0px`                           | `--shadow-sm`       |
-| md       | `rgba(0, 0, 0, 0.2) 0px 0px 12px 0px inset`                    | `--shadow-md`       |
-| subtle   | `rgb(35, 37, 42) 0px 0px 0px 1px inset`                        | `--shadow-subtle`   |
-| subtle-2 | `rgba(0, 0, 0, 0.2) 0px 0px 0px 1px`                           | `--shadow-subtle-2` |
-| subtle-3 | `rgba(0, 0, 0, 0.01) 0px 5px 2px 0px, rgba(0, 0, 0, 0.04) ...` | `--shadow-subtle-3` |
-| xl       | `rgba(8, 9, 10, 0.6) 0px 4px 32px 0px`                         | `--shadow-xl`       |
-| subtle-4 | `rgba(0, 0, 0, 0.1) 0px 0px 0px 2px`                           | `--shadow-subtle-4` |
-| subtle-5 | `rgba(0, 0, 0, 0.33) 0px 0px 0px 1px`                          | `--shadow-subtle-5` |
-| subtle-6 | `rgba(255, 255, 255, 0.03) 0px 0px 0px 1px inset, rgba(255...` | `--shadow-subtle-6` |
+### Typography
 
-### Layout
+Use `Inter Variable`, falling back to `Inter` and then the system sans-serif stack. Use `Berkeley Mono`, falling back to `IBM Plex Mono` or the system monospace stack, for code and technical data.
 
-- **Section gap:** 24px
-- **Card padding:** 12px
-- **Element gap:** 8px
+| Role          | Size   | Weight | Line height | Tracking  |
+| ------------- | ------ | ------ | ----------- | --------- |
+| Caption       | `10px` | 400    | 1.4         | `-0.1px`  |
+| Body          | `14px` | 400    | 1.4         | `-0.13px` |
+| Label         | `13px` | 510    | 1.4         | `-0.11px` |
+| Heading       | `24px` | 590    | 1.33        | `-0.22px` |
+| Large heading | `48px` | 590    | 1.2         | `-0.22px` |
+| Display       | `72px` | 590    | 1           | `-0.22px` |
 
-## Components
+Prefer tight, restrained headings over oversized marketing typography inside product UI. Use large display sizes only where the layout has enough room.
 
-### Primary Action Button
+### Spacing and Shape
 
-**Role:** Call to action button
+Use a `4px` spacing base. Prefer `4`, `8`, `12`, `16`, `24`, `32`, `48`, and `64px`; introduce intermediate values only when required by the existing system.
 
-Filled button with 'Neon Lime' background (#e4f222), 'Pitch Black' text (#08090a), 6px border-radius, and variable padding. Used for primary user actions.
+- Element gap: `8px`
+- Card padding: `12px`
+- Section gap: `24px` in application UI
+- Default radius: `6px`
+- Small tags: `2px`
+- Badges: `4px`
+- Nested or prominent containers: up to `12px`
+- Pills: fully rounded only when the control’s meaning calls for it
 
-### Ghost Navigation Button
+Avoid large, soft radii on ordinary cards and controls.
 
-**Role:** Navigation and secondary actions
+### Elevation
 
-Ghost button with transparent background, 'Porcelain' text (#f7f8f8), no explicit padding, and 0px border-radius. Navigational links or simple interactive elements.
+Prefer surface contrast and thin borders over diffuse shadows.
 
-### Subtle Link Button
+```css
+--shadow-card: rgba(0, 0, 0, 0.4) 0 2px 4px;
+--shadow-inset-border: rgb(35, 37, 42) 0 0 0 1px inset;
+--shadow-overlay: rgba(8, 9, 10, 0.6) 0 4px 32px;
+```
 
-**Role:** Tertiary actions and links
-
-Ghost button with transparent background, 'Light Steel' text (#d0d6e0), 6px border-radius, and minimal padding (0px top/bottom, 6px left/right). Used for less prominent interactive elements or textual links.
-
-### Navigation Item Button
-
-**Role:** Sidebar navigation items
-
-Ghost button with transparent background, 'Storm Cloud' text (#8a8f98), 2px border-radius, and no explicit padding. Used for items in a navigation list.
-
-### Default Card
-
-**Role:** Content container
-
-Card with 'Graphite' background (#0f1011), 6px border-radius, and an outer shadow of rgba(0, 0, 0, 0.4) 0px 2px 4px 0px. Padding is 8px on all sides.
-
-### Elevated Card
-
-**Role:** Prominent content container
-
-Card with 'Deep Slate' background (#161718), 12px top border-radius (0px bottom), and an inset shadow of rgb(35, 37, 42) 0px 0px 0px 1px. Padding is 24px vertical and 0px horizontal.
-
-### Nested Card
-
-**Role:** Internal content grouping
-
-Card with 'Pitch Black' background (#08090a) and 12px border-radius, no shadow. Padding 8px on all sides, used for containing sub-elements within larger cards.
-
-### Input Field
-
-**Role:** User input fields
-
-Input field with transparent background, 'Porcelain' text (#f7f8f8), 'Charcoal Grey' border (#23252a), and 6px border-radius. Padding is 12px vertical and 14px horizontal.
-
-### Subtle Input Field
-
-**Role:** Search or secondary input fields
-
-Input field with 'Gunmetal' background (#383b3f), 'Porcelain' text (#f7f8f8), no explicit border, and 0px border-radius. Used for less emphasized data entry.
-
-### Badge
-
-**Role:** Label or tag
-
-Badge with a 'Gunmetal' background (#383b3f), 'Storm Cloud' text (#8a8f98), 4px border-radius, and padding of 0px vertical and 6px horizontal. Used for small categorical labels.
-
-## Do's and Don'ts
-
-### Do
-
-- Use 'Pitch Black' (#08090a) for the primary page background to establish the dark theme.
-- Apply 'Porcelain' (#f7f8f8) for all primary text and important icons to ensure readability.
-- Highlight primary interactive elements exclusively with 'Neon Lime' (#e4f222) as a background, restricting its use to guide user attention.
-- Create depth and hierarchy by layering surfaces using 'Pitch Black' (#08090a), 'Graphite' (#0f1011), and 'Deep Slate' (#161718) backgrounds.
-- Employ the Inter Variable font family with specific letter-spacing adjustments for all UI text, such as -0.22px for display sizes and -0.11px for body text, to maintain a tight, precise feel.
-- Utilize 6px border-radius for all primary buttons, cards, and input fields to maintain a consistent, subtly rounded aesthetic.
-- Use 'Storm Cloud' (#8a8f98) for secondary text and descriptive labels to recede into the background.
-
-### Don't
-
-- Do not introduce additional bright or saturated colors beyond 'Neon Lime' (#e4f222) for interactive elements; maintain its singular role.
-- Avoid using harsh white backgrounds or light-themed patterns, as the system is anchored in a dark mode aesthetic.
-- Do not deviate from the specified typeface choices; 'Inter Variable' and 'Berkeley Mono' are fundamental to the visual identity.
-- Refrain from using strong, diffuse shadows; elevation is achieved through subtle layering and sharp, contained shadows like rgba(0, 0, 0, 0.4) 0px 2px 4px 0px.
-- Do not apply broad, decorative background gradients across large sections of the UI; gradients are subtle and contained to specific functional areas.
-- Do not use generic border-radii; adhere to 6px for key components like cards and buttons, and 2px for smaller tags, to preserve the signature balance of softness and precision.
-- Avoid large amounts of white space; the design is compact, leveraging an 8px element gap as a standard measurement.
-
-## Surfaces
-
-| Level | Name                     | Value     | Purpose                                                                               |
-| ----- | ------------------------ | --------- | ------------------------------------------------------------------------------------- |
-| 0     | Pitch Black Canvas       | `#08090a` | Base page background and deepest surface level.                                       |
-| 1     | Graphite Card            | `#0f1011` | Primary card surface for general content, slightly elevated from the canvas.          |
-| 2     | Deep Slate Elevated Card | `#161718` | More prominent card surface, used for focused content sections or lists.              |
-| 3     | Charcoal Grey Overlay    | `#23252a` | Accent surface for borders, shadows, and subtle overlays, providing clear separation. |
-
-## Elevation
-
-- **Default Card:** `rgba(0, 0, 0, 0.4) 0px 2px 4px 0px`
-- **Sidebar/Menu Element Focus:** `rgba(0, 0, 0, 0.2) 0px 0px 12px 0px inset`
-- **Elevated Card Inset:** `rgb(35, 37, 42) 0px 0px 0px 1px inset`
-- **Card Border/Input Focus:** `rgba(0, 0, 0, 0.2) 0px 0px 0px 1px`
-- **Navigation/Button Subtle Lift:** `rgba(0, 0, 0, 0.01) 0px 5px 2px 0px, rgba(0, 0, 0, 0.04) 0px 3px 2px 0px, rgba(0, 0, 0, 0.07) 0px 1px 1px 0px, rgba(0, 0, 0, 0.08) 0px 0px 1px 0px`
-
-## Imagery
-
-The site's visual language is dominated by UI elements and product screenshots, emphasizing functionality over decorative imagery. Where images appear, they are often contained within realistic product mockups or embedded application frames. Abstract graphics are minimal, primarily serving as subtle background textures or data visualizations. Icons are filled, minimalist, and mono-color, often adopting the 'Porcelain' (#f7f8f8) or 'Storm Cloud' (#8a8f98) neutral palette, enhancing the dashboard aesthetic. The overall density of imagery is low; it serves an explanatory or product showcase role rather than a decorative one.
+Use the overlay shadow only for menus, dialogs, or other floating layers. Do not add colored glows or broad decorative shadows.
 
 ## Layout
 
-The page primarily uses a full-bleed structure for background content, with main content sections constrained by a centered maximum width (not explicitly defined but visually present). The hero section features a full-bleed 'Pitch Black' background with a centered, prominent headline. Subsequent sections alternate between dark backgrounds for narrative content and embedded UI examples, often featuring split layouts (text on one side, product UI on the other). Content is generally arranged in vertical stacks or multi-column grids for feature display. Navigation consists of a sticky top bar and frequently observed left-hand sidebar for application-like structures. Spacing is compact yet deliberate, creating a dense but organized information flow.
+For application interfaces:
 
-## Agent Prompt Guide
+- Use a stable sidebar or compact top navigation when navigation depth requires it.
+- Organize content into dense vertical stacks, lists, and restrained grids.
+- Keep related controls close and separate groups with spacing or subtle dividers.
+- Constrain reading-heavy content; let tables, boards, and timelines use available width.
+- Preserve alignment across headings, labels, controls, and data columns.
 
-Quick Color Reference:
+For responsive behavior:
 
-- text: #f7f8f8 (Porcelain)
-- background: #08090a (Pitch Black)
-- border: #23252a (Charcoal Grey)
-- accent: #5e6ad2 (Aether Blue)
-- primary action: #e4f222 (filled action)
+- Collapse or move the sidebar behind navigation at narrow widths.
+- Reduce multi-column layouts to one column before compressing content excessively.
+- Preserve at least `12px` page gutters on small screens and increase them to `24px` or more when space permits.
+- Allow tables and dense data views to scroll horizontally rather than shrinking text below readable sizes.
+- Replace display typography with the next smaller role when it would wrap awkwardly.
+- Keep primary actions visible without covering content or forcing horizontal overflow.
 
-3-5 Example Component Prompts:
+## Components
 
-- Create a call-to-action button: 'Neon Lime' background (#e4f222), 'Pitch Black' text (#08090a), Inter Variable font weight 590 at 15px, 6px border-radius, 12px vertical and 24px horizontal padding.
-- Create a default card with content: 'Graphite' background (#0f1011), 6px border-radius, rgba(0, 0, 0, 0.4) 0px 2px 4px 0px shadow. Inside, use Inter Variable font weight 400 at 14px with 'Porcelain' text (#f7f8f8), and a subsection headline at 17px weight 510 with 'Porcelain' text (#f7f8f8). Apply 8px padding internally.
-- Create a sidebar navigation item: Ghost button with transparent background, 'Storm Cloud' text (#8a8f98), Inter Variable font weight 400 at 14px, 2px border-radius, no padding.
-- Create an input field: transparent background with a 'Gunmetal' fill (#383b3f), 'Light Steel' text (#d0d6e0) using Inter Variable font weight 400 at 14px, 6px border-radius. Inset with a 1px 'Charcoal Grey' border (#23252a). Padding 12px vertical and 14px horizontal.
+### Primary action
 
-## Similar Brands
+Use `#e4f222` fill, `#08090a` text, `6px` radius, and medium-weight Inter. Provide hover, active, focus-visible, loading, and disabled states. Darken or desaturate slightly for hover/active feedback rather than introducing another accent.
 
-- **Vercel** — Dark UI with strong typography, geometric layouts, and selective use of brand accent colors for interactivity.
-- **GitHub** — Emphasis on functional, dark-themed UI for developer tools, prioritizing information density and code readability.
-- **Notion (dark mode)** — Layered dark surfaces creating depth, clear typography, and a subdued palette for a productivity application.
-- **Raycast** — High-contrast dark mode, minimalist design, and an emphasis on technical tools with clear interaction points.
+### Secondary and ghost actions
 
-## Quick Start
+Use transparent or neutral fills with `#d0d6e0` text. On hover, raise text toward `#f7f8f8` and introduce a subtle surface or border. Keep tertiary text actions visually quieter than secondary buttons.
 
-### CSS Custom Properties
+### Navigation item
 
-```css
-:root {
-  /* Colors */
-  --color-pitch-black: #08090a;
-  --color-graphite: #0f1011;
-  --color-deep-slate: #161718;
-  --color-charcoal-grey: #23252a;
-  --color-muted-ash: #323334;
-  --color-gunmetal: #383b3f;
-  --color-porcelain: #f7f8f8;
-  --color-light-steel: #d0d6e0;
-  --color-storm-cloud: #8a8f98;
-  --color-fog-grey: #62666d;
-  --color-alabaster: #e5e5e6;
-  --color-neon-lime: #e4f222;
-  --color-aether-blue: #5e6ad2;
-  --color-forest-green: #008d2c;
-  --color-cyan-spark: #02b8cc;
-  --color-emerald: #27a644;
-  --color-warning-red: #eb5757;
-  --color-deep-violet: #6366f1;
-  --color-amethyst: #8b5cf6;
+Use `#8a8f98` text by default and `#f7f8f8` for the active label. Indicate active state with a subtle surface, a restrained lime marker, or both; do not fill every selected item with lime.
 
-  /* Typography — Font Families */
-  --font-inter-variable:
-    "Inter Variable", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, sans-serif;
-  --font-berkeley-mono:
-    "Berkeley Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+### Card or panel
 
-  /* Typography — Scale */
-  --text-caption: 10px;
-  --leading-caption: 1.4;
-  --tracking-caption: -0.1px;
-  --text-body: 14px;
-  --leading-body: 1.4;
-  --tracking-body: -0.13px;
-  --text-heading: 24px;
-  --leading-heading: 1.33;
-  --tracking-heading: -0.22px;
-  --text-heading-lg: 48px;
-  --leading-heading-lg: 1.2;
-  --tracking-heading-lg: -0.22px;
-  --text-display: 72px;
-  --leading-display: 1;
-  --tracking-display: -0.22px;
+Use `#0f1011`, a `1px` subtle boundary where needed, `6px` radius, and `12px` padding. Use `#161718` for elevated or focused regions. Nested content may return to `#08090a` to reinforce depth.
 
-  /* Typography — Weights */
-  --font-weight-light: 300;
-  --font-weight-regular: 400;
-  --font-weight-w510: 510;
-  --font-weight-w590: 590;
+### Input
 
-  /* Spacing */
-  --spacing-unit: 4px;
-  --spacing-4: 4px;
-  --spacing-8: 8px;
-  --spacing-12: 12px;
-  --spacing-16: 16px;
-  --spacing-20: 20px;
-  --spacing-24: 24px;
-  --spacing-28: 28px;
-  --spacing-32: 32px;
-  --spacing-36: 36px;
-  --spacing-40: 40px;
-  --spacing-48: 48px;
-  --spacing-56: 56px;
-  --spacing-64: 64px;
-  --spacing-80: 80px;
-  --spacing-96: 96px;
-  --spacing-128: 128px;
+Use a transparent or dark-neutral background, `#f7f8f8` text, `#23252a` border, `6px` radius, and approximately `10–12px` vertical by `12–14px` horizontal padding. Use muted text for placeholders, but maintain sufficient contrast. Show focus with a visible neutral or lime ring that does not depend on color alone.
 
-  /* Layout */
-  --section-gap: 24px;
-  --card-padding: 12px;
-  --element-gap: 8px;
+### Badge
 
-  /* Border Radius */
-  --radius-sm: 2px;
-  --radius-md: 6px;
-  --radius-xl: 12px;
-  --radius-2xl: 16px;
-  --radius-2xl-2: 22px;
-  --radius-full: 400px;
-  --radius-full-2: 9999px;
+Use `#383b3f` fill, `#8a8f98` or `#d0d6e0` text, `4px` radius, and compact horizontal padding. Reserve semantic colors for badges that communicate status, not category decoration.
 
-  /* Named Radii */
-  --radius-pill: 9999px;
-  --radius-tags: 2px;
-  --radius-cards: 6px;
-  --radius-badges: 4px;
-  --radius-inputs: 6px;
-  --radius-buttons: 6px;
-  --radius-default: 6px;
+### Dialog and menu
 
-  /* Shadows */
-  --shadow-sm: rgba(0, 0, 0, 0.4) 0px 2px 4px 0px;
-  --shadow-md: rgba(0, 0, 0, 0.2) 0px 0px 12px 0px inset;
-  --shadow-subtle: rgb(35, 37, 42) 0px 0px 0px 1px inset;
-  --shadow-subtle-2: rgba(0, 0, 0, 0.2) 0px 0px 0px 1px;
-  --shadow-subtle-3:
-    rgba(0, 0, 0, 0.01) 0px 5px 2px 0px, rgba(0, 0, 0, 0.04) 0px 3px 2px 0px,
-    rgba(0, 0, 0, 0.07) 0px 1px 1px 0px, rgba(0, 0, 0, 0.08) 0px 0px 1px 0px;
-  --shadow-xl: rgba(8, 9, 10, 0.6) 0px 4px 32px 0px;
-  --shadow-subtle-4: rgba(0, 0, 0, 0.1) 0px 0px 0px 2px;
-  --shadow-subtle-5: rgba(0, 0, 0, 0.33) 0px 0px 0px 1px;
-  --shadow-subtle-6:
-    rgba(255, 255, 255, 0.03) 0px 0px 0px 1px inset,
-    rgba(255, 255, 255, 0.04) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.6) 0px 0px 0px 1px,
-    rgba(0, 0, 0, 0.1) 0px 4px 4px 0px;
+Use `#161718` or `#0f1011`, a subtle border, and the overlay shadow. Keep menus compact, clearly highlight keyboard focus, and expose shortcuts with muted monospace labels.
 
-  /* Surfaces */
-  --surface-pitch-black-canvas: #08090a;
-  --surface-graphite-card: #0f1011;
-  --surface-deep-slate-elevated-card: #161718;
-  --surface-charcoal-grey-overlay: #23252a;
-}
-```
+## Interaction and Motion
 
-### Tailwind v4
+Every interactive component should define:
 
-```css
-@theme {
-  /* Colors */
-  --color-pitch-black: #08090a;
-  --color-graphite: #0f1011;
-  --color-deep-slate: #161718;
-  --color-charcoal-grey: #23252a;
-  --color-muted-ash: #323334;
-  --color-gunmetal: #383b3f;
-  --color-porcelain: #f7f8f8;
-  --color-light-steel: #d0d6e0;
-  --color-storm-cloud: #8a8f98;
-  --color-fog-grey: #62666d;
-  --color-alabaster: #e5e5e6;
-  --color-neon-lime: #e4f222;
-  --color-aether-blue: #5e6ad2;
-  --color-forest-green: #008d2c;
-  --color-cyan-spark: #02b8cc;
-  --color-emerald: #27a644;
-  --color-warning-red: #eb5757;
-  --color-deep-violet: #6366f1;
-  --color-amethyst: #8b5cf6;
+- default, hover, active, focus-visible, and disabled states;
+- selected or current state where relevant;
+- loading and error states for asynchronous controls;
+- keyboard behavior consistent with the control type.
 
-  /* Typography */
-  --font-inter-variable:
-    "Inter Variable", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, sans-serif;
-  --font-berkeley-mono:
-    "Berkeley Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+Keep transitions short and functional, generally `120–200ms`. Animate opacity, color, border color, or small transforms. Avoid ornamental motion and honor `prefers-reduced-motion`.
 
-  /* Typography — Scale */
-  --text-caption: 10px;
-  --leading-caption: 1.4;
-  --tracking-caption: -0.1px;
-  --text-body: 14px;
-  --leading-body: 1.4;
-  --tracking-body: -0.13px;
-  --text-heading: 24px;
-  --leading-heading: 1.33;
-  --tracking-heading: -0.22px;
-  --text-heading-lg: 48px;
-  --leading-heading-lg: 1.2;
-  --tracking-heading-lg: -0.22px;
-  --text-display: 72px;
-  --leading-display: 1;
-  --tracking-display: -0.22px;
+## Accessibility
 
-  /* Spacing */
-  --spacing-4: 4px;
-  --spacing-8: 8px;
-  --spacing-12: 12px;
-  --spacing-16: 16px;
-  --spacing-20: 20px;
-  --spacing-24: 24px;
-  --spacing-28: 28px;
-  --spacing-32: 32px;
-  --spacing-36: 36px;
-  --spacing-40: 40px;
-  --spacing-48: 48px;
-  --spacing-56: 56px;
-  --spacing-64: 64px;
-  --spacing-80: 80px;
-  --spacing-96: 96px;
-  --spacing-128: 128px;
+- Meet WCAG AA contrast for text and essential controls; verify combinations rather than assuming token names are sufficient.
+- Do not use lime, green, or red as the only status indicator; pair color with text, an icon, or shape.
+- Keep focus indicators visible on every dark surface.
+- Preserve semantic HTML, logical heading order, labels, and keyboard navigation.
+- Target at least `44px` touch areas where the interface is expected to support touch, even when the visible control is compact.
+- Do not reduce body text below the defined `14px` role merely to fit more content.
 
-  /* Border Radius */
-  --radius-sm: 2px;
-  --radius-md: 6px;
-  --radius-xl: 12px;
-  --radius-2xl: 16px;
-  --radius-2xl-2: 22px;
-  --radius-full: 400px;
-  --radius-full-2: 9999px;
+## Implementation Rules
 
-  /* Shadows */
-  --shadow-sm: rgba(0, 0, 0, 0.4) 0px 2px 4px 0px;
-  --shadow-md: rgba(0, 0, 0, 0.2) 0px 0px 12px 0px inset;
-  --shadow-subtle: rgb(35, 37, 42) 0px 0px 0px 1px inset;
-  --shadow-subtle-2: rgba(0, 0, 0, 0.2) 0px 0px 0px 1px;
-  --shadow-subtle-3:
-    rgba(0, 0, 0, 0.01) 0px 5px 2px 0px, rgba(0, 0, 0, 0.04) 0px 3px 2px 0px,
-    rgba(0, 0, 0, 0.07) 0px 1px 1px 0px, rgba(0, 0, 0, 0.08) 0px 0px 1px 0px;
-  --shadow-xl: rgba(8, 9, 10, 0.6) 0px 4px 32px 0px;
-  --shadow-subtle-4: rgba(0, 0, 0, 0.1) 0px 0px 0px 2px;
-  --shadow-subtle-5: rgba(0, 0, 0, 0.33) 0px 0px 0px 1px;
-  --shadow-subtle-6:
-    rgba(255, 255, 255, 0.03) 0px 0px 0px 1px inset,
-    rgba(255, 255, 255, 0.04) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.6) 0px 0px 0px 1px,
-    rgba(0, 0, 0, 0.1) 0px 4px 4px 0px;
-}
-```
+1. Inspect and reuse the project’s existing tokens and components before adding new ones.
+2. Map this reference onto the project’s naming conventions instead of creating a parallel design system.
+3. Establish canvas, surface, text, and border hierarchy before adding accent color.
+4. Implement all relevant states and responsive behavior with the component.
+5. Check the result at narrow and wide widths, with keyboard navigation and reduced motion enabled.
+6. If visual rendering is available, inspect contrast, density, clipping, alignment, and hierarchy before finalizing.
+
+## Avoid
+
+- light page backgrounds or alternating light sections;
+- multiple bright accent colors competing for attention;
+- decorative gradients across major surfaces;
+- large amounts of empty space in product workflows;
+- broad, soft shadows as the primary elevation mechanism;
+- excessive rounding that makes the interface feel playful;
+- hard-coded one-off values when an existing project token is suitable;
+- sacrificing readability or touch accessibility for visual density.
