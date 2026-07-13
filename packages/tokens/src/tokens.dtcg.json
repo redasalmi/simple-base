@@ -5,41 +5,41 @@
     "black": {
       "950": {
         "$type": "color",
-        "$value": "#040506"
+        "$value": "#060708"
       },
       "900": {
         "$type": "color",
         "$value": "#08090a"
       },
-      "850": {
+      "800": {
         "$type": "color",
-        "$value": "#07080a"
+        "$value": "#202124"
       }
     },
     "gray": {
       "900": {
         "$type": "color",
-        "$value": "#0f1011"
+        "$value": "#0c0d0f"
       },
       "850": {
         "$type": "color",
-        "$value": "#111214"
+        "$value": "#141518"
       },
       "800": {
         "$type": "color",
-        "$value": "#161718"
+        "$value": "#18191c"
       },
       "750": {
         "$type": "color",
-        "$value": "#1b1c1e"
+        "$value": "#1c1d21"
       },
       "700": {
         "$type": "color",
-        "$value": "#23252a"
+        "$value": "#282a2f"
       },
       "650": {
         "$type": "color",
-        "$value": "#363739"
+        "$value": "#383b42"
       },
       "600": {
         "$type": "color",
@@ -47,19 +47,23 @@
       },
       "500": {
         "$type": "color",
-        "$value": "#6a6b6c"
+        "$value": "#62666d"
       },
       "400": {
         "$type": "color",
-        "$value": "#9c9c9d"
+        "$value": "#8a8f98"
       },
-      "50": {
+      "200": {
         "$type": "color",
-        "$value": "#f7f7f7"
+        "$value": "#d0d6e0"
       },
       "100": {
         "$type": "color",
         "$value": "#e6e6e6"
+      },
+      "50": {
+        "$type": "color",
+        "$value": "#f7f7f7"
       }
     },
     "white": {
@@ -106,8 +110,26 @@
         "$value": "#56c2ff"
       }
     },
+    "amber": {
+      "400": {
+        "$type": "color",
+        "$value": "#d6a243"
+      }
+    },
     "violet": {
+      "400": {
+        "$type": "color",
+        "$value": "#9d74f7"
+      },
       "500": {
+        "$type": "color",
+        "$value": "#8b5cf6"
+      },
+      "600": {
+        "$type": "color",
+        "$value": "#6d28d9"
+      },
+      "700": {
         "$type": "color",
         "$value": "#523091"
       }
@@ -157,6 +179,10 @@
     "20": {
       "$type": "dimension",
       "$value": "80px"
+    },
+    "24": {
+      "$type": "dimension",
+      "$value": "96px"
     }
   },
   "radius": {
@@ -520,7 +546,7 @@
     },
     "relaxed": {
       "$type": "number",
-      "$value": "1.55"
+      "$value": "1.5"
     }
   },
   "tracking": {
@@ -557,11 +583,11 @@
       },
       "letter-spacing": {
         "$type": "dimension",
-        "$value": "-0.08em"
+        "$value": "-0.04em"
       },
       "font-weight": {
         "$type": "number",
-        "$value": "{font.weight.bold}"
+        "$value": "{font.weight.semibold}"
       }
     },
     "heading": {
@@ -572,61 +598,7 @@
         },
         "line-height": {
           "$type": "number",
-          "$value": "1.05"
-        },
-        "letter-spacing": {
-          "$type": "dimension",
-          "$value": "{tracking.tight}"
-        },
-        "font-weight": {
-          "$type": "number",
-          "$value": "{font.weight.bold}"
-        }
-      },
-      "2": {
-        "font-size": {
-          "$type": "dimension",
-          "$value": "{text.4xl}"
-        },
-        "line-height": {
-          "$type": "number",
-          "$value": "1.12"
-        },
-        "letter-spacing": {
-          "$type": "dimension",
-          "$value": "{tracking.tight}"
-        },
-        "font-weight": {
-          "$type": "number",
-          "$value": "{font.weight.bold}"
-        }
-      },
-      "3": {
-        "font-size": {
-          "$type": "dimension",
-          "$value": "{text.3xl}"
-        },
-        "line-height": {
-          "$type": "number",
-          "$value": "{leading.tight}"
-        },
-        "letter-spacing": {
-          "$type": "dimension",
-          "$value": "-0.04em"
-        },
-        "font-weight": {
-          "$type": "number",
-          "$value": "{font.weight.bold}"
-        }
-      },
-      "4": {
-        "font-size": {
-          "$type": "dimension",
-          "$value": "{text.2xl}"
-        },
-        "line-height": {
-          "$type": "number",
-          "$value": "{leading.snug}"
+          "$value": "1.1"
         },
         "letter-spacing": {
           "$type": "dimension",
@@ -634,7 +606,61 @@
         },
         "font-weight": {
           "$type": "number",
-          "$value": "{font.weight.bold}"
+          "$value": "{font.weight.semibold}"
+        }
+      },
+      "2": {
+        "font-size": {
+          "$type": "dimension",
+          "$value": "{dimension.28}"
+        },
+        "line-height": {
+          "$type": "number",
+          "$value": "1.2"
+        },
+        "letter-spacing": {
+          "$type": "dimension",
+          "$value": "-0.025em"
+        },
+        "font-weight": {
+          "$type": "number",
+          "$value": "{font.weight.semibold}"
+        }
+      },
+      "3": {
+        "font-size": {
+          "$type": "dimension",
+          "$value": "{text.2xl}"
+        },
+        "line-height": {
+          "$type": "number",
+          "$value": "1.3"
+        },
+        "letter-spacing": {
+          "$type": "dimension",
+          "$value": "-0.02em"
+        },
+        "font-weight": {
+          "$type": "number",
+          "$value": "{font.weight.semibold}"
+        }
+      },
+      "4": {
+        "font-size": {
+          "$type": "dimension",
+          "$value": "{text.xl}"
+        },
+        "line-height": {
+          "$type": "number",
+          "$value": "1.3"
+        },
+        "letter-spacing": {
+          "$type": "dimension",
+          "$value": "-0.02em"
+        },
+        "font-weight": {
+          "$type": "number",
+          "$value": "{font.weight.semibold}"
         }
       },
       "5": {
@@ -648,11 +674,11 @@
         },
         "letter-spacing": {
           "$type": "dimension",
-          "$value": "-0.02em"
+          "$value": "{tracking.normal}"
         },
         "font-weight": {
           "$type": "number",
-          "$value": "{font.weight.bold}"
+          "$value": "{font.weight.semibold}"
         }
       },
       "6": {
@@ -666,11 +692,11 @@
         },
         "letter-spacing": {
           "$type": "dimension",
-          "$value": "{tracking.wider}"
+          "$value": "{tracking.wide}"
         },
         "font-weight": {
           "$type": "number",
-          "$value": "{font.weight.bold}"
+          "$value": "{font.weight.semibold}"
         }
       }
     },
@@ -686,7 +712,7 @@
         },
         "letter-spacing": {
           "$type": "dimension",
-          "$value": "{tracking.wide}"
+          "$value": "{tracking.normal}"
         },
         "font-weight": {
           "$type": "number",
@@ -741,17 +767,17 @@
       },
       "letter-spacing": {
         "$type": "dimension",
-        "$value": "{tracking.wider}"
+        "$value": "{tracking.wide}"
       },
       "font-weight": {
         "$type": "number",
-        "$value": "{font.weight.semibold}"
+        "$value": "{font.weight.medium}"
       }
     },
     "label": {
       "font-size": {
         "$type": "dimension",
-        "$value": "{text.sm}"
+        "$value": "{text.md}"
       },
       "line-height": {
         "$type": "number",
@@ -759,11 +785,11 @@
       },
       "letter-spacing": {
         "$type": "dimension",
-        "$value": "{tracking.wide}"
+        "$value": "{tracking.normal}"
       },
       "font-weight": {
         "$type": "number",
-        "$value": "{font.weight.semibold}"
+        "$value": "{font.weight.medium}"
       }
     },
     "code": {
@@ -933,7 +959,7 @@
     "max": {
       "width": {
         "$type": "dimension",
-        "$value": "1120px"
+        "$value": "1200px"
       }
     }
   },
@@ -1074,19 +1100,19 @@
     },
     "card": {
       "$type": "shadow",
-      "$value": "rgba(0, 0, 0, 0.4) 0 2px 4px",
+      "$value": "rgba(0, 0, 0, 0.35) 0 2px 6px",
       "$description": "CSS value; preserve as string when transforming to CSS."
     },
     "overlay": {
       "$type": "shadow",
-      "$value": "rgba(0, 0, 0, 0.4) 0 4px 40px 8px",
+      "$value": "rgba(0, 0, 0, 0.5) 0 16px 48px, rgba(255, 255, 255, 0.06) 0 1px 0 inset",
       "$description": "CSS value; preserve as string when transforming to CSS."
     }
   },
   "gradient": {
     "page": {
       "$type": "gradient",
-      "$value": "radial-gradient(84% 74% at 50% 8%, rgba(4, 63, 150, 0.45), rgba(6, 18, 37, 0.1) 42%, transparent 70%), radial-gradient(56% 48% at 85% 25%, rgba(82, 48, 145, 0.34), transparent 62%), linear-gradient(180deg, {bg.canvas}, {bg.page})",
+      "$value": "radial-gradient(70% 60% at 50% 15%, rgba(139, 92, 246, 0.28), rgba(39, 24, 72, 0.1) 45%, transparent 75%), linear-gradient(180deg, {bg.canvas}, {bg.page})",
       "$description": "CSS value; preserve as string when transforming to CSS."
     },
     "section": {
@@ -1097,14 +1123,9 @@
       },
       "violet": {
         "$type": "gradient",
-        "$value": "radial-gradient(86% 75% at 50% 24%, rgba(82, 48, 145, 0.28), transparent 70%)",
+        "$value": "radial-gradient(70% 60% at 50% 15%, rgba(139, 92, 246, 0.28), rgba(39, 24, 72, 0.1) 45%, transparent 75%)",
         "$description": "CSS value; preserve as string when transforming to CSS."
       }
-    },
-    "action": {
-      "$type": "gradient",
-      "$value": "linear-gradient(180deg, #f1fb52, {accent.primary})",
-      "$description": "CSS value; preserve as string when transforming to CSS."
     },
     "danger": {
       "$type": "gradient",
@@ -1124,7 +1145,7 @@
     },
     "page": {
       "$type": "color",
-      "$value": "{color.black.900}"
+      "$value": "{color.black.950}"
     },
     "surface": {
       "default": {
@@ -1148,7 +1169,7 @@
   "fg": {
     "primary": {
       "$type": "color",
-      "$value": "{color.white}"
+      "$value": "{color.porcelain}"
     },
     "strong": {
       "$type": "color",
@@ -1156,21 +1177,67 @@
     },
     "secondary": {
       "$type": "color",
-      "$value": "{color.gray.400}"
+      "$value": "{color.gray.200}"
     },
     "muted": {
+      "$type": "color",
+      "$value": "{color.gray.400}"
+    },
+    "tertiary": {
       "$type": "color",
       "$value": "{color.gray.500}"
     },
     "inverse": {
       "$type": "color",
-      "$value": "{color.black.900}"
+      "$value": "{color.black.800}"
+    },
+    "accent": {
+      "readable": {
+        "$type": "color",
+        "$value": "{accent.hover}"
+      }
+    },
+    "danger": {
+      "readable": {
+        "$type": "color",
+        "$value": "{accent.danger}"
+      }
+    },
+    "success": {
+      "readable": {
+        "$type": "color",
+        "$value": "{accent.success}"
+      }
+    },
+    "warning": {
+      "readable": {
+        "$type": "color",
+        "$value": "{accent.warning}"
+      }
+    },
+    "info": {
+      "readable": {
+        "$type": "color",
+        "$value": "{accent.info}"
+      }
     }
   },
   "accent": {
     "primary": {
       "$type": "color",
-      "$value": "{color.lime.400}"
+      "$value": "{color.violet.500}"
+    },
+    "hover": {
+      "$type": "color",
+      "$value": "{color.violet.400}"
+    },
+    "soft": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [0.545098, 0.360784, 0.964706],
+        "alpha": 0.14
+      }
     },
     "danger": {
       "$type": "color",
@@ -1180,6 +1247,10 @@
       "$type": "color",
       "$value": "{color.mint.400}"
     },
+    "warning": {
+      "$type": "color",
+      "$value": "{color.amber.400}"
+    },
     "info": {
       "$type": "color",
       "$value": "{color.blue.400}"
@@ -1188,13 +1259,28 @@
   "control": {
     "radius": {
       "$type": "dimension",
-      "$value": "{radius.md}"
+      "$value": "{radius.sm}"
+    },
+    "checked": {
+      "bg": {
+        "$type": "color",
+        "$value": "{accent.primary}"
+      },
+      "fg": {
+        "$type": "color",
+        "$value": "{color.white}"
+      },
+      "shadow": {
+        "$type": "shadow",
+        "$value": "{accent.primary} 0 0 0 {border.width.default} inset, rgba(255, 255, 255, 0.12) 0 1px 0 inset",
+        "$description": "CSS value; preserve as string when transforming to CSS."
+      }
     }
   },
   "card": {
     "radius": {
       "$type": "dimension",
-      "$value": "{radius.xl}"
+      "$value": "{radius.md}"
     },
     "bg": {
       "$type": "color",
@@ -1222,7 +1308,7 @@
       },
       "default": {
         "$type": "shadow",
-        "$value": "{focus.ring.color} 0 0 0 {border.width.default} inset, rgba(228, 242, 34, 0.16) 0 0 0 3px",
+        "$value": "{focus.ring.color} 0 0 0 {border.width.default} inset, rgba(139, 92, 246, 0.2) 0 0 0 3px",
         "$description": "CSS value; preserve as string when transforming to CSS."
       },
       "danger": {
@@ -1248,7 +1334,7 @@
         "$type": "color",
         "$value": {
           "colorSpace": "srgb",
-          "components": [0.894118, 0.94902, 0.133333],
+          "components": [0.545098, 0.360784, 0.964706],
           "alpha": 0.1
         }
       }
@@ -1256,11 +1342,7 @@
     "selected": {
       "bg": {
         "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [0.894118, 0.94902, 0.133333],
-          "alpha": 0.1
-        }
+        "$value": "{accent.soft}"
       }
     },
     "disabled": {
@@ -1279,6 +1361,16 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [1.0, 0.388235, 0.388235],
+          "alpha": 0.1
+        }
+      }
+    },
+    "warning": {
+      "bg": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.839216, 0.635294, 0.262745],
           "alpha": 0.1
         }
       }
@@ -1308,31 +1400,40 @@
     "primary": {
       "bg": {
         "$type": "color",
-        "$value": "{gradient.action}"
+        "$value": "{color.gray.100}"
+      },
+      "bg-hover": {
+        "$type": "color",
+        "$value": "color-mix(in srgb, {color.gray.100} 92%, black)",
+        "$description": "CSS value; preserve as string when transforming to CSS."
+      },
+      "bg-active": {
+        "$type": "color",
+        "$value": "color-mix(in srgb, {color.gray.100} 86%, black)",
+        "$description": "CSS value; preserve as string when transforming to CSS."
       },
       "fg": {
         "$type": "color",
-        "$value": "{color.black.900}",
-        "$description": "Near-black maintains AA contrast across the action gradient in every theme."
+        "$value": "{fg.inverse}",
+        "$description": "Near-black maintains AA contrast on the near-white primary action."
       },
       "shadow": {
         "$type": "shadow",
-        "$value": "{shadow.key}, rgba(228, 242, 34, 0.18) 0 0 {dimension.28}",
+        "$value": "{shadow.ring}",
         "$description": "CSS value; preserve as string when transforming to CSS."
       },
       "shadow-hover": {
         "$type": "shadow",
-        "$value": "{shadow.key}, rgba(228, 242, 34, 0.28) 0 0 {dimension.34}",
+        "$value": "rgba(255, 255, 255, 0.08) 0 1px 0 inset, rgba(255, 255, 255, 0.24) 0 0 0 1px, rgba(0, 0, 0, 0.35) 0 3px 8px",
         "$description": "CSS value; preserve as string when transforming to CSS."
       },
       "highlight-bg": {
-        "$type": "gradient",
-        "$value": "linear-gradient(180deg, rgba(255, 255, 255, 0.42), transparent)",
-        "$description": "CSS value; preserve as string when transforming to CSS."
+        "$type": "color",
+        "$value": "transparent"
       },
       "highlight-opacity": {
         "$type": "number",
-        "$value": "0.55"
+        "$value": "0"
       }
     },
     "secondary": {
@@ -1420,7 +1521,7 @@
     "danger": {
       "bg": {
         "$type": "color",
-        "$value": "{gradient.danger}"
+        "$value": "{accent.danger}"
       },
       "fg": {
         "$type": "color",
@@ -1428,12 +1529,12 @@
       },
       "shadow": {
         "$type": "shadow",
-        "$value": "{shadow.key}, rgba(255, 99, 99, 0.16) 0 0 {dimension.24}",
+        "$value": "{shadow.ring}",
         "$description": "CSS value; preserve as string when transforming to CSS."
       },
       "shadow-hover": {
         "$type": "shadow",
-        "$value": "{shadow.key}, rgba(255, 99, 99, 0.24) 0 0 {dimension.30}",
+        "$value": "rgba(255, 255, 255, 0.08) 0 1px 0 inset, rgba(255, 99, 99, 0.32) 0 0 0 1px, rgba(0, 0, 0, 0.35) 0 3px 8px",
         "$description": "CSS value; preserve as string when transforming to CSS."
       }
     },
@@ -1466,6 +1567,16 @@
       }
     }
   },
+  "selection": {
+    "bg": {
+      "$type": "color",
+      "$value": "{color.violet.600}"
+    },
+    "fg": {
+      "$type": "color",
+      "$value": "{color.white}"
+    }
+  },
   "input": {
     "bg": {
       "$type": "color",
@@ -1487,6 +1598,16 @@
       "$type": "color",
       "$value": "{fg.muted}"
     },
+    "readonly": {
+      "bg": {
+        "$type": "color",
+        "$value": "{bg.surface.raised}"
+      },
+      "fg": {
+        "$type": "color",
+        "$value": "{fg.secondary}"
+      }
+    },
     "error": {
       "border": {
         "$type": "color",
@@ -1499,10 +1620,26 @@
       "$type": "color",
       "$value": "{bg.surface.raised}"
     },
+    "border": {
+      "$type": "color",
+      "$value": "{border.subtle}"
+    },
+    "radius": {
+      "$type": "dimension",
+      "$value": "{radius.lg}"
+    },
     "shadow": {
       "$type": "shadow",
       "$value": "{shadow.overlay}",
       "$description": "CSS value; preserve as string when transforming to CSS."
+    },
+    "backdrop": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [0.0, 0.0, 0.0],
+        "alpha": 0.58
+      }
     }
   },
   "tooltip": {

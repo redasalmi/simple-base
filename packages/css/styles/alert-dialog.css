@@ -1,19 +1,14 @@
 .sb-alert-dialog {
   width: min(100%, var(--sb-modal-width));
   margin: auto;
-  padding: var(--sb-dimension-20);
+  padding: var(--sb-space-5);
   border: 0;
-  border-radius: var(--sb-dimension-16);
+  border-radius: var(--sb-dialog-radius);
   color: var(--sb-fg-primary);
-  background:
-    radial-gradient(70% 80% at 50% 0%, rgba(255, 99, 99, 0.08), transparent 58%),
-    linear-gradient(180deg, rgba(17, 18, 20, 0.96), rgba(7, 8, 10, 0.94));
+  background: var(--sb-dialog-bg);
   box-shadow:
-    rgba(0, 0, 0, 0.4) 0 var(--sb-dimension-4) var(--sb-dimension-40) var(--sb-dimension-8),
-    rgba(0, 0, 0, 0.8) 0 0 0 var(--sb-dimension-0-5),
-    rgba(255, 255, 255, 0.18) 0 0 0 var(--sb-dimension-1) inset,
-    rgba(255, 255, 255, 0.08) 0 var(--sb-dimension-1) 0 inset;
-  backdrop-filter: blur(var(--sb-dimension-36));
+    var(--sb-dialog-shadow),
+    var(--sb-dialog-border) 0 0 0 var(--sb-border-width-default) inset;
 }
 
 .sb-alert-dialog[open] {
@@ -23,7 +18,7 @@
 }
 
 .sb-alert-dialog::backdrop {
-  background: rgba(0, 0, 0, 0.56);
+  background: var(--sb-dialog-backdrop);
   backdrop-filter: blur(var(--sb-dimension-12));
 }
 
@@ -32,15 +27,13 @@
   place-items: center;
   width: var(--sb-dimension-34);
   height: var(--sb-dimension-34);
-  border-radius: var(--sb-dimension-999);
-  color: var(--sb-fg-danger-readable, var(--sb-accent-danger));
-  background: rgba(255, 99, 99, 0.1);
+  border-radius: var(--sb-radius-full);
+  color: var(--sb-fg-danger-readable);
+  background: var(--sb-state-error-bg);
   font-size: var(--sb-text-lg);
   font-weight: var(--sb-font-weight-bold);
   line-height: var(--sb-leading-none);
-  box-shadow:
-    rgba(255, 99, 99, 0.3) 0 0 0 var(--sb-dimension-1) inset,
-    rgba(255, 255, 255, 0.08) 0 var(--sb-dimension-1) 0 inset;
+  box-shadow: var(--sb-accent-danger) 0 0 0 var(--sb-border-width-default) inset;
 }
 
 .sb-alert-dialog-content {
@@ -80,7 +73,7 @@
   margin-top: var(--sb-dimension-4);
 }
 
-@media (max-width: 640px) {
+@media (max-width: 760px) {
   .sb-alert-dialog[open] {
     grid-template-columns: 1fr;
   }

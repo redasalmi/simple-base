@@ -6,10 +6,10 @@
   gap: var(--sb-space-1);
   padding: 0 var(--sb-dimension-8);
   border: 0;
-  border-radius: var(--sb-dimension-6);
-  color: var(--sb-fg-secondary);
-  background: var(--sb-bg-muted);
-  box-shadow: rgba(255, 255, 255, 0.04) 0 var(--sb-dimension-1) 0 inset;
+  border-radius: var(--sb-radius-sm);
+  color: var(--sb-badge-fg);
+  background: var(--sb-badge-bg);
+  box-shadow: var(--sb-shadow-ring);
   font-size: var(--sb-text-sm);
   font-weight: var(--sb-font-weight-semibold);
   line-height: var(--sb-leading-none);
@@ -19,9 +19,9 @@
 }
 
 .sb-badge[data-variant="default"] {
-  color: var(--sb-fg-secondary);
-  background: var(--sb-bg-muted);
-  box-shadow: rgba(255, 255, 255, 0.04) 0 var(--sb-dimension-1) 0 inset;
+  color: var(--sb-badge-fg);
+  background: var(--sb-badge-bg);
+  box-shadow: var(--sb-shadow-ring);
 }
 
 .sb-badge[data-variant="command"] {
@@ -31,29 +31,27 @@
 }
 
 .sb-badge[data-variant="success"] {
-  color: var(--sb-fg-success-readable, var(--sb-accent-success));
-  background: rgba(89, 212, 153, 0.1);
-  box-shadow: rgba(89, 212, 153, 0.28) 0 0 0 var(--sb-dimension-1) inset;
+  color: var(--sb-fg-success-readable);
+  background: var(--sb-state-success-bg);
+  box-shadow: var(--sb-accent-success) 0 0 0 var(--sb-border-width-default) inset;
 }
 
 .sb-badge[data-variant="danger"] {
-  color: var(--sb-fg-danger-readable, var(--sb-accent-danger));
-  background: rgba(255, 99, 99, 0.1);
-  box-shadow: rgba(255, 99, 99, 0.3) 0 0 0 var(--sb-dimension-1) inset;
+  color: var(--sb-fg-danger-readable);
+  background: var(--sb-state-error-bg);
+  box-shadow: var(--sb-accent-danger) 0 0 0 var(--sb-border-width-default) inset;
 }
 
 .sb-badge[data-variant="outline"] {
   color: var(--sb-fg-strong);
-  background: rgba(255, 255, 255, 0.03);
-  box-shadow:
-    rgba(255, 255, 255, 0.22) 0 0 0 var(--sb-dimension-1),
-    rgba(255, 255, 255, 0.05) 0 var(--sb-dimension-1) 0 inset;
+  background: transparent;
+  box-shadow: var(--sb-shadow-ring);
 }
 
 .sb-badge[data-variant="muted"] {
   color: var(--sb-fg-muted);
-  background: rgba(255, 255, 255, 0.025);
-  box-shadow: rgba(255, 255, 255, 0.06) 0 0 0 var(--sb-dimension-1) inset;
+  background: var(--sb-state-disabled-bg);
+  box-shadow: var(--sb-border-subtle) 0 0 0 var(--sb-border-width-default) inset;
 }
 
 .sb-badge[data-size="small"] {

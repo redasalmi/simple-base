@@ -8,9 +8,7 @@
   color: var(--sb-input-fg);
   caret-color: var(--sb-fg-accent-readable, var(--sb-accent-primary));
   padding: 0 var(--sb-dimension-14);
-  box-shadow:
-    var(--sb-input-border) 0 0 0 var(--sb-dimension-1) inset,
-    rgba(255, 255, 255, 0.04) 0 var(--sb-dimension-1) 0 inset;
+  box-shadow: var(--sb-input-border) 0 0 0 var(--sb-border-width-default) inset;
   font: inherit;
   font-size: var(--sb-text-base);
   letter-spacing: var(--sb-tracking-normal);
@@ -26,16 +24,48 @@
 }
 
 .sb-input::selection {
-  color: var(--sb-fg-inverse);
-  background: var(--sb-accent-primary);
+  color: var(--sb-selection-fg);
+  background: var(--sb-selection-bg);
 }
 
-.sb-input:focus {
+.sb-input:focus-visible {
   box-shadow: var(--sb-focus-ring-default);
 }
 
 .sb-input[aria-invalid="true"] {
+  box-shadow: var(--sb-input-error-border) 0 0 0 var(--sb-border-width-default) inset;
+}
+
+.sb-input[aria-invalid="true"]:focus-visible {
   box-shadow: var(--sb-focus-ring-danger);
+}
+
+.sb-input:read-only {
+  color: var(--sb-input-readonly-fg);
+  background: var(--sb-input-readonly-bg);
+}
+
+.sb-input:autofill,
+.sb-input:-webkit-autofill {
+  box-shadow:
+    var(--sb-input-border) 0 0 0 var(--sb-border-width-default) inset,
+    0 0 0 var(--sb-dimension-999) var(--sb-input-bg) inset;
+  caret-color: var(--sb-fg-accent-readable);
+  -webkit-text-fill-color: var(--sb-input-fg);
+}
+
+.sb-input:autofill:focus-visible,
+.sb-input:-webkit-autofill:focus-visible {
+  box-shadow:
+    var(--sb-focus-ring-default),
+    0 0 0 var(--sb-dimension-999) var(--sb-input-bg) inset;
+}
+
+.sb-input[aria-invalid="true"]:autofill:focus-visible,
+.sb-input[aria-invalid="true"]:-webkit-autofill:focus-visible {
+  box-shadow:
+    var(--sb-focus-ring-danger),
+    0 0 0 var(--sb-dimension-999) var(--sb-input-bg) inset;
 }
 
 .sb-input:disabled {

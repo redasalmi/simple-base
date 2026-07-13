@@ -7,11 +7,8 @@
   border: 0;
   border-radius: var(--sb-radius-full);
   appearance: none;
-  background: color-mix(in srgb, var(--sb-fg-primary) 4%, transparent);
-  box-shadow:
-    var(--sb-border-default) 0 0 0 var(--sb-dimension-1) inset,
-    rgba(0, 0, 0, 0.25) 0 var(--sb-dimension-2) var(--sb-dimension-1) var(--sb-dimension-1) inset,
-    rgba(255, 255, 255, 0.08) 0 var(--sb-dimension-1) 0 inset;
+  background: var(--sb-button-tertiary-bg);
+  box-shadow: var(--sb-shadow-ring);
   cursor: pointer;
   transition:
     background var(--sb-duration-normal) var(--sb-ease-standard),
@@ -36,19 +33,14 @@
 }
 
 .sb-switch:checked {
-  background: var(--sb-button-primary-bg);
-  box-shadow:
-    rgba(228, 242, 34, 0.18) 0 0 var(--sb-dimension-22),
-    rgba(0, 0, 0, 0.25) 0 var(--sb-dimension-2) var(--sb-dimension-1) var(--sb-dimension-1) inset,
-    rgba(255, 255, 255, 0.22) 0 var(--sb-dimension-1) var(--sb-dimension-1) inset;
+  background: var(--sb-control-checked-bg);
+  box-shadow: var(--sb-control-checked-shadow);
 }
 
 .sb-switch:checked::after {
   translate: var(--sb-dimension-20) 0;
-  background: var(--sb-fg-inverse);
-  box-shadow:
-    rgba(0, 0, 0, 0.35) 0 var(--sb-dimension-1-5) var(--sb-dimension-0-5) var(--sb-dimension-1-5),
-    rgba(255, 255, 255, 0.12) 0 var(--sb-dimension-1) var(--sb-dimension-1) inset;
+  background: var(--sb-control-checked-fg);
+  box-shadow: var(--sb-shadow-ring);
 }
 
 .sb-switch:focus-visible {

@@ -9,9 +9,7 @@
   color: var(--sb-input-fg);
   caret-color: var(--sb-fg-accent-readable, var(--sb-accent-primary));
   padding: var(--sb-dimension-13) var(--sb-dimension-14);
-  box-shadow:
-    var(--sb-input-border) 0 0 0 var(--sb-dimension-1) inset,
-    rgba(255, 255, 255, 0.04) 0 var(--sb-dimension-1) 0 inset;
+  box-shadow: var(--sb-input-border) 0 0 0 var(--sb-border-width-default) inset;
   font: inherit;
   font-size: var(--sb-text-base);
   line-height: var(--sb-leading-relaxed);
@@ -28,16 +26,48 @@
 }
 
 .sb-textarea::selection {
-  color: var(--sb-fg-inverse);
-  background: var(--sb-accent-primary);
+  color: var(--sb-selection-fg);
+  background: var(--sb-selection-bg);
 }
 
-.sb-textarea:focus {
+.sb-textarea:focus-visible {
   box-shadow: var(--sb-focus-ring-default);
 }
 
 .sb-textarea[aria-invalid="true"] {
+  box-shadow: var(--sb-input-error-border) 0 0 0 var(--sb-border-width-default) inset;
+}
+
+.sb-textarea[aria-invalid="true"]:focus-visible {
   box-shadow: var(--sb-focus-ring-danger);
+}
+
+.sb-textarea:read-only {
+  color: var(--sb-input-readonly-fg);
+  background: var(--sb-input-readonly-bg);
+}
+
+.sb-textarea:autofill,
+.sb-textarea:-webkit-autofill {
+  box-shadow:
+    var(--sb-input-border) 0 0 0 var(--sb-border-width-default) inset,
+    0 0 0 var(--sb-dimension-999) var(--sb-input-bg) inset;
+  caret-color: var(--sb-fg-accent-readable);
+  -webkit-text-fill-color: var(--sb-input-fg);
+}
+
+.sb-textarea:autofill:focus-visible,
+.sb-textarea:-webkit-autofill:focus-visible {
+  box-shadow:
+    var(--sb-focus-ring-default),
+    0 0 0 var(--sb-dimension-999) var(--sb-input-bg) inset;
+}
+
+.sb-textarea[aria-invalid="true"]:autofill:focus-visible,
+.sb-textarea[aria-invalid="true"]:-webkit-autofill:focus-visible {
+  box-shadow:
+    var(--sb-focus-ring-danger),
+    0 0 0 var(--sb-dimension-999) var(--sb-input-bg) inset;
 }
 
 .sb-textarea:disabled {

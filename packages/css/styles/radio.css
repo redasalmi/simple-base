@@ -6,9 +6,7 @@
   border-radius: var(--sb-radius-full);
   appearance: none;
   background: var(--sb-button-tertiary-bg);
-  box-shadow:
-    var(--sb-border-default) 0 0 0 var(--sb-dimension-1) inset,
-    rgba(255, 255, 255, 0.08) 0 var(--sb-dimension-1) 0 inset;
+  box-shadow: var(--sb-shadow-ring);
   cursor: pointer;
   transition:
     background var(--sb-duration-normal) var(--sb-ease-standard),
@@ -20,13 +18,11 @@
   background:
     radial-gradient(
       circle,
-      var(--sb-fg-inverse) 0 var(--sb-dimension-4),
+      var(--sb-control-checked-fg) 0 var(--sb-dimension-4),
       transparent var(--sb-dimension-5)
     ),
-    var(--sb-button-primary-bg);
-  box-shadow:
-    var(--sb-shadow-key),
-    rgba(228, 242, 34, 0.18) 0 0 var(--sb-dimension-18);
+    var(--sb-control-checked-bg);
+  box-shadow: var(--sb-control-checked-shadow);
 }
 
 .sb-radio:focus-visible {

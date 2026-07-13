@@ -91,7 +91,7 @@
               "accent": {
                 "readable": {
                   "$type": "color",
-                  "$value": "#566000"
+                  "$value": "#6d28d9"
                 }
               },
               "danger": {
@@ -114,10 +114,6 @@
               }
             },
             "accent": {
-              "primary": {
-                "$type": "color",
-                "$value": "#b6c400"
-              },
               "danger": {
                 "$type": "color",
                 "$value": "#d94f4f"
@@ -129,6 +125,26 @@
               "info": {
                 "$type": "color",
                 "$value": "#157fd1"
+              }
+            },
+            "button": {
+              "primary": {
+                "bg": {
+                  "$type": "color",
+                  "$value": "{fg.primary}"
+                },
+                "bg-hover": {
+                  "$type": "color",
+                  "$value": "color-mix(in srgb, {fg.primary} 88%, white)"
+                },
+                "bg-active": {
+                  "$type": "color",
+                  "$value": "color-mix(in srgb, {fg.primary} 80%, white)"
+                },
+                "fg": {
+                  "$type": "color",
+                  "$value": "{fg.inverse}"
+                }
               }
             }
           }
@@ -205,7 +221,7 @@
               "accent": {
                 "readable": {
                   "$type": "color",
-                  "$value": "#2f7d20"
+                  "$value": "#6d28d9"
                 }
               },
               "danger": {
@@ -228,10 +244,6 @@
               }
             },
             "accent": {
-              "primary": {
-                "$type": "color",
-                "$value": "#40a02b"
-              },
               "danger": {
                 "$type": "color",
                 "$value": "#d20f39"
@@ -243,6 +255,26 @@
               "info": {
                 "$type": "color",
                 "$value": "#1e66f5"
+              }
+            },
+            "button": {
+              "primary": {
+                "bg": {
+                  "$type": "color",
+                  "$value": "{fg.primary}"
+                },
+                "bg-hover": {
+                  "$type": "color",
+                  "$value": "color-mix(in srgb, {fg.primary} 88%, white)"
+                },
+                "bg-active": {
+                  "$type": "color",
+                  "$value": "color-mix(in srgb, {fg.primary} 80%, white)"
+                },
+                "fg": {
+                  "$type": "color",
+                  "$value": "{fg.inverse}"
+                }
               }
             }
           }
@@ -319,7 +351,7 @@
               "accent": {
                 "readable": {
                   "$type": "color",
-                  "$value": "#a6d189"
+                  "$value": "#c4b5fd"
                 }
               },
               "danger": {
@@ -342,10 +374,6 @@
               }
             },
             "accent": {
-              "primary": {
-                "$type": "color",
-                "$value": "#a6d189"
-              },
               "danger": {
                 "$type": "color",
                 "$value": "#e78284"
@@ -433,7 +461,7 @@
               "accent": {
                 "readable": {
                   "$type": "color",
-                  "$value": "#a6da95"
+                  "$value": "#c4b5fd"
                 }
               },
               "danger": {
@@ -456,10 +484,6 @@
               }
             },
             "accent": {
-              "primary": {
-                "$type": "color",
-                "$value": "#a6da95"
-              },
               "danger": {
                 "$type": "color",
                 "$value": "#ed8796"
@@ -547,7 +571,7 @@
               "accent": {
                 "readable": {
                   "$type": "color",
-                  "$value": "#a6e3a1"
+                  "$value": "#c4b5fd"
                 }
               },
               "danger": {
@@ -570,10 +594,6 @@
               }
             },
             "accent": {
-              "primary": {
-                "$type": "color",
-                "$value": "#a6e3a1"
-              },
               "danger": {
                 "$type": "color",
                 "$value": "#f38ba8"
@@ -661,7 +681,7 @@
               "accent": {
                 "readable": {
                   "$type": "color",
-                  "$value": "#50fa7b"
+                  "$value": "#c4b5fd"
                 }
               },
               "danger": {
@@ -684,10 +704,6 @@
               }
             },
             "accent": {
-              "primary": {
-                "$type": "color",
-                "$value": "#50fa7b"
-              },
               "danger": {
                 "$type": "color",
                 "$value": "#ff5555"
@@ -775,7 +791,7 @@
               "accent": {
                 "readable": {
                   "$type": "color",
-                  "$value": "#9ece6a"
+                  "$value": "#c4b5fd"
                 }
               },
               "danger": {
@@ -798,10 +814,6 @@
               }
             },
             "accent": {
-              "primary": {
-                "$type": "color",
-                "$value": "#9ece6a"
-              },
               "danger": {
                 "$type": "color",
                 "$value": "#f7768e"
@@ -889,7 +901,7 @@
               "accent": {
                 "readable": {
                   "$type": "color",
-                  "$value": "#a3be8c"
+                  "$value": "#c4b5fd"
                 }
               },
               "danger": {
@@ -912,10 +924,6 @@
               }
             },
             "accent": {
-              "primary": {
-                "$type": "color",
-                "$value": "#a3be8c"
-              },
               "danger": {
                 "$type": "color",
                 "$value": "#bf616a"
