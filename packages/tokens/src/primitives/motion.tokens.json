@@ -1,0 +1,42 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+  "$description": "Motion timing and easing tokens.",
+  "primitive": {
+    "duration": {
+      "$type": "duration",
+      "fast": {
+        "$value": {
+          "value": 140,
+          "unit": "ms"
+        }
+      },
+      "normal": {
+        "$value": {
+          "value": 200,
+          "unit": "ms"
+        }
+      },
+      "slow": {
+        "$value": {
+          "value": 400,
+          "unit": "ms"
+        }
+      },
+      "spinner": {
+        "$value": {
+          "value": 900,
+          "unit": "ms"
+        }
+      }
+    },
+    "easing": {
+      "$type": "cubicBezier",
+      "out": {
+        "$value": [0.23, 1, 0.32, 1]
+      },
+      "standard": {
+        "$value": [0.2, 0, 0, 1]
+      }
+    }
+  }
+}

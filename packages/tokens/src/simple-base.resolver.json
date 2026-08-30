@@ -1,953 +1,106 @@
 {
   "$schema": "https://www.designtokens.org/schemas/2025.10/resolver.json",
   "name": "Simple Base",
+  "description": "Primitive, semantic, and theme tokens with selectable color themes.",
   "version": "2025.10",
-  "description": "Resolver document for Simple Base design tokens. Resolves the base DTCG token set with a theme modifier for Simple Base, Catppuccin, Dracula, Tokyo Night, and Nord contexts.",
+  "resolutionOrder": [
+    {
+      "$ref": "#/sets/primitives"
+    },
+    {
+      "$ref": "#/sets/semantic"
+    },
+    {
+      "$ref": "#/modifiers/theme"
+    }
+  ],
   "sets": {
-    "base": {
-      "description": "Base Simple Base primitive, semantic, component, motion, spacing, typography, radius, shadow, and layout tokens in DTCG format.",
+    "primitives": {
+      "description": "Foundational token values.",
       "sources": [
         {
-          "$ref": "tokens.dtcg.json"
+          "$ref": "primitives/effects.tokens.json"
+        },
+        {
+          "$ref": "primitives/motion.tokens.json"
+        },
+        {
+          "$ref": "primitives/sizing.tokens.json"
+        },
+        {
+          "$ref": "primitives/typography.tokens.json"
+        }
+      ]
+    },
+    "semantic": {
+      "description": "Stable semantic token roles.",
+      "sources": [
+        {
+          "$ref": "semantic/effects.tokens.json"
+        },
+        {
+          "$ref": "semantic/motion.tokens.json"
+        },
+        {
+          "$ref": "semantic/sizing.tokens.json"
+        },
+        {
+          "$ref": "semantic/typography.tokens.json"
         }
       ]
     }
   },
   "modifiers": {
     "theme": {
-      "description": "Color theme context. Values override semantic color aliases from the base token set. Base dark values are already included in tokens.dtcg.json, so the dark context is intentionally empty.",
+      "description": "Color theme.",
       "default": "simple-base-dark",
       "contexts": {
-        "simple-base-dark": [],
+        "simple-base-dark": [
+          {
+            "$ref": "themes/simple-base-dark.tokens.json"
+          }
+        ],
         "simple-base-light": [
           {
-            "bg": {
-              "canvas": {
-                "$type": "color",
-                "$value": "#f6f7f8"
-              },
-              "page": {
-                "$type": "color",
-                "$value": "#ffffff"
-              },
-              "surface": {
-                "default": {
-                  "$type": "color",
-                  "$value": "#ffffff"
-                },
-                "raised": {
-                  "$type": "color",
-                  "$value": "#f1f3f5"
-                },
-                "overlay": {
-                  "$type": "color",
-                  "$value": "#e8ebef"
-                }
-              },
-              "muted": {
-                "$type": "color",
-                "$value": "#eef1f4"
-              }
-            },
-            "border": {
-              "subtle": {
-                "$type": "color",
-                "$value": {
-                  "colorSpace": "srgb",
-                  "components": [0.031373, 0.035294, 0.039216],
-                  "alpha": 0.08
-                }
-              },
-              "default": {
-                "$type": "color",
-                "$value": "#d8dde3"
-              },
-              "strong": {
-                "$type": "color",
-                "$value": "#c4cbd3"
-              }
-            },
-            "fg": {
-              "primary": {
-                "$type": "color",
-                "$value": "#08090a"
-              },
-              "strong": {
-                "$type": "color",
-                "$value": "#111214"
-              },
-              "secondary": {
-                "$type": "color",
-                "$value": "#4d545d"
-              },
-              "muted": {
-                "$type": "color",
-                "$value": "#5f6772"
-              },
-              "inverse": {
-                "$type": "color",
-                "$value": "#ffffff"
-              },
-              "accent": {
-                "readable": {
-                  "$type": "color",
-                  "$value": "#6d28d9"
-                }
-              },
-              "danger": {
-                "readable": {
-                  "$type": "color",
-                  "$value": "#b4232f"
-                }
-              },
-              "success": {
-                "readable": {
-                  "$type": "color",
-                  "$value": "#16713a"
-                }
-              },
-              "info": {
-                "readable": {
-                  "$type": "color",
-                  "$value": "#0969b3"
-                }
-              }
-            },
-            "accent": {
-              "danger": {
-                "$type": "color",
-                "$value": "#d94f4f"
-              },
-              "success": {
-                "$type": "color",
-                "$value": "#168a3f"
-              },
-              "info": {
-                "$type": "color",
-                "$value": "#157fd1"
-              }
-            },
-            "button": {
-              "primary": {
-                "bg": {
-                  "$type": "color",
-                  "$value": "{fg.primary}"
-                },
-                "bg-hover": {
-                  "$type": "color",
-                  "$value": "color-mix(in srgb, {fg.primary} 88%, white)"
-                },
-                "bg-active": {
-                  "$type": "color",
-                  "$value": "color-mix(in srgb, {fg.primary} 80%, white)"
-                },
-                "fg": {
-                  "$type": "color",
-                  "$value": "{fg.inverse}"
-                }
-              }
-            }
+            "$ref": "themes/simple-base-light.tokens.json"
           }
         ],
         "catppuccin-latte": [
           {
-            "bg": {
-              "canvas": {
-                "$type": "color",
-                "$value": "#eff1f5"
-              },
-              "page": {
-                "$type": "color",
-                "$value": "#e6e9ef"
-              },
-              "surface": {
-                "default": {
-                  "$type": "color",
-                  "$value": "#ffffff"
-                },
-                "raised": {
-                  "$type": "color",
-                  "$value": "#ccd0da"
-                },
-                "overlay": {
-                  "$type": "color",
-                  "$value": "#bcc0cc"
-                }
-              },
-              "muted": {
-                "$type": "color",
-                "$value": "#dce0e8"
-              }
-            },
-            "border": {
-              "subtle": {
-                "$type": "color",
-                "$value": {
-                  "colorSpace": "srgb",
-                  "components": [0.298039, 0.309804, 0.411765],
-                  "alpha": 0.12
-                }
-              },
-              "default": {
-                "$type": "color",
-                "$value": "#ccd0da"
-              },
-              "strong": {
-                "$type": "color",
-                "$value": "#acb0be"
-              }
-            },
-            "fg": {
-              "primary": {
-                "$type": "color",
-                "$value": "#4c4f69"
-              },
-              "strong": {
-                "$type": "color",
-                "$value": "#1e1e2e"
-              },
-              "secondary": {
-                "$type": "color",
-                "$value": "#4c4f69"
-              },
-              "muted": {
-                "$type": "color",
-                "$value": "#4c4f69"
-              },
-              "inverse": {
-                "$type": "color",
-                "$value": "#eff1f5"
-              },
-              "accent": {
-                "readable": {
-                  "$type": "color",
-                  "$value": "#6d28d9"
-                }
-              },
-              "danger": {
-                "readable": {
-                  "$type": "color",
-                  "$value": "#b20d30"
-                }
-              },
-              "success": {
-                "readable": {
-                  "$type": "color",
-                  "$value": "#2f7d20"
-                }
-              },
-              "info": {
-                "readable": {
-                  "$type": "color",
-                  "$value": "#1557c0"
-                }
-              }
-            },
-            "accent": {
-              "danger": {
-                "$type": "color",
-                "$value": "#d20f39"
-              },
-              "success": {
-                "$type": "color",
-                "$value": "#40a02b"
-              },
-              "info": {
-                "$type": "color",
-                "$value": "#1e66f5"
-              }
-            },
-            "button": {
-              "primary": {
-                "bg": {
-                  "$type": "color",
-                  "$value": "{fg.primary}"
-                },
-                "bg-hover": {
-                  "$type": "color",
-                  "$value": "color-mix(in srgb, {fg.primary} 88%, white)"
-                },
-                "bg-active": {
-                  "$type": "color",
-                  "$value": "color-mix(in srgb, {fg.primary} 80%, white)"
-                },
-                "fg": {
-                  "$type": "color",
-                  "$value": "{fg.inverse}"
-                }
-              }
-            }
+            "$ref": "themes/catppuccin-latte.tokens.json"
           }
         ],
         "catppuccin-frappe": [
           {
-            "bg": {
-              "canvas": {
-                "$type": "color",
-                "$value": "#303446"
-              },
-              "page": {
-                "$type": "color",
-                "$value": "#292c3c"
-              },
-              "surface": {
-                "default": {
-                  "$type": "color",
-                  "$value": "#414559"
-                },
-                "raised": {
-                  "$type": "color",
-                  "$value": "#51576d"
-                },
-                "overlay": {
-                  "$type": "color",
-                  "$value": "#626880"
-                }
-              },
-              "muted": {
-                "$type": "color",
-                "$value": "#51576d"
-              }
-            },
-            "border": {
-              "subtle": {
-                "$type": "color",
-                "$value": {
-                  "colorSpace": "srgb",
-                  "components": [0.776471, 0.815686, 0.960784],
-                  "alpha": 0.1
-                }
-              },
-              "default": {
-                "$type": "color",
-                "$value": "#51576d"
-              },
-              "strong": {
-                "$type": "color",
-                "$value": "#626880"
-              }
-            },
-            "fg": {
-              "primary": {
-                "$type": "color",
-                "$value": "#c6d0f5"
-              },
-              "strong": {
-                "$type": "color",
-                "$value": "#f2d5cf"
-              },
-              "secondary": {
-                "$type": "color",
-                "$value": "#c6d0f5"
-              },
-              "muted": {
-                "$type": "color",
-                "$value": "#c6d0f5"
-              },
-              "inverse": {
-                "$type": "color",
-                "$value": "#232634"
-              },
-              "accent": {
-                "readable": {
-                  "$type": "color",
-                  "$value": "#c4b5fd"
-                }
-              },
-              "danger": {
-                "readable": {
-                  "$type": "color",
-                  "$value": "#f2d5cf"
-                }
-              },
-              "success": {
-                "readable": {
-                  "$type": "color",
-                  "$value": "#a6d189"
-                }
-              },
-              "info": {
-                "readable": {
-                  "$type": "color",
-                  "$value": "#8caaee"
-                }
-              }
-            },
-            "accent": {
-              "danger": {
-                "$type": "color",
-                "$value": "#e78284"
-              },
-              "success": {
-                "$type": "color",
-                "$value": "#a6d189"
-              },
-              "info": {
-                "$type": "color",
-                "$value": "#8caaee"
-              }
-            }
+            "$ref": "themes/catppuccin-frappe.tokens.json"
           }
         ],
         "catppuccin-macchiato": [
           {
-            "bg": {
-              "canvas": {
-                "$type": "color",
-                "$value": "#24273a"
-              },
-              "page": {
-                "$type": "color",
-                "$value": "#1e2030"
-              },
-              "surface": {
-                "default": {
-                  "$type": "color",
-                  "$value": "#363a4f"
-                },
-                "raised": {
-                  "$type": "color",
-                  "$value": "#494d64"
-                },
-                "overlay": {
-                  "$type": "color",
-                  "$value": "#5b6078"
-                }
-              },
-              "muted": {
-                "$type": "color",
-                "$value": "#494d64"
-              }
-            },
-            "border": {
-              "subtle": {
-                "$type": "color",
-                "$value": {
-                  "colorSpace": "srgb",
-                  "components": [0.792157, 0.827451, 0.960784],
-                  "alpha": 0.1
-                }
-              },
-              "default": {
-                "$type": "color",
-                "$value": "#494d64"
-              },
-              "strong": {
-                "$type": "color",
-                "$value": "#5b6078"
-              }
-            },
-            "fg": {
-              "primary": {
-                "$type": "color",
-                "$value": "#cad3f5"
-              },
-              "strong": {
-                "$type": "color",
-                "$value": "#f4dbd6"
-              },
-              "secondary": {
-                "$type": "color",
-                "$value": "#cad3f5"
-              },
-              "muted": {
-                "$type": "color",
-                "$value": "#cad3f5"
-              },
-              "inverse": {
-                "$type": "color",
-                "$value": "#181926"
-              },
-              "accent": {
-                "readable": {
-                  "$type": "color",
-                  "$value": "#c4b5fd"
-                }
-              },
-              "danger": {
-                "readable": {
-                  "$type": "color",
-                  "$value": "#ed8796"
-                }
-              },
-              "success": {
-                "readable": {
-                  "$type": "color",
-                  "$value": "#a6da95"
-                }
-              },
-              "info": {
-                "readable": {
-                  "$type": "color",
-                  "$value": "#8aadf4"
-                }
-              }
-            },
-            "accent": {
-              "danger": {
-                "$type": "color",
-                "$value": "#ed8796"
-              },
-              "success": {
-                "$type": "color",
-                "$value": "#a6da95"
-              },
-              "info": {
-                "$type": "color",
-                "$value": "#8aadf4"
-              }
-            }
+            "$ref": "themes/catppuccin-macchiato.tokens.json"
           }
         ],
         "catppuccin-mocha": [
           {
-            "bg": {
-              "canvas": {
-                "$type": "color",
-                "$value": "#1e1e2e"
-              },
-              "page": {
-                "$type": "color",
-                "$value": "#181825"
-              },
-              "surface": {
-                "default": {
-                  "$type": "color",
-                  "$value": "#313244"
-                },
-                "raised": {
-                  "$type": "color",
-                  "$value": "#45475a"
-                },
-                "overlay": {
-                  "$type": "color",
-                  "$value": "#585b70"
-                }
-              },
-              "muted": {
-                "$type": "color",
-                "$value": "#45475a"
-              }
-            },
-            "border": {
-              "subtle": {
-                "$type": "color",
-                "$value": {
-                  "colorSpace": "srgb",
-                  "components": [0.803922, 0.839216, 0.956863],
-                  "alpha": 0.1
-                }
-              },
-              "default": {
-                "$type": "color",
-                "$value": "#45475a"
-              },
-              "strong": {
-                "$type": "color",
-                "$value": "#585b70"
-              }
-            },
-            "fg": {
-              "primary": {
-                "$type": "color",
-                "$value": "#cdd6f4"
-              },
-              "strong": {
-                "$type": "color",
-                "$value": "#f5e0dc"
-              },
-              "secondary": {
-                "$type": "color",
-                "$value": "#bac2de"
-              },
-              "muted": {
-                "$type": "color",
-                "$value": "#bac2de"
-              },
-              "inverse": {
-                "$type": "color",
-                "$value": "#11111b"
-              },
-              "accent": {
-                "readable": {
-                  "$type": "color",
-                  "$value": "#c4b5fd"
-                }
-              },
-              "danger": {
-                "readable": {
-                  "$type": "color",
-                  "$value": "#f38ba8"
-                }
-              },
-              "success": {
-                "readable": {
-                  "$type": "color",
-                  "$value": "#a6e3a1"
-                }
-              },
-              "info": {
-                "readable": {
-                  "$type": "color",
-                  "$value": "#89b4fa"
-                }
-              }
-            },
-            "accent": {
-              "danger": {
-                "$type": "color",
-                "$value": "#f38ba8"
-              },
-              "success": {
-                "$type": "color",
-                "$value": "#a6e3a1"
-              },
-              "info": {
-                "$type": "color",
-                "$value": "#89b4fa"
-              }
-            }
+            "$ref": "themes/catppuccin-mocha.tokens.json"
           }
         ],
         "dracula": [
           {
-            "bg": {
-              "canvas": {
-                "$type": "color",
-                "$value": "#282a36"
-              },
-              "page": {
-                "$type": "color",
-                "$value": "#21222c"
-              },
-              "surface": {
-                "default": {
-                  "$type": "color",
-                  "$value": "#343746"
-                },
-                "raised": {
-                  "$type": "color",
-                  "$value": "#44475a"
-                },
-                "overlay": {
-                  "$type": "color",
-                  "$value": "#4f5268"
-                }
-              },
-              "muted": {
-                "$type": "color",
-                "$value": "#44475a"
-              }
-            },
-            "border": {
-              "subtle": {
-                "$type": "color",
-                "$value": {
-                  "colorSpace": "srgb",
-                  "components": [0.972549, 0.972549, 0.94902],
-                  "alpha": 0.1
-                }
-              },
-              "default": {
-                "$type": "color",
-                "$value": "#44475a"
-              },
-              "strong": {
-                "$type": "color",
-                "$value": "#6272a4"
-              }
-            },
-            "fg": {
-              "primary": {
-                "$type": "color",
-                "$value": "#f8f8f2"
-              },
-              "strong": {
-                "$type": "color",
-                "$value": "#ffffff"
-              },
-              "secondary": {
-                "$type": "color",
-                "$value": "#bdc2d8"
-              },
-              "muted": {
-                "$type": "color",
-                "$value": "#bdc2d8"
-              },
-              "inverse": {
-                "$type": "color",
-                "$value": "#282a36"
-              },
-              "accent": {
-                "readable": {
-                  "$type": "color",
-                  "$value": "#c4b5fd"
-                }
-              },
-              "danger": {
-                "readable": {
-                  "$type": "color",
-                  "$value": "#ffb3b3"
-                }
-              },
-              "success": {
-                "readable": {
-                  "$type": "color",
-                  "$value": "#50fa7b"
-                }
-              },
-              "info": {
-                "readable": {
-                  "$type": "color",
-                  "$value": "#8be9fd"
-                }
-              }
-            },
-            "accent": {
-              "danger": {
-                "$type": "color",
-                "$value": "#ff5555"
-              },
-              "success": {
-                "$type": "color",
-                "$value": "#50fa7b"
-              },
-              "info": {
-                "$type": "color",
-                "$value": "#8be9fd"
-              }
-            }
+            "$ref": "themes/dracula.tokens.json"
           }
         ],
         "tokyo-night": [
           {
-            "bg": {
-              "canvas": {
-                "$type": "color",
-                "$value": "#1a1b26"
-              },
-              "page": {
-                "$type": "color",
-                "$value": "#16161e"
-              },
-              "surface": {
-                "default": {
-                  "$type": "color",
-                  "$value": "#24283b"
-                },
-                "raised": {
-                  "$type": "color",
-                  "$value": "#292e42"
-                },
-                "overlay": {
-                  "$type": "color",
-                  "$value": "#3b4261"
-                }
-              },
-              "muted": {
-                "$type": "color",
-                "$value": "#414868"
-              }
-            },
-            "border": {
-              "subtle": {
-                "$type": "color",
-                "$value": {
-                  "colorSpace": "srgb",
-                  "components": [0.752941, 0.792157, 0.960784],
-                  "alpha": 0.1
-                }
-              },
-              "default": {
-                "$type": "color",
-                "$value": "#3b4261"
-              },
-              "strong": {
-                "$type": "color",
-                "$value": "#565f89"
-              }
-            },
-            "fg": {
-              "primary": {
-                "$type": "color",
-                "$value": "#c0caf5"
-              },
-              "strong": {
-                "$type": "color",
-                "$value": "#ffffff"
-              },
-              "secondary": {
-                "$type": "color",
-                "$value": "#a9b1d6"
-              },
-              "muted": {
-                "$type": "color",
-                "$value": "#a9b1d6"
-              },
-              "inverse": {
-                "$type": "color",
-                "$value": "#1a1b26"
-              },
-              "accent": {
-                "readable": {
-                  "$type": "color",
-                  "$value": "#c4b5fd"
-                }
-              },
-              "danger": {
-                "readable": {
-                  "$type": "color",
-                  "$value": "#f7768e"
-                }
-              },
-              "success": {
-                "readable": {
-                  "$type": "color",
-                  "$value": "#9ece6a"
-                }
-              },
-              "info": {
-                "readable": {
-                  "$type": "color",
-                  "$value": "#7aa2f7"
-                }
-              }
-            },
-            "accent": {
-              "danger": {
-                "$type": "color",
-                "$value": "#f7768e"
-              },
-              "success": {
-                "$type": "color",
-                "$value": "#9ece6a"
-              },
-              "info": {
-                "$type": "color",
-                "$value": "#7aa2f7"
-              }
-            }
+            "$ref": "themes/tokyo-night.tokens.json"
           }
         ],
         "nord": [
           {
-            "bg": {
-              "canvas": {
-                "$type": "color",
-                "$value": "#2e3440"
-              },
-              "page": {
-                "$type": "color",
-                "$value": "#242933"
-              },
-              "surface": {
-                "default": {
-                  "$type": "color",
-                  "$value": "#3b4252"
-                },
-                "raised": {
-                  "$type": "color",
-                  "$value": "#434c5e"
-                },
-                "overlay": {
-                  "$type": "color",
-                  "$value": "#4c566a"
-                }
-              },
-              "muted": {
-                "$type": "color",
-                "$value": "#434c5e"
-              }
-            },
-            "border": {
-              "subtle": {
-                "$type": "color",
-                "$value": {
-                  "colorSpace": "srgb",
-                  "components": [0.92549, 0.937255, 0.956863],
-                  "alpha": 0.1
-                }
-              },
-              "default": {
-                "$type": "color",
-                "$value": "#4c566a"
-              },
-              "strong": {
-                "$type": "color",
-                "$value": "#5e81ac"
-              }
-            },
-            "fg": {
-              "primary": {
-                "$type": "color",
-                "$value": "#eceff4"
-              },
-              "strong": {
-                "$type": "color",
-                "$value": "#ffffff"
-              },
-              "secondary": {
-                "$type": "color",
-                "$value": "#d8dee9"
-              },
-              "muted": {
-                "$type": "color",
-                "$value": "#d8dee9"
-              },
-              "inverse": {
-                "$type": "color",
-                "$value": "#2e3440"
-              },
-              "accent": {
-                "readable": {
-                  "$type": "color",
-                  "$value": "#c4b5fd"
-                }
-              },
-              "danger": {
-                "readable": {
-                  "$type": "color",
-                  "$value": "#ebcb8b"
-                }
-              },
-              "success": {
-                "readable": {
-                  "$type": "color",
-                  "$value": "#a3be8c"
-                }
-              },
-              "info": {
-                "readable": {
-                  "$type": "color",
-                  "$value": "#88c0d0"
-                }
-              }
-            },
-            "accent": {
-              "danger": {
-                "$type": "color",
-                "$value": "#bf616a"
-              },
-              "success": {
-                "$type": "color",
-                "$value": "#a3be8c"
-              },
-              "info": {
-                "$type": "color",
-                "$value": "#88c0d0"
-              }
-            }
+            "$ref": "themes/nord.tokens.json"
           }
         ]
       }
     }
-  },
-  "resolutionOrder": [
-    {
-      "$ref": "#/sets/base"
-    },
-    {
-      "$ref": "#/modifiers/theme"
-    }
-  ]
+  }
 }

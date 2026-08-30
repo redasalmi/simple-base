@@ -1,0 +1,18 @@
+@import "tailwindcss";
+@import "./tokens.css";
+
+/* The default Tailwind v4 theme uses the resolver's default color context. */
+@theme {
+  @tz (theme: "simple-base-dark");
+}
+
+/* Theme variants match the data-theme selectors emitted in tokens.css. */
+@custom-variant simple-base-dark ([data-theme="simple-base-dark"] &);
+@custom-variant simple-base-light ([data-theme="simple-base-light"] &);
+@custom-variant catppuccin-latte ([data-theme="catppuccin-latte"] &);
+@custom-variant catppuccin-frappe ([data-theme="catppuccin-frappe"] &);
+@custom-variant catppuccin-macchiato ([data-theme="catppuccin-macchiato"] &);
+@custom-variant catppuccin-mocha ([data-theme="catppuccin-mocha"] &);
+@custom-variant dracula ([data-theme="dracula"] &);
+@custom-variant tokyo-night ([data-theme="tokyo-night"] &);
+@custom-variant nord ([data-theme="nord"] &);

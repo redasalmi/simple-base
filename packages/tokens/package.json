@@ -6,27 +6,31 @@
     "dist"
   ],
   "type": "module",
-  "main": "./dist/web/tokens.js",
-  "module": "./dist/web/tokens.js",
-  "types": "./dist/web/tokens.d.ts",
+  "main": "./dist/tokens.js",
+  "module": "./dist/tokens.js",
+  "types": "./dist/tokens.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/web/tokens.d.ts",
-      "import": "./dist/web/tokens.js"
+      "types": "./dist/tokens.d.ts",
+      "import": "./dist/tokens.js"
     },
-    "./css": "./dist/web/tokens.css",
+    "./css": "./dist/tokens.css",
+    "./tailwind-theme.css": "./dist/tailwind-theme.css",
     "./tokens": {
-      "types": "./dist/web/tokens.d.ts",
-      "import": "./dist/web/tokens.js"
+      "types": "./dist/tokens.d.ts",
+      "import": "./dist/tokens.js"
     }
   },
   "scripts": {
-    "build": "tsx src/build.ts && tsc -p tsconfig.build.json",
-    "prepack": "pnpm build"
+    "check": "tz check",
+    "build": "tz build"
   },
   "devDependencies": {
-    "@types/node": "^25.8.0",
-    "style-dictionary": "^5.4.0",
-    "tsx": "^4.22.0"
+    "@terrazzo/cli": "^2.7.1",
+    "@terrazzo/plugin-css": "^2.7.1",
+    "@terrazzo/plugin-js": "^2.7.1",
+    "@terrazzo/plugin-tailwind": "^2.7.1",
+    "@terrazzo/token-types": "^2.7.1",
+    "@types/node": "^25.8.0"
   }
 }

@@ -1,0 +1,95 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+  "$description": "Opacity, layering, and shadow tokens.",
+  "primitive": {
+    "opacity": {
+      "$type": "number",
+      "disabled": {
+        "$value": 0.48
+      },
+      "subtle": {
+        "$value": 0.72
+      },
+      "invisible": {
+        "$value": 0
+      },
+      "opaque": {
+        "$value": 1
+      }
+    },
+    "z-index": {
+      "$type": "number",
+      "base": {
+        "$value": 0
+      },
+      "sticky": {
+        "$value": 200
+      },
+      "dropdown": {
+        "$value": 400
+      },
+      "overlay": {
+        "$value": 600
+      },
+      "modal": {
+        "$value": 700
+      },
+      "toast": {
+        "$value": 900
+      }
+    },
+    "shadow": {
+      "$type": "shadow",
+      "card": {
+        "$value": {
+          "offsetX": {
+            "value": 0,
+            "unit": "px"
+          },
+          "offsetY": {
+            "value": 12,
+            "unit": "px"
+          },
+          "blur": {
+            "value": 30,
+            "unit": "px"
+          },
+          "spread": {
+            "value": 0,
+            "unit": "px"
+          },
+          "color": {
+            "colorSpace": "oklch",
+            "components": [0.1276, 0.0035, 245.8],
+            "alpha": 0.72
+          }
+        }
+      },
+      "overlay": {
+        "$value": {
+          "offsetX": {
+            "value": 0,
+            "unit": "px"
+          },
+          "offsetY": {
+            "value": 24,
+            "unit": "px"
+          },
+          "blur": {
+            "value": 64,
+            "unit": "px"
+          },
+          "spread": {
+            "value": 0,
+            "unit": "px"
+          },
+          "color": {
+            "colorSpace": "oklch",
+            "components": [0.1276, 0.0035, 245.8],
+            "alpha": 0.92
+          }
+        }
+      }
+    }
+  }
+}

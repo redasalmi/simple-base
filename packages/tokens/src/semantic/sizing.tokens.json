@@ -1,0 +1,140 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+  "$description": "Spacing, sizing, borders, radii, and responsive layout tokens.",
+  "semantic": {
+    "space": {
+      "0": {
+        "$value": "{primitive.space.0}"
+      },
+      "1": {
+        "$value": "{primitive.space.1}"
+      },
+      "2": {
+        "$value": "{primitive.space.2}"
+      },
+      "3": {
+        "$value": "{primitive.space.3}"
+      },
+      "4": {
+        "$value": "{primitive.space.4}"
+      },
+      "5": {
+        "$value": "{primitive.space.5}"
+      },
+      "6": {
+        "$value": "{primitive.space.6}"
+      },
+      "8": {
+        "$value": "{primitive.space.8}"
+      },
+      "10": {
+        "$value": "{primitive.space.10}"
+      },
+      "12": {
+        "$value": "{primitive.space.12}"
+      },
+      "16": {
+        "$value": "{primitive.space.16}"
+      },
+      "20": {
+        "$value": "{primitive.space.20}"
+      },
+      "$type": "dimension"
+    },
+    "radius": {
+      "$type": "dimension",
+      "none": {
+        "$value": "{primitive.radius.none}"
+      },
+      "sm": {
+        "$value": "{primitive.radius.sm}"
+      },
+      "md": {
+        "$value": "{primitive.radius.md}"
+      },
+      "lg": {
+        "$value": "{primitive.radius.lg}"
+      },
+      "xl": {
+        "$value": "{primitive.radius.xl}"
+      },
+      "full": {
+        "$value": "{primitive.radius.full}"
+      }
+    },
+    "size": {
+      "control": {
+        "$type": "dimension",
+        "xs": {
+          "$value": "{primitive.size.control.xs}"
+        },
+        "sm": {
+          "$value": "{primitive.size.control.sm}"
+        },
+        "md": {
+          "$value": "{primitive.size.control.md}"
+        },
+        "lg": {
+          "$value": "{primitive.size.control.lg}"
+        },
+        "xl": {
+          "$value": "{primitive.size.control.xl}"
+        }
+      },
+      "target": {
+        "$type": "dimension",
+        "minimum": {
+          "$value": "{primitive.size.target.minimum}"
+        }
+      },
+      "icon": {
+        "$type": "dimension",
+        "sm": {
+          "$value": "{primitive.size.icon.sm}"
+        },
+        "md": {
+          "$value": "{primitive.size.icon.md}"
+        },
+        "lg": {
+          "$value": "{primitive.size.icon.lg}"
+        }
+      },
+      "container": {
+        "$type": "dimension",
+        "content": {
+          "$value": "{primitive.size.container.content}"
+        }
+      }
+    },
+    "border-width": {
+      "$type": "dimension",
+      "none": {
+        "$value": "{primitive.border-width.none}"
+      },
+      "hairline": {
+        "$value": "{primitive.border-width.hairline}"
+      },
+      "strong": {
+        "$value": "{primitive.border-width.strong}"
+      }
+    },
+    "breakpoint": {
+      "$type": "dimension",
+      "sm": {
+        "$value": "{primitive.breakpoint.sm}"
+      },
+      "md": {
+        "$value": "{primitive.breakpoint.md}"
+      },
+      "lg": {
+        "$value": "{primitive.breakpoint.lg}"
+      },
+      "xl": {
+        "$value": "{primitive.breakpoint.xl}"
+      },
+      "2xl": {
+        "$value": "{primitive.breakpoint.2xl}"
+      }
+    }
+  }
+}

@@ -1,76 +1,158 @@
-simple-base/
-|
-|-- apps/
-| `-- docs/ # Astro + Starlight public documentation site
-|
-|-- packages/
-|   |-- tokens/ # Design tokens package (JSON source of truth + generated CSS/TS outputs)
-|   |   |-- src/
-|   |   |   |-- globals/ # Core token groups shared across themes
-|   |   |   |   |-- colors.json
-|   |   |   |   |-- layer.json
-|   |   |   |   |-- motion.json
-|   |   |   |   |-- opacity.json
-|   |   |   |   |-- radius.json
-|   |   |   |   |-- size.json
-|   |   |   |   |-- space.json
-|   |   |   |   |-- stroke.json
-|   |   |   |   `-- typography.json
-| | | |
-| | | |-- themes/ # Theme-specific token maps and overrides
-| | | | |-- simple-base-light.json
-| | | | |-- simple-base-dark.json # future
-| | | | |-- brand-a-light.json # future
-| | | | `-- brand-a-dark.json # future
-|   |   |   |
-|   |   |   `-- build.ts # Style Dictionary build script for CSS and TS artifacts
-| | |
-| | |-- dist/
-| | | |-- css/
-| | | | |-- globals.css # generated CSS custom properties
-| | | | `-- themes.css # generated theme selectors / overrides
-|   |   |   |
-|   |   |   |-- js/
-|   |   |   |   `-- index.js # generated token exports
-| | | |
-| | | |-- types/
-| | | | `-- index.d.ts # generated TS declarations
-|   |   |   |
-|   |   |   `-- json/
-| | | `-- tokens.json # generated merged token payload
-|   |   |
-|   |   |-- package.json
-|   |   `-- README.md
-| |
-| |-- fonts/ # Optional font assets package
-| | |-- src/
-| | |-- dist/
-| | `-- README.md
-|   |
-|   |-- react/ # Thin React adapter package
-|   |   |-- src/
-|   |   |-- dist/
-|   |   `-- README.md
-| |
-| |-- solid/ # Thin Solid adapter package
-| | |-- src/
-| | |-- dist/
-| | `-- README.md
-|   |
-|   `-- config/ # Shared repo configs
-| |-- tsconfig/
-| `-- oxlint/
-|
-|-- .changeset/ # Versioning + changelogs
-|-- .github/
-|   `-- workflows/ # CI + publishing
-|
-|-- turbo.json
-|-- pnpm-workspace.yaml
-|-- package.json
-|
-|-- README.md
-|-- CONTRIBUTING.md
-|-- CODE_OF_CONDUCT.md
-|-- LICENSE
-`-- SECURITY.md
+simple-base-design-system/
+├── apps/
+│ ├── docs/
+│ │ ├── src/
+│ │ │ ├── content/
+│ │ │ │ └── docs/
+│ │ │ ├── components/
+│ │ │ │ ├── react/
+│ │ │ │ └── solid/
+│ │ │ └── styles/
+│ │ ├── astro.config.mjs
+│ │ └── package.json
+│ │
+│ ├── vanilla-playground/
+│ │ ├── src/
+│ │ ├── index.html
+│ │ ├── vite.config.ts
+│ │ └── package.json
+│ │
+│ ├── react-playground/
+│ │ ├── src/
+│ │ ├── vite.config.ts
+│ │ └── package.json
+│ │
+│ └── solid-playground/
+│ ├── src/
+│ ├── vite.config.ts
+│ └── package.json
+│
+├── packages/
+│ ├── tokens/
+│ │ ├── src/
+│ │ │ ├── primitives/
+│ │ │ │ ├── effects.tokens.json
+│ │ │ │ ├── motion.tokens.json
+│ │ │ │ ├── sizing.tokens.json
+│ │ │ │ └── typography.tokens.json
+│ │ │ │
+│ │ │ ├── semantic/
+│ │ │ │ ├── effects.tokens.json
+│ │ │ │ ├── motion.tokens.json
+│ │ │ │ ├── sizing.tokens.json
+│ │ │ │ └── typography.tokens.json
+│ │ │ │
+│ │ │ ├── themes/
+│ │ │ │ ├── catppuccin-frappe.tokens.json
+│ │ │ │ ├── catppuccin-latte.tokens.json
+│ │ │ │ ├── catppuccin-macchiato.tokens.json
+│ │ │ │ ├── catppuccin-mocha.tokens.json
+│ │ │ │ ├── dracula.tokens.json
+│ │ │ │ ├── nord.tokens.json
+│ │ │ │ ├── simple-base-dark.tokens.json
+│ │ │ │ ├── simple-base-light.tokens.json
+│ │ │ │ └── tokyo-night.tokens.json
+│ │ │ │
+│ │ │ ├── simple-base.resolver.json
+│ │ │ └── tailwind.template.css
+│ │ │
+│ │ ├── dist/
+│ │ │ ├── tailwind-theme.css
+│ │ │ ├── tokens.css
+│ │ │ ├── tokens.d.ts
+│ │ │ └── tokens.js
+│ │ ├── terrazzo.config.ts
+│ │ ├── package.json
+│ │ └── tsconfig.json
+│ │
+│ ├── styles/
+│ │ ├── src/
+│ │ │ ├── layers.css
+│ │ │ ├── base.css
+│ │ │ ├── reset.css
+│ │ │ ├── components/
+│ │ │ │ ├── button.css
+│ │ │ │ ├── field.css
+│ │ │ │ ├── checkbox.css
+│ │ │ │ ├── dialog.css
+│ │ │ │ ├── menu.css
+│ │ │ │ ├── select.css
+│ │ │ │ ├── tabs.css
+│ │ │ │ └── tooltip.css
+│ │ │ ├── utilities/
+│ │ │ │ ├── visually-hidden.css
+│ │ │ │ └── focus-ring.css
+│ │ │ ├── all.css
+│ │ │ └── with-reset.css
+│ │ ├── scripts/
+│ │ │ └── build-css.mjs
+│ │ ├── package.json
+│ │ └── dist/
+│ │
+│ ├── contracts/
+│ │ ├── src/
+│ │ │ ├── button.ts
+│ │ │ ├── dialog.ts
+│ │ │ ├── field.ts
+│ │ │ ├── select.ts
+│ │ │ └── index.ts
+│ │ ├── tsdown.config.ts
+│ │ └── package.json
+│ │
+│ ├── react/
+│ │ ├── src/
+│ │ │ ├── button/
+│ │ │ │ ├── Button.tsx
+│ │ │ │ └── index.ts
+│ │ │ ├── dialog/
+│ │ │ ├── select/
+│ │ │ └── index.ts
+│ │ ├── tsdown.config.ts
+│ │ └── package.json
+│ │
+│ ├── solid/
+│ │ ├── src/
+│ │ │ ├── button/
+│ │ │ │ ├── Button.tsx
+│ │ │ │ └── index.ts
+│ │ │ ├── dialog/
+│ │ │ ├── select/
+│ │ │ └── index.ts
+│ │ ├── tsdown.config.ts
+│ │ └── package.json
+│ │
+│ ├── testing/
+│ │ ├── src/
+│ │ │ ├── component-cases.ts
+│ │ │ ├── keyboard-cases.ts
+│ │ │ └── theme-cases.ts
+│ │ └── package.json
+│ │
+│ └── config/
+│ ├── tsconfig/
+│ ├── vitest/
+│ └── package.json
+│
+├── tests/
+│ ├── e2e/
+│ │ ├── react/
+│ │ ├── solid/
+│ │ ├── vanilla/
+│ │ └── shared/
+│ └── package-consumers/
+│ ├── react/
+│ └── solid/
+│
+├── .changeset/
+├── .github/
+│ └── workflows/
+│ ├── ci.yml
+│ └── release.yml
+├── biome.json
+├── stylelint.config.mjs
+├── browserslist
+├── pnpm-workspace.yaml
+├── turbo.json
+├── tsconfig.json
+├── package.json
+└── pnpm-lock.yaml

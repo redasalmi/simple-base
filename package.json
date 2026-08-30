@@ -4,21 +4,27 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
+    "check": "turbo run check",
     "lint": "oxlint .",
     "lint:fix": "oxlint --fix .",
     "format": "oxfmt --check",
     "format:fix": "oxfmt .",
-    "quality": "turbo run //#lint //#format",
+    "quality": "turbo run check //#lint //#format",
     "quality:fix": "turbo run //#lint:fix //#format:fix"
   },
   "devDependencies": {
-    "oxfmt": "^0.57.0",
-    "oxlint": "^1.72.0",
-    "turbo": "^2.10.3",
-    "typescript": "~6.0.3"
+    "oxfmt": "^0.65.0",
+    "oxlint": "^1.80.0",
+    "turbo": "^2.10.12",
+    "typescript": "~7.0.2"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "11.25.0"
+    }
   },
   "engines": {
-    "node": ">=18"
-  },
-  "packageManager": "pnpm@9.15.9+sha512.68046141893c66fad01c079231128e9afb89ef87e2691d69e4d40eee228988295fd4682181bae55b58418c3a253bde65a505ec7c5f9403ece5cc3cd37dcf2531"
+    "node": ">=24"
+  }
 }

@@ -1,0 +1,51 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+  "$description": "Opacity, layering, and shadow tokens.",
+  "semantic": {
+    "opacity": {
+      "$type": "number",
+      "disabled": {
+        "$value": "{primitive.opacity.disabled}"
+      },
+      "subtle": {
+        "$value": "{primitive.opacity.subtle}"
+      },
+      "invisible": {
+        "$value": "{primitive.opacity.invisible}"
+      },
+      "opaque": {
+        "$value": "{primitive.opacity.opaque}"
+      }
+    },
+    "layer": {
+      "$type": "number",
+      "base": {
+        "$value": "{primitive.z-index.base}"
+      },
+      "sticky": {
+        "$value": "{primitive.z-index.sticky}"
+      },
+      "dropdown": {
+        "$value": "{primitive.z-index.dropdown}"
+      },
+      "overlay": {
+        "$value": "{primitive.z-index.overlay}"
+      },
+      "modal": {
+        "$value": "{primitive.z-index.modal}"
+      },
+      "toast": {
+        "$value": "{primitive.z-index.toast}"
+      }
+    },
+    "shadow": {
+      "$type": "shadow",
+      "card": {
+        "$value": "{primitive.shadow.card}"
+      },
+      "overlay": {
+        "$value": "{primitive.shadow.overlay}"
+      }
+    }
+  }
+}

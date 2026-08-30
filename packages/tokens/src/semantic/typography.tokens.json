@@ -1,0 +1,104 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+  "$description": "Typography primitives and stable semantic roles.",
+  "semantic": {
+    "typography": {
+      "family": {
+        "$type": "fontFamily",
+        "body": {
+          "$value": "{primitive.font-family.sans}"
+        },
+        "display": {
+          "$value": "{primitive.font-family.display}"
+        },
+        "code": {
+          "$value": "{primitive.font-family.mono}"
+        }
+      },
+      "weight": {
+        "$type": "fontWeight",
+        "regular": {
+          "$value": "{primitive.font-weight.regular}"
+        },
+        "medium": {
+          "$value": "{primitive.font-weight.medium}"
+        },
+        "semibold": {
+          "$value": "{primitive.font-weight.semibold}"
+        },
+        "bold": {
+          "$value": "{primitive.font-weight.bold}"
+        }
+      },
+      "size": {
+        "$type": "dimension",
+        "xs": {
+          "$value": "{primitive.font-size.xs}"
+        },
+        "sm": {
+          "$value": "{primitive.font-size.sm}"
+        },
+        "md": {
+          "$value": "{primitive.font-size.md}"
+        },
+        "lg": {
+          "$value": "{primitive.font-size.lg}"
+        },
+        "xl": {
+          "$value": "{primitive.font-size.xl}"
+        },
+        "2xl": {
+          "$value": "{primitive.font-size.2xl}"
+        },
+        "3xl": {
+          "$value": "{primitive.font-size.3xl}"
+        },
+        "4xl": {
+          "$value": "{primitive.font-size.4xl}"
+        },
+        "5xl": {
+          "$value": "{primitive.font-size.5xl}"
+        },
+        "display": {
+          "$value": "{primitive.font-size.display}"
+        }
+      },
+      "line-height": {
+        "$type": "number",
+        "none": {
+          "$value": "{primitive.line-height.none}"
+        },
+        "tight": {
+          "$value": "{primitive.line-height.tight}"
+        },
+        "snug": {
+          "$value": "{primitive.line-height.snug}"
+        },
+        "normal": {
+          "$value": "{primitive.line-height.normal}"
+        },
+        "relaxed": {
+          "$value": "{primitive.line-height.relaxed}"
+        }
+      },
+      "letter-spacing": {
+        "$type": "number",
+        "tight": {
+          "$value": "{primitive.letter-spacing.tight}"
+        },
+        "snug": {
+          "$value": "{primitive.letter-spacing.snug}"
+        },
+        "normal": {
+          "$value": "{primitive.letter-spacing.normal}"
+        },
+        "wide": {
+          "$value": "{primitive.letter-spacing.wide}"
+        },
+        "wider": {
+          "$value": "{primitive.letter-spacing.wider}"
+        }
+      }
+    }
+  }
+}

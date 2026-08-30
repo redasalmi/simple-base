@@ -1,0 +1,449 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+  "$description": "catppuccin-macchiato color theme.",
+  "$extensions": {
+    "org.simple-base.theme": {
+      "colorScheme": "dark"
+    }
+  },
+  "primitive": {
+    "color": {
+      "$type": "color",
+      "$description": "Raw catppuccin-macchiato palette. Product components must not reference this group directly.",
+      "canvas": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.141176, 0.152941, 0.227451],
+          "hex": "#24273a"
+        }
+      },
+      "surface": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.211765, 0.227451, 0.309804],
+          "hex": "#363a4f"
+        }
+      },
+      "raised": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.286275, 0.301961, 0.392157],
+          "hex": "#494d64"
+        }
+      },
+      "overlay": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.356863, 0.376471, 0.470588],
+          "hex": "#5b6078"
+        }
+      },
+      "fg": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.792157, 0.827451, 0.960784],
+          "hex": "#cad3f5"
+        }
+      },
+      "secondary": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.721569, 0.752941, 0.878431],
+          "hex": "#b8c0e0"
+        }
+      },
+      "muted": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.647059, 0.678431, 0.796078],
+          "hex": "#a5adcb"
+        }
+      },
+      "inverse": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.094118, 0.098039, 0.14902],
+          "hex": "#181926"
+        }
+      },
+      "border": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.286275, 0.301961, 0.392157],
+          "hex": "#494d64"
+        }
+      },
+      "border-strong": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.356863, 0.376471, 0.470588],
+          "hex": "#5b6078"
+        }
+      },
+      "accent": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.776471, 0.627451, 0.964706],
+          "hex": "#c6a0f6"
+        }
+      },
+      "accent-readable": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.776471, 0.627451, 0.964706],
+          "hex": "#c6a0f6"
+        }
+      },
+      "danger": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.929412, 0.529412, 0.588235],
+          "hex": "#ed8796"
+        }
+      },
+      "danger-text": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.929412, 0.529412, 0.588235],
+          "hex": "#ed8796"
+        }
+      },
+      "danger-surface": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.929412, 0.529412, 0.588235],
+          "hex": "#ed8796"
+        }
+      },
+      "success": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.65098, 0.854902, 0.584314],
+          "hex": "#a6da95"
+        }
+      },
+      "success-text": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.65098, 0.854902, 0.584314],
+          "hex": "#a6da95"
+        }
+      },
+      "success-surface": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.65098, 0.854902, 0.584314],
+          "hex": "#a6da95"
+        }
+      },
+      "warning": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.933333, 0.831373, 0.623529],
+          "hex": "#eed49f"
+        }
+      },
+      "warning-text": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.933333, 0.831373, 0.623529],
+          "hex": "#eed49f"
+        }
+      },
+      "warning-surface": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.933333, 0.831373, 0.623529],
+          "hex": "#eed49f"
+        }
+      },
+      "info": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.541176, 0.678431, 0.956863],
+          "hex": "#8aadf4"
+        }
+      },
+      "info-text": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.541176, 0.678431, 0.956863],
+          "hex": "#8aadf4"
+        }
+      },
+      "info-surface": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.541176, 0.678431, 0.956863],
+          "hex": "#8aadf4"
+        }
+      },
+      "fg-subtle": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.792157, 0.827451, 0.960784],
+          "hex": "#cad3f5",
+          "alpha": 0.72
+        }
+      },
+      "bg-subtle": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.792157, 0.827451, 0.960784],
+          "hex": "#cad3f5",
+          "alpha": 0.06
+        }
+      },
+      "border-subtle": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.792157, 0.827451, 0.960784],
+          "hex": "#cad3f5",
+          "alpha": 0.12
+        }
+      },
+      "accent-soft": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.776471, 0.627451, 0.964706],
+          "hex": "#c6a0f6",
+          "alpha": 0.14
+        }
+      },
+      "danger-soft": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.929412, 0.529412, 0.588235],
+          "hex": "#ed8796",
+          "alpha": 0.12
+        }
+      },
+      "success-soft": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.65098, 0.854902, 0.584314],
+          "hex": "#a6da95",
+          "alpha": 0.12
+        }
+      },
+      "warning-soft": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.933333, 0.831373, 0.623529],
+          "hex": "#eed49f",
+          "alpha": 0.12
+        }
+      },
+      "info-soft": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.541176, 0.678431, 0.956863],
+          "hex": "#8aadf4",
+          "alpha": 0.12
+        }
+      },
+      "scrim": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.141176, 0.152941, 0.227451],
+          "hex": "#24273a",
+          "alpha": 0.72
+        }
+      },
+      "danger-on": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.094118, 0.098039, 0.14902],
+          "hex": "#181926"
+        }
+      },
+      "success-on": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.094118, 0.098039, 0.14902],
+          "hex": "#181926"
+        }
+      },
+      "warning-on": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.094118, 0.098039, 0.14902],
+          "hex": "#181926"
+        }
+      },
+      "info-on": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.094118, 0.098039, 0.14902],
+          "hex": "#181926"
+        }
+      }
+    }
+  },
+  "semantic": {
+    "color": {
+      "$description": "Theme-resolved color roles. This group is the only color API consumed by components.",
+      "background": {
+        "$type": "color",
+        "canvas": {
+          "$value": "{primitive.color.canvas}"
+        },
+        "surface": {
+          "$value": "{primitive.color.surface}"
+        },
+        "raised": {
+          "$value": "{primitive.color.raised}"
+        },
+        "overlay": {
+          "$value": "{primitive.color.overlay}"
+        },
+        "subtle": {
+          "$value": "{primitive.color.bg-subtle}"
+        }
+      },
+      "foreground": {
+        "$type": "color",
+        "primary": {
+          "$value": "{primitive.color.fg}"
+        },
+        "secondary": {
+          "$value": "{primitive.color.secondary}"
+        },
+        "muted": {
+          "$value": "{primitive.color.muted}"
+        },
+        "subtle": {
+          "$value": "{primitive.color.fg-subtle}"
+        },
+        "inverse": {
+          "$value": "{primitive.color.inverse}"
+        }
+      },
+      "border": {
+        "$type": "color",
+        "default": {
+          "$value": "{primitive.color.border}"
+        },
+        "strong": {
+          "$value": "{primitive.color.border-strong}"
+        },
+        "subtle": {
+          "$value": "{primitive.color.border-subtle}"
+        }
+      },
+      "accent": {
+        "$type": "color",
+        "surface": {
+          "$value": "{primitive.color.accent}"
+        },
+        "text": {
+          "$value": "{primitive.color.accent-readable}"
+        },
+        "soft": {
+          "$value": "{primitive.color.accent-soft}"
+        },
+        "on-surface": {
+          "$value": "{primitive.color.inverse}"
+        }
+      },
+      "status": {
+        "danger": {
+          "$type": "color",
+          "base": {
+            "$value": "{primitive.color.danger}"
+          },
+          "surface": {
+            "$value": "{primitive.color.danger-surface}"
+          },
+          "text": {
+            "$value": "{primitive.color.danger-text}"
+          },
+          "on-surface": {
+            "$value": "{primitive.color.danger-on}"
+          },
+          "soft": {
+            "$value": "{primitive.color.danger-soft}"
+          }
+        },
+        "success": {
+          "$type": "color",
+          "base": {
+            "$value": "{primitive.color.success}"
+          },
+          "surface": {
+            "$value": "{primitive.color.success-surface}"
+          },
+          "text": {
+            "$value": "{primitive.color.success-text}"
+          },
+          "on-surface": {
+            "$value": "{primitive.color.success-on}"
+          },
+          "soft": {
+            "$value": "{primitive.color.success-soft}"
+          }
+        },
+        "warning": {
+          "$type": "color",
+          "base": {
+            "$value": "{primitive.color.warning}"
+          },
+          "surface": {
+            "$value": "{primitive.color.warning-surface}"
+          },
+          "text": {
+            "$value": "{primitive.color.warning-text}"
+          },
+          "on-surface": {
+            "$value": "{primitive.color.warning-on}"
+          },
+          "soft": {
+            "$value": "{primitive.color.warning-soft}"
+          }
+        },
+        "info": {
+          "$type": "color",
+          "base": {
+            "$value": "{primitive.color.info}"
+          },
+          "surface": {
+            "$value": "{primitive.color.info-surface}"
+          },
+          "text": {
+            "$value": "{primitive.color.info-text}"
+          },
+          "on-surface": {
+            "$value": "{primitive.color.info-on}"
+          },
+          "soft": {
+            "$value": "{primitive.color.info-soft}"
+          }
+        }
+      },
+      "selection": {
+        "$type": "color",
+        "background": {
+          "$value": "{primitive.color.accent}"
+        },
+        "foreground": {
+          "$value": "{primitive.color.inverse}"
+        }
+      },
+      "focus": {
+        "$type": "color",
+        "ring": {
+          "$value": "{primitive.color.accent-readable}"
+        },
+        "danger-ring": {
+          "$value": "{primitive.color.danger}"
+        }
+      },
+      "overlay": {
+        "$type": "color",
+        "scrim": {
+          "$value": "{primitive.color.scrim}"
+        }
+      }
+    }
+  }
+}

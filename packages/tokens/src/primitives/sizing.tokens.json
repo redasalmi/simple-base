@@ -1,0 +1,248 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+  "$description": "Spacing, sizing, borders, radii, and responsive layout tokens.",
+  "primitive": {
+    "space": {
+      "0": {
+        "$value": {
+          "value": 0,
+          "unit": "px"
+        }
+      },
+      "1": {
+        "$value": {
+          "value": 4,
+          "unit": "px"
+        }
+      },
+      "2": {
+        "$value": {
+          "value": 8,
+          "unit": "px"
+        }
+      },
+      "3": {
+        "$value": {
+          "value": 12,
+          "unit": "px"
+        }
+      },
+      "4": {
+        "$value": {
+          "value": 16,
+          "unit": "px"
+        }
+      },
+      "5": {
+        "$value": {
+          "value": 20,
+          "unit": "px"
+        }
+      },
+      "6": {
+        "$value": {
+          "value": 24,
+          "unit": "px"
+        }
+      },
+      "8": {
+        "$value": {
+          "value": 32,
+          "unit": "px"
+        }
+      },
+      "10": {
+        "$value": {
+          "value": 40,
+          "unit": "px"
+        }
+      },
+      "12": {
+        "$value": {
+          "value": 48,
+          "unit": "px"
+        }
+      },
+      "16": {
+        "$value": {
+          "value": 64,
+          "unit": "px"
+        }
+      },
+      "20": {
+        "$value": {
+          "value": 80,
+          "unit": "px"
+        }
+      },
+      "$type": "dimension"
+    },
+    "radius": {
+      "$type": "dimension",
+      "none": {
+        "$value": {
+          "value": 0,
+          "unit": "px"
+        }
+      },
+      "sm": {
+        "$value": {
+          "value": 6,
+          "unit": "px"
+        }
+      },
+      "md": {
+        "$value": {
+          "value": 8,
+          "unit": "px"
+        }
+      },
+      "lg": {
+        "$value": {
+          "value": 12,
+          "unit": "px"
+        }
+      },
+      "xl": {
+        "$value": {
+          "value": 16,
+          "unit": "px"
+        }
+      },
+      "full": {
+        "$value": {
+          "value": 999,
+          "unit": "px"
+        }
+      }
+    },
+    "size": {
+      "control": {
+        "$type": "dimension",
+        "xs": {
+          "$value": {
+            "value": 30,
+            "unit": "px"
+          }
+        },
+        "sm": {
+          "$value": {
+            "value": 34,
+            "unit": "px"
+          }
+        },
+        "md": {
+          "$value": {
+            "value": 40,
+            "unit": "px"
+          }
+        },
+        "lg": {
+          "$value": {
+            "value": 44,
+            "unit": "px"
+          }
+        },
+        "xl": {
+          "$value": {
+            "value": 52,
+            "unit": "px"
+          }
+        }
+      },
+      "target": {
+        "$type": "dimension",
+        "minimum": {
+          "$value": {
+            "value": 44,
+            "unit": "px"
+          }
+        }
+      },
+      "icon": {
+        "$type": "dimension",
+        "sm": {
+          "$value": {
+            "value": 16,
+            "unit": "px"
+          }
+        },
+        "md": {
+          "$value": {
+            "value": 20,
+            "unit": "px"
+          }
+        },
+        "lg": {
+          "$value": {
+            "value": 24,
+            "unit": "px"
+          }
+        }
+      },
+      "container": {
+        "$type": "dimension",
+        "content": {
+          "$value": {
+            "value": 1280,
+            "unit": "px"
+          }
+        }
+      }
+    },
+    "border-width": {
+      "$type": "dimension",
+      "none": {
+        "$value": {
+          "value": 0,
+          "unit": "px"
+        }
+      },
+      "hairline": {
+        "$value": {
+          "value": 1,
+          "unit": "px"
+        }
+      },
+      "strong": {
+        "$value": {
+          "value": 2,
+          "unit": "px"
+        }
+      }
+    },
+    "breakpoint": {
+      "$type": "dimension",
+      "sm": {
+        "$value": {
+          "value": 640,
+          "unit": "px"
+        }
+      },
+      "md": {
+        "$value": {
+          "value": 768,
+          "unit": "px"
+        }
+      },
+      "lg": {
+        "$value": {
+          "value": 1024,
+          "unit": "px"
+        }
+      },
+      "xl": {
+        "$value": {
+          "value": 1280,
+          "unit": "px"
+        }
+      },
+      "2xl": {
+        "$value": {
+          "value": 1536,
+          "unit": "px"
+        }
+      }
+    }
+  }
+}
