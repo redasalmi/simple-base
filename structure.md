@@ -1,3 +1,4 @@
+```text
 simple-base-design-system/
 ├── apps/
 │ ├── docs/
@@ -156,3 +157,4 @@ simple-base-design-system/
 ├── tsconfig.json
 ├── package.json
 └── pnpm-lock.yaml
+```
