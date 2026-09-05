@@ -1,0 +1,35 @@
+.sb-tabs {
+  display: flex;
+  gap: var(--sb-semantic-space-1);
+  padding-bottom: var(--sb-semantic-space-2);
+  overflow-x: auto;
+  border-bottom: var(--sb-semantic-border-width-hairline) solid
+    var(--sb-semantic-color-border-default);
+}
+
+.sb-tab {
+  min-height: var(--sb-semantic-size-target-minimum);
+  padding: 0 var(--sb-semantic-space-3);
+  border: 0;
+  border-radius: var(--sb-semantic-radius-sm);
+  color: var(--sb-semantic-color-foreground-muted);
+  background: transparent;
+  font-size: 13px;
+  font-weight: var(--sb-semantic-typography-weight-semibold);
+  white-space: nowrap;
+}
+
+.sb-tab:hover {
+  color: var(--sb-semantic-color-foreground-primary);
+  background: var(--sb-semantic-color-background-subtle);
+}
+
+.sb-tab[aria-selected="true"] {
+  color: var(--sb-semantic-color-foreground-primary);
+  background: var(--sb-semantic-color-accent-soft);
+}
+
+.sb-tab-panel {
+  padding-top: var(--sb-semantic-space-5);
+  color: var(--sb-semantic-color-foreground-secondary);
+}

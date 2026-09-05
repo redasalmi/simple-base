@@ -4,15 +4,7 @@
   "private": true,
   "files": [
     "styles.css",
-    "styles/alert-dialog.css",
-    "styles/button.css",
-    "styles/badge.css",
-    "styles/typography.css",
-    "styles/checkbox.css",
-    "styles/input.css",
-    "styles/radio.css",
-    "styles/textarea.css",
-    "styles/switch.css",
+    "styles",
     "styles.d.ts"
   ],
   "exports": {
@@ -23,7 +15,8 @@
     "./styles.css": {
       "types": "./styles.d.ts",
       "default": "./styles.css"
-    }
+    },
+    "./styles/*": "./styles/*"
   },
   "dependencies": {
     "@simple-base/tokens": "workspace:^"

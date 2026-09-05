@@ -1,0 +1,43 @@
+.sb-segmented-control,
+.sb-segmented {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  padding: 3px;
+  border: var(--sb-semantic-border-width-hairline) solid var(--sb-semantic-color-border-default);
+  border-radius: var(--sb-semantic-radius-md);
+  background: var(--sb-semantic-color-background-overlay);
+}
+
+.sb-segment {
+  min-height: var(--sb-semantic-size-control-sm);
+  padding: 0 var(--sb-semantic-space-3);
+  border: 0;
+  border-radius: var(--sb-semantic-radius-sm);
+  color: var(--sb-semantic-color-foreground-muted);
+  background: transparent;
+  font-size: var(--sb-semantic-typography-size-sm);
+  font-weight: var(--sb-semantic-typography-weight-semibold);
+}
+
+.sb-segment:hover {
+  color: var(--sb-semantic-color-foreground-primary);
+}
+
+.sb-segment[aria-pressed="true"] {
+  color: var(--sb-semantic-color-foreground-primary);
+  background: var(--sb-semantic-color-background-surface);
+  box-shadow: 0 1px 3px
+    color-mix(in oklch, var(--sb-semantic-color-background-canvas) 70%, transparent);
+}
+
+@media (max-width: 480px) {
+  .sb-segmented-control,
+  .sb-segmented {
+    width: 100%;
+  }
+
+  .sb-segment {
+    flex: 1 1 auto;
+  }
+}

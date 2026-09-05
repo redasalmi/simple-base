@@ -1,59 +1,51 @@
 .sb-switch {
   position: relative;
-  display: inline-flex;
-  width: var(--sb-dimension-46);
-  height: var(--sb-dimension-26);
+  width: 46px;
+  height: 26px;
+  flex: 0 0 auto;
   margin: 0;
-  border: 0;
-  border-radius: var(--sb-radius-full);
+  border: var(--sb-semantic-border-width-hairline) solid var(--sb-semantic-color-border-strong);
+  border-radius: var(--sb-semantic-radius-full);
   appearance: none;
-  background: var(--sb-button-tertiary-bg);
-  box-shadow: var(--sb-shadow-ring);
+  background: var(--sb-semantic-color-background-surface);
   cursor: pointer;
   transition:
-    background var(--sb-duration-normal) var(--sb-ease-standard),
-    box-shadow var(--sb-duration-normal) var(--sb-ease-standard),
-    opacity var(--sb-duration-normal) var(--sb-ease-standard);
+    background var(--sb-semantic-motion-duration-normal) var(--sb-semantic-motion-easing-standard),
+    border-color var(--sb-semantic-motion-duration-normal) var(--sb-semantic-motion-easing-standard);
 }
 
 .sb-switch::after {
   position: absolute;
-  top: var(--sb-dimension-4);
-  left: var(--sb-dimension-4);
-  width: var(--sb-dimension-18);
-  height: var(--sb-dimension-18);
-  border-radius: var(--sb-radius-full);
-  background: var(--sb-button-secondary-bg);
-  box-shadow: var(--sb-shadow-key);
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: var(--sb-semantic-radius-full);
+  background: var(--sb-semantic-color-foreground-secondary);
   content: "";
   transition:
-    translate var(--sb-duration-normal) var(--sb-ease-out),
-    background var(--sb-duration-normal) var(--sb-ease-standard),
-    box-shadow var(--sb-duration-normal) var(--sb-ease-standard);
+    transform var(--sb-semantic-motion-duration-normal) var(--sb-semantic-motion-easing-out),
+    background var(--sb-semantic-motion-duration-normal) var(--sb-semantic-motion-easing-standard);
 }
 
 .sb-switch:checked {
-  background: var(--sb-control-checked-bg);
-  box-shadow: var(--sb-control-checked-shadow);
+  background: var(--sb-semantic-color-accent-surface);
+  border-color: var(--sb-semantic-color-accent-surface);
 }
 
 .sb-switch:checked::after {
-  translate: var(--sb-dimension-20) 0;
-  background: var(--sb-control-checked-fg);
-  box-shadow: var(--sb-shadow-ring);
+  background: var(--sb-semantic-color-accent-on-surface);
+  transform: translateX(20px);
 }
 
 .sb-switch:focus-visible {
   outline: 0;
-  box-shadow: var(--sb-focus-ring-default);
+  box-shadow:
+    0 0 0 var(--sb-semantic-border-width-hairline) var(--sb-semantic-color-background-canvas),
+    0 0 0 var(--sb-semantic-space-1) var(--sb-semantic-color-focus-ring);
 }
 
 .sb-switch:disabled {
   cursor: not-allowed;
-  opacity: var(--sb-opacity-disabled);
-}
-
-.sb-switch:disabled::after {
-  background: var(--sb-fg-muted);
-  box-shadow: none;
+  opacity: var(--sb-semantic-opacity-disabled);
 }

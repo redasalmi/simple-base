@@ -1,74 +1,105 @@
 .sb-input {
   width: 100%;
-  min-height: var(--sb-size-control-lg);
-  border: 0;
+  min-height: var(--sb-semantic-size-control-lg);
+  padding: 0 var(--sb-semantic-space-3);
+  border: var(--sb-semantic-border-width-hairline) solid var(--sb-semantic-color-border-default);
+  border-radius: var(--sb-semantic-radius-sm);
   outline: 0;
-  border-radius: var(--sb-control-radius);
-  background: var(--sb-input-bg);
-  color: var(--sb-input-fg);
-  caret-color: var(--sb-fg-accent-readable, var(--sb-accent-primary));
-  padding: 0 var(--sb-dimension-14);
-  box-shadow: var(--sb-input-border) 0 0 0 var(--sb-border-width-default) inset;
+  color: var(--sb-semantic-color-foreground-primary);
+  background: color-mix(
+    in oklch,
+    var(--sb-semantic-color-background-canvas) 82%,
+    var(--sb-semantic-color-background-surface)
+  );
+  caret-color: var(--sb-semantic-color-accent-text);
   font: inherit;
-  font-size: var(--sb-text-base);
-  letter-spacing: var(--sb-tracking-normal);
+  font-size: var(--sb-semantic-typography-size-md);
+  letter-spacing: var(--sb-semantic-typography-letter-spacing-normal);
   transition:
-    box-shadow var(--sb-duration-normal) var(--sb-ease-standard),
-    background var(--sb-duration-normal) var(--sb-ease-standard),
-    color var(--sb-duration-normal) var(--sb-ease-standard),
-    opacity var(--sb-duration-normal) var(--sb-ease-standard);
+    border-color var(--sb-semantic-motion-duration-normal) var(--sb-semantic-motion-easing-standard),
+    box-shadow var(--sb-semantic-motion-duration-normal) var(--sb-semantic-motion-easing-standard),
+    background var(--sb-semantic-motion-duration-normal) var(--sb-semantic-motion-easing-standard),
+    color var(--sb-semantic-motion-duration-normal) var(--sb-semantic-motion-easing-standard),
+    opacity var(--sb-semantic-motion-duration-normal) var(--sb-semantic-motion-easing-standard);
 }
 
 .sb-input::placeholder {
-  color: var(--sb-input-placeholder);
+  color: var(--sb-semantic-color-foreground-muted);
 }
 
 .sb-input::selection {
-  color: var(--sb-selection-fg);
-  background: var(--sb-selection-bg);
+  color: var(--sb-semantic-color-selection-foreground);
+  background: var(--sb-semantic-color-selection-background);
+}
+
+.sb-input:hover:where(:not(:disabled)) {
+  border-color: var(--sb-semantic-color-border-strong);
 }
 
 .sb-input:focus-visible {
-  box-shadow: var(--sb-focus-ring-default);
+  border-color: var(--sb-semantic-color-accent-text);
+  box-shadow:
+    0 0 0 var(--sb-semantic-border-width-hairline) var(--sb-semantic-color-background-canvas),
+    0 0 0 var(--sb-semantic-space-1) var(--sb-semantic-color-focus-ring);
 }
 
 .sb-input[aria-invalid="true"] {
-  box-shadow: var(--sb-input-error-border) 0 0 0 var(--sb-border-width-default) inset;
+  border-color: var(--sb-semantic-color-status-danger-base);
 }
 
 .sb-input[aria-invalid="true"]:focus-visible {
-  box-shadow: var(--sb-focus-ring-danger);
+  box-shadow:
+    0 0 0 var(--sb-semantic-border-width-hairline) var(--sb-semantic-color-background-canvas),
+    0 0 0 var(--sb-semantic-space-1) var(--sb-semantic-color-focus-danger-ring);
 }
 
 .sb-input:read-only {
-  color: var(--sb-input-readonly-fg);
-  background: var(--sb-input-readonly-bg);
+  color: var(--sb-semantic-color-foreground-secondary);
+  background: var(--sb-semantic-color-background-raised);
 }
 
 .sb-input:autofill,
 .sb-input:-webkit-autofill {
-  box-shadow:
-    var(--sb-input-border) 0 0 0 var(--sb-border-width-default) inset,
-    0 0 0 var(--sb-dimension-999) var(--sb-input-bg) inset;
-  caret-color: var(--sb-fg-accent-readable);
-  -webkit-text-fill-color: var(--sb-input-fg);
+  box-shadow: 0 0 0 1000px
+    color-mix(
+      in oklch,
+      var(--sb-semantic-color-background-canvas) 82%,
+      var(--sb-semantic-color-background-surface)
+    )
+    inset;
+  caret-color: var(--sb-semantic-color-accent-text);
+  -webkit-text-fill-color: var(--sb-semantic-color-foreground-primary);
 }
 
 .sb-input:autofill:focus-visible,
 .sb-input:-webkit-autofill:focus-visible {
   box-shadow:
-    var(--sb-focus-ring-default),
-    0 0 0 var(--sb-dimension-999) var(--sb-input-bg) inset;
+    0 0 0 var(--sb-semantic-border-width-hairline) var(--sb-semantic-color-background-canvas),
+    0 0 0 var(--sb-semantic-space-1) var(--sb-semantic-color-focus-ring),
+    0 0 0 1000px
+      color-mix(
+        in oklch,
+        var(--sb-semantic-color-background-canvas) 82%,
+        var(--sb-semantic-color-background-surface)
+      )
+      inset;
 }
 
 .sb-input[aria-invalid="true"]:autofill:focus-visible,
 .sb-input[aria-invalid="true"]:-webkit-autofill:focus-visible {
   box-shadow:
-    var(--sb-focus-ring-danger),
-    0 0 0 var(--sb-dimension-999) var(--sb-input-bg) inset;
+    0 0 0 var(--sb-semantic-border-width-hairline) var(--sb-semantic-color-background-canvas),
+    0 0 0 var(--sb-semantic-space-1) var(--sb-semantic-color-focus-danger-ring),
+    0 0 0 1000px
+      color-mix(
+        in oklch,
+        var(--sb-semantic-color-background-canvas) 82%,
+        var(--sb-semantic-color-background-surface)
+      )
+      inset;
 }
 
 .sb-input:disabled {
   cursor: not-allowed;
-  opacity: var(--sb-opacity-disabled);
+  opacity: var(--sb-semantic-opacity-disabled);
 }

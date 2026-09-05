@@ -1,0 +1,62 @@
+.sb-field {
+  display: grid;
+  gap: var(--sb-semantic-space-2);
+  min-width: 0;
+}
+
+.sb-field label,
+.sb-field legend,
+.sb-field-title {
+  color: var(--sb-semantic-color-foreground-secondary);
+  font-size: 13px;
+  font-weight: var(--sb-semantic-typography-weight-semibold);
+}
+
+.sb-field small,
+.sb-field-help {
+  color: var(--sb-semantic-color-foreground-muted);
+  font-size: var(--sb-semantic-typography-size-sm);
+}
+
+.sb-field-error {
+  color: var(--sb-semantic-color-status-danger-text) !important;
+}
+
+.sb-fieldset {
+  min-width: 0;
+  padding: 0;
+  border: 0;
+}
+
+.sb-choice-list {
+  display: grid;
+  gap: var(--sb-semantic-space-1);
+  margin-top: var(--sb-semantic-space-3);
+}
+
+.sb-choice {
+  display: flex;
+  align-items: center;
+  min-height: var(--sb-semantic-size-target-minimum);
+  gap: var(--sb-semantic-space-3);
+  padding: 0 var(--sb-semantic-space-3);
+  border: var(--sb-semantic-border-width-hairline) solid transparent;
+  border-radius: var(--sb-semantic-radius-md);
+  color: var(--sb-semantic-color-foreground-secondary);
+  cursor: pointer;
+}
+
+.sb-choice:hover {
+  color: var(--sb-semantic-color-foreground-primary);
+  background: var(--sb-semantic-color-background-subtle);
+}
+
+.sb-choice:has(input:focus-visible) {
+  box-shadow:
+    0 0 0 var(--sb-semantic-border-width-hairline) var(--sb-semantic-color-background-canvas),
+    0 0 0 var(--sb-semantic-space-1) var(--sb-semantic-color-focus-ring);
+}
+
+.sb-choice span {
+  font-size: 13px;
+}

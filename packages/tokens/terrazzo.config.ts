@@ -29,6 +29,7 @@ export default defineConfig({
       filename: "tokens.css",
       transform: (token) =>
         token.id.startsWith("primitive.letter-spacing.") ? `${token.$value}em` : undefined,
+      variableName: (token) => `--sb-${token.id.replaceAll(".", "-")}`,
       permutations: themes.map(({ name, colorScheme, isDefault }) => ({
         input: { theme: name },
         prepare: (contents) => {

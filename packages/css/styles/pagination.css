@@ -1,0 +1,34 @@
+.sb-pagination {
+  display: flex;
+  align-items: center;
+  gap: var(--sb-semantic-space-1);
+}
+
+.sb-page-button {
+  display: inline-grid;
+  place-items: center;
+  min-width: var(--sb-semantic-size-target-minimum);
+  min-height: var(--sb-semantic-size-target-minimum);
+  padding-inline: 10px;
+  border: var(--sb-semantic-border-width-hairline) solid transparent;
+  border-radius: var(--sb-semantic-radius-sm);
+  color: var(--sb-semantic-color-foreground-muted);
+  background: transparent;
+  font-family: var(--sb-semantic-typography-family-code);
+  font-size: var(--sb-semantic-typography-size-sm);
+}
+
+.sb-page-button:hover {
+  color: var(--sb-semantic-color-foreground-primary);
+  background: var(--sb-semantic-color-background-subtle);
+}
+
+.sb-page-button[aria-current="page"] {
+  color: var(--sb-semantic-color-foreground-primary);
+  background: var(--sb-semantic-color-accent-soft);
+  border-color: color-mix(
+    in oklch,
+    var(--sb-semantic-color-accent-surface) 45%,
+    var(--sb-semantic-color-border-default)
+  );
+}

@@ -1,0 +1,21 @@
+.sb-breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sb-semantic-space-2);
+  color: var(--sb-semantic-color-foreground-muted);
+  font-size: 13px;
+}
+
+.sb-breadcrumb a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.sb-breadcrumb a:hover {
+  color: var(--sb-semantic-color-foreground-primary);
+}
+
+.sb-breadcrumb-separator {
+  color: var(--sb-semantic-color-border-strong);
+}

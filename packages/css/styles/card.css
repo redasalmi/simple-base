@@ -1,0 +1,28 @@
+.sb-card {
+  min-width: 0;
+  border: var(--sb-semantic-border-width-hairline) solid var(--sb-semantic-color-border-default);
+  border-radius: var(--sb-semantic-radius-lg);
+  background: var(--sb-semantic-color-background-surface);
+  box-shadow: var(--sb-semantic-shadow-card);
+}
+
+.sb-card[data-padding="true"],
+.sb-card-pad {
+  padding: clamp(var(--sb-semantic-space-5), 3vw, var(--sb-semantic-space-8));
+}
+
+.sb-card[data-variant="flat"],
+.sb-card-flat {
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.sb-card[data-variant="rule"],
+.sb-card-rule {
+  padding-top: var(--sb-semantic-space-5);
+  border: 0;
+  border-top: var(--sb-semantic-border-width-hairline) solid var(--sb-semantic-color-border-strong);
+  border-radius: 0;
+  box-shadow: none;
+}

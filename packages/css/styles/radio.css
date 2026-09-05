@@ -1,36 +1,39 @@
 .sb-radio {
-  width: var(--sb-dimension-18);
-  height: var(--sb-dimension-18);
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
   margin: 0;
-  border: 0;
-  border-radius: var(--sb-radius-full);
+  border: var(--sb-semantic-border-width-hairline) solid var(--sb-semantic-color-border-strong);
+  border-radius: var(--sb-semantic-radius-full);
   appearance: none;
-  background: var(--sb-button-tertiary-bg);
-  box-shadow: var(--sb-shadow-ring);
+  background: var(--sb-semantic-color-background-surface);
   cursor: pointer;
-  transition:
-    background var(--sb-duration-normal) var(--sb-ease-standard),
-    box-shadow var(--sb-duration-normal) var(--sb-ease-standard),
-    opacity var(--sb-duration-normal) var(--sb-ease-standard);
 }
 
 .sb-radio:checked {
-  background:
-    radial-gradient(
-      circle,
-      var(--sb-control-checked-fg) 0 var(--sb-dimension-4),
-      transparent var(--sb-dimension-5)
-    ),
-    var(--sb-control-checked-bg);
-  box-shadow: var(--sb-control-checked-shadow);
+  background: var(--sb-semantic-color-accent-surface);
+  border-color: var(--sb-semantic-color-accent-surface);
+  box-shadow:
+    inset 0 0 0 var(--sb-semantic-space-1) var(--sb-semantic-color-background-surface),
+    inset 0 0 0 7px var(--sb-semantic-color-accent-surface);
 }
 
 .sb-radio:focus-visible {
   outline: 0;
-  box-shadow: var(--sb-focus-ring-default);
+  box-shadow:
+    0 0 0 var(--sb-semantic-border-width-hairline) var(--sb-semantic-color-background-canvas),
+    0 0 0 var(--sb-semantic-space-1) var(--sb-semantic-color-focus-ring);
+}
+
+.sb-radio:checked:focus-visible {
+  box-shadow:
+    inset 0 0 0 var(--sb-semantic-space-1) var(--sb-semantic-color-background-surface),
+    inset 0 0 0 7px var(--sb-semantic-color-accent-surface),
+    0 0 0 var(--sb-semantic-border-width-hairline) var(--sb-semantic-color-background-canvas),
+    0 0 0 var(--sb-semantic-space-1) var(--sb-semantic-color-focus-ring);
 }
 
 .sb-radio:disabled {
   cursor: not-allowed;
-  opacity: var(--sb-opacity-disabled);
+  opacity: var(--sb-semantic-opacity-disabled);
 }

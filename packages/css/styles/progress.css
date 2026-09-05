@@ -1,0 +1,15 @@
+.sb-progress {
+  height: var(--sb-semantic-space-2);
+  overflow: hidden;
+  border-radius: var(--sb-semantic-radius-full);
+  background: var(--sb-semantic-color-background-overlay);
+}
+
+.sb-progress > span,
+.sb-progress-value {
+  display: block;
+  width: var(--sb-progress-value, 64%);
+  height: 100%;
+  border-radius: inherit;
+  background: var(--sb-semantic-color-status-success-surface);
+}

@@ -1,46 +1,40 @@
 .sb-checkbox {
   position: relative;
-  width: var(--sb-dimension-18);
-  height: var(--sb-dimension-18);
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
   margin: 0;
-  border: 0;
-  border-radius: var(--sb-dimension-5);
+  border: var(--sb-semantic-border-width-hairline) solid var(--sb-semantic-color-border-strong);
+  border-radius: var(--sb-semantic-radius-sm);
   appearance: none;
-  background: var(--sb-button-tertiary-bg);
-  box-shadow: var(--sb-shadow-ring);
+  background: var(--sb-semantic-color-background-surface);
   cursor: pointer;
-  transition:
-    background var(--sb-duration-normal) var(--sb-ease-standard),
-    box-shadow var(--sb-duration-normal) var(--sb-ease-standard),
-    opacity var(--sb-duration-normal) var(--sb-ease-standard);
-}
-
-.sb-checkbox::after {
-  position: absolute;
-  inset: 0;
-  background: var(--sb-control-checked-fg);
-  content: "";
-  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath d='M4.25 9.35 7.25 12.35 13.75 5.85' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
-    center / var(--sb-dimension-14) var(--sb-dimension-14) no-repeat;
-  opacity: 0;
-  pointer-events: none;
 }
 
 .sb-checkbox:checked {
-  background: var(--sb-control-checked-bg);
-  box-shadow: var(--sb-control-checked-shadow);
+  background: var(--sb-semantic-color-accent-surface);
+  border-color: var(--sb-semantic-color-accent-surface);
 }
 
 .sb-checkbox:checked::after {
-  opacity: 1;
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--sb-semantic-color-accent-on-surface);
+  content: "✓";
+  font-size: var(--sb-semantic-typography-size-sm);
+  font-weight: var(--sb-semantic-typography-weight-bold);
 }
 
 .sb-checkbox:focus-visible {
   outline: 0;
-  box-shadow: var(--sb-focus-ring-default);
+  box-shadow:
+    0 0 0 var(--sb-semantic-border-width-hairline) var(--sb-semantic-color-background-canvas),
+    0 0 0 var(--sb-semantic-space-1) var(--sb-semantic-color-focus-ring);
 }
 
 .sb-checkbox:disabled {
   cursor: not-allowed;
-  opacity: var(--sb-opacity-disabled);
+  opacity: var(--sb-semantic-opacity-disabled);
 }

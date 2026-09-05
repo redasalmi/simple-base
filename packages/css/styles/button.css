@@ -1,46 +1,30 @@
 .sb-button {
-  position: relative;
-  isolation: isolate;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: var(--sb-size-control-md);
-  gap: var(--sb-space-2);
-  padding: 0 var(--sb-dimension-16);
-  border: 0;
-  border-radius: var(--sb-control-radius);
+  min-height: var(--sb-semantic-size-control-md);
+  gap: var(--sb-semantic-space-2);
+  padding: 0 var(--sb-semantic-space-4);
+  border: var(--sb-semantic-border-width-hairline) solid transparent;
+  border-radius: var(--sb-semantic-radius-sm);
   appearance: none;
   cursor: pointer;
-  color: var(--sb-button-primary-fg);
-  background: var(--sb-button-primary-bg);
-  box-shadow: var(--sb-button-primary-shadow);
+  color: var(--sb-semantic-color-foreground-inverse);
+  background: var(--sb-semantic-color-foreground-primary);
   font: inherit;
-  font-size: var(--sb-text-base);
-  font-weight: var(--sb-font-weight-semibold);
-  line-height: var(--sb-leading-none);
-  letter-spacing: var(--sb-tracking-normal);
+  font-size: var(--sb-semantic-typography-size-md);
+  font-weight: var(--sb-semantic-typography-weight-semibold);
+  line-height: var(--sb-semantic-typography-line-height-none);
+  letter-spacing: var(--sb-semantic-typography-letter-spacing-normal);
   text-decoration: none;
   white-space: nowrap;
   user-select: none;
   transition:
-    transform var(--sb-duration-normal) var(--sb-ease-out),
-    box-shadow var(--sb-duration-normal) var(--sb-ease-standard),
-    color var(--sb-duration-normal) var(--sb-ease-standard),
-    background var(--sb-duration-normal) var(--sb-ease-standard),
-    opacity var(--sb-duration-normal) var(--sb-ease-standard);
-}
-
-.sb-button::before {
-  position: absolute;
-  inset: var(--sb-dimension-1) var(--sb-dimension-1) auto;
-  z-index: -1;
-  height: 45%;
-  border-radius: var(--sb-dimension-7) var(--sb-dimension-7) var(--sb-dimension-12)
-    var(--sb-dimension-12);
-  background: var(--sb-button-primary-highlight-bg);
-  opacity: 0;
-  pointer-events: none;
-  content: "";
+    transform var(--sb-semantic-motion-duration-fast) var(--sb-semantic-motion-easing-out),
+    background var(--sb-semantic-motion-duration-normal) var(--sb-semantic-motion-easing-standard),
+    color var(--sb-semantic-motion-duration-normal) var(--sb-semantic-motion-easing-standard),
+    border-color var(--sb-semantic-motion-duration-normal) var(--sb-semantic-motion-easing-standard),
+    opacity var(--sb-semantic-motion-duration-normal) var(--sb-semantic-motion-easing-standard);
 }
 
 .sb-button:not(:disabled):not([aria-disabled="true"]):hover {
@@ -52,114 +36,198 @@
 }
 
 .sb-button[data-variant="primary"] {
-  overflow: hidden;
-  color: var(--sb-button-primary-fg);
-  background: var(--sb-button-primary-bg);
-  box-shadow: var(--sb-button-primary-shadow);
-}
-
-.sb-button[data-variant="primary"]::before {
-  opacity: var(--sb-button-primary-highlight-opacity);
+  color: var(--sb-semantic-color-foreground-inverse);
+  background: var(--sb-semantic-color-foreground-primary);
+  border-color: var(--sb-semantic-color-foreground-primary);
 }
 
 .sb-button[data-variant="primary"]:not(:disabled):not([aria-disabled="true"]):hover {
-  background: var(--sb-button-primary-bg-hover);
-  box-shadow: var(--sb-button-primary-shadow-hover);
+  background: color-mix(
+    in oklch,
+    var(--sb-semantic-color-foreground-primary) 90%,
+    var(--sb-semantic-color-foreground-inverse)
+  );
+  border-color: color-mix(
+    in oklch,
+    var(--sb-semantic-color-foreground-primary) 90%,
+    var(--sb-semantic-color-foreground-inverse)
+  );
 }
 
 .sb-button[data-variant="primary"]:not(:disabled):not([aria-disabled="true"]):active {
-  background: var(--sb-button-primary-bg-active);
+  background: color-mix(
+    in oklch,
+    var(--sb-semantic-color-foreground-primary) 82%,
+    var(--sb-semantic-color-foreground-inverse)
+  );
+  border-color: color-mix(
+    in oklch,
+    var(--sb-semantic-color-foreground-primary) 82%,
+    var(--sb-semantic-color-foreground-inverse)
+  );
 }
 
 .sb-button[data-variant="secondary"] {
-  color: var(--sb-button-secondary-fg);
-  background: var(--sb-button-secondary-bg);
-  box-shadow: var(--sb-button-secondary-shadow);
+  color: var(--sb-semantic-color-foreground-primary);
+  background: var(--sb-semantic-color-background-raised);
+  border-color: var(--sb-semantic-color-border-strong);
 }
 
 .sb-button[data-variant="secondary"]:not(:disabled):not([aria-disabled="true"]):hover {
-  box-shadow: var(--sb-button-secondary-shadow-hover);
+  background: var(--sb-semantic-color-background-overlay);
+  border-color: var(--sb-semantic-color-foreground-secondary);
 }
 
 .sb-button[data-variant="tertiary"] {
-  color: var(--sb-button-tertiary-fg);
-  background: var(--sb-button-tertiary-bg);
-  box-shadow: var(--sb-button-tertiary-shadow);
+  color: var(--sb-semantic-color-foreground-secondary);
+  background: var(--sb-semantic-color-background-subtle);
 }
 
 .sb-button[data-variant="tertiary"]:not(:disabled):not([aria-disabled="true"]):hover {
-  color: var(--sb-button-tertiary-fg-hover);
-  background: var(--sb-button-tertiary-bg-hover);
-  box-shadow: var(--sb-button-tertiary-shadow-hover);
+  color: var(--sb-semantic-color-foreground-primary);
+  background: color-mix(in oklch, var(--sb-semantic-color-foreground-primary) 10%, transparent);
 }
 
 .sb-button[data-variant="ghost"] {
-  color: var(--sb-button-ghost-fg);
-  background: var(--sb-button-ghost-bg);
-  box-shadow: var(--sb-button-ghost-shadow);
+  color: var(--sb-semantic-color-foreground-secondary);
+  background: transparent;
 }
 
 .sb-button[data-variant="ghost"]:not(:disabled):not([aria-disabled="true"]):hover {
-  color: var(--sb-button-ghost-fg-hover);
-  background: var(--sb-button-ghost-bg-hover);
-  box-shadow: var(--sb-button-ghost-shadow-hover);
+  color: var(--sb-semantic-color-foreground-primary);
+  background: var(--sb-semantic-color-background-subtle);
 }
 
 .sb-button[data-variant="danger"] {
-  color: var(--sb-button-danger-fg);
-  background: var(--sb-button-danger-bg);
-  box-shadow: var(--sb-button-danger-shadow);
+  color: var(--sb-semantic-color-status-danger-on-surface);
+  background: var(--sb-semantic-color-status-danger-surface);
+  border-color: var(--sb-semantic-color-status-danger-surface);
 }
 
 .sb-button[data-variant="danger"]:not(:disabled):not([aria-disabled="true"]):hover {
-  box-shadow: var(--sb-button-danger-shadow-hover);
+  background: color-mix(
+    in oklch,
+    var(--sb-semantic-color-status-danger-surface) 88%,
+    var(--sb-semantic-color-background-canvas)
+  );
+  border-color: color-mix(
+    in oklch,
+    var(--sb-semantic-color-status-danger-surface) 88%,
+    var(--sb-semantic-color-background-canvas)
+  );
 }
 
 .sb-button[data-variant="danger-subtle"] {
-  color: var(--sb-button-danger-subtle-fg);
-  background: var(--sb-button-danger-subtle-bg);
-  box-shadow: var(--sb-button-danger-subtle-shadow);
+  color: var(--sb-semantic-color-status-danger-text);
+  background: var(--sb-semantic-color-status-danger-soft);
+  border-color: color-mix(
+    in oklch,
+    var(--sb-semantic-color-status-danger-base) 55%,
+    var(--sb-semantic-color-border-default)
+  );
 }
 
 .sb-button[data-variant="danger-subtle"]:not(:disabled):not([aria-disabled="true"]):hover {
-  color: var(--sb-button-danger-subtle-fg-hover);
-  background: var(--sb-button-danger-subtle-bg-hover);
-  box-shadow: var(--sb-button-danger-subtle-shadow-hover);
+  color: var(--sb-semantic-color-status-danger-on-surface);
+  background: var(--sb-semantic-color-status-danger-surface);
+  border-color: var(--sb-semantic-color-status-danger-surface);
+}
+
+.sb-button:focus-visible {
+  outline: 0;
+  box-shadow:
+    0 0 0 var(--sb-semantic-border-width-hairline) var(--sb-semantic-color-background-canvas),
+    0 0 0 var(--sb-semantic-space-1) var(--sb-semantic-color-focus-ring);
 }
 
 .sb-button:disabled,
-.sb-button[aria-disabled="true"],
-.sb-button[data-variant]:disabled,
-.sb-button[data-variant][aria-disabled="true"] {
+.sb-button[aria-disabled="true"] {
   cursor: not-allowed;
-  opacity: var(--sb-opacity-disabled);
+  opacity: var(--sb-semantic-opacity-disabled);
   transform: none;
-  box-shadow: var(--sb-shadow-ring);
-}
-
-.sb-button:focus-visible,
-.sb-button[data-variant]:focus-visible {
-  outline: 0;
-  box-shadow: var(--sb-focus-ring-default), var(--sb-shadow-ring);
 }
 
 .sb-button[data-size="small"] {
-  min-height: var(--sb-size-control-sm);
-  gap: var(--sb-space-1);
-  padding: 0 var(--sb-dimension-12);
-  font-size: var(--sb-text-sm);
+  min-height: var(--sb-semantic-size-control-sm);
+  padding-inline: var(--sb-semantic-space-3);
+  font-size: var(--sb-semantic-typography-size-sm);
 }
 
 .sb-button[data-size="medium"] {
-  min-height: var(--sb-size-control-md);
-  gap: var(--sb-space-2);
-  padding: 0 var(--sb-dimension-16);
-  font-size: var(--sb-text-base);
+  min-height: var(--sb-semantic-size-control-md);
+  padding-inline: var(--sb-semantic-space-4);
+  font-size: var(--sb-semantic-typography-size-md);
 }
 
 .sb-button[data-size="large"] {
-  min-height: var(--sb-size-control-xl);
-  gap: var(--sb-space-3);
-  padding: 0 var(--sb-dimension-24);
-  font-size: var(--sb-text-lg);
+  min-height: var(--sb-semantic-size-control-xl);
+  padding-inline: var(--sb-semantic-space-6);
+  font-size: var(--sb-semantic-typography-size-lg);
+}
+
+.sb-button[data-icon-only="true"] {
+  width: var(--sb-semantic-size-control-md);
+  padding: 0;
+}
+
+.sb-button[data-icon-only="true"][data-size="large"] {
+  width: var(--sb-semantic-size-control-xl);
+}
+
+.sb-button[data-icon-only="true"] svg {
+  width: var(--sb-semantic-size-icon-md);
+  height: var(--sb-semantic-size-icon-md);
+}
+
+.sb-button[data-loading="true"] {
+  pointer-events: none;
+}
+
+.sb-button-spinner {
+  width: 15px;
+  height: 15px;
+  border: var(--sb-semantic-border-width-strong) solid currentcolor;
+  border-right-color: transparent;
+  border-radius: var(--sb-semantic-radius-full);
+  animation: sb-spin var(--sb-semantic-motion-duration-spinner) linear infinite;
+}
+
+@keyframes sb-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.sb-button-stack {
+  display: grid;
+  gap: var(--sb-semantic-space-5);
+}
+
+.sb-button-row {
+  display: grid;
+  grid-template-columns: 100px minmax(0, 1fr);
+  align-items: center;
+  gap: var(--sb-semantic-space-5);
+  padding-top: var(--sb-semantic-space-4);
+  border-top: var(--sb-semantic-border-width-hairline) solid var(--sb-semantic-color-border-default);
+}
+
+.sb-button-row:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.sb-button-label {
+  color: var(--sb-semantic-color-foreground-muted);
+  font-family: var(--sb-semantic-typography-family-code);
+  font-size: var(--sb-semantic-typography-size-xs);
+  letter-spacing: var(--sb-semantic-typography-letter-spacing-wide);
+  text-transform: uppercase;
+}
+
+@media (max-width: 760px) {
+  .sb-button-row {
+    grid-template-columns: 1fr;
+    gap: var(--sb-semantic-space-3);
+  }
 }

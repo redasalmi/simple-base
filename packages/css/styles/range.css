@@ -1,0 +1,19 @@
+.sb-range {
+  width: 100%;
+  accent-color: var(--sb-semantic-color-accent-surface);
+}
+
+.sb-range:focus-visible {
+  outline: 0;
+  box-shadow:
+    0 0 0 var(--sb-semantic-border-width-hairline) var(--sb-semantic-color-background-canvas),
+    0 0 0 var(--sb-semantic-space-1) var(--sb-semantic-color-focus-ring);
+}
+
+.sb-range-readout {
+  display: flex;
+  justify-content: space-between;
+  color: var(--sb-semantic-color-foreground-muted);
+  font-family: var(--sb-semantic-typography-family-code);
+  font-size: var(--sb-semantic-typography-size-xs);
+}

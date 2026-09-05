@@ -1,7 +1,7 @@
-.sb-alert-dialog {
+.sb-dialog {
   box-sizing: border-box;
   width: min(560px, calc(100vw - 40px));
-  max-width: 100%;
+  max-width: none;
   margin: auto;
   padding: var(--sb-semantic-space-6);
   border: var(--sb-semantic-border-width-hairline) solid var(--sb-semantic-color-border-strong);
@@ -11,38 +11,19 @@
   box-shadow: var(--sb-semantic-shadow-overlay);
 }
 
-.sb-alert-dialog[open] {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: var(--sb-semantic-space-4);
-}
-
-.sb-alert-dialog::backdrop {
+.sb-dialog::backdrop {
   background: var(--sb-semantic-color-overlay-scrim);
   backdrop-filter: blur(var(--sb-semantic-space-2));
 }
 
-.sb-alert-dialog-icon {
-  display: grid;
-  place-items: center;
-  width: var(--sb-semantic-space-6);
-  height: var(--sb-semantic-space-6);
-  flex: 0 0 auto;
-  color: var(--sb-semantic-color-status-danger-text);
-  background: var(--sb-semantic-color-status-danger-soft);
-  border-radius: var(--sb-semantic-radius-full);
+.sb-dialog-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--sb-semantic-space-5);
 }
 
-.sb-alert-dialog-icon svg {
-  width: var(--sb-semantic-typography-size-md);
-  height: var(--sb-semantic-typography-size-md);
-}
-
-.sb-alert-dialog-content {
-  min-width: 0;
-}
-
-.sb-alert-dialog-kicker {
+.sb-dialog-kicker {
   margin: 0;
   color: var(--sb-semantic-color-status-danger-text);
   font-family: var(--sb-semantic-typography-family-code);
@@ -51,32 +32,28 @@
   text-transform: uppercase;
 }
 
-.sb-alert-dialog-title {
+.sb-dialog-title {
   margin: var(--sb-semantic-space-2) 0 0;
   color: var(--sb-semantic-color-foreground-primary);
   font-family: var(--sb-semantic-typography-family-display);
   font-size: var(--sb-semantic-typography-size-2xl);
   font-weight: var(--sb-semantic-typography-weight-semibold);
   line-height: var(--sb-semantic-typography-line-height-snug);
-  letter-spacing: var(--sb-semantic-typography-letter-spacing-normal);
 }
 
-.sb-alert-dialog-description {
+.sb-dialog-copy {
   margin: var(--sb-semantic-space-3) 0 0;
   color: var(--sb-semantic-color-foreground-secondary);
-  font-size: var(--sb-semantic-typography-size-md);
-  line-height: var(--sb-semantic-typography-line-height-relaxed);
 }
 
-.sb-alert-dialog-actions {
-  grid-column: 2;
+.sb-dialog-actions {
   display: flex;
   justify-content: flex-end;
   gap: var(--sb-semantic-space-3);
-  margin-top: var(--sb-semantic-space-2);
+  margin-top: var(--sb-semantic-space-6);
 }
 
-.sb-alert-dialog-close {
+.sb-dialog-close {
   display: inline-grid;
   place-items: center;
   width: var(--sb-semantic-size-target-minimum);
@@ -90,23 +67,18 @@
   line-height: var(--sb-semantic-typography-line-height-none);
 }
 
-.sb-alert-dialog-close:hover {
+.sb-dialog-close:hover {
   color: var(--sb-semantic-color-foreground-primary);
   background: var(--sb-semantic-color-background-subtle);
 }
 
 @media (max-width: 480px) {
-  .sb-alert-dialog[open] {
-    grid-template-columns: 1fr;
-  }
-
-  .sb-alert-dialog-actions {
-    grid-column: 1;
+  .sb-dialog-actions {
     align-items: stretch;
     flex-direction: column;
   }
 
-  .sb-alert-dialog-actions > * {
+  .sb-dialog-actions > * {
     width: 100%;
   }
 }
