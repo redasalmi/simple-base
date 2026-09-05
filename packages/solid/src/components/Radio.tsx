@@ -1,5 +1,5 @@
 import { splitProps, type JSX } from "solid-js";
-import { cn } from "../utils";
+import { cn } from "cn";
 
 export type RadioProps = Omit<JSX.InputHTMLAttributes<HTMLInputElement>, "type">;
 

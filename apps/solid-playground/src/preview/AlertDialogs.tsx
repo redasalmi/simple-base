@@ -1,5 +1,4 @@
-import { AlertDialog } from "../components/AlertDialog";
-import { Button } from "../components/Button";
+import { AlertDialog, Button } from "@simple-base/solid";
 
 export function AlertDialogs() {
   return (

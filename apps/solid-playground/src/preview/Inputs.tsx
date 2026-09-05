@@ -1,9 +1,5 @@
 import { For } from "solid-js";
-import { Checkbox } from "../components/Checkbox";
-import { Input } from "../components/Input";
-import { Radio } from "../components/Radio";
-import { Switch } from "../components/Switch";
-import { TextArea } from "../components/TextArea";
+import { Checkbox, Input, Radio, Switch, TextArea } from "@simple-base/solid";
 
 const checkboxStates = [
   { label: "Unchecked", props: {} },

@@ -15,22 +15,20 @@
       "import": "./dist/tokens.js"
     },
     "./css": "./dist/tokens.css",
-    "./tailwind-theme.css": "./dist/tailwind-theme.css",
-    "./tokens": {
-      "types": "./dist/tokens.d.ts",
-      "import": "./dist/tokens.js"
-    }
+    "./tailwind": "./dist/tailwind.css"
   },
   "scripts": {
     "check": "tz check",
     "build": "tz build"
+  },
+  "dependencies": {
+    "@terrazzo/token-types": "^2.7.1"
   },
   "devDependencies": {
     "@terrazzo/cli": "^2.7.1",
     "@terrazzo/plugin-css": "^2.7.1",
     "@terrazzo/plugin-js": "^2.7.1",
     "@terrazzo/plugin-tailwind": "^2.7.1",
-    "@terrazzo/token-types": "^2.7.1",
     "@types/node": "^25.8.0"
   }
 }

@@ -58,7 +58,7 @@ simple-base-design-system/
 │ │ │ └── tailwind.template.css
 │ │ │
 │ │ ├── dist/
-│ │ │ ├── tailwind-theme.css
+│ │ │ ├── tailwind.css
 │ │ │ ├── tokens.css
 │ │ │ ├── tokens.d.ts
 │ │ │ └── tokens.js

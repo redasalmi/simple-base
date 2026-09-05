@@ -4,12 +4,13 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
-    "check": "turbo run check",
+    "check": "turbo run check typecheck",
+    "typecheck": "turbo run typecheck",
     "lint": "oxlint .",
     "lint:fix": "oxlint --fix .",
     "format": "oxfmt --check",
     "format:fix": "oxfmt .",
-    "quality": "turbo run check //#lint //#format",
+    "quality": "turbo run check typecheck //#lint //#format",
     "quality:fix": "turbo run //#lint:fix //#format:fix"
   },
   "devDependencies": {

@@ -1,5 +1,5 @@
 import { splitProps, createContext, useContext, createUniqueId, type JSX } from "solid-js";
-import { cn } from "../utils";
+import { cn } from "cn";
 
 type AlertDialogContextType = {
   titleId: string;

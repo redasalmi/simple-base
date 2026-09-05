@@ -10,11 +10,9 @@
     "check": {
       "outputs": []
     },
-    "transit": {
-      "dependsOn": ["^transit"]
-    },
-    "check-types": {
-      "dependsOn": ["transit"]
+    "typecheck": {
+      "dependsOn": ["^build"],
+      "outputs": []
     },
     "//#lint": {
       "outputs": []
@@ -30,6 +28,17 @@
     },
     "dev": {
       "dependsOn": ["^build"],
+      "cache": false,
+      "persistent": true
+    },
+    "@simple-base/solid#dev": {
+      "dependsOn": ["build"],
+      "cache": false,
+      "persistent": true
+    },
+    "solid-playground#dev": {
+      "dependsOn": ["^build"],
+      "with": ["@simple-base/solid#dev"],
       "cache": false,
       "persistent": true
     }

@@ -1,5 +1,5 @@
 import { type JSX, splitProps } from "solid-js";
-import { cn } from "../utils";
+import { cn } from "cn";
 
 export type BadgeVariant = "default" | "command" | "success" | "danger" | "outline" | "muted";
 export type BadgeSize = "small" | "medium";

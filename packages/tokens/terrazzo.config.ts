@@ -40,7 +40,7 @@ export default defineConfig({
     }),
     tailwind({
       template: tailwindTemplatePath,
-      filename: "tailwind-theme.css",
+      filename: "tailwind.css",
       theme: {
         color: ["semantic.color.**"],
         font: ["semantic.typography.family.*"],

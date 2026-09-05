@@ -1,5 +1,5 @@
 import { For } from "solid-js";
-import { Badge, type BadgeSize, type BadgeVariant } from "../components/Badge";
+import { Badge, type BadgeSize, type BadgeVariant } from "@simple-base/solid";
 
 const variants: BadgeVariant[] = ["default", "command", "success", "danger", "outline", "muted"];
 const sizes: BadgeSize[] = ["small", "medium"];

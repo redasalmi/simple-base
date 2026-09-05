@@ -12,11 +12,106 @@
       "types": "./styles.d.ts",
       "default": "./styles.css"
     },
-    "./styles.css": {
+    "./alert-dialog": {
       "types": "./styles.d.ts",
-      "default": "./styles.css"
+      "default": "./styles/alert-dialog.css"
     },
-    "./styles/*": "./styles/*"
+    "./badge": {
+      "types": "./styles.d.ts",
+      "default": "./styles/badge.css"
+    },
+    "./breadcrumb": {
+      "types": "./styles.d.ts",
+      "default": "./styles/breadcrumb.css"
+    },
+    "./button": {
+      "types": "./styles.d.ts",
+      "default": "./styles/button.css"
+    },
+    "./card": {
+      "types": "./styles.d.ts",
+      "default": "./styles/card.css"
+    },
+    "./checkbox": {
+      "types": "./styles.d.ts",
+      "default": "./styles/checkbox.css"
+    },
+    "./dialog": {
+      "types": "./styles.d.ts",
+      "default": "./styles/dialog.css"
+    },
+    "./disclosure": {
+      "types": "./styles.d.ts",
+      "default": "./styles/disclosure.css"
+    },
+    "./empty-state": {
+      "types": "./styles.d.ts",
+      "default": "./styles/empty-state.css"
+    },
+    "./field": {
+      "types": "./styles.d.ts",
+      "default": "./styles/field.css"
+    },
+    "./input": {
+      "types": "./styles.d.ts",
+      "default": "./styles/input.css"
+    },
+    "./keyboard-shortcut": {
+      "types": "./styles.d.ts",
+      "default": "./styles/keyboard-shortcut.css"
+    },
+    "./menu": {
+      "types": "./styles.d.ts",
+      "default": "./styles/menu.css"
+    },
+    "./pagination": {
+      "types": "./styles.d.ts",
+      "default": "./styles/pagination.css"
+    },
+    "./progress": {
+      "types": "./styles.d.ts",
+      "default": "./styles/progress.css"
+    },
+    "./radio": {
+      "types": "./styles.d.ts",
+      "default": "./styles/radio.css"
+    },
+    "./range": {
+      "types": "./styles.d.ts",
+      "default": "./styles/range.css"
+    },
+    "./segmented-control": {
+      "types": "./styles.d.ts",
+      "default": "./styles/segmented-control.css"
+    },
+    "./select": {
+      "types": "./styles.d.ts",
+      "default": "./styles/select.css"
+    },
+    "./status": {
+      "types": "./styles.d.ts",
+      "default": "./styles/status.css"
+    },
+    "./switch": {
+      "types": "./styles.d.ts",
+      "default": "./styles/switch.css"
+    },
+    "./table": {
+      "types": "./styles.d.ts",
+      "default": "./styles/table.css"
+    },
+    "./tabs": {
+      "types": "./styles.d.ts",
+      "default": "./styles/tabs.css"
+    },
+    "./textarea": {
+      "types": "./styles.d.ts",
+      "default": "./styles/textarea.css"
+    },
+    "./typography": {
+      "types": "./styles.d.ts",
+      "default": "./styles/typography.css"
+    }
   },
   "dependencies": {
     "@simple-base/tokens": "workspace:^"

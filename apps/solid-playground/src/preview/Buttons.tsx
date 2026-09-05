@@ -1,5 +1,5 @@
 import { For } from "solid-js";
-import { Button, type ButtonSize, type ButtonVariant } from "../components/Button";
+import { Button, type ButtonSize, type ButtonVariant } from "@simple-base/solid";
 
 const variants: ButtonVariant[] = [
   "primary",

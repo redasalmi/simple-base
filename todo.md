@@ -1,2 +1,2 @@
 - generate better JS consts and TS types
-- refactor/better tailwind-theme.css output
+- refactor/better tailwind.css output
