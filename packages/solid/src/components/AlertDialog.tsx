@@ -8,12 +8,12 @@ type AlertDialogContextType = {
 
 const AlertDialogContext = createContext<AlertDialogContextType | null>(null);
 
-const useAlertDialog = () => {
+function useAlertDialog() {
   const context = useContext(AlertDialogContext);
   if (!context) throw new Error("useAlertDialog must be used within an AlertDialogRoot");
 
   return context;
-};
+}
 
 export type AlertDialogRootProps = Omit<
   JSX.DialogHtmlAttributes<HTMLDialogElement>,
@@ -22,8 +22,9 @@ export type AlertDialogRootProps = Omit<
 
 function AlertDialogRoot(props: AlertDialogRootProps) {
   const [{ class: className }, rest] = splitProps(props, ["class"]);
-  const titleId = createUniqueId();
-  const descriptionId = createUniqueId();
+  const id = createUniqueId();
+  const titleId = `${id}-title`;
+  const descriptionId = `${id}-description`;
 
   return (
     <AlertDialogContext.Provider

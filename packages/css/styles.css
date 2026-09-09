@@ -10,6 +10,7 @@
 @import "./styles/field.css";
 @import "./styles/input.css";
 @import "./styles/select.css";
+@import "./styles/combobox.css";
 @import "./styles/textarea.css";
 @import "./styles/checkbox.css";
 @import "./styles/radio.css";

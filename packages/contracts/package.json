@@ -26,6 +26,10 @@
       "types": "./dist/card.d.ts",
       "import": "./dist/card.js"
     },
+    "./combobox": {
+      "types": "./dist/combobox.d.ts",
+      "import": "./dist/combobox.js"
+    },
     "./status": {
       "types": "./dist/status.d.ts",
       "import": "./dist/status.js"

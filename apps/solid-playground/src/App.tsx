@@ -5,6 +5,7 @@ import { Buttons } from "./preview/Buttons";
 import { Badges } from "./preview/Badges";
 import { AlertDialogs } from "./preview/AlertDialogs";
 import { Inputs, TextAreas, Checkboxes, Radios, Switches } from "./preview/Inputs";
+import { Comboboxes } from "./preview/Comboboxes";
 import { Styles } from "./preview/Styles";
 
 type Page = {
@@ -52,6 +53,15 @@ const pages: Page[] = [
       "Single-line entry with native input types, validation, and familiar browser behavior. Always pair the control with a visible label.",
     usage: 'import { Input } from "@simple-base/solid";',
     component: Inputs,
+  },
+  {
+    id: "combobox",
+    label: "Combobox",
+    group: "Components",
+    description:
+      "Search a list of options as you type, then select a value. Compound parts provide a labeled input, keyboard navigation, and a portaled popup with an empty state.",
+    usage: 'import { Combobox } from "@simple-base/solid";',
+    component: Comboboxes,
   },
   {
     id: "textarea",

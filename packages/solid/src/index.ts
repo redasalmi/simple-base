@@ -16,3 +16,4 @@ export { Checkbox, type CheckboxProps } from "./components/Checkbox";
 export { Input, type InputProps } from "./components/Input";
 export { Radio, type RadioProps } from "./components/Radio";
 export { TextArea, type TextAreaProps } from "./components/TextArea";
+export { Combobox } from "./components/Combobox";

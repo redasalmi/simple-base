@@ -36,6 +36,10 @@
       "types": "./styles.d.ts",
       "default": "./styles/checkbox.css"
     },
+    "./combobox": {
+      "types": "./styles.d.ts",
+      "default": "./styles/combobox.css"
+    },
     "./dialog": {
       "types": "./styles.d.ts",
       "default": "./styles/dialog.css"

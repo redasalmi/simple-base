@@ -23,6 +23,8 @@
   },
   "dependencies": {
     "@simple-base/contracts": "workspace:*",
+    "@zag-js/combobox": "^1.43.3",
+    "@zag-js/solid": "^1.43.3",
     "cn": "^0.2.5"
   },
   "devDependencies": {

@@ -20,12 +20,13 @@ import {
 ```
 
 The same exports are available from `@simple-base/contracts/button`. Other
-subpaths are `/badge`, `/card`, and `/status`.
+subpaths are `/badge`, `/card`, `/combobox`, and `/status`.
 
 Adapters compose the shared options with their framework's native element props,
 apply defaults when options are omitted, and emit the appropriate CSS classes and
-attributes directly. Children, refs, event handlers, native disabled state, and
-accessibility behavior do not belong in these contracts.
+attributes directly. Share framework-neutral public configuration and value
+callbacks. Children, refs, framework-specific DOM events, native element prop
+interfaces, internal context, and accessibility implementation stay in the adapters.
 
 ```ts
 export type ButtonOptions = {
@@ -49,6 +50,7 @@ exports; there are no allowed-value arrays without a runtime use case.
 | Button      | `ButtonVariant`, `ButtonSize`, `ButtonOptions` | `buttonDefaults`: `primary`, `medium` |
 | Badge       | `BadgeVariant`, `BadgeSize`, `BadgeOptions`    | `badgeDefaults`: `default`, `medium`  |
 | Card        | `CardVariant`, `CardOptions`                   | `cardDefaults`: `padding: false`      |
+| Combobox    | `ComboboxOption`, `ComboboxOptions`            | No defaults                           |
 | Status line | `StatusValue`, `StatusOptions`                 | No default status                     |
 | Alert       | `AlertStatus`, `AlertOptions`                  | No default status                     |
 | Toast       | `ToastStatus`, `ToastOptions`                  | `toastDefaults`: `status: "success"`  |
@@ -61,6 +63,11 @@ exports; there are no allowed-value arrays without a runtime use case.
 - Card variants: `flat`, `rule`. Omit `variant` for the base card; there is no
   explicit `default` variant. `padding` is boolean and maps to
   `data-padding="true"` when enabled.
+- `ComboboxOption` contains `label`, a unique `value`, and optional `disabled`.
+  `ComboboxOptions` defines the shared root API: required `id`, `label`, `options`,
+  and `onValueChange`, plus optional `placeholder`. The callback receives the
+  selected option's string value, or an empty string when selection is cleared.
+  Adapters add their own children type and keep context and rendering internal.
 - Status line statuses: `success`, `danger`, `info`.
 - Alert statuses: `danger`, `info`. Only the border changes with status; the CSS
   keeps the alert mark danger-colored.
