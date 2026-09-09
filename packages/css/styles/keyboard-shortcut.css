@@ -1,18 +1,3 @@
-.sb-shortcut-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--sb-semantic-space-3);
-  margin-top: var(--sb-semantic-space-4);
-}
-
-.sb-shortcut-item {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--sb-semantic-space-2);
-  color: var(--sb-semantic-color-foreground-muted);
-  font-size: var(--sb-semantic-typography-size-sm);
-}
-
 .sb-shortcut {
   display: inline-flex;
   align-items: center;

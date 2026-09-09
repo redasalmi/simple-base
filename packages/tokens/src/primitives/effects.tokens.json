@@ -41,17 +41,18 @@
     "shadow": {
       "$type": "shadow",
       "card": {
+        "$description": "Flat grouping; cards are separated by surface and border, not elevation.",
         "$value": {
           "offsetX": {
             "value": 0,
             "unit": "px"
           },
           "offsetY": {
-            "value": 12,
+            "value": 0,
             "unit": "px"
           },
           "blur": {
-            "value": 30,
+            "value": 0,
             "unit": "px"
           },
           "spread": {
@@ -61,22 +62,23 @@
           "color": {
             "colorSpace": "oklch",
             "components": [0.1276, 0.0035, 245.8],
-            "alpha": 0.72
+            "alpha": 0
           }
         }
       },
       "overlay": {
+        "$description": "Restrained dark-theme elevation; light themes override this shadow.",
         "$value": {
           "offsetX": {
             "value": 0,
             "unit": "px"
           },
           "offsetY": {
-            "value": 24,
+            "value": 8,
             "unit": "px"
           },
           "blur": {
-            "value": 64,
+            "value": 24,
             "unit": "px"
           },
           "spread": {
@@ -86,7 +88,7 @@
           "color": {
             "colorSpace": "oklch",
             "components": [0.1276, 0.0035, 245.8],
-            "alpha": 0.92
+            "alpha": 0.32
           }
         }
       }

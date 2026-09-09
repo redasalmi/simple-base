@@ -251,6 +251,15 @@ importers:
         specifier: ^2.11.14
         version: 2.11.14(solid-js@1.9.15)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.0)(jiti@2.7.0)(tsx@4.22.0)(yaml@2.9.0))
 
+  packages/contracts:
+    devDependencies:
+      '@types/node':
+        specifier: ^25.8.0
+        version: 25.8.0
+      tsdown:
+        specifier: ^0.23.0
+        version: 0.23.0(tsx@4.22.0)(typescript@7.0.2)
+
   packages/css:
     dependencies:
       '@simple-base/tokens':
@@ -259,6 +268,9 @@ importers:
 
   packages/solid:
     dependencies:
+      '@simple-base/contracts':
+        specifier: workspace:*
+        version: link:../contracts
       cn:
         specifier: ^0.2.5
         version: 0.2.5

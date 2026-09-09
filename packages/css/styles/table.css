@@ -20,11 +20,9 @@
 
 .sb-table th {
   color: var(--sb-semantic-color-foreground-muted);
-  font-family: var(--sb-semantic-typography-family-code);
-  font-size: var(--sb-semantic-typography-size-xs);
+  font-family: var(--sb-semantic-typography-family-body);
+  font-size: var(--sb-semantic-typography-size-sm);
   font-weight: var(--sb-semantic-typography-weight-medium);
-  letter-spacing: var(--sb-semantic-typography-letter-spacing-wide);
-  text-transform: uppercase;
 }
 
 .sb-table tbody tr:hover {

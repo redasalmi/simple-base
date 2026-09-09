@@ -13,7 +13,6 @@
 
 .sb-dialog::backdrop {
   background: var(--sb-semantic-color-overlay-scrim);
-  backdrop-filter: blur(var(--sb-semantic-space-2));
 }
 
 .sb-dialog-head {
@@ -25,17 +24,16 @@
 
 .sb-dialog-kicker {
   margin: 0;
-  color: var(--sb-semantic-color-status-danger-text);
-  font-family: var(--sb-semantic-typography-family-code);
-  font-size: var(--sb-semantic-typography-size-xs);
-  letter-spacing: var(--sb-semantic-typography-letter-spacing-wide);
-  text-transform: uppercase;
+  color: var(--sb-semantic-color-foreground-muted);
+  font-family: var(--sb-semantic-typography-family-body);
+  font-size: var(--sb-semantic-typography-size-sm);
+  line-height: var(--sb-semantic-typography-line-height-normal);
 }
 
 .sb-dialog-title {
   margin: var(--sb-semantic-space-2) 0 0;
   color: var(--sb-semantic-color-foreground-primary);
-  font-family: var(--sb-semantic-typography-family-display);
+  font-family: var(--sb-semantic-typography-family-body);
   font-size: var(--sb-semantic-typography-size-2xl);
   font-weight: var(--sb-semantic-typography-weight-semibold);
   line-height: var(--sb-semantic-typography-line-height-snug);

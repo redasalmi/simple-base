@@ -1,44 +1,73 @@
 import { For } from "solid-js";
-import { Badge, type BadgeSize, type BadgeVariant } from "@simple-base/solid";
+import { Badge, type BadgeVariant } from "@simple-base/solid";
+import { Api, Example } from "./Preview";
 
-const variants: BadgeVariant[] = ["default", "command", "success", "danger", "outline", "muted"];
-const sizes: BadgeSize[] = ["small", "medium"];
-
-function formatLabel(value: string) {
-  return value.replaceAll("-", " ");
-}
+const variants = [
+  ["default", "Default", "Draft"],
+  ["success", "Success", "Published"],
+  ["danger", "Danger", "Failed"],
+  ["warning", "Warning", "Pending"],
+  ["info", "Info", "In review"],
+  ["accent", "Accent", "Featured"],
+  ["command", "Command", "Command"],
+  ["outline", "Outline", "Optional"],
+  ["muted", "Muted", "Archived"],
+] as const satisfies readonly (readonly [BadgeVariant, string, string])[];
 
 export function Badges() {
   return (
-    <section class="flex flex-col gap-6">
-      <div class="flex flex-col gap-2">
-        <p class="sb-text-caption">Components</p>
-        <h1 class="sb-heading-1">Badges</h1>
-        <p class="sb-text-body">
-          Badge variants use the <code class="sb-code-text">.sb-badge</code> class with
-          <code class="sb-code-text"> data-variant</code> and
-          <code class="sb-code-text"> data-size</code> attributes.
-        </p>
-      </div>
-
-      <div class="flex flex-col gap-6 rounded-xl bg-(--sb-card-bg) p-6 shadow-(--sb-card-shadow) ring-1 ring-(--sb-card-border)">
-        <For each={sizes}>
-          {(size) => (
-            <div class="flex flex-col gap-3">
-              <h2 class="sb-heading-6">{formatLabel(size)}</h2>
-              <div class="flex flex-wrap gap-3">
-                <For each={variants}>
-                  {(variant) => (
-                    <Badge variant={variant} size={size}>
-                      {formatLabel(variant)}
-                    </Badge>
-                  )}
-                </For>
+    <>
+      <Example
+        title="All treatments"
+        description="Nine variants in both sizes. The label describes the state, so color is never the only cue."
+        code={
+          '<Badge variant="success" size="small">Published</Badge>\n<Badge variant="outline">Optional</Badge>'
+        }
+      >
+        <div class="preview-stack">
+          <div class="preview-badge-row preview-note">
+            <span>Variant</span>
+            <span>Small</span>
+            <span>Medium</span>
+          </div>
+          <For each={variants}>
+            {([variant, name, label]) => (
+              <div class="preview-badge-row">
+                <span>{name}</span>
+                <Badge variant={variant} size="small">
+                  {label}
+                </Badge>
+                <Badge variant={variant}>{label}</Badge>
               </div>
-            </div>
-          )}
-        </For>
-      </div>
-    </section>
+            )}
+          </For>
+        </div>
+      </Example>
+      <Example
+        title="Supporting content"
+        description="Keep badges beside the information they qualify. They are labels, not buttons, links, or filters."
+        code={'<h3>Release notes</h3>\n<Badge variant="default">Draft</Badge>'}
+      >
+        <div class="preview-row">
+          <h3 class="sb-heading-4">Release notes</h3>
+          <Badge>Draft</Badge>
+        </div>
+      </Example>
+      <Api
+        rows={[
+          [
+            "variant",
+            '"default" (default)',
+            "default · success · danger · warning · info · accent · command · outline · muted",
+          ],
+          ["size", '"medium" (default)', "small (20px) · medium (24px) minimum height"],
+          [
+            "…props",
+            "HTMLAttributes<HTMLSpanElement>",
+            "Renders a span. Use a Button for interactive behavior and a keyboard shortcut style for actual key combinations.",
+          ],
+        ]}
+      />
+    </>
   );
 }

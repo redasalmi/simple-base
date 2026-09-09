@@ -3,6 +3,36 @@
 Vite app for previewing the components exported by `@simple-base/solid` and the
 styles from `@simple-base/css`. Preview examples live in `src/preview/`.
 
+## Reference coverage
+
+The header switches between all nine token themes. Desktop navigation becomes a
+native section selector on small screens. Each section has a shareable hash URL
+(such as `/#buttons` or `/#alert-dialog`), usage notes, code disclosures, and a
+short API reference.
+
+- **Solid components:** Button (six variants, three sizes, disabled states), Badge
+  (nine variants, both sizes), Input, TextArea, Checkbox, Radio, Switch, and all
+  AlertDialog compound parts. Form examples cover editable, selected, disabled,
+  read-only, and validation states where supported.
+- **Foundations:** the heading and body scales, display typography, text roles,
+  code, and keyboard shortcuts.
+- **CSS-only patterns:** cards, status lines, alerts, toasts, progress, range,
+  selects, field grouping, segmented controls, tabs, tables, pagination,
+  breadcrumbs, disclosures, command popovers, generic dialogs, and empty states.
+  These examples do not imply additional Solid component exports.
+
+Examples use local state only. Navigation resets component demonstrations; no
+form data is submitted or persisted. Modal examples use `showModal()` and
+`close()`; the inline AlertDialog is an explicitly non-modal anatomy specimen.
+Keyboard behavior is demonstrated with native controls, focusable navigation,
+and a local accessible tabs example.
+
+The visual structure is a reference workbench: compact masthead, an indexed
+navigation rail, and ruled documentation sections beside live specimens. It
+reuses the design-system typography and semantic tokens without gradients,
+backdrop blur, decorative motion, or additional fonts. Layout and documentation
+helpers stay in this app, not the CSS package.
+
 Run commands from the repository root using pnpm.
 
 ## Development

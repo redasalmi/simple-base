@@ -2,6 +2,26 @@
 
 Simple Base component styles and typography.
 
+Styles cover components and their internal parts, including functional wrappers
+such as select arrows and scrollable tables. Page layouts, component galleries,
+and external grouping or showcase helpers belong in the consuming application.
+
+## Visual defaults
+
+- Use `.sb-heading-1` through `.sb-heading-6` for utility headings: sans serif,
+  sized 32, 24, 20, 18, 16, and 14px. Reserve `.sb-display` for an intentional
+  expressive serif heading, not routine page sections or dialogs.
+- Write captions, table headings, and optional dialog kickers in sentence case.
+  Monospace is for code, identifiers, shortcuts, and alignment-dependent values;
+  omit eyebrows that repeat the heading or add no context.
+- Cards group content through surfaces and borders, without default elevation.
+  Menus and dialogs use restrained shadows, lighter in light themes. Modal
+  backdrops separate context with a scrim, not blur.
+- Generic dialog kickers are neutral. Danger styling belongs to destructive
+  confirmations, not ordinary settings or editing dialogs.
+- Buttons stay in place on hover and press. Color and border changes provide
+  feedback; focus rings remain visible.
+
 ## All styles
 
 Import the stylesheet for its side effects through a CSS-aware bundler:

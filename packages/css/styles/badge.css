@@ -1,12 +1,4 @@
-.sb-badge-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--sb-semantic-space-3);
-}
-
-.sb-badge,
-.sb-tag {
+.sb-badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -103,11 +95,4 @@
 .sb-badge[data-size="medium"] {
   min-height: var(--sb-semantic-space-6);
   padding-inline: var(--sb-semantic-space-3);
-}
-
-.sb-tag {
-  color: var(--sb-semantic-color-foreground-muted);
-  background: transparent;
-  border: var(--sb-semantic-border-width-hairline) solid var(--sb-semantic-color-border-default);
-  font-weight: var(--sb-semantic-typography-weight-medium);
 }

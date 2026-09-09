@@ -22,6 +22,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@simple-base/contracts": "workspace:*",
     "cn": "^0.2.5"
   },
   "devDependencies": {
