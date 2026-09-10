@@ -10,6 +10,13 @@
   font-weight: var(--sb-semantic-typography-weight-semibold);
 }
 
+.sb-combobox-label[data-required]::after {
+  margin-inline-start: var(--sb-semantic-space-1);
+  color: var(--sb-semantic-color-status-danger-base);
+  content: "*";
+  content: "*" / "";
+}
+
 .sb-combobox-control {
   display: flex;
   box-sizing: border-box;
@@ -37,6 +44,16 @@
   box-shadow:
     0 0 0 var(--sb-semantic-border-width-hairline) var(--sb-semantic-color-background-canvas),
     0 0 0 var(--sb-semantic-space-1) var(--sb-semantic-color-focus-ring);
+}
+
+.sb-combobox-control[data-invalid] {
+  border-color: var(--sb-semantic-color-status-danger-base);
+}
+
+.sb-combobox-control[data-invalid]:focus-within {
+  box-shadow:
+    0 0 0 var(--sb-semantic-border-width-hairline) var(--sb-semantic-color-background-canvas),
+    0 0 0 var(--sb-semantic-space-1) var(--sb-semantic-color-focus-danger-ring);
 }
 
 .sb-combobox-input {

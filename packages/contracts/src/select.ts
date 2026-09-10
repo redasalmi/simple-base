@@ -1,17 +1,17 @@
 import type { Placement } from "./placement";
 
-export type ComboboxOption = {
+export type SelectOption = {
   label: string;
   value: string;
   disabled?: boolean;
 };
 
-export type ComboboxOptions = {
+export type SelectOptions = {
   id: string;
   label: string;
   name?: string;
   placeholder?: string;
-  options: ComboboxOption[];
+  options: SelectOption[];
   value?: string;
   disabled?: boolean;
   invalid?: boolean;

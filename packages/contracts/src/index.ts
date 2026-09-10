@@ -2,6 +2,8 @@ export { badgeDefaults, type BadgeVariant, type BadgeSize, type BadgeOptions } f
 export { buttonDefaults, type ButtonVariant, type ButtonSize, type ButtonOptions } from "./button";
 export { cardDefaults, type CardVariant, type CardOptions } from "./card";
 export type { ComboboxOption, ComboboxOptions } from "./combobox";
+export type { Placement } from "./placement";
+export type { SelectOption, SelectOptions } from "./select";
 export {
   toastDefaults,
   type StatusValue,

@@ -1,4 +1,5 @@
 import {
+  splitProps,
   createMemo,
   useContext,
   createSignal,
@@ -9,6 +10,7 @@ import {
   type Accessor,
 } from "solid-js";
 import { Portal } from "solid-js/web";
+import { cn } from "cn";
 import * as combobox from "@zag-js/combobox";
 import { normalizeProps, useMachine } from "@zag-js/solid";
 import type { ComboboxOption, ComboboxOptions } from "@simple-base/contracts";
@@ -30,13 +32,29 @@ function useCombobox() {
 
 export type ComboboxRootProps = ComboboxOptions & {
   children: JSX.Element;
-};
+} & Omit<JSX.HTMLAttributes<HTMLDivElement>, keyof ComboboxOptions | "children">;
 
 function ComboboxRoot(props: ComboboxRootProps) {
+  const [local, rest] = splitProps(props, [
+    "class",
+    "children",
+    "id",
+    "label",
+    "name",
+    "placeholder",
+    "options",
+    "value",
+    "disabled",
+    "placement",
+    "invalid",
+    "required",
+    "onValueChange",
+    "onOpenChange",
+  ]);
   const [query, setQuery] = createSignal("");
   const options = createMemo(() => {
     const search = query().toLowerCase();
-    return props.options.filter((option) => option.label.toLowerCase().includes(search));
+    return local.options.filter((option) => option.label.toLowerCase().includes(search));
   });
 
   const collection = createMemo(() =>
@@ -48,27 +66,51 @@ function ComboboxRoot(props: ComboboxRootProps) {
     }),
   );
 
+  const positioning = createMemo(() =>
+    local.placement ? { placement: local.placement } : undefined,
+  );
+
   const service = useMachine(combobox.machine, {
     get id() {
-      return props.id;
+      return local.id;
     },
     get ids() {
-      return { root: props.id };
+      return { root: local.id };
+    },
+    get name() {
+      return local.name;
     },
     get placeholder() {
-      return props.placeholder;
+      return local.placeholder;
+    },
+    get disabled() {
+      return local.disabled;
+    },
+    get invalid() {
+      return local.invalid;
+    },
+    get required() {
+      return local.required;
+    },
+    get value() {
+      if (local.value === undefined) return undefined;
+      return local.value === "" ? [] : [local.value];
+    },
+    get positioning() {
+      return positioning();
     },
     get collection() {
       return collection();
     },
     onOpenChange({ open, reason }) {
       if (open && reason !== "input-change") setQuery("");
+      local.onOpenChange?.(open);
     },
     onInputValueChange({ inputValue, reason }) {
       setQuery(reason === "input-change" ? inputValue : "");
     },
     onValueChange({ value }) {
-      props.onValueChange(value[0] ?? "");
+      local.onValueChange(value[0] ?? "");
     },
   });
 
@@ -77,67 +119,82 @@ function ComboboxRoot(props: ComboboxRootProps) {
   return (
     <ComboboxContext.Provider
       value={{
-        label: () => props.label,
+        label: () => local.label,
         options,
         api,
       }}
     >
-      <div {...api().getRootProps()} class="sb-combobox">
-        {props.children}
+      <div {...api().getRootProps()} {...rest} class={cn("sb-combobox", local.class)}>
+        {local.children}
       </div>
     </ComboboxContext.Provider>
   );
 }
 
-type ComboboxLabelProps = {
+export type ComboboxLabelProps = Omit<JSX.LabelHTMLAttributes<HTMLLabelElement>, "id" | "for"> & {
   children?: JSX.Element;
 };
 
 function ComboboxLabel(props: ComboboxLabelProps) {
   const { api, label } = useCombobox();
+  const [local, rest] = splitProps(props, ["class", "children"]);
 
   return (
-    <label {...api().getLabelProps()} class="sb-combobox-label">
-      {props.children ?? label()}
+    <label {...api().getLabelProps()} {...rest} class={cn("sb-combobox-label", local.class)}>
+      {local.children ?? label()}
     </label>
   );
 }
 
-type ComboboxTriggerProps = {
-  children: JSX.Element;
-};
-
-function ComboboxTrigger(props: ComboboxTriggerProps) {
-  const { api } = useCombobox();
-
-  return (
-    <button {...api().getTriggerProps()} class="sb-combobox-trigger">
-      {props.children}
-    </button>
-  );
-}
-
-type ComboboxControlProps = {
-  children: JSX.Element;
-};
+export type ComboboxControlProps = Omit<JSX.HTMLAttributes<HTMLDivElement>, "id">;
 
 function ComboboxControl(props: ComboboxControlProps) {
   const { api } = useCombobox();
+  const [local, rest] = splitProps(props, ["class", "children"]);
 
   return (
-    <div {...api().getControlProps()} class="sb-combobox-control">
-      {props.children}
+    <div {...api().getControlProps()} {...rest} class={cn("sb-combobox-control", local.class)}>
+      {local.children}
     </div>
   );
 }
 
-function ComboboxInput() {
-  const { api, label } = useCombobox();
+export type ComboboxInputProps = Omit<
+  JSX.InputHTMLAttributes<HTMLInputElement>,
+  "id" | "type" | "role" | "value" | "defaultValue" | "disabled" | "readOnly" | "autoComplete"
+>;
 
-  return <input {...api().getInputProps()} aria-label={label()} class="sb-combobox-input" />;
+function ComboboxInput(props: ComboboxInputProps) {
+  const { api, label } = useCombobox();
+  const [local, rest] = splitProps(props, ["class"]);
+
+  return (
+    <input
+      {...api().getInputProps()}
+      aria-label={label()}
+      {...rest}
+      class={cn("sb-combobox-input", local.class)}
+    />
+  );
 }
 
-type ComboboxPortalProps = {
+export type ComboboxTriggerProps = Omit<
+  JSX.ButtonHTMLAttributes<HTMLButtonElement>,
+  "id" | "type" | "role" | "disabled"
+>;
+
+function ComboboxTrigger(props: ComboboxTriggerProps) {
+  const { api } = useCombobox();
+  const [local, rest] = splitProps(props, ["class", "children"]);
+
+  return (
+    <button {...api().getTriggerProps()} {...rest} class={cn("sb-combobox-trigger", local.class)}>
+      {local.children}
+    </button>
+  );
+}
+
+export type ComboboxPortalProps = {
   children: JSX.Element;
 };
 
@@ -145,74 +202,92 @@ function ComboboxPortal(props: ComboboxPortalProps) {
   return <Portal>{props.children}</Portal>;
 }
 
-type ComboboxPositionerProps = {
-  children: JSX.Element;
-};
+export type ComboboxPositionerProps = Omit<JSX.HTMLAttributes<HTMLDivElement>, "id" | "style">;
 
 function ComboboxPositioner(props: ComboboxPositionerProps) {
   const { api } = useCombobox();
+  const [local, rest] = splitProps(props, ["class", "children"]);
 
   return (
-    <div {...api().getPositionerProps()} class="sb-combobox-positioner">
-      {props.children}
+    <div
+      {...api().getPositionerProps()}
+      {...rest}
+      class={cn("sb-combobox-positioner", local.class)}
+    >
+      {local.children}
     </div>
   );
 }
 
-type ComboboxContentProps = {
-  children: JSX.Element;
-};
+export type ComboboxContentProps = Omit<JSX.HTMLAttributes<HTMLDivElement>, "hidden">;
 
 function ComboboxContent(props: ComboboxContentProps) {
   const { api } = useCombobox();
+  const [local, rest] = splitProps(props, ["class", "children"]);
 
   return (
-    <div hidden={!api().open} class="sb-combobox-content">
-      {props.children}
+    <div hidden={!api().open} {...rest} class={cn("sb-combobox-content", local.class)}>
+      {local.children}
     </div>
   );
 }
 
-type ComboboxListProps = {
+export type ComboboxListProps = Omit<
+  JSX.HTMLAttributes<HTMLUListElement>,
+  "id" | "role" | "tabIndex" | "children"
+> & {
   children: (option: ComboboxOption) => JSX.Element;
 };
 
 function ComboboxList(props: ComboboxListProps) {
   const { api, options, label } = useCombobox();
+  const [local, rest] = splitProps(props, ["class", "children"]);
 
   return (
-    <ul {...api().getContentProps()} aria-label={label()} class="sb-combobox-list">
-      <For each={options()}>{(option) => props.children(option)}</For>
+    <ul
+      {...api().getContentProps()}
+      aria-label={label()}
+      {...rest}
+      class={cn("sb-combobox-list", local.class)}
+    >
+      <For each={options()}>{(option) => local.children(option)}</For>
     </ul>
   );
 }
 
-type ComboboxEmptyProps = {
-  children: JSX.Element;
-};
+export type ComboboxEmptyProps = JSX.HTMLAttributes<HTMLDivElement>;
 
 function ComboboxEmpty(props: ComboboxEmptyProps) {
   const { api, options } = useCombobox();
+  const [local, rest] = splitProps(props, ["class", "children"]);
 
   return (
     <Show when={api().open && options().length === 0}>
-      <div role="status" class="sb-combobox-empty">
-        {props.children}
+      <div {...rest} role="status" class={cn("sb-combobox-empty", local.class)}>
+        {local.children}
       </div>
     </Show>
   );
 }
 
-type ComboboxItemProps = {
+export type ComboboxItemProps = Omit<
+  JSX.LiHTMLAttributes<HTMLLIElement>,
+  "id" | "role" | "children"
+> & {
   option: ComboboxOption;
 };
 
 function ComboboxItem(props: ComboboxItemProps) {
   const { api } = useCombobox();
+  const [local, rest] = splitProps(props, ["class", "option"]);
 
   return (
-    <li {...api().getItemProps({ item: props.option })} class="sb-combobox-item">
-      {props.option.label}
+    <li
+      {...api().getItemProps({ item: local.option })}
+      {...rest}
+      class={cn("sb-combobox-item", local.class)}
+    >
+      {local.option.label}
     </li>
   );
 }

@@ -84,10 +84,15 @@ a {
   color: var(--sb-semantic-color-foreground-secondary);
   font-size: 12px;
 }
-.playground-theme .sb-select-wrap {
+.playground-theme .sb-select-root {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.playground-theme .sb-select-control {
   width: 204px;
 }
-.playground-theme select {
+.playground-theme .sb-select-trigger {
   font-size: 12px;
 }
 
@@ -429,14 +434,14 @@ a {
     display: block;
     font-size: 11px;
   }
-  .playground-theme > span:first-child {
+  .playground-theme .sb-select-label {
     position: absolute;
     width: 1px;
     height: 1px;
     overflow: hidden;
     clip-path: inset(50%);
   }
-  .playground-theme .sb-select-wrap {
+  .playground-theme .sb-select-control {
     width: 160px;
   }
   .playground-layout {
@@ -465,7 +470,7 @@ a {
   .playground-header-inner {
     padding-inline: 16px;
   }
-  .playground-theme .sb-select-wrap {
+  .playground-theme .sb-select-control {
     width: 148px;
   }
   .playground-layout {

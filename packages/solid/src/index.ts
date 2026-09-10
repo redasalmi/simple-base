@@ -16,4 +16,32 @@ export { Checkbox, type CheckboxProps } from "./components/Checkbox";
 export { Input, type InputProps } from "./components/Input";
 export { Radio, type RadioProps } from "./components/Radio";
 export { TextArea, type TextAreaProps } from "./components/TextArea";
-export { Combobox } from "./components/Combobox";
+export {
+  Combobox,
+  type ComboboxRootProps,
+  type ComboboxLabelProps,
+  type ComboboxControlProps,
+  type ComboboxInputProps,
+  type ComboboxTriggerProps,
+  type ComboboxPortalProps,
+  type ComboboxPositionerProps,
+  type ComboboxContentProps,
+  type ComboboxListProps,
+  type ComboboxEmptyProps,
+  type ComboboxItemProps,
+} from "./components/Combobox";
+export {
+  Select,
+  type SelectRootProps,
+  type SelectLabelProps,
+  type SelectControlProps,
+  type SelectTriggerProps,
+  type SelectValueTextProps,
+  type SelectIndicatorProps,
+  type SelectPortalProps,
+  type SelectPositionerProps,
+  type SelectContentProps,
+  type SelectListProps,
+  type SelectEmptyProps,
+  type SelectItemProps,
+} from "./components/Select";

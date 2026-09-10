@@ -30,6 +30,14 @@
       "types": "./dist/combobox.d.ts",
       "import": "./dist/combobox.js"
     },
+    "./placement": {
+      "types": "./dist/placement.d.ts",
+      "import": "./dist/placement.js"
+    },
+    "./select": {
+      "types": "./dist/select.d.ts",
+      "import": "./dist/select.js"
+    },
     "./status": {
       "types": "./dist/status.d.ts",
       "import": "./dist/status.js"

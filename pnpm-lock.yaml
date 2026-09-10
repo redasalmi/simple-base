@@ -274,6 +274,9 @@ importers:
       '@zag-js/combobox':
         specifier: ^1.43.3
         version: 1.43.3
+      '@zag-js/select':
+        specifier: ^1.43.3
+        version: 1.43.3
       '@zag-js/solid':
         specifier: ^1.43.3
         version: 1.43.3(solid-js@1.9.13)
@@ -1475,6 +1478,9 @@ packages:
 
   '@zag-js/popper@1.43.3':
     resolution: {integrity: sha512-99PPQerLylh+ouG16d0Go0UgpLR3rCQvWMmJoO5Ti8+2Ww3aqBNLTqpF0rJuLPe1Ps4BfEt5Lr4dYhL1ixgbRQ==}
+
+  '@zag-js/select@1.43.3':
+    resolution: {integrity: sha512-vd5uKPOoRXXrHlL8VPNk5Mih6XRhIzXAon7emEupCe6UAAShqYnxumrLBbr5LifiePP93CGJx3rGn8RZky/OVg==}
 
   '@zag-js/solid@1.43.3':
     resolution: {integrity: sha512-xAYrRfeo3+3rcUaGlbi1hpx/mlruPO1YoMmnnttWConHKxH4zkLOviM3+uaqJGZLAjDdUqEMUFijLyPWLC7AUw==}
@@ -3103,6 +3109,18 @@ snapshots:
     dependencies:
       '@floating-ui/dom': 1.8.0
       '@zag-js/dom-query': 1.43.3
+      '@zag-js/utils': 1.43.3
+
+  '@zag-js/select@1.43.3':
+    dependencies:
+      '@zag-js/anatomy': 1.43.3
+      '@zag-js/collection': 1.43.3
+      '@zag-js/core': 1.43.3
+      '@zag-js/dismissable': 1.43.3
+      '@zag-js/dom-query': 1.43.3
+      '@zag-js/focus-visible': 1.43.3
+      '@zag-js/popper': 1.43.3
+      '@zag-js/types': 1.43.3
       '@zag-js/utils': 1.43.3
 
   '@zag-js/solid@1.43.3(solid-js@1.9.13)':

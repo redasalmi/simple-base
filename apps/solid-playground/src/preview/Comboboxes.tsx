@@ -121,7 +121,7 @@ export function Comboboxes() {
         rows={[
           [
             "Combobox / .Root",
-            "id, label, options, onValueChange; optional placeholder",
+            "id, label, options, onValueChange (required)",
             "The root owns single-selection state and case-insensitive label filtering. Give each instance a unique ID.",
           ],
           [
@@ -133,6 +133,16 @@ export function Comboboxes() {
             "onValueChange",
             "(value: string) => void",
             "Receives the selected option value, not its label or the search text. An empty string represents a cleared selection.",
+          ],
+          [
+            "value, disabled, invalid, required, name, placement, onOpenChange",
+            "optional",
+            "value makes selection controlled, where an empty string clears it. disabled dims and blocks the field, invalid switches to the danger border, and required adds the label marker. name submits the option label through the visible input, not its value. placement picks the popup side. onOpenChange reports popup visibility.",
+          ],
+          [
+            "class and native props",
+            "every part",
+            "Each part accepts class plus the native attributes for the element it renders, applied after the behavior props. Attributes the widget owns, such as id and role, are excluded.",
           ],
           [
             ".Label / .Control / .Input",

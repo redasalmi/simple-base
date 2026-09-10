@@ -1,11 +1,13 @@
 import { For, createEffect, createSignal, onCleanup, onMount, type Component } from "solid-js";
 import { Dynamic } from "solid-js/web";
+import { Select } from "@simple-base/solid";
 import { Typography } from "./preview/Typography";
 import { Buttons } from "./preview/Buttons";
 import { Badges } from "./preview/Badges";
 import { AlertDialogs } from "./preview/AlertDialogs";
 import { Inputs, TextAreas, Checkboxes, Radios, Switches } from "./preview/Inputs";
 import { Comboboxes } from "./preview/Comboboxes";
+import { Selects } from "./preview/Selects";
 import { Styles } from "./preview/Styles";
 
 type Page = {
@@ -62,6 +64,15 @@ const pages: Page[] = [
       "Search a list of options as you type, then select a value. Compound parts provide a labeled input, keyboard navigation, and a portaled popup with an empty state.",
     usage: 'import { Combobox } from "@simple-base/solid";',
     component: Comboboxes,
+  },
+  {
+    id: "select",
+    label: "Select",
+    group: "Components",
+    description:
+      "Pick a single option from a known list. Compound parts provide a labeled trigger, keyboard typeahead, and a portaled popup that shares the combobox popup styling.",
+    usage: 'import { Select } from "@simple-base/solid";',
+    component: Selects,
   },
   {
     id: "textarea",
@@ -131,6 +142,16 @@ const themes = [
   ["nord", "Nord"],
 ] as const;
 
+const themeOptions = themes.map(([value, label]) => ({ label, value }));
+
+function ChevronDown() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="m6 9 6 6 6-6" />
+    </svg>
+  );
+}
+
 function pageFromHash() {
   return pages.find((page) => page.id === window.location.hash.slice(1)) ?? pages[1]!;
 }
@@ -174,19 +195,32 @@ export default function App() {
           <a class="playground-brand" href="#buttons">
             Simple Base<span>Solid reference</span>
           </a>
-          <label class="playground-theme">
-            <span>Theme</span>
-            <span class="sb-select-wrap">
-              <select
-                class="sb-select"
-                aria-label="Theme"
-                value={theme()}
-                onChange={(event) => setTheme(event.currentTarget.value)}
-              >
-                <For each={themes}>{([value, name]) => <option value={value}>{name}</option>}</For>
-              </select>
-            </span>
-          </label>
+          <div class="playground-theme">
+            <Select
+              id="playground-theme-select"
+              label="Theme"
+              options={themeOptions}
+              value={theme()}
+              onValueChange={setTheme}
+            >
+              <Select.Label />
+              <Select.Control>
+                <Select.Trigger>
+                  <Select.ValueText />
+                  <Select.Indicator>
+                    <ChevronDown />
+                  </Select.Indicator>
+                </Select.Trigger>
+              </Select.Control>
+              <Select.Portal>
+                <Select.Positioner>
+                  <Select.Content>
+                    <Select.List>{(option) => <Select.Item option={option} />}</Select.List>
+                  </Select.Content>
+                </Select.Positioner>
+              </Select.Portal>
+            </Select>
+          </div>
         </div>
       </header>
       <div class="playground-layout">
