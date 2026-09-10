@@ -88,8 +88,10 @@ exports; there are no allowed-value arrays without a runtime use case.
   not a pass-through. `onOpenChange` reports popup visibility for lazy loading
   and analytics.
 - `name` has different meaning per component. Combobox applies it to the visible
-  input, so the submitted value is the option label, not its value. Select renders
-  a hidden native select for the option value, and only when `name` is set.
+  input, so the submitted value is the option label, not its value. Select keeps a
+  hidden native select for the option value and always renders it, so the label
+  stays associated and form reset and fieldset state are tracked; `name` alone
+  decides whether the control is submitted.
 - Status line statuses: `success`, `danger`, `info`.
 - Alert statuses: `danger`, `info`. Only the border changes with status; the CSS
   keeps the alert mark danger-colored.

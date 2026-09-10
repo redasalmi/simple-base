@@ -137,7 +137,7 @@ export function Selects() {
           [
             "name",
             "string (optional)",
-            "Renders a hidden native select so the option value is submitted with the surrounding form. Omit it to keep the widget outside form submission.",
+            "Names the hidden native select that carries the option value, so it is submitted with the surrounding form. Omit it to keep the widget outside form submission.",
           ],
           [
             "value, disabled, invalid, required, placement, onOpenChange",

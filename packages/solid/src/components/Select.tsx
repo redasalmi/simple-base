@@ -114,13 +114,11 @@ function SelectRoot(props: SelectRootProps) {
       }}
     >
       <div {...api().getRootProps()} {...rest} class={cn("sb-select-root", local.class)}>
-        <Show when={local.name}>
-          <select {...api().getHiddenSelectProps()}>
-            <For each={local.options}>
-              {(option) => <option value={option.value}>{option.label}</option>}
-            </For>
-          </select>
-        </Show>
+        <select {...api().getHiddenSelectProps()}>
+          <For each={local.options}>
+            {(option) => <option value={option.value}>{option.label}</option>}
+          </For>
+        </select>
         {local.children}
       </div>
     </SelectContext.Provider>
@@ -157,15 +155,20 @@ function SelectControl(props: SelectControlProps) {
 
 export type SelectTriggerProps = Omit<
   JSX.ButtonHTMLAttributes<HTMLButtonElement>,
-  "id" | "type" | "role" | "disabled"
+  "id" | "type" | "role" | "disabled" | "aria-label"
 >;
 
 function SelectTrigger(props: SelectTriggerProps) {
-  const { api } = useSelect();
+  const { api, label } = useSelect();
   const [local, rest] = splitProps(props, ["class", "children"]);
 
   return (
-    <button {...api().getTriggerProps()} {...rest} class={cn("sb-select-trigger", local.class)}>
+    <button
+      {...api().getTriggerProps()}
+      aria-label={label()}
+      {...rest}
+      class={cn("sb-select-trigger", local.class)}
+    >
       {local.children}
     </button>
   );
