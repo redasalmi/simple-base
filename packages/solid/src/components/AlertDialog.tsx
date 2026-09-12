@@ -21,7 +21,7 @@ export type AlertDialogRootProps = Omit<
 >;
 
 function AlertDialogRoot(props: AlertDialogRootProps) {
-  const [{ class: className }, rest] = splitProps(props, ["class"]);
+  const [local, rest] = splitProps(props, ["class"]);
   const id = createUniqueId();
   const titleId = `${id}-title`;
   const descriptionId = `${id}-description`;
@@ -38,7 +38,7 @@ function AlertDialogRoot(props: AlertDialogRootProps) {
         role="alertdialog"
         aria-labelledby={titleId}
         aria-describedby={descriptionId}
-        class={cn("sb-alert-dialog", className)}
+        class={cn("sb-alert-dialog", local.class)}
       />
     </AlertDialogContext.Provider>
   );
@@ -47,54 +47,57 @@ function AlertDialogRoot(props: AlertDialogRootProps) {
 export type AlertDialogIconProps = JSX.HTMLAttributes<HTMLDivElement>;
 
 function AlertDialogIcon(props: AlertDialogIconProps) {
-  const [{ class: className, "aria-hidden": ariaHidden = true }, rest] = splitProps(props, [
-    "class",
-    "aria-hidden",
-  ]);
+  const [local, rest] = splitProps(props, ["class", "aria-hidden"]);
 
-  return <div {...rest} aria-hidden={ariaHidden} class={cn("sb-alert-dialog-icon", className)} />;
+  return (
+    <div
+      {...rest}
+      aria-hidden={local["aria-hidden"] ?? true}
+      class={cn("sb-alert-dialog-icon", local.class)}
+    />
+  );
 }
 
 export type AlertDialogContentProps = JSX.HTMLAttributes<HTMLDivElement>;
 
 function AlertDialogContent(props: AlertDialogContentProps) {
-  const [{ class: className }, rest] = splitProps(props, ["class"]);
+  const [local, rest] = splitProps(props, ["class"]);
 
-  return <div {...rest} class={cn("sb-alert-dialog-content", className)} />;
+  return <div {...rest} class={cn("sb-alert-dialog-content", local.class)} />;
 }
 
 export type AlertDialogKickerProps = JSX.HTMLAttributes<HTMLParagraphElement>;
 
 function AlertDialogKicker(props: AlertDialogKickerProps) {
-  const [{ class: className }, rest] = splitProps(props, ["class"]);
+  const [local, rest] = splitProps(props, ["class"]);
 
-  return <p {...rest} class={cn("sb-alert-dialog-kicker", className)} />;
+  return <p {...rest} class={cn("sb-alert-dialog-kicker", local.class)} />;
 }
 
 export type AlertDialogTitleProps = Omit<JSX.HTMLAttributes<HTMLHeadingElement>, "id">;
 
 function AlertDialogTitle(props: AlertDialogTitleProps) {
   const { titleId } = useAlertDialog();
-  const [{ class: className }, rest] = splitProps(props, ["class"]);
+  const [local, rest] = splitProps(props, ["class"]);
 
-  return <h3 {...rest} id={titleId} class={cn("sb-alert-dialog-title", className)} />;
+  return <h3 {...rest} id={titleId} class={cn("sb-alert-dialog-title", local.class)} />;
 }
 
 export type AlertDialogDescriptionProps = Omit<JSX.HTMLAttributes<HTMLParagraphElement>, "id">;
 
 function AlertDialogDescription(props: AlertDialogDescriptionProps) {
   const { descriptionId } = useAlertDialog();
-  const [{ class: className }, rest] = splitProps(props, ["class"]);
+  const [local, rest] = splitProps(props, ["class"]);
 
-  return <p {...rest} id={descriptionId} class={cn("sb-alert-dialog-description", className)} />;
+  return <p {...rest} id={descriptionId} class={cn("sb-alert-dialog-description", local.class)} />;
 }
 
 export type AlertDialogActionsProps = JSX.HTMLAttributes<HTMLDivElement>;
 
 function AlertDialogActions(props: AlertDialogActionsProps) {
-  const [{ class: className }, rest] = splitProps(props, ["class"]);
+  const [local, rest] = splitProps(props, ["class"]);
 
-  return <div {...rest} class={cn("sb-alert-dialog-actions", className)} />;
+  return <div {...rest} class={cn("sb-alert-dialog-actions", local.class)} />;
 }
 
 export const AlertDialog = Object.assign(AlertDialogRoot, {

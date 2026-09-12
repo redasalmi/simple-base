@@ -1,6 +1,10 @@
 import {
   splitProps,
   createMemo,
+  createEffect,
+  on,
+  onMount,
+  onCleanup,
   useContext,
   For,
   Show,
@@ -13,6 +17,7 @@ import { cn } from "cn";
 import * as select from "@zag-js/select";
 import { normalizeProps, useMachine } from "@zag-js/solid";
 import type { SelectOption, SelectOptions } from "@simple-base/contracts";
+import { mergeWidgetProps } from "../mergeWidgetProps";
 
 type SelectContextType = {
   label: Accessor<string>;
@@ -103,6 +108,28 @@ function SelectRoot(props: SelectRootProps) {
   });
 
   const api = createMemo(() => select.connect(service, normalizeProps));
+  let hiddenSelect!: HTMLSelectElement;
+
+  const syncHiddenSelect = () => {
+    hiddenSelect.value = api().value[0] ?? "";
+  };
+
+  // Replacing options can change native selection without changing the machine's value.
+  createEffect(on([collection, () => api().value], syncHiddenSelect));
+  onMount(() => {
+    const form = hiddenSelect.form;
+    // The browser resets native selection after Zag handles the reset event.
+    let resetFrame = 0;
+    const handleReset = () => {
+      cancelAnimationFrame(resetFrame);
+      resetFrame = requestAnimationFrame(syncHiddenSelect);
+    };
+    form?.addEventListener("reset", handleReset);
+    onCleanup(() => {
+      form?.removeEventListener("reset", handleReset);
+      cancelAnimationFrame(resetFrame);
+    });
+  });
 
   return (
     <SelectContext.Provider
@@ -113,8 +140,16 @@ function SelectRoot(props: SelectRootProps) {
         api,
       }}
     >
-      <div {...api().getRootProps()} {...rest} class={cn("sb-select-root", local.class)}>
-        <select {...api().getHiddenSelectProps()}>
+      <div
+        {...mergeWidgetProps(api().getRootProps(), rest)}
+        class={cn("sb-select-root", local.class)}
+      >
+        <select
+          ref={(element) => {
+            hiddenSelect = element;
+          }}
+          {...api().getHiddenSelectProps()}
+        >
           <For each={local.options}>
             {(option) => <option value={option.value}>{option.label}</option>}
           </For>
@@ -134,7 +169,10 @@ function SelectLabel(props: SelectLabelProps) {
   const [local, rest] = splitProps(props, ["class", "children"]);
 
   return (
-    <label {...api().getLabelProps()} {...rest} class={cn("sb-select-label", local.class)}>
+    <label
+      {...mergeWidgetProps(api().getLabelProps(), rest)}
+      class={cn("sb-select-label", local.class)}
+    >
       {local.children ?? label()}
     </label>
   );
@@ -147,7 +185,10 @@ function SelectControl(props: SelectControlProps) {
   const [local, rest] = splitProps(props, ["class", "children"]);
 
   return (
-    <div {...api().getControlProps()} {...rest} class={cn("sb-select-control", local.class)}>
+    <div
+      {...mergeWidgetProps(api().getControlProps(), rest)}
+      class={cn("sb-select-control", local.class)}
+    >
       {local.children}
     </div>
   );
@@ -164,9 +205,8 @@ function SelectTrigger(props: SelectTriggerProps) {
 
   return (
     <button
-      {...api().getTriggerProps()}
       aria-label={label()}
-      {...rest}
+      {...mergeWidgetProps(api().getTriggerProps(), rest)}
       class={cn("sb-select-trigger", local.class)}
     >
       {local.children}
@@ -181,7 +221,10 @@ function SelectValueText(props: SelectValueTextProps) {
   const [local, rest] = splitProps(props, ["class", "children"]);
 
   return (
-    <span {...api().getValueTextProps()} {...rest} class={cn("sb-select-value-text", local.class)}>
+    <span
+      {...mergeWidgetProps(api().getValueTextProps(), rest)}
+      class={cn("sb-select-value-text", local.class)}
+    >
       {local.children ?? (api().valueAsString || placeholder())}
     </span>
   );
@@ -195,9 +238,8 @@ function SelectIndicator(props: SelectIndicatorProps) {
 
   return (
     <span
-      {...api().getIndicatorProps()}
+      {...mergeWidgetProps(api().getIndicatorProps(), rest)}
       aria-hidden="true"
-      {...rest}
       class={cn("sb-select-indicator", local.class)}
     >
       {local.children}
@@ -207,10 +249,11 @@ function SelectIndicator(props: SelectIndicatorProps) {
 
 export type SelectPortalProps = {
   children: JSX.Element;
+  mount?: Node;
 };
 
 function SelectPortal(props: SelectPortalProps) {
-  return <Portal>{props.children}</Portal>;
+  return <Portal mount={props.mount}>{props.children}</Portal>;
 }
 
 export type SelectPositionerProps = Omit<JSX.HTMLAttributes<HTMLDivElement>, "id" | "style">;
@@ -220,7 +263,10 @@ function SelectPositioner(props: SelectPositionerProps) {
   const [local, rest] = splitProps(props, ["class", "children"]);
 
   return (
-    <div {...api().getPositionerProps()} {...rest} class={cn("sb-select-positioner", local.class)}>
+    <div
+      {...mergeWidgetProps(api().getPositionerProps(), rest)}
+      class={cn("sb-select-positioner", local.class)}
+    >
       {local.children}
     </div>
   );
@@ -252,9 +298,8 @@ function SelectList(props: SelectListProps) {
 
   return (
     <ul
-      {...api().getContentProps()}
       aria-label={label()}
-      {...rest}
+      {...mergeWidgetProps(api().getContentProps(), rest)}
       class={cn("sb-select-list", local.class)}
     >
       <For each={options()}>{(option) => local.children(option)}</For>
@@ -290,8 +335,7 @@ function SelectItem(props: SelectItemProps) {
 
   return (
     <li
-      {...api().getItemProps({ item: local.option })}
-      {...rest}
+      {...mergeWidgetProps(api().getItemProps({ item: local.option }), rest)}
       class={cn("sb-select-item", local.class)}
     >
       {local.option.label}

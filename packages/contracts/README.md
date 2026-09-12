@@ -28,8 +28,9 @@ apply defaults when options are omitted, and emit the appropriate CSS classes an
 attributes directly. Share framework-neutral public configuration and value
 callbacks. Children, refs, framework-specific DOM events, native element prop
 interfaces, internal context, and accessibility implementation stay in the adapters.
-Every adapter part accepts a `class` plus the native attributes for the element it
-renders, excluding the attributes the widget owns.
+Every adapter part accepts a reactive `class` plus the native attributes for the
+element it renders, excluding the attributes the widget owns. Widget event
+handlers are composed with consumer handlers rather than replaced.
 
 ```ts
 export type ButtonOptions = {

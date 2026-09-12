@@ -14,6 +14,7 @@ import { cn } from "cn";
 import * as combobox from "@zag-js/combobox";
 import { normalizeProps, useMachine } from "@zag-js/solid";
 import type { ComboboxOption, ComboboxOptions } from "@simple-base/contracts";
+import { mergeWidgetProps } from "../mergeWidgetProps";
 
 type ComboboxContextType = {
   label: Accessor<string>;
@@ -124,7 +125,7 @@ function ComboboxRoot(props: ComboboxRootProps) {
         api,
       }}
     >
-      <div {...api().getRootProps()} {...rest} class={cn("sb-combobox", local.class)}>
+      <div {...mergeWidgetProps(api().getRootProps(), rest)} class={cn("sb-combobox", local.class)}>
         {local.children}
       </div>
     </ComboboxContext.Provider>
@@ -140,7 +141,10 @@ function ComboboxLabel(props: ComboboxLabelProps) {
   const [local, rest] = splitProps(props, ["class", "children"]);
 
   return (
-    <label {...api().getLabelProps()} {...rest} class={cn("sb-combobox-label", local.class)}>
+    <label
+      {...mergeWidgetProps(api().getLabelProps(), rest)}
+      class={cn("sb-combobox-label", local.class)}
+    >
       {local.children ?? label()}
     </label>
   );
@@ -153,7 +157,10 @@ function ComboboxControl(props: ComboboxControlProps) {
   const [local, rest] = splitProps(props, ["class", "children"]);
 
   return (
-    <div {...api().getControlProps()} {...rest} class={cn("sb-combobox-control", local.class)}>
+    <div
+      {...mergeWidgetProps(api().getControlProps(), rest)}
+      class={cn("sb-combobox-control", local.class)}
+    >
       {local.children}
     </div>
   );
@@ -170,9 +177,8 @@ function ComboboxInput(props: ComboboxInputProps) {
 
   return (
     <input
-      {...api().getInputProps()}
       aria-label={label()}
-      {...rest}
+      {...mergeWidgetProps(api().getInputProps(), rest)}
       class={cn("sb-combobox-input", local.class)}
     />
   );
@@ -188,7 +194,10 @@ function ComboboxTrigger(props: ComboboxTriggerProps) {
   const [local, rest] = splitProps(props, ["class", "children"]);
 
   return (
-    <button {...api().getTriggerProps()} {...rest} class={cn("sb-combobox-trigger", local.class)}>
+    <button
+      {...mergeWidgetProps(api().getTriggerProps(), rest)}
+      class={cn("sb-combobox-trigger", local.class)}
+    >
       {local.children}
     </button>
   );
@@ -196,10 +205,11 @@ function ComboboxTrigger(props: ComboboxTriggerProps) {
 
 export type ComboboxPortalProps = {
   children: JSX.Element;
+  mount?: Node;
 };
 
 function ComboboxPortal(props: ComboboxPortalProps) {
-  return <Portal>{props.children}</Portal>;
+  return <Portal mount={props.mount}>{props.children}</Portal>;
 }
 
 export type ComboboxPositionerProps = Omit<JSX.HTMLAttributes<HTMLDivElement>, "id" | "style">;
@@ -210,8 +220,7 @@ function ComboboxPositioner(props: ComboboxPositionerProps) {
 
   return (
     <div
-      {...api().getPositionerProps()}
-      {...rest}
+      {...mergeWidgetProps(api().getPositionerProps(), rest)}
       class={cn("sb-combobox-positioner", local.class)}
     >
       {local.children}
@@ -245,9 +254,8 @@ function ComboboxList(props: ComboboxListProps) {
 
   return (
     <ul
-      {...api().getContentProps()}
       aria-label={label()}
-      {...rest}
+      {...mergeWidgetProps(api().getContentProps(), rest)}
       class={cn("sb-combobox-list", local.class)}
     >
       <For each={options()}>{(option) => local.children(option)}</For>
@@ -283,8 +291,7 @@ function ComboboxItem(props: ComboboxItemProps) {
 
   return (
     <li
-      {...api().getItemProps({ item: local.option })}
-      {...rest}
+      {...mergeWidgetProps(api().getItemProps({ item: local.option }), rest)}
       class={cn("sb-combobox-item", local.class)}
     >
       {local.option.label}

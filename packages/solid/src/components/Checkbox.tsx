@@ -4,7 +4,7 @@ import { cn } from "cn";
 export type CheckboxProps = Omit<JSX.InputHTMLAttributes<HTMLInputElement>, "type">;
 
 export function Checkbox(props: CheckboxProps) {
-  const [{ class: className }, rest] = splitProps(props, ["class"]);
+  const [local, rest] = splitProps(props, ["class"]);
 
-  return <input {...rest} type="checkbox" class={cn("sb-checkbox", className)} />;
+  return <input {...rest} type="checkbox" class={cn("sb-checkbox", local.class)} />;
 }

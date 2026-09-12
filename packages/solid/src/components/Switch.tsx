@@ -12,7 +12,7 @@ export type SwitchProps = Omit<
   AccessibleName;
 
 export function Switch(props: SwitchProps) {
-  const [{ class: className }, rest] = splitProps(props, ["class"]);
+  const [local, rest] = splitProps(props, ["class"]);
 
-  return <input {...rest} type="checkbox" role="switch" class={cn("sb-switch", className)} />;
+  return <input {...rest} type="checkbox" role="switch" class={cn("sb-switch", local.class)} />;
 }

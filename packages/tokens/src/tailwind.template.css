@@ -1,8 +1,8 @@
 @import "tailwindcss";
 @import "./tokens.css";
 
-/* The default Tailwind v4 theme uses the resolver's default color context. */
-@theme {
+/* Inline aliases resolve semantic CSS roles in each element's theme scope. */
+@theme inline {
   @tz (theme: "simple-base-dark");
 }
 

@@ -4,7 +4,7 @@ import { cn } from "cn";
 export type TextAreaProps = JSX.TextareaHTMLAttributes<HTMLTextAreaElement>;
 
 export function TextArea(props: TextAreaProps) {
-  const [{ class: className }, rest] = splitProps(props, ["class"]);
+  const [local, rest] = splitProps(props, ["class"]);
 
-  return <textarea {...rest} class={cn("sb-textarea", className)} />;
+  return <textarea {...rest} class={cn("sb-textarea", local.class)} />;
 }

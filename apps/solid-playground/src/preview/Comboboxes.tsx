@@ -142,7 +142,7 @@ export function Comboboxes() {
           [
             "class and native props",
             "every part",
-            "Each part accepts class plus the native attributes for the element it renders, applied after the behavior props. Attributes the widget owns, such as id and role, are excluded.",
+            "Each part accepts reactive class and native attributes. Consumer event handlers run alongside widget handlers, not instead of them. Attributes the widget owns, such as id and role, are excluded.",
           ],
           [
             ".Label / .Control / .Input",
@@ -157,7 +157,7 @@ export function Comboboxes() {
           [
             ".Portal / .Positioner / .Content",
             "popup composition",
-            "Portal moves the popup to the document body. Positioner anchors it to the control, and Content hides all popup children when closed.",
+            "Portal mounts under document.body by default. Inside a native modal dialog, pass mount={dialog()} using a signal-backed dialog ref to keep the popup interactive. Positioner anchors it to the control, and Content hides all popup children when closed.",
           ],
           [
             ".List / .Item",

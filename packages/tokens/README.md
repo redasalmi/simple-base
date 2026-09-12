@@ -26,3 +26,7 @@ Tailwind and the token stylesheet and requires Tailwind in the consuming project
 ```css
 @import "@simple-base/tokens/tailwind";
 ```
+
+Utilities reference the same semantic CSS variables as the component styles, so
+`data-theme` works on the root or a nested region. Breakpoints are generated as
+literal dimensions because CSS media queries cannot resolve custom properties.

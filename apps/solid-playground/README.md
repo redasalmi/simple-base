@@ -75,3 +75,11 @@ pnpm exec turbo run typecheck --filter=solid-playground
 
 Turbo builds workspace dependencies before checking types. `pnpm check` and
 `pnpm quality` also include both the library and playground type checks.
+
+## Modal portal targets
+
+Both `Select.Portal` and `Combobox.Portal` accept `mount?: Node`. Inside a native
+modal, mount the popup within the dialog rather than under `document.body`.
+Use a signal-backed ref (`const [dialog, setDialog] = createSignal<HTMLDialogElement>()`),
+pass `ref={setDialog}` to `AlertDialog`, and use `mount={dialog()}` on the portal.
+The reactive ref lets the portal follow the dialog once its element is assigned.

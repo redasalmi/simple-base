@@ -9,7 +9,7 @@ export type InputProps = Omit<InputElement, "type"> & {
 };
 
 export function Input(props: InputProps) {
-  const [{ class: className }, rest] = splitProps(props, ["class"]);
+  const [local, rest] = splitProps(props, ["class"]);
 
-  return <input {...rest} class={cn("sb-input", className)} />;
+  return <input {...rest} class={cn("sb-input", local.class)} />;
 }

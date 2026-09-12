@@ -60,6 +60,29 @@ export default defineConfig({
         "default-transition-timing-function": "semantic.motion.easing.standard",
       },
     }),
+    {
+      name: "simple-base-tailwind-values",
+      enforce: "post",
+      transform({ getTransforms, setTransform }) {
+        for (const { name } of themes) {
+          const input = { theme: name };
+          for (const token of getTransforms({ format: "tailwind", input })) {
+            // Media queries need literals; utilities should use the public, scoped CSS roles.
+            const value =
+              token.id.startsWith("semantic.breakpoint.") && token.token.$type === "dimension"
+                ? `${token.token.$value.value}${token.token.$value.unit}`
+                : `var(--sb-${token.id.replaceAll(".", "-")})`;
+            setTransform(token.id, {
+              format: "tailwind",
+              input,
+              localID: token.localID,
+              value,
+              meta: token.meta,
+            });
+          }
+        }
+      },
+    },
     js({ filename: "tokens.js" }),
   ],
 });
