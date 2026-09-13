@@ -1,7 +1,7 @@
 {
   "name": "@simple-base/tokens",
-  "version": "0.0.0",
-  "private": true,
+  "version": "0.1.0",
+  "license": "MIT",
   "files": [
     "dist"
   ],
@@ -16,6 +16,10 @@
     },
     "./css": "./dist/tokens.css",
     "./tailwind": "./dist/tailwind.css"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
     "check": "tz check",

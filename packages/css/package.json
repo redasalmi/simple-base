@@ -1,7 +1,7 @@
 {
   "name": "@simple-base/css",
-  "version": "0.0.0",
-  "private": true,
+  "version": "0.1.0",
+  "license": "MIT",
   "files": [
     "styles.css",
     "styles",
@@ -116,6 +116,10 @@
       "types": "./styles.d.ts",
       "default": "./styles/typography.css"
     }
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
     "@simple-base/tokens": "workspace:^"
