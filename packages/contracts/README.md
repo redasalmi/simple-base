@@ -1,12 +1,16 @@
 # @simple-base/contracts
 
-Shared component option types and default constants for framework adapters such as
-Solid and React. CSS owns styling; adapters own rendering, native props, and
-behavior. This package has no runtime dependencies.
+Framework-neutral component options and default values for Simple Base adapters.
 
-`packages/css/styles/` is the source of truth for supported styling options. Only
-components with shared custom options need a contract. There are no class-name
-maps, attribute-name maps, CSS-property maps, or class-only contracts.
+CSS owns styling. Adapters own rendering, native props, and behavior. This package holds the shared custom options that more than one adapter needs — the types you pass to a component and the defaults applied when you omit them. It has no runtime dependencies.
+
+**Most applications don't need this package directly.** Install [@simple-base/solid](https://www.npmjs.com/package/@simple-base/solid) and it re-exports the option types it uses. Install this package when you are writing an adapter for another framework, or when you need the shared option types without a renderer.
+
+## Install
+
+```sh
+pnpm add @simple-base/contracts
+```
 
 ## Usage
 
@@ -17,105 +21,89 @@ import {
   type ButtonSize,
   type ButtonVariant,
 } from "@simple-base/contracts";
+
+export function Button(props: ButtonOptions) {
+  const variant = props.variant ?? buttonDefaults.variant;
+  const size = props.size ?? buttonDefaults.size;
+
+  return { "data-variant": variant, "data-size": size };
+}
 ```
 
-The same exports are available from `@simple-base/contracts/button`. Other
-subpaths are `/badge`, `/card`, `/combobox`, `/placement`, `/select`, and
-`/status`.
-
-Adapters compose the shared options with their framework's native element props,
-apply defaults when options are omitted, and emit the appropriate CSS classes and
-attributes directly. Share framework-neutral public configuration and value
-callbacks. Children, refs, framework-specific DOM events, native element prop
-interfaces, internal context, and accessibility implementation stay in the adapters.
-Every adapter part accepts a reactive `class` plus the native attributes for the
-element it renders, excluding the attributes the widget owns. Widget event
-handlers are composed with consumer handlers rather than replaced.
+The same exports are available per component, which keeps imports narrow:
 
 ```ts
-export type ButtonOptions = {
-  variant?: ButtonVariant;
-  size?: ButtonSize;
-};
-
-export const buttonDefaults = {
-  variant: "primary",
-  size: "medium",
-} as const satisfies Required<ButtonOptions>;
+import { buttonDefaults, type ButtonVariant } from "@simple-base/contracts/button";
 ```
 
-Types are erased from runtime JavaScript. Only the default constants are runtime
-exports; there are no allowed-value arrays without a runtime use case.
+Subpaths: `/badge` · `/button` · `/card` · `/combobox` · `/placement` · `/select` · `/status` · `/table`
 
-## Available options
+## Options reference
 
 | Component   | Types                                          | Defaults                              |
 | ----------- | ---------------------------------------------- | ------------------------------------- |
 | Button      | `ButtonVariant`, `ButtonSize`, `ButtonOptions` | `buttonDefaults`: `primary`, `medium` |
 | Badge       | `BadgeVariant`, `BadgeSize`, `BadgeOptions`    | `badgeDefaults`: `default`, `medium`  |
 | Card        | `CardVariant`, `CardOptions`                   | `cardDefaults`: `padding: false`      |
-| Combobox    | `ComboboxOption`, `ComboboxOptions`            | No defaults                           |
-| Select      | `SelectOption`, `SelectOptions`                | No defaults                           |
-| Status line | `StatusValue`, `StatusOptions`                 | No default status                     |
-| Alert       | `AlertStatus`, `AlertOptions`                  | No default status                     |
+| Combobox    | `ComboboxOption`, `ComboboxOptions`            | —                                     |
+| Select      | `SelectOption`, `SelectOptions`                | —                                     |
+| Status line | `StatusValue`, `StatusOptions`                 | —                                     |
+| Alert       | `AlertStatus`, `AlertOptions`                  | —                                     |
 | Toast       | `ToastStatus`, `ToastOptions`                  | `toastDefaults`: `status: "success"`  |
+| Table cell  | `TableCellVariant`, `TableCellOptions`         | —                                     |
 
-- Button variants: `primary`, `secondary`, `tertiary`, `ghost`, `danger`,
-  `danger-subtle`. Sizes: `small`, `medium`, `large`. Apply the default attributes
-  explicitly; the bare CSS class is not identical to every default variant rule.
-- Badge variants: `default`, `success`, `danger`, `warning`, `info`, `accent`,
-  `command`, `outline`, `muted`. Sizes: `small`, `medium`.
-- Card variants: `flat`, `rule`. Omit `variant` for the base card; there is no
-  explicit `default` variant. `padding` is boolean and maps to
-  `data-padding="true"` when enabled.
-- `ComboboxOption` contains `label`, a unique `value`, and optional `disabled`.
-  `ComboboxOptions` defines the shared root API: required `id`, `label`, `options`,
-  and `onValueChange`, plus optional `placeholder`, `value`, `disabled`,
-  `invalid`, `required`, `name`, `placement`, and `onOpenChange`. The callback
-  receives the selected option's string value, or an empty string when selection
-  is cleared. Adapters add their own children type and keep context and rendering
-  internal.
-- `SelectOption` mirrors `ComboboxOption`, and `SelectOptions` mirrors
-  `ComboboxOptions` for the keyboard-driven single-select. The `placeholder`
-  string renders in place of the value text until an option is selected. Both
-  option lists stay independent so each adapter can evolve its own surface.
-- `value` is the controlled counterpart of `onValueChange`. An empty string means
-  no selection, and omitting `value` leaves the component uncontrolled. Adapters
-  must therefore treat `""` as a controlled empty selection, not as uncontrolled.
-- `disabled` dims and blocks the field, `invalid` switches the border and focus
-  ring to the danger tokens, and `required` adds the label marker. `placement` is
-  the shared `top`/`bottom` union with `-start` and `-end` variants and picks the
-  popup side; it is deliberately narrower than the adapter's positioning options,
-  not a pass-through. `onOpenChange` reports popup visibility for lazy loading
-  and analytics.
-- `name` has different meaning per component. Combobox applies it to the visible
-  input, so the submitted value is the option label, not its value. Select keeps a
-  hidden native select for the option value and always renders it, so the label
-  stays associated and form reset and fieldset state are tracked; `name` alone
-  decides whether the control is submitted.
-- Status line statuses: `success`, `danger`, `info`.
-- Alert statuses: `danger`, `info`. Only the border changes with status; the CSS
-  keeps the alert mark danger-colored.
-- Toast status: `success` only. Status line, alert, and toast types are exported
-  from `/status`, but intentionally do not share an interchangeable status union.
+Types are erased at runtime. Only the `*Defaults` constants are runtime exports — there are no allowed-value arrays without a runtime use case.
 
-Native-only components such as checkbox, input, and the plain `.sb-select`
-pattern do not need shared custom options. Typography classes and the progress
-CSS custom property remain part of the CSS API, not this package.
+### Values
 
-## Migration from the class-map contracts
+- **Button variants:** `primary`, `secondary`, `tertiary`, `ghost`, `danger`, `danger-subtle`. **Sizes:** `small`, `medium`, `large`. Apply the default attributes explicitly — the bare CSS class is not identical to every default variant rule.
+- **Badge variants:** `default`, `success`, `danger`, `warning`, `info`, `accent`, `command`, `outline`, `muted`. **Sizes:** `small`, `medium`.
+- **Card variants:** `flat`, `rule`. Omit `variant` for the base card; there is no explicit `default` variant. `padding` is boolean and maps to `data-padding="true"` when enabled.
+- **Table cell variants:** `code`, `number`.
+- **Statuses are deliberately not interchangeable.** Status lines use `success`, `danger`, `info`. Alerts use `danger`, `info` — only the border changes with status. Toasts use `success` only. All three are exported from `/status`.
 
-Use `buttonDefaults`, `badgeDefaults`, `cardDefaults`, and `toastDefaults` instead
-of the corresponding `*Contract.defaults`. Use CSS class and attribute names
-directly in adapters. Class-only contracts and their subpaths have been removed.
-Existing option type names are unchanged.
+### Select and Combobox
 
-## Verification
+`SelectOption` and `ComboboxOption` both contain `label`, a unique `value`, and optional `disabled`.
 
-```sh
-pnpm --filter @simple-base/contracts typecheck
-pnpm --filter @simple-base/contracts build
-```
+`SelectOptions` and `ComboboxOptions` define the shared root API:
 
-These commands check the shared types and build the runtime defaults and type
-declarations.
+| Prop            | Required | Description                                                                                                                 |
+| --------------- | -------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `id`            | yes      | Unique identifier for the instance.                                                                                         |
+| `label`         | yes      | Visible label text.                                                                                                         |
+| `options`       | yes      | The option list.                                                                                                            |
+| `onValueChange` | yes      | Called with the selected option's string value, or `""` when selection is cleared.                                          |
+| `placeholder`   | no       | Rendered in place of the value text until something is selected.                                                            |
+| `value`         | no       | Controlled counterpart of `onValueChange`. `""` means no selection; omitting `value` leaves it uncontrolled.                |
+| `disabled`      | no       | Dims and blocks the field.                                                                                                  |
+| `invalid`       | no       | Switches the border and focus ring to the danger tokens.                                                                    |
+| `required`      | no       | Adds the label marker.                                                                                                      |
+| `name`          | no       | See below — semantics differ per component.                                                                                 |
+| `placement`     | no       | Shared `top`/`bottom` union with `-start` and `-end` variants; deliberately narrower than an adapter's positioning options. |
+| `onOpenChange`  | no       | Reports popup visibility, for lazy loading and analytics.                                                                   |
+
+Adapters must treat `""` as a controlled empty selection, not as uncontrolled.
+
+The two option lists stay independent so each adapter can evolve its own surface.
+
+**`name` differs per component.** Combobox applies it to the visible input, so the submitted value is the option _label_. Select keeps a hidden native select for the option _value_ and always renders it, so the label stays associated and form reset and fieldset state are tracked — `name` alone decides whether the control is submitted.
+
+## What stays in adapters
+
+Share framework-neutral configuration and value callbacks. Children, refs, framework-specific DOM events, native element prop interfaces, internal context, and accessibility implementation belong to the adapter.
+
+Adapters compose shared options with their framework's native element props, apply defaults when options are omitted, and emit the CSS classes and attributes directly. There are no class-name maps, attribute-name maps, CSS-property maps, or class-only contracts.
+
+Native-only components — checkbox, input, and the plain `.sb-select` pattern — have no shared custom options. Typography classes and the progress CSS custom property are part of the CSS package's API, not this one.
+
+## Links
+
+- [Repository](https://github.com/redasalmi/simple-base)
+- [Styles and selector API](https://www.npmjs.com/package/@simple-base/css)
+- [Design tokens](https://www.npmjs.com/package/@simple-base/tokens)
+- [Solid components](https://www.npmjs.com/package/@simple-base/solid)
+
+## License
+
+[MIT](https://github.com/redasalmi/simple-base/blob/main/LICENSE)

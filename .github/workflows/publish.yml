@@ -1,0 +1,59 @@
+name: Publish
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: Pack and verify the packages without publishing them
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+  id-token: write # npm provenance attestations
+
+concurrency:
+  group: publish
+  cancel-in-progress: false
+
+jobs:
+  npm:
+    name: Publish to npm
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up pnpm and Node.js
+        uses: pnpm/setup@v2
+        with:
+          # pnpm version comes from devEngines.packageManager in package.json.
+          runtime: node@24
+          cache: true
+          require-lockfile: true # runs pnpm install --frozen-lockfile
+
+      # Packages ship compiled output from dist/, so build before packing.
+      - name: Build packages
+        run: pnpm build
+
+      # pnpm skips packages whose version is already on the registry, so
+      # re-running this workflow is safe.
+      - name: Publish packages
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          DRY_RUN: ${{ inputs.dry_run || false }}
+        run: |
+          printf '//registry.npmjs.org/:_authToken=%s\n' "$NODE_AUTH_TOKEN" > ~/.npmrc
+
+          args=(--access public --no-git-checks)
+
+          if [[ "$DRY_RUN" == "true" ]]; then
+            echo "Dry run: packing and verifying without publishing"
+            args+=(--dry-run)
+          else
+            args+=(--provenance)
+          fi
+
+          pnpm --filter './packages/*' -r publish "${args[@]}"

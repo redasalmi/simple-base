@@ -1,100 +1,93 @@
 # @simple-base/css
 
-Simple Base component styles and typography.
+Component styles and typography for Simple Base. Plain CSS, no build step, no runtime — the selectors are the API.
 
-Styles cover components and their internal parts, including functional wrappers
-such as select arrows and scrollable tables. Page layouts, component galleries,
-and external grouping or showcase helpers belong in the consuming application.
+Styles cover components and their internal parts, including functional wrappers such as select arrows and scrollable tables. Page layouts, component galleries, and showcase helpers belong in your application.
 
-## Visual defaults
+## Install
 
-- Use `.sb-heading-1` through `.sb-heading-6` for utility headings: sans serif,
-  sized 32, 24, 20, 18, 16, and 14px. Reserve `.sb-display` for an intentional
-  expressive serif heading, not routine page sections or dialogs.
-- Write captions, table headings, and optional dialog kickers in sentence case.
-  Monospace is for code, identifiers, shortcuts, and alignment-dependent values;
-  omit eyebrows that repeat the heading or add no context.
-- Cards group content through surfaces and borders, without default elevation.
-  Menus and dialogs use restrained shadows, lighter in light themes. Modal
-  backdrops separate context with a scrim, not blur.
-- Generic dialog kickers are neutral. Danger styling belongs to destructive
-  confirmations, not ordinary settings or editing dialogs.
-- Buttons stay in place on hover and press. Color and border changes provide
-  feedback; focus rings remain visible.
+```sh
+pnpm add @simple-base/css
+```
 
-## All styles
+## Quick start
 
-Import the stylesheet for its side effects through a CSS-aware bundler:
+The package root includes the tokens and every component stylesheet. Import it once for its side effects:
 
 ```ts
 import "@simple-base/css";
 ```
 
-Or import it from CSS:
+Or from CSS:
 
 ```css
 @import "@simple-base/css";
 ```
 
-The package root includes the token stylesheet. Stylesheet imports do not export
-a JavaScript value or CSS string.
+Neither form exports a JavaScript value or a CSS string — the import exists for its side effects.
 
-## Individual stylesheets
-
-Load tokens once, then select the component styles you need:
+To load only what you use, import the tokens first and then the components you need:
 
 ```css
 @import "@simple-base/tokens/css";
 @import "@simple-base/css/button";
 @import "@simple-base/css/badge";
+@import "@simple-base/css/table";
 ```
 
-Individual stylesheets use explicit, extensionless exports such as `/button`,
-`/badge`, `/alert-dialog`, and `/typography`. The internal `styles/` directory and
-`.css` filenames are not public import paths. These exports also support
-side-effect imports in TypeScript:
+Then apply the root class and configuration attributes:
 
-```ts
-import "@simple-base/css/button";
+```html
+<button class="sb-button" data-variant="primary" data-size="medium">Save</button>
+<span class="sb-badge" data-variant="success" data-size="small">Active</span>
 ```
 
-## Selector API
+## Theming
 
-The selectors are the public API of this package. Component roots and parts are
-classes; configuration and state are attributes, never modifier classes.
+Colors come from [@simple-base/tokens](https://www.npmjs.com/package/@simple-base/tokens), which ships nine themes. Set `data-theme` on the root or on any nested region:
 
-### Cascade layer
+```html
+<html data-theme="nord"></html>
+```
 
-Every rule is wrapped in the `sb` cascade layer and declared before the imports:
+## Cascade layer
+
+Every rule lives in the `sb` cascade layer, declared before the imports:
 
 ```css
 @layer sb;
 ```
 
-Because the library is layered, any unlayered CSS in the consuming app wins over
-it regardless of specificity, so overrides do not need `!important`:
+Because the library is layered, any unlayered CSS in your application wins over it regardless of specificity — no `!important` needed:
 
 ```css
-/* app styles, unlayered */
+/* application styles, unlayered */
 .sb-button {
   border-radius: 0;
 }
 ```
 
-Note on order: if a layered framework such as Tailwind CSS is imported _before_
-this package, the `sb` layer is declared after the framework layers and wins on
-ties. Import this package first if framework utilities need the higher priority.
+Order matters with other layered frameworks: if you import a layered framework such as Tailwind CSS **before** this package, the `sb` layer is declared after the framework's layers and wins ties. Import this package first when framework utilities should take priority.
 
-### Conventions
+## Individual stylesheets
+
+Each entry point is an explicit, extensionless subpath. The internal `styles/` directory and `.css` filenames are not public import paths.
+
+`alert-dialog` · `badge` · `breadcrumb` · `button` · `card` · `checkbox` · `combobox` · `dialog` · `disclosure` · `empty-state` · `field` · `input` · `keyboard-shortcut` · `menu` · `pagination` · `progress` · `radio` · `range` · `segmented-control` · `select` · `status` · `switch` · `table` · `tabs` · `textarea` · `typography`
+
+## Design conventions
+
+- Use `.sb-heading-1` through `.sb-heading-6` for utility headings — sans serif, sized 32, 24, 20, 18, 16, and 14px. Reserve `.sb-display` for an intentional expressive serif heading, not routine page sections or dialogs.
+- Write captions, table headings, and optional dialog kickers in sentence case. Monospace is for code, identifiers, shortcuts, and alignment-dependent values.
+- Cards group content with surfaces and borders, without default elevation. Menus and dialogs use restrained shadows. Modal backdrops separate context with a scrim, not blur.
+- Buttons stay in place on hover and press. Color and border changes provide feedback; focus rings remain visible.
+
+## Selector conventions
 
 - `.sb-<component>` is the required root class.
 - `.sb-<component>-<part>` is a part of that component.
-- Configuration uses `data-*` attributes; state uses `data-*`, `aria-*`, or
-  native pseudo-classes (`:checked`, `:disabled`, `:hover`, `:focus-visible`,
-  `[open]`).
-- Element selectors are only used as descendants of a root class, to style the
-  structure a component renders. They are not standalone hooks and imply the
-  markup contract listed below.
+- Configuration uses `data-*` attributes; state uses `data-*`, `aria-*`, or native pseudo-classes (`:checked`, `:disabled`, `:hover`, `:focus-visible`, `[open]`).
+- Element selectors only appear as descendants of a root class, to style the structure a component renders. They are not standalone hooks.
 
 ### Variants and options
 
@@ -111,16 +104,18 @@ ties. Import this package first if framework utilities need the higher priority.
 
 ### State attributes
 
-- `[aria-invalid="true"]` — `.sb-input`, `.sb-textarea`.
-- `[data-invalid]` — `.sb-select-control`, `.sb-combobox-control`, `.sb-field-help`.
-- `[aria-selected="true"]` — `.sb-tab`, and `.sb-table tbody tr`.
-- `[aria-pressed="true"]` — `.sb-segment`.
-- `[aria-current="page"]` — `.sb-page-button`.
-- `[aria-disabled="true"]`, `:disabled` — `.sb-button`, `.sb-select`, form controls.
-- `[data-state="open"]` — `.sb-select-trigger`, `.sb-combobox-trigger`.
-- `[data-highlighted]` — `.sb-select-item`, `.sb-combobox-item`.
-- `[data-placeholder-shown]`, `[data-required]` — `.sb-select`, `.sb-combobox`.
-- `[open]` — `.sb-dialog`, `.sb-alert-dialog`, `.sb-disclosure`, `.sb-menu`.
+| Selector                                      | Applies to                                                     |
+| --------------------------------------------- | -------------------------------------------------------------- |
+| `[aria-invalid="true"]`                       | `.sb-input`, `.sb-textarea`                                    |
+| `[data-invalid]`                              | `.sb-select-control`, `.sb-combobox-control`, `.sb-field-help` |
+| `[aria-selected="true"]`                      | `.sb-tab`, `.sb-table tbody tr`                                |
+| `[aria-pressed="true"]`                       | `.sb-segment`                                                  |
+| `[aria-current="page"]`                       | `.sb-page-button`                                              |
+| `[aria-disabled="true"]`, `:disabled`         | `.sb-button`, `.sb-select`, form controls                      |
+| `[data-state="open"]`                         | `.sb-select-trigger`, `.sb-combobox-trigger`                   |
+| `[data-highlighted]`                          | `.sb-select-item`, `.sb-combobox-item`                         |
+| `[data-placeholder-shown]`, `[data-required]` | `.sb-select`, `.sb-combobox`                                   |
+| `[open]`                                      | `.sb-dialog`, `.sb-alert-dialog`, `.sb-disclosure`, `.sb-menu` |
 
 ### Component reference
 
@@ -156,8 +151,7 @@ ties. Import this package first if framework utilities need the higher priority.
 
 ### Element selectors
 
-These rules style the markup a component renders. Use the listed elements, or
-add a part class where one is available.
+These rules style the markup a component renders. Use the listed elements, or add a part class where one is available.
 
 | Parent                                                                                    | Elements                     |
 | ----------------------------------------------------------------------------------------- | ---------------------------- |
@@ -170,3 +164,13 @@ add a part class where one is available.
 | `.sb-choice`                                                                              | `span`, `input` (via `:has`) |
 | `.sb-progress`                                                                            | `span`                       |
 | `.sb-table`                                                                               | `th`, `td`, `tbody`, `tr`    |
+
+## Links
+
+- [Repository](https://github.com/redasalmi/simple-base)
+- [Design tokens](https://www.npmjs.com/package/@simple-base/tokens)
+- [Solid components](https://www.npmjs.com/package/@simple-base/solid)
+
+## License
+
+[MIT](https://github.com/redasalmi/simple-base/blob/main/LICENSE)
