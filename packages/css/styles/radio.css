@@ -1,39 +1,41 @@
-.sb-radio {
-  width: 18px;
-  height: 18px;
-  flex: 0 0 auto;
-  margin: 0;
-  border: var(--sb-semantic-border-width-hairline) solid var(--sb-semantic-color-border-strong);
-  border-radius: var(--sb-semantic-radius-full);
-  appearance: none;
-  background: var(--sb-semantic-color-background-surface);
-  cursor: pointer;
-}
+@layer sb {
+  .sb-radio {
+    width: 18px;
+    height: 18px;
+    flex: 0 0 auto;
+    margin: 0;
+    border: var(--sb-semantic-border-width-hairline) solid var(--sb-semantic-color-border-strong);
+    border-radius: var(--sb-semantic-radius-full);
+    appearance: none;
+    background: var(--sb-semantic-color-background-surface);
+    cursor: pointer;
+  }
 
-.sb-radio:checked {
-  background: var(--sb-semantic-color-accent-surface);
-  border-color: var(--sb-semantic-color-accent-surface);
-  box-shadow:
-    inset 0 0 0 var(--sb-semantic-space-1) var(--sb-semantic-color-background-surface),
-    inset 0 0 0 7px var(--sb-semantic-color-accent-surface);
-}
+  .sb-radio:checked {
+    background: var(--sb-semantic-color-accent-surface);
+    border-color: var(--sb-semantic-color-accent-surface);
+    box-shadow:
+      inset 0 0 0 var(--sb-semantic-space-1) var(--sb-semantic-color-background-surface),
+      inset 0 0 0 7px var(--sb-semantic-color-accent-surface);
+  }
 
-.sb-radio:focus-visible {
-  outline: 0;
-  box-shadow:
-    0 0 0 var(--sb-semantic-border-width-hairline) var(--sb-semantic-color-background-canvas),
-    0 0 0 var(--sb-semantic-space-1) var(--sb-semantic-color-focus-ring);
-}
+  .sb-radio:focus-visible {
+    outline: 0;
+    box-shadow:
+      0 0 0 var(--sb-semantic-border-width-hairline) var(--sb-semantic-color-background-canvas),
+      0 0 0 var(--sb-semantic-space-1) var(--sb-semantic-color-focus-ring);
+  }
 
-.sb-radio:checked:focus-visible {
-  box-shadow:
-    inset 0 0 0 var(--sb-semantic-space-1) var(--sb-semantic-color-background-surface),
-    inset 0 0 0 7px var(--sb-semantic-color-accent-surface),
-    0 0 0 var(--sb-semantic-border-width-hairline) var(--sb-semantic-color-background-canvas),
-    0 0 0 var(--sb-semantic-space-1) var(--sb-semantic-color-focus-ring);
-}
+  .sb-radio:checked:focus-visible {
+    box-shadow:
+      inset 0 0 0 var(--sb-semantic-space-1) var(--sb-semantic-color-background-surface),
+      inset 0 0 0 7px var(--sb-semantic-color-accent-surface),
+      0 0 0 var(--sb-semantic-border-width-hairline) var(--sb-semantic-color-background-canvas),
+      0 0 0 var(--sb-semantic-space-1) var(--sb-semantic-color-focus-ring);
+  }
 
-.sb-radio:disabled {
-  cursor: not-allowed;
-  opacity: var(--sb-semantic-opacity-disabled);
+  .sb-radio:disabled {
+    cursor: not-allowed;
+    opacity: var(--sb-semantic-opacity-disabled);
+  }
 }

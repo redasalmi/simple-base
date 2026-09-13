@@ -8,6 +8,7 @@ import { AlertDialogs } from "./preview/AlertDialogs";
 import { Inputs, TextAreas, Checkboxes, Radios, Switches } from "./preview/Inputs";
 import { Comboboxes } from "./preview/Comboboxes";
 import { Selects } from "./preview/Selects";
+import { Tables } from "./preview/Tables";
 import { Styles } from "./preview/Styles";
 
 type Page = {
@@ -73,6 +74,15 @@ const pages: Page[] = [
       "Pick a single option from a known list. Compound parts provide a labeled trigger, keyboard typeahead, and a portaled popup that shares the combobox popup styling.",
     usage: 'import { Select } from "@simple-base/solid";',
     component: Selects,
+  },
+  {
+    id: "table",
+    label: "Table",
+    group: "Components",
+    description:
+      "Display records in rows and columns. Compound parts map to native table elements, with optional cell variants and a scroll container for wide data.",
+    usage: 'import { Table } from "@simple-base/solid";',
+    component: Tables,
   },
   {
     id: "textarea",

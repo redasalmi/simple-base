@@ -45,3 +45,17 @@ export {
   type SelectEmptyProps,
   type SelectItemProps,
 } from "./components/Select";
+export {
+  Table,
+  type TableRootProps,
+  type TableWrapProps,
+  type TableCaptionProps,
+  type TableHeaderProps,
+  type TableBodyProps,
+  type TableFooterProps,
+  type TableRowProps,
+  type TableColumnHeaderProps,
+  type TableRowHeaderProps,
+  type TableCellProps,
+  type TableCellVariant,
+} from "./components/Table";

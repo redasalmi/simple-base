@@ -1,3 +1,5 @@
+@layer sb;
+
 @import "@simple-base/tokens/css";
 @import "./styles/typography.css";
 @import "./styles/card.css";

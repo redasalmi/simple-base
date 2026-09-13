@@ -4,6 +4,7 @@ export { cardDefaults, type CardVariant, type CardOptions } from "./card";
 export type { ComboboxOption, ComboboxOptions } from "./combobox";
 export type { Placement } from "./placement";
 export type { SelectOption, SelectOptions } from "./select";
+export type { TableCellVariant, TableCellOptions } from "./table";
 export {
   toastDefaults,
   type StatusValue,

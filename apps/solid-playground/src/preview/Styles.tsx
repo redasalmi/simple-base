@@ -311,7 +311,7 @@ export function Styles() {
                           }
                         />
                       </td>
-                      <td class="sb-table-code">{record.id}</td>
+                      <td data-variant="code">{record.id}</td>
                       <td>{record.name}</td>
                       <td>{record.status}</td>
                     </tr>
@@ -495,8 +495,8 @@ export function Styles() {
           ],
           [
             "Aliases",
-            "card-pad · card-flat · card-rule · segmented-control · empty-mark",
-            "Alternative class forms share the same appearance as the data attributes and classes shown above.",
+            "segmented-control / segmented · empty-state-mark / empty-mark",
+            "Root and part classes with a shorter alternative name. Variants and state always use data or ARIA attributes, never modifier classes.",
           ],
           [
             "Keyboard shortcuts",

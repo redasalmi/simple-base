@@ -1,98 +1,100 @@
-.sb-badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: var(--sb-semantic-space-6);
-  gap: var(--sb-semantic-space-2);
-  padding: 0 var(--sb-semantic-space-3);
-  border-radius: var(--sb-semantic-radius-full);
-  font-size: var(--sb-semantic-typography-size-xs);
-  font-weight: var(--sb-semantic-typography-weight-semibold);
-  line-height: var(--sb-semantic-typography-line-height-none);
-  text-decoration: none;
-  white-space: nowrap;
-}
+@layer sb {
+  .sb-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: var(--sb-semantic-space-6);
+    gap: var(--sb-semantic-space-2);
+    padding: 0 var(--sb-semantic-space-3);
+    border-radius: var(--sb-semantic-radius-full);
+    font-size: var(--sb-semantic-typography-size-xs);
+    font-weight: var(--sb-semantic-typography-weight-semibold);
+    line-height: var(--sb-semantic-typography-line-height-none);
+    text-decoration: none;
+    white-space: nowrap;
+  }
 
-.sb-badge,
-.sb-badge[data-variant="default"] {
-  color: var(--sb-semantic-color-foreground-secondary);
-  background: var(--sb-semantic-color-background-overlay);
-  border: var(--sb-semantic-border-width-hairline) solid var(--sb-semantic-color-border-strong);
-}
+  .sb-badge,
+  .sb-badge[data-variant="default"] {
+    color: var(--sb-semantic-color-foreground-secondary);
+    background: var(--sb-semantic-color-background-overlay);
+    border: var(--sb-semantic-border-width-hairline) solid var(--sb-semantic-color-border-strong);
+  }
 
-.sb-badge[data-variant="success"] {
-  color: var(--sb-semantic-color-status-success-text);
-  background: var(--sb-semantic-color-status-success-soft);
-  border-color: color-mix(
-    in oklch,
-    var(--sb-semantic-color-status-success-base) 48%,
-    var(--sb-semantic-color-border-default)
-  );
-}
+  .sb-badge[data-variant="success"] {
+    color: var(--sb-semantic-color-status-success-text);
+    background: var(--sb-semantic-color-status-success-soft);
+    border-color: color-mix(
+      in oklch,
+      var(--sb-semantic-color-status-success-base) 48%,
+      var(--sb-semantic-color-border-default)
+    );
+  }
 
-.sb-badge[data-variant="danger"] {
-  color: var(--sb-semantic-color-status-danger-text);
-  background: var(--sb-semantic-color-status-danger-soft);
-  border-color: color-mix(
-    in oklch,
-    var(--sb-semantic-color-status-danger-base) 48%,
-    var(--sb-semantic-color-border-default)
-  );
-}
+  .sb-badge[data-variant="danger"] {
+    color: var(--sb-semantic-color-status-danger-text);
+    background: var(--sb-semantic-color-status-danger-soft);
+    border-color: color-mix(
+      in oklch,
+      var(--sb-semantic-color-status-danger-base) 48%,
+      var(--sb-semantic-color-border-default)
+    );
+  }
 
-.sb-badge[data-variant="warning"] {
-  color: var(--sb-semantic-color-status-warning-text);
-  background: var(--sb-semantic-color-status-warning-soft);
-  border-color: color-mix(
-    in oklch,
-    var(--sb-semantic-color-status-warning-base) 48%,
-    var(--sb-semantic-color-border-default)
-  );
-}
+  .sb-badge[data-variant="warning"] {
+    color: var(--sb-semantic-color-status-warning-text);
+    background: var(--sb-semantic-color-status-warning-soft);
+    border-color: color-mix(
+      in oklch,
+      var(--sb-semantic-color-status-warning-base) 48%,
+      var(--sb-semantic-color-border-default)
+    );
+  }
 
-.sb-badge[data-variant="info"] {
-  color: var(--sb-semantic-color-status-info-text);
-  background: var(--sb-semantic-color-status-info-soft);
-  border-color: color-mix(
-    in oklch,
-    var(--sb-semantic-color-status-info-base) 48%,
-    var(--sb-semantic-color-border-default)
-  );
-}
+  .sb-badge[data-variant="info"] {
+    color: var(--sb-semantic-color-status-info-text);
+    background: var(--sb-semantic-color-status-info-soft);
+    border-color: color-mix(
+      in oklch,
+      var(--sb-semantic-color-status-info-base) 48%,
+      var(--sb-semantic-color-border-default)
+    );
+  }
 
-.sb-badge[data-variant="accent"] {
-  color: var(--sb-semantic-color-accent-text);
-  background: var(--sb-semantic-color-accent-soft);
-  border-color: color-mix(
-    in oklch,
-    var(--sb-semantic-color-accent-surface) 48%,
-    var(--sb-semantic-color-border-default)
-  );
-}
+  .sb-badge[data-variant="accent"] {
+    color: var(--sb-semantic-color-accent-text);
+    background: var(--sb-semantic-color-accent-soft);
+    border-color: color-mix(
+      in oklch,
+      var(--sb-semantic-color-accent-surface) 48%,
+      var(--sb-semantic-color-border-default)
+    );
+  }
 
-.sb-badge[data-variant="command"] {
-  color: var(--sb-semantic-color-foreground-primary);
-  background: var(--sb-semantic-color-background-overlay);
-}
+  .sb-badge[data-variant="command"] {
+    color: var(--sb-semantic-color-foreground-primary);
+    background: var(--sb-semantic-color-background-overlay);
+  }
 
-.sb-badge[data-variant="outline"] {
-  color: var(--sb-semantic-color-foreground-secondary);
-  background: transparent;
-  border-color: var(--sb-semantic-color-border-default);
-}
+  .sb-badge[data-variant="outline"] {
+    color: var(--sb-semantic-color-foreground-secondary);
+    background: transparent;
+    border-color: var(--sb-semantic-color-border-default);
+  }
 
-.sb-badge[data-variant="muted"] {
-  color: var(--sb-semantic-color-foreground-muted);
-  background: var(--sb-semantic-color-background-subtle);
-  border-color: var(--sb-semantic-color-border-subtle);
-}
+  .sb-badge[data-variant="muted"] {
+    color: var(--sb-semantic-color-foreground-muted);
+    background: var(--sb-semantic-color-background-subtle);
+    border-color: var(--sb-semantic-color-border-subtle);
+  }
 
-.sb-badge[data-size="small"] {
-  min-height: var(--sb-semantic-space-5);
-  padding-inline: var(--sb-semantic-space-2);
-}
+  .sb-badge[data-size="small"] {
+    min-height: var(--sb-semantic-space-5);
+    padding-inline: var(--sb-semantic-space-2);
+  }
 
-.sb-badge[data-size="medium"] {
-  min-height: var(--sb-semantic-space-6);
-  padding-inline: var(--sb-semantic-space-3);
+  .sb-badge[data-size="medium"] {
+    min-height: var(--sb-semantic-space-6);
+    padding-inline: var(--sb-semantic-space-3);
+  }
 }

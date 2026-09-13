@@ -42,6 +42,10 @@
       "types": "./dist/status.d.ts",
       "import": "./dist/status.js"
     },
+    "./table": {
+      "types": "./dist/table.d.ts",
+      "import": "./dist/table.js"
+    },
     "./package.json": "./package.json"
   },
   "scripts": {

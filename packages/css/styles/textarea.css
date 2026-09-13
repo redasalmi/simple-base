@@ -1,66 +1,69 @@
-.sb-textarea {
-  width: 100%;
-  min-height: 120px;
-  padding: var(--sb-semantic-space-3);
-  resize: vertical;
-  border: var(--sb-semantic-border-width-hairline) solid var(--sb-semantic-color-border-default);
-  border-radius: var(--sb-semantic-radius-sm);
-  outline: 0;
-  color: var(--sb-semantic-color-foreground-primary);
-  background: color-mix(
-    in oklch,
-    var(--sb-semantic-color-background-canvas) 82%,
-    var(--sb-semantic-color-background-surface)
-  );
-  caret-color: var(--sb-semantic-color-accent-text);
-  font: inherit;
-  font-size: var(--sb-semantic-typography-size-md);
-  line-height: var(--sb-semantic-typography-line-height-relaxed);
-  letter-spacing: var(--sb-semantic-typography-letter-spacing-normal);
-  transition:
-    border-color var(--sb-semantic-motion-duration-normal) var(--sb-semantic-motion-easing-standard),
-    box-shadow var(--sb-semantic-motion-duration-normal) var(--sb-semantic-motion-easing-standard),
-    background var(--sb-semantic-motion-duration-normal) var(--sb-semantic-motion-easing-standard),
-    color var(--sb-semantic-motion-duration-normal) var(--sb-semantic-motion-easing-standard),
-    opacity var(--sb-semantic-motion-duration-normal) var(--sb-semantic-motion-easing-standard);
-}
+@layer sb {
+  .sb-textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: var(--sb-semantic-space-3);
+    resize: vertical;
+    border: var(--sb-semantic-border-width-hairline) solid var(--sb-semantic-color-border-default);
+    border-radius: var(--sb-semantic-radius-sm);
+    outline: 0;
+    color: var(--sb-semantic-color-foreground-primary);
+    background: color-mix(
+      in oklch,
+      var(--sb-semantic-color-background-canvas) 82%,
+      var(--sb-semantic-color-background-surface)
+    );
+    caret-color: var(--sb-semantic-color-accent-text);
+    font: inherit;
+    font-size: var(--sb-semantic-typography-size-md);
+    line-height: var(--sb-semantic-typography-line-height-relaxed);
+    letter-spacing: var(--sb-semantic-typography-letter-spacing-normal);
+    transition:
+      border-color var(--sb-semantic-motion-duration-normal)
+        var(--sb-semantic-motion-easing-standard),
+      box-shadow var(--sb-semantic-motion-duration-normal) var(--sb-semantic-motion-easing-standard),
+      background var(--sb-semantic-motion-duration-normal) var(--sb-semantic-motion-easing-standard),
+      color var(--sb-semantic-motion-duration-normal) var(--sb-semantic-motion-easing-standard),
+      opacity var(--sb-semantic-motion-duration-normal) var(--sb-semantic-motion-easing-standard);
+  }
 
-.sb-textarea::placeholder {
-  color: var(--sb-semantic-color-foreground-muted);
-}
+  .sb-textarea::placeholder {
+    color: var(--sb-semantic-color-foreground-muted);
+  }
 
-.sb-textarea::selection {
-  color: var(--sb-semantic-color-selection-foreground);
-  background: var(--sb-semantic-color-selection-background);
-}
+  .sb-textarea::selection {
+    color: var(--sb-semantic-color-selection-foreground);
+    background: var(--sb-semantic-color-selection-background);
+  }
 
-.sb-textarea:hover:where(:not(:disabled)) {
-  border-color: var(--sb-semantic-color-border-strong);
-}
+  .sb-textarea:hover:where(:not(:disabled)) {
+    border-color: var(--sb-semantic-color-border-strong);
+  }
 
-.sb-textarea:focus-visible {
-  border-color: var(--sb-semantic-color-accent-text);
-  box-shadow:
-    0 0 0 var(--sb-semantic-border-width-hairline) var(--sb-semantic-color-background-canvas),
-    0 0 0 var(--sb-semantic-space-1) var(--sb-semantic-color-focus-ring);
-}
+  .sb-textarea:focus-visible {
+    border-color: var(--sb-semantic-color-accent-text);
+    box-shadow:
+      0 0 0 var(--sb-semantic-border-width-hairline) var(--sb-semantic-color-background-canvas),
+      0 0 0 var(--sb-semantic-space-1) var(--sb-semantic-color-focus-ring);
+  }
 
-.sb-textarea[aria-invalid="true"] {
-  border-color: var(--sb-semantic-color-status-danger-base);
-}
+  .sb-textarea[aria-invalid="true"] {
+    border-color: var(--sb-semantic-color-status-danger-base);
+  }
 
-.sb-textarea[aria-invalid="true"]:focus-visible {
-  box-shadow:
-    0 0 0 var(--sb-semantic-border-width-hairline) var(--sb-semantic-color-background-canvas),
-    0 0 0 var(--sb-semantic-space-1) var(--sb-semantic-color-focus-danger-ring);
-}
+  .sb-textarea[aria-invalid="true"]:focus-visible {
+    box-shadow:
+      0 0 0 var(--sb-semantic-border-width-hairline) var(--sb-semantic-color-background-canvas),
+      0 0 0 var(--sb-semantic-space-1) var(--sb-semantic-color-focus-danger-ring);
+  }
 
-.sb-textarea:read-only {
-  color: var(--sb-semantic-color-foreground-secondary);
-  background: var(--sb-semantic-color-background-raised);
-}
+  .sb-textarea:read-only {
+    color: var(--sb-semantic-color-foreground-secondary);
+    background: var(--sb-semantic-color-background-raised);
+  }
 
-.sb-textarea:disabled {
-  cursor: not-allowed;
-  opacity: var(--sb-semantic-opacity-disabled);
+  .sb-textarea:disabled {
+    cursor: not-allowed;
+    opacity: var(--sb-semantic-opacity-disabled);
+  }
 }

@@ -1,156 +1,159 @@
-.sb-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: var(--sb-semantic-size-control-md);
-  gap: var(--sb-semantic-space-2);
-  padding: 0 var(--sb-semantic-space-4);
-  border: var(--sb-semantic-border-width-hairline) solid transparent;
-  border-radius: var(--sb-semantic-radius-sm);
-  appearance: none;
-  cursor: pointer;
-  color: var(--sb-semantic-color-foreground-inverse);
-  background: var(--sb-semantic-color-foreground-primary);
-  font: inherit;
-  font-size: var(--sb-semantic-typography-size-md);
-  font-weight: var(--sb-semantic-typography-weight-semibold);
-  line-height: var(--sb-semantic-typography-line-height-none);
-  letter-spacing: var(--sb-semantic-typography-letter-spacing-normal);
-  text-decoration: none;
-  white-space: nowrap;
-  user-select: none;
-  transition:
-    background var(--sb-semantic-motion-duration-normal) var(--sb-semantic-motion-easing-standard),
-    color var(--sb-semantic-motion-duration-normal) var(--sb-semantic-motion-easing-standard),
-    border-color var(--sb-semantic-motion-duration-normal) var(--sb-semantic-motion-easing-standard),
-    opacity var(--sb-semantic-motion-duration-normal) var(--sb-semantic-motion-easing-standard);
-}
+@layer sb {
+  .sb-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: var(--sb-semantic-size-control-md);
+    gap: var(--sb-semantic-space-2);
+    padding: 0 var(--sb-semantic-space-4);
+    border: var(--sb-semantic-border-width-hairline) solid transparent;
+    border-radius: var(--sb-semantic-radius-sm);
+    appearance: none;
+    cursor: pointer;
+    color: var(--sb-semantic-color-foreground-inverse);
+    background: var(--sb-semantic-color-foreground-primary);
+    font: inherit;
+    font-size: var(--sb-semantic-typography-size-md);
+    font-weight: var(--sb-semantic-typography-weight-semibold);
+    line-height: var(--sb-semantic-typography-line-height-none);
+    letter-spacing: var(--sb-semantic-typography-letter-spacing-normal);
+    text-decoration: none;
+    white-space: nowrap;
+    user-select: none;
+    transition:
+      background var(--sb-semantic-motion-duration-normal) var(--sb-semantic-motion-easing-standard),
+      color var(--sb-semantic-motion-duration-normal) var(--sb-semantic-motion-easing-standard),
+      border-color var(--sb-semantic-motion-duration-normal)
+        var(--sb-semantic-motion-easing-standard),
+      opacity var(--sb-semantic-motion-duration-normal) var(--sb-semantic-motion-easing-standard);
+  }
 
-.sb-button[data-variant="primary"] {
-  color: var(--sb-semantic-color-foreground-inverse);
-  background: var(--sb-semantic-color-foreground-primary);
-  border-color: var(--sb-semantic-color-foreground-primary);
-}
+  .sb-button[data-variant="primary"] {
+    color: var(--sb-semantic-color-foreground-inverse);
+    background: var(--sb-semantic-color-foreground-primary);
+    border-color: var(--sb-semantic-color-foreground-primary);
+  }
 
-.sb-button[data-variant="primary"]:not(:disabled):not([aria-disabled="true"]):hover {
-  background: color-mix(
-    in oklch,
-    var(--sb-semantic-color-foreground-primary) 90%,
-    var(--sb-semantic-color-foreground-inverse)
-  );
-  border-color: color-mix(
-    in oklch,
-    var(--sb-semantic-color-foreground-primary) 90%,
-    var(--sb-semantic-color-foreground-inverse)
-  );
-}
+  .sb-button[data-variant="primary"]:not(:disabled):not([aria-disabled="true"]):hover {
+    background: color-mix(
+      in oklch,
+      var(--sb-semantic-color-foreground-primary) 90%,
+      var(--sb-semantic-color-foreground-inverse)
+    );
+    border-color: color-mix(
+      in oklch,
+      var(--sb-semantic-color-foreground-primary) 90%,
+      var(--sb-semantic-color-foreground-inverse)
+    );
+  }
 
-.sb-button[data-variant="primary"]:not(:disabled):not([aria-disabled="true"]):active {
-  background: color-mix(
-    in oklch,
-    var(--sb-semantic-color-foreground-primary) 82%,
-    var(--sb-semantic-color-foreground-inverse)
-  );
-  border-color: color-mix(
-    in oklch,
-    var(--sb-semantic-color-foreground-primary) 82%,
-    var(--sb-semantic-color-foreground-inverse)
-  );
-}
+  .sb-button[data-variant="primary"]:not(:disabled):not([aria-disabled="true"]):active {
+    background: color-mix(
+      in oklch,
+      var(--sb-semantic-color-foreground-primary) 82%,
+      var(--sb-semantic-color-foreground-inverse)
+    );
+    border-color: color-mix(
+      in oklch,
+      var(--sb-semantic-color-foreground-primary) 82%,
+      var(--sb-semantic-color-foreground-inverse)
+    );
+  }
 
-.sb-button[data-variant="secondary"] {
-  color: var(--sb-semantic-color-foreground-primary);
-  background: var(--sb-semantic-color-background-raised);
-  border-color: var(--sb-semantic-color-border-strong);
-}
+  .sb-button[data-variant="secondary"] {
+    color: var(--sb-semantic-color-foreground-primary);
+    background: var(--sb-semantic-color-background-raised);
+    border-color: var(--sb-semantic-color-border-strong);
+  }
 
-.sb-button[data-variant="secondary"]:not(:disabled):not([aria-disabled="true"]):hover {
-  background: var(--sb-semantic-color-background-overlay);
-  border-color: var(--sb-semantic-color-foreground-secondary);
-}
+  .sb-button[data-variant="secondary"]:not(:disabled):not([aria-disabled="true"]):hover {
+    background: var(--sb-semantic-color-background-overlay);
+    border-color: var(--sb-semantic-color-foreground-secondary);
+  }
 
-.sb-button[data-variant="tertiary"] {
-  color: var(--sb-semantic-color-foreground-secondary);
-  background: var(--sb-semantic-color-background-subtle);
-}
+  .sb-button[data-variant="tertiary"] {
+    color: var(--sb-semantic-color-foreground-secondary);
+    background: var(--sb-semantic-color-background-subtle);
+  }
 
-.sb-button[data-variant="tertiary"]:not(:disabled):not([aria-disabled="true"]):hover {
-  color: var(--sb-semantic-color-foreground-primary);
-  background: color-mix(in oklch, var(--sb-semantic-color-foreground-primary) 10%, transparent);
-}
+  .sb-button[data-variant="tertiary"]:not(:disabled):not([aria-disabled="true"]):hover {
+    color: var(--sb-semantic-color-foreground-primary);
+    background: color-mix(in oklch, var(--sb-semantic-color-foreground-primary) 10%, transparent);
+  }
 
-.sb-button[data-variant="ghost"] {
-  color: var(--sb-semantic-color-foreground-secondary);
-  background: transparent;
-}
+  .sb-button[data-variant="ghost"] {
+    color: var(--sb-semantic-color-foreground-secondary);
+    background: transparent;
+  }
 
-.sb-button[data-variant="ghost"]:not(:disabled):not([aria-disabled="true"]):hover {
-  color: var(--sb-semantic-color-foreground-primary);
-  background: var(--sb-semantic-color-background-subtle);
-}
+  .sb-button[data-variant="ghost"]:not(:disabled):not([aria-disabled="true"]):hover {
+    color: var(--sb-semantic-color-foreground-primary);
+    background: var(--sb-semantic-color-background-subtle);
+  }
 
-.sb-button[data-variant="danger"] {
-  color: var(--sb-semantic-color-status-danger-on-surface);
-  background: var(--sb-semantic-color-status-danger-surface);
-  border-color: var(--sb-semantic-color-status-danger-surface);
-}
+  .sb-button[data-variant="danger"] {
+    color: var(--sb-semantic-color-status-danger-on-surface);
+    background: var(--sb-semantic-color-status-danger-surface);
+    border-color: var(--sb-semantic-color-status-danger-surface);
+  }
 
-.sb-button[data-variant="danger"]:not(:disabled):not([aria-disabled="true"]):hover {
-  background: color-mix(
-    in oklch,
-    var(--sb-semantic-color-status-danger-surface) 88%,
-    var(--sb-semantic-color-background-canvas)
-  );
-  border-color: color-mix(
-    in oklch,
-    var(--sb-semantic-color-status-danger-surface) 88%,
-    var(--sb-semantic-color-background-canvas)
-  );
-}
+  .sb-button[data-variant="danger"]:not(:disabled):not([aria-disabled="true"]):hover {
+    background: color-mix(
+      in oklch,
+      var(--sb-semantic-color-status-danger-surface) 88%,
+      var(--sb-semantic-color-background-canvas)
+    );
+    border-color: color-mix(
+      in oklch,
+      var(--sb-semantic-color-status-danger-surface) 88%,
+      var(--sb-semantic-color-background-canvas)
+    );
+  }
 
-.sb-button[data-variant="danger-subtle"] {
-  color: var(--sb-semantic-color-status-danger-text);
-  background: var(--sb-semantic-color-status-danger-soft);
-  border-color: color-mix(
-    in oklch,
-    var(--sb-semantic-color-status-danger-base) 55%,
-    var(--sb-semantic-color-border-default)
-  );
-}
+  .sb-button[data-variant="danger-subtle"] {
+    color: var(--sb-semantic-color-status-danger-text);
+    background: var(--sb-semantic-color-status-danger-soft);
+    border-color: color-mix(
+      in oklch,
+      var(--sb-semantic-color-status-danger-base) 55%,
+      var(--sb-semantic-color-border-default)
+    );
+  }
 
-.sb-button[data-variant="danger-subtle"]:not(:disabled):not([aria-disabled="true"]):hover {
-  color: var(--sb-semantic-color-status-danger-on-surface);
-  background: var(--sb-semantic-color-status-danger-surface);
-  border-color: var(--sb-semantic-color-status-danger-surface);
-}
+  .sb-button[data-variant="danger-subtle"]:not(:disabled):not([aria-disabled="true"]):hover {
+    color: var(--sb-semantic-color-status-danger-on-surface);
+    background: var(--sb-semantic-color-status-danger-surface);
+    border-color: var(--sb-semantic-color-status-danger-surface);
+  }
 
-.sb-button:focus-visible {
-  outline: 0;
-  box-shadow:
-    0 0 0 var(--sb-semantic-border-width-hairline) var(--sb-semantic-color-background-canvas),
-    0 0 0 var(--sb-semantic-space-1) var(--sb-semantic-color-focus-ring);
-}
+  .sb-button:focus-visible {
+    outline: 0;
+    box-shadow:
+      0 0 0 var(--sb-semantic-border-width-hairline) var(--sb-semantic-color-background-canvas),
+      0 0 0 var(--sb-semantic-space-1) var(--sb-semantic-color-focus-ring);
+  }
 
-.sb-button:disabled,
-.sb-button[aria-disabled="true"] {
-  cursor: not-allowed;
-  opacity: var(--sb-semantic-opacity-disabled);
-}
+  .sb-button:disabled,
+  .sb-button[aria-disabled="true"] {
+    cursor: not-allowed;
+    opacity: var(--sb-semantic-opacity-disabled);
+  }
 
-.sb-button[data-size="small"] {
-  min-height: var(--sb-semantic-size-control-sm);
-  padding-inline: var(--sb-semantic-space-3);
-  font-size: var(--sb-semantic-typography-size-sm);
-}
+  .sb-button[data-size="small"] {
+    min-height: var(--sb-semantic-size-control-sm);
+    padding-inline: var(--sb-semantic-space-3);
+    font-size: var(--sb-semantic-typography-size-sm);
+  }
 
-.sb-button[data-size="medium"] {
-  min-height: var(--sb-semantic-size-control-md);
-  padding-inline: var(--sb-semantic-space-4);
-  font-size: var(--sb-semantic-typography-size-md);
-}
+  .sb-button[data-size="medium"] {
+    min-height: var(--sb-semantic-size-control-md);
+    padding-inline: var(--sb-semantic-space-4);
+    font-size: var(--sb-semantic-typography-size-md);
+  }
 
-.sb-button[data-size="large"] {
-  min-height: var(--sb-semantic-size-control-xl);
-  padding-inline: var(--sb-semantic-space-6);
-  font-size: var(--sb-semantic-typography-size-lg);
+  .sb-button[data-size="large"] {
+    min-height: var(--sb-semantic-size-control-xl);
+    padding-inline: var(--sb-semantic-space-6);
+    font-size: var(--sb-semantic-typography-size-lg);
+  }
 }

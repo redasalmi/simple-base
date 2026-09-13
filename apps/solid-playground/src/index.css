@@ -273,6 +273,10 @@ a {
   color: var(--sb-semantic-color-foreground-secondary);
   font-size: 13px;
 }
+.preview-field-help {
+  margin: 0;
+  font-size: 13px;
+}
 .preview-button-row {
   display: flex;
   flex-wrap: wrap;

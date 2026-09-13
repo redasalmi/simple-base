@@ -52,7 +52,8 @@ export function Inputs() {
           </Field>
           <p
             id="name-help"
-            class={invalid() ? "sb-field-error preview-note" : "preview-note"}
+            class="sb-field-help preview-field-help"
+            data-invalid={invalid() || undefined}
             role="status"
           >
             {invalid() ? "Use at least three characters." : "The workspace name is long enough."}
@@ -167,7 +168,8 @@ export function TextAreas() {
           </Field>
           <p
             id="note-help"
-            class={!note().trim() ? "sb-field-error preview-note" : "preview-note"}
+            class="sb-field-help preview-field-help"
+            data-invalid={!note().trim() || undefined}
             role="status"
           >
             {note().trim() ? `${note().length} characters` : "Add a note before continuing."}

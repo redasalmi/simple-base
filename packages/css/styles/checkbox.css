@@ -1,40 +1,42 @@
-.sb-checkbox {
-  position: relative;
-  width: 18px;
-  height: 18px;
-  flex: 0 0 auto;
-  margin: 0;
-  border: var(--sb-semantic-border-width-hairline) solid var(--sb-semantic-color-border-strong);
-  border-radius: var(--sb-semantic-radius-sm);
-  appearance: none;
-  background: var(--sb-semantic-color-background-surface);
-  cursor: pointer;
-}
+@layer sb {
+  .sb-checkbox {
+    position: relative;
+    width: 18px;
+    height: 18px;
+    flex: 0 0 auto;
+    margin: 0;
+    border: var(--sb-semantic-border-width-hairline) solid var(--sb-semantic-color-border-strong);
+    border-radius: var(--sb-semantic-radius-sm);
+    appearance: none;
+    background: var(--sb-semantic-color-background-surface);
+    cursor: pointer;
+  }
 
-.sb-checkbox:checked {
-  background: var(--sb-semantic-color-accent-surface);
-  border-color: var(--sb-semantic-color-accent-surface);
-}
+  .sb-checkbox:checked {
+    background: var(--sb-semantic-color-accent-surface);
+    border-color: var(--sb-semantic-color-accent-surface);
+  }
 
-.sb-checkbox:checked::after {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  color: var(--sb-semantic-color-accent-on-surface);
-  content: "✓";
-  font-size: var(--sb-semantic-typography-size-sm);
-  font-weight: var(--sb-semantic-typography-weight-bold);
-}
+  .sb-checkbox:checked::after {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    color: var(--sb-semantic-color-accent-on-surface);
+    content: "✓";
+    font-size: var(--sb-semantic-typography-size-sm);
+    font-weight: var(--sb-semantic-typography-weight-bold);
+  }
 
-.sb-checkbox:focus-visible {
-  outline: 0;
-  box-shadow:
-    0 0 0 var(--sb-semantic-border-width-hairline) var(--sb-semantic-color-background-canvas),
-    0 0 0 var(--sb-semantic-space-1) var(--sb-semantic-color-focus-ring);
-}
+  .sb-checkbox:focus-visible {
+    outline: 0;
+    box-shadow:
+      0 0 0 var(--sb-semantic-border-width-hairline) var(--sb-semantic-color-background-canvas),
+      0 0 0 var(--sb-semantic-space-1) var(--sb-semantic-color-focus-ring);
+  }
 
-.sb-checkbox:disabled {
-  cursor: not-allowed;
-  opacity: var(--sb-semantic-opacity-disabled);
+  .sb-checkbox:disabled {
+    cursor: not-allowed;
+    opacity: var(--sb-semantic-opacity-disabled);
+  }
 }
