@@ -59,6 +59,7 @@ import "@simple-base/css/badge";
 | ---------- | ---------------------- | ---------------------------------------------------------- |
 | `Button`   | `button`               | `variant`, `size`                                          |
 | `Badge`    | `span`                 | `variant`, `size`                                          |
+| `Card`     | `div`                  | `variant`                                                  |
 | `Input`    | `input`                | Native input props; `type` excludes `radio` and `checkbox` |
 | `TextArea` | `textarea`             | Native props                                               |
 | `Checkbox` | `input[type=checkbox]` | Native props                                               |
@@ -74,7 +75,7 @@ import "@simple-base/css/badge";
 | `Select`      | `Root`, `Label`, `Control`, `Trigger`, `ValueText`, `Indicator`, `Portal`, `Positioner`, `Content`, `List`, `Empty`, `Item` |
 | `Table`       | `Root`, `Wrap`, `Caption`, `Header`, `Body`, `Footer`, `Row`, `ColumnHeader`, `RowHeader`, `Cell`                           |
 
-The CSS package ships more components than this adapter currently covers. Breadcrumb, card, dialog, disclosure, empty state, field, keyboard shortcut, menu, pagination, progress, range, segmented control, status, tabs, and typography are available as styles with selector-level APIs.
+The CSS package ships more components than this adapter currently covers. Breadcrumb, dialog, disclosure, empty state, field, keyboard shortcut, menu, pagination, progress, range, segmented control, status, tabs, and typography are available as styles with selector-level APIs.
 
 ## Select
 
@@ -227,6 +228,19 @@ import { AlertDialog, Button } from "@simple-base/solid";
 - Native attributes pass through, except the ones the component owns (such as `id`, `role`, and `aria-*` that describe the widget's own structure).
 - Event handlers compose: your `onClick` runs alongside the component's internal handling, not instead of it.
 - Shared option names and defaults come from [@simple-base/contracts](https://www.npmjs.com/package/@simple-base/contracts), and the unmodified option types are re-exported from this package.
+
+## Tailwind CSS
+
+The components emit only class names and `data-*` attributes, so Tailwind utilities can override them — provided the cascade layers are ordered before the imports:
+
+```css
+@layer theme, base, sb, components, utilities;
+
+@import "tailwindcss";
+@import "@simple-base/css";
+```
+
+Resets stay before the library's defaults and utilities stay after them, so `p-0` on a `Card` needs no `!important`. See [Cascade layer](https://www.npmjs.com/package/@simple-base/css) in the CSS package for the full order, the other override options, and the 0.2.0 migration notes.
 
 ## Themes
 

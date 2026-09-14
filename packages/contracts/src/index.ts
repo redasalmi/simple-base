@@ -1,6 +1,6 @@
 export { badgeDefaults, type BadgeVariant, type BadgeSize, type BadgeOptions } from "./badge";
 export { buttonDefaults, type ButtonVariant, type ButtonSize, type ButtonOptions } from "./button";
-export { cardDefaults, type CardVariant, type CardOptions } from "./card";
+export type { CardVariant, CardOptions } from "./card";
 export type { ComboboxOption, ComboboxOptions } from "./combobox";
 export type { Placement } from "./placement";
 export type { SelectOption, SelectOptions } from "./select";

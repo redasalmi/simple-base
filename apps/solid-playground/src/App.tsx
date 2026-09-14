@@ -4,6 +4,7 @@ import { Select } from "@simple-base/solid";
 import { Typography } from "./preview/Typography";
 import { Buttons } from "./preview/Buttons";
 import { Badges } from "./preview/Badges";
+import { Cards } from "./preview/Cards";
 import { AlertDialogs } from "./preview/AlertDialogs";
 import { Inputs, TextAreas, Checkboxes, Radios, Switches } from "./preview/Inputs";
 import { Comboboxes } from "./preview/Comboboxes";
@@ -47,6 +48,15 @@ const pages: Page[] = [
       "Short, non-interactive labels for status and metadata. Use the text to carry meaning; color is supporting information.",
     usage: 'import { Badge } from "@simple-base/solid";',
     component: Badges,
+  },
+  {
+    id: "card",
+    label: "Card",
+    group: "Components",
+    description:
+      "Group related content on a bordered surface, or drop the surface for content that already sits on one. Cards have no default elevation and no interactive behavior.",
+    usage: 'import { Card } from "@simple-base/solid";',
+    component: Cards,
   },
   {
     id: "input",

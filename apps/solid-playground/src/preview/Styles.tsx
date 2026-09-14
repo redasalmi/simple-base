@@ -3,7 +3,6 @@ import { Button, Checkbox } from "@simple-base/solid";
 import { Api, Example, Field } from "./Preview";
 
 export function Styles() {
-  const [padded, setPadded] = createSignal(true);
   const [progress, setProgress] = createSignal(64);
   const [view, setView] = createSignal("List");
   const [tab, setTab] = createSignal(0);
@@ -15,6 +14,11 @@ export function Styles() {
   let menu: HTMLDetailsElement | undefined;
   let dialog: HTMLDialogElement | undefined;
   const tabNames = ["Overview", "Activity", "Settings"];
+  const cardTreatments = [
+    [undefined, "Default"],
+    ["flat", "Flat"],
+    ["rule", "Rule"],
+  ] as const;
   const tabCopy = [
     "A summary of the example workspace.",
     "There is no recent activity in this demo.",
@@ -29,23 +33,16 @@ export function Styles() {
     <>
       <Example
         title="Cards & grouping"
-        description="Default, flat, and rule variants. Surfaces and borders provide grouping; cards have no default elevation. Toggle the optional padding."
+        description="Default, flat, and rule variants. Surfaces and borders provide grouping; cards have no default elevation and ship their own interior padding."
         code={
-          '<section class="sb-card" data-variant="rule" data-padding="true">\n  <h3 class="sb-heading-3">Workspace settings</h3>\n</section>'
+          '<section class="sb-card" data-variant="rule">\n  <h3 class="sb-heading-3">Workspace settings</h3>\n</section>'
         }
       >
         <div class="preview-stack">
-          <label class="preview-choice">
-            <Checkbox
-              checked={padded()}
-              onChange={(event) => setPadded(event.currentTarget.checked)}
-            />
-            <span>Card padding</span>
-          </label>
-          <For each={["default", "flat", "rule"]}>
-            {(variant) => (
-              <section class="sb-card" data-variant={variant} data-padding={String(padded())}>
-                <h3 class="sb-heading-4">{variant[0].toUpperCase() + variant.slice(1)}</h3>
+          <For each={cardTreatments}>
+            {([variant, label]) => (
+              <section class="sb-card" data-variant={variant}>
+                <h3 class="sb-heading-4">{label}</h3>
                 <p class="sb-text-body">A group of related content, not an action.</p>
               </section>
             )}

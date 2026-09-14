@@ -44,7 +44,7 @@ Subpaths: `/badge` · `/button` · `/card` · `/combobox` · `/placement` · `/s
 | ----------- | ---------------------------------------------- | ------------------------------------- |
 | Button      | `ButtonVariant`, `ButtonSize`, `ButtonOptions` | `buttonDefaults`: `primary`, `medium` |
 | Badge       | `BadgeVariant`, `BadgeSize`, `BadgeOptions`    | `badgeDefaults`: `default`, `medium`  |
-| Card        | `CardVariant`, `CardOptions`                   | `cardDefaults`: `padding: false`      |
+| Card        | `CardVariant`, `CardOptions`                   | —                                     |
 | Combobox    | `ComboboxOption`, `ComboboxOptions`            | —                                     |
 | Select      | `SelectOption`, `SelectOptions`                | —                                     |
 | Status line | `StatusValue`, `StatusOptions`                 | —                                     |
@@ -58,7 +58,7 @@ Types are erased at runtime. Only the `*Defaults` constants are runtime exports 
 
 - **Button variants:** `primary`, `secondary`, `tertiary`, `ghost`, `danger`, `danger-subtle`. **Sizes:** `small`, `medium`, `large`. Apply the default attributes explicitly — the bare CSS class is not identical to every default variant rule.
 - **Badge variants:** `default`, `success`, `danger`, `warning`, `info`, `accent`, `command`, `outline`, `muted`. **Sizes:** `small`, `medium`.
-- **Card variants:** `flat`, `rule`. Omit `variant` for the base card; there is no explicit `default` variant. `padding` is boolean and maps to `data-padding="true"` when enabled.
+- **Card variants:** `flat`, `rule`. Omit `variant` for the base card; there is no explicit `default` variant. Card padding is built into `.sb-card`; see the 0.2.0 migration notes in [@simple-base/css](https://www.npmjs.com/package/@simple-base/css).
 - **Table cell variants:** `code`, `number`.
 - **Statuses are deliberately not interchangeable.** Status lines use `success`, `danger`, `info`. Alerts use `danger`, `info` — only the border changes with status. Toasts use `success` only. All three are exported from `/status`.
 

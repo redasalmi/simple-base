@@ -1,14 +1,12 @@
 @layer sb {
   .sb-card {
     min-width: 0;
+    /* Interior padding is part of the surface; override .sb-card from app CSS to change it. */
+    padding: clamp(var(--sb-semantic-space-5), 3vw, var(--sb-semantic-space-8));
     border: var(--sb-semantic-border-width-hairline) solid var(--sb-semantic-color-border-default);
     border-radius: var(--sb-semantic-radius-lg);
     background: var(--sb-semantic-color-background-surface);
     box-shadow: var(--sb-semantic-shadow-card);
-  }
-
-  .sb-card[data-padding="true"] {
-    padding: clamp(var(--sb-semantic-space-5), 3vw, var(--sb-semantic-space-8));
   }
 
   .sb-card[data-variant="flat"] {
@@ -18,7 +16,7 @@
   }
 
   .sb-card[data-variant="rule"] {
-    padding-top: var(--sb-semantic-space-5);
+    padding: var(--sb-semantic-space-5) 0 0;
     border: 0;
     border-top: var(--sb-semantic-border-width-hairline) solid
       var(--sb-semantic-color-border-strong);

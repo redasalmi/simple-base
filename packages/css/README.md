@@ -52,22 +52,89 @@ Colors come from [@simple-base/tokens](https://www.npmjs.com/package/@simple-bas
 
 ## Cascade layer
 
-Every rule lives in the `sb` cascade layer, declared before the imports:
+Every Simple Base rule lives in the `sb` cascade layer. The library declares that layer; your application decides where it sits by declaring the full order before the imports:
 
 ```css
-@layer sb;
+@layer theme, base, sb, components, utilities;
+
+@import "tailwindcss";
+@import "@simple-base/css";
 ```
 
-Because the library is layered, any unlayered CSS in your application wins over it regardless of specificity — no `!important` needed:
+That order keeps resets out of the way and puts your own styles last:
+
+| Layer        | Holds                    | Relative to `sb` |
+| ------------ | ------------------------ | ---------------- |
+| `theme`      | Tailwind theme variables | before           |
+| `base`       | Tailwind preflight reset | before           |
+| `sb`         | Every Simple Base rule   | —                |
+| `components` | Application components   | after            |
+| `utilities`  | Tailwind utilities       | after            |
+
+Layer priority is compared before specificity for normal declarations, so a later layer wins a conflict even when the earlier rule is more specific. Tailwind's preflight `padding: 0` on `*` cannot strip a card's padding, while `p-0` on that same card can set it.
+
+Customize anything the library styles with one of these. None of them needs `!important`:
+
+```html
+<!-- Tailwind utility -->
+<div class="sb-card p-0">…</div>
+```
 
 ```css
-/* application styles, unlayered */
-.sb-button {
-  border-radius: 0;
+/* Application component, in the components layer */
+@layer components {
+  .card-flush {
+    padding: 0;
+  }
 }
 ```
 
-Order matters with other layered frameworks: if you import a layered framework such as Tailwind CSS **before** this package, the `sb` layer is declared after the framework's layers and wins ties. Import this package first when framework utilities should take priority.
+```css
+/* Unlayered application CSS — always wins */
+.checkout .sb-card {
+  padding: var(--sb-semantic-space-4);
+}
+```
+
+```html
+<!-- Inline style -->
+<div class="sb-card" style="padding: 1rem">…</div>
+```
+
+The library sits before all of your layers, so it never needs `!important`. Reserve that for conflicts between your own styles, such as one utility that has to beat another.
+
+If another layered framework shares the page, name its layers in the same statement and place them deliberately instead of relying on import order.
+
+## Migrating to 0.2.0
+
+Card padding is no longer an option — it is part of the `.sb-card` surface:
+
+- `data-padding` was removed from this package.
+- `CardOptions.padding` and `cardDefaults` were removed from [@simple-base/contracts](https://www.npmjs.com/package/@simple-base/contracts).
+- Base and flat cards that were previously unpadded now receive the stylesheet's default interior padding.
+- Rule cards keep top-only padding.
+- `variant` is unchanged: `flat`, `rule`, or omitted for the base surface.
+
+If a layout needs the previous unpadded look, override it from your own styles:
+
+```html
+<!-- Tailwind utility, given the layer order above -->
+<div class="sb-card p-0">…</div>
+```
+
+```css
+/* Application component */
+@layer components {
+  .card-flush {
+    padding: 0;
+  }
+}
+
+/* Unlayered application CSS */
+.checkout-summary .sb-card {
+  padding: 0;
+}
+```
 
 ## Individual stylesheets
 
@@ -79,7 +146,7 @@ Each entry point is an explicit, extensionless subpath. The internal `styles/` d
 
 - Use `.sb-heading-1` through `.sb-heading-6` for utility headings — sans serif, sized 32, 24, 20, 18, 16, and 14px. Reserve `.sb-display` for an intentional expressive serif heading, not routine page sections or dialogs.
 - Write captions, table headings, and optional dialog kickers in sentence case. Monospace is for code, identifiers, shortcuts, and alignment-dependent values.
-- Cards group content with surfaces and borders, without default elevation. Menus and dialogs use restrained shadows. Modal backdrops separate context with a scrim, not blur.
+- Cards group content with surfaces and borders, without default elevation. Every `.sb-card` ships its own interior padding; override `.sb-card` from application CSS when a layout needs different spacing. Menus and dialogs use restrained shadows. Modal backdrops separate context with a scrim, not blur.
 - Buttons stay in place on hover and press. Color and border changes provide feedback; focus rings remain visible.
 
 ## Selector conventions
@@ -100,7 +167,6 @@ Each entry point is an explicit, extensionless subpath. The internal `styles/` d
 | `data-size`    | `.sb-badge`                                 | `small`, `medium`                                                                          |
 | `data-size`    | `.sb-button`                                | `small`, `medium`, `large`                                                                 |
 | `data-status`  | `.sb-status-line`, `.sb-alert`, `.sb-toast` | `success`, `danger`, `info`                                                                |
-| `data-padding` | `.sb-card`                                  | `true`                                                                                     |
 
 ### State attributes
 
