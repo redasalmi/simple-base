@@ -1,5 +1,18 @@
 import { createSignal } from "solid-js";
-import { Button, Combobox } from "@simple-base/solid";
+import {
+  Button,
+  Combobox,
+  ComboboxContent,
+  ComboboxControl,
+  ComboboxEmpty,
+  ComboboxInput,
+  ComboboxItem,
+  ComboboxLabel,
+  ComboboxList,
+  ComboboxPortal,
+  ComboboxPositioner,
+  ComboboxTrigger,
+} from "@simple-base/solid";
 import { Api, Example } from "./Preview";
 
 const countries = [
@@ -34,7 +47,7 @@ export function Comboboxes() {
         title="Search and select"
         description="Type to filter countries, then use the arrow keys and Enter or click an option. Japan is disabled in this demo. Search for a nonmatching term to see the empty message; Escape closes the popup."
         code={
-          'const [country, setCountry] = createSignal("");\n\n<Combobox\n  id="country"\n  label="Country"\n  options={countries}\n  placeholder="Search countries"\n  onValueChange={setCountry}\n>\n  <Combobox.Label />\n  <Combobox.Control>\n    <Combobox.Input />\n    <Combobox.Trigger>\n      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">\n        <path d="m6 9 6 6 6-6" />\n      </svg>\n    </Combobox.Trigger>\n  </Combobox.Control>\n  <Combobox.Portal>\n    <Combobox.Positioner>\n      <Combobox.Content>\n        <Combobox.List>\n          {(option) => <Combobox.Item option={option} />}\n        </Combobox.List>\n        <Combobox.Empty>No countries found. Try another search.</Combobox.Empty>\n      </Combobox.Content>\n    </Combobox.Positioner>\n  </Combobox.Portal>\n</Combobox>'
+          'const [country, setCountry] = createSignal("");\n\n<Combobox\n  id="country"\n  label="Country"\n  options={countries}\n  placeholder="Search countries"\n  onValueChange={setCountry}\n>\n  <ComboboxLabel />\n  <ComboboxControl>\n    <ComboboxInput />\n    <ComboboxTrigger>\n      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">\n        <path d="m6 9 6 6 6-6" />\n      </svg>\n    </ComboboxTrigger>\n  </ComboboxControl>\n  <ComboboxPortal>\n    <ComboboxPositioner>\n      <ComboboxContent>\n        <ComboboxList>\n          {(option) => <ComboboxItem option={option} />}\n        </ComboboxList>\n        <ComboboxEmpty>No countries found. Try another search.</ComboboxEmpty>\n      </ComboboxContent>\n    </ComboboxPositioner>\n  </ComboboxPortal>\n</Combobox>'
         }
       >
         <div class="preview-stack">
@@ -45,21 +58,21 @@ export function Comboboxes() {
             placeholder="Search countries"
             onValueChange={setCountry}
           >
-            <Combobox.Label />
-            <Combobox.Control>
-              <Combobox.Input />
-              <Combobox.Trigger>
+            <ComboboxLabel />
+            <ComboboxControl>
+              <ComboboxInput />
+              <ComboboxTrigger>
                 <ChevronDown />
-              </Combobox.Trigger>
-            </Combobox.Control>
-            <Combobox.Portal>
-              <Combobox.Positioner>
-                <Combobox.Content>
-                  <Combobox.List>{(option) => <Combobox.Item option={option} />}</Combobox.List>
-                  <Combobox.Empty>No countries found. Try another search.</Combobox.Empty>
-                </Combobox.Content>
-              </Combobox.Positioner>
-            </Combobox.Portal>
+              </ComboboxTrigger>
+            </ComboboxControl>
+            <ComboboxPortal>
+              <ComboboxPositioner>
+                <ComboboxContent>
+                  <ComboboxList>{(option) => <ComboboxItem option={option} />}</ComboboxList>
+                  <ComboboxEmpty>No countries found. Try another search.</ComboboxEmpty>
+                </ComboboxContent>
+              </ComboboxPositioner>
+            </ComboboxPortal>
           </Combobox>
           <p class="preview-status" role="status">
             {country()
@@ -72,7 +85,7 @@ export function Comboboxes() {
         title="Empty and updated options"
         description="Open the initially empty list, then load a local collection to see the options update. No request is made and no data is saved."
         code={
-          'const [loaded, setLoaded] = createSignal(false);\nconst [destination, setDestination] = createSignal("");\n\n<Combobox\n  id="destination"\n  label="Destination"\n  options={loaded() ? countries : []}\n  onValueChange={setDestination}\n>\n  {/* Label and control as above. */}\n  <Combobox.Portal>\n    <Combobox.Positioner>\n      <Combobox.Content>\n        <Combobox.List>\n          {(option) => <Combobox.Item option={option} />}\n        </Combobox.List>\n        <Combobox.Empty>\n          {loaded() ? "No destinations found." : "No destinations available. Load the example options."}\n        </Combobox.Empty>\n      </Combobox.Content>\n    </Combobox.Positioner>\n  </Combobox.Portal>\n</Combobox>\n<Button onClick={() => setLoaded(true)} disabled={loaded()}>\n  {loaded() ? "Options loaded" : "Load example options"}\n</Button>'
+          'const [loaded, setLoaded] = createSignal(false);\nconst [destination, setDestination] = createSignal("");\n\n<Combobox\n  id="destination"\n  label="Destination"\n  options={loaded() ? countries : []}\n  onValueChange={setDestination}\n>\n  {/* Label and control as above. */}\n  <ComboboxPortal>\n    <ComboboxPositioner>\n      <ComboboxContent>\n        <ComboboxList>\n          {(option) => <ComboboxItem option={option} />}\n        </ComboboxList>\n        <ComboboxEmpty>\n          {loaded() ? "No destinations found." : "No destinations available. Load the example options."}\n        </ComboboxEmpty>\n      </ComboboxContent>\n    </ComboboxPositioner>\n  </ComboboxPortal>\n</Combobox>\n<Button onClick={() => setLoaded(true)} disabled={loaded()}>\n  {loaded() ? "Options loaded" : "Load example options"}\n</Button>'
         }
       >
         <div class="preview-stack">
@@ -83,25 +96,25 @@ export function Comboboxes() {
             placeholder="Search destinations"
             onValueChange={setDestination}
           >
-            <Combobox.Label />
-            <Combobox.Control>
-              <Combobox.Input />
-              <Combobox.Trigger>
+            <ComboboxLabel />
+            <ComboboxControl>
+              <ComboboxInput />
+              <ComboboxTrigger>
                 <ChevronDown />
-              </Combobox.Trigger>
-            </Combobox.Control>
-            <Combobox.Portal>
-              <Combobox.Positioner>
-                <Combobox.Content>
-                  <Combobox.List>{(option) => <Combobox.Item option={option} />}</Combobox.List>
-                  <Combobox.Empty>
+              </ComboboxTrigger>
+            </ComboboxControl>
+            <ComboboxPortal>
+              <ComboboxPositioner>
+                <ComboboxContent>
+                  <ComboboxList>{(option) => <ComboboxItem option={option} />}</ComboboxList>
+                  <ComboboxEmpty>
                     {loaded()
                       ? "No destinations found. Try another search."
                       : "No destinations available. Load the example options."}
-                  </Combobox.Empty>
-                </Combobox.Content>
-              </Combobox.Positioner>
-            </Combobox.Portal>
+                  </ComboboxEmpty>
+                </ComboboxContent>
+              </ComboboxPositioner>
+            </ComboboxPortal>
           </Combobox>
           <div>
             <Button variant="secondary" disabled={loaded()} onClick={() => setLoaded(true)}>
@@ -120,7 +133,7 @@ export function Comboboxes() {
       <Api
         rows={[
           [
-            "Combobox / .Root",
+            "Combobox",
             "id, label, options, onValueChange (required)",
             "The root owns single-selection state and case-insensitive label filtering. Give each instance a unique ID.",
           ],
@@ -145,27 +158,27 @@ export function Comboboxes() {
             "Each part accepts reactive class and native attributes. Consumer event handlers run alongside widget handlers, not instead of them. Attributes the widget owns, such as id and role, are excluded.",
           ],
           [
-            ".Label / .Control / .Input",
+            "ComboboxLabel / ComboboxControl / ComboboxInput",
             "label / wrapper / text input",
             "Label uses the root label by default. Control groups the input and trigger; the input stays focused while navigating suggestions.",
           ],
           [
-            ".Trigger",
+            "ComboboxTrigger",
             "button",
             'Opens or closes suggestions. Direct SVG children use the system icon size; mark decorative icons with aria-hidden="true".',
           ],
           [
-            ".Portal / .Positioner / .Content",
+            "ComboboxPortal / ComboboxPositioner / ComboboxContent",
             "popup composition",
             "Portal mounts under document.body by default. Inside a native modal dialog, pass mount={dialog()} using a signal-backed dialog ref to keep the popup interactive. Positioner anchors it to the control, and Content hides all popup children when closed.",
           ],
           [
-            ".List / .Item",
+            "ComboboxList / ComboboxItem",
             "render callback / option",
             "List supplies the filtered options. Render an Item with its option prop; disabled options cannot be selected.",
           ],
           [
-            ".Empty",
+            "ComboboxEmpty",
             "status message",
             "Place beside List inside Content. It appears only when the popup is open and the filtered collection has no options.",
           ],

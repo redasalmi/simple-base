@@ -12,7 +12,7 @@ short API reference.
 
 - **Solid components:** Button (six variants, three sizes, disabled states), Badge
   (nine variants, both sizes), Input, TextArea, Checkbox, Radio, Switch, and all
-  AlertDialog compound parts. Form examples cover editable, selected, disabled,
+  AlertDialog named parts. Form examples cover editable, selected, disabled,
   read-only, and validation states where supported.
 - **Foundations:** the heading and body scales, display typography, text roles,
   code, and keyboard shortcuts.
@@ -22,8 +22,8 @@ short API reference.
   These examples do not imply additional Solid component exports.
 
 Examples use local state only. Navigation resets component demonstrations; no
-form data is submitted or persisted. Modal examples use `showModal()` and
-`close()`; the inline AlertDialog is an explicitly non-modal anatomy specimen.
+form data is submitted or persisted. AlertDialog coordinates its trigger and
+native modal content through controlled or uncontrolled state.
 Keyboard behavior is demonstrated with native controls, focusable navigation,
 and a local accessible tabs example.
 
@@ -78,8 +78,8 @@ Turbo builds workspace dependencies before checking types. `pnpm check` and
 
 ## Modal portal targets
 
-Both `Select.Portal` and `Combobox.Portal` accept `mount?: Node`. Inside a native
+Both `SelectPortal` and `ComboboxPortal` accept `mount?: Node`. Inside a native
 modal, mount the popup within the dialog rather than under `document.body`.
 Use a signal-backed ref (`const [dialog, setDialog] = createSignal<HTMLDialogElement>()`),
-pass `ref={setDialog}` to `AlertDialog`, and use `mount={dialog()}` on the portal.
+pass `ref={setDialog}` to `AlertDialogContent`, and use `mount={dialog()}` on the portal.
 The reactive ref lets the portal follow the dialog once its element is assigned.

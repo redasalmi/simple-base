@@ -66,14 +66,14 @@ import "@simple-base/css/badge";
 | `Radio`    | `input[type=radio]`    | Native props                                               |
 | `Switch`   | `input[role=switch]`   | Native props; requires `aria-label` or `aria-labelledby`   |
 
-**Compound components** expose parts as properties on the root (`Select.Label`, `Table.Cell`, and so on):
+**Composable components** use named exports so bundlers can remove unused parts. Each part is prefixed with its root name:
 
-| Component     | Parts                                                                                                                       |
-| ------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| `AlertDialog` | `Root`, `Icon`, `Content`, `Kicker`, `Title`, `Description`, `Actions`                                                      |
-| `Combobox`    | `Root`, `Label`, `Control`, `Input`, `Trigger`, `Portal`, `Positioner`, `Content`, `List`, `Empty`, `Item`                  |
-| `Select`      | `Root`, `Label`, `Control`, `Trigger`, `ValueText`, `Indicator`, `Portal`, `Positioner`, `Content`, `List`, `Empty`, `Item` |
-| `Table`       | `Root`, `Wrap`, `Caption`, `Header`, `Body`, `Footer`, `Row`, `ColumnHeader`, `RowHeader`, `Cell`                           |
+| Root          | Named parts                                                                                                                                                                                                          |
+| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `AlertDialog` | `AlertDialogTrigger`, `AlertDialogContent`, `AlertDialogIcon`, `AlertDialogHeader`, `AlertDialogKicker`, `AlertDialogTitle`, `AlertDialogDescription`, `AlertDialogFooter`, `AlertDialogCancel`, `AlertDialogAction` |
+| `Combobox`    | `ComboboxLabel`, `ComboboxControl`, `ComboboxInput`, `ComboboxTrigger`, `ComboboxPortal`, `ComboboxPositioner`, `ComboboxContent`, `ComboboxList`, `ComboboxEmpty`, `ComboboxItem`                                   |
+| `Select`      | `SelectLabel`, `SelectControl`, `SelectTrigger`, `SelectValueText`, `SelectIndicator`, `SelectPortal`, `SelectPositioner`, `SelectContent`, `SelectList`, `SelectEmpty`, `SelectItem`                                |
+| `Table`       | `TableWrap`, `TableCaption`, `TableHeader`, `TableBody`, `TableFooter`, `TableRow`, `TableColumnHeader`, `TableRowHeader`, `TableCell`                                                                               |
 
 The CSS package ships more components than this adapter currently covers. Breadcrumb, dialog, disclosure, empty state, field, keyboard shortcut, menu, pagination, progress, range, segmented control, status, tabs, and typography are available as styles with selector-level APIs.
 
@@ -83,7 +83,19 @@ The CSS package ships more components than this adapter currently covers. Breadc
 
 ```tsx
 import { createSignal } from "solid-js";
-import { Select } from "@simple-base/solid";
+import {
+  Select,
+  SelectContent,
+  SelectControl,
+  SelectIndicator,
+  SelectItem,
+  SelectLabel,
+  SelectList,
+  SelectPortal,
+  SelectPositioner,
+  SelectTrigger,
+  SelectValueText,
+} from "@simple-base/solid";
 
 const timezones = [
   { label: "Central European Time (UTC+01:00)", value: "cet" },
@@ -102,11 +114,11 @@ export function TimezonePicker() {
       options={timezones}
       onValueChange={setTimezone}
     >
-      <Select.Label />
-      <Select.Control>
-        <Select.Trigger>
-          <Select.ValueText />
-          <Select.Indicator>
+      <SelectLabel />
+      <SelectControl>
+        <SelectTrigger>
+          <SelectValueText />
+          <SelectIndicator>
             <svg
               aria-hidden="true"
               viewBox="0 0 24 24"
@@ -116,16 +128,16 @@ export function TimezonePicker() {
             >
               <path d="m6 9 6 6 6-6" />
             </svg>
-          </Select.Indicator>
-        </Select.Trigger>
-      </Select.Control>
-      <Select.Portal>
-        <Select.Positioner>
-          <Select.Content>
-            <Select.List>{(option) => <Select.Item option={option} />}</Select.List>
-          </Select.Content>
-        </Select.Positioner>
-      </Select.Portal>
+          </SelectIndicator>
+        </SelectTrigger>
+      </SelectControl>
+      <SelectPortal>
+        <SelectPositioner>
+          <SelectContent>
+            <SelectList>{(option) => <SelectItem option={option} />}</SelectList>
+          </SelectContent>
+        </SelectPositioner>
+      </SelectPortal>
     </Select>
   );
 }
@@ -133,13 +145,27 @@ export function TimezonePicker() {
 
 Additional root props: `value` makes selection controlled (`""` means cleared), `name` adds a hidden native select so the value submits with the form, `disabled`, `invalid`, and `required` drive state styling and labeling, `placement` picks the popup side, and `onOpenChange` reports visibility.
 
-`Select.Empty` renders beside `Select.List` and appears only while the popup is open with no options. `Select.Portal` accepts `mount` — pass a dialog element's node to keep the popup interactive inside a native modal.
+`SelectEmpty` renders beside `SelectList` and appears only while the popup is open with no options. `SelectPortal` accepts `mount` — pass a dialog element's node to keep the popup interactive inside a native modal.
 
 ## Combobox
 
 Same root props as `Select`, with a text input that filters options by label.
 
 ```tsx
+import {
+  Combobox,
+  ComboboxContent,
+  ComboboxControl,
+  ComboboxEmpty,
+  ComboboxInput,
+  ComboboxItem,
+  ComboboxLabel,
+  ComboboxList,
+  ComboboxPortal,
+  ComboboxPositioner,
+  ComboboxTrigger,
+} from "@simple-base/solid";
+
 <Combobox
   id="country"
   label="Country"
@@ -147,10 +173,10 @@ Same root props as `Select`, with a text input that filters options by label.
   options={countries}
   onValueChange={setCountry}
 >
-  <Combobox.Label />
-  <Combobox.Control>
-    <Combobox.Input />
-    <Combobox.Trigger>
+  <ComboboxLabel />
+  <ComboboxControl>
+    <ComboboxInput />
+    <ComboboxTrigger>
       <svg
         aria-hidden="true"
         viewBox="0 0 24 24"
@@ -160,17 +186,17 @@ Same root props as `Select`, with a text input that filters options by label.
       >
         <path d="m6 9 6 6 6-6" />
       </svg>
-    </Combobox.Trigger>
-  </Combobox.Control>
-  <Combobox.Portal>
-    <Combobox.Positioner>
-      <Combobox.Content>
-        <Combobox.List>{(option) => <Combobox.Item option={option} />}</Combobox.List>
-        <Combobox.Empty>No countries found. Try another search.</Combobox.Empty>
-      </Combobox.Content>
-    </Combobox.Positioner>
-  </Combobox.Portal>
-</Combobox>
+    </ComboboxTrigger>
+  </ComboboxControl>
+  <ComboboxPortal>
+    <ComboboxPositioner>
+      <ComboboxContent>
+        <ComboboxList>{(option) => <ComboboxItem option={option} />}</ComboboxList>
+        <ComboboxEmpty>No countries found. Try another search.</ComboboxEmpty>
+      </ComboboxContent>
+    </ComboboxPositioner>
+  </ComboboxPortal>
+</Combobox>;
 ```
 
 ## Table
@@ -178,49 +204,74 @@ Same root props as `Select`, with a text input that filters options by label.
 `ColumnHeader` defaults `scope` to `col` and `RowHeader` to `row`. `Cell` accepts `variant`: `code` or `number`.
 
 ```tsx
-import { Table } from "@simple-base/solid";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableColumnHeader,
+  TableHeader,
+  TableRow,
+  TableRowHeader,
+  TableWrap,
+} from "@simple-base/solid";
 
-<Table.Wrap>
+<TableWrap>
   <Table>
-    <Table.Caption>Recent invoices</Table.Caption>
-    <Table.Header>
-      <Table.Row>
-        <Table.ColumnHeader>Invoice</Table.ColumnHeader>
-        <Table.ColumnHeader>Status</Table.ColumnHeader>
-        <Table.ColumnHeader>Amount</Table.ColumnHeader>
-      </Table.Row>
-    </Table.Header>
-    <Table.Body>
-      <Table.Row>
-        <Table.RowHeader>INV-001</Table.RowHeader>
-        <Table.Cell>Paid</Table.Cell>
-        <Table.Cell variant="number">$250.00</Table.Cell>
-      </Table.Row>
-    </Table.Body>
+    <TableCaption>Recent invoices</TableCaption>
+    <TableHeader>
+      <TableRow>
+        <TableColumnHeader>Invoice</TableColumnHeader>
+        <TableColumnHeader>Status</TableColumnHeader>
+        <TableColumnHeader>Amount</TableColumnHeader>
+      </TableRow>
+    </TableHeader>
+    <TableBody>
+      <TableRow>
+        <TableRowHeader>INV-001</TableRowHeader>
+        <TableCell>Paid</TableCell>
+        <TableCell variant="number">$250.00</TableCell>
+      </TableRow>
+    </TableBody>
   </Table>
-</Table.Wrap>;
+</TableWrap>;
 ```
 
-`Table.Wrap` provides the horizontal scroll container the table styles expect.
+`TableWrap` provides the horizontal scroll container the table styles expect.
 
 ## AlertDialog
 
-Renders a native `<dialog>` with `role="alertdialog"`, wiring `aria-labelledby` and `aria-describedby` to the title and description automatically.
+Provides controlled or uncontrolled modal state around a native `<dialog>` with `role="alertdialog"`. Content wires `aria-labelledby` and `aria-describedby` to the title and description automatically.
 
 ```tsx
-import { AlertDialog, Button } from "@simple-base/solid";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@simple-base/solid";
 
-<AlertDialog open>
-  <AlertDialog.Content>
-    <AlertDialog.Title>Delete project?</AlertDialog.Title>
-    <AlertDialog.Description>This action cannot be undone.</AlertDialog.Description>
-  </AlertDialog.Content>
-  <AlertDialog.Actions>
-    <Button variant="ghost">Cancel</Button>
-    <Button variant="danger">Delete</Button>
-  </AlertDialog.Actions>
+<AlertDialog>
+  <AlertDialogTrigger variant="danger-subtle">Delete project</AlertDialogTrigger>
+  <AlertDialogContent>
+    <AlertDialogHeader>
+      <AlertDialogTitle>Delete project?</AlertDialogTitle>
+      <AlertDialogDescription>This action cannot be undone.</AlertDialogDescription>
+    </AlertDialogHeader>
+    <AlertDialogFooter>
+      <AlertDialogCancel>Cancel</AlertDialogCancel>
+      <AlertDialogAction>Delete</AlertDialogAction>
+    </AlertDialogFooter>
+  </AlertDialogContent>
 </AlertDialog>;
 ```
+
+Use `open` with `onOpenChange` for controlled state, or `defaultOpen` for uncontrolled initial state. Native dialog attributes, events, and the `HTMLDialogElement` ref belong to `AlertDialogContent`.
 
 ## Props conventions
 

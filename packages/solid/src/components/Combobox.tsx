@@ -35,7 +35,7 @@ export type ComboboxRootProps = ComboboxOptions & {
   children: JSX.Element;
 } & Omit<JSX.HTMLAttributes<HTMLDivElement>, keyof ComboboxOptions | "children">;
 
-function ComboboxRoot(props: ComboboxRootProps) {
+export function Combobox(props: ComboboxRootProps) {
   const [local, rest] = splitProps(props, [
     "class",
     "children",
@@ -136,7 +136,7 @@ export type ComboboxLabelProps = Omit<JSX.LabelHTMLAttributes<HTMLLabelElement>,
   children?: JSX.Element;
 };
 
-function ComboboxLabel(props: ComboboxLabelProps) {
+export function ComboboxLabel(props: ComboboxLabelProps) {
   const { api, label } = useCombobox();
   const [local, rest] = splitProps(props, ["class", "children"]);
 
@@ -152,7 +152,7 @@ function ComboboxLabel(props: ComboboxLabelProps) {
 
 export type ComboboxControlProps = Omit<JSX.HTMLAttributes<HTMLDivElement>, "id">;
 
-function ComboboxControl(props: ComboboxControlProps) {
+export function ComboboxControl(props: ComboboxControlProps) {
   const { api } = useCombobox();
   const [local, rest] = splitProps(props, ["class", "children"]);
 
@@ -171,7 +171,7 @@ export type ComboboxInputProps = Omit<
   "id" | "type" | "role" | "value" | "defaultValue" | "disabled" | "readOnly" | "autoComplete"
 >;
 
-function ComboboxInput(props: ComboboxInputProps) {
+export function ComboboxInput(props: ComboboxInputProps) {
   const { api, label } = useCombobox();
   const [local, rest] = splitProps(props, ["class"]);
 
@@ -189,7 +189,7 @@ export type ComboboxTriggerProps = Omit<
   "id" | "type" | "role" | "disabled"
 >;
 
-function ComboboxTrigger(props: ComboboxTriggerProps) {
+export function ComboboxTrigger(props: ComboboxTriggerProps) {
   const { api } = useCombobox();
   const [local, rest] = splitProps(props, ["class", "children"]);
 
@@ -208,13 +208,13 @@ export type ComboboxPortalProps = {
   mount?: Node;
 };
 
-function ComboboxPortal(props: ComboboxPortalProps) {
+export function ComboboxPortal(props: ComboboxPortalProps) {
   return <Portal mount={props.mount}>{props.children}</Portal>;
 }
 
 export type ComboboxPositionerProps = Omit<JSX.HTMLAttributes<HTMLDivElement>, "id" | "style">;
 
-function ComboboxPositioner(props: ComboboxPositionerProps) {
+export function ComboboxPositioner(props: ComboboxPositionerProps) {
   const { api } = useCombobox();
   const [local, rest] = splitProps(props, ["class", "children"]);
 
@@ -230,7 +230,7 @@ function ComboboxPositioner(props: ComboboxPositionerProps) {
 
 export type ComboboxContentProps = Omit<JSX.HTMLAttributes<HTMLDivElement>, "hidden">;
 
-function ComboboxContent(props: ComboboxContentProps) {
+export function ComboboxContent(props: ComboboxContentProps) {
   const { api } = useCombobox();
   const [local, rest] = splitProps(props, ["class", "children"]);
 
@@ -248,7 +248,7 @@ export type ComboboxListProps = Omit<
   children: (option: ComboboxOption) => JSX.Element;
 };
 
-function ComboboxList(props: ComboboxListProps) {
+export function ComboboxList(props: ComboboxListProps) {
   const { api, options, label } = useCombobox();
   const [local, rest] = splitProps(props, ["class", "children"]);
 
@@ -265,7 +265,7 @@ function ComboboxList(props: ComboboxListProps) {
 
 export type ComboboxEmptyProps = JSX.HTMLAttributes<HTMLDivElement>;
 
-function ComboboxEmpty(props: ComboboxEmptyProps) {
+export function ComboboxEmpty(props: ComboboxEmptyProps) {
   const { api, options } = useCombobox();
   const [local, rest] = splitProps(props, ["class", "children"]);
 
@@ -285,7 +285,7 @@ export type ComboboxItemProps = Omit<
   option: ComboboxOption;
 };
 
-function ComboboxItem(props: ComboboxItemProps) {
+export function ComboboxItem(props: ComboboxItemProps) {
   const { api } = useCombobox();
   const [local, rest] = splitProps(props, ["class", "option"]);
 
@@ -298,17 +298,3 @@ function ComboboxItem(props: ComboboxItemProps) {
     </li>
   );
 }
-
-export const Combobox = Object.assign(ComboboxRoot, {
-  Root: ComboboxRoot,
-  Label: ComboboxLabel,
-  Control: ComboboxControl,
-  Input: ComboboxInput,
-  Trigger: ComboboxTrigger,
-  Portal: ComboboxPortal,
-  Positioner: ComboboxPositioner,
-  Content: ComboboxContent,
-  List: ComboboxList,
-  Empty: ComboboxEmpty,
-  Item: ComboboxItem,
-});

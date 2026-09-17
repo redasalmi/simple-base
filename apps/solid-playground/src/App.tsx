@@ -1,6 +1,18 @@
 import { For, createEffect, createSignal, onCleanup, onMount, type Component } from "solid-js";
 import { Dynamic } from "solid-js/web";
-import { Select } from "@simple-base/solid";
+import {
+  Select,
+  SelectContent,
+  SelectControl,
+  SelectIndicator,
+  SelectItem,
+  SelectLabel,
+  SelectList,
+  SelectPortal,
+  SelectPositioner,
+  SelectTrigger,
+  SelectValueText,
+} from "@simple-base/solid";
 import { Typography } from "./preview/Typography";
 import { Buttons } from "./preview/Buttons";
 import { Badges } from "./preview/Badges";
@@ -72,8 +84,8 @@ const pages: Page[] = [
     label: "Combobox",
     group: "Components",
     description:
-      "Search a list of options as you type, then select a value. Compound parts provide a labeled input, keyboard navigation, and a portaled popup with an empty state.",
-    usage: 'import { Combobox } from "@simple-base/solid";',
+      "Search a list of options as you type, then select a value. Named parts provide a labeled input, keyboard navigation, and a portaled popup with an empty state.",
+    usage: 'import { Combobox, ComboboxInput, ComboboxItem } from "@simple-base/solid";',
     component: Comboboxes,
   },
   {
@@ -81,8 +93,8 @@ const pages: Page[] = [
     label: "Select",
     group: "Components",
     description:
-      "Pick a single option from a known list. Compound parts provide a labeled trigger, keyboard typeahead, and a portaled popup that shares the combobox popup styling.",
-    usage: 'import { Select } from "@simple-base/solid";',
+      "Pick a single option from a known list. Named parts provide a labeled trigger, keyboard typeahead, and a portaled popup that shares the combobox popup styling.",
+    usage: 'import { Select, SelectTrigger, SelectItem } from "@simple-base/solid";',
     component: Selects,
   },
   {
@@ -90,8 +102,8 @@ const pages: Page[] = [
     label: "Table",
     group: "Components",
     description:
-      "Display records in rows and columns. Compound parts map to native table elements, with optional cell variants and a scroll container for wide data.",
-    usage: 'import { Table } from "@simple-base/solid";',
+      "Display records in rows and columns. Named parts map to native table elements, with optional cell variants and a scroll container for wide data.",
+    usage: 'import { Table, TableHeader, TableCell } from "@simple-base/solid";',
     component: Tables,
   },
   {
@@ -135,8 +147,9 @@ const pages: Page[] = [
     label: "AlertDialog",
     group: "Components",
     description:
-      "A deliberate pause before a destructive action. Compound parts sit on a native dialog with a linked title and description.",
-    usage: 'import { AlertDialog } from "@simple-base/solid";',
+      "A deliberate pause before a destructive action. Named parts compose a native dialog with a linked title and description.",
+    usage:
+      'import { AlertDialog, AlertDialogTrigger, AlertDialogContent } from "@simple-base/solid";',
     component: AlertDialogs,
   },
   {
@@ -223,22 +236,22 @@ export default function App() {
               value={theme()}
               onValueChange={setTheme}
             >
-              <Select.Label />
-              <Select.Control>
-                <Select.Trigger>
-                  <Select.ValueText />
-                  <Select.Indicator>
+              <SelectLabel />
+              <SelectControl>
+                <SelectTrigger>
+                  <SelectValueText />
+                  <SelectIndicator>
                     <ChevronDown />
-                  </Select.Indicator>
-                </Select.Trigger>
-              </Select.Control>
-              <Select.Portal>
-                <Select.Positioner>
-                  <Select.Content>
-                    <Select.List>{(option) => <Select.Item option={option} />}</Select.List>
-                  </Select.Content>
-                </Select.Positioner>
-              </Select.Portal>
+                  </SelectIndicator>
+                </SelectTrigger>
+              </SelectControl>
+              <SelectPortal>
+                <SelectPositioner>
+                  <SelectContent>
+                    <SelectList>{(option) => <SelectItem option={option} />}</SelectList>
+                  </SelectContent>
+                </SelectPositioner>
+              </SelectPortal>
             </Select>
           </div>
         </div>

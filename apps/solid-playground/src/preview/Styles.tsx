@@ -407,7 +407,7 @@ export function Styles() {
       </Example>
       <Example
         title="Generic dialog"
-        description="A neutral, non-destructive dialog. This uses CSS and native HTML directly, not the Solid AlertDialog compound component."
+        description="A neutral, non-destructive dialog. This uses CSS and native HTML directly, not the Solid AlertDialog component family."
         code={
           '<dialog class="sb-dialog" aria-labelledby="dialog-title">\n  <div class="sb-dialog-head">\n    <h2 class="sb-dialog-title" id="dialog-title">Workspace details</h2>\n    <button class="sb-dialog-close" aria-label="Close">×</button>\n  </div>\n  <p class="sb-dialog-copy">A neutral information dialog.</p>\n</dialog>'
         }

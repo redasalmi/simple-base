@@ -170,24 +170,24 @@ Each entry point is an explicit, extensionless subpath. The internal `styles/` d
 
 ### State attributes
 
-| Selector                                      | Applies to                                                     |
-| --------------------------------------------- | -------------------------------------------------------------- |
-| `[aria-invalid="true"]`                       | `.sb-input`, `.sb-textarea`                                    |
-| `[data-invalid]`                              | `.sb-select-control`, `.sb-combobox-control`, `.sb-field-help` |
-| `[aria-selected="true"]`                      | `.sb-tab`, `.sb-table tbody tr`                                |
-| `[aria-pressed="true"]`                       | `.sb-segment`                                                  |
-| `[aria-current="page"]`                       | `.sb-page-button`                                              |
-| `[aria-disabled="true"]`, `:disabled`         | `.sb-button`, `.sb-select`, form controls                      |
-| `[data-state="open"]`                         | `.sb-select-trigger`, `.sb-combobox-trigger`                   |
-| `[data-highlighted]`                          | `.sb-select-item`, `.sb-combobox-item`                         |
-| `[data-placeholder-shown]`, `[data-required]` | `.sb-select`, `.sb-combobox`                                   |
-| `[open]`                                      | `.sb-dialog`, `.sb-alert-dialog`, `.sb-disclosure`, `.sb-menu` |
+| Selector                                      | Applies to                                                             |
+| --------------------------------------------- | ---------------------------------------------------------------------- |
+| `[aria-invalid="true"]`                       | `.sb-input`, `.sb-textarea`                                            |
+| `[data-invalid]`                              | `.sb-select-control`, `.sb-combobox-control`, `.sb-field-help`         |
+| `[aria-selected="true"]`                      | `.sb-tab`, `.sb-table tbody tr`                                        |
+| `[aria-pressed="true"]`                       | `.sb-segment`                                                          |
+| `[aria-current="page"]`                       | `.sb-page-button`                                                      |
+| `[aria-disabled="true"]`, `:disabled`         | `.sb-button`, `.sb-select`, form controls                              |
+| `[data-state="open"]`                         | `.sb-select-trigger`, `.sb-combobox-trigger`                           |
+| `[data-highlighted]`                          | `.sb-select-item`, `.sb-combobox-item`                                 |
+| `[data-placeholder-shown]`, `[data-required]` | `.sb-select`, `.sb-combobox`                                           |
+| `[open]`                                      | `.sb-dialog`, `.sb-alert-dialog-content`, `.sb-disclosure`, `.sb-menu` |
 
 ### Component reference
 
 | Component         | Root                                                                         | Parts                                                                                                 |
 | ----------------- | ---------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| Alert dialog      | `.sb-alert-dialog`                                                           | `-icon`, `-content`, `-kicker`, `-title`, `-description`, `-actions`, `-close`                        |
+| Alert dialog      | `.sb-alert-dialog-content`                                                   | `-trigger`, `-icon`, `-header`, `-kicker`, `-title`, `-description`, `-footer`, `-cancel`, `-action`  |
 | Badge             | `.sb-badge`                                                                  | —                                                                                                     |
 | Breadcrumb        | `.sb-breadcrumb`                                                             | `-separator`                                                                                          |
 | Button            | `.sb-button`                                                                 | —                                                                                                     |

@@ -1,5 +1,17 @@
 import { createSignal } from "solid-js";
-import { AlertDialog, Button } from "@simple-base/solid";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogIcon,
+  AlertDialogKicker,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@simple-base/solid";
 import { Api, Example } from "./Preview";
 
 export function AlertDialogs() {
@@ -7,90 +19,78 @@ export function AlertDialogs() {
   const [result, setResult] = createSignal(
     "No action taken. This demo does not archive real data.",
   );
-  const openDialog = () => {
-    if (!dialog) return;
-    dialog.returnValue = "";
-    dialog.showModal();
-  };
 
   return (
     <>
-      <Example
-        title="Try the dialog"
-        description="Open a real modal to inspect its scrim, keyboard focus, and actions. Escape or Cancel dismisses it; focus returns to the trigger."
-        code={
-          'let dialog: HTMLDialogElement | undefined;\n\n<Button onClick={() => dialog?.showModal()}>Archive workspace</Button>\n<AlertDialog ref={dialog}>\n  <AlertDialog.Icon>!</AlertDialog.Icon>\n  <AlertDialog.Content>\n    <AlertDialog.Kicker>Destructive action</AlertDialog.Kicker>\n    <AlertDialog.Title>Archive this workspace?</AlertDialog.Title>\n    <AlertDialog.Description>\n      It will be removed from the active workspace list.\n    </AlertDialog.Description>\n  </AlertDialog.Content>\n  <AlertDialog.Actions>\n    <Button variant="secondary" onClick={() => dialog?.close()}>Cancel</Button>\n    <Button variant="danger" onClick={() => dialog?.close("archive")}>Archive</Button>\n  </AlertDialog.Actions>\n</AlertDialog>'
-        }
-      >
-        <div class="preview-stack">
-          <div>
-            <Button variant="danger-subtle" onClick={openDialog}>
-              Archive workspace
-            </Button>
+      <AlertDialog>
+        <Example
+          title="Try the dialog"
+          description="Open a real modal to inspect its scrim, keyboard focus, and actions. Escape or Cancel dismisses it; focus returns to the trigger."
+          code={
+            '<AlertDialog>\n  <AlertDialogTrigger variant="danger-subtle">\n    Archive workspace\n  </AlertDialogTrigger>\n  <AlertDialogContent>\n    <AlertDialogIcon>!</AlertDialogIcon>\n    <AlertDialogHeader>\n      <AlertDialogKicker>Destructive action</AlertDialogKicker>\n      <AlertDialogTitle>Archive this workspace?</AlertDialogTitle>\n      <AlertDialogDescription>\n        It will be removed from the active workspace list.\n      </AlertDialogDescription>\n    </AlertDialogHeader>\n    <AlertDialogFooter>\n      <AlertDialogCancel>Cancel</AlertDialogCancel>\n      <AlertDialogAction value="archive">Archive</AlertDialogAction>\n    </AlertDialogFooter>\n  </AlertDialogContent>\n</AlertDialog>'
+          }
+        >
+          <div class="preview-stack">
+            <div>
+              <AlertDialogTrigger variant="danger-subtle">Archive workspace</AlertDialogTrigger>
+            </div>
+            <p class="preview-status" role="status">
+              {result()}
+            </p>
           </div>
-          <p class="preview-status" role="status">
-            {result()}
-          </p>
-        </div>
-      </Example>
-      <AlertDialog
-        ref={(element) => {
-          dialog = element;
-        }}
-        onClose={() =>
-          setResult(
-            dialog?.returnValue === "archive"
-              ? "Demo workspace archived. No real data was changed."
-              : "Dialog dismissed. No changes made.",
-          )
-        }
-      >
-        <AlertDialog.Icon>!</AlertDialog.Icon>
-        <AlertDialog.Content>
-          <AlertDialog.Kicker>Destructive action</AlertDialog.Kicker>
-          <AlertDialog.Title>Archive this workspace?</AlertDialog.Title>
-          <AlertDialog.Description>
-            It will be removed from the active workspace list. This is a local demonstration; no
-            data will be changed.
-          </AlertDialog.Description>
-        </AlertDialog.Content>
-        <AlertDialog.Actions>
-          <Button variant="secondary" onClick={() => dialog?.close()}>
-            Cancel
-          </Button>
-          <Button variant="danger" onClick={() => dialog?.close("archive")}>
-            Archive
-          </Button>
-        </AlertDialog.Actions>
+        </Example>
+        <AlertDialogContent
+          ref={(element) => {
+            dialog = element;
+          }}
+          onClose={() =>
+            setResult(
+              dialog?.returnValue === "archive"
+                ? "Demo workspace archived. No real data was changed."
+                : "Dialog dismissed. No changes made.",
+            )
+          }
+        >
+          <AlertDialogIcon>!</AlertDialogIcon>
+          <AlertDialogHeader>
+            <AlertDialogKicker>Destructive action</AlertDialogKicker>
+            <AlertDialogTitle>Archive this workspace?</AlertDialogTitle>
+            <AlertDialogDescription>
+              It will be removed from the active workspace list. This is a local demonstration; no
+              data will be changed.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction value="archive">Archive</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
       </AlertDialog>
       <Example
         title="Anatomy"
-        description="All seven exported parts in an inline, non-modal specimen. These example actions only update the demo status message. The kicker is optional; the title and description provide the accessible name and explanation."
+        description="The root provides state without rendering an element. Trigger opens the native dialog Content; Header and Footer organize the accessible copy and explicit actions."
       >
         <div class="preview-stack">
-          <AlertDialog open class="preview-inline-dialog">
-            <AlertDialog.Icon>!</AlertDialog.Icon>
-            <AlertDialog.Content>
-              <AlertDialog.Kicker>Destructive action</AlertDialog.Kicker>
-              <AlertDialog.Title>Archive this workspace?</AlertDialog.Title>
-              <AlertDialog.Description>
-                You can restore an archived workspace later.
-              </AlertDialog.Description>
-            </AlertDialog.Content>
-            <AlertDialog.Actions>
-              <Button
-                variant="secondary"
-                onClick={() => setResult("Inline specimen: Cancel selected.")}
-              >
-                Cancel
-              </Button>
-              <Button
-                variant="danger"
-                onClick={() => setResult("Inline specimen: Archive selected.")}
-              >
-                Archive
-              </Button>
-            </AlertDialog.Actions>
+          <AlertDialog>
+            <AlertDialogTrigger variant="secondary">Inspect anatomy</AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogIcon>!</AlertDialogIcon>
+              <AlertDialogHeader>
+                <AlertDialogKicker>Destructive action</AlertDialogKicker>
+                <AlertDialogTitle>Archive this workspace?</AlertDialogTitle>
+                <AlertDialogDescription>
+                  You can restore an archived workspace later.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel onClick={() => setResult("Anatomy example: Cancel selected.")}>
+                  Cancel
+                </AlertDialogCancel>
+                <AlertDialogAction onClick={() => setResult("Anatomy example: Archive selected.")}>
+                  Archive
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
           </AlertDialog>
         </div>
       </Example>
@@ -98,33 +98,38 @@ export function AlertDialogs() {
         rows={[
           [
             "AlertDialog",
-            "native dialog root",
-            "ref gives access to showModal() and close(). The open attribute alone is non-modal; it does not create a backdrop or focus trap.",
+            "state and context root",
+            "Supports controlled open or uncontrolled defaultOpen state and does not render a DOM element.",
           ],
           [
-            ".Icon",
+            "AlertDialogTrigger / AlertDialogContent",
+            "button / native dialog",
+            "Trigger opens the modal. Content owns native dialog attributes, events, and the forwarded HTMLDialogElement ref.",
+          ],
+          [
+            "AlertDialogIcon",
             "div; aria-hidden by default",
             "Optional visual warning. It does not replace the title or an accessible description.",
           ],
           [
-            ".Content / .Kicker",
+            "AlertDialogHeader / AlertDialogKicker",
             "div / paragraph",
-            "Content groups the text. Use the optional kicker only when it adds useful context.",
+            "Header groups the text. Use the optional kicker only when it adds useful context.",
           ],
           [
-            ".Title / .Description",
+            "AlertDialogTitle / AlertDialogDescription",
             "heading / paragraph",
             "Generated IDs are linked to the root through aria-labelledby and aria-describedby. Include both parts.",
           ],
           [
-            ".Actions",
-            "div",
-            "Holds explicit actions. Put Cancel first so the destructive action does not receive initial focus.",
+            "AlertDialogFooter / AlertDialogCancel / AlertDialogAction",
+            "div / buttons",
+            "Footer holds explicit actions. Cancel receives initial focus; Action defaults to the danger variant.",
           ],
           [
             "…props",
-            "DialogHtmlAttributes",
-            "Native dialog attributes and events pass through. No custom size or variant props; generic non-destructive dialogs use the CSS dialog pattern.",
+            "native attributes",
+            "Button props pass through Trigger, Cancel, and Action; dialog props pass through Content.",
           ],
         ]}
       />

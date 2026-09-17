@@ -39,7 +39,7 @@ export type SelectRootProps = SelectOptions & {
   children: JSX.Element;
 } & Omit<JSX.HTMLAttributes<HTMLDivElement>, keyof SelectOptions | "children">;
 
-function SelectRoot(props: SelectRootProps) {
+export function Select(props: SelectRootProps) {
   const [local, rest] = splitProps(props, [
     "class",
     "children",
@@ -164,7 +164,7 @@ export type SelectLabelProps = Omit<JSX.LabelHTMLAttributes<HTMLLabelElement>, "
   children?: JSX.Element;
 };
 
-function SelectLabel(props: SelectLabelProps) {
+export function SelectLabel(props: SelectLabelProps) {
   const { api, label } = useSelect();
   const [local, rest] = splitProps(props, ["class", "children"]);
 
@@ -180,7 +180,7 @@ function SelectLabel(props: SelectLabelProps) {
 
 export type SelectControlProps = Omit<JSX.HTMLAttributes<HTMLDivElement>, "id">;
 
-function SelectControl(props: SelectControlProps) {
+export function SelectControl(props: SelectControlProps) {
   const { api } = useSelect();
   const [local, rest] = splitProps(props, ["class", "children"]);
 
@@ -199,7 +199,7 @@ export type SelectTriggerProps = Omit<
   "id" | "type" | "role" | "disabled" | "aria-label"
 >;
 
-function SelectTrigger(props: SelectTriggerProps) {
+export function SelectTrigger(props: SelectTriggerProps) {
   const { api, label } = useSelect();
   const [local, rest] = splitProps(props, ["class", "children"]);
 
@@ -216,7 +216,7 @@ function SelectTrigger(props: SelectTriggerProps) {
 
 export type SelectValueTextProps = JSX.HTMLAttributes<HTMLSpanElement>;
 
-function SelectValueText(props: SelectValueTextProps) {
+export function SelectValueText(props: SelectValueTextProps) {
   const { api, placeholder } = useSelect();
   const [local, rest] = splitProps(props, ["class", "children"]);
 
@@ -232,7 +232,7 @@ function SelectValueText(props: SelectValueTextProps) {
 
 export type SelectIndicatorProps = Omit<JSX.HTMLAttributes<HTMLSpanElement>, "aria-hidden">;
 
-function SelectIndicator(props: SelectIndicatorProps) {
+export function SelectIndicator(props: SelectIndicatorProps) {
   const { api } = useSelect();
   const [local, rest] = splitProps(props, ["class", "children"]);
 
@@ -252,13 +252,13 @@ export type SelectPortalProps = {
   mount?: Node;
 };
 
-function SelectPortal(props: SelectPortalProps) {
+export function SelectPortal(props: SelectPortalProps) {
   return <Portal mount={props.mount}>{props.children}</Portal>;
 }
 
 export type SelectPositionerProps = Omit<JSX.HTMLAttributes<HTMLDivElement>, "id" | "style">;
 
-function SelectPositioner(props: SelectPositionerProps) {
+export function SelectPositioner(props: SelectPositionerProps) {
   const { api } = useSelect();
   const [local, rest] = splitProps(props, ["class", "children"]);
 
@@ -274,7 +274,7 @@ function SelectPositioner(props: SelectPositionerProps) {
 
 export type SelectContentProps = Omit<JSX.HTMLAttributes<HTMLDivElement>, "hidden">;
 
-function SelectContent(props: SelectContentProps) {
+export function SelectContent(props: SelectContentProps) {
   const { api } = useSelect();
   const [local, rest] = splitProps(props, ["class", "children"]);
 
@@ -292,7 +292,7 @@ export type SelectListProps = Omit<
   children: (option: SelectOption) => JSX.Element;
 };
 
-function SelectList(props: SelectListProps) {
+export function SelectList(props: SelectListProps) {
   const { api, options, label } = useSelect();
   const [local, rest] = splitProps(props, ["class", "children"]);
 
@@ -309,7 +309,7 @@ function SelectList(props: SelectListProps) {
 
 export type SelectEmptyProps = JSX.HTMLAttributes<HTMLDivElement>;
 
-function SelectEmpty(props: SelectEmptyProps) {
+export function SelectEmpty(props: SelectEmptyProps) {
   const { api, options } = useSelect();
   const [local, rest] = splitProps(props, ["class", "children"]);
 
@@ -329,7 +329,7 @@ export type SelectItemProps = Omit<
   option: SelectOption;
 };
 
-function SelectItem(props: SelectItemProps) {
+export function SelectItem(props: SelectItemProps) {
   const { api } = useSelect();
   const [local, rest] = splitProps(props, ["class", "option"]);
 
@@ -342,18 +342,3 @@ function SelectItem(props: SelectItemProps) {
     </li>
   );
 }
-
-export const Select = Object.assign(SelectRoot, {
-  Root: SelectRoot,
-  Label: SelectLabel,
-  Control: SelectControl,
-  Trigger: SelectTrigger,
-  ValueText: SelectValueText,
-  Indicator: SelectIndicator,
-  Portal: SelectPortal,
-  Positioner: SelectPositioner,
-  Content: SelectContent,
-  List: SelectList,
-  Empty: SelectEmpty,
-  Item: SelectItem,
-});
