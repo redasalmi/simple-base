@@ -66,7 +66,7 @@ Types are erased at runtime. Only the `*Defaults` constants are runtime exports 
 
 ### Select and Combobox
 
-`SelectOption` and `ComboboxOption` both contain `label`, a unique `value`, and optional `disabled`.
+`SelectOption` and `ComboboxOption` both contain `label`, a unique, non-empty `value`, and optional `disabled`. Empty string is reserved for no selection and is rejected as an option value.
 
 `SelectOptions` and `ComboboxOptions` define the shared root API:
 

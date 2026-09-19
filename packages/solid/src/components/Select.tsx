@@ -18,6 +18,7 @@ import * as select from "@zag-js/select";
 import { normalizeProps, useMachine } from "@zag-js/solid";
 import type { SelectOption, SelectOptions } from "@simple-base/contracts";
 import { mergeWidgetProps } from "../mergeWidgetProps";
+import { validateWidgetOptions } from "../validateWidgetOptions";
 
 type SelectContextType = {
   label: Accessor<string>;
@@ -57,14 +58,16 @@ export function Select(props: SelectRootProps) {
     "onOpenChange",
   ]);
 
-  const collection = createMemo(() =>
-    select.collection({
+  const collection = createMemo(() => {
+    validateWidgetOptions("Select", local.options);
+
+    return select.collection({
       items: local.options,
       itemToValue: (item) => item.value,
       itemToString: (item) => item.label,
       isItemDisabled: (item) => item.disabled ?? false,
-    }),
-  );
+    });
+  });
 
   const positioning = createMemo(() =>
     local.placement ? { placement: local.placement } : undefined,

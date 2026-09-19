@@ -15,6 +15,7 @@ import * as combobox from "@zag-js/combobox";
 import { normalizeProps, useMachine } from "@zag-js/solid";
 import type { ComboboxOption, ComboboxOptions } from "@simple-base/contracts";
 import { mergeWidgetProps } from "../mergeWidgetProps";
+import { validateWidgetOptions } from "../validateWidgetOptions";
 
 type ComboboxContextType = {
   label: Accessor<string>;
@@ -53,9 +54,13 @@ export function Combobox(props: ComboboxRootProps) {
     "onOpenChange",
   ]);
   const [query, setQuery] = createSignal("");
+  const validatedOptions = createMemo(() => {
+    validateWidgetOptions("Combobox", local.options);
+    return local.options;
+  });
   const options = createMemo(() => {
     const search = query().toLowerCase();
-    return local.options.filter((option) => option.label.toLowerCase().includes(search));
+    return validatedOptions().filter((option) => option.label.toLowerCase().includes(search));
   });
 
   const collection = createMemo(() =>

@@ -141,7 +141,7 @@ export function Selects() {
           [
             "options",
             "{ label: string; value: string; disabled?: boolean }[]",
-            "Values identify options and should be unique. Reactive array replacements update both the list and keyboard navigation.",
+            'Values identify options and must be unique and non-empty. Empty string is reserved for "no selection." Reactive array replacements update both the list and keyboard navigation.',
           ],
           [
             "onValueChange",
