@@ -58,46 +58,73 @@
         "simple-base-dark": [
           {
             "$ref": "themes/simple-base-dark.tokens.json"
+          },
+          {
+            "$ref": "semantic/color.tokens.json"
           }
         ],
         "simple-base-light": [
           {
             "$ref": "themes/simple-base-light.tokens.json"
+          },
+          {
+            "$ref": "semantic/color.tokens.json"
           }
         ],
         "catppuccin-latte": [
           {
             "$ref": "themes/catppuccin-latte.tokens.json"
+          },
+          {
+            "$ref": "semantic/color.tokens.json"
           }
         ],
         "catppuccin-frappe": [
           {
             "$ref": "themes/catppuccin-frappe.tokens.json"
+          },
+          {
+            "$ref": "semantic/color.tokens.json"
           }
         ],
         "catppuccin-macchiato": [
           {
             "$ref": "themes/catppuccin-macchiato.tokens.json"
+          },
+          {
+            "$ref": "semantic/color.tokens.json"
           }
         ],
         "catppuccin-mocha": [
           {
             "$ref": "themes/catppuccin-mocha.tokens.json"
+          },
+          {
+            "$ref": "semantic/color.tokens.json"
           }
         ],
         "dracula": [
           {
             "$ref": "themes/dracula.tokens.json"
+          },
+          {
+            "$ref": "semantic/color.tokens.json"
           }
         ],
         "tokyo-night": [
           {
             "$ref": "themes/tokyo-night.tokens.json"
+          },
+          {
+            "$ref": "semantic/color.tokens.json"
           }
         ],
         "nord": [
           {
             "$ref": "themes/nord.tokens.json"
+          },
+          {
+            "$ref": "semantic/color.tokens.json"
           }
         ]
       }
