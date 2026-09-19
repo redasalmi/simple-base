@@ -2,6 +2,7 @@ export { badgeDefaults, type BadgeVariant, type BadgeSize, type BadgeOptions } f
 export { buttonDefaults, type ButtonVariant, type ButtonSize, type ButtonOptions } from "./button";
 export type { CardVariant, CardOptions } from "./card";
 export type { ComboboxOption, ComboboxOptions } from "./combobox";
+export type { DialogOptions } from "./dialog";
 export type { Placement } from "./placement";
 export type { SelectOption, SelectOptions } from "./select";
 export type { TableCellVariant, TableCellOptions } from "./table";

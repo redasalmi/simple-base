@@ -1,5 +1,5 @@
 @layer sb {
-  .sb-dialog {
+  .sb-dialog-content {
     box-sizing: border-box;
     width: min(560px, calc(100vw - 40px));
     max-width: none;
@@ -12,11 +12,11 @@
     box-shadow: var(--sb-semantic-shadow-overlay);
   }
 
-  .sb-dialog::backdrop {
+  .sb-dialog-content::backdrop {
     background: var(--sb-semantic-color-overlay-scrim);
   }
 
-  .sb-dialog-head {
+  .sb-dialog-header {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
@@ -40,12 +40,12 @@
     line-height: var(--sb-semantic-typography-line-height-snug);
   }
 
-  .sb-dialog-copy {
+  .sb-dialog-description {
     margin: var(--sb-semantic-space-3) 0 0;
     color: var(--sb-semantic-color-foreground-secondary);
   }
 
-  .sb-dialog-actions {
+  .sb-dialog-footer {
     display: flex;
     justify-content: flex-end;
     gap: var(--sb-semantic-space-3);
@@ -64,6 +64,7 @@
     background: transparent;
     font-size: var(--sb-semantic-typography-size-2xl);
     line-height: var(--sb-semantic-typography-line-height-none);
+    cursor: pointer;
   }
 
   .sb-dialog-close:hover {
@@ -71,13 +72,20 @@
     background: var(--sb-semantic-color-background-subtle);
   }
 
+  .sb-dialog-close:focus-visible {
+    outline: 0;
+    box-shadow:
+      0 0 0 var(--sb-semantic-border-width-hairline) var(--sb-semantic-color-background-canvas),
+      0 0 0 var(--sb-semantic-space-1) var(--sb-semantic-color-focus-ring);
+  }
+
   @media (max-width: 480px) {
-    .sb-dialog-actions {
+    .sb-dialog-footer {
       align-items: stretch;
       flex-direction: column;
     }
 
-    .sb-dialog-actions > * {
+    .sb-dialog-footer > * {
       width: 100%;
     }
   }

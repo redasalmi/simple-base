@@ -71,11 +71,12 @@ import "@simple-base/css/badge";
 | Root          | Named parts                                                                                                                                                                                                          |
 | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `AlertDialog` | `AlertDialogTrigger`, `AlertDialogContent`, `AlertDialogIcon`, `AlertDialogHeader`, `AlertDialogKicker`, `AlertDialogTitle`, `AlertDialogDescription`, `AlertDialogFooter`, `AlertDialogCancel`, `AlertDialogAction` |
+| `Dialog`      | `DialogTrigger`, `DialogContent`, `DialogHeader`, `DialogKicker`, `DialogTitle`, `DialogDescription`, `DialogFooter`, `DialogClose`, `DialogAction`                                                                  |
 | `Combobox`    | `ComboboxLabel`, `ComboboxControl`, `ComboboxInput`, `ComboboxTrigger`, `ComboboxPortal`, `ComboboxPositioner`, `ComboboxContent`, `ComboboxList`, `ComboboxEmpty`, `ComboboxItem`                                   |
 | `Select`      | `SelectLabel`, `SelectControl`, `SelectTrigger`, `SelectValueText`, `SelectIndicator`, `SelectPortal`, `SelectPositioner`, `SelectContent`, `SelectList`, `SelectEmpty`, `SelectItem`                                |
 | `Table`       | `TableWrap`, `TableCaption`, `TableHeader`, `TableBody`, `TableFooter`, `TableRow`, `TableColumnHeader`, `TableRowHeader`, `TableCell`                                                                               |
 
-The CSS package ships more components than this adapter currently covers. Breadcrumb, dialog, disclosure, empty state, field, keyboard shortcut, menu, pagination, progress, range, segmented control, status, tabs, and typography are available as styles with selector-level APIs.
+The CSS package ships more components than this adapter currently covers. Breadcrumb, disclosure, empty state, field, keyboard shortcut, menu, pagination, progress, range, segmented control, status, tabs, and typography are available as styles with selector-level APIs.
 
 ## Select
 
@@ -238,6 +239,42 @@ import {
 ```
 
 `TableWrap` provides the horizontal scroll container the table styles expect.
+
+## Dialog
+
+Provides controlled or uncontrolled modal state around a native `<dialog>`. Content wires `aria-labelledby` and `aria-describedby` to the title and description automatically.
+
+```tsx
+import {
+  Dialog,
+  DialogAction,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@simple-base/solid";
+
+<Dialog>
+  <DialogTrigger variant="secondary">View details</DialogTrigger>
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle>Workspace details</DialogTitle>
+      <DialogClose aria-label="Close workspace details">×</DialogClose>
+    </DialogHeader>
+    <DialogDescription>Twelve members can access this workspace.</DialogDescription>
+    <DialogFooter>
+      <DialogAction value="done">Done</DialogAction>
+    </DialogFooter>
+  </DialogContent>
+</Dialog>;
+```
+
+`DialogClose` is the icon-sized close control; give it an accessible name when it contains only an icon. `DialogAction` uses the standard button API, closes the modal, and copies its `value` to the native dialog `returnValue`.
+
+Use `open` with `onOpenChange` for controlled state, or `defaultOpen` for uncontrolled initial state. Native dialog attributes, events, and the `HTMLDialogElement` ref belong to `DialogContent`.
 
 ## AlertDialog
 

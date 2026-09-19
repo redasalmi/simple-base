@@ -12,18 +12,18 @@ short API reference.
 
 - **Solid components:** Button (six variants, three sizes, disabled states), Badge
   (nine variants, both sizes), Input, TextArea, Checkbox, Radio, Switch, and all
-  AlertDialog named parts. Form examples cover editable, selected, disabled,
-  read-only, and validation states where supported.
+  Dialog and AlertDialog named parts. Form examples cover editable, selected,
+  disabled, read-only, and validation states where supported.
 - **Foundations:** the heading and body scales, display typography, text roles,
   code, and keyboard shortcuts.
 - **CSS-only patterns:** cards, status lines, alerts, toasts, progress, range,
   selects, field grouping, segmented controls, tabs, tables, pagination,
-  breadcrumbs, disclosures, command popovers, generic dialogs, and empty states.
+  breadcrumbs, disclosures, command popovers, and empty states.
   These examples do not imply additional Solid component exports.
 
 Examples use local state only. Navigation resets component demonstrations; no
-form data is submitted or persisted. AlertDialog coordinates its trigger and
-native modal content through controlled or uncontrolled state.
+form data is submitted or persisted. Dialog and AlertDialog coordinate their
+triggers and native modal content through controlled or uncontrolled state.
 Keyboard behavior is demonstrated with native controls, focusable navigation,
 and a local accessible tabs example.
 

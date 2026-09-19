@@ -17,6 +17,7 @@ import { Typography } from "./preview/Typography";
 import { Buttons } from "./preview/Buttons";
 import { Badges } from "./preview/Badges";
 import { Cards } from "./preview/Cards";
+import { Dialogs } from "./preview/Dialogs";
 import { AlertDialogs } from "./preview/AlertDialogs";
 import { Inputs, TextAreas, Checkboxes, Radios, Switches } from "./preview/Inputs";
 import { Comboboxes } from "./preview/Comboboxes";
@@ -141,6 +142,15 @@ const pages: Page[] = [
       "An immediate on or off preference. A native checkbox with switch semantics and a required accessible name.",
     usage: 'import { Switch } from "@simple-base/solid";',
     component: Switches,
+  },
+  {
+    id: "dialog",
+    label: "Dialog",
+    group: "Components",
+    description:
+      "A neutral modal for focused information or tasks. Named parts compose a native dialog with linked title and description.",
+    usage: 'import { Dialog, DialogTrigger, DialogContent } from "@simple-base/solid";',
+    component: Dialogs,
   },
   {
     id: "alert-dialog",

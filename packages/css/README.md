@@ -170,18 +170,18 @@ Each entry point is an explicit, extensionless subpath. The internal `styles/` d
 
 ### State attributes
 
-| Selector                                      | Applies to                                                             |
-| --------------------------------------------- | ---------------------------------------------------------------------- |
-| `[aria-invalid="true"]`                       | `.sb-input`, `.sb-textarea`                                            |
-| `[data-invalid]`                              | `.sb-select-control`, `.sb-combobox-control`, `.sb-field-help`         |
-| `[aria-selected="true"]`                      | `.sb-tab`, `.sb-table tbody tr`                                        |
-| `[aria-pressed="true"]`                       | `.sb-segment`                                                          |
-| `[aria-current="page"]`                       | `.sb-page-button`                                                      |
-| `[aria-disabled="true"]`, `:disabled`         | `.sb-button`, `.sb-select`, form controls                              |
-| `[data-state="open"]`                         | `.sb-select-trigger`, `.sb-combobox-trigger`                           |
-| `[data-highlighted]`                          | `.sb-select-item`, `.sb-combobox-item`                                 |
-| `[data-placeholder-shown]`, `[data-required]` | `.sb-select`, `.sb-combobox`                                           |
-| `[open]`                                      | `.sb-dialog`, `.sb-alert-dialog-content`, `.sb-disclosure`, `.sb-menu` |
+| Selector                                      | Applies to                                                                     |
+| --------------------------------------------- | ------------------------------------------------------------------------------ |
+| `[aria-invalid="true"]`                       | `.sb-input`, `.sb-textarea`                                                    |
+| `[data-invalid]`                              | `.sb-select-control`, `.sb-combobox-control`, `.sb-field-help`                 |
+| `[aria-selected="true"]`                      | `.sb-tab`, `.sb-table tbody tr`                                                |
+| `[aria-pressed="true"]`                       | `.sb-segment`                                                                  |
+| `[aria-current="page"]`                       | `.sb-page-button`                                                              |
+| `[aria-disabled="true"]`, `:disabled`         | `.sb-button`, `.sb-select`, form controls                                      |
+| `[data-state="open"]`                         | `.sb-select-trigger`, `.sb-combobox-trigger`                                   |
+| `[data-highlighted]`                          | `.sb-select-item`, `.sb-combobox-item`                                         |
+| `[data-placeholder-shown]`, `[data-required]` | `.sb-select`, `.sb-combobox`                                                   |
+| `[open]`                                      | `.sb-dialog-content`, `.sb-alert-dialog-content`, `.sb-disclosure`, `.sb-menu` |
 
 ### Component reference
 
@@ -194,7 +194,7 @@ Each entry point is an explicit, extensionless subpath. The internal `styles/` d
 | Card              | `.sb-card`                                                                   | —                                                                                                     |
 | Checkbox          | `.sb-checkbox`                                                               | —                                                                                                     |
 | Combobox          | `.sb-combobox`                                                               | `-label`, `-control`, `-input`, `-trigger`, `-content`, `-list`, `-item`, `-empty`                    |
-| Dialog            | `.sb-dialog`                                                                 | `-head`, `-title`, `-kicker`, `-copy`, `-actions`, `-close`                                           |
+| Dialog            | `.sb-dialog-content`                                                         | `-trigger`, `-header`, `-title`, `-kicker`, `-description`, `-footer`, `-close`, `-action`            |
 | Disclosure        | `.sb-disclosure`                                                             | `-copy`                                                                                               |
 | Empty state       | `.sb-empty-state`                                                            | `-mark` (alias `.sb-empty-mark`)                                                                      |
 | Field             | `.sb-field`, `.sb-fieldset`                                                  | `-title`, `-help`, `.sb-choice-list`, `.sb-choice`                                                    |

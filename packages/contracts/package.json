@@ -1,6 +1,6 @@
 {
   "name": "@simple-base/contracts",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -34,6 +34,10 @@
     "./combobox": {
       "types": "./dist/combobox.d.ts",
       "import": "./dist/combobox.js"
+    },
+    "./dialog": {
+      "types": "./dist/dialog.d.ts",
+      "import": "./dist/dialog.js"
     },
     "./placement": {
       "types": "./dist/placement.d.ts",

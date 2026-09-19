@@ -7,15 +7,15 @@ import {
   splitProps,
   useContext,
   type Accessor,
-  type Setter,
   type JSX,
+  type Setter,
 } from "solid-js";
 import { cn } from "cn";
 import type { DialogOptions } from "@simple-base/contracts";
 import { Button, type ButtonProps } from "./Button";
 import { mergeWidgetProps } from "../mergeWidgetProps";
 
-type AlertDialogContextType = {
+type DialogContextType = {
   titleId: string;
   descriptionId: string;
   contentId: string;
@@ -25,20 +25,20 @@ type AlertDialogContextType = {
   setDialogRef: Setter<HTMLDialogElement | null>;
 };
 
-const AlertDialogContext = createContext<AlertDialogContextType | null>(null);
+const DialogContext = createContext<DialogContextType | null>(null);
 
-function useAlertDialog() {
-  const context = useContext(AlertDialogContext);
-  if (!context) throw new Error("AlertDialog parts must be used within an AlertDialog");
+function useDialog() {
+  const context = useContext(DialogContext);
+  if (!context) throw new Error("Dialog parts must be used within a Dialog");
 
   return context;
 }
 
-export type AlertDialogRootProps = DialogOptions & {
+export type DialogRootProps = DialogOptions & {
   children: JSX.Element;
 };
 
-export function AlertDialog(props: AlertDialogRootProps) {
+export function Dialog(props: DialogRootProps) {
   const [uncontrolledOpen, setUncontrolledOpen] = createSignal(props.defaultOpen ?? false);
   const [dialogRef, setDialogRef] = createSignal<HTMLDialogElement | null>(null);
   const id = createUniqueId();
@@ -58,20 +58,18 @@ export function AlertDialog(props: AlertDialogRootProps) {
     setOpen,
     dialogRef,
     setDialogRef,
-  } satisfies AlertDialogContextType;
+  } satisfies DialogContextType;
 
-  return (
-    <AlertDialogContext.Provider value={context}>{props.children}</AlertDialogContext.Provider>
-  );
+  return <DialogContext.Provider value={context}>{props.children}</DialogContext.Provider>;
 }
 
-export type AlertDialogTriggerProps = Omit<
+export type DialogTriggerProps = Omit<
   ButtonProps,
   "aria-controls" | "aria-expanded" | "aria-haspopup"
 >;
 
-export function AlertDialogTrigger(props: AlertDialogTriggerProps) {
-  const { contentId, open, setOpen } = useAlertDialog();
+export function DialogTrigger(props: DialogTriggerProps) {
+  const { contentId, open, setOpen } = useDialog();
   const [local, rest] = splitProps(props, ["ref", "class", "variant", "size"]);
   const triggerProps = mergeWidgetProps(
     {
@@ -86,7 +84,7 @@ export function AlertDialogTrigger(props: AlertDialogTriggerProps) {
   return (
     <Button
       {...triggerProps}
-      class={cn("sb-alert-dialog-trigger", local.class)}
+      class={cn("sb-dialog-trigger", local.class)}
       variant={local.variant}
       size={local.size}
       aria-haspopup="dialog"
@@ -100,14 +98,13 @@ export function AlertDialogTrigger(props: AlertDialogTriggerProps) {
   );
 }
 
-export type AlertDialogContentProps = Omit<
+export type DialogContentProps = Omit<
   JSX.DialogHtmlAttributes<HTMLDialogElement>,
   "id" | "open" | "role" | "aria-labelledby" | "aria-describedby"
 >;
 
-export function AlertDialogContent(props: AlertDialogContentProps) {
-  const { titleId, descriptionId, contentId, open, setOpen, dialogRef, setDialogRef } =
-    useAlertDialog();
+export function DialogContent(props: DialogContentProps) {
+  const { titleId, descriptionId, contentId, open, setOpen, dialogRef, setDialogRef } = useDialog();
   const [local, rest] = splitProps(props, ["class", "ref"]);
   const dialogProps = mergeWidgetProps(
     {
@@ -145,75 +142,61 @@ export function AlertDialogContent(props: AlertDialogContentProps) {
         setDialogRef(element);
         if (typeof local.ref === "function") local.ref(element);
       }}
-      role="alertdialog"
+      role="dialog"
       aria-labelledby={titleId}
       aria-describedby={descriptionId}
-      class={cn("sb-alert-dialog-content", local.class)}
+      class={cn("sb-dialog-content", local.class)}
     />
   );
 }
 
-export type AlertDialogIconProps = JSX.HTMLAttributes<HTMLDivElement>;
+export type DialogHeaderProps = JSX.HTMLAttributes<HTMLDivElement>;
 
-export function AlertDialogIcon(props: AlertDialogIconProps) {
-  const [local, rest] = splitProps(props, ["class", "aria-hidden"]);
-
-  return (
-    <div
-      {...rest}
-      aria-hidden={local["aria-hidden"] ?? true}
-      class={cn("sb-alert-dialog-icon", local.class)}
-    />
-  );
-}
-
-export type AlertDialogHeaderProps = JSX.HTMLAttributes<HTMLDivElement>;
-
-export function AlertDialogHeader(props: AlertDialogHeaderProps) {
+export function DialogHeader(props: DialogHeaderProps) {
   const [local, rest] = splitProps(props, ["class"]);
 
-  return <div {...rest} class={cn("sb-alert-dialog-header", local.class)} />;
+  return <div {...rest} class={cn("sb-dialog-header", local.class)} />;
 }
 
-export type AlertDialogKickerProps = JSX.HTMLAttributes<HTMLParagraphElement>;
+export type DialogKickerProps = JSX.HTMLAttributes<HTMLParagraphElement>;
 
-export function AlertDialogKicker(props: AlertDialogKickerProps) {
+export function DialogKicker(props: DialogKickerProps) {
   const [local, rest] = splitProps(props, ["class"]);
 
-  return <p {...rest} class={cn("sb-alert-dialog-kicker", local.class)} />;
+  return <p {...rest} class={cn("sb-dialog-kicker", local.class)} />;
 }
 
-export type AlertDialogTitleProps = Omit<JSX.HTMLAttributes<HTMLHeadingElement>, "id">;
+export type DialogTitleProps = Omit<JSX.HTMLAttributes<HTMLHeadingElement>, "id">;
 
-export function AlertDialogTitle(props: AlertDialogTitleProps) {
-  const { titleId } = useAlertDialog();
+export function DialogTitle(props: DialogTitleProps) {
+  const { titleId } = useDialog();
   const [local, rest] = splitProps(props, ["class"]);
 
-  return <h3 {...rest} id={titleId} class={cn("sb-alert-dialog-title", local.class)} />;
+  return <h2 {...rest} id={titleId} class={cn("sb-dialog-title", local.class)} />;
 }
 
-export type AlertDialogDescriptionProps = Omit<JSX.HTMLAttributes<HTMLParagraphElement>, "id">;
+export type DialogDescriptionProps = Omit<JSX.HTMLAttributes<HTMLParagraphElement>, "id">;
 
-export function AlertDialogDescription(props: AlertDialogDescriptionProps) {
-  const { descriptionId } = useAlertDialog();
+export function DialogDescription(props: DialogDescriptionProps) {
+  const { descriptionId } = useDialog();
   const [local, rest] = splitProps(props, ["class"]);
 
-  return <p {...rest} id={descriptionId} class={cn("sb-alert-dialog-description", local.class)} />;
+  return <p {...rest} id={descriptionId} class={cn("sb-dialog-description", local.class)} />;
 }
 
-export type AlertDialogFooterProps = JSX.HTMLAttributes<HTMLDivElement>;
+export type DialogFooterProps = JSX.HTMLAttributes<HTMLDivElement>;
 
-export function AlertDialogFooter(props: AlertDialogFooterProps) {
+export function DialogFooter(props: DialogFooterProps) {
   const [local, rest] = splitProps(props, ["class"]);
 
-  return <div {...rest} class={cn("sb-alert-dialog-footer", local.class)} />;
+  return <div {...rest} class={cn("sb-dialog-footer", local.class)} />;
 }
 
-export type AlertDialogCancelProps = ButtonProps;
+export type DialogCloseProps = JSX.ButtonHTMLAttributes<HTMLButtonElement>;
 
-export function AlertDialogCancel(props: AlertDialogCancelProps) {
-  const { dialogRef, setOpen } = useAlertDialog();
-  const [local, rest] = splitProps(props, ["class", "variant", "autofocus"]);
+export function DialogClose(props: DialogCloseProps) {
+  const { dialogRef, setOpen } = useDialog();
+  const [local, rest] = splitProps(props, ["class"]);
   const buttonProps = mergeWidgetProps(
     {
       type: "button" as const,
@@ -227,20 +210,13 @@ export function AlertDialogCancel(props: AlertDialogCancelProps) {
     rest,
   );
 
-  return (
-    <Button
-      {...buttonProps}
-      class={cn("sb-alert-dialog-cancel", local.class)}
-      autofocus={local.autofocus ?? true}
-      variant={local.variant ?? "secondary"}
-    />
-  );
+  return <button {...buttonProps} class={cn("sb-dialog-close", local.class)} />;
 }
 
-export type AlertDialogActionProps = ButtonProps;
+export type DialogActionProps = ButtonProps;
 
-export function AlertDialogAction(props: AlertDialogActionProps) {
-  const { dialogRef, setOpen } = useAlertDialog();
+export function DialogAction(props: DialogActionProps) {
+  const { dialogRef, setOpen } = useDialog();
   const [local, rest] = splitProps(props, ["class", "variant"]);
   const buttonProps = mergeWidgetProps(
     {
@@ -256,12 +232,8 @@ export function AlertDialogAction(props: AlertDialogActionProps) {
   );
 
   return (
-    <Button
-      {...buttonProps}
-      class={cn("sb-alert-dialog-action", local.class)}
-      variant={local.variant ?? "danger"}
-    />
+    <Button {...buttonProps} class={cn("sb-dialog-action", local.class)} variant={local.variant} />
   );
 }
 
-export type AlertDialogProps = AlertDialogRootProps;
+export type DialogProps = DialogRootProps;

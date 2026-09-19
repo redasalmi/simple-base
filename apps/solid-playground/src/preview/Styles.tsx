@@ -12,7 +12,6 @@ export function Styles() {
   const [toast, setToast] = createSignal(false);
   const [hasRecord, setHasRecord] = createSignal(false);
   let menu: HTMLDetailsElement | undefined;
-  let dialog: HTMLDialogElement | undefined;
   const tabNames = ["Overview", "Activity", "Settings"];
   const cardTreatments = [
     [undefined, "Default"],
@@ -404,47 +403,6 @@ export function Styles() {
             {menuAction()}
           </p>
         </div>
-      </Example>
-      <Example
-        title="Generic dialog"
-        description="A neutral, non-destructive dialog. This uses CSS and native HTML directly, not the Solid AlertDialog component family."
-        code={
-          '<dialog class="sb-dialog" aria-labelledby="dialog-title">\n  <div class="sb-dialog-head">\n    <h2 class="sb-dialog-title" id="dialog-title">Workspace details</h2>\n    <button class="sb-dialog-close" aria-label="Close">×</button>\n  </div>\n  <p class="sb-dialog-copy">A neutral information dialog.</p>\n</dialog>'
-        }
-      >
-        <Button variant="secondary" onClick={() => dialog?.showModal()}>
-          Open workspace details
-        </Button>
-        <dialog
-          ref={(element) => {
-            dialog = element;
-          }}
-          class="sb-dialog"
-          aria-labelledby="pattern-dialog-title"
-          aria-describedby="pattern-dialog-copy"
-        >
-          <div class="sb-dialog-head">
-            <div>
-              <p class="sb-dialog-kicker">Workspace</p>
-              <h2 class="sb-dialog-title" id="pattern-dialog-title">
-                Workspace details
-              </h2>
-            </div>
-            <button
-              class="sb-dialog-close"
-              aria-label="Close workspace details"
-              onClick={() => dialog?.close()}
-            >
-              ×
-            </button>
-          </div>
-          <p class="sb-dialog-copy" id="pattern-dialog-copy">
-            A neutral information dialog. No changes are needed.
-          </p>
-          <div class="sb-dialog-actions">
-            <Button onClick={() => dialog?.close()}>Done</Button>
-          </div>
-        </dialog>
       </Example>
       <Example
         title="Empty state"

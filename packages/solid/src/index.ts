@@ -23,6 +23,30 @@ export {
   type AlertDialogCancelProps,
   type AlertDialogActionProps,
 } from "./components/AlertDialog";
+export {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogKicker,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+  DialogClose,
+  DialogAction,
+  type DialogProps,
+  type DialogRootProps,
+  type DialogTriggerProps,
+  type DialogContentProps,
+  type DialogHeaderProps,
+  type DialogKickerProps,
+  type DialogTitleProps,
+  type DialogDescriptionProps,
+  type DialogFooterProps,
+  type DialogCloseProps,
+  type DialogActionProps,
+} from "./components/Dialog";
+export type { DialogOptions } from "@simple-base/contracts";
 export { Badge, type BadgeProps, type BadgeVariant, type BadgeSize } from "./components/Badge";
 export { Button, type ButtonProps, type ButtonVariant, type ButtonSize } from "./components/Button";
 export { Card, type CardProps, type CardVariant } from "./components/Card";
