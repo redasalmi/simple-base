@@ -12,11 +12,11 @@ short API reference.
 
 - **Solid components:** Button (six variants, three sizes, disabled states), Badge
   (nine variants, both sizes), Input, TextArea, Checkbox, Radio, Switch, and all
-  Dialog and AlertDialog named parts. Form examples cover editable, selected,
+  Dialog, AlertDialog, and Toast named parts. Form examples cover editable, selected,
   disabled, read-only, and validation states where supported.
 - **Foundations:** the heading and body scales, display typography, text roles,
   code, and keyboard shortcuts.
-- **CSS-only patterns:** cards, status lines, alerts, toasts, progress, range,
+- **CSS-only patterns:** cards, status lines, alerts, progress, range,
   selects, field grouping, segmented controls, tabs, tables, pagination,
   breadcrumbs, disclosures, command popovers, and empty states.
   These examples do not imply additional Solid component exports.

@@ -75,8 +75,9 @@ import "@simple-base/css/badge";
 | `Combobox`    | `ComboboxLabel`, `ComboboxControl`, `ComboboxInput`, `ComboboxTrigger`, `ComboboxPortal`, `ComboboxPositioner`, `ComboboxContent`, `ComboboxList`, `ComboboxEmpty`, `ComboboxItem`                                   |
 | `Select`      | `SelectLabel`, `SelectControl`, `SelectTrigger`, `SelectValueText`, `SelectIndicator`, `SelectPortal`, `SelectPositioner`, `SelectContent`, `SelectList`, `SelectEmpty`, `SelectItem`                                |
 | `Table`       | `TableWrap`, `TableCaption`, `TableHeader`, `TableBody`, `TableFooter`, `TableRow`, `TableColumnHeader`, `TableRowHeader`, `TableCell`                                                                               |
+| `Toaster`     | `Toast`, `ToastIcon`, `ToastContent`, `ToastTitle`, `ToastDescription`, `ToastAction`, `ToastClose`, plus `createToaster`                                                                                            |
 
-The CSS package ships more components than this adapter currently covers. Breadcrumb, disclosure, empty state, field, keyboard shortcut, menu, pagination, progress, range, segmented control, status, tabs, and typography are available as styles with selector-level APIs.
+The CSS package ships more components than this adapter currently covers. Breadcrumb, disclosure, empty state, field, keyboard shortcut, menu, pagination, progress, range, segmented control, status lines and alerts, tabs, and typography are available as styles with selector-level APIs.
 
 ## Select
 
@@ -309,6 +310,60 @@ import {
 ```
 
 Use `open` with `onOpenChange` for controlled state, or `defaultOpen` for uncontrolled initial state. Native dialog attributes, events, and the `HTMLDialogElement` ref belong to `AlertDialogContent`.
+
+## Toast
+
+`createToaster` creates the store; render its `Toaster` once near the app root. The `Toaster` children function is the template used for every toast, and each part reads its content from the options passed to `create`.
+
+```tsx
+import {
+  Button,
+  Toast,
+  ToastAction,
+  ToastClose,
+  ToastContent,
+  ToastDescription,
+  ToastIcon,
+  ToastTitle,
+  Toaster,
+  createToaster,
+} from "@simple-base/solid";
+
+const toaster = createToaster({ placement: "bottom-end" });
+
+<Toaster toaster={toaster}>
+  {() => (
+    <Toast>
+      <ToastIcon>✓</ToastIcon>
+      <ToastContent>
+        <ToastTitle />
+        <ToastDescription />
+        <ToastAction />
+      </ToastContent>
+      <ToastClose>×</ToastClose>
+    </Toast>
+  )}
+</Toaster>;
+
+<Button
+  onClick={() =>
+    toaster.create({
+      title: "Project archived",
+      description: "Northwind moved to the archive.",
+      action: { label: "Undo", onClick: restoreProject },
+    })
+  }
+>
+  Archive project
+</Button>;
+```
+
+`createToaster` accepts `placement` (default `bottom-end`) and a default `duration` in milliseconds (default `5000`). The returned toaster has two methods:
+
+- `create({ title, description?, action?, duration?, id?, status? })` shows a toast and returns its id. Reusing an `id` updates that toast; `duration: Infinity` keeps it until dismissed.
+- `dismiss(id?)` dismisses one toast, or every toast when `id` is omitted.
+
+Toasts pause while the region is hovered or focused. `Alt+T` moves focus to the region, and Escape dismisses the focused toast. `ToastDescription` and `ToastAction` render nothing when the toast has no description or action; the action runs its callback, then dismisses the toast. `ToastClose` is labeled "Dismiss notification" unless you pass `aria-label`. `Toaster` accepts `label` to rename the live region (default "Notifications").
 
 ## Props conventions
 

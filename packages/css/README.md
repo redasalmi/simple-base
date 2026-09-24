@@ -170,18 +170,19 @@ Each entry point is an explicit, extensionless subpath. The internal `styles/` d
 
 ### State attributes
 
-| Selector                                      | Applies to                                                                     |
-| --------------------------------------------- | ------------------------------------------------------------------------------ |
-| `[aria-invalid="true"]`                       | `.sb-input`, `.sb-textarea`                                                    |
-| `[data-invalid]`                              | `.sb-select-control`, `.sb-combobox-control`, `.sb-field-help`                 |
-| `[aria-selected="true"]`                      | `.sb-tab`, `.sb-table tbody tr`                                                |
-| `[aria-pressed="true"]`                       | `.sb-segment`                                                                  |
-| `[aria-current="page"]`                       | `.sb-page-button`                                                              |
-| `[aria-disabled="true"]`, `:disabled`         | `.sb-button`, `.sb-select`, form controls                                      |
-| `[data-state="open"]`                         | `.sb-select-trigger`, `.sb-combobox-trigger`                                   |
-| `[data-highlighted]`                          | `.sb-select-item`, `.sb-combobox-item`                                         |
-| `[data-placeholder-shown]`, `[data-required]` | `.sb-select`, `.sb-combobox`                                                   |
-| `[open]`                                      | `.sb-dialog-content`, `.sb-alert-dialog-content`, `.sb-disclosure`, `.sb-menu` |
+| Selector                                       | Applies to                                                                     |
+| ---------------------------------------------- | ------------------------------------------------------------------------------ |
+| `[aria-invalid="true"]`                        | `.sb-input`, `.sb-textarea`                                                    |
+| `[data-invalid]`                               | `.sb-select-control`, `.sb-combobox-control`, `.sb-field-help`                 |
+| `[aria-selected="true"]`                       | `.sb-tab`, `.sb-table tbody tr`                                                |
+| `[aria-pressed="true"]`                        | `.sb-segment`                                                                  |
+| `[aria-current="page"]`                        | `.sb-page-button`                                                              |
+| `[aria-disabled="true"]`, `:disabled`          | `.sb-button`, `.sb-select`, form controls                                      |
+| `[data-state="open"]`                          | `.sb-select-trigger`, `.sb-combobox-trigger`                                   |
+| `[data-highlighted]`                           | `.sb-select-item`, `.sb-combobox-item`                                         |
+| `[data-placeholder-shown]`, `[data-required]`  | `.sb-select`, `.sb-combobox`                                                   |
+| `[open]`                                       | `.sb-dialog-content`, `.sb-alert-dialog-content`, `.sb-disclosure`, `.sb-menu` |
+| `[data-state="open"]`, `[data-state="closed"]` | `.sb-toaster .sb-toast`                                                        |
 
 ### Component reference
 
@@ -209,6 +210,7 @@ Each entry point is an explicit, extensionless subpath. The internal `styles/` d
 | Select            | `.sb-select-root` (compound)                                                 | `-label`, `-control`, `-trigger`, `-value-text`, `-indicator`, `-content`, `-list`, `-item`, `-empty` |
 | Select (native)   | `.sb-select-wrap`                                                            | `.sb-select`                                                                                          |
 | Status            | `.sb-status-line`, `.sb-alert`, `.sb-toast`                                  | `-dot`, `-icon`, `.sb-alert-mark`, `.sb-live-region`                                                  |
+| Toast             | `.sb-toaster` (region), `.sb-toast`                                          | `-icon`, `-content`, `-title`, `-description`, `-action`, `-close`                                    |
 | Switch            | `.sb-switch`                                                                 | —                                                                                                     |
 | Table             | `.sb-table-wrap`, `.sb-table`                                                | —                                                                                                     |
 | Tabs              | `.sb-tabs`                                                                   | `.sb-tab`, `.sb-tab-panel`                                                                            |
@@ -230,6 +232,10 @@ These rules style the markup a component renders. Use the listed elements, or ad
 | `.sb-choice`                                                                              | `span`, `input` (via `:has`) |
 | `.sb-progress`                                                                            | `span`                       |
 | `.sb-table`                                                                               | `th`, `td`, `tbody`, `tr`    |
+
+### Toast region
+
+Toast styles ship with `status`. Inside `.sb-toaster`, toasts are positioned by the `--x`, `--y`, `--scale`, `--height`, `--opacity`, and `--z-index` variables that the [Zag.js toast machine](https://zagjs.com/components/solid/toast) writes; `@simple-base/solid` provides that behavior. Outside a region, `.sb-toast` is a static surface for CSS-only use inside `.sb-live-region`.
 
 ## Links
 

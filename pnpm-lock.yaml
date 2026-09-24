@@ -280,6 +280,9 @@ importers:
       '@zag-js/solid':
         specifier: ^1.43.3
         version: 1.43.3(solid-js@1.9.13)
+      '@zag-js/toast':
+        specifier: ^1.43.3
+        version: 1.43.3
       cn:
         specifier: ^0.2.5
         version: 0.2.5
@@ -1489,6 +1492,9 @@ packages:
 
   '@zag-js/store@1.43.3':
     resolution: {integrity: sha512-NL3Uxk5Rszjd+X+cPXw0N7Kn5TNMyrS6cTMazlBOcN2+J68mzXhNFvM/0H38m0X+3ybK3sE5Ta6NPlhOQADRqw==}
+
+  '@zag-js/toast@1.43.3':
+    resolution: {integrity: sha512-XBDewuymsIzZy23xrcx1v6F/HeDlk3NAfZ2C02P+DHiNKdj+a53PpqUGZg2e2FX7ZGibag+aywWG4pnvKaSQWg==}
 
   '@zag-js/types@1.43.3':
     resolution: {integrity: sha512-QokzUgkJ7a/TRE8SAXqlm1XfiNDbyM8y+mx0PpmzHa8bvmWXLEe/Zx2TRz8aYoGim75NluYzDy3x+WWileF7uA==}
@@ -3135,6 +3141,15 @@ snapshots:
   '@zag-js/store@1.43.3':
     dependencies:
       proxy-compare: 3.0.1
+
+  '@zag-js/toast@1.43.3':
+    dependencies:
+      '@zag-js/anatomy': 1.43.3
+      '@zag-js/core': 1.43.3
+      '@zag-js/dismissable': 1.43.3
+      '@zag-js/dom-query': 1.43.3
+      '@zag-js/types': 1.43.3
+      '@zag-js/utils': 1.43.3
 
   '@zag-js/types@1.43.3':
     dependencies:

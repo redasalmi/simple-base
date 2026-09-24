@@ -9,7 +9,6 @@ export function Styles() {
   const [page, setPage] = createSignal(1);
   const [selected, setSelected] = createSignal<string[]>([]);
   const [menuAction, setMenuAction] = createSignal("Choose an example command.");
-  const [toast, setToast] = createSignal(false);
   const [hasRecord, setHasRecord] = createSignal(false);
   let menu: HTMLDetailsElement | undefined;
   const tabNames = ["Overview", "Activity", "Settings"];
@@ -88,27 +87,8 @@ export function Styles() {
               <p>Editing will be unavailable during the maintenance window.</p>
             </div>
           </div>
-          <div>
-            <Button variant="secondary" onClick={() => setToast(true)}>
-              Show success toast
-            </Button>
-          </div>
         </div>
       </Example>
-      <div class="sb-live-region" role="status">
-        <div class="sb-toast" data-status="success" hidden={!toast()}>
-          <span class="sb-toast-icon" aria-hidden="true">
-            ✓
-          </span>
-          <div>
-            <strong>Example saved</strong>
-            <p>This notification stays until dismissed.</p>
-            <Button size="small" variant="ghost" onClick={() => setToast(false)}>
-              Dismiss notification
-            </Button>
-          </div>
-        </div>
-      </div>
       <Example
         title="Progress & range"
         description="A native range input drives the progress specimen. Values are local, not a running upload or a fabricated metric."

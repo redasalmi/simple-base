@@ -23,6 +23,7 @@ import { Inputs, TextAreas, Checkboxes, Radios, Switches } from "./preview/Input
 import { Comboboxes } from "./preview/Comboboxes";
 import { Selects } from "./preview/Selects";
 import { Tables } from "./preview/Tables";
+import { Toasts } from "./preview/Toasts";
 import { Styles } from "./preview/Styles";
 
 type Page = {
@@ -161,6 +162,15 @@ const pages: Page[] = [
     usage:
       'import { AlertDialog, AlertDialogTrigger, AlertDialogContent } from "@simple-base/solid";',
     component: AlertDialogs,
+  },
+  {
+    id: "toast",
+    label: "Toast",
+    group: "Components",
+    description:
+      "Brief, non-blocking confirmation after an action. A toaster stacks toasts in a polite live region; named parts render each toast from the options passed to create.",
+    usage: 'import { createToaster, Toaster, Toast, ToastTitle } from "@simple-base/solid";',
+    component: Toasts,
   },
   {
     id: "styles",
