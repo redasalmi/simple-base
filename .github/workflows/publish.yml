@@ -34,6 +34,10 @@ jobs:
           cache: true
           require-lockfile: true # runs pnpm install --frozen-lockfile
 
+      # Never publish a release that fails lint, format, token, or type checks.
+      - name: Run quality checks
+        run: pnpm quality
+
       # Packages ship compiled output from dist/, so build before packing.
       - name: Build packages
         run: pnpm build
