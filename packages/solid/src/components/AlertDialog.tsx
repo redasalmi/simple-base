@@ -72,20 +72,17 @@ export type AlertDialogTriggerProps = Omit<
 
 export function AlertDialogTrigger(props: AlertDialogTriggerProps) {
   const { contentId, open, setOpen } = useAlertDialog();
-  const [local, rest] = splitProps(props, ["ref", "class", "variant", "size"]);
-  const triggerProps = mergeWidgetProps(
-    {
-      type: "button" as const,
-      onClick(event: MouseEvent) {
-        if (!event.defaultPrevented) setOpen(true);
-      },
+  const [local, rest] = splitProps(props, ["ref", "class", "variant", "size", "children"]);
+  const triggerBehavior = {
+    type: "button" as const,
+    onClick(event: MouseEvent) {
+      if (!event.defaultPrevented) setOpen(true);
     },
-    rest,
-  );
+  };
 
   return (
     <Button
-      {...triggerProps}
+      {...mergeWidgetProps(triggerBehavior, rest)}
       class={cn("sb-alert-dialog-trigger", local.class)}
       variant={local.variant}
       size={local.size}
@@ -96,7 +93,9 @@ export function AlertDialogTrigger(props: AlertDialogTriggerProps) {
       ref={(element) => {
         if (typeof local.ref === "function") local.ref(element);
       }}
-    />
+    >
+      {local.children}
+    </Button>
   );
 }
 
@@ -108,20 +107,17 @@ export type AlertDialogContentProps = Omit<
 export function AlertDialogContent(props: AlertDialogContentProps) {
   const { titleId, descriptionId, contentId, open, setOpen, dialogRef, setDialogRef } =
     useAlertDialog();
-  const [local, rest] = splitProps(props, ["class", "ref"]);
-  const dialogProps = mergeWidgetProps(
-    {
-      onCancel(event: Event) {
-        if (event.defaultPrevented) return;
-        event.preventDefault();
-        setOpen(false);
-      },
-      onClose() {
-        if (open()) setOpen(false);
-      },
+  const [local, rest] = splitProps(props, ["class", "ref", "children"]);
+  const dialogBehavior = {
+    onCancel(event: Event) {
+      if (event.defaultPrevented) return;
+      event.preventDefault();
+      setOpen(false);
     },
-    rest,
-  );
+    onClose() {
+      if (open()) setOpen(false);
+    },
+  };
 
   createEffect(() => {
     const dialog = dialogRef();
@@ -139,7 +135,7 @@ export function AlertDialogContent(props: AlertDialogContentProps) {
 
   return (
     <dialog
-      {...dialogProps}
+      {...mergeWidgetProps(dialogBehavior, rest)}
       id={contentId}
       ref={(element) => {
         setDialogRef(element);
@@ -149,7 +145,9 @@ export function AlertDialogContent(props: AlertDialogContentProps) {
       aria-labelledby={titleId}
       aria-describedby={descriptionId}
       class={cn("sb-alert-dialog-content", local.class)}
-    />
+    >
+      {local.children}
+    </dialog>
   );
 }
 
@@ -213,27 +211,29 @@ export type AlertDialogCancelProps = ButtonProps;
 
 export function AlertDialogCancel(props: AlertDialogCancelProps) {
   const { dialogRef, setOpen } = useAlertDialog();
-  const [local, rest] = splitProps(props, ["class", "variant", "autofocus"]);
-  const buttonProps = mergeWidgetProps(
-    {
-      type: "button" as const,
-      onClick(event: MouseEvent & { currentTarget: HTMLButtonElement }) {
-        if (event.defaultPrevented) return;
-        const dialog = dialogRef();
-        if (dialog) dialog.returnValue = event.currentTarget.value;
-        setOpen(false);
-      },
+  const [local, rest] = splitProps(props, ["ref", "class", "variant", "autofocus", "children"]);
+  const buttonBehavior = {
+    type: "button" as const,
+    onClick(event: MouseEvent & { currentTarget: HTMLButtonElement }) {
+      if (event.defaultPrevented) return;
+      const dialog = dialogRef();
+      if (dialog) dialog.returnValue = event.currentTarget.value;
+      setOpen(false);
     },
-    rest,
-  );
+  };
 
   return (
     <Button
-      {...buttonProps}
+      {...mergeWidgetProps(buttonBehavior, rest)}
       class={cn("sb-alert-dialog-cancel", local.class)}
       autofocus={local.autofocus ?? true}
       variant={local.variant ?? "secondary"}
-    />
+      ref={(element) => {
+        if (typeof local.ref === "function") local.ref(element);
+      }}
+    >
+      {local.children}
+    </Button>
   );
 }
 
@@ -241,26 +241,28 @@ export type AlertDialogActionProps = ButtonProps;
 
 export function AlertDialogAction(props: AlertDialogActionProps) {
   const { dialogRef, setOpen } = useAlertDialog();
-  const [local, rest] = splitProps(props, ["class", "variant"]);
-  const buttonProps = mergeWidgetProps(
-    {
-      type: "button" as const,
-      onClick(event: MouseEvent & { currentTarget: HTMLButtonElement }) {
-        if (event.defaultPrevented) return;
-        const dialog = dialogRef();
-        if (dialog) dialog.returnValue = event.currentTarget.value;
-        setOpen(false);
-      },
+  const [local, rest] = splitProps(props, ["ref", "class", "variant", "children"]);
+  const buttonBehavior = {
+    type: "button" as const,
+    onClick(event: MouseEvent & { currentTarget: HTMLButtonElement }) {
+      if (event.defaultPrevented) return;
+      const dialog = dialogRef();
+      if (dialog) dialog.returnValue = event.currentTarget.value;
+      setOpen(false);
     },
-    rest,
-  );
+  };
 
   return (
     <Button
-      {...buttonProps}
+      {...mergeWidgetProps(buttonBehavior, rest)}
       class={cn("sb-alert-dialog-action", local.class)}
       variant={local.variant ?? "danger"}
-    />
+      ref={(element) => {
+        if (typeof local.ref === "function") local.ref(element);
+      }}
+    >
+      {local.children}
+    </Button>
   );
 }
 

@@ -17,6 +17,19 @@ import type { ComboboxOption, ComboboxOptions } from "@simple-base/contracts";
 import { mergeWidgetProps } from "../mergeWidgetProps";
 import { validateWidgetOptions } from "../validateWidgetOptions";
 
+// Matches Zag's hidden select: out of view, but focusable so native validation can report on it.
+const visuallyHiddenStyle = {
+  position: "absolute",
+  width: "1px",
+  height: "1px",
+  margin: "-1px",
+  padding: "0",
+  border: "0",
+  overflow: "hidden",
+  clip: "rect(0 0 0 0)",
+  "white-space": "nowrap",
+} satisfies JSX.CSSProperties;
+
 type ComboboxContextType = {
   label: Accessor<string>;
   options: Accessor<ComboboxOption[]>;
@@ -83,9 +96,6 @@ export function Combobox(props: ComboboxRootProps) {
     get ids() {
       return { root: local.id };
     },
-    get name() {
-      return local.name;
-    },
     get placeholder() {
       return local.placeholder;
     },
@@ -131,6 +141,18 @@ export function Combobox(props: ComboboxRootProps) {
       }}
     >
       <div {...mergeWidgetProps(api().getRootProps(), rest)} class={cn("sb-combobox", local.class)}>
+        {/* Zag names the text input, which would submit the typed text instead of the value. */}
+        <select
+          aria-hidden="true"
+          tabIndex={-1}
+          style={visuallyHiddenStyle}
+          name={local.name}
+          disabled={local.disabled}
+          required={local.required}
+          onFocus={() => api().focus()}
+        >
+          <Show when={api().value[0]}>{(value) => <option value={value()} />}</Show>
+        </select>
         {local.children}
       </div>
     </ComboboxContext.Provider>
