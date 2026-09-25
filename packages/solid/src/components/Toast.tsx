@@ -10,7 +10,7 @@ import {
   type Accessor,
   type JSX,
 } from "solid-js";
-import { cn } from "cn";
+import { cn } from "../cn";
 import * as toast from "@zag-js/toast";
 import { Key, normalizeProps, useMachine } from "@zag-js/solid";
 import { toastDefaults, type Placement, type ToastOptions } from "@simple-base/contracts";

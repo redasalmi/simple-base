@@ -283,9 +283,6 @@ importers:
       '@zag-js/toast':
         specifier: ^1.43.3
         version: 1.43.3
-      cn:
-        specifier: ^0.2.5
-        version: 0.2.5
     devDependencies:
       '@types/node':
         specifier: ^25.8.0
@@ -1536,11 +1533,6 @@ packages:
   chokidar@5.0.0:
     resolution: {integrity: sha512-TQMmc3w+5AxjpL8iIiwebF73dRDF4fBIieAqGn9RGCWaEVwQ6Fb2cGe31Yns0RRIzii5goJ1Y7xbMwo1TxMplw==}
     engines: {node: '>= 20.19.0'}
-
-  cn@0.2.5:
-    resolution: {integrity: sha512-OCjZtMeQfXbI4Es1+EIjkd77gvWzaE689gD8KhfexlqjClC06qR1MQBR+Z35ZMSPNEBWyHiItW1Soy0UvwNv9w==}
-    engines: {node: '>=20'}
-    hasBin: true
 
   colorjs.io@0.7.1:
     resolution: {integrity: sha512-LY7OHnJZxHwT5UlzNa9bbhHHDbzB6yE5+3MIPwJEQKRvSCt/T4G7epsj+9j2BExUIIfXFIJGsIXUKdfrK9Q5tA==}
@@ -3197,8 +3189,6 @@ snapshots:
   chokidar@5.0.0:
     dependencies:
       readdirp: 5.1.1
-
-  cn@0.2.5: {}
 
   colorjs.io@0.7.1: {}
 

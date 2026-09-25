@@ -10,7 +10,7 @@ import {
   type Accessor,
 } from "solid-js";
 import { Portal } from "solid-js/web";
-import { cn } from "cn";
+import { cn } from "../cn";
 import * as combobox from "@zag-js/combobox";
 import { normalizeProps, useMachine } from "@zag-js/solid";
 import type { ComboboxOption, ComboboxOptions } from "@simple-base/contracts";

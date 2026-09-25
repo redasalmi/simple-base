@@ -13,7 +13,7 @@ import {
   type Accessor,
 } from "solid-js";
 import { Portal } from "solid-js/web";
-import { cn } from "cn";
+import { cn } from "../cn";
 import * as select from "@zag-js/select";
 import { normalizeProps, useMachine } from "@zag-js/solid";
 import type { SelectOption, SelectOptions } from "@simple-base/contracts";

@@ -10,7 +10,7 @@ import {
   type JSX,
   type Setter,
 } from "solid-js";
-import { cn } from "cn";
+import { cn } from "../cn";
 import type { DialogOptions } from "@simple-base/contracts";
 import { Button, type ButtonProps } from "./Button";
 import { mergeWidgetProps } from "../mergeWidgetProps";

@@ -1,5 +1,5 @@
 import { splitProps, type JSX } from "solid-js";
-import { cn } from "cn";
+import { cn } from "../cn";
 import type { TableCellOptions } from "@simple-base/contracts";
 export type { TableCellVariant } from "@simple-base/contracts";
 
