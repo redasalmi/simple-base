@@ -1,6 +1,6 @@
 {
   "name": "@simple-base/css",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -45,6 +45,10 @@
       "types": "./styles.d.ts",
       "default": "./styles/combobox.css"
     },
+    "./date-picker": {
+      "types": "./styles.d.ts",
+      "default": "./styles/date-picker.css"
+    },
     "./dialog": {
       "types": "./styles.d.ts",
       "default": "./styles/dialog.css"
@@ -72,6 +76,10 @@
     "./menu": {
       "types": "./styles.d.ts",
       "default": "./styles/menu.css"
+    },
+    "./number-input": {
+      "types": "./styles.d.ts",
+      "default": "./styles/number-input.css"
     },
     "./pagination": {
       "types": "./styles.d.ts",
@@ -116,6 +124,10 @@
     "./textarea": {
       "types": "./styles.d.ts",
       "default": "./styles/textarea.css"
+    },
+    "./tooltip": {
+      "types": "./styles.d.ts",
+      "default": "./styles/tooltip.css"
     },
     "./typography": {
       "types": "./styles.d.ts",

@@ -20,10 +20,34 @@
     font-family: var(--sb-semantic-typography-family-code);
   }
 
-  .sb-empty-state p {
+  .sb-empty-state-mark > svg,
+  .sb-empty-mark > svg {
+    width: var(--sb-semantic-size-icon-md);
+    height: var(--sb-semantic-size-icon-md);
+  }
+
+  .sb-empty-state-title {
+    margin: 0;
+    color: var(--sb-semantic-color-foreground-primary);
+    font-size: var(--sb-semantic-typography-size-lg);
+    font-weight: var(--sb-semantic-typography-weight-semibold);
+    line-height: var(--sb-semantic-typography-line-height-snug);
+    text-wrap: balance;
+  }
+
+  .sb-empty-state p,
+  .sb-empty-state-description {
     max-width: 34ch;
     margin: var(--sb-semantic-space-2) 0 0;
     color: var(--sb-semantic-color-foreground-muted);
     font-size: 13px;
+  }
+
+  .sb-empty-state-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--sb-semantic-space-2);
+    margin-top: var(--sb-semantic-space-5);
   }
 }

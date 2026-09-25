@@ -62,7 +62,7 @@ Types are erased at runtime. Only the `*Defaults` constants are runtime exports 
 - **Card variants:** `flat`, `rule`. Omit `variant` for the base card; there is no explicit `default` variant. Card padding is built into `.sb-card`; see the 0.2.0 migration notes in [@simple-base/css](https://www.npmjs.com/package/@simple-base/css).
 - **Table cell variants:** `code`, `number`.
 - **Dialogs:** `open` is the controlled state, `defaultOpen` provides the initial uncontrolled state, and `onOpenChange` reports requested visibility changes.
-- **Statuses are deliberately not interchangeable.** Status lines use `success`, `danger`, `info`. Alerts use `danger`, `info` — only the border changes with status. Toasts use `success` only. All three are exported from `/status`.
+- **Statuses are deliberately not interchangeable.** Status lines and alerts use `success`, `warning`, `danger`, `info`. Toasts use `success` and `warning`. All three are exported from `/status`.
 
 ### Select and Combobox
 

@@ -11,35 +11,121 @@
     display: none;
   }
 
-  .sb-menu-panel {
-    position: absolute;
-    top: calc(100% + var(--sb-semantic-space-2));
-    right: 0;
+  .sb-menu-panel,
+  .sb-menu-content {
+    box-sizing: border-box;
     z-index: var(--sb-semantic-layer-dropdown);
     min-width: 190px;
     padding: var(--sb-semantic-space-2);
     border: var(--sb-semantic-border-width-hairline) solid var(--sb-semantic-color-border-strong);
     border-radius: var(--sb-semantic-radius-md);
+    color: var(--sb-semantic-color-foreground-primary);
     background: var(--sb-semantic-color-background-overlay);
     box-shadow: var(--sb-semantic-shadow-overlay);
+    font-family: var(--sb-semantic-typography-family-body);
+    line-height: var(--sb-semantic-typography-line-height-normal);
+  }
+
+  .sb-menu-panel {
+    position: absolute;
+    top: calc(100% + var(--sb-semantic-space-2));
+    right: 0;
+  }
+
+  .sb-menu-content {
+    max-width: var(--available-width);
+    max-height: var(--available-height);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    outline: 0;
   }
 
   .sb-menu-item {
     display: flex;
+    box-sizing: border-box;
     align-items: center;
+    gap: var(--sb-semantic-space-3);
     width: 100%;
     min-height: var(--sb-semantic-size-control-md);
     padding: 0 var(--sb-semantic-space-3);
     border: 0;
     border-radius: var(--sb-semantic-radius-sm);
+    outline: 0;
     color: var(--sb-semantic-color-foreground-secondary);
     background: transparent;
+    font: inherit;
     font-size: 13px;
-    text-align: left;
+    text-align: start;
+    cursor: pointer;
+    user-select: none;
   }
 
-  .sb-menu-item:hover {
-    color: var(--sb-semantic-color-foreground-primary);
-    background: var(--sb-semantic-color-background-subtle);
+  .sb-menu-item > svg {
+    flex: 0 0 auto;
+    width: var(--sb-semantic-size-icon-sm);
+    height: var(--sb-semantic-size-icon-sm);
+    color: var(--sb-semantic-color-foreground-muted);
+  }
+
+  .sb-menu-panel .sb-menu-item:hover:not(:disabled),
+  .sb-menu-panel .sb-menu-item:focus-visible,
+  .sb-menu-item[data-highlighted]:not([data-disabled]) {
+    color: var(--sb-semantic-color-selection-foreground);
+    background: var(--sb-semantic-color-selection-background);
+  }
+
+  .sb-menu-panel .sb-menu-item:hover:not(:disabled) > svg,
+  .sb-menu-panel .sb-menu-item:focus-visible > svg,
+  .sb-menu-item[data-highlighted]:not([data-disabled]) > svg {
+    color: inherit;
+  }
+
+  .sb-menu-item[data-variant="danger"],
+  .sb-menu-item[data-variant="danger"] > svg {
+    color: var(--sb-semantic-color-status-danger-text);
+  }
+
+  .sb-menu-panel .sb-menu-item[data-variant="danger"]:hover:not(:disabled),
+  .sb-menu-panel .sb-menu-item[data-variant="danger"]:focus-visible,
+  .sb-menu-item[data-variant="danger"][data-highlighted]:not([data-disabled]) {
+    color: var(--sb-semantic-color-status-danger-text);
+    background: var(--sb-semantic-color-status-danger-soft);
+  }
+
+  .sb-menu-item:disabled,
+  .sb-menu-item[data-disabled] {
+    cursor: not-allowed;
+    opacity: var(--sb-semantic-opacity-disabled);
+  }
+
+  .sb-menu-item-shortcut {
+    margin-inline-start: auto;
+    padding-inline-start: var(--sb-semantic-space-4);
+    color: var(--sb-semantic-color-foreground-muted);
+    font-family: var(--sb-semantic-typography-family-code);
+    font-size: var(--sb-semantic-typography-size-xs);
+  }
+
+  .sb-menu-group-label {
+    padding: var(--sb-semantic-space-2) var(--sb-semantic-space-3) var(--sb-semantic-space-1);
+    color: var(--sb-semantic-color-foreground-muted);
+    font-size: var(--sb-semantic-typography-size-xs);
+    font-weight: var(--sb-semantic-typography-weight-semibold);
+  }
+
+  .sb-menu-separator {
+    height: 0;
+    margin: var(--sb-semantic-space-2) calc(-1 * var(--sb-semantic-space-2));
+    border: 0;
+    border-top: var(--sb-semantic-border-width-hairline) solid
+      var(--sb-semantic-color-border-default);
+  }
+
+  @media (forced-colors: active) {
+    .sb-menu-panel .sb-menu-item:focus-visible,
+    .sb-menu-item[data-highlighted]:not([data-disabled]) {
+      outline: var(--sb-semantic-border-width-strong) solid Highlight;
+      outline-offset: calc(-1 * var(--sb-semantic-border-width-strong));
+    }
   }
 }

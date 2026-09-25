@@ -7,10 +7,19 @@
 
   .sb-field label,
   .sb-field legend,
+  .sb-field-label,
   .sb-field-title {
     color: var(--sb-semantic-color-foreground-secondary);
     font-size: 13px;
     font-weight: var(--sb-semantic-typography-weight-semibold);
+  }
+
+  .sb-field-label[data-required]::after,
+  .sb-field-title[data-required]::after {
+    margin-inline-start: var(--sb-semantic-space-1);
+    color: var(--sb-semantic-color-status-danger-base);
+    content: "*";
+    content: "*" / "";
   }
 
   .sb-field small,
@@ -19,8 +28,18 @@
     font-size: var(--sb-semantic-typography-size-sm);
   }
 
-  .sb-field-help[data-invalid] {
+  .sb-field-help[data-invalid],
+  .sb-field-error {
     color: var(--sb-semantic-color-status-danger-text);
+  }
+
+  .sb-field-error {
+    font-size: var(--sb-semantic-typography-size-sm);
+  }
+
+  .sb-field[data-disabled] :is(.sb-field-label, .sb-field-title, .sb-field-help),
+  .sb-fieldset:disabled :is(.sb-field-title, .sb-field-help, .sb-choice span) {
+    opacity: var(--sb-semantic-opacity-disabled);
   }
 
   .sb-fieldset {
@@ -56,6 +75,15 @@
     box-shadow:
       0 0 0 var(--sb-semantic-border-width-hairline) var(--sb-semantic-color-background-canvas),
       0 0 0 var(--sb-semantic-space-1) var(--sb-semantic-color-focus-ring);
+  }
+
+  .sb-choice:has(input:disabled) {
+    cursor: not-allowed;
+  }
+
+  .sb-choice:has(input:disabled):hover {
+    color: var(--sb-semantic-color-foreground-secondary);
+    background: transparent;
   }
 
   .sb-choice span {

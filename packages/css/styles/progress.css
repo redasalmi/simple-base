@@ -1,9 +1,24 @@
 @layer sb {
   .sb-progress {
+    --sb-progress-fill: var(--sb-semantic-color-status-success-surface);
+
+    position: relative;
     height: var(--sb-semantic-space-2);
     overflow: hidden;
     border-radius: var(--sb-semantic-radius-full);
     background: var(--sb-semantic-color-background-overlay);
+  }
+
+  .sb-progress[data-status="warning"] {
+    --sb-progress-fill: var(--sb-semantic-color-status-warning-surface);
+  }
+
+  .sb-progress[data-status="danger"] {
+    --sb-progress-fill: var(--sb-semantic-color-status-danger-surface);
+  }
+
+  .sb-progress[data-status="info"] {
+    --sb-progress-fill: var(--sb-semantic-color-status-info-surface);
   }
 
   .sb-progress > span,
@@ -12,6 +27,51 @@
     width: var(--sb-progress-value, 64%);
     height: 100%;
     border-radius: inherit;
-    background: var(--sb-semantic-color-status-success-surface);
+    background: var(--sb-progress-fill);
+    transition: width var(--sb-semantic-motion-duration-slow) var(--sb-semantic-motion-easing-out);
+  }
+
+  .sb-progress[data-state="indeterminate"] > span,
+  .sb-progress[data-state="indeterminate"] .sb-progress-value {
+    position: absolute;
+    inset-block: 0;
+    width: 40%;
+    animation: sb-progress-indeterminate 1.4s var(--sb-semantic-motion-easing-standard) infinite;
+  }
+
+  @keyframes sb-progress-indeterminate {
+    from {
+      left: -40%;
+    }
+
+    to {
+      left: 100%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sb-progress > span,
+    .sb-progress-value {
+      transition: none;
+    }
+
+    .sb-progress[data-state="indeterminate"] > span,
+    .sb-progress[data-state="indeterminate"] .sb-progress-value {
+      left: 0;
+      width: 100%;
+      animation: none;
+      opacity: var(--sb-semantic-opacity-subtle);
+    }
+  }
+
+  @media (forced-colors: active) {
+    .sb-progress {
+      border: var(--sb-semantic-border-width-hairline) solid CanvasText;
+    }
+
+    .sb-progress > span,
+    .sb-progress-value {
+      background: Highlight;
+    }
   }
 }

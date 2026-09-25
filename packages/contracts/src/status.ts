@@ -1,16 +1,16 @@
-export type StatusValue = "success" | "danger" | "info";
+export type StatusValue = "success" | "warning" | "danger" | "info";
 
 export type StatusOptions = {
   status?: StatusValue;
 };
 
-export type AlertStatus = "danger" | "info";
+export type AlertStatus = "success" | "warning" | "danger" | "info";
 
 export type AlertOptions = {
   status?: AlertStatus;
 };
 
-export type ToastStatus = "success";
+export type ToastStatus = "success" | "warning";
 
 export type ToastOptions = {
   status?: ToastStatus;

@@ -28,6 +28,10 @@
     font-weight: var(--sb-semantic-typography-weight-bold);
   }
 
+  .sb-checkbox[aria-invalid="true"] {
+    border-color: var(--sb-semantic-color-status-danger-base);
+  }
+
   .sb-checkbox:focus-visible {
     outline: 0;
     box-shadow:

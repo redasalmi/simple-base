@@ -1,0 +1,56 @@
+@layer sb {
+  .sb-tooltip-content {
+    --arrow-size: var(--sb-semantic-space-2);
+    --arrow-background: var(--sb-semantic-color-foreground-primary);
+
+    box-sizing: border-box;
+    z-index: var(--sb-semantic-layer-overlay);
+    width: max-content;
+    max-width: min(280px, var(--available-width, 100vw));
+    padding: var(--sb-semantic-space-1) var(--sb-semantic-space-2);
+    border-radius: var(--sb-semantic-radius-sm);
+    color: var(--sb-semantic-color-foreground-inverse);
+    background: var(--sb-semantic-color-foreground-primary);
+    font-family: var(--sb-semantic-typography-family-body);
+    font-size: var(--sb-semantic-typography-size-sm);
+    font-weight: var(--sb-semantic-typography-weight-medium);
+    line-height: var(--sb-semantic-typography-line-height-snug);
+    overflow-wrap: anywhere;
+    transform-origin: var(--transform-origin);
+  }
+
+  .sb-tooltip-content[data-state="open"]:not([data-instant]) {
+    animation: sb-tooltip-in var(--sb-semantic-motion-duration-fast)
+      var(--sb-semantic-motion-easing-out);
+  }
+
+  .sb-tooltip-content .sb-shortcut {
+    min-height: 18px;
+    margin-inline-start: var(--sb-semantic-space-2);
+    border-color: color-mix(in oklch, var(--sb-semantic-color-foreground-inverse) 40%, transparent);
+    color: inherit;
+  }
+
+  .sb-tooltip-arrow-tip {
+    border-radius: 1px;
+  }
+
+  @keyframes sb-tooltip-in {
+    from {
+      opacity: 0;
+      scale: 0.96;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sb-tooltip-content[data-state="open"]:not([data-instant]) {
+      animation: none;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .sb-tooltip-content {
+      border: var(--sb-semantic-border-width-hairline) solid CanvasText;
+    }
+  }
+}

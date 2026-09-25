@@ -11,25 +11,69 @@
   }
 
   .sb-segment {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--sb-semantic-space-2);
     min-height: var(--sb-semantic-size-control-sm);
     padding: 0 var(--sb-semantic-space-3);
     border: 0;
     border-radius: var(--sb-semantic-radius-sm);
     color: var(--sb-semantic-color-foreground-muted);
     background: transparent;
+    font: inherit;
     font-size: var(--sb-semantic-typography-size-sm);
     font-weight: var(--sb-semantic-typography-weight-semibold);
+    cursor: pointer;
   }
 
-  .sb-segment:hover {
+  .sb-segment:hover:where(:not(:disabled, [aria-disabled="true"], [data-disabled])) {
     color: var(--sb-semantic-color-foreground-primary);
   }
 
-  .sb-segment[aria-pressed="true"] {
+  .sb-segment[aria-pressed="true"],
+  .sb-segment[aria-checked="true"],
+  .sb-segment[data-state="checked"] {
     color: var(--sb-semantic-color-foreground-primary);
     background: var(--sb-semantic-color-background-surface);
     box-shadow: 0 1px 3px
       color-mix(in oklch, var(--sb-semantic-color-background-canvas) 70%, transparent);
+  }
+
+  .sb-segment:focus-visible,
+  .sb-segment:has(input:focus-visible) {
+    outline: 0;
+    box-shadow: 0 0 0 var(--sb-semantic-border-width-strong) var(--sb-semantic-color-focus-ring);
+  }
+
+  .sb-segment:disabled,
+  .sb-segment[aria-disabled="true"],
+  .sb-segment[data-disabled] {
+    cursor: not-allowed;
+    opacity: var(--sb-semantic-opacity-disabled);
+  }
+
+  .sb-segment > input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  @media (forced-colors: active) {
+    .sb-segment:focus-visible,
+    .sb-segment:has(input:focus-visible) {
+      outline: var(--sb-semantic-border-width-strong) solid Highlight;
+    }
+
+    .sb-segment[aria-pressed="true"],
+    .sb-segment[aria-checked="true"],
+    .sb-segment[data-state="checked"] {
+      outline: var(--sb-semantic-border-width-hairline) solid SelectedItem;
+    }
   }
 
   @media (max-width: 480px) {

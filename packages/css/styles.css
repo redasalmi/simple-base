@@ -13,6 +13,8 @@
 @import "./styles/input.css";
 @import "./styles/select.css";
 @import "./styles/combobox.css";
+@import "./styles/number-input.css";
+@import "./styles/date-picker.css";
 @import "./styles/textarea.css";
 @import "./styles/checkbox.css";
 @import "./styles/radio.css";
@@ -25,5 +27,6 @@
 @import "./styles/pagination.css";
 @import "./styles/disclosure.css";
 @import "./styles/menu.css";
+@import "./styles/tooltip.css";
 @import "./styles/table.css";
 @import "./styles/empty-state.css";

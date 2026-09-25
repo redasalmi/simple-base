@@ -140,7 +140,7 @@ If a layout needs the previous unpadded look, override it from your own styles:
 
 Each entry point is an explicit, extensionless subpath. The internal `styles/` directory and `.css` filenames are not public import paths.
 
-`alert-dialog` · `badge` · `breadcrumb` · `button` · `card` · `checkbox` · `combobox` · `dialog` · `disclosure` · `empty-state` · `field` · `input` · `keyboard-shortcut` · `menu` · `pagination` · `progress` · `radio` · `range` · `segmented-control` · `select` · `status` · `switch` · `table` · `tabs` · `textarea` · `typography`
+`alert-dialog` · `badge` · `breadcrumb` · `button` · `card` · `checkbox` · `combobox` · `date-picker` · `dialog` · `disclosure` · `empty-state` · `field` · `input` · `keyboard-shortcut` · `menu` · `number-input` · `pagination` · `progress` · `radio` · `range` · `segmented-control` · `select` · `status` · `switch` · `table` · `tabs` · `textarea` · `tooltip` · `typography`
 
 ## Design conventions
 
@@ -158,64 +158,77 @@ Each entry point is an explicit, extensionless subpath. The internal `styles/` d
 
 ### Variants and options
 
-| Attribute      | Component                                   | Values                                                                                     |
-| -------------- | ------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| `data-variant` | `.sb-badge`                                 | `default`, `success`, `danger`, `warning`, `info`, `accent`, `command`, `outline`, `muted` |
-| `data-variant` | `.sb-button`                                | `primary`, `secondary`, `tertiary`, `ghost`, `danger`, `danger-subtle`                     |
-| `data-variant` | `.sb-card`                                  | `flat`, `rule`                                                                             |
-| `data-variant` | `.sb-table` cell                            | `code`, `number`                                                                           |
-| `data-size`    | `.sb-badge`                                 | `small`, `medium`                                                                          |
-| `data-size`    | `.sb-button`                                | `small`, `medium`, `large`                                                                 |
-| `data-status`  | `.sb-status-line`, `.sb-alert`, `.sb-toast` | `success`, `danger`, `info`                                                                |
+| Attribute      | Component                      | Values                                                                                     |
+| -------------- | ------------------------------ | ------------------------------------------------------------------------------------------ |
+| `data-variant` | `.sb-badge`                    | `default`, `success`, `danger`, `warning`, `info`, `accent`, `command`, `outline`, `muted` |
+| `data-variant` | `.sb-button`                   | `primary`, `secondary`, `tertiary`, `ghost`, `danger`, `danger-subtle`                     |
+| `data-variant` | `.sb-card`                     | `flat`, `rule`                                                                             |
+| `data-variant` | `.sb-table` cell               | `code`, `number`                                                                           |
+| `data-size`    | `.sb-badge`                    | `small`, `medium`                                                                          |
+| `data-size`    | `.sb-button`                   | `small`, `medium`, `large`                                                                 |
+| `data-variant` | `.sb-menu-item`                | `danger`                                                                                   |
+| `data-status`  | `.sb-status-line`, `.sb-alert` | `success`, `warning`, `danger`, `info`                                                     |
+| `data-status`  | `.sb-toast`                    | `success`, `warning`                                                                       |
+| `data-status`  | `.sb-progress`                 | `warning`, `danger`, `info`; omit for success                                              |
 
 ### State attributes
 
-| Selector                                       | Applies to                                                                     |
-| ---------------------------------------------- | ------------------------------------------------------------------------------ |
-| `[aria-invalid="true"]`                        | `.sb-input`, `.sb-textarea`                                                    |
-| `[data-invalid]`                               | `.sb-select-control`, `.sb-combobox-control`, `.sb-field-help`                 |
-| `[aria-selected="true"]`                       | `.sb-tab`, `.sb-table tbody tr`                                                |
-| `[aria-pressed="true"]`                        | `.sb-segment`                                                                  |
-| `[aria-current="page"]`                        | `.sb-page-button`                                                              |
-| `[aria-disabled="true"]`, `:disabled`          | `.sb-button`, `.sb-select`, form controls                                      |
-| `[data-state="open"]`                          | `.sb-select-trigger`, `.sb-combobox-trigger`                                   |
-| `[data-highlighted]`                           | `.sb-select-item`, `.sb-combobox-item`                                         |
-| `[data-placeholder-shown]`, `[data-required]`  | `.sb-select`, `.sb-combobox`                                                   |
-| `[open]`                                       | `.sb-dialog-content`, `.sb-alert-dialog-content`, `.sb-disclosure`, `.sb-menu` |
-| `[data-state="open"]`, `[data-state="closed"]` | `.sb-toaster .sb-toast`                                                        |
+| Selector                                                                                                                                                    | Applies to                                                                                                                                                                                                                  |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `[aria-invalid="true"]`                                                                                                                                     | `.sb-input`, `.sb-textarea`, `.sb-checkbox`, `.sb-radio`                                                                                                                                                                    |
+| `[data-invalid]`                                                                                                                                            | `.sb-select-control`, `.sb-combobox-control`, `.sb-number-input-control`, `.sb-date-picker-control`, `.sb-field-help`                                                                                                       |
+| `[aria-selected="true"]`                                                                                                                                    | `.sb-tab`, `.sb-table tbody tr`                                                                                                                                                                                             |
+| `[aria-pressed="true"]`, `[aria-checked="true"]`, `[data-state="checked"]`                                                                                  | `.sb-segment`                                                                                                                                                                                                               |
+| `[aria-current="page"]`                                                                                                                                     | `.sb-page-button`, `.sb-breadcrumb` descendants                                                                                                                                                                             |
+| `[aria-disabled="true"]`, `:disabled`                                                                                                                       | `.sb-button`, `.sb-select`, `.sb-tab`, `.sb-segment`, `.sb-page-button`, form controls                                                                                                                                      |
+| `[data-disabled]`                                                                                                                                           | `.sb-field`, `.sb-tab`, `.sb-segment`, `.sb-page-button`, `.sb-menu-item`, `.sb-number-input-control`, `.sb-number-input-trigger`, `.sb-date-picker-control`, `.sb-date-picker-nav-trigger`, `.sb-date-picker-cell-trigger` |
+| `[data-state="open"]`                                                                                                                                       | `.sb-select-trigger`, `.sb-combobox-trigger`, `.sb-date-picker-trigger`, `.sb-tooltip-content`                                                                                                                              |
+| `[data-highlighted]`                                                                                                                                        | `.sb-select-item`, `.sb-combobox-item`, `.sb-menu-item`                                                                                                                                                                     |
+| `[data-placeholder-shown]`, `[data-required]`                                                                                                               | `.sb-select`, `.sb-combobox`                                                                                                                                                                                                |
+| `[data-required]`                                                                                                                                           | `.sb-field-label`, `.sb-field-title`, `.sb-number-input-label`, `.sb-date-picker-label`                                                                                                                                     |
+| `[data-state="indeterminate"]`                                                                                                                              | `.sb-progress`                                                                                                                                                                                                              |
+| `[data-instant]`                                                                                                                                            | `.sb-tooltip-content` (skips the enter animation)                                                                                                                                                                           |
+| `[data-inline]`                                                                                                                                             | `.sb-date-picker-content`                                                                                                                                                                                                   |
+| `[data-view]`, `[data-selected]`, `[data-today]`, `[data-outside-range]`, `[data-in-range]`, `[data-range-start]`, `[data-range-end]`, `[data-unavailable]` | `.sb-date-picker-cell-trigger`                                                                                                                                                                                              |
+| `[open]`                                                                                                                                                    | `.sb-dialog-content`, `.sb-alert-dialog-content`, `.sb-disclosure`, `.sb-menu`                                                                                                                                              |
+| `[data-state="open"]`, `[data-state="closed"]`                                                                                                              | `.sb-toaster .sb-toast`                                                                                                                                                                                                     |
 
 ### Component reference
 
-| Component         | Root                                                                         | Parts                                                                                                 |
-| ----------------- | ---------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| Alert dialog      | `.sb-alert-dialog-content`                                                   | `-trigger`, `-icon`, `-header`, `-kicker`, `-title`, `-description`, `-footer`, `-cancel`, `-action`  |
-| Badge             | `.sb-badge`                                                                  | —                                                                                                     |
-| Breadcrumb        | `.sb-breadcrumb`                                                             | `-separator`                                                                                          |
-| Button            | `.sb-button`                                                                 | —                                                                                                     |
-| Card              | `.sb-card`                                                                   | —                                                                                                     |
-| Checkbox          | `.sb-checkbox`                                                               | —                                                                                                     |
-| Combobox          | `.sb-combobox`                                                               | `-label`, `-control`, `-input`, `-trigger`, `-content`, `-list`, `-item`, `-empty`                    |
-| Dialog            | `.sb-dialog-content`                                                         | `-trigger`, `-header`, `-title`, `-kicker`, `-description`, `-footer`, `-close`, `-action`            |
-| Disclosure        | `.sb-disclosure`                                                             | `-copy`                                                                                               |
-| Empty state       | `.sb-empty-state`                                                            | `-mark` (alias `.sb-empty-mark`)                                                                      |
-| Field             | `.sb-field`, `.sb-fieldset`                                                  | `-title`, `-help`, `.sb-choice-list`, `.sb-choice`                                                    |
-| Input             | `.sb-input`                                                                  | —                                                                                                     |
-| Keyboard shortcut | `.sb-shortcut`                                                               | —                                                                                                     |
-| Menu              | `.sb-menu`                                                                   | `-panel`, `-item`                                                                                     |
-| Pagination        | `.sb-pagination`                                                             | `.sb-page-button`                                                                                     |
-| Progress          | `.sb-progress`                                                               | —                                                                                                     |
-| Radio             | `.sb-radio`                                                                  | —                                                                                                     |
-| Range             | `.sb-range`                                                                  | `.sb-range-readout`                                                                                   |
-| Segmented control | `.sb-segmented-control` (alias `.sb-segmented`)                              | `.sb-segment`                                                                                         |
-| Select            | `.sb-select-root` (compound)                                                 | `-label`, `-control`, `-trigger`, `-value-text`, `-indicator`, `-content`, `-list`, `-item`, `-empty` |
-| Select (native)   | `.sb-select-wrap`                                                            | `.sb-select`                                                                                          |
-| Status            | `.sb-status-line`, `.sb-alert`, `.sb-toast`                                  | `-dot`, `-icon`, `.sb-alert-mark`, `.sb-live-region`                                                  |
-| Toast             | `.sb-toaster` (region), `.sb-toast`                                          | `-icon`, `-content`, `-title`, `-description`, `-action`, `-close`                                    |
-| Switch            | `.sb-switch`                                                                 | —                                                                                                     |
-| Table             | `.sb-table-wrap`, `.sb-table`                                                | —                                                                                                     |
-| Tabs              | `.sb-tabs`                                                                   | `.sb-tab`, `.sb-tab-panel`                                                                            |
-| Textarea          | `.sb-textarea`                                                               | —                                                                                                     |
-| Typography        | `.sb-display`, `.sb-heading-1` … `.sb-heading-6`, `.sb-text-*`, `.sb-code-*` | —                                                                                                     |
+| Component         | Root                                                                         | Parts                                                                                                                                                                           |
+| ----------------- | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Alert dialog      | `.sb-alert-dialog-content`                                                   | `-trigger`, `-icon`, `-header`, `-kicker`, `-title`, `-description`, `-footer`, `-cancel`, `-action`                                                                            |
+| Badge             | `.sb-badge`                                                                  | —                                                                                                                                                                               |
+| Breadcrumb        | `.sb-breadcrumb`                                                             | `-list`, `-item`, `-link`, `-separator`                                                                                                                                         |
+| Button            | `.sb-button`                                                                 | —                                                                                                                                                                               |
+| Card              | `.sb-card`                                                                   | —                                                                                                                                                                               |
+| Checkbox          | `.sb-checkbox`                                                               | —                                                                                                                                                                               |
+| Combobox          | `.sb-combobox`                                                               | `-label`, `-control`, `-input`, `-trigger`, `-content`, `-list`, `-item`, `-empty`                                                                                              |
+| Date picker       | `.sb-date-picker`                                                            | `-label`, `-control`, `-input`, `-trigger`, `-content`, `-view-control`, `-view-trigger`, `-nav-trigger`, `-table`, `-table-header`, `-table-cell`, `-cell-trigger`, `-presets` |
+| Dialog            | `.sb-dialog-content`                                                         | `-trigger`, `-header`, `-title`, `-kicker`, `-description`, `-footer`, `-close`, `-action`                                                                                      |
+| Disclosure        | `.sb-disclosure`                                                             | `-copy`                                                                                                                                                                         |
+| Empty state       | `.sb-empty-state`                                                            | `-mark` (alias `.sb-empty-mark`), `-title`, `-description`, `-actions`                                                                                                          |
+| Field             | `.sb-field`, `.sb-fieldset`                                                  | `-label`, `-title`, `-help`, `-error`, `.sb-choice-list`, `.sb-choice`                                                                                                          |
+| Input             | `.sb-input`                                                                  | —                                                                                                                                                                               |
+| Keyboard shortcut | `.sb-shortcut`                                                               | —                                                                                                                                                                               |
+| Menu (popup)      | `.sb-menu-content`                                                           | `.sb-menu-item`, `-item-shortcut`, `-group-label`, `-separator`                                                                                                                 |
+| Menu (native)     | `.sb-menu` (on `details`)                                                    | `-panel`, `-item`, `-item-shortcut`, `-group-label`, `-separator`                                                                                                               |
+| Number input      | `.sb-number-input`                                                           | `-label`, `-control`, `-input`, `-affix`, `-trigger`                                                                                                                            |
+| Pagination        | `.sb-pagination`                                                             | `.sb-page-button`, `.sb-page-ellipsis`                                                                                                                                          |
+| Progress          | `.sb-progress`                                                               | `-value`                                                                                                                                                                        |
+| Radio             | `.sb-radio`                                                                  | —                                                                                                                                                                               |
+| Range             | `.sb-range`                                                                  | `.sb-range-readout`                                                                                                                                                             |
+| Segmented control | `.sb-segmented-control` (alias `.sb-segmented`)                              | `.sb-segment`                                                                                                                                                                   |
+| Select            | `.sb-select-root` (compound)                                                 | `-label`, `-control`, `-trigger`, `-value-text`, `-indicator`, `-content`, `-list`, `-item`, `-empty`                                                                           |
+| Select (native)   | `.sb-select-wrap`                                                            | `.sb-select`                                                                                                                                                                    |
+| Status            | `.sb-status-line`, `.sb-alert`, `.sb-toast`                                  | `-dot`, `-icon`, `.sb-alert-mark`, `.sb-alert-content`, `.sb-alert-actions`, `.sb-alert-close`, `.sb-live-region`                                                               |
+| Toast             | `.sb-toaster` (region), `.sb-toast`                                          | `-icon`, `-content`, `-title`, `-description`, `-action`, `-close`                                                                                                              |
+| Switch            | `.sb-switch`                                                                 | —                                                                                                                                                                               |
+| Table             | `.sb-table-wrap`, `.sb-table`                                                | —                                                                                                                                                                               |
+| Tabs              | `.sb-tabs`                                                                   | `.sb-tab`, `.sb-tab-panel`                                                                                                                                                      |
+| Textarea          | `.sb-textarea`                                                               | —                                                                                                                                                                               |
+| Tooltip           | `.sb-tooltip-content`                                                        | `-arrow`, `-arrow-tip`                                                                                                                                                          |
+| Typography        | `.sb-display`, `.sb-heading-1` … `.sb-heading-6`, `.sb-text-*`, `.sb-code-*` | —                                                                                                                                                                               |
 
 ### Element selectors
 
@@ -224,6 +237,10 @@ These rules style the markup a component renders. Use the listed elements, or ad
 | Parent                                                                                    | Elements                     |
 | ----------------------------------------------------------------------------------------- | ---------------------------- |
 | `.sb-alert-dialog-icon`, `.sb-alert-mark`, `.sb-select-indicator`, `.sb-combobox-trigger` | `svg`                        |
+| `.sb-menu-item`, `.sb-tab`, `.sb-page-button`, `.sb-empty-state-mark`, `.sb-alert-close`  | `svg`                        |
+| `.sb-number-input-trigger`, `.sb-date-picker-trigger`, `.sb-date-picker-nav-trigger`      | `svg`                        |
+| `.sb-segment`                                                                             | `input` (visually hidden)    |
+| `.sb-tooltip-content`                                                                     | `.sb-shortcut`               |
 | `.sb-breadcrumb`                                                                          | `a`                          |
 | `.sb-disclosure`, `.sb-menu`                                                              | `summary`                    |
 | `.sb-empty-state`                                                                         | `p`                          |
@@ -232,6 +249,12 @@ These rules style the markup a component renders. Use the listed elements, or ad
 | `.sb-choice`                                                                              | `span`, `input` (via `:has`) |
 | `.sb-progress`                                                                            | `span`                       |
 | `.sb-table`                                                                               | `th`, `td`, `tbody`, `tr`    |
+
+### Positioned popups
+
+Menu, tooltip, and date picker content are positioned the same way as select and combobox: the [Zag.js](https://zagjs.com) popper writes `--x`, `--y`, `--z-index`, `--available-width`, `--available-height`, and `--transform-origin` on the positioner, and the content reads them. The tooltip arrow reads `--arrow-size` and `--arrow-background` from `.sb-tooltip-content`. `@simple-base/solid` provides that behavior; without it, position the content yourself.
+
+The native menu (`.sb-menu` on `<details>`) keeps its absolute `.sb-menu-panel` for CSS-only use. It is a disclosure of buttons, not an ARIA menu.
 
 ### Toast region
 
