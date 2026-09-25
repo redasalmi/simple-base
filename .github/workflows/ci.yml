@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: Lint, format, typecheck, and build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up pnpm and Node.js
+        uses: pnpm/setup@v2
+        with:
+          # pnpm version comes from devEngines.packageManager in package.json.
+          runtime: node@24
+          cache: true
+          require-lockfile: true # runs pnpm install --frozen-lockfile
+
+      # Lints, checks formatting and tokens, and typechecks every package
+      # (typecheck builds its workspace dependencies first).
+      - name: Run quality checks
+        run: pnpm quality
+
+      # The playground is the only consumer that isn't built by typecheck.
+      - name: Build all packages
+        run: pnpm build
