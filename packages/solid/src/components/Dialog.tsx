@@ -70,20 +70,17 @@ export type DialogTriggerProps = Omit<
 
 export function DialogTrigger(props: DialogTriggerProps) {
   const { contentId, open, setOpen } = useDialog();
-  const [local, rest] = splitProps(props, ["ref", "class", "variant", "size"]);
-  const triggerProps = mergeWidgetProps(
-    {
-      type: "button" as const,
-      onClick(event: MouseEvent) {
-        if (!event.defaultPrevented) setOpen(true);
-      },
+  const [local, rest] = splitProps(props, ["ref", "class", "variant", "size", "children"]);
+  const triggerBehavior = {
+    type: "button" as const,
+    onClick(event: MouseEvent) {
+      if (!event.defaultPrevented) setOpen(true);
     },
-    rest,
-  );
+  };
 
   return (
     <Button
-      {...triggerProps}
+      {...mergeWidgetProps(triggerBehavior, rest)}
       class={cn("sb-dialog-trigger", local.class)}
       variant={local.variant}
       size={local.size}
@@ -94,7 +91,9 @@ export function DialogTrigger(props: DialogTriggerProps) {
       ref={(element) => {
         if (typeof local.ref === "function") local.ref(element);
       }}
-    />
+    >
+      {local.children}
+    </Button>
   );
 }
 
@@ -105,20 +104,17 @@ export type DialogContentProps = Omit<
 
 export function DialogContent(props: DialogContentProps) {
   const { titleId, descriptionId, contentId, open, setOpen, dialogRef, setDialogRef } = useDialog();
-  const [local, rest] = splitProps(props, ["class", "ref"]);
-  const dialogProps = mergeWidgetProps(
-    {
-      onCancel(event: Event) {
-        if (event.defaultPrevented) return;
-        event.preventDefault();
-        setOpen(false);
-      },
-      onClose() {
-        if (open()) setOpen(false);
-      },
+  const [local, rest] = splitProps(props, ["class", "ref", "children"]);
+  const dialogBehavior = {
+    onCancel(event: Event) {
+      if (event.defaultPrevented) return;
+      event.preventDefault();
+      setOpen(false);
     },
-    rest,
-  );
+    onClose() {
+      if (open()) setOpen(false);
+    },
+  };
 
   createEffect(() => {
     const dialog = dialogRef();
@@ -136,7 +132,7 @@ export function DialogContent(props: DialogContentProps) {
 
   return (
     <dialog
-      {...dialogProps}
+      {...mergeWidgetProps(dialogBehavior, rest)}
       id={contentId}
       ref={(element) => {
         setDialogRef(element);
@@ -146,7 +142,9 @@ export function DialogContent(props: DialogContentProps) {
       aria-labelledby={titleId}
       aria-describedby={descriptionId}
       class={cn("sb-dialog-content", local.class)}
-    />
+    >
+      {local.children}
+    </dialog>
   );
 }
 
@@ -196,43 +194,56 @@ export type DialogCloseProps = JSX.ButtonHTMLAttributes<HTMLButtonElement>;
 
 export function DialogClose(props: DialogCloseProps) {
   const { dialogRef, setOpen } = useDialog();
-  const [local, rest] = splitProps(props, ["class"]);
-  const buttonProps = mergeWidgetProps(
-    {
-      type: "button" as const,
-      onClick(event: MouseEvent & { currentTarget: HTMLButtonElement }) {
-        if (event.defaultPrevented) return;
-        const dialog = dialogRef();
-        if (dialog) dialog.returnValue = event.currentTarget.value;
-        setOpen(false);
-      },
+  const [local, rest] = splitProps(props, ["ref", "class", "children"]);
+  const buttonBehavior = {
+    type: "button" as const,
+    onClick(event: MouseEvent & { currentTarget: HTMLButtonElement }) {
+      if (event.defaultPrevented) return;
+      const dialog = dialogRef();
+      if (dialog) dialog.returnValue = event.currentTarget.value;
+      setOpen(false);
     },
-    rest,
-  );
+  };
 
-  return <button {...buttonProps} class={cn("sb-dialog-close", local.class)} />;
+  return (
+    <button
+      {...mergeWidgetProps(buttonBehavior, rest)}
+      class={cn("sb-dialog-close", local.class)}
+      ref={(element) => {
+        if (typeof local.ref === "function") local.ref(element);
+      }}
+    >
+      {local.children}
+    </button>
+  );
 }
 
 export type DialogActionProps = ButtonProps;
 
 export function DialogAction(props: DialogActionProps) {
   const { dialogRef, setOpen } = useDialog();
-  const [local, rest] = splitProps(props, ["class", "variant"]);
-  const buttonProps = mergeWidgetProps(
-    {
-      type: "button" as const,
-      onClick(event: MouseEvent & { currentTarget: HTMLButtonElement }) {
-        if (event.defaultPrevented) return;
-        const dialog = dialogRef();
-        if (dialog) dialog.returnValue = event.currentTarget.value;
-        setOpen(false);
-      },
+  const [local, rest] = splitProps(props, ["ref", "class", "variant", "children"]);
+  const buttonBehavior = {
+    type: "button" as const,
+    onClick(event: MouseEvent & { currentTarget: HTMLButtonElement }) {
+      if (event.defaultPrevented) return;
+      const dialog = dialogRef();
+      if (dialog) dialog.returnValue = event.currentTarget.value;
+      setOpen(false);
     },
-    rest,
-  );
+  };
 
   return (
-    <Button {...buttonProps} class={cn("sb-dialog-action", local.class)} variant={local.variant} />
+    <Button
+      {...mergeWidgetProps(buttonBehavior, rest)}
+      class={cn("sb-dialog-action", local.class)}
+      variant={local.variant}
+      ref={(element) => {
+        if (typeof local.ref === "function") local.ref(element);
+      }}
+    >
+      {local.children}
+    </Button>
   );
 }
 

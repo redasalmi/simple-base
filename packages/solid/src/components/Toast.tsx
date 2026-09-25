@@ -250,12 +250,14 @@ export type ToastCloseProps = Omit<JSX.ButtonHTMLAttributes<HTMLButtonElement>, 
 
 export function ToastClose(props: ToastCloseProps) {
   const { api } = useToast();
-  const [local, rest] = splitProps(props, ["class"]);
+  const [local, rest] = splitProps(props, ["class", "children"]);
 
   return (
     <button
       {...mergeWidgetProps(api().getCloseTriggerProps(), rest)}
       class={cn("sb-toast-close", local.class)}
-    />
+    >
+      {local.children}
+    </button>
   );
 }
