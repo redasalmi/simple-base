@@ -30,7 +30,9 @@ and a local accessible tabs example.
 The visual structure is a reference workbench: compact masthead, an indexed
 navigation rail, and ruled documentation sections beside live specimens. It
 reuses the design-system typography and semantic tokens without gradients,
-backdrop blur, decorative motion, or additional fonts. Layout and documentation
+backdrop blur, or decorative motion. `index.html` loads the Studio fonts
+(Atkinson Hyperlegible Next and Mono, Young Serif) from Google Fonts, since the
+CSS package names them but does not download them. Layout and documentation
 helpers stay in this app, not the CSS package.
 
 Run commands from the repository root using pnpm.

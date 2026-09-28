@@ -64,3 +64,44 @@ export function Field(props: { label: string; hint?: string; children: JSX.Eleme
     </label>
   );
 }
+
+function Icon(props: { children: JSX.Element }) {
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2.25"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      {props.children}
+    </svg>
+  );
+}
+
+export function CheckIcon() {
+  return (
+    <Icon>
+      <path d="M5 12.5l4.5 4.5L19 7.5" />
+    </Icon>
+  );
+}
+
+export function WarningIcon() {
+  return (
+    <Icon>
+      <path d="M12 3.5l9.5 16.5h-19z" />
+      <path d="M12 10v4.5M12 17.5v.01" />
+    </Icon>
+  );
+}
+
+export function CloseIcon() {
+  return (
+    <Icon>
+      <path d="M6.5 6.5l11 11M17.5 6.5l-11 11" />
+    </Icon>
+  );
+}

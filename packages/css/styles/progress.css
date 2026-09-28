@@ -7,6 +7,8 @@
     overflow: hidden;
     border-radius: var(--sb-semantic-radius-full);
     background: var(--sb-semantic-color-background-overlay);
+    box-shadow: inset 0 0 0 var(--sb-semantic-border-width-hairline)
+      var(--sb-semantic-color-border-default);
   }
 
   .sb-progress[data-status="warning"] {

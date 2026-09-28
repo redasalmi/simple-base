@@ -2,12 +2,12 @@ import { For } from "solid-js";
 import { Api, Example } from "./Preview";
 
 const headings = [
-  ["sb-heading-1", "32px", "Workspace settings"],
-  ["sb-heading-2", "24px", "Account preferences"],
-  ["sb-heading-3", "20px", "Notification delivery"],
-  ["sb-heading-4", "18px", "Email summary"],
-  ["sb-heading-5", "16px", "Delivery schedule"],
-  ["sb-heading-6", "14px", "Time zone"],
+  ["sb-heading-1", "36px serif", "Workspace settings"],
+  ["sb-heading-2", "28px serif", "Account preferences"],
+  ["sb-heading-3", "24px serif", "Notification delivery"],
+  ["sb-heading-4", "20px", "Email summary"],
+  ["sb-heading-5", "18px", "Delivery schedule"],
+  ["sb-heading-6", "16px", "Time zone"],
 ] as const;
 const bodyStyles = [
   ["sb-text-body-lg", "A little more room for an introduction."],
@@ -23,7 +23,7 @@ export function Typography() {
     <>
       <Example
         title="Utility headings"
-        description="A measured sans-serif scale, from page titles to compact groups. Choose the HTML heading level for structure and the class for visual size."
+        description="Page and section titles use the Young Serif display face; smaller groups switch to the body face. Choose the HTML heading level for structure and the class for visual size."
         code={
           '<h1 class="sb-heading-1">Workspace settings</h1>\n<h2 class="sb-heading-3">Notification delivery</h2>'
         }
@@ -63,7 +63,7 @@ export function Typography() {
       </Example>
       <Example
         title="Display"
-        description="An optional expressive serif, not the default for product headings. It scales from 40 to 72px and keeps a relaxed line height."
+        description="The same serif at its largest, for landing moments and empty screens. It scales from 44 to 72px with a tight line height."
         code={'<h1 class="sb-display">Type with purpose.</h1>'}
       >
         <p class="sb-display">Type with purpose.</p>
@@ -112,7 +112,7 @@ export function Typography() {
           [
             "Families",
             "body · display · code",
-            "System fallbacks are included. The package does not download web fonts.",
+            "Atkinson Hyperlegible Next, Young Serif, and Atkinson Hyperlegible Mono, with system fallbacks. The package does not download web fonts; this playground loads them from Google Fonts.",
           ],
           [
             "Themes",

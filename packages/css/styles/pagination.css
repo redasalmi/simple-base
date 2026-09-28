@@ -17,8 +17,8 @@
     min-height: var(--sb-semantic-size-target-minimum);
     padding-inline: 10px;
     border: var(--sb-semantic-border-width-hairline) solid transparent;
-    border-radius: var(--sb-semantic-radius-sm);
-    color: var(--sb-semantic-color-foreground-muted);
+    border-radius: var(--sb-semantic-radius-md);
+    color: var(--sb-semantic-color-foreground-secondary);
     background: transparent;
     font-family: var(--sb-semantic-typography-family-code);
     font-size: var(--sb-semantic-typography-size-sm);
@@ -32,24 +32,18 @@
 
   .sb-page-button:hover:where(:not(:disabled, [aria-disabled="true"], [data-disabled])) {
     color: var(--sb-semantic-color-foreground-primary);
-    background: var(--sb-semantic-color-background-subtle);
+    background: var(--sb-semantic-color-background-raised);
   }
 
   .sb-page-button[aria-current="page"] {
-    color: var(--sb-semantic-color-foreground-primary);
-    background: var(--sb-semantic-color-accent-soft);
-    border-color: color-mix(
-      in oklch,
-      var(--sb-semantic-color-accent-surface) 45%,
-      var(--sb-semantic-color-border-default)
-    );
+    color: var(--sb-semantic-color-accent-on-surface);
+    background: var(--sb-semantic-color-accent-surface);
+    font-weight: var(--sb-semantic-typography-weight-semibold);
   }
 
   .sb-page-button:focus-visible {
-    outline: 0;
-    box-shadow:
-      0 0 0 var(--sb-semantic-border-width-hairline) var(--sb-semantic-color-background-canvas),
-      0 0 0 var(--sb-semantic-space-1) var(--sb-semantic-color-focus-ring);
+    outline: var(--sb-semantic-border-width-strong) solid var(--sb-semantic-color-focus-ring);
+    outline-offset: var(--sb-semantic-border-width-strong);
   }
 
   .sb-page-button:disabled,

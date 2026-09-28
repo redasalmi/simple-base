@@ -41,7 +41,7 @@ const pages: Page[] = [
     label: "Typography",
     group: "Foundations",
     description:
-      "A practical type scale for interfaces. Sans serif for the work; an optional serif display style when the content calls for it.",
+      "A legible type scale for interfaces. Atkinson Hyperlegible for the work, Young Serif for headings and figures.",
     usage: 'import "@simple-base/css/typography";',
     component: Typography,
   },
@@ -50,7 +50,7 @@ const pages: Page[] = [
     label: "Button",
     group: "Components",
     description:
-      "Actions with a clear order of importance. Six variants, three sizes, and native button behavior—without movement or decorative effects.",
+      "Actions with a clear order of importance. Six variants, three sizes, and native button behavior, with a small press response and no decorative effects.",
     usage: 'import { Button } from "@simple-base/solid";',
     component: Buttons,
   },
@@ -59,7 +59,7 @@ const pages: Page[] = [
     label: "Badge",
     group: "Components",
     description:
-      "Short, non-interactive labels for status and metadata. Use the text to carry meaning; color is supporting information.",
+      "Short, non-interactive labels for status and metadata. Status variants add a glyph, and the text carries the meaning; color is supporting information.",
     usage: 'import { Badge } from "@simple-base/solid";',
     component: Badges,
   },
@@ -68,7 +68,7 @@ const pages: Page[] = [
     label: "Card",
     group: "Components",
     description:
-      "Group related content on a bordered surface, or drop the surface for content that already sits on one. Cards have no default elevation and no interactive behavior.",
+      "Group related content on a bordered surface, or drop the surface for content that already sits on one. Cards sit on a 1px baseline instead of a blurred shadow and have no interactive behavior.",
     usage: 'import { Card } from "@simple-base/solid";',
     component: Cards,
   },
@@ -211,7 +211,7 @@ function pageFromHash() {
 
 export default function App() {
   const [current, setCurrent] = createSignal(pageFromHash());
-  const [theme, setTheme] = createSignal("simple-base-dark");
+  const [theme, setTheme] = createSignal("simple-base-light");
   let title: HTMLHeadingElement | undefined;
 
   createEffect(() => {

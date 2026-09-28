@@ -3,155 +3,259 @@
   "$description": "catppuccin-frappe color theme.",
   "$extensions": {
     "org.simple-base.theme": {
-      "colorScheme": "dark"
+      "colorScheme": "dark",
+      "palette": {
+        "name": "Catppuccin Frappé",
+        "source": "https://catppuccin.com/palette",
+        "colors": {
+          "rosewater": "#f2d5cf",
+          "flamingo": "#eebebe",
+          "pink": "#f4b8e4",
+          "mauve": "#ca9ee6",
+          "red": "#e78284",
+          "maroon": "#ea999c",
+          "peach": "#ef9f76",
+          "yellow": "#e5c890",
+          "green": "#a6d189",
+          "teal": "#81c8be",
+          "sky": "#99d1db",
+          "sapphire": "#85c1dc",
+          "blue": "#8caaee",
+          "lavender": "#babbf1",
+          "text": "#c6d0f5",
+          "subtext1": "#b5bfe2",
+          "subtext0": "#a5adce",
+          "overlay2": "#949cbb",
+          "overlay1": "#838ba7",
+          "overlay0": "#737994",
+          "surface2": "#626880",
+          "surface1": "#51576d",
+          "surface0": "#414559",
+          "base": "#303446",
+          "mantle": "#292c3c",
+          "crust": "#232634"
+        }
+      }
     }
   },
   "primitive": {
     "color": {
       "$type": "color",
-      "$description": "Raw catppuccin-frappe palette. Product components must not reference this group directly.",
+      "$description": "Raw Catppuccin Frappé palette colors; each token names the palette color it uses. Product components must not reference this group directly.",
       "canvas": {
         "$value": {
           "colorSpace": "srgb",
-          "components": [0.188235, 0.203922, 0.27451]
+          "components": [0.160784, 0.172549, 0.235294]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "mantle"
         }
       },
       "surface": {
         "$value": {
           "colorSpace": "srgb",
-          "components": [0.254902, 0.270588, 0.34902]
+          "components": [0.188235, 0.203922, 0.27451]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "base"
         }
       },
       "raised": {
         "$value": {
           "colorSpace": "srgb",
-          "components": [0.317647, 0.341176, 0.427451]
+          "components": [0.254902, 0.270588, 0.34902]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "surface0"
         }
       },
       "overlay": {
         "$value": {
           "colorSpace": "srgb",
-          "components": [0.384314, 0.407843, 0.501961]
+          "components": [0.317647, 0.341176, 0.427451]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "surface1"
         }
       },
       "fg": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.776471, 0.815686, 0.960784]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "text"
         }
       },
       "secondary": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.709804, 0.74902, 0.886275]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "subtext1"
         }
       },
       "muted": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.647059, 0.678431, 0.807843]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "subtext0"
         }
       },
       "inverse": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.137255, 0.14902, 0.203922]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "crust"
         }
       },
       "border": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.317647, 0.341176, 0.427451]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "surface1"
         }
       },
       "border-strong": {
         "$value": {
           "colorSpace": "srgb",
-          "components": [0.384314, 0.407843, 0.501961]
+          "components": [0.513725, 0.545098, 0.654902]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "overlay1"
         }
       },
       "accent": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.792157, 0.619608, 0.901961]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "mauve"
         }
       },
       "accent-readable": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.792157, 0.619608, 0.901961]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "mauve"
         }
       },
       "danger": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.905882, 0.509804, 0.517647]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "red"
         }
       },
       "danger-text": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.905882, 0.509804, 0.517647]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "red"
         }
       },
       "danger-surface": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.905882, 0.509804, 0.517647]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "red"
         }
       },
       "success": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.65098, 0.819608, 0.537255]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "green"
         }
       },
       "success-text": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.65098, 0.819608, 0.537255]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "green"
         }
       },
       "success-surface": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.65098, 0.819608, 0.537255]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "green"
         }
       },
       "warning": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.898039, 0.784314, 0.564706]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "yellow"
         }
       },
       "warning-text": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.898039, 0.784314, 0.564706]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "yellow"
         }
       },
       "warning-surface": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.898039, 0.784314, 0.564706]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "yellow"
         }
       },
       "info": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.54902, 0.666667, 0.933333]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "blue"
         }
       },
       "info-text": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.54902, 0.666667, 0.933333]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "blue"
         }
       },
       "info-surface": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.54902, 0.666667, 0.933333]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "blue"
         }
       },
       "fg-subtle": {
@@ -159,6 +263,9 @@
           "colorSpace": "srgb",
           "components": [0.776471, 0.815686, 0.960784],
           "alpha": 0.72
+        },
+        "$extensions": {
+          "org.simple-base.palette": "text"
         }
       },
       "bg-subtle": {
@@ -166,6 +273,9 @@
           "colorSpace": "srgb",
           "components": [0.776471, 0.815686, 0.960784],
           "alpha": 0.06
+        },
+        "$extensions": {
+          "org.simple-base.palette": "text"
         }
       },
       "border-subtle": {
@@ -173,6 +283,9 @@
           "colorSpace": "srgb",
           "components": [0.776471, 0.815686, 0.960784],
           "alpha": 0.12
+        },
+        "$extensions": {
+          "org.simple-base.palette": "text"
         }
       },
       "accent-soft": {
@@ -180,13 +293,18 @@
           "colorSpace": "srgb",
           "components": [0.792157, 0.619608, 0.901961],
           "alpha": 0.14
+        },
+        "$extensions": {
+          "org.simple-base.palette": "mauve"
         }
       },
       "danger-soft": {
         "$value": {
           "colorSpace": "srgb",
-          "components": [0.905882, 0.509804, 0.517647],
-          "alpha": 0.12
+          "components": [0.137255, 0.14902, 0.203922]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "crust"
         }
       },
       "success-soft": {
@@ -194,6 +312,9 @@
           "colorSpace": "srgb",
           "components": [0.65098, 0.819608, 0.537255],
           "alpha": 0.12
+        },
+        "$extensions": {
+          "org.simple-base.palette": "green"
         }
       },
       "warning-soft": {
@@ -201,44 +322,65 @@
           "colorSpace": "srgb",
           "components": [0.898039, 0.784314, 0.564706],
           "alpha": 0.12
+        },
+        "$extensions": {
+          "org.simple-base.palette": "yellow"
         }
       },
       "info-soft": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.54902, 0.666667, 0.933333],
-          "alpha": 0.12
+          "alpha": 0.09
+        },
+        "$extensions": {
+          "org.simple-base.palette": "blue"
         }
       },
       "scrim": {
         "$value": {
           "colorSpace": "srgb",
-          "components": [0.188235, 0.203922, 0.27451],
+          "components": [0.137255, 0.14902, 0.203922],
           "alpha": 0.72
+        },
+        "$extensions": {
+          "org.simple-base.palette": "crust"
         }
       },
       "danger-on": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.137255, 0.14902, 0.203922]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "crust"
         }
       },
       "success-on": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.137255, 0.14902, 0.203922]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "crust"
         }
       },
       "warning-on": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.137255, 0.14902, 0.203922]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "crust"
         }
       },
       "info-on": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.137255, 0.14902, 0.203922]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "crust"
         }
       }
     }

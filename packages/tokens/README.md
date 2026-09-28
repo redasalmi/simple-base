@@ -51,6 +51,34 @@ Then use the custom properties anywhere:
 
 Each theme is a scoped selector, so different regions of a page can use different themes. The matching `color-scheme` is set alongside the variables.
 
+### Theme contract
+
+Every theme layers its surfaces the same way — `canvas` for the page, `surface` for cards and fields, then `raised` and `overlay` as one small step up each — and meets these contrast minimums against the surface and canvas it sits on:
+
+| Role                                                       | Minimum |
+| ---------------------------------------------------------- | ------- |
+| `foreground.primary`, `secondary`, `muted` text            | 4.5:1   |
+| `accent.text` and `status.*.text`, also on `*.soft`        | 4.5:1   |
+| `accent.on-surface`, `status.danger.on-surface`            | 4.5:1   |
+| `border.strong` (field, checkbox, switch outlines)         | 3:1     |
+| `status.danger.base` (invalid borders)                     | 3:1     |
+| `status.*.base` on `*.soft` (glyphs), when text is colored | 3:1     |
+| `focus.ring`, `accent.surface`                             | 3:1     |
+
+### Ported palettes
+
+Catppuccin, Dracula, Tokyo Night, and Nord use only their official palette colors. Each theme file declares its palette under `$extensions["org.simple-base.theme"].palette`, and each color token names the palette color it uses in `$extensions["org.simple-base.palette"]`. Colors are never lightened or darkened to pass contrast. Instead, each role picks a palette color that passes, and the only adjustment is the opacity of tints and the modal scrim.
+
+Each status color is shown one of three ways, whichever its palette allows:
+
+- **Tinted**: the label in the status color on a tint of the same color. Most statuses in the dark palettes.
+- **Shaded**: the label in the status color on the palette's darkest color, where a tint would lower its contrast too far. Frappé and Dracula danger.
+- **Body text**: the label in the body color, with the status color on the glyph, tint, and border. Used where no palette pairing reaches 4.5:1: every status in Latte, and Nord danger and info.
+
+Some palettes also need a different layering. Latte and Nord use the same color for `canvas` and `surface`, because their accent or field-border color only reaches contrast on the lightest (Latte) or darkest (Nord) background; cards are set apart by their border. Dracula and Tokyo Night use their comment grays only for borders, and set secondary and muted text in their lighter text colors.
+
+The one exception is Nord's `danger-surface`, the danger button fill: no Nord color reaches 4.5:1 as text on `nord11`, so it uses `nord11` darkened. The exception is recorded in the token.
+
 ## Tailwind CSS
 
 For Tailwind CSS v4, use the generated theme instead of importing the token stylesheet directly. It imports Tailwind and the tokens, and maps the semantic roles onto Tailwind theme variables:

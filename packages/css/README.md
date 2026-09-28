@@ -144,10 +144,16 @@ Each entry point is an explicit, extensionless subpath. The internal `styles/` d
 
 ## Design conventions
 
-- Use `.sb-heading-1` through `.sb-heading-6` for utility headings — sans serif, sized 32, 24, 20, 18, 16, and 14px. Reserve `.sb-display` for an intentional expressive serif heading, not routine page sections or dialogs.
+The default Simple Base themes follow the Studio direction: warm paper neutrals, a forest green accent, and type chosen for legibility.
+
+- Body text uses Atkinson Hyperlegible Next and code uses Atkinson Hyperlegible Mono. `.sb-display` and `.sb-heading-1` through `.sb-heading-3` use the Young Serif display face at a regular weight; `.sb-heading-4` through `.sb-heading-6` stay in the body face. Headings are sized 36, 28, 24, 20, 18, and 16px. The package names these families but does not download them — load the fonts in your app, or the system fallbacks apply.
 - Write captions, table headings, and optional dialog kickers in sentence case. Monospace is for code, identifiers, shortcuts, and alignment-dependent values.
-- Cards group content with surfaces and borders, without default elevation. Every `.sb-card` ships its own interior padding; override `.sb-card` from application CSS when a layout needs different spacing. Menus and dialogs use restrained shadows. Modal backdrops separate context with a scrim, not blur.
-- Buttons stay in place on hover and press. Color and border changes provide feedback; focus rings remain visible.
+- Status never relies on color alone. Success, warning, danger, and info badges include a glyph, field errors lead with a warning glyph, and the switch thumb shows a check or a cross. Glyphs, status dots, and alert marks take the status `base` color, so the status stays visible in themes whose palette color is too light or dark to set the label in.
+- The accent badge is a solid accent fill, like the primary button, so it stays readable in every ported palette.
+- Depth comes from edges, not blur. Cards use a border and a 1px baseline; blurred shadows are reserved for menus, popovers, dialogs, and toasts. Modal backdrops separate context with a scrim, not blur.
+- Every `.sb-card` ships its own interior padding; override `.sb-card` from application CSS when a layout needs different spacing.
+- Buttons stay in place on hover; pressing scales them slightly, except under `prefers-reduced-motion`. Disabled buttons drop their color rather than fading, so the label stays readable.
+- Focus is a solid 2px ring in the theme's focus color. Standalone controls offset it by 2px; bordered fields draw it flush with their border.
 
 ## Selector conventions
 

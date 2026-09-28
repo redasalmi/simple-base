@@ -19,7 +19,7 @@ export function Badges() {
     <>
       <Example
         title="All treatments"
-        description="Nine variants in both sizes. The label describes the state, so color is never the only cue."
+        description="Nine variants in both sizes. The label describes the state and success, danger, warning, and info add a glyph, so color is never the only cue."
         code={
           '<Badge variant="success" size="small">Published</Badge>\n<Badge variant="outline">Optional</Badge>'
         }

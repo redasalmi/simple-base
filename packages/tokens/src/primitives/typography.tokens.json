@@ -6,7 +6,8 @@
       "$type": "fontFamily",
       "sans": {
         "$value": [
-          "Inter",
+          "Atkinson Hyperlegible Next",
+          "Atkinson Hyperlegible",
           "ui-sans-serif",
           "system-ui",
           "-apple-system",
@@ -16,12 +17,11 @@
         ]
       },
       "display": {
-        "$value": ["Iowan Old Style", "Charter", "Georgia", "Times New Roman", "serif"]
+        "$value": ["Young Serif", "Iowan Old Style", "Charter", "Georgia", "serif"]
       },
       "mono": {
         "$value": [
-          "Geist Mono",
-          "Berkeley Mono",
+          "Atkinson Hyperlegible Mono",
           "ui-monospace",
           "SFMono-Regular",
           "Menlo",
@@ -50,61 +50,61 @@
       "$type": "dimension",
       "xs": {
         "$value": {
-          "value": 11,
+          "value": 12,
           "unit": "px"
         }
       },
       "sm": {
         "$value": {
-          "value": 12,
+          "value": 14,
           "unit": "px"
         }
       },
       "md": {
         "$value": {
-          "value": 14,
+          "value": 16,
           "unit": "px"
         }
       },
       "lg": {
         "$value": {
-          "value": 16,
+          "value": 18,
           "unit": "px"
         }
       },
       "xl": {
         "$value": {
-          "value": 18,
+          "value": 20,
           "unit": "px"
         }
       },
       "2xl": {
         "$value": {
-          "value": 20,
+          "value": 24,
           "unit": "px"
         }
       },
       "3xl": {
         "$value": {
-          "value": 24,
+          "value": 28,
           "unit": "px"
         }
       },
       "4xl": {
         "$value": {
-          "value": 32,
+          "value": 36,
           "unit": "px"
         }
       },
       "5xl": {
         "$value": {
-          "value": 48,
+          "value": 52,
           "unit": "px"
         }
       },
       "display": {
         "$value": {
-          "value": 64,
+          "value": 72,
           "unit": "px"
         }
       }
@@ -115,13 +115,13 @@
         "$value": 1
       },
       "tight": {
-        "$value": 1.08
+        "$value": 1.05
       },
       "snug": {
         "$value": 1.2
       },
       "normal": {
-        "$value": 1.4
+        "$value": 1.45
       },
       "relaxed": {
         "$value": 1.55
@@ -130,23 +130,23 @@
     "letter-spacing": {
       "$type": "number",
       "tight": {
-        "$value": -0.06,
-        "$description": "Relative em value."
-      },
-      "snug": {
         "$value": -0.03,
         "$description": "Relative em value."
       },
+      "snug": {
+        "$value": -0.02,
+        "$description": "Relative em value."
+      },
       "normal": {
-        "$value": -0.01,
+        "$value": 0,
         "$description": "Relative em value."
       },
       "wide": {
-        "$value": 0.04,
+        "$value": 0.02,
         "$description": "Relative em value."
       },
       "wider": {
-        "$value": 0.08,
+        "$value": 0.06,
         "$description": "Relative em value."
       }
     }

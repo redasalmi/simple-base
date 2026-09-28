@@ -69,12 +69,13 @@ a {
   gap: 20px;
   color: inherit;
   text-decoration: none;
-  font-size: 20px;
-  font-weight: var(--sb-semantic-typography-weight-semibold);
-  letter-spacing: var(--sb-semantic-typography-letter-spacing-snug);
+  font-family: var(--sb-semantic-typography-family-display);
+  font-size: 22px;
+  font-weight: var(--sb-semantic-typography-weight-regular);
 }
 .playground-brand span {
   color: var(--sb-semantic-color-foreground-muted);
+  font-family: var(--sb-semantic-typography-family-body);
   font-size: 13px;
   font-weight: var(--sb-semantic-typography-weight-regular);
   letter-spacing: normal;
@@ -128,7 +129,7 @@ a {
 .playground-nav-group a {
   display: block;
   padding: 7px 12px;
-  border-left: 2px solid transparent;
+  border-radius: var(--sb-semantic-radius-sm);
   color: var(--sb-semantic-color-foreground-secondary);
   text-decoration: none;
 }
@@ -136,9 +137,9 @@ a {
   color: var(--sb-semantic-color-foreground-primary);
 }
 .playground-nav-group a[aria-current="page"] {
-  border-color: var(--sb-semantic-color-foreground-primary);
   color: var(--sb-semantic-color-foreground-primary);
-  background: var(--sb-semantic-color-background-subtle);
+  background: var(--sb-semantic-color-background-surface);
+  box-shadow: 0 0 0 1px var(--sb-semantic-color-border-default);
   font-weight: var(--sb-semantic-typography-weight-semibold);
 }
 .playground-setup {
@@ -165,9 +166,10 @@ a {
 }
 .playground-page-heading h1 {
   margin: 0 0 12px;
-  font-size: var(--sb-semantic-typography-size-4xl);
-  font-weight: var(--sb-semantic-typography-weight-semibold);
-  line-height: var(--sb-semantic-typography-line-height-snug);
+  font-family: var(--sb-semantic-typography-family-display);
+  font-size: var(--sb-semantic-typography-size-5xl);
+  font-weight: var(--sb-semantic-typography-weight-regular);
+  line-height: var(--sb-semantic-typography-line-height-tight);
   letter-spacing: var(--sb-semantic-typography-letter-spacing-snug);
   scroll-margin-top: 120px;
 }
@@ -205,7 +207,7 @@ a {
   font-size: 13px;
 }
 .preview-example-heading .sb-heading-3 {
-  font-size: 16px;
+  font-size: var(--sb-semantic-typography-size-xl);
 }
 .preview-example-content {
   min-width: 0;
@@ -214,8 +216,9 @@ a {
   min-width: 0;
   padding: 24px;
   border: 1px solid var(--sb-semantic-color-border-default);
-  border-radius: var(--sb-semantic-radius-sm);
+  border-radius: var(--sb-semantic-radius-lg);
   background: var(--sb-semantic-color-background-surface);
+  box-shadow: var(--sb-semantic-shadow-card);
 }
 .preview-source {
   margin-top: 12px;
@@ -359,6 +362,7 @@ a {
   height: 24px;
   flex: 0 0 auto;
   border: 1px solid var(--sb-semantic-color-border-strong);
+  border-radius: 6px;
 }
 .preview-inline-dialog {
   position: relative;

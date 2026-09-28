@@ -3,155 +3,248 @@
   "$description": "dracula color theme.",
   "$extensions": {
     "org.simple-base.theme": {
-      "colorScheme": "dark"
+      "colorScheme": "dark",
+      "palette": {
+        "name": "Dracula",
+        "source": "https://spec.draculatheme.com",
+        "colors": {
+          "background": "#282a36",
+          "current-line": "#44475a",
+          "foreground": "#f8f8f2",
+          "comment": "#6272a4",
+          "cyan": "#8be9fd",
+          "green": "#50fa7b",
+          "orange": "#ffb86c",
+          "pink": "#ff79c6",
+          "purple": "#bd93f9",
+          "red": "#ff5555",
+          "yellow": "#f1fa8c",
+          "background-darker": "#21222c",
+          "background-darkest": "#191a21",
+          "background-lighter": "#343746",
+          "background-light": "#424450"
+        }
+      }
     }
   },
   "primitive": {
     "color": {
       "$type": "color",
-      "$description": "Raw dracula palette. Product components must not reference this group directly.",
+      "$description": "Raw Dracula palette colors; each token names the palette color it uses. Product components must not reference this group directly.",
       "canvas": {
         "$value": {
           "colorSpace": "srgb",
-          "components": [0.156863, 0.164706, 0.211765]
+          "components": [0.129412, 0.133333, 0.172549]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "background-darker"
         }
       },
       "surface": {
         "$value": {
           "colorSpace": "srgb",
-          "components": [0.203922, 0.215686, 0.27451]
+          "components": [0.156863, 0.164706, 0.211765]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "background"
         }
       },
       "raised": {
         "$value": {
           "colorSpace": "srgb",
-          "components": [0.266667, 0.278431, 0.352941]
+          "components": [0.203922, 0.215686, 0.27451]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "background-lighter"
         }
       },
       "overlay": {
         "$value": {
           "colorSpace": "srgb",
-          "components": [0.309804, 0.321569, 0.407843]
+          "components": [0.266667, 0.278431, 0.352941]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "current-line"
         }
       },
       "fg": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.972549, 0.972549, 0.94902]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "foreground"
         }
       },
       "secondary": {
         "$value": {
           "colorSpace": "srgb",
-          "components": [0.741176, 0.760784, 0.847059]
+          "components": [0.972549, 0.972549, 0.94902]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "foreground"
         }
       },
       "muted": {
         "$value": {
           "colorSpace": "srgb",
-          "components": [0.603922, 0.627451, 0.709804]
+          "components": [0.972549, 0.972549, 0.94902]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "foreground"
         }
       },
       "inverse": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.156863, 0.164706, 0.211765]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "background"
         }
       },
       "border": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.266667, 0.278431, 0.352941]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "current-line"
         }
       },
       "border-strong": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.384314, 0.447059, 0.643137]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "comment"
         }
       },
       "accent": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.741176, 0.576471, 0.976471]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "purple"
         }
       },
       "accent-readable": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.741176, 0.576471, 0.976471]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "purple"
         }
       },
       "danger": {
         "$value": {
           "colorSpace": "srgb",
-          "components": [1, 0.333333, 0.333333]
+          "components": [1.0, 0.333333, 0.333333]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "red"
         }
       },
       "danger-text": {
         "$value": {
           "colorSpace": "srgb",
-          "components": [1, 0.701961, 0.701961]
+          "components": [1.0, 0.333333, 0.333333]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "red"
         }
       },
       "danger-surface": {
         "$value": {
           "colorSpace": "srgb",
-          "components": [1, 0.333333, 0.333333]
+          "components": [1.0, 0.333333, 0.333333]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "red"
         }
       },
       "success": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.313725, 0.980392, 0.482353]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "green"
         }
       },
       "success-text": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.313725, 0.980392, 0.482353]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "green"
         }
       },
       "success-surface": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.313725, 0.980392, 0.482353]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "green"
         }
       },
       "warning": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.945098, 0.980392, 0.54902]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "yellow"
         }
       },
       "warning-text": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.945098, 0.980392, 0.54902]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "yellow"
         }
       },
       "warning-surface": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.945098, 0.980392, 0.54902]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "yellow"
         }
       },
       "info": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.545098, 0.913725, 0.992157]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "cyan"
         }
       },
       "info-text": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.545098, 0.913725, 0.992157]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "cyan"
         }
       },
       "info-surface": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.545098, 0.913725, 0.992157]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "cyan"
         }
       },
       "fg-subtle": {
@@ -159,6 +252,9 @@
           "colorSpace": "srgb",
           "components": [0.972549, 0.972549, 0.94902],
           "alpha": 0.72
+        },
+        "$extensions": {
+          "org.simple-base.palette": "foreground"
         }
       },
       "bg-subtle": {
@@ -166,6 +262,9 @@
           "colorSpace": "srgb",
           "components": [0.972549, 0.972549, 0.94902],
           "alpha": 0.06
+        },
+        "$extensions": {
+          "org.simple-base.palette": "foreground"
         }
       },
       "border-subtle": {
@@ -173,6 +272,9 @@
           "colorSpace": "srgb",
           "components": [0.972549, 0.972549, 0.94902],
           "alpha": 0.12
+        },
+        "$extensions": {
+          "org.simple-base.palette": "foreground"
         }
       },
       "accent-soft": {
@@ -180,13 +282,18 @@
           "colorSpace": "srgb",
           "components": [0.741176, 0.576471, 0.976471],
           "alpha": 0.14
+        },
+        "$extensions": {
+          "org.simple-base.palette": "purple"
         }
       },
       "danger-soft": {
         "$value": {
           "colorSpace": "srgb",
-          "components": [1, 0.333333, 0.333333],
-          "alpha": 0.12
+          "components": [0.098039, 0.101961, 0.129412]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "background-darkest"
         }
       },
       "success-soft": {
@@ -194,6 +301,9 @@
           "colorSpace": "srgb",
           "components": [0.313725, 0.980392, 0.482353],
           "alpha": 0.12
+        },
+        "$extensions": {
+          "org.simple-base.palette": "green"
         }
       },
       "warning-soft": {
@@ -201,6 +311,9 @@
           "colorSpace": "srgb",
           "components": [0.945098, 0.980392, 0.54902],
           "alpha": 0.12
+        },
+        "$extensions": {
+          "org.simple-base.palette": "yellow"
         }
       },
       "info-soft": {
@@ -208,37 +321,55 @@
           "colorSpace": "srgb",
           "components": [0.545098, 0.913725, 0.992157],
           "alpha": 0.12
+        },
+        "$extensions": {
+          "org.simple-base.palette": "cyan"
         }
       },
       "scrim": {
         "$value": {
           "colorSpace": "srgb",
-          "components": [0.156863, 0.164706, 0.211765],
+          "components": [0.098039, 0.101961, 0.129412],
           "alpha": 0.72
+        },
+        "$extensions": {
+          "org.simple-base.palette": "background-darkest"
         }
       },
       "danger-on": {
         "$value": {
           "colorSpace": "srgb",
-          "components": [0.156863, 0.164706, 0.211765]
+          "components": [0.098039, 0.101961, 0.129412]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "background-darkest"
         }
       },
       "success-on": {
         "$value": {
           "colorSpace": "srgb",
-          "components": [0.156863, 0.164706, 0.211765]
+          "components": [0.098039, 0.101961, 0.129412]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "background-darkest"
         }
       },
       "warning-on": {
         "$value": {
           "colorSpace": "srgb",
-          "components": [0.156863, 0.164706, 0.211765]
+          "components": [0.098039, 0.101961, 0.129412]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "background-darkest"
         }
       },
       "info-on": {
         "$value": {
           "colorSpace": "srgb",
-          "components": [0.156863, 0.164706, 0.211765]
+          "components": [0.098039, 0.101961, 0.129412]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "background-darkest"
         }
       }
     }

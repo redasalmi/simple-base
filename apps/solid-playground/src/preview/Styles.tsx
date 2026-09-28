@@ -1,6 +1,6 @@
 import { For, Show, createSignal } from "solid-js";
 import { Button, Checkbox } from "@simple-base/solid";
-import { Api, Example, Field } from "./Preview";
+import { Api, CheckIcon, CloseIcon, Example, Field, WarningIcon } from "./Preview";
 
 // September 2026 starts on a Tuesday.
 const calendarWeeks = Array.from({ length: 5 }, (_, week) =>
@@ -45,7 +45,7 @@ export function Styles() {
     <>
       <Example
         title="Cards & grouping"
-        description="Default, flat, and rule variants. Surfaces and borders provide grouping; cards have no default elevation and ship their own interior padding."
+        description="Default, flat, and rule variants. Surfaces and borders provide grouping; cards sit on a 1px baseline instead of a blurred shadow and ship their own interior padding."
         code={
           '<section class="sb-card" data-variant="rule">\n  <h3 class="sb-heading-3">Workspace settings</h3>\n</section>'
         }
@@ -89,7 +89,7 @@ export function Styles() {
           </For>
           <div class="sb-alert" data-status="danger">
             <span class="sb-alert-mark" aria-hidden="true">
-              !
+              <WarningIcon />
             </span>
             <div>
               <strong>Review your entries</strong>
@@ -99,7 +99,7 @@ export function Styles() {
           <Show when={showAlert()}>
             <div class="sb-alert" data-status="warning" role="status">
               <span class="sb-alert-mark" aria-hidden="true">
-                !
+                <WarningIcon />
               </span>
               <div class="sb-alert-content">
                 <strong>2 invoices are overdue</strong>
@@ -118,13 +118,13 @@ export function Styles() {
                 aria-label="Dismiss overdue invoices alert"
                 onClick={() => setShowAlert(false)}
               >
-                ×
+                <CloseIcon />
               </button>
             </div>
           </Show>
           <div class="sb-alert" data-status="success">
             <span class="sb-alert-mark" aria-hidden="true">
-              ✓
+              <CheckIcon />
             </span>
             <div>
               <strong>Invoice sent</strong>

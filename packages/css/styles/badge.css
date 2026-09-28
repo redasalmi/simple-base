@@ -1,12 +1,16 @@
 @layer sb {
   .sb-badge {
+    --sb-badge-glyph: none;
+    --sb-badge-glyph-color: currentColor;
+
     display: inline-flex;
     align-items: center;
     justify-content: center;
     min-height: var(--sb-semantic-space-6);
-    gap: var(--sb-semantic-space-2);
-    padding: 0 var(--sb-semantic-space-3);
-    border-radius: var(--sb-semantic-radius-full);
+    gap: 6px;
+    padding: 0 var(--sb-semantic-space-2);
+    border: var(--sb-semantic-border-width-hairline) solid transparent;
+    border-radius: var(--sb-semantic-radius-sm);
     font-size: var(--sb-semantic-typography-size-xs);
     font-weight: var(--sb-semantic-typography-weight-semibold);
     line-height: var(--sb-semantic-typography-line-height-none);
@@ -14,87 +18,104 @@
     white-space: nowrap;
   }
 
+  /*
+   * Status variants carry a distinct glyph, so the state still reads without color. The glyph
+   * takes the status color even where a theme sets the label in the body color for contrast.
+   */
+  .sb-badge:is(
+      [data-variant="success"],
+      [data-variant="danger"],
+      [data-variant="warning"],
+      [data-variant="info"]
+    )::before {
+    flex: 0 0 auto;
+    width: var(--sb-semantic-space-3);
+    height: var(--sb-semantic-space-3);
+    background: var(--sb-badge-glyph-color);
+    content: "";
+    mask: var(--sb-badge-glyph) center / contain no-repeat;
+  }
+
   .sb-badge,
   .sb-badge[data-variant="default"] {
-    color: var(--sb-semantic-color-foreground-secondary);
+    color: var(--sb-semantic-color-foreground-primary);
     background: var(--sb-semantic-color-background-overlay);
-    border: var(--sb-semantic-border-width-hairline) solid var(--sb-semantic-color-border-strong);
   }
 
   .sb-badge[data-variant="success"] {
+    --sb-badge-glyph: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E");
+
+    --sb-badge-glyph-color: var(--sb-semantic-color-status-success-base);
+
     color: var(--sb-semantic-color-status-success-text);
     background: var(--sb-semantic-color-status-success-soft);
-    border-color: color-mix(
-      in oklch,
-      var(--sb-semantic-color-status-success-base) 48%,
-      var(--sb-semantic-color-border-default)
-    );
   }
 
   .sb-badge[data-variant="danger"] {
+    --sb-badge-glyph: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8.5 3h7L21 8.5v7L15.5 21h-7L3 15.5v-7z'/%3E%3Cpath d='M12 7.5v5.5M12 16.5v.01'/%3E%3C/svg%3E");
+
+    --sb-badge-glyph-color: var(--sb-semantic-color-status-danger-base);
+
     color: var(--sb-semantic-color-status-danger-text);
     background: var(--sb-semantic-color-status-danger-soft);
-    border-color: color-mix(
-      in oklch,
-      var(--sb-semantic-color-status-danger-base) 48%,
-      var(--sb-semantic-color-border-default)
-    );
   }
 
   .sb-badge[data-variant="warning"] {
+    --sb-badge-glyph: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3.5l9.5 16.5h-19z'/%3E%3Cpath d='M12 10v4.5M12 17.5v.01'/%3E%3C/svg%3E");
+
+    --sb-badge-glyph-color: var(--sb-semantic-color-status-warning-base);
+
     color: var(--sb-semantic-color-status-warning-text);
     background: var(--sb-semantic-color-status-warning-soft);
-    border-color: color-mix(
-      in oklch,
-      var(--sb-semantic-color-status-warning-base) 48%,
-      var(--sb-semantic-color-border-default)
-    );
   }
 
   .sb-badge[data-variant="info"] {
+    --sb-badge-glyph: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M12 11v5.5M12 7.5v.01'/%3E%3C/svg%3E");
+
+    --sb-badge-glyph-color: var(--sb-semantic-color-status-info-base);
+
     color: var(--sb-semantic-color-status-info-text);
     background: var(--sb-semantic-color-status-info-soft);
-    border-color: color-mix(
-      in oklch,
-      var(--sb-semantic-color-status-info-base) 48%,
-      var(--sb-semantic-color-border-default)
-    );
   }
 
   .sb-badge[data-variant="accent"] {
-    color: var(--sb-semantic-color-accent-text);
-    background: var(--sb-semantic-color-accent-soft);
-    border-color: color-mix(
-      in oklch,
-      var(--sb-semantic-color-accent-surface) 48%,
-      var(--sb-semantic-color-border-default)
-    );
+    color: var(--sb-semantic-color-accent-on-surface);
+    background: var(--sb-semantic-color-accent-surface);
   }
 
   .sb-badge[data-variant="command"] {
     color: var(--sb-semantic-color-foreground-primary);
-    background: var(--sb-semantic-color-background-overlay);
+    background: var(--sb-semantic-color-background-raised);
+    border-color: var(--sb-semantic-color-border-default);
+    font-family: var(--sb-semantic-typography-family-code);
+    font-weight: var(--sb-semantic-typography-weight-medium);
   }
 
   .sb-badge[data-variant="outline"] {
     color: var(--sb-semantic-color-foreground-secondary);
     background: transparent;
-    border-color: var(--sb-semantic-color-border-default);
+    border-color: var(--sb-semantic-color-border-strong);
   }
 
   .sb-badge[data-variant="muted"] {
     color: var(--sb-semantic-color-foreground-muted);
     background: var(--sb-semantic-color-background-subtle);
-    border-color: var(--sb-semantic-color-border-subtle);
   }
 
   .sb-badge[data-size="small"] {
     min-height: var(--sb-semantic-space-5);
-    padding-inline: var(--sb-semantic-space-2);
+    gap: var(--sb-semantic-space-1);
+    padding-inline: 6px;
   }
 
   .sb-badge[data-size="medium"] {
     min-height: var(--sb-semantic-space-6);
-    padding-inline: var(--sb-semantic-space-3);
+    padding-inline: var(--sb-semantic-space-2);
+  }
+
+  @media (forced-colors: active) {
+    .sb-badge {
+      border-color: CanvasText;
+    }
   }
 }

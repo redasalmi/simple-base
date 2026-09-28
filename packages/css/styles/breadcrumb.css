@@ -5,7 +5,7 @@
     align-items: center;
     gap: var(--sb-semantic-space-2);
     color: var(--sb-semantic-color-foreground-muted);
-    font-size: 13px;
+    font-size: var(--sb-semantic-typography-size-sm);
   }
 
   .sb-breadcrumb-list {
@@ -41,10 +41,8 @@
 
   .sb-breadcrumb a:focus-visible,
   .sb-breadcrumb-link:focus-visible {
-    outline: 0;
-    box-shadow:
-      0 0 0 var(--sb-semantic-border-width-hairline) var(--sb-semantic-color-background-canvas),
-      0 0 0 var(--sb-semantic-space-1) var(--sb-semantic-color-focus-ring);
+    outline: var(--sb-semantic-border-width-strong) solid var(--sb-semantic-color-focus-ring);
+    outline-offset: var(--sb-semantic-border-width-strong);
   }
 
   .sb-breadcrumb [aria-current="page"] {

@@ -5,10 +5,10 @@
     max-width: none;
     margin: auto;
     padding: var(--sb-semantic-space-6);
-    border: var(--sb-semantic-border-width-hairline) solid var(--sb-semantic-color-border-strong);
-    border-radius: var(--sb-semantic-radius-lg);
+    border: var(--sb-semantic-border-width-hairline) solid var(--sb-semantic-color-border-default);
+    border-radius: var(--sb-semantic-radius-xl);
     color: var(--sb-semantic-color-foreground-primary);
-    background: var(--sb-semantic-color-background-raised);
+    background: var(--sb-semantic-color-background-surface);
     box-shadow: var(--sb-semantic-shadow-overlay);
   }
 
@@ -32,24 +32,26 @@
   }
 
   .sb-dialog-title {
-    margin: var(--sb-semantic-space-2) 0 0;
+    margin: var(--sb-semantic-space-1) 0 0;
     color: var(--sb-semantic-color-foreground-primary);
-    font-family: var(--sb-semantic-typography-family-body);
-    font-size: var(--sb-semantic-typography-size-2xl);
-    font-weight: var(--sb-semantic-typography-weight-semibold);
+    font-family: var(--sb-semantic-typography-family-display);
+    font-size: var(--sb-semantic-typography-size-3xl);
+    font-weight: var(--sb-semantic-typography-weight-regular);
     line-height: var(--sb-semantic-typography-line-height-snug);
+    text-wrap: balance;
   }
 
   .sb-dialog-description {
     margin: var(--sb-semantic-space-3) 0 0;
     color: var(--sb-semantic-color-foreground-secondary);
+    line-height: var(--sb-semantic-typography-line-height-relaxed);
   }
 
   .sb-dialog-footer {
     display: flex;
     justify-content: flex-end;
     gap: var(--sb-semantic-space-3);
-    margin-top: var(--sb-semantic-space-6);
+    margin-top: var(--sb-semantic-space-8);
   }
 
   .sb-dialog-close {
@@ -58,8 +60,9 @@
     width: var(--sb-semantic-size-target-minimum);
     height: var(--sb-semantic-size-target-minimum);
     padding: 0;
+    margin: calc(-1 * var(--sb-semantic-space-2)) calc(-1 * var(--sb-semantic-space-2)) 0 0;
     border: 0;
-    border-radius: var(--sb-semantic-radius-sm);
+    border-radius: var(--sb-semantic-radius-md);
     color: var(--sb-semantic-color-foreground-muted);
     background: transparent;
     font-size: var(--sb-semantic-typography-size-2xl);
@@ -69,14 +72,17 @@
 
   .sb-dialog-close:hover {
     color: var(--sb-semantic-color-foreground-primary);
-    background: var(--sb-semantic-color-background-subtle);
+    background: var(--sb-semantic-color-background-raised);
+  }
+
+  .sb-dialog-close > svg {
+    width: var(--sb-semantic-size-icon-sm);
+    height: var(--sb-semantic-size-icon-sm);
   }
 
   .sb-dialog-close:focus-visible {
-    outline: 0;
-    box-shadow:
-      0 0 0 var(--sb-semantic-border-width-hairline) var(--sb-semantic-color-background-canvas),
-      0 0 0 var(--sb-semantic-space-1) var(--sb-semantic-color-focus-ring);
+    outline: var(--sb-semantic-border-width-strong) solid var(--sb-semantic-color-focus-ring);
+    outline-offset: 0;
   }
 
   @media (max-width: 480px) {

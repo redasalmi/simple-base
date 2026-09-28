@@ -11,7 +11,7 @@ import {
   Toaster,
   createToaster,
 } from "@simple-base/solid";
-import { Api, Example } from "./Preview";
+import { Api, CheckIcon, CloseIcon, Example } from "./Preview";
 
 const toaster = createToaster();
 
@@ -24,7 +24,7 @@ export function Toasts() {
         title="Try a toast"
         description="Confirm a completed action without interrupting the task. Toasts dismiss after five seconds; hovering or focusing the region pauses the timer, Escape dismisses the focused toast, and Alt+T moves focus to the region."
         code={
-          'const toaster = createToaster();\n\n<Toaster toaster={toaster}>\n  {() => (\n    <Toast>\n      <ToastIcon>✓</ToastIcon>\n      <ToastContent>\n        <ToastTitle />\n        <ToastDescription />\n        <ToastAction />\n      </ToastContent>\n      <ToastClose>×</ToastClose>\n    </Toast>\n  )}\n</Toaster>\n\n<Button\n  onClick={() =>\n    toaster.create({\n      title: "Changes saved",\n      description: "Your preferences are up to date.",\n    })\n  }\n>\n  Save changes\n</Button>'
+          'const toaster = createToaster();\n\n<Toaster toaster={toaster}>\n  {() => (\n    <Toast>\n      <ToastIcon>\n        <CheckIcon />\n      </ToastIcon>\n      <ToastContent>\n        <ToastTitle />\n        <ToastDescription />\n        <ToastAction />\n      </ToastContent>\n      <ToastClose>\n        <CloseIcon />\n      </ToastClose>\n    </Toast>\n  )}\n</Toaster>\n\n<Button\n  onClick={() =>\n    toaster.create({\n      title: "Changes saved",\n      description: "Your preferences are up to date.",\n    })\n  }\n>\n  Save changes\n</Button>'
         }
       >
         <div class="preview-row">
@@ -107,13 +107,17 @@ export function Toasts() {
       <Toaster toaster={toaster}>
         {() => (
           <Toast>
-            <ToastIcon>✓</ToastIcon>
+            <ToastIcon>
+              <CheckIcon />
+            </ToastIcon>
             <ToastContent>
               <ToastTitle />
               <ToastDescription />
               <ToastAction />
             </ToastContent>
-            <ToastClose>×</ToastClose>
+            <ToastClose>
+              <CloseIcon />
+            </ToastClose>
           </Toast>
         )}
       </Toaster>

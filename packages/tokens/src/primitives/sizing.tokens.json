@@ -87,25 +87,25 @@
       },
       "sm": {
         "$value": {
-          "value": 6,
+          "value": 8,
           "unit": "px"
         }
       },
       "md": {
         "$value": {
-          "value": 8,
+          "value": 12,
           "unit": "px"
         }
       },
       "lg": {
         "$value": {
-          "value": 12,
+          "value": 16,
           "unit": "px"
         }
       },
       "xl": {
         "$value": {
-          "value": 16,
+          "value": 22,
           "unit": "px"
         }
       },
@@ -133,19 +133,19 @@
         },
         "md": {
           "$value": {
-            "value": 40,
+            "value": 42,
             "unit": "px"
           }
         },
         "lg": {
           "$value": {
-            "value": 44,
+            "value": 46,
             "unit": "px"
           }
         },
         "xl": {
           "$value": {
-            "value": 52,
+            "value": 50,
             "unit": "px"
           }
         }

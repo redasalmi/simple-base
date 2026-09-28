@@ -1,11 +1,14 @@
 @layer sb {
   .sb-switch {
+    --sb-switch-glyph: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round'%3E%3Cpath d='M8 8l8 8M16 8l-8 8'/%3E%3C/svg%3E");
+
     position: relative;
-    width: 46px;
-    height: 26px;
+    box-sizing: border-box;
+    width: 48px;
+    height: 28px;
     flex: 0 0 auto;
     margin: 0;
-    border: var(--sb-semantic-border-width-hairline) solid var(--sb-semantic-color-border-strong);
+    border: var(--sb-semantic-border-width-strong) solid var(--sb-semantic-color-border-strong);
     border-radius: var(--sb-semantic-radius-full);
     appearance: none;
     background: var(--sb-semantic-color-background-surface);
@@ -16,39 +19,85 @@
         var(--sb-semantic-motion-easing-standard);
   }
 
+  /*
+   * The thumb is ::before and its glyph is ::after; both move together. Off, the thumb takes the
+   * field border color, which every theme keeps at 3:1 against the surface.
+   */
+  .sb-switch::before,
   .sb-switch::after {
     position: absolute;
     top: 3px;
     left: 3px;
     width: 18px;
     height: 18px;
-    border-radius: var(--sb-semantic-radius-full);
-    background: var(--sb-semantic-color-foreground-secondary);
     content: "";
     transition:
-      transform var(--sb-semantic-motion-duration-normal) var(--sb-semantic-motion-easing-out),
+      translate var(--sb-semantic-motion-duration-normal) var(--sb-semantic-motion-easing-out),
       background var(--sb-semantic-motion-duration-normal) var(--sb-semantic-motion-easing-standard);
   }
 
+  .sb-switch::before {
+    border-radius: var(--sb-semantic-radius-full);
+    background: var(--sb-semantic-color-border-strong);
+  }
+
+  .sb-switch::after {
+    background: var(--sb-semantic-color-background-surface);
+    mask: var(--sb-switch-glyph) center / 10px no-repeat;
+  }
+
   .sb-switch:checked {
+    --sb-switch-glyph: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3.25' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E");
+
     background: var(--sb-semantic-color-accent-surface);
     border-color: var(--sb-semantic-color-accent-surface);
   }
 
-  .sb-switch:checked::after {
+  .sb-switch:checked::before {
     background: var(--sb-semantic-color-accent-on-surface);
-    transform: translateX(20px);
+    translate: 20px 0;
+  }
+
+  .sb-switch:checked::after {
+    background: var(--sb-semantic-color-accent-surface);
+    translate: 20px 0;
   }
 
   .sb-switch:focus-visible {
-    outline: 0;
-    box-shadow:
-      0 0 0 var(--sb-semantic-border-width-hairline) var(--sb-semantic-color-background-canvas),
-      0 0 0 var(--sb-semantic-space-1) var(--sb-semantic-color-focus-ring);
+    outline: var(--sb-semantic-border-width-strong) solid var(--sb-semantic-color-focus-ring);
+    outline-offset: var(--sb-semantic-border-width-strong);
   }
 
   .sb-switch:disabled {
     cursor: not-allowed;
     opacity: var(--sb-semantic-opacity-disabled);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sb-switch,
+    .sb-switch::before,
+    .sb-switch::after {
+      transition: none;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .sb-switch {
+      border-color: CanvasText;
+    }
+
+    .sb-switch::before {
+      forced-color-adjust: none;
+      background: CanvasText;
+    }
+
+    .sb-switch::after {
+      forced-color-adjust: none;
+      background: Canvas;
+    }
+
+    .sb-switch:checked::before {
+      background: Highlight;
+    }
   }
 }

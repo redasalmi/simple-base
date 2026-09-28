@@ -1,41 +1,77 @@
 @layer sb {
   .sb-table-wrap {
     overflow-x: auto;
+    border: var(--sb-semantic-border-width-hairline) solid var(--sb-semantic-color-border-default);
+    border-radius: var(--sb-semantic-radius-md);
+    background: var(--sb-semantic-color-background-surface);
+  }
+
+  .sb-table-wrap:focus-visible {
+    outline: var(--sb-semantic-border-width-strong) solid var(--sb-semantic-color-focus-ring);
+    outline-offset: var(--sb-semantic-border-width-strong);
   }
 
   .sb-table {
     width: 100%;
     min-width: 640px;
     border-collapse: collapse;
-    font-size: 13px;
+    font-size: var(--sb-semantic-typography-size-sm);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .sb-table caption {
+    padding: var(--sb-semantic-space-3) var(--sb-semantic-space-4);
+    color: var(--sb-semantic-color-foreground-secondary);
+    font-weight: var(--sb-semantic-typography-weight-semibold);
+    text-align: start;
   }
 
   .sb-table th,
   .sb-table td {
-    padding: var(--sb-semantic-space-4);
+    padding: var(--sb-semantic-space-3) var(--sb-semantic-space-4);
     border-bottom: var(--sb-semantic-border-width-hairline) solid
       var(--sb-semantic-color-border-default);
     text-align: left;
     vertical-align: middle;
   }
 
-  .sb-table th {
-    color: var(--sb-semantic-color-foreground-muted);
+  .sb-table thead th {
+    color: var(--sb-semantic-color-foreground-secondary);
+    background: var(--sb-semantic-color-background-raised);
     font-family: var(--sb-semantic-typography-family-body);
     font-size: var(--sb-semantic-typography-size-sm);
-    font-weight: var(--sb-semantic-typography-weight-medium);
+    font-weight: var(--sb-semantic-typography-weight-semibold);
   }
 
-  .sb-table tbody tr:hover {
-    background: var(--sb-semantic-color-background-subtle);
+  .sb-table tbody th {
+    color: var(--sb-semantic-color-foreground-primary);
+    font-weight: var(--sb-semantic-typography-weight-semibold);
   }
 
-  .sb-table tbody tr[aria-selected="true"] {
+  .sb-table-wrap .sb-table > :last-child > tr:last-child > :is(th, td) {
+    border-bottom: 0;
+  }
+
+  .sb-table tbody tr:hover > :is(th, td) {
+    background: color-mix(
+      in oklab,
+      var(--sb-semantic-color-background-raised) 60%,
+      var(--sb-semantic-color-background-surface)
+    );
+  }
+
+  .sb-table tbody tr[aria-selected="true"] > :is(th, td) {
     background: var(--sb-semantic-color-accent-soft);
   }
 
+  .sb-table tfoot :is(th, td) {
+    color: var(--sb-semantic-color-foreground-secondary);
+    background: var(--sb-semantic-color-background-raised);
+    font-weight: var(--sb-semantic-typography-weight-semibold);
+  }
+
   .sb-table [data-variant="code"] {
-    color: var(--sb-semantic-color-accent-text);
+    color: var(--sb-semantic-color-foreground-primary);
     font-family: var(--sb-semantic-typography-family-code);
     font-size: var(--sb-semantic-typography-size-sm);
   }

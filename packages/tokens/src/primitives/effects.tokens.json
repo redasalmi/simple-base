@@ -41,14 +41,14 @@
     "shadow": {
       "$type": "shadow",
       "card": {
-        "$description": "Flat grouping; cards are separated by surface and border, not elevation.",
+        "$description": "A 1px baseline under the card edge; depth comes from edges, not blur.",
         "$value": {
           "offsetX": {
             "value": 0,
             "unit": "px"
           },
           "offsetY": {
-            "value": 0,
+            "value": 1,
             "unit": "px"
           },
           "blur": {
@@ -60,35 +60,35 @@
             "unit": "px"
           },
           "color": {
-            "colorSpace": "oklch",
-            "components": [0.1276, 0.0035, 245.8],
-            "alpha": 0
+            "colorSpace": "srgb",
+            "components": [0, 0, 0],
+            "alpha": 0.06
           }
         }
       },
       "overlay": {
-        "$description": "Restrained dark-theme elevation; light themes override this shadow.",
+        "$description": "Soft elevation reserved for overlays; light themes override this shadow.",
         "$value": {
           "offsetX": {
             "value": 0,
             "unit": "px"
           },
           "offsetY": {
-            "value": 8,
+            "value": 16,
             "unit": "px"
           },
           "blur": {
-            "value": 24,
+            "value": 40,
             "unit": "px"
           },
           "spread": {
-            "value": 0,
+            "value": -12,
             "unit": "px"
           },
           "color": {
-            "colorSpace": "oklch",
-            "components": [0.1276, 0.0035, 245.8],
-            "alpha": 0.32
+            "colorSpace": "srgb",
+            "components": [0, 0, 0],
+            "alpha": 0.5
           }
         }
       }

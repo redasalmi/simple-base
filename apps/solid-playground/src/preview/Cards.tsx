@@ -13,7 +13,7 @@ export function Cards() {
     <>
       <Example
         title="Base card"
-        description="A div with the sb-card surface: hairline border, large radius, no elevation, and its own interior padding. Omit variant for this treatment."
+        description="A div with the sb-card surface: hairline border, large radius, a 1px baseline instead of a blurred shadow, and its own interior padding. Omit variant for this treatment."
         code={
           '<Card>\n  <h3 class="sb-heading-4">Release notes</h3>\n  <p class="sb-text-body">Draft prepared for review.</p>\n  <Badge variant="default">Draft</Badge>\n</Card>'
         }

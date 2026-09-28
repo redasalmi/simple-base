@@ -5,13 +5,13 @@
     justify-content: center;
     min-height: var(--sb-semantic-size-control-md);
     gap: var(--sb-semantic-space-2);
-    padding: 0 var(--sb-semantic-space-4);
+    padding: 0 var(--sb-semantic-space-5);
     border: var(--sb-semantic-border-width-hairline) solid transparent;
-    border-radius: var(--sb-semantic-radius-sm);
+    border-radius: var(--sb-semantic-radius-md);
     appearance: none;
     cursor: pointer;
-    color: var(--sb-semantic-color-foreground-inverse);
-    background: var(--sb-semantic-color-foreground-primary);
+    color: var(--sb-semantic-color-accent-on-surface);
+    background: var(--sb-semantic-color-accent-surface);
     font: inherit;
     font-size: var(--sb-semantic-typography-size-md);
     font-weight: var(--sb-semantic-typography-weight-semibold);
@@ -21,139 +21,145 @@
     white-space: nowrap;
     user-select: none;
     transition:
-      background var(--sb-semantic-motion-duration-normal) var(--sb-semantic-motion-easing-standard),
-      color var(--sb-semantic-motion-duration-normal) var(--sb-semantic-motion-easing-standard),
-      border-color var(--sb-semantic-motion-duration-normal)
-        var(--sb-semantic-motion-easing-standard),
-      opacity var(--sb-semantic-motion-duration-normal) var(--sb-semantic-motion-easing-standard);
+      background var(--sb-semantic-motion-duration-fast) var(--sb-semantic-motion-easing-standard),
+      color var(--sb-semantic-motion-duration-fast) var(--sb-semantic-motion-easing-standard),
+      border-color var(--sb-semantic-motion-duration-fast) var(--sb-semantic-motion-easing-standard),
+      scale var(--sb-semantic-motion-duration-fast) var(--sb-semantic-motion-easing-standard);
+  }
+
+  .sb-button > svg {
+    flex: 0 0 auto;
+    width: var(--sb-semantic-size-icon-sm);
+    height: var(--sb-semantic-size-icon-sm);
+  }
+
+  .sb-button:not(:disabled):not([aria-disabled="true"]):active {
+    scale: 0.98;
   }
 
   .sb-button[data-variant="primary"] {
-    color: var(--sb-semantic-color-foreground-inverse);
-    background: var(--sb-semantic-color-foreground-primary);
-    border-color: var(--sb-semantic-color-foreground-primary);
+    color: var(--sb-semantic-color-accent-on-surface);
+    background: var(--sb-semantic-color-accent-surface);
   }
 
   .sb-button[data-variant="primary"]:not(:disabled):not([aria-disabled="true"]):hover {
     background: color-mix(
-      in oklch,
-      var(--sb-semantic-color-foreground-primary) 90%,
-      var(--sb-semantic-color-foreground-inverse)
-    );
-    border-color: color-mix(
-      in oklch,
-      var(--sb-semantic-color-foreground-primary) 90%,
-      var(--sb-semantic-color-foreground-inverse)
-    );
-  }
-
-  .sb-button[data-variant="primary"]:not(:disabled):not([aria-disabled="true"]):active {
-    background: color-mix(
-      in oklch,
-      var(--sb-semantic-color-foreground-primary) 82%,
-      var(--sb-semantic-color-foreground-inverse)
-    );
-    border-color: color-mix(
-      in oklch,
-      var(--sb-semantic-color-foreground-primary) 82%,
-      var(--sb-semantic-color-foreground-inverse)
+      in oklab,
+      var(--sb-semantic-color-accent-surface) 86%,
+      var(--sb-semantic-color-foreground-primary)
     );
   }
 
   .sb-button[data-variant="secondary"] {
     color: var(--sb-semantic-color-foreground-primary);
-    background: var(--sb-semantic-color-background-raised);
+    background: var(--sb-semantic-color-background-surface);
     border-color: var(--sb-semantic-color-border-strong);
   }
 
   .sb-button[data-variant="secondary"]:not(:disabled):not([aria-disabled="true"]):hover {
-    background: var(--sb-semantic-color-background-overlay);
-    border-color: var(--sb-semantic-color-foreground-secondary);
+    background: var(--sb-semantic-color-background-raised);
+    border-color: var(--sb-semantic-color-foreground-muted);
   }
 
   .sb-button[data-variant="tertiary"] {
-    color: var(--sb-semantic-color-foreground-secondary);
-    background: var(--sb-semantic-color-background-subtle);
+    color: var(--sb-semantic-color-foreground-primary);
+    background: var(--sb-semantic-color-accent-soft);
   }
 
   .sb-button[data-variant="tertiary"]:not(:disabled):not([aria-disabled="true"]):hover {
-    color: var(--sb-semantic-color-foreground-primary);
-    background: color-mix(in oklch, var(--sb-semantic-color-foreground-primary) 10%, transparent);
+    background: color-mix(
+      in oklab,
+      var(--sb-semantic-color-accent-soft) 80%,
+      var(--sb-semantic-color-accent-surface)
+    );
   }
 
   .sb-button[data-variant="ghost"] {
-    color: var(--sb-semantic-color-foreground-secondary);
+    color: var(--sb-semantic-color-foreground-primary);
     background: transparent;
   }
 
   .sb-button[data-variant="ghost"]:not(:disabled):not([aria-disabled="true"]):hover {
-    color: var(--sb-semantic-color-foreground-primary);
-    background: var(--sb-semantic-color-background-subtle);
+    background: var(--sb-semantic-color-background-raised);
   }
 
   .sb-button[data-variant="danger"] {
     color: var(--sb-semantic-color-status-danger-on-surface);
     background: var(--sb-semantic-color-status-danger-surface);
-    border-color: var(--sb-semantic-color-status-danger-surface);
   }
 
   .sb-button[data-variant="danger"]:not(:disabled):not([aria-disabled="true"]):hover {
     background: color-mix(
-      in oklch,
-      var(--sb-semantic-color-status-danger-surface) 88%,
-      var(--sb-semantic-color-background-canvas)
-    );
-    border-color: color-mix(
-      in oklch,
-      var(--sb-semantic-color-status-danger-surface) 88%,
-      var(--sb-semantic-color-background-canvas)
+      in oklab,
+      var(--sb-semantic-color-status-danger-surface) 86%,
+      var(--sb-semantic-color-foreground-primary)
     );
   }
 
   .sb-button[data-variant="danger-subtle"] {
     color: var(--sb-semantic-color-status-danger-text);
     background: var(--sb-semantic-color-status-danger-soft);
-    border-color: color-mix(
-      in oklch,
-      var(--sb-semantic-color-status-danger-base) 55%,
-      var(--sb-semantic-color-border-default)
-    );
   }
 
   .sb-button[data-variant="danger-subtle"]:not(:disabled):not([aria-disabled="true"]):hover {
     color: var(--sb-semantic-color-status-danger-on-surface);
     background: var(--sb-semantic-color-status-danger-surface);
-    border-color: var(--sb-semantic-color-status-danger-surface);
   }
 
   .sb-button:focus-visible {
-    outline: 0;
-    box-shadow:
-      0 0 0 var(--sb-semantic-border-width-hairline) var(--sb-semantic-color-background-canvas),
-      0 0 0 var(--sb-semantic-space-1) var(--sb-semantic-color-focus-ring);
+    outline: var(--sb-semantic-border-width-strong) solid var(--sb-semantic-color-focus-ring);
+    outline-offset: var(--sb-semantic-border-width-strong);
   }
 
+  /* Disabled buttons drop their color instead of fading, so the label stays readable. */
   .sb-button:disabled,
   .sb-button[aria-disabled="true"] {
     cursor: not-allowed;
-    opacity: var(--sb-semantic-opacity-disabled);
+    color: var(--sb-semantic-color-foreground-muted);
+    background: var(--sb-semantic-color-background-raised);
+    border-color: var(--sb-semantic-color-border-default);
+  }
+
+  .sb-button[data-variant="ghost"]:disabled,
+  .sb-button[data-variant="ghost"][aria-disabled="true"] {
+    background: transparent;
+    border-color: transparent;
   }
 
   .sb-button[data-size="small"] {
     min-height: var(--sb-semantic-size-control-sm);
     padding-inline: var(--sb-semantic-space-3);
+    border-radius: var(--sb-semantic-radius-sm);
     font-size: var(--sb-semantic-typography-size-sm);
   }
 
   .sb-button[data-size="medium"] {
     min-height: var(--sb-semantic-size-control-md);
-    padding-inline: var(--sb-semantic-space-4);
+    padding-inline: var(--sb-semantic-space-5);
     font-size: var(--sb-semantic-typography-size-md);
   }
 
   .sb-button[data-size="large"] {
     min-height: var(--sb-semantic-size-control-xl);
     padding-inline: var(--sb-semantic-space-6);
-    font-size: var(--sb-semantic-typography-size-lg);
+    font-size: var(--sb-semantic-typography-size-md);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sb-button {
+      transition: none;
+    }
+
+    .sb-button:not(:disabled):not([aria-disabled="true"]):active {
+      scale: none;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .sb-button:disabled,
+    .sb-button[aria-disabled="true"] {
+      color: GrayText;
+      border-color: GrayText;
+    }
   }
 }

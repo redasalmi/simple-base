@@ -19,7 +19,7 @@
     padding: var(--sb-semantic-space-5) 0 0;
     border: 0;
     border-top: var(--sb-semantic-border-width-hairline) solid
-      var(--sb-semantic-color-border-strong);
+      var(--sb-semantic-color-border-default);
     border-radius: 0;
     box-shadow: none;
   }

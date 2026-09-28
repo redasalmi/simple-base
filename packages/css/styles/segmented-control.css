@@ -3,11 +3,11 @@
   .sb-segmented {
     display: inline-flex;
     flex-wrap: wrap;
-    gap: 2px;
-    padding: 3px;
+    gap: var(--sb-semantic-space-1);
+    padding: var(--sb-semantic-space-1);
     border: var(--sb-semantic-border-width-hairline) solid var(--sb-semantic-color-border-default);
     border-radius: var(--sb-semantic-radius-md);
-    background: var(--sb-semantic-color-background-overlay);
+    background: var(--sb-semantic-color-background-raised);
   }
 
   .sb-segment {
@@ -20,7 +20,7 @@
     padding: 0 var(--sb-semantic-space-3);
     border: 0;
     border-radius: var(--sb-semantic-radius-sm);
-    color: var(--sb-semantic-color-foreground-muted);
+    color: var(--sb-semantic-color-foreground-secondary);
     background: transparent;
     font: inherit;
     font-size: var(--sb-semantic-typography-size-sm);
@@ -37,14 +37,15 @@
   .sb-segment[data-state="checked"] {
     color: var(--sb-semantic-color-foreground-primary);
     background: var(--sb-semantic-color-background-surface);
-    box-shadow: 0 1px 3px
-      color-mix(in oklch, var(--sb-semantic-color-background-canvas) 70%, transparent);
+    box-shadow:
+      0 0 0 var(--sb-semantic-border-width-hairline) var(--sb-semantic-color-border-strong),
+      0 1px 0 var(--sb-semantic-border-width-hairline) var(--sb-semantic-color-border-strong);
   }
 
   .sb-segment:focus-visible,
   .sb-segment:has(input:focus-visible) {
-    outline: 0;
-    box-shadow: 0 0 0 var(--sb-semantic-border-width-strong) var(--sb-semantic-color-focus-ring);
+    outline: var(--sb-semantic-border-width-strong) solid var(--sb-semantic-color-focus-ring);
+    outline-offset: var(--sb-semantic-border-width-hairline);
   }
 
   .sb-segment:disabled,

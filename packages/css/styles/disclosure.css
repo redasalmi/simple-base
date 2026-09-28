@@ -15,7 +15,7 @@
     justify-content: space-between;
     min-height: 56px;
     gap: var(--sb-semantic-space-4);
-    color: var(--sb-semantic-color-foreground-secondary);
+    color: var(--sb-semantic-color-foreground-primary);
     cursor: pointer;
     list-style: none;
     font-weight: var(--sb-semantic-typography-weight-semibold);
@@ -39,6 +39,6 @@
   .sb-disclosure-copy {
     padding: 0 42px var(--sb-semantic-space-5) 0;
     color: var(--sb-semantic-color-foreground-muted);
-    font-size: 13px;
+    font-size: var(--sb-semantic-typography-size-sm);
   }
 }

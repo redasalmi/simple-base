@@ -5,10 +5,10 @@ import { Api, Example } from "./Preview";
 const variants = [
   ["primary", "Primary", "The main action in a view. Use sparingly."],
   ["secondary", "Secondary", "An alternative action with a visible boundary."],
-  ["tertiary", "Tertiary", "A lower-emphasis action on a quiet surface."],
+  ["tertiary", "Tertiary", "A softer accent action for secondary emphasis."],
   ["ghost", "Ghost", "A supporting action without a resting container."],
   ["danger", "Danger", "An explicit destructive action."],
-  ["danger-subtle", "Danger subtle", "A destructive option before final confirmation."],
+  ["danger-subtle", "Danger subtle", "A soft destructive option before final confirmation."],
 ] as const satisfies readonly (readonly [ButtonVariant, string, string])[];
 const sizes: ButtonSize[] = ["small", "medium", "large"];
 
@@ -61,7 +61,7 @@ export function Buttons() {
       </p>
       <Example
         title="In context"
-        description="Keep the primary action unmistakable. Use Tab to inspect focus; buttons stay in place on hover and press."
+        description="Keep the primary action unmistakable. Use Tab to inspect focus; buttons stay in place on hover and scale down slightly when pressed."
         code={
           '<div>\n  <Button variant="secondary" onClick={cancel}>Cancel</Button>\n  <Button onClick={save}>Save changes</Button>\n</div>'
         }
@@ -83,7 +83,7 @@ export function Buttons() {
           [
             "size",
             '"medium" (default)',
-            "small (34px) · medium (40px) · large (52px) minimum height",
+            "small (34px) · medium (42px) · large (50px) minimum height",
           ],
           [
             "disabled",

@@ -11,7 +11,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@simple-base/solid";
-import { Api, Example } from "./Preview";
+import { Api, CloseIcon, Example } from "./Preview";
 
 export function Dialogs() {
   let dialog: HTMLDialogElement | undefined;
@@ -24,7 +24,7 @@ export function Dialogs() {
           title="Try the dialog"
           description="Open a neutral modal for supporting information or a focused task. Escape, the close control, or Done dismisses it and returns focus to the trigger."
           code={
-            '<Dialog>\n  <DialogTrigger variant="secondary">\n    View workspace details\n  </DialogTrigger>\n  <DialogContent>\n    <DialogHeader>\n      <div>\n        <DialogKicker>Workspace</DialogKicker>\n        <DialogTitle>Workspace details</DialogTitle>\n      </div>\n      <DialogClose aria-label="Close workspace details">×</DialogClose>\n    </DialogHeader>\n    <DialogDescription>\n      Review the workspace settings before continuing.\n    </DialogDescription>\n    <DialogFooter>\n      <DialogAction value="done">Done</DialogAction>\n    </DialogFooter>\n  </DialogContent>\n</Dialog>'
+            '<Dialog>\n  <DialogTrigger variant="secondary">\n    View workspace details\n  </DialogTrigger>\n  <DialogContent>\n    <DialogHeader>\n      <div>\n        <DialogKicker>Workspace</DialogKicker>\n        <DialogTitle>Workspace details</DialogTitle>\n      </div>\n      <DialogClose aria-label="Close workspace details">\n        <CloseIcon />\n      </DialogClose>\n    </DialogHeader>\n    <DialogDescription>\n      Review the workspace settings before continuing.\n    </DialogDescription>\n    <DialogFooter>\n      <DialogAction value="done">Done</DialogAction>\n    </DialogFooter>\n  </DialogContent>\n</Dialog>'
           }
         >
           <div class="preview-stack">
@@ -53,7 +53,9 @@ export function Dialogs() {
               <DialogKicker>Workspace</DialogKicker>
               <DialogTitle>Workspace details</DialogTitle>
             </div>
-            <DialogClose aria-label="Close workspace details">×</DialogClose>
+            <DialogClose aria-label="Close workspace details">
+              <CloseIcon />
+            </DialogClose>
           </DialogHeader>
           <DialogDescription>
             This workspace is visible to twelve members. Billing and access settings are managed by

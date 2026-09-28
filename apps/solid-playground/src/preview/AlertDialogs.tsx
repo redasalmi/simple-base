@@ -12,7 +12,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@simple-base/solid";
-import { Api, Example } from "./Preview";
+import { Api, Example, WarningIcon } from "./Preview";
 
 export function AlertDialogs() {
   let dialog: HTMLDialogElement | undefined;
@@ -27,7 +27,7 @@ export function AlertDialogs() {
           title="Try the dialog"
           description="Open a real modal to inspect its scrim, keyboard focus, and actions. Escape or Cancel dismisses it; focus returns to the trigger."
           code={
-            '<AlertDialog>\n  <AlertDialogTrigger variant="danger-subtle">\n    Archive workspace\n  </AlertDialogTrigger>\n  <AlertDialogContent>\n    <AlertDialogIcon>!</AlertDialogIcon>\n    <AlertDialogHeader>\n      <AlertDialogKicker>Destructive action</AlertDialogKicker>\n      <AlertDialogTitle>Archive this workspace?</AlertDialogTitle>\n      <AlertDialogDescription>\n        It will be removed from the active workspace list.\n      </AlertDialogDescription>\n    </AlertDialogHeader>\n    <AlertDialogFooter>\n      <AlertDialogCancel>Cancel</AlertDialogCancel>\n      <AlertDialogAction value="archive">Archive</AlertDialogAction>\n    </AlertDialogFooter>\n  </AlertDialogContent>\n</AlertDialog>'
+            '<AlertDialog>\n  <AlertDialogTrigger variant="danger-subtle">\n    Archive workspace\n  </AlertDialogTrigger>\n  <AlertDialogContent>\n    <AlertDialogIcon>\n      <WarningIcon />\n    </AlertDialogIcon>\n    <AlertDialogHeader>\n      <AlertDialogKicker>Destructive action</AlertDialogKicker>\n      <AlertDialogTitle>Archive this workspace?</AlertDialogTitle>\n      <AlertDialogDescription>\n        It will be removed from the active workspace list.\n      </AlertDialogDescription>\n    </AlertDialogHeader>\n    <AlertDialogFooter>\n      <AlertDialogCancel>Cancel</AlertDialogCancel>\n      <AlertDialogAction value="archive">Archive</AlertDialogAction>\n    </AlertDialogFooter>\n  </AlertDialogContent>\n</AlertDialog>'
           }
         >
           <div class="preview-stack">
@@ -51,7 +51,9 @@ export function AlertDialogs() {
             )
           }
         >
-          <AlertDialogIcon>!</AlertDialogIcon>
+          <AlertDialogIcon>
+            <WarningIcon />
+          </AlertDialogIcon>
           <AlertDialogHeader>
             <AlertDialogKicker>Destructive action</AlertDialogKicker>
             <AlertDialogTitle>Archive this workspace?</AlertDialogTitle>
@@ -74,7 +76,9 @@ export function AlertDialogs() {
           <AlertDialog>
             <AlertDialogTrigger variant="secondary">Inspect anatomy</AlertDialogTrigger>
             <AlertDialogContent>
-              <AlertDialogIcon>!</AlertDialogIcon>
+              <AlertDialogIcon>
+                <WarningIcon />
+              </AlertDialogIcon>
               <AlertDialogHeader>
                 <AlertDialogKicker>Destructive action</AlertDialogKicker>
                 <AlertDialogTitle>Archive this workspace?</AlertDialogTitle>
