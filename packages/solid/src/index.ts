@@ -56,6 +56,21 @@ export { Input, type InputProps } from "./components/Input";
 export { Radio, type RadioProps } from "./components/Radio";
 export { TextArea, type TextAreaProps } from "./components/TextArea";
 export {
+  Field,
+  FieldLabel,
+  FieldInput,
+  FieldTextArea,
+  FieldDescription,
+  FieldError,
+  type FieldRootProps,
+  type FieldLabelProps,
+  type FieldInputProps,
+  type FieldTextAreaProps,
+  type FieldDescriptionProps,
+  type FieldErrorProps,
+} from "./components/Field";
+export type { FieldOptions } from "@simple-base/contracts";
+export {
   Combobox,
   ComboboxLabel,
   ComboboxControl,

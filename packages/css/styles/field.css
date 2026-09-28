@@ -1,6 +1,8 @@
 @layer sb {
   .sb-field {
     display: grid;
+    /* Keep rows at their content height when a grid parent stretches the field. */
+    align-content: start;
     gap: var(--sb-semantic-space-2);
     min-width: 0;
   }
@@ -23,19 +25,19 @@
   }
 
   .sb-field small,
-  .sb-field-help {
+  .sb-field-description {
     color: var(--sb-semantic-color-foreground-muted);
     font-size: var(--sb-semantic-typography-size-sm);
     line-height: var(--sb-semantic-typography-line-height-normal);
   }
 
-  .sb-field-help[data-invalid],
+  .sb-field-description[data-invalid],
   .sb-field-error {
     color: var(--sb-semantic-color-status-danger-text);
   }
 
   /* Errors lead with a warning glyph, so they do not rely on color alone. */
-  .sb-field-help[data-invalid],
+  .sb-field-description[data-invalid],
   .sb-field-error {
     display: flex;
     align-items: flex-start;
@@ -44,7 +46,7 @@
     font-weight: var(--sb-semantic-typography-weight-medium);
   }
 
-  .sb-field-help[data-invalid]::before,
+  .sb-field-description[data-invalid]::before,
   .sb-field-error::before {
     flex: 0 0 auto;
     width: var(--sb-semantic-size-icon-sm);
@@ -56,8 +58,8 @@
       center / contain no-repeat;
   }
 
-  .sb-field[data-disabled] :is(.sb-field-label, .sb-field-title, .sb-field-help),
-  .sb-fieldset:disabled :is(.sb-field-title, .sb-field-help, .sb-choice span) {
+  .sb-field[data-disabled] :is(.sb-field-label, .sb-field-title, .sb-field-description),
+  .sb-fieldset:disabled :is(.sb-field-title, .sb-field-description, .sb-choice span) {
     opacity: var(--sb-semantic-opacity-disabled);
   }
 

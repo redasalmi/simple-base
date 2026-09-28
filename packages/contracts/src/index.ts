@@ -3,6 +3,7 @@ export { buttonDefaults, type ButtonVariant, type ButtonSize, type ButtonOptions
 export type { CardVariant, CardOptions } from "./card";
 export type { ComboboxOption, ComboboxOptions } from "./combobox";
 export type { DialogOptions } from "./dialog";
+export type { FieldOptions } from "./field";
 export type { Placement } from "./placement";
 export type { SelectOption, SelectOptions } from "./select";
 export type { TableCellVariant, TableCellOptions } from "./table";

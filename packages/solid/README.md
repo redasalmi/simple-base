@@ -55,16 +55,16 @@ import "@simple-base/css/badge";
 
 **Simple components** render one element and take native props:
 
-| Component  | Renders                | Options                                                    |
-| ---------- | ---------------------- | ---------------------------------------------------------- |
-| `Button`   | `button`               | `variant`, `size`                                          |
-| `Badge`    | `span`                 | `variant`, `size`                                          |
-| `Card`     | `div`                  | `variant`                                                  |
-| `Input`    | `input`                | Native input props; `type` excludes `radio` and `checkbox` |
-| `TextArea` | `textarea`             | Native props                                               |
-| `Checkbox` | `input[type=checkbox]` | Native props                                               |
-| `Radio`    | `input[type=radio]`    | Native props                                               |
-| `Switch`   | `input[role=switch]`   | Native props; requires `aria-label` or `aria-labelledby`   |
+| Component  | Renders                | Options                                                                              |
+| ---------- | ---------------------- | ------------------------------------------------------------------------------------ |
+| `Button`   | `button`               | `variant`, `size`                                                                    |
+| `Badge`    | `span`                 | `variant`, `size`                                                                    |
+| `Card`     | `div`                  | `variant`                                                                            |
+| `Input`    | `input`                | Native input props; `type` is `text`, `email`, `password`, `search`, `tel`, or `url` |
+| `TextArea` | `textarea`             | Native props                                                                         |
+| `Checkbox` | `input[type=checkbox]` | Native props                                                                         |
+| `Radio`    | `input[type=radio]`    | Native props                                                                         |
+| `Switch`   | `input[role=switch]`   | Native props; requires `aria-label` or `aria-labelledby`                             |
 
 **Composable components** use named exports so bundlers can remove unused parts. Each part is prefixed with its root name:
 
@@ -72,12 +72,44 @@ import "@simple-base/css/badge";
 | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `AlertDialog` | `AlertDialogTrigger`, `AlertDialogContent`, `AlertDialogIcon`, `AlertDialogHeader`, `AlertDialogKicker`, `AlertDialogTitle`, `AlertDialogDescription`, `AlertDialogFooter`, `AlertDialogCancel`, `AlertDialogAction` |
 | `Dialog`      | `DialogTrigger`, `DialogContent`, `DialogHeader`, `DialogKicker`, `DialogTitle`, `DialogDescription`, `DialogFooter`, `DialogClose`, `DialogAction`                                                                  |
+| `Field`       | `FieldLabel`, `FieldInput`, `FieldTextArea`, `FieldDescription`, `FieldError`                                                                                                                                        |
 | `Combobox`    | `ComboboxLabel`, `ComboboxControl`, `ComboboxInput`, `ComboboxTrigger`, `ComboboxPortal`, `ComboboxPositioner`, `ComboboxContent`, `ComboboxList`, `ComboboxEmpty`, `ComboboxItem`                                   |
 | `Select`      | `SelectLabel`, `SelectControl`, `SelectTrigger`, `SelectValueText`, `SelectIndicator`, `SelectPortal`, `SelectPositioner`, `SelectContent`, `SelectList`, `SelectEmpty`, `SelectItem`                                |
 | `Table`       | `TableWrap`, `TableCaption`, `TableHeader`, `TableBody`, `TableFooter`, `TableRow`, `TableColumnHeader`, `TableRowHeader`, `TableCell`                                                                               |
 | `Toaster`     | `Toast`, `ToastIcon`, `ToastContent`, `ToastTitle`, `ToastDescription`, `ToastAction`, `ToastClose`, plus `createToaster`                                                                                            |
 
-The CSS package ships more components than this adapter currently covers. Breadcrumb, disclosure, empty state, field, keyboard shortcut, menu, pagination, progress, range, segmented control, status lines and alerts, tabs, and typography are available as styles with selector-level APIs.
+The CSS package ships more components than this adapter currently covers. Breadcrumb, disclosure, empty state, fieldset, keyboard shortcut, menu, pagination, progress, range, segmented control, status lines and alerts, tabs, and typography are available as styles with selector-level APIs.
+
+## Field
+
+Wraps one `FieldInput` or `FieldTextArea` with its label, description, and error. `id`, `required`, `disabled`, and `invalid` are set on the root only; the control, label, and messages read them from it.
+
+```tsx
+import { createSignal } from "solid-js";
+import { Field, FieldDescription, FieldError, FieldInput, FieldLabel } from "@simple-base/solid";
+
+export function EmailField() {
+  const [email, setEmail] = createSignal("");
+
+  return (
+    <Field id="email" required invalid={email() !== "" && !email().includes("@")}>
+      <FieldLabel>Email</FieldLabel>
+      <FieldInput
+        type="email"
+        name="email"
+        value={email()}
+        onInput={(event) => setEmail(event.currentTarget.value)}
+      />
+      <FieldDescription>We never share it.</FieldDescription>
+      <FieldError>Enter a full email address.</FieldError>
+    </Field>
+  );
+}
+```
+
+`FieldInput` and `FieldTextArea` take the same props as `Input` and `TextArea`, except `id`, `required`, `disabled`, `aria-invalid`, and `aria-describedby`, which come from the root. `aria-describedby` lists the description and the error while they are rendered. `FieldError` renders only while `invalid` is set. Omit `id` to generate one.
+
+Use one control per `Field`: every control in a field gets the same `id`. `Select`, `Combobox`, `Checkbox`, `Radio`, and `Switch` carry their own labeling and are not used inside a `Field`.
 
 ## Select
 

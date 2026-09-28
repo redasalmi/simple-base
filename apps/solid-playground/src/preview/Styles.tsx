@@ -1,6 +1,6 @@
 import { For, Show, createSignal } from "solid-js";
 import { Button, Checkbox } from "@simple-base/solid";
-import { Api, CheckIcon, CloseIcon, Example, Field, WarningIcon } from "./Preview";
+import { Api, CheckIcon, CloseIcon, Example, WarningIcon } from "./Preview";
 
 // September 2026 starts on a Tuesday.
 const calendarWeeks = Array.from({ length: 5 }, (_, week) =>
@@ -26,11 +26,6 @@ export function Styles() {
   const [tooltip, setTooltip] = createSignal(false);
   let menu: HTMLDetailsElement | undefined;
   const tabNames = ["Overview", "Activity", "Settings"];
-  const cardTreatments = [
-    [undefined, "Default"],
-    ["flat", "Flat"],
-    ["rule", "Rule"],
-  ] as const;
   const tabCopy = [
     "A summary of the example workspace.",
     "There is no recent activity in this demo.",
@@ -43,24 +38,6 @@ export function Styles() {
 
   return (
     <>
-      <Example
-        title="Cards & grouping"
-        description="Default, flat, and rule variants. Surfaces and borders provide grouping; cards sit on a 1px baseline instead of a blurred shadow and ship their own interior padding."
-        code={
-          '<section class="sb-card" data-variant="rule">\n  <h3 class="sb-heading-3">Workspace settings</h3>\n</section>'
-        }
-      >
-        <div class="preview-stack">
-          <For each={cardTreatments}>
-            {([variant, label]) => (
-              <section class="sb-card" data-variant={variant}>
-                <h3 class="sb-heading-4">{label}</h3>
-                <p class="sb-text-body">A group of related content, not an action.</p>
-              </section>
-            )}
-          </For>
-        </div>
-      </Example>
       <Example
         title="Status & alerts"
         description="Status lines and alerts support success, warning, danger, and info. Keep the message specific and include a recovery path when needed."
@@ -147,7 +124,8 @@ export function Styles() {
         }
       >
         <div class="preview-stack">
-          <Field label="Example completion">
+          <label class="sb-field">
+            <span class="sb-field-title">Example completion</span>
             <input
               class="sb-range"
               type="range"
@@ -156,7 +134,7 @@ export function Styles() {
               value={progress()}
               onInput={(event) => setProgress(Number(event.currentTarget.value))}
             />
-          </Field>
+          </label>
           <div class="sb-range-readout">
             <span>0%</span>
             <output>{progress()}%</output>
@@ -208,7 +186,8 @@ export function Styles() {
       >
         <div class="preview-stack">
           <div class="preview-fields">
-            <Field label="Delivery">
+            <label class="sb-field">
+              <span class="sb-field-title">Delivery</span>
               <span class="sb-select-wrap">
                 <select class="sb-select">
                   <option>Daily summary</option>
@@ -216,14 +195,15 @@ export function Styles() {
                   <option>Never</option>
                 </select>
               </span>
-            </Field>
-            <Field label="Locked delivery">
+            </label>
+            <label class="sb-field">
+              <span class="sb-field-title">Locked delivery</span>
               <span class="sb-select-wrap">
                 <select class="sb-select" disabled>
                   <option>Managed by your team</option>
                 </select>
               </span>
-            </Field>
+            </label>
           </div>
           <fieldset class="sb-fieldset">
             <legend class="sb-field-title">Include in summary</legend>
@@ -241,66 +221,26 @@ export function Styles() {
         </div>
       </Example>
       <Example
-        title="Field"
-        description="A label, help text, and error message around any control. The control carries aria-invalid and aria-describedby; the field only styles the text around it."
+        title="Fieldset errors"
+        description="A required choice group with an error message. Text inputs and text areas use the Field component; fieldsets and choices stay CSS patterns."
         code={
-          '<div class="sb-field">\n  <label class="sb-field-label" for="due" data-required>Due date</label>\n  <input class="sb-input" id="due" aria-invalid="true" aria-describedby="due-error" />\n  <span class="sb-field-error" id="due-error">Pick a date after the issue date.</span>\n</div>'
+          '<fieldset class="sb-fieldset">\n  <legend class="sb-field-title" data-required>Terms</legend>\n  <div class="sb-choice-list">\n    <label class="sb-choice">\n      <Checkbox aria-invalid="true" aria-describedby="terms-error" />\n      <span>I have reviewed the invoice totals</span>\n    </label>\n  </div>\n  <span class="sb-field-error" id="terms-error">Confirm the totals before sending.</span>\n</fieldset>'
         }
       >
-        <div class="preview-fields">
-          <div class="sb-field">
-            <label class="sb-field-label" for="field-reference" data-required>
-              Invoice number
+        <fieldset class="sb-fieldset">
+          <legend class="sb-field-title" data-required>
+            Terms
+          </legend>
+          <div class="sb-choice-list">
+            <label class="sb-choice">
+              <Checkbox aria-invalid="true" aria-describedby="field-terms-error" />
+              <span>I have reviewed the invoice totals</span>
             </label>
-            <input
-              class="sb-input"
-              id="field-reference"
-              value="INV-0043"
-              required
-              aria-describedby="field-reference-help"
-            />
-            <span class="sb-field-help" id="field-reference-help">
-              Numbers continue from your last invoice.
-            </span>
           </div>
-          <div class="sb-field">
-            <label class="sb-field-label" for="field-email" data-required>
-              Client email
-            </label>
-            <input
-              class="sb-input"
-              id="field-email"
-              value="billing@"
-              required
-              aria-invalid="true"
-              aria-describedby="field-email-error"
-            />
-            <span class="sb-field-error" id="field-email-error">
-              Enter a full email address, like billing@example.com.
-            </span>
-          </div>
-          <div class="sb-field" data-disabled>
-            <label class="sb-field-label" for="field-currency">
-              Currency
-            </label>
-            <input class="sb-input" id="field-currency" value="EUR" disabled />
-            <span class="sb-field-help">Set per client.</span>
-          </div>
-          <fieldset class="sb-fieldset">
-            <legend class="sb-field-title" data-required>
-              Terms
-            </legend>
-            <div class="sb-choice-list">
-              <label class="sb-choice">
-                <Checkbox aria-invalid="true" aria-describedby="field-terms-error" />
-                <span>I have reviewed the invoice totals</span>
-              </label>
-            </div>
-            <span class="sb-field-error" id="field-terms-error">
-              Confirm the totals before sending.
-            </span>
-          </fieldset>
-        </div>
+          <span class="sb-field-error" id="field-terms-error">
+            Confirm the totals before sending.
+          </span>
+        </fieldset>
       </Example>
       <Example
         title="Number input"

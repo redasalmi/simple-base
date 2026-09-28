@@ -53,18 +53,6 @@ export function Api(props: { rows: readonly (readonly [string, string, string])[
   );
 }
 
-export function Field(props: { label: string; hint?: string; children: JSX.Element }) {
-  return (
-    <label class="sb-field preview-field">
-      <span class="sb-field-title">{props.label}</span>
-      {props.children}
-      <Show when={props.hint}>
-        <span class="sb-field-help">{props.hint}</span>
-      </Show>
-    </label>
-  );
-}
-
 function Icon(props: { children: JSX.Element }) {
   return (
     <svg

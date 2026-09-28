@@ -1,6 +1,16 @@
 import { For, createSignal } from "solid-js";
-import { Checkbox, Input, Radio, Switch, TextArea, type InputProps } from "@simple-base/solid";
-import { Api, Example, Field } from "./Preview";
+import {
+  Checkbox,
+  Field,
+  FieldError,
+  FieldInput,
+  FieldLabel,
+  FieldTextArea,
+  Radio,
+  Switch,
+  type InputProps,
+} from "@simple-base/solid";
+import { Api, Example } from "./Preview";
 
 const inputTypes = [
   ["text", "Text", "Workspace name"],
@@ -9,12 +19,6 @@ const inputTypes = [
   ["password", "Password", "Enter a password"],
   ["url", "URL", "https://example.com"],
   ["tel", "Telephone", "+1 555 0100"],
-  ["number", "Number", "12"],
-  ["date", "Date", ""],
-  ["time", "Time", ""],
-  ["datetime-local", "Date and time", ""],
-  ["month", "Month", ""],
-  ["week", "Week", ""],
 ] as const satisfies readonly (readonly [NonNullable<InputProps["type"]>, string, string])[];
 
 export function Inputs() {
@@ -24,79 +28,59 @@ export function Inputs() {
     <>
       <Example
         title="Field states"
-        description="Default, filled, read-only, disabled, and invalid. Edit the short workspace name to resolve the example error."
+        description="Default, filled, read-only, disabled, and invalid, each labeled with Field. Edit the short workspace name to resolve the example error."
         code={
-          '<label for="workspace">Workspace</label>\n<Input id="workspace" value={name()}\n  onInput={(event) => setName(event.currentTarget.value)}\n  aria-invalid={invalid()} aria-describedby="name-help" />\n<p id="name-help">Use at least three characters.</p>'
+          "<Field invalid={invalid()}>\n  <FieldLabel>Workspace name</FieldLabel>\n  <FieldInput value={name()}\n    onInput={(event) => setName(event.currentTarget.value)} />\n  <FieldError>Use at least three characters.</FieldError>\n</Field>"
         }
       >
         <div class="preview-fields">
-          <Field label="Default">
-            <Input placeholder="Workspace name" />
+          <Field>
+            <FieldLabel>Default</FieldLabel>
+            <FieldInput placeholder="Workspace name" />
           </Field>
-          <Field label="Filled">
-            <Input value="Design system" />
+          <Field>
+            <FieldLabel>Filled</FieldLabel>
+            <FieldInput value="Design system" />
           </Field>
-          <Field label="Read-only">
-            <Input value="workspace/design" readOnly />
+          <Field>
+            <FieldLabel>Read-only</FieldLabel>
+            <FieldInput value="workspace/design" readOnly />
           </Field>
-          <Field label="Disabled">
-            <Input value="Managed by your team" disabled />
+          <Field disabled>
+            <FieldLabel>Disabled</FieldLabel>
+            <FieldInput value="Managed by your team" />
           </Field>
-          <Field label="Workspace name">
-            <Input
-              value={name()}
-              onInput={(event) => setName(event.currentTarget.value)}
-              aria-invalid={invalid()}
-              aria-describedby="name-help"
-            />
+          <Field invalid={invalid()}>
+            <FieldLabel>Workspace name</FieldLabel>
+            <FieldInput value={name()} onInput={(event) => setName(event.currentTarget.value)} />
+            <FieldError>Use at least three characters.</FieldError>
           </Field>
-          <p
-            id="name-help"
-            class="sb-field-help preview-field-help"
-            data-invalid={invalid() || undefined}
-            role="status"
-          >
-            {invalid() ? "Use at least three characters." : "The workspace name is long enough."}
-          </p>
         </div>
       </Example>
       <Example
         title="Native input types"
-        description="Text-entry and date types retain browser parsing, validation, and pickers. Their exact appearance depends on your browser."
+        description="Text-entry types retain browser validation and mobile keyboards. Their exact appearance depends on your browser."
         code={
-          '<Input type="email" placeholder="alex@example.com" />\n<Input type="number" min={0} step={1} />\n<Input type="date" />'
+          '<Field>\n  <FieldLabel>Email</FieldLabel>\n  <FieldInput type="email" placeholder="alex@example.com" />\n</Field>'
         }
       >
         <div class="preview-fields">
           <For each={inputTypes}>
             {([type, label, placeholder]) => (
-              <Field label={label}>
-                <Input type={type} placeholder={placeholder} />
+              <Field>
+                <FieldLabel>{label}</FieldLabel>
+                <FieldInput type={type} placeholder={placeholder} />
               </Field>
             )}
           </For>
-        </div>
-      </Example>
-      <Example
-        title="Browser-owned controls"
-        description="File and color controls also accept native props. The file stays local; this preview does not upload it."
-        code={'<Input type="file" accept="image/*" />\n<Input type="color" value="#7660a4" />'}
-      >
-        <div class="preview-fields">
-          <Field label="Image file">
-            <Input type="file" accept="image/*" />
-          </Field>
-          <Field label="Color">
-            <Input type="color" value="#7660a4" />
-          </Field>
         </div>
       </Example>
       <Api
         rows={[
           [
             "type",
-            'native input type; defaults to "text"',
-            "Checkbox and radio types are excluded. Use their dedicated components; use Button for actions and the CSS range style for sliders.",
+            '"text" | "email" | "password" | "search" | "tel" | "url"; defaults to "text"',
+            "Only text-entry types. Use Checkbox and Radio for choices, Button for actions, and the CSS range style for sliders.",
           ],
           [
             "value / onInput",
@@ -111,7 +95,7 @@ export function Inputs() {
           [
             "aria-invalid",
             "boolean",
-            "Applies error styling. Validation logic and a linked error message belong to the consuming app.",
+            "Applies error styling. Inside a Field, set invalid on the root instead; it also links the error message.",
           ],
           [
             "…props",
@@ -130,50 +114,43 @@ export function TextAreas() {
     <>
       <Example
         title="Field states"
-        description="An empty field, existing content, a read-only note, and a disabled field. Drag the lower corner to resize vertically."
+        description="An empty field, existing content, a read-only note, and a disabled field, each labeled with Field. Drag the lower corner to resize vertically."
         code={
-          '<TextArea placeholder="Add a note…" />\n<TextArea value="A read-only note." readOnly />'
+          '<Field>\n  <FieldLabel>Read-only</FieldLabel>\n  <FieldTextArea value="A read-only note." readOnly />\n</Field>'
         }
       >
         <div class="preview-fields">
-          <Field label="Default">
-            <TextArea placeholder="Add a note…" />
+          <Field>
+            <FieldLabel>Default</FieldLabel>
+            <FieldTextArea placeholder="Add a note…" />
           </Field>
-          <Field label="Filled">
-            <TextArea value="Document the decision, not just the outcome." />
+          <Field>
+            <FieldLabel>Filled</FieldLabel>
+            <FieldTextArea value="Document the decision, not just the outcome." />
           </Field>
-          <Field label="Read-only">
-            <TextArea value="This note is part of the archived record." readOnly />
+          <Field>
+            <FieldLabel>Read-only</FieldLabel>
+            <FieldTextArea value="This note is part of the archived record." readOnly />
           </Field>
-          <Field label="Disabled">
-            <TextArea value="Editing is unavailable for this example." disabled />
+          <Field disabled>
+            <FieldLabel>Disabled</FieldLabel>
+            <FieldTextArea value="Editing is unavailable for this example." />
           </Field>
         </div>
       </Example>
       <Example
         title="Validation & feedback"
-        description="This local example requires a note. The error treatment clears when text is entered; the character count updates as you type."
+        description="This local example requires a note. The error clears when text is entered."
         code={
-          '<TextArea value={note()}\n  onInput={(event) => setNote(event.currentTarget.value)}\n  aria-invalid={!note().trim()} aria-describedby="note-help" />'
+          "<Field invalid={!note().trim()}>\n  <FieldLabel>Decision note</FieldLabel>\n  <FieldTextArea value={note()}\n    onInput={(event) => setNote(event.currentTarget.value)} />\n  <FieldError>Add a note before continuing.</FieldError>\n</Field>"
         }
       >
         <div class="preview-stack">
-          <Field label="Decision note">
-            <TextArea
-              value={note()}
-              onInput={(event) => setNote(event.currentTarget.value)}
-              aria-invalid={!note().trim()}
-              aria-describedby="note-help"
-            />
+          <Field invalid={!note().trim()}>
+            <FieldLabel>Decision note</FieldLabel>
+            <FieldTextArea value={note()} onInput={(event) => setNote(event.currentTarget.value)} />
+            <FieldError>Add a note before continuing.</FieldError>
           </Field>
-          <p
-            id="note-help"
-            class="sb-field-help preview-field-help"
-            data-invalid={!note().trim() || undefined}
-            role="status"
-          >
-            {note().trim() ? `${note().length} characters` : "Add a note before continuing."}
-          </p>
         </div>
       </Example>
       <Api
@@ -187,7 +164,7 @@ export function TextAreas() {
           [
             "aria-invalid",
             "boolean",
-            "Marks the field visually. Associate explanatory text using aria-describedby.",
+            "Marks the field visually. Inside a Field, set invalid on the root instead; it also links the error message.",
           ],
           [
             "…props",

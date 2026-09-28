@@ -20,6 +20,7 @@ import { Cards } from "./preview/Cards";
 import { Dialogs } from "./preview/Dialogs";
 import { AlertDialogs } from "./preview/AlertDialogs";
 import { Inputs, TextAreas, Checkboxes, Radios, Switches } from "./preview/Inputs";
+import { Fields } from "./preview/Fields";
 import { Comboboxes } from "./preview/Comboboxes";
 import { Selects } from "./preview/Selects";
 import { Tables } from "./preview/Tables";
@@ -80,6 +81,15 @@ const pages: Page[] = [
       "Single-line entry with native input types, validation, and familiar browser behavior. Always pair the control with a visible label.",
     usage: 'import { Input } from "@simple-base/solid";',
     component: Inputs,
+  },
+  {
+    id: "field",
+    label: "Field",
+    group: "Components",
+    description:
+      "A label, description, and error around one Input or TextArea. Set required, disabled, and invalid on the root; ids and ARIA links are wired for you.",
+    usage: 'import { Field, FieldLabel, FieldInput, FieldError } from "@simple-base/solid";',
+    component: Fields,
   },
   {
     id: "combobox",

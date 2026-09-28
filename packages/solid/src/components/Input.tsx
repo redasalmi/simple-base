@@ -1,10 +1,9 @@
 import { splitProps, type JSX } from "solid-js";
 import { cn } from "../cn";
 
-type InputElement = JSX.InputHTMLAttributes<HTMLInputElement>;
-type InputType = Exclude<InputElement["type"], "radio" | "checkbox">;
+type InputType = "text" | "email" | "password" | "search" | "tel" | "url";
 
-export type InputProps = Omit<InputElement, "type"> & {
+export type InputProps = Omit<JSX.InputHTMLAttributes<HTMLInputElement>, "type"> & {
   type?: InputType;
 };
 

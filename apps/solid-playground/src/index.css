@@ -248,16 +248,6 @@ a {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 24px;
 }
-.preview-field {
-  min-width: 0;
-}
-.preview-field .sb-field-help {
-  line-height: 1.5;
-}
-.preview-field input,
-.preview-field textarea {
-  min-width: 0;
-}
 .preview-choice {
   display: flex;
   align-items: center;
@@ -276,10 +266,6 @@ a {
 .preview-note {
   margin: 0;
   color: var(--sb-semantic-color-foreground-secondary);
-  font-size: 13px;
-}
-.preview-field-help {
-  margin: 0;
   font-size: 13px;
 }
 .preview-button-row {
