@@ -14,10 +14,10 @@
     "quality:fix": "turbo run //#lint:fix //#format:fix"
   },
   "devDependencies": {
-    "oxfmt": "^0.65.0",
-    "oxlint": "^1.80.0",
-    "turbo": "^2.10.12",
-    "typescript": "~7.0.2"
+    "oxfmt": "^0.71.0",
+    "oxlint": "^1.86.0",
+    "turbo": "^2.11.5",
+    "typescript": "catalog:"
   },
   "devEngines": {
     "packageManager": {

@@ -38,6 +38,6 @@
     "@terrazzo/plugin-css": "^2.7.1",
     "@terrazzo/plugin-js": "^2.7.1",
     "@terrazzo/plugin-tailwind": "^2.7.1",
-    "@types/node": "^25.8.0"
+    "@types/node": "catalog:"
   }
 }
