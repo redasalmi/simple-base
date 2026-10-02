@@ -13,7 +13,7 @@ import {
 import { cn } from "../cn";
 import type { DialogOptions } from "@simple-base/contracts";
 import { Button, type ButtonProps } from "./Button";
-import { mergeWidgetProps } from "../mergeWidgetProps";
+import { mergeProps } from "@zag-js/solid";
 
 type AlertDialogContextType = {
   titleId: string;
@@ -82,7 +82,7 @@ export function AlertDialogTrigger(props: AlertDialogTriggerProps) {
 
   return (
     <Button
-      {...mergeWidgetProps(triggerBehavior, rest)}
+      {...mergeProps(triggerBehavior, rest)}
       class={cn("sb-alert-dialog-trigger", local.class)}
       variant={local.variant}
       size={local.size}
@@ -135,7 +135,7 @@ export function AlertDialogContent(props: AlertDialogContentProps) {
 
   return (
     <dialog
-      {...mergeWidgetProps(dialogBehavior, rest)}
+      {...mergeProps(dialogBehavior, rest)}
       id={contentId}
       ref={(element) => {
         setDialogRef(element);
@@ -224,7 +224,7 @@ export function AlertDialogCancel(props: AlertDialogCancelProps) {
 
   return (
     <Button
-      {...mergeWidgetProps(buttonBehavior, rest)}
+      {...mergeProps(buttonBehavior, rest)}
       class={cn("sb-alert-dialog-cancel", local.class)}
       autofocus={local.autofocus ?? true}
       variant={local.variant ?? "secondary"}
@@ -254,7 +254,7 @@ export function AlertDialogAction(props: AlertDialogActionProps) {
 
   return (
     <Button
-      {...mergeWidgetProps(buttonBehavior, rest)}
+      {...mergeProps(buttonBehavior, rest)}
       class={cn("sb-alert-dialog-action", local.class)}
       variant={local.variant ?? "danger"}
       ref={(element) => {

@@ -13,7 +13,7 @@ import {
 import { cn } from "../cn";
 import type { DialogOptions } from "@simple-base/contracts";
 import { Button, type ButtonProps } from "./Button";
-import { mergeWidgetProps } from "../mergeWidgetProps";
+import { mergeProps } from "@zag-js/solid";
 
 type DialogContextType = {
   titleId: string;
@@ -80,7 +80,7 @@ export function DialogTrigger(props: DialogTriggerProps) {
 
   return (
     <Button
-      {...mergeWidgetProps(triggerBehavior, rest)}
+      {...mergeProps(triggerBehavior, rest)}
       class={cn("sb-dialog-trigger", local.class)}
       variant={local.variant}
       size={local.size}
@@ -132,7 +132,7 @@ export function DialogContent(props: DialogContentProps) {
 
   return (
     <dialog
-      {...mergeWidgetProps(dialogBehavior, rest)}
+      {...mergeProps(dialogBehavior, rest)}
       id={contentId}
       ref={(element) => {
         setDialogRef(element);
@@ -207,7 +207,7 @@ export function DialogClose(props: DialogCloseProps) {
 
   return (
     <button
-      {...mergeWidgetProps(buttonBehavior, rest)}
+      {...mergeProps(buttonBehavior, rest)}
       class={cn("sb-dialog-close", local.class)}
       ref={(element) => {
         if (typeof local.ref === "function") local.ref(element);
@@ -235,7 +235,7 @@ export function DialogAction(props: DialogActionProps) {
 
   return (
     <Button
-      {...mergeWidgetProps(buttonBehavior, rest)}
+      {...mergeProps(buttonBehavior, rest)}
       class={cn("sb-dialog-action", local.class)}
       variant={local.variant}
       ref={(element) => {

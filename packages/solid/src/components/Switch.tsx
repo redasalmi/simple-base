@@ -9,7 +9,10 @@ export type SwitchProps = Omit<
   JSX.InputHTMLAttributes<HTMLInputElement>,
   "type" | "role" | "aria-checked"
 > &
-  AccessibleName;
+  AccessibleName & {
+    /** Initial checked state for uncontrolled use; `form.reset()` restores it. */
+    defaultChecked?: boolean;
+  };
 
 export function Switch(props: SwitchProps) {
   const [local, rest] = splitProps(props, ["class"]);

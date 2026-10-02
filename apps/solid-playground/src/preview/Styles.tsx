@@ -21,7 +21,6 @@ export function Styles() {
   const [menuAction, setMenuAction] = createSignal("Choose an example command.");
   const [hasRecord, setHasRecord] = createSignal(false);
   const [showAlert, setShowAlert] = createSignal(true);
-  const [quantity, setQuantity] = createSignal(3);
   const [day, setDay] = createSignal(30);
   const [tooltip, setTooltip] = createSignal(false);
   let menu: HTMLDetailsElement | undefined;
@@ -243,94 +242,6 @@ export function Styles() {
         </fieldset>
       </Example>
       <Example
-        title="Number input"
-        description="A text input with steppers and an optional unit affix. Numbers use tabular figures so columns of amounts line up."
-        code={
-          '<div class="sb-number-input">\n  <label class="sb-number-input-label" for="qty">Quantity</label>\n  <div class="sb-number-input-control">\n    <input class="sb-number-input-input" id="qty" inputmode="decimal" />\n    <button class="sb-number-input-trigger" aria-label="Decrease">−</button>\n    <button class="sb-number-input-trigger" aria-label="Increase">+</button>\n  </div>\n</div>'
-        }
-      >
-        <div class="preview-fields">
-          <div class="sb-number-input">
-            <label class="sb-number-input-label" for="number-quantity">
-              Quantity
-            </label>
-            <div class="sb-number-input-control">
-              <input
-                class="sb-number-input-input"
-                id="number-quantity"
-                inputmode="numeric"
-                value={quantity()}
-                onChange={(event) =>
-                  setQuantity(Math.max(0, Number(event.currentTarget.value) || 0))
-                }
-              />
-              <button
-                class="sb-number-input-trigger"
-                aria-label="Decrease quantity"
-                disabled={quantity() <= 0}
-                onClick={() => setQuantity((value) => Math.max(0, value - 1))}
-              >
-                −
-              </button>
-              <button
-                class="sb-number-input-trigger"
-                aria-label="Increase quantity"
-                onClick={() => setQuantity((value) => value + 1)}
-              >
-                +
-              </button>
-            </div>
-          </div>
-          <div class="sb-number-input">
-            <label class="sb-number-input-label" for="number-price" data-required>
-              Unit price
-            </label>
-            <div class="sb-number-input-control">
-              <span class="sb-number-input-affix" aria-hidden="true">
-                €
-              </span>
-              <input
-                class="sb-number-input-input"
-                id="number-price"
-                inputmode="decimal"
-                value="1,250.00"
-              />
-            </div>
-          </div>
-          <div class="sb-number-input">
-            <label class="sb-number-input-label" for="number-tax">
-              Tax rate
-            </label>
-            <div class="sb-number-input-control" data-invalid>
-              <input
-                class="sb-number-input-input"
-                id="number-tax"
-                inputmode="decimal"
-                value="120"
-                aria-invalid="true"
-              />
-              <span class="sb-number-input-affix" aria-hidden="true">
-                %
-              </span>
-            </div>
-          </div>
-          <div class="sb-number-input">
-            <label class="sb-number-input-label" for="number-locked">
-              Discount
-            </label>
-            <div class="sb-number-input-control" data-disabled>
-              <input class="sb-number-input-input" id="number-locked" value="0" disabled />
-              <button class="sb-number-input-trigger" aria-label="Decrease discount" disabled>
-                −
-              </button>
-              <button class="sb-number-input-trigger" aria-label="Increase discount" disabled>
-                +
-              </button>
-            </div>
-          </div>
-        </div>
-      </Example>
-      <Example
         title="Date picker"
         description="The input, trigger, and calendar grid. This specimen shows the calendar inline; the component positions it under the input. Today is outlined, the selected day is filled."
         code={
@@ -339,7 +250,7 @@ export function Styles() {
       >
         <div class="preview-stack">
           <div class="sb-date-picker">
-            <label class="sb-date-picker-label" for="date-due" data-required>
+            <label class="sb-field-label" for="date-due" data-required>
               Due date
             </label>
             <div class="sb-date-picker-control">

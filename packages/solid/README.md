@@ -113,7 +113,7 @@ Use one control per `Field`: every control in a field gets the same `id`. `Selec
 
 ## Select
 
-`id`, `label`, `options`, and `onValueChange` are required. `onValueChange` receives the selected option's value, not its label.
+`label` and `options` are required. `onValueChange` receives the selected option's value, not its label. Omit `id` to generate one.
 
 ```tsx
 import { createSignal } from "solid-js";
@@ -177,7 +177,9 @@ export function TimezonePicker() {
 }
 ```
 
-Additional root props: `value` makes selection controlled (`""` means cleared), `name` adds a hidden native select so the value submits with the form, `disabled`, `invalid`, and `required` drive state styling and labeling, `placement` picks the popup side, and `onOpenChange` reports visibility.
+Additional root props: `value` makes selection controlled (`""` means cleared), `defaultValue` sets the initial selection of an uncontrolled select, `name` adds a hidden native select so the value submits with the form, `disabled`, `invalid`, and `required` drive state styling and labeling, `placement` picks the popup side, and `onOpenChange` reports visibility.
+
+With `name` and `defaultValue`, a `Select` works uncontrolled inside a `<form>`: no `onValueChange` is needed, and `form.reset()` restores the initial selection.
 
 `SelectEmpty` renders beside `SelectList` and appears only while the popup is open with no options. `SelectPortal` accepts `mount` — pass a dialog element's node to keep the popup interactive inside a native modal.
 
@@ -390,18 +392,45 @@ const toaster = createToaster({ placement: "bottom-end" });
 </Button>;
 ```
 
-`createToaster` accepts `placement` (default `bottom-end`) and a default `duration` in milliseconds (default `5000`). The returned toaster has two methods:
+`createToaster` accepts `placement` (default `bottom-end`), a default `duration` in milliseconds (default `5000`), and `max`, the most toasts shown at once (default `24`). Later toasts wait in a queue, and a queued toast ignores `dismiss(id)` and updates through a reused `id` until it is shown. The returned toaster has two methods:
 
 - `create({ title, description?, action?, duration?, id?, status? })` shows a toast and returns its id. Reusing an `id` updates that toast; `duration: Infinity` keeps it until dismissed.
 - `dismiss(id?)` dismisses one toast, or every toast when `id` is omitted.
 
 Toasts pause while the region is hovered or focused. `Alt+T` moves focus to the region, and Escape dismisses the focused toast. `ToastDescription` and `ToastAction` render nothing when the toast has no description or action; the action runs its callback, then dismisses the toast. `ToastClose` is labeled "Dismiss notification" unless you pass `aria-label`. `Toaster` accepts `label` to rename the live region (default "Notifications").
 
+## Forms
+
+Every form control takes `name` and works uncontrolled inside a `<form>`. Set the initial state with the default prop, not the controlled one:
+
+| Component                                                         | Initial state                |
+| ----------------------------------------------------------------- | ---------------------------- |
+| `Input`, `TextArea`, `FieldInput`, `FieldTextArea`, `NumberField` | `defaultValue`               |
+| `Checkbox`, `Radio`, `Switch`                                     | `defaultChecked`             |
+| `Select`, `Combobox`                                              | `defaultValue` (`""` = none) |
+
+```tsx
+<form>
+  <Input name="email" type="email" defaultValue="you@example.com" />
+  <Checkbox name="newsletter" defaultChecked />
+  <Select label="Timezone" name="timezone" options={timezones} defaultValue="utc">
+    {/* parts */}
+  </Select>
+</form>
+```
+
+`form.reset()` limitations:
+
+- On `Input`, `TextArea`, `Checkbox`, `Radio`, and `Switch`, Solid sets `value` and `checked` as DOM properties, so a reset clears a starting value given that way. Use `defaultValue` or `defaultChecked`.
+- `Combobox` ignores `form.reset()` and keeps its current selection. To reset it, use a controlled `value` and set it back in the form's `onReset` handler.
+- `Select` and `NumberField` reset their value even when a reset listener calls `preventDefault()` after theirs has run.
+
 ## Props conventions
 
 - `class` is reactive and merged with the component's own classes; it never replaces them.
 - Native attributes pass through, except the ones the component owns (such as `id`, `role`, and `aria-*` that describe the widget's own structure).
-- Event handlers compose: your `onClick` runs alongside the component's internal handling, not instead of it.
+- Event handlers compose: your `onClick` runs alongside the component's internal handling, not instead of it. Pass handlers as functions; Solid's `[handler, data]` array form replaces the internal handler instead of composing with it.
+- Pass `style` as an object on parts that set their own styles, such as popup positioners. A string `style` is parsed into declarations, and `!important` does not survive.
 - Shared option names and defaults come from [@simple-base/contracts](https://www.npmjs.com/package/@simple-base/contracts), and the unmodified option types are re-exported from this package.
 
 ## Tailwind CSS

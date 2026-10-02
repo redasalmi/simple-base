@@ -21,6 +21,7 @@ import { Dialogs } from "./preview/Dialogs";
 import { AlertDialogs } from "./preview/AlertDialogs";
 import { Inputs, TextAreas, Checkboxes, Radios, Switches } from "./preview/Inputs";
 import { Fields } from "./preview/Fields";
+import { NumberFields } from "./preview/NumberFields";
 import { Comboboxes } from "./preview/Comboboxes";
 import { Selects } from "./preview/Selects";
 import { Tables } from "./preview/Tables";
@@ -90,6 +91,16 @@ const pages: Page[] = [
       "A label, description, and error around one Input or TextArea. Set required, disabled, and invalid on the root; ids and ARIA links are wired for you.",
     usage: 'import { Field, FieldLabel, FieldInput, FieldError } from "@simple-base/solid";',
     component: Fields,
+  },
+  {
+    id: "number-field",
+    label: "NumberField",
+    group: "Components",
+    description:
+      "Numeric entry with steppers, keyboard increments, and locale formatting. Out-of-range values are flagged automatically, and the value submits with the form by name.",
+    usage:
+      'import { NumberField, NumberFieldInput, NumberFieldIncrement } from "@simple-base/solid";',
+    component: NumberFields,
   },
   {
     id: "combobox",

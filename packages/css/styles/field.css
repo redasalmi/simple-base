@@ -1,3 +1,4 @@
+/* Every form component renders its label, description, and error with these classes, so they never drift apart. */
 @layer sb {
   .sb-field {
     display: grid;
@@ -58,7 +59,11 @@
       center / contain no-repeat;
   }
 
-  .sb-field[data-disabled] :is(.sb-field-label, .sb-field-title, .sb-field-description),
+  /* Zag labels carry data-disabled themselves; other parts inherit it from a disabled root. */
+  :is(.sb-field-label, .sb-field-title, .sb-field-description):is(
+    [data-disabled],
+    [data-disabled] *
+  ),
   .sb-fieldset:disabled :is(.sb-field-title, .sb-field-description, .sb-choice span) {
     opacity: var(--sb-semantic-opacity-disabled);
   }

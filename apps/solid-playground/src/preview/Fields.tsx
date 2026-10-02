@@ -42,22 +42,22 @@ export function Fields() {
         title="States"
         description="Required, read-only, and disabled. A disabled field dims its label and description with the control."
         code={
-          '<Field required>…</Field>\n<Field>\n  <FieldInput value="workspace/design" readOnly />\n</Field>\n<Field disabled>…</Field>'
+          '<Field required>…</Field>\n<Field>\n  <FieldInput defaultValue="workspace/design" readOnly />\n</Field>\n<Field disabled>…</Field>'
         }
       >
         <div class="preview-fields">
           <Field required>
             <FieldLabel>Invoice number</FieldLabel>
-            <FieldInput value="INV-0043" />
+            <FieldInput defaultValue="INV-0043" />
             <FieldDescription>Numbers continue from your last invoice.</FieldDescription>
           </Field>
           <Field>
             <FieldLabel>Workspace</FieldLabel>
-            <FieldInput value="workspace/design" readOnly />
+            <FieldInput defaultValue="workspace/design" readOnly />
           </Field>
           <Field disabled>
             <FieldLabel>Currency</FieldLabel>
-            <FieldInput value="EUR" />
+            <FieldInput defaultValue="EUR" />
             <FieldDescription>Set per client.</FieldDescription>
           </Field>
         </div>
@@ -88,7 +88,7 @@ export function Fields() {
           [
             "FieldInput / FieldTextArea",
             "Input / TextArea props",
-            "Except id, required, disabled, aria-invalid, and aria-describedby, which come from the root. Use one control per Field.",
+            "Except id, required, disabled, aria-invalid, and aria-describedby, which come from the root. name and defaultValue pass through for uncontrolled forms. Use one control per Field.",
           ],
           [
             "FieldLabel",

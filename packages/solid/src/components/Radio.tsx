@@ -1,7 +1,10 @@
 import { splitProps, type JSX } from "solid-js";
 import { cn } from "../cn";
 
-export type RadioProps = Omit<JSX.InputHTMLAttributes<HTMLInputElement>, "type">;
+export type RadioProps = Omit<JSX.InputHTMLAttributes<HTMLInputElement>, "type"> & {
+  /** Initial checked state for uncontrolled use; `form.reset()` restores it. */
+  defaultChecked?: boolean;
+};
 
 export function Radio(props: RadioProps) {
   const [local, rest] = splitProps(props, ["class"]);

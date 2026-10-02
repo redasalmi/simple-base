@@ -14,7 +14,7 @@ import {
   SelectTrigger,
   SelectValueText,
 } from "@simple-base/solid";
-import { Api, Example } from "./Preview";
+import { Api, Example, FormDemo } from "./Preview";
 
 const timezones = [
   { label: "Central European Time (UTC+01:00)", value: "cet" },
@@ -81,6 +81,34 @@ export function Selects() {
         </div>
       </Example>
       <Example
+        title="In a form"
+        description="With name and defaultValue the select needs no signal or handler: a hidden native select submits the option value with the form, and Reset restores the initial selection."
+        code={
+          '<form>\n  <Select\n    label="Timezone"\n    name="timezone"\n    options={timezones}\n    defaultValue="utc"\n  >\n    {/* Label, control, and popup as above. */}\n  </Select>\n  <Button type="submit">Submit</Button>\n  <Button type="reset">Reset</Button>\n</form>'
+        }
+      >
+        <FormDemo>
+          <Select label="Timezone" name="timezone" options={timezones} defaultValue="utc">
+            <SelectLabel />
+            <SelectControl>
+              <SelectTrigger>
+                <SelectValueText />
+                <SelectIndicator>
+                  <ChevronDown />
+                </SelectIndicator>
+              </SelectTrigger>
+            </SelectControl>
+            <SelectPortal>
+              <SelectPositioner>
+                <SelectContent>
+                  <SelectList>{(option) => <SelectItem option={option} />}</SelectList>
+                </SelectContent>
+              </SelectPositioner>
+            </SelectPortal>
+          </Select>
+        </FormDemo>
+      </Example>
+      <Example
         title="Empty and updated options"
         description="Open the initially empty list to see the empty message, then load a local collection and reopen it. No request is made and no data is saved."
         code={
@@ -135,8 +163,8 @@ export function Selects() {
         rows={[
           [
             "Select",
-            "id, label, options, onValueChange (required)",
-            "The root owns single-selection state and builds the option collection. Give each instance a unique ID.",
+            "label, options (required)",
+            "The root owns single-selection state and builds the option collection. id is generated when omitted; pass one to name the root.",
           ],
           [
             "options",
@@ -145,13 +173,18 @@ export function Selects() {
           ],
           [
             "onValueChange",
-            "(value: string) => void",
-            "Receives the selected option value, not its label. An empty string represents a cleared selection.",
+            "(value: string) => void (optional)",
+            "Receives the selected option value, not its label. An empty string represents a cleared selection. Not needed for uncontrolled use in a form.",
+          ],
+          [
+            "defaultValue",
+            "string (optional)",
+            'Initial selection for uncontrolled use. Empty string means "no selection." form.reset() restores it.',
           ],
           [
             "name",
             "string (optional)",
-            "Names the hidden native select that carries the option value, so it is submitted with the surrounding form. Omit it to keep the widget outside form submission.",
+            "Names the hidden native select that carries the option value, so it is submitted with the surrounding form, controlled or not. Omit it to keep the widget outside form submission.",
           ],
           [
             "value, disabled, invalid, required, placement, onOpenChange",

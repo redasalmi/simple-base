@@ -13,7 +13,7 @@ import {
   ComboboxPositioner,
   ComboboxTrigger,
 } from "@simple-base/solid";
-import { Api, Example } from "./Preview";
+import { Api, Example, FormDemo } from "./Preview";
 
 const countries = [
   { label: "Canada", value: "CA" },
@@ -40,6 +40,7 @@ export function Comboboxes() {
   const [country, setCountry] = createSignal("");
   const [loaded, setLoaded] = createSignal(false);
   const [destination, setDestination] = createSignal("");
+  const [shipping, setShipping] = createSignal("FR");
 
   return (
     <>
@@ -80,6 +81,39 @@ export function Comboboxes() {
               : "No country selected. Typing only filters the list."}
           </p>
         </div>
+      </Example>
+      <Example
+        title="In a form"
+        description="With name, a hidden native select submits the option value, not the typed text. The combobox ignores form.reset() on its own, so this example controls value and sets it back in the form's onReset."
+        code={
+          'const [country, setCountry] = createSignal("FR");\n\n<form onReset={() => setCountry("FR")}>\n  <Combobox\n    label="Shipping country"\n    name="country"\n    options={countries}\n    value={country()}\n    onValueChange={setCountry}\n  >\n    {/* Label, control, and popup as above. */}\n  </Combobox>\n  <Button type="submit">Submit</Button>\n  <Button type="reset">Reset</Button>\n</form>'
+        }
+      >
+        <FormDemo onReset={() => setShipping("FR")}>
+          <Combobox
+            label="Shipping country"
+            name="country"
+            options={countries}
+            value={shipping()}
+            onValueChange={setShipping}
+          >
+            <ComboboxLabel />
+            <ComboboxControl>
+              <ComboboxInput />
+              <ComboboxTrigger>
+                <ChevronDown />
+              </ComboboxTrigger>
+            </ComboboxControl>
+            <ComboboxPortal>
+              <ComboboxPositioner>
+                <ComboboxContent>
+                  <ComboboxList>{(option) => <ComboboxItem option={option} />}</ComboboxList>
+                  <ComboboxEmpty>No countries found. Try another search.</ComboboxEmpty>
+                </ComboboxContent>
+              </ComboboxPositioner>
+            </ComboboxPortal>
+          </Combobox>
+        </FormDemo>
       </Example>
       <Example
         title="Empty and updated options"
@@ -134,8 +168,8 @@ export function Comboboxes() {
         rows={[
           [
             "Combobox",
-            "id, label, options, onValueChange (required)",
-            "The root owns single-selection state and case-insensitive label filtering. Give each instance a unique ID.",
+            "label, options (required)",
+            "The root owns single-selection state and case-insensitive label filtering. id is generated when omitted; pass one to name the root.",
           ],
           [
             "options",
@@ -144,13 +178,18 @@ export function Comboboxes() {
           ],
           [
             "onValueChange",
-            "(value: string) => void",
+            "(value: string) => void (optional)",
             "Receives the selected option value, not its label or the search text. An empty string represents a cleared selection.",
+          ],
+          [
+            "defaultValue",
+            "string (optional)",
+            'Initial selection for uncontrolled use; the input shows its label. Empty string means "no selection."',
           ],
           [
             "value, disabled, invalid, required, name, placement, onOpenChange",
             "optional",
-            "value makes selection controlled, where an empty string clears it. disabled dims and blocks the field, invalid switches to the danger border, and required adds the label marker. name submits the option label through the visible input, not its value. placement picks the popup side. onOpenChange reports popup visibility.",
+            "value makes selection controlled, where an empty string clears it. disabled dims and blocks the field, invalid switches to the danger border, and required adds the label marker. name submits the option value through a hidden native select, not the typed text. form.reset() leaves the selection unchanged; to reset it, control value and set it back in the form's onReset. placement picks the popup side. onOpenChange reports popup visibility.",
           ],
           [
             "class and native props",

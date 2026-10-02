@@ -13,7 +13,7 @@ import {
 } from "@simple-base/solid";
 import { Api, CheckIcon, CloseIcon, Example } from "./Preview";
 
-const toaster = createToaster();
+const toaster = createToaster({ max: 3 });
 
 export function Toasts() {
   const [result, setResult] = createSignal("No project archived yet.");
@@ -22,9 +22,9 @@ export function Toasts() {
     <>
       <Example
         title="Try a toast"
-        description="Confirm a completed action without interrupting the task. Toasts dismiss after five seconds; hovering or focusing the region pauses the timer, Escape dismisses the focused toast, and Alt+T moves focus to the region."
+        description="Confirm a completed action without interrupting the task. At most three show at once and later ones wait their turn. Toasts dismiss after five seconds; hovering or focusing the region pauses the timer, Escape dismisses the focused toast, and Alt+T moves focus to the region."
         code={
-          'const toaster = createToaster();\n\n<Toaster toaster={toaster}>\n  {() => (\n    <Toast>\n      <ToastIcon>\n        <CheckIcon />\n      </ToastIcon>\n      <ToastContent>\n        <ToastTitle />\n        <ToastDescription />\n        <ToastAction />\n      </ToastContent>\n      <ToastClose>\n        <CloseIcon />\n      </ToastClose>\n    </Toast>\n  )}\n</Toaster>\n\n<Button\n  onClick={() =>\n    toaster.create({\n      title: "Changes saved",\n      description: "Your preferences are up to date.",\n    })\n  }\n>\n  Save changes\n</Button>'
+          'const toaster = createToaster({ max: 3 });\n\n<Toaster toaster={toaster}>\n  {() => (\n    <Toast>\n      <ToastIcon>\n        <CheckIcon />\n      </ToastIcon>\n      <ToastContent>\n        <ToastTitle />\n        <ToastDescription />\n        <ToastAction />\n      </ToastContent>\n      <ToastClose>\n        <CloseIcon />\n      </ToastClose>\n    </Toast>\n  )}\n</Toaster>\n\n<Button\n  onClick={() =>\n    toaster.create({\n      title: "Changes saved",\n      description: "Your preferences are up to date.",\n    })\n  }\n>\n  Save changes\n</Button>'
         }
       >
         <div class="preview-row">
@@ -125,8 +125,8 @@ export function Toasts() {
         rows={[
           [
             "createToaster",
-            "placement · duration",
-            "Creates the toast store. Placement defaults to bottom-end and duration to 5000ms.",
+            "placement · duration · max",
+            "Creates the toast store. Placement defaults to bottom-end, duration to 5000ms, and max to 24 visible toasts. Later toasts wait in a queue, and a queued toast ignores dismiss(id) and id updates until it is shown.",
           ],
           [
             "toaster.create / toaster.dismiss",

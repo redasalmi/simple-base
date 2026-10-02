@@ -1,4 +1,5 @@
-import { For, Show, createUniqueId, type JSX } from "solid-js";
+import { For, Show, createSignal, createUniqueId, type JSX } from "solid-js";
+import { Button } from "@simple-base/solid";
 
 export function Example(props: {
   title: string;
@@ -27,6 +28,41 @@ export function Example(props: {
         </Show>
       </div>
     </section>
+  );
+}
+
+/** A native form that reports its submitted data, for uncontrolled examples. */
+export function FormDemo(props: { children: JSX.Element; onReset?: () => void }) {
+  const [status, setStatus] = createSignal("Submit the form to see the data it sends.");
+
+  return (
+    <form
+      class="preview-stack"
+      onSubmit={(event) => {
+        event.preventDefault();
+        const entries = [...new FormData(event.currentTarget)].map(
+          ([name, value]) => `${name}=${String(value)}`,
+        );
+        setStatus(entries.length > 0 ? `Submitted ${entries.join(", ")}` : "Submitted no data.");
+      }}
+      onReset={() => {
+        props.onReset?.();
+        setStatus("Form reset.");
+      }}
+    >
+      {props.children}
+      <div class="preview-row">
+        <Button type="submit" variant="secondary">
+          Submit
+        </Button>
+        <Button type="reset" variant="ghost">
+          Reset
+        </Button>
+      </div>
+      <p class="preview-status" role="status">
+        {status()}
+      </p>
+    </form>
   );
 }
 

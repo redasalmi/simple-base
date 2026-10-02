@@ -1,21 +1,10 @@
+@import "./field.css";
+
 @layer sb {
   .sb-combobox {
     display: grid;
     gap: var(--sb-semantic-space-2);
     min-width: 0;
-  }
-
-  .sb-combobox-label {
-    color: var(--sb-semantic-color-foreground-primary);
-    font-size: var(--sb-semantic-typography-size-sm);
-    font-weight: var(--sb-semantic-typography-weight-semibold);
-  }
-
-  .sb-combobox-label[data-required]::after {
-    margin-inline-start: var(--sb-semantic-space-1);
-    color: var(--sb-semantic-color-status-danger-base);
-    content: "*";
-    content: "*" / "";
   }
 
   .sb-combobox-control {

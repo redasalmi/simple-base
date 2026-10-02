@@ -2,8 +2,6 @@ import {
   createContext,
   createMemo,
   createUniqueId,
-  onCleanup,
-  onMount,
   splitProps,
   useContext,
   Show,
@@ -12,16 +10,20 @@ import {
 } from "solid-js";
 import { cn } from "../cn";
 import * as toast from "@zag-js/toast";
-import { Key, normalizeProps, useMachine } from "@zag-js/solid";
+import { Key, mergeProps, normalizeProps, useMachine } from "@zag-js/solid";
 import { toastDefaults, type Placement, type ToastOptions } from "@simple-base/contracts";
 import { Button, type ButtonProps } from "./Button";
-import { mergeWidgetProps } from "../mergeWidgetProps";
 
 export type ToasterOptions = {
   /** @default "bottom-end" */
   placement?: Placement;
   /** Default time in milliseconds before a toast dismisses itself. @default 5000 */
   duration?: number;
+  /**
+   * Most toasts shown at once; later ones wait in a queue. Queued toasts ignore `dismiss(id)`
+   * and updates through a reused `id` until they are shown. @default 24
+   */
+  max?: number;
 };
 
 export type ToastCreateOptions = ToastOptions & {
@@ -44,8 +46,7 @@ const stores = new WeakMap<ToasterApi, toast.Store>();
 export function createToaster(options: ToasterOptions = {}): ToasterApi {
   const store = toast.createStore({
     placement: options.placement ?? "bottom-end",
-    // Zag's queue ignores dismiss and id updates, so never queue.
-    max: Infinity,
+    max: options.max,
     duration: options.duration ?? 5000,
   });
   const toaster: ToasterApi = {
@@ -61,7 +62,6 @@ export function createToaster(options: ToasterOptions = {}): ToasterApi {
 type ToastContextType = {
   api: Accessor<toast.Api>;
   toast: Accessor<toast.Props>;
-  service: toast.Service;
 };
 
 const ToastContext = createContext<ToastContextType | null>(null);
@@ -94,7 +94,7 @@ export function Toaster(props: ToasterProps) {
 
   return (
     <div
-      {...mergeWidgetProps(api().getGroupProps({ label: local.label }), rest)}
+      {...mergeProps(api().getGroupProps({ label: local.label }), rest)}
       class={cn("sb-toaster", local.class)}
     >
       <Key each={api().getToasts()} by="id">
@@ -124,7 +124,7 @@ function ToastProvider(props: ToastProviderProps) {
   const api = createMemo(() => toast.connect(service, normalizeProps));
 
   return (
-    <ToastContext.Provider value={{ api, toast: props.toast, service }}>
+    <ToastContext.Provider value={{ api, toast: props.toast }}>
       {props.children()}
     </ToastContext.Provider>
   );
@@ -136,31 +136,12 @@ export type ToastProps = Omit<
 >;
 
 export function Toast(props: ToastProps) {
-  const { api, service } = useToast();
-  const [local, rest] = splitProps(props, ["ref", "class", "children"]);
-  let root: HTMLDivElement | undefined;
-
-  // Zag only remeasures on content mutations; text also rewraps when the width changes.
-  onMount(() => {
-    if (!root) return;
-    const element = root;
-    let width = element.offsetWidth;
-    const observer = new ResizeObserver(() => {
-      if (element.offsetWidth === width) return;
-      width = element.offsetWidth;
-      service.send({ type: "MEASURE" });
-    });
-    observer.observe(element);
-    onCleanup(() => observer.disconnect());
-  });
+  const { api } = useToast();
+  const [local, rest] = splitProps(props, ["class", "children"]);
 
   return (
     <div
-      {...mergeWidgetProps(api().getRootProps(), rest)}
-      ref={(element) => {
-        root = element;
-        if (typeof local.ref === "function") local.ref(element);
-      }}
+      {...mergeProps(api().getRootProps(), rest)}
       class={cn("sb-toast", local.class)}
       data-status={api().type}
     >
@@ -194,10 +175,7 @@ export function ToastTitle(props: ToastTitleProps) {
   const [local, rest] = splitProps(props, ["class"]);
 
   return (
-    <strong
-      {...mergeWidgetProps(api().getTitleProps(), rest)}
-      class={cn("sb-toast-title", local.class)}
-    >
+    <strong {...mergeProps(api().getTitleProps(), rest)} class={cn("sb-toast-title", local.class)}>
       {api().title}
     </strong>
   );
@@ -215,7 +193,7 @@ export function ToastDescription(props: ToastDescriptionProps) {
   return (
     <Show when={api().description}>
       <p
-        {...mergeWidgetProps(api().getDescriptionProps(), rest)}
+        {...mergeProps(api().getDescriptionProps(), rest)}
         class={cn("sb-toast-description", local.class)}
       >
         {api().description}
@@ -234,7 +212,7 @@ export function ToastAction(props: ToastActionProps) {
     <Show when={toast().action}>
       {(action) => (
         <Button
-          {...mergeWidgetProps(api().getActionTriggerProps(), rest)}
+          {...mergeProps(api().getActionTriggerProps(), rest)}
           class={cn("sb-toast-action", local.class)}
           variant={local.variant ?? "secondary"}
           size={local.size ?? "small"}
@@ -254,7 +232,7 @@ export function ToastClose(props: ToastCloseProps) {
 
   return (
     <button
-      {...mergeWidgetProps(api().getCloseTriggerProps(), rest)}
+      {...mergeProps(api().getCloseTriggerProps(), rest)}
       class={cn("sb-toast-close", local.class)}
     >
       {local.children}

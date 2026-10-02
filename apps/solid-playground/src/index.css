@@ -436,7 +436,7 @@ a {
     display: block;
     font-size: 11px;
   }
-  .playground-theme .sb-select-label {
+  .playground-theme .sb-field-label {
     position: absolute;
     width: 1px;
     height: 1px;

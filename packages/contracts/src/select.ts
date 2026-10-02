@@ -8,18 +8,21 @@ export type SelectOption = {
 };
 
 export type SelectOptions = {
-  id: string;
+  /** Id of the root element. Generated when omitted. */
+  id?: string;
   label: string;
   name?: string;
   placeholder?: string;
   options: SelectOption[];
   /** Controlled value. Empty string means no selection; omit for uncontrolled state. */
   value?: string;
+  /** Initial value for uncontrolled state. Empty string means no selection. */
+  defaultValue?: string;
   disabled?: boolean;
   invalid?: boolean;
   required?: boolean;
   placement?: Placement;
   /** Called with the selected option value, or an empty string when selection is cleared. */
-  onValueChange: (value: string) => void;
+  onValueChange?: (value: string) => void;
   onOpenChange?: (open: boolean) => void;
 };

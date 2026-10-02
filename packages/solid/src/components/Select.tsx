@@ -1,10 +1,7 @@
 import {
   splitProps,
   createMemo,
-  createEffect,
-  on,
-  onMount,
-  onCleanup,
+  createUniqueId,
   useContext,
   For,
   Show,
@@ -15,9 +12,8 @@ import {
 import { Portal } from "solid-js/web";
 import { cn } from "../cn";
 import * as select from "@zag-js/select";
-import { normalizeProps, useMachine } from "@zag-js/solid";
+import { mergeProps, normalizeProps, useMachine } from "@zag-js/solid";
 import type { SelectOption, SelectOptions } from "@simple-base/contracts";
-import { mergeWidgetProps } from "../mergeWidgetProps";
 import { validateWidgetOptions } from "../validateWidgetOptions";
 
 type SelectContextType = {
@@ -50,6 +46,7 @@ export function Select(props: SelectRootProps) {
     "placeholder",
     "options",
     "value",
+    "defaultValue",
     "disabled",
     "placement",
     "invalid",
@@ -73,12 +70,15 @@ export function Select(props: SelectRootProps) {
     local.placement ? { placement: local.placement } : undefined,
   );
 
+  const fallbackId = createUniqueId();
+  const id = () => local.id ?? fallbackId;
+
   const service = useMachine(select.machine, {
     get id() {
-      return local.id;
+      return id();
     },
     get ids() {
-      return { root: local.id };
+      return { root: id() };
     },
     get name() {
       return local.name;
@@ -96,6 +96,10 @@ export function Select(props: SelectRootProps) {
       if (local.value === undefined) return undefined;
       return local.value === "" ? [] : [local.value];
     },
+    get defaultValue() {
+      if (local.defaultValue === undefined) return undefined;
+      return local.defaultValue === "" ? [] : [local.defaultValue];
+    },
     get positioning() {
       return positioning();
     },
@@ -106,33 +110,11 @@ export function Select(props: SelectRootProps) {
       local.onOpenChange?.(open);
     },
     onValueChange({ value }) {
-      local.onValueChange(value[0] ?? "");
+      local.onValueChange?.(value[0] ?? "");
     },
   });
 
   const api = createMemo(() => select.connect(service, normalizeProps));
-  let hiddenSelect!: HTMLSelectElement;
-
-  const syncHiddenSelect = () => {
-    hiddenSelect.value = api().value[0] ?? "";
-  };
-
-  // Replacing options can change native selection without changing the machine's value.
-  createEffect(on([collection, () => api().value], syncHiddenSelect));
-  onMount(() => {
-    const form = hiddenSelect.form;
-    // The browser resets native selection after Zag handles the reset event.
-    let resetFrame = 0;
-    const handleReset = () => {
-      cancelAnimationFrame(resetFrame);
-      resetFrame = requestAnimationFrame(syncHiddenSelect);
-    };
-    form?.addEventListener("reset", handleReset);
-    onCleanup(() => {
-      form?.removeEventListener("reset", handleReset);
-      cancelAnimationFrame(resetFrame);
-    });
-  });
 
   return (
     <SelectContext.Provider
@@ -143,18 +125,21 @@ export function Select(props: SelectRootProps) {
         api,
       }}
     >
-      <div
-        {...mergeWidgetProps(api().getRootProps(), rest)}
-        class={cn("sb-select-root", local.class)}
-      >
-        <select
-          ref={(element) => {
-            hiddenSelect = element;
-          }}
-          {...api().getHiddenSelectProps()}
-        >
+      <div {...mergeProps(api().getRootProps(), rest)} class={cn("sb-select-root", local.class)}>
+        <select {...api().getHiddenSelectProps()}>
+          <Show when={api().value.length === 0}>
+            <option value="" />
+          </Show>
           <For each={local.options}>
-            {(option) => <option value={option.value}>{option.label}</option>}
+            {(option) => (
+              <option
+                value={option.value}
+                // The `selected` attribute, unlike the property, is what a native form reset restores.
+                {...{ "attr:selected": api().value.includes(option.value) ? "" : undefined }}
+              >
+                {option.label}
+              </option>
+            )}
           </For>
         </select>
         {local.children}
@@ -172,10 +157,7 @@ export function SelectLabel(props: SelectLabelProps) {
   const [local, rest] = splitProps(props, ["class", "children"]);
 
   return (
-    <label
-      {...mergeWidgetProps(api().getLabelProps(), rest)}
-      class={cn("sb-select-label", local.class)}
-    >
+    <label {...mergeProps(api().getLabelProps(), rest)} class={cn("sb-field-label", local.class)}>
       {local.children ?? label()}
     </label>
   );
@@ -189,7 +171,7 @@ export function SelectControl(props: SelectControlProps) {
 
   return (
     <div
-      {...mergeWidgetProps(api().getControlProps(), rest)}
+      {...mergeProps(api().getControlProps(), rest)}
       class={cn("sb-select-control", local.class)}
     >
       {local.children}
@@ -209,7 +191,7 @@ export function SelectTrigger(props: SelectTriggerProps) {
   return (
     <button
       aria-label={label()}
-      {...mergeWidgetProps(api().getTriggerProps(), rest)}
+      {...mergeProps(api().getTriggerProps(), rest)}
       class={cn("sb-select-trigger", local.class)}
     >
       {local.children}
@@ -225,7 +207,7 @@ export function SelectValueText(props: SelectValueTextProps) {
 
   return (
     <span
-      {...mergeWidgetProps(api().getValueTextProps(), rest)}
+      {...mergeProps(api().getValueTextProps(), rest)}
       class={cn("sb-select-value-text", local.class)}
     >
       {local.children ?? (api().valueAsString || placeholder())}
@@ -241,7 +223,7 @@ export function SelectIndicator(props: SelectIndicatorProps) {
 
   return (
     <span
-      {...mergeWidgetProps(api().getIndicatorProps(), rest)}
+      {...mergeProps(api().getIndicatorProps(), rest)}
       aria-hidden="true"
       class={cn("sb-select-indicator", local.class)}
     >
@@ -267,7 +249,7 @@ export function SelectPositioner(props: SelectPositionerProps) {
 
   return (
     <div
-      {...mergeWidgetProps(api().getPositionerProps(), rest)}
+      {...mergeProps(api().getPositionerProps(), rest)}
       class={cn("sb-select-positioner", local.class)}
     >
       {local.children}
@@ -302,7 +284,7 @@ export function SelectList(props: SelectListProps) {
   return (
     <ul
       aria-label={label()}
-      {...mergeWidgetProps(api().getContentProps(), rest)}
+      {...mergeProps(api().getContentProps(), rest)}
       class={cn("sb-select-list", local.class)}
     >
       <For each={options()}>{(option) => local.children(option)}</For>
@@ -338,7 +320,7 @@ export function SelectItem(props: SelectItemProps) {
 
   return (
     <li
-      {...mergeWidgetProps(api().getItemProps({ item: local.option }), rest)}
+      {...mergeProps(api().getItemProps({ item: local.option }), rest)}
       class={cn("sb-select-item", local.class)}
     >
       {local.option.label}

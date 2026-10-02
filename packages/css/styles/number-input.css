@@ -1,21 +1,12 @@
+@import "./field.css";
+
 @layer sb {
   .sb-number-input {
     display: grid;
+    /* Keep rows at their content height when a grid parent stretches the field. */
+    align-content: start;
     gap: var(--sb-semantic-space-2);
     min-width: 0;
-  }
-
-  .sb-number-input-label {
-    color: var(--sb-semantic-color-foreground-primary);
-    font-size: var(--sb-semantic-typography-size-sm);
-    font-weight: var(--sb-semantic-typography-weight-semibold);
-  }
-
-  .sb-number-input-label[data-required]::after {
-    margin-inline-start: var(--sb-semantic-space-1);
-    color: var(--sb-semantic-color-status-danger-base);
-    content: "*";
-    content: "*" / "";
   }
 
   .sb-number-input-control {

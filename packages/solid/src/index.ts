@@ -71,6 +71,26 @@ export {
 } from "./components/Field";
 export type { FieldOptions } from "@simple-base/contracts";
 export {
+  NumberField,
+  NumberFieldLabel,
+  NumberFieldControl,
+  NumberFieldInput,
+  NumberFieldDecrement,
+  NumberFieldIncrement,
+  NumberFieldAffix,
+  NumberFieldDescription,
+  NumberFieldError,
+  type NumberFieldProps,
+  type NumberFieldLabelProps,
+  type NumberFieldControlProps,
+  type NumberFieldInputProps,
+  type NumberFieldTriggerProps,
+  type NumberFieldAffixProps,
+  type NumberFieldDescriptionProps,
+  type NumberFieldErrorProps,
+} from "./components/NumberField";
+export type { NumberFieldOptions } from "@simple-base/contracts";
+export {
   Combobox,
   ComboboxLabel,
   ComboboxControl,

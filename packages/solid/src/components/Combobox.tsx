@@ -1,6 +1,7 @@
 import {
   splitProps,
   createMemo,
+  createUniqueId,
   useContext,
   createSignal,
   For,
@@ -12,9 +13,8 @@ import {
 import { Portal } from "solid-js/web";
 import { cn } from "../cn";
 import * as combobox from "@zag-js/combobox";
-import { normalizeProps, useMachine } from "@zag-js/solid";
+import { mergeProps, normalizeProps, useMachine } from "@zag-js/solid";
 import type { ComboboxOption, ComboboxOptions } from "@simple-base/contracts";
-import { mergeWidgetProps } from "../mergeWidgetProps";
 import { validateWidgetOptions } from "../validateWidgetOptions";
 
 // Matches Zag's hidden select: out of view, but focusable so native validation can report on it.
@@ -59,6 +59,7 @@ export function Combobox(props: ComboboxRootProps) {
     "placeholder",
     "options",
     "value",
+    "defaultValue",
     "disabled",
     "placement",
     "invalid",
@@ -89,12 +90,15 @@ export function Combobox(props: ComboboxRootProps) {
     local.placement ? { placement: local.placement } : undefined,
   );
 
+  const fallbackId = createUniqueId();
+  const id = () => local.id ?? fallbackId;
+
   const service = useMachine(combobox.machine, {
     get id() {
-      return local.id;
+      return id();
     },
     get ids() {
-      return { root: local.id };
+      return { root: id() };
     },
     get placeholder() {
       return local.placeholder;
@@ -112,6 +116,10 @@ export function Combobox(props: ComboboxRootProps) {
       if (local.value === undefined) return undefined;
       return local.value === "" ? [] : [local.value];
     },
+    get defaultValue() {
+      if (local.defaultValue === undefined) return undefined;
+      return local.defaultValue === "" ? [] : [local.defaultValue];
+    },
     get positioning() {
       return positioning();
     },
@@ -126,7 +134,7 @@ export function Combobox(props: ComboboxRootProps) {
       setQuery(reason === "input-change" ? inputValue : "");
     },
     onValueChange({ value }) {
-      local.onValueChange(value[0] ?? "");
+      local.onValueChange?.(value[0] ?? "");
     },
   });
 
@@ -140,7 +148,7 @@ export function Combobox(props: ComboboxRootProps) {
         api,
       }}
     >
-      <div {...mergeWidgetProps(api().getRootProps(), rest)} class={cn("sb-combobox", local.class)}>
+      <div {...mergeProps(api().getRootProps(), rest)} class={cn("sb-combobox", local.class)}>
         {/* Zag names the text input, which would submit the typed text instead of the value. */}
         <select
           aria-hidden="true"
@@ -168,10 +176,7 @@ export function ComboboxLabel(props: ComboboxLabelProps) {
   const [local, rest] = splitProps(props, ["class", "children"]);
 
   return (
-    <label
-      {...mergeWidgetProps(api().getLabelProps(), rest)}
-      class={cn("sb-combobox-label", local.class)}
-    >
+    <label {...mergeProps(api().getLabelProps(), rest)} class={cn("sb-field-label", local.class)}>
       {local.children ?? label()}
     </label>
   );
@@ -185,7 +190,7 @@ export function ComboboxControl(props: ComboboxControlProps) {
 
   return (
     <div
-      {...mergeWidgetProps(api().getControlProps(), rest)}
+      {...mergeProps(api().getControlProps(), rest)}
       class={cn("sb-combobox-control", local.class)}
     >
       {local.children}
@@ -202,10 +207,18 @@ export function ComboboxInput(props: ComboboxInputProps) {
   const { api, label } = useCombobox();
   const [local, rest] = splitProps(props, ["class"]);
 
+  // Zag passes the input text as `defaultValue`, which Solid's normalizer renames to a live
+  // `value`. Restore it so a form reset keeps the text; Zag syncs what's displayed.
+  // Solid only sets `defaultValue` as a DOM property under `prop:`.
+  const inputProps = () => {
+    const { value, ...inputProps } = api().getInputProps();
+    return { ...inputProps, "prop:defaultValue": value };
+  };
+
   return (
     <input
       aria-label={label()}
-      {...mergeWidgetProps(api().getInputProps(), rest)}
+      {...mergeProps(inputProps(), rest)}
       class={cn("sb-combobox-input", local.class)}
     />
   );
@@ -222,7 +235,7 @@ export function ComboboxTrigger(props: ComboboxTriggerProps) {
 
   return (
     <button
-      {...mergeWidgetProps(api().getTriggerProps(), rest)}
+      {...mergeProps(api().getTriggerProps(), rest)}
       class={cn("sb-combobox-trigger", local.class)}
     >
       {local.children}
@@ -247,7 +260,7 @@ export function ComboboxPositioner(props: ComboboxPositionerProps) {
 
   return (
     <div
-      {...mergeWidgetProps(api().getPositionerProps(), rest)}
+      {...mergeProps(api().getPositionerProps(), rest)}
       class={cn("sb-combobox-positioner", local.class)}
     >
       {local.children}
@@ -282,7 +295,7 @@ export function ComboboxList(props: ComboboxListProps) {
   return (
     <ul
       aria-label={label()}
-      {...mergeWidgetProps(api().getContentProps(), rest)}
+      {...mergeProps(api().getContentProps(), rest)}
       class={cn("sb-combobox-list", local.class)}
     >
       <For each={options()}>{(option) => local.children(option)}</For>
@@ -318,7 +331,7 @@ export function ComboboxItem(props: ComboboxItemProps) {
 
   return (
     <li
-      {...mergeWidgetProps(api().getItemProps({ item: local.option }), rest)}
+      {...mergeProps(api().getItemProps({ item: local.option }), rest)}
       class={cn("sb-combobox-item", local.class)}
     >
       {local.option.label}

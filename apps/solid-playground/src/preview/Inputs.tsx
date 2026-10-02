@@ -10,7 +10,7 @@ import {
   Switch,
   type InputProps,
 } from "@simple-base/solid";
-import { Api, Example } from "./Preview";
+import { Api, Example, FormDemo } from "./Preview";
 
 const inputTypes = [
   ["text", "Text", "Workspace name"],
@@ -40,15 +40,15 @@ export function Inputs() {
           </Field>
           <Field>
             <FieldLabel>Filled</FieldLabel>
-            <FieldInput value="Design system" />
+            <FieldInput defaultValue="Design system" />
           </Field>
           <Field>
             <FieldLabel>Read-only</FieldLabel>
-            <FieldInput value="workspace/design" readOnly />
+            <FieldInput defaultValue="workspace/design" readOnly />
           </Field>
           <Field disabled>
             <FieldLabel>Disabled</FieldLabel>
-            <FieldInput value="Managed by your team" />
+            <FieldInput defaultValue="Managed by your team" />
           </Field>
           <Field invalid={invalid()}>
             <FieldLabel>Workspace name</FieldLabel>
@@ -56,6 +56,26 @@ export function Inputs() {
             <FieldError>Use at least three characters.</FieldError>
           </Field>
         </div>
+      </Example>
+      <Example
+        title="In a form"
+        description="Uncontrolled inputs need no signals. name submits each value with the form, and defaultValue is what Reset restores."
+        code={
+          '<form>\n  <Field>\n    <FieldLabel>Workspace name</FieldLabel>\n    <FieldInput name="workspace" defaultValue="Design system" />\n  </Field>\n  <Button type="submit">Submit</Button>\n  <Button type="reset">Reset</Button>\n</form>'
+        }
+      >
+        <FormDemo>
+          <div class="preview-fields">
+            <Field>
+              <FieldLabel>Workspace name</FieldLabel>
+              <FieldInput name="workspace" defaultValue="Design system" />
+            </Field>
+            <Field>
+              <FieldLabel>Contact email</FieldLabel>
+              <FieldInput type="email" name="email" defaultValue="alex@example.com" />
+            </Field>
+          </div>
+        </FormDemo>
       </Example>
       <Example
         title="Native input types"
@@ -81,6 +101,11 @@ export function Inputs() {
             "type",
             '"text" | "email" | "password" | "search" | "tel" | "url"; defaults to "text"',
             "Only text-entry types. Use Checkbox and Radio for choices, Button for actions, and the CSS range style for sliders.",
+          ],
+          [
+            "defaultValue",
+            "string",
+            "Initial value for uncontrolled inputs; form.reset() restores it. A value given through value is cleared by a reset.",
           ],
           [
             "value / onInput",
@@ -116,7 +141,7 @@ export function TextAreas() {
         title="Field states"
         description="An empty field, existing content, a read-only note, and a disabled field, each labeled with Field. Drag the lower corner to resize vertically."
         code={
-          '<Field>\n  <FieldLabel>Read-only</FieldLabel>\n  <FieldTextArea value="A read-only note." readOnly />\n</Field>'
+          '<Field>\n  <FieldLabel>Read-only</FieldLabel>\n  <FieldTextArea defaultValue="A read-only note." readOnly />\n</Field>'
         }
       >
         <div class="preview-fields">
@@ -126,15 +151,15 @@ export function TextAreas() {
           </Field>
           <Field>
             <FieldLabel>Filled</FieldLabel>
-            <FieldTextArea value="Document the decision, not just the outcome." />
+            <FieldTextArea defaultValue="Document the decision, not just the outcome." />
           </Field>
           <Field>
             <FieldLabel>Read-only</FieldLabel>
-            <FieldTextArea value="This note is part of the archived record." readOnly />
+            <FieldTextArea defaultValue="This note is part of the archived record." readOnly />
           </Field>
           <Field disabled>
             <FieldLabel>Disabled</FieldLabel>
-            <FieldTextArea value="Editing is unavailable for this example." />
+            <FieldTextArea defaultValue="Editing is unavailable for this example." />
           </Field>
         </div>
       </Example>
@@ -155,6 +180,11 @@ export function TextAreas() {
       </Example>
       <Api
         rows={[
+          [
+            "defaultValue",
+            "string",
+            "Initial content for uncontrolled text areas; form.reset() restores it.",
+          ],
           [
             "value / onInput",
             "native value and event",
@@ -211,9 +241,30 @@ export function Checkboxes() {
         </fieldset>
       </Example>
       <Example
+        title="In a form"
+        description="Checked boxes submit their name and value; unchecked ones submit nothing. defaultChecked sets the initial state that Reset restores."
+        code={
+          '<form>\n  <label>\n    <Checkbox name="notify" value="email" defaultChecked />\n    Email updates\n  </label>\n  <label>\n    <Checkbox name="notify" value="activity" />\n    Activity summary\n  </label>\n</form>'
+        }
+      >
+        <FormDemo>
+          <fieldset class="sb-fieldset preview-stack">
+            <legend class="sb-heading-5">Notifications</legend>
+            <label class="preview-choice">
+              <Checkbox name="notify" value="email" defaultChecked />
+              <span>Email updates</span>
+            </label>
+            <label class="preview-choice">
+              <Checkbox name="notify" value="activity" />
+              <span>Activity summary</span>
+            </label>
+          </fieldset>
+        </FormDemo>
+      </Example>
+      <Example
         title="Disabled states"
         description="Both unchecked and checked disabled states are shown. Disabled controls retain their value but cannot be changed."
-        code={"<Checkbox disabled />\n<Checkbox checked disabled />"}
+        code={"<Checkbox disabled />\n<Checkbox defaultChecked disabled />"}
       >
         <div class="preview-stack">
           <label class="preview-choice">
@@ -221,13 +272,18 @@ export function Checkboxes() {
             <span>Unavailable option</span>
           </label>
           <label class="preview-choice">
-            <Checkbox checked disabled />
+            <Checkbox defaultChecked disabled />
             <span>Required by your team</span>
           </label>
         </div>
       </Example>
       <Api
         rows={[
+          [
+            "defaultChecked",
+            "boolean",
+            "Initial state for uncontrolled checkboxes; form.reset() restores it. A state given through checked is cleared by a reset.",
+          ],
           [
             "checked / onChange",
             "boolean / native event",
@@ -257,7 +313,7 @@ export function Radios() {
         title="One selection"
         description="A shared name keeps the options exclusive. Use arrow keys within the group to change the selection."
         code={
-          '<fieldset>\n  <legend>Row spacing</legend>\n  <label><Radio name="density" value="comfortable" checked /> Comfortable</label>\n  <label><Radio name="density" value="compact" /> Compact</label>\n</fieldset>'
+          '<fieldset>\n  <legend>Row spacing</legend>\n  <label><Radio name="density" value="comfortable" defaultChecked /> Comfortable</label>\n  <label><Radio name="density" value="compact" /> Compact</label>\n</fieldset>'
         }
       >
         <fieldset class="sb-fieldset preview-stack">
@@ -287,9 +343,32 @@ export function Radios() {
         </fieldset>
       </Example>
       <Example
+        title="In a form"
+        description="The checked radio submits its value under the group's name. defaultChecked picks the initial choice that Reset restores."
+        code={
+          '<form>\n  <label><Radio name="plan" value="starter" /> Starter</label>\n  <label><Radio name="plan" value="team" defaultChecked /> Team</label>\n</form>'
+        }
+      >
+        <FormDemo>
+          <fieldset class="sb-fieldset preview-stack">
+            <legend class="sb-heading-5">Plan</legend>
+            <label class="preview-choice">
+              <Radio name="plan" value="starter" />
+              <span>Starter</span>
+            </label>
+            <label class="preview-choice">
+              <Radio name="plan" value="team" defaultChecked />
+              <span>Team</span>
+            </label>
+          </fieldset>
+        </FormDemo>
+      </Example>
+      <Example
         title="Disabled states"
         description="An unavailable option and a locked selection. These specimens use separate groups so the selected state remains unambiguous."
-        code={'<Radio name="unavailable" disabled />\n<Radio name="locked" checked disabled />'}
+        code={
+          '<Radio name="unavailable" disabled />\n<Radio name="locked" defaultChecked disabled />'
+        }
       >
         <div class="preview-stack">
           <label class="preview-choice">
@@ -297,7 +376,7 @@ export function Radios() {
             <span>Unavailable option</span>
           </label>
           <label class="preview-choice">
-            <Radio name="locked" checked disabled />
+            <Radio name="locked" defaultChecked disabled />
             <span>Locked selection</span>
           </label>
         </div>
@@ -309,6 +388,11 @@ export function Radios() {
             "value / checked / onChange",
             "native input props",
             "The selected radio contributes its value to a native form.",
+          ],
+          [
+            "defaultChecked",
+            "boolean",
+            "Initial choice for uncontrolled groups; form.reset() restores it.",
           ],
           [
             "…props",
@@ -356,10 +440,24 @@ export function Switches() {
         </div>
       </Example>
       <Example
+        title="In a form"
+        description="A switch submits like a checkbox: its name and value while on, nothing while off. defaultChecked sets the state that Reset restores."
+        code={
+          '<form>\n  <label>\n    <Switch aria-label="Weekly digest" name="digest" defaultChecked />\n    Weekly digest\n  </label>\n</form>'
+        }
+      >
+        <FormDemo>
+          <label class="preview-choice">
+            <Switch aria-label="Weekly digest" name="digest" defaultChecked />
+            <span>Weekly digest</span>
+          </label>
+        </FormDemo>
+      </Example>
+      <Example
         title="Disabled states"
         description="Unavailable off and on settings. Keep the label visible to explain which preference is locked."
         code={
-          '<Switch aria-label="Unavailable setting" disabled />\n<Switch aria-label="Required setting" checked disabled />'
+          '<Switch aria-label="Unavailable setting" disabled />\n<Switch aria-label="Required setting" defaultChecked disabled />'
         }
       >
         <div class="preview-stack">
@@ -368,7 +466,7 @@ export function Switches() {
             <span>Unavailable setting</span>
           </label>
           <label class="preview-choice">
-            <Switch aria-label="Required setting" checked disabled />
+            <Switch aria-label="Required setting" defaultChecked disabled />
             <span>Required setting</span>
           </label>
         </div>
@@ -384,6 +482,11 @@ export function Switches() {
             "checked / onChange",
             "boolean / native event",
             'Uses checkbox state and role="switch". Do not provide aria-checked separately.',
+          ],
+          [
+            "defaultChecked",
+            "boolean",
+            "Initial state for uncontrolled switches; form.reset() restores it.",
           ],
           [
             "…props",
