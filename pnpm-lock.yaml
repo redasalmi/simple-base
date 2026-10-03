@@ -205,9 +205,30 @@ settings:
 
 catalogs:
   default:
+    '@internationalized/date':
+      specifier: ^3.12.4
+      version: 3.12.4
     '@types/node':
       specifier: ^24.19.0
       version: 24.19.0
+    '@zag-js/combobox':
+      specifier: ^1.44.0
+      version: 1.44.0
+    '@zag-js/date-picker':
+      specifier: ^1.44.0
+      version: 1.44.0
+    '@zag-js/number-input':
+      specifier: ^1.44.0
+      version: 1.44.0
+    '@zag-js/select':
+      specifier: ^1.44.0
+      version: 1.44.0
+    '@zag-js/solid':
+      specifier: ^1.44.0
+      version: 1.44.0
+    '@zag-js/toast':
+      specifier: ^1.44.0
+      version: 1.44.0
     solid-js:
       specifier: ^1.9.15
       version: 1.9.15
@@ -267,6 +288,10 @@ importers:
         version: 2.11.14(solid-js@1.9.15)(vite@8.3.1(@types/node@24.19.0)(esbuild@0.28.0)(jiti@2.7.0)(tsx@4.22.0)(yaml@2.9.1))
 
   packages/contracts:
+    dependencies:
+      '@internationalized/date':
+        specifier: 'catalog:'
+        version: 3.12.4
     devDependencies:
       '@types/node':
         specifier: 'catalog:'
@@ -283,23 +308,29 @@ importers:
 
   packages/solid:
     dependencies:
+      '@internationalized/date':
+        specifier: 'catalog:'
+        version: 3.12.4
       '@simple-base/contracts':
         specifier: workspace:^
         version: link:../contracts
       '@zag-js/combobox':
-        specifier: ^1.44.0
+        specifier: 'catalog:'
         version: 1.44.0
+      '@zag-js/date-picker':
+        specifier: 'catalog:'
+        version: 1.44.0(@internationalized/date@3.12.4)
       '@zag-js/number-input':
-        specifier: ^1.44.0
+        specifier: 'catalog:'
         version: 1.44.0
       '@zag-js/select':
-        specifier: ^1.44.0
+        specifier: 'catalog:'
         version: 1.44.0
       '@zag-js/solid':
-        specifier: ^1.44.0
+        specifier: 'catalog:'
         version: 1.44.0(solid-js@1.9.15)
       '@zag-js/toast':
-        specifier: ^1.44.0
+        specifier: 'catalog:'
         version: 1.44.0
     devDependencies:
       '@types/node':
@@ -648,6 +679,9 @@ packages:
   '@humanwhocodes/momoa@3.3.13':
     resolution: {integrity: sha512-AbKq3EW41+HY6pNMJgAOrz68iyiTTf0Nr1JRHHfuG5zwniJ9Dw8J3U7oa1I2ptpqYwmEf1sXKOGK6lbdZ9eqmg==}
     engines: {node: '>=18'}
+
+  '@internationalized/date@3.12.4':
+    resolution: {integrity: sha512-M1dEn4c1U1HsSlaVR8upZtSqvXrTkHDfv18H01uCSJyjVLDxnBR38v/fMxecmlwXKR4i9HeZcmgQAPE6A+aGJQ==}
 
   '@internationalized/number@3.6.7':
     resolution: {integrity: sha512-3ji1fcrT+FPAK86UqEhB/psHixYo6niWPJtt7+qRaYFynt/BaJG8GhAPimtWUpEiVSTq8ZM8L5psMxGquiB/Vg==}
@@ -1481,6 +1515,16 @@ packages:
 
   '@zag-js/core@1.44.0':
     resolution: {integrity: sha512-tqDBJeDpDuLfjodk6NetSDZLMy7+r799RcC5oDtVivowfSxfPBSsfh4UxYT/+zXv9RZ0mYG3TzO4yFROPmniIA==}
+
+  '@zag-js/date-picker@1.44.0':
+    resolution: {integrity: sha512-yrhINkFdRSpT+6iNHDlIT/s1Yonc6CNWkFObbQy203JtqOc93EMVtXL/fj/4OM5ayzZUlu+8BNNaCh/BKACdhw==}
+    peerDependencies:
+      '@internationalized/date': '>=3.0.0'
+
+  '@zag-js/date-utils@1.44.0':
+    resolution: {integrity: sha512-vxO6KQQftQhS7f+tFHbre1GQhqCf3Ta5p2w3qpaBgTIt9fHSQXj+odR+AENtYwpk5yuUQwFJO6d6VyiSp2lHKA==}
+    peerDependencies:
+      '@internationalized/date': '>=3.0.0'
 
   '@zag-js/dismissable@1.44.0':
     resolution: {integrity: sha512-S4xfFrcy38JQXmgiFlkyP/W+iC/crTwOqHT1d8AcIxaTxDya/dIUb1mTTZVyJRo5DA7C4Xp3oPqFxEJ2jSENFQ==}
@@ -2557,6 +2601,10 @@ snapshots:
 
   '@humanwhocodes/momoa@3.3.13': {}
 
+  '@internationalized/date@3.12.4':
+    dependencies:
+      '@swc/helpers': 0.5.23
+
   '@internationalized/number@3.6.7':
     dependencies:
       '@swc/helpers': 0.5.23
@@ -3108,6 +3156,23 @@ snapshots:
     dependencies:
       '@zag-js/dom-query': 1.44.0
       '@zag-js/utils': 1.44.0
+
+  '@zag-js/date-picker@1.44.0(@internationalized/date@3.12.4)':
+    dependencies:
+      '@internationalized/date': 3.12.4
+      '@zag-js/anatomy': 1.44.0
+      '@zag-js/core': 1.44.0
+      '@zag-js/date-utils': 1.44.0(@internationalized/date@3.12.4)
+      '@zag-js/dismissable': 1.44.0
+      '@zag-js/dom-query': 1.44.0
+      '@zag-js/live-region': 1.44.0
+      '@zag-js/popper': 1.44.0
+      '@zag-js/types': 1.44.0
+      '@zag-js/utils': 1.44.0
+
+  '@zag-js/date-utils@1.44.0(@internationalized/date@3.12.4)':
+    dependencies:
+      '@internationalized/date': 3.12.4
 
   '@zag-js/dismissable@1.44.0':
     dependencies:

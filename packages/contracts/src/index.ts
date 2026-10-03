@@ -17,3 +17,4 @@ export {
   type ToastStatus,
   type ToastOptions,
 } from "./status";
+export type { DatePickerOptions } from "./datePicker";

@@ -22,6 +22,7 @@ import { AlertDialogs } from "./preview/AlertDialogs";
 import { Inputs, TextAreas, Checkboxes, Radios, Switches } from "./preview/Inputs";
 import { Fields } from "./preview/Fields";
 import { NumberFields } from "./preview/NumberFields";
+import { DatePickers } from "./preview/DatePickers";
 import { Comboboxes } from "./preview/Comboboxes";
 import { Selects } from "./preview/Selects";
 import { Tables } from "./preview/Tables";
@@ -101,6 +102,16 @@ const pages: Page[] = [
     usage:
       'import { NumberField, NumberFieldInput, NumberFieldIncrement } from "@simple-base/solid";',
     component: NumberFields,
+  },
+  {
+    id: "date-picker",
+    label: "DatePicker",
+    group: "Components",
+    description:
+      "Choose a calendar date by typing it or from a popup calendar. Keyboard navigation, range limits, and locale formatting are built in, and the date submits with the form as an ISO string.",
+    usage:
+      'import { DatePicker, DatePickerInput, DatePickerCalendar, parseDate } from "@simple-base/solid";',
+    component: DatePickers,
   },
   {
     id: "combobox",

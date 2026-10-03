@@ -2,16 +2,6 @@ import { For, Show, createSignal } from "solid-js";
 import { Button, Checkbox } from "@simple-base/solid";
 import { Api, CheckIcon, CloseIcon, Example, WarningIcon } from "./Preview";
 
-// September 2026 starts on a Tuesday.
-const calendarWeeks = Array.from({ length: 5 }, (_, week) =>
-  Array.from({ length: 7 }, (_, weekday) => {
-    const date = week * 7 + weekday;
-    if (date === 0) return { day: 31, outside: true };
-    if (date > 30) return { day: date - 30, outside: true };
-    return { day: date, outside: false };
-  }),
-);
-
 export function Styles() {
   const [progress, setProgress] = createSignal(64);
   const [view, setView] = createSignal("List");
@@ -21,7 +11,6 @@ export function Styles() {
   const [menuAction, setMenuAction] = createSignal("Choose an example command.");
   const [hasRecord, setHasRecord] = createSignal(false);
   const [showAlert, setShowAlert] = createSignal(true);
-  const [day, setDay] = createSignal(30);
   const [tooltip, setTooltip] = createSignal(false);
   let menu: HTMLDetailsElement | undefined;
   const tabNames = ["Overview", "Activity", "Settings"];
@@ -240,114 +229,6 @@ export function Styles() {
             Confirm the totals before sending.
           </span>
         </fieldset>
-      </Example>
-      <Example
-        title="Date picker"
-        description="The input, trigger, and calendar grid. This specimen shows the calendar inline; the component positions it under the input. Today is outlined, the selected day is filled."
-        code={
-          '<div class="sb-date-picker-content" data-inline>\n  <div class="sb-date-picker-view-control">…</div>\n  <table class="sb-date-picker-table">\n    <td class="sb-date-picker-table-cell">\n      <div class="sb-date-picker-cell-trigger" data-view="day" data-selected>25</div>\n    </td>\n  </table>\n</div>'
-        }
-      >
-        <div class="preview-stack">
-          <div class="sb-date-picker">
-            <label class="sb-field-label" for="date-due" data-required>
-              Due date
-            </label>
-            <div class="sb-date-picker-control">
-              <input
-                class="sb-date-picker-input"
-                id="date-due"
-                placeholder="dd/mm/yyyy"
-                value={`${String(day()).padStart(2, "0")}/09/2026`}
-                readOnly
-              />
-              <button class="sb-date-picker-trigger" aria-label="Open calendar">
-                <svg
-                  aria-hidden="true"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <rect x="3" y="5" width="18" height="16" rx="2" />
-                  <path d="M3 10h18M8 3v4M16 3v4" />
-                </svg>
-              </button>
-            </div>
-          </div>
-          <div class="sb-date-picker-content" data-inline style={{ "max-width": "320px" }}>
-            <div class="sb-date-picker-view-control">
-              <button class="sb-date-picker-nav-trigger" aria-label="Previous month">
-                ‹
-              </button>
-              <button class="sb-date-picker-view-trigger">September 2026</button>
-              <button class="sb-date-picker-nav-trigger" aria-label="Next month">
-                ›
-              </button>
-            </div>
-            <table class="sb-date-picker-table" role="grid">
-              <thead>
-                <tr>
-                  <For each={["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"]}>
-                    {(weekday) => (
-                      <th class="sb-date-picker-table-header" scope="col">
-                        {weekday}
-                      </th>
-                    )}
-                  </For>
-                </tr>
-              </thead>
-              <tbody>
-                <For each={calendarWeeks}>
-                  {(week) => (
-                    <tr>
-                      <For each={week}>
-                        {(cell) => (
-                          <td class="sb-date-picker-table-cell">
-                            <div
-                              class="sb-date-picker-cell-trigger"
-                              role="button"
-                              tabIndex={cell.outside ? -1 : 0}
-                              data-view="day"
-                              data-outside-range={cell.outside ? "" : undefined}
-                              data-today={!cell.outside && cell.day === 25 ? "" : undefined}
-                              data-selected={!cell.outside && cell.day === day() ? "" : undefined}
-                              data-disabled={!cell.outside && cell.day < 3 ? "" : undefined}
-                              aria-disabled={!cell.outside && cell.day < 3 ? "true" : undefined}
-                              onClick={() => {
-                                if (!cell.outside && cell.day >= 3) setDay(cell.day);
-                              }}
-                              onKeyDown={(event) => {
-                                if (
-                                  (event.key === "Enter" || event.key === " ") &&
-                                  !cell.outside &&
-                                  cell.day >= 3
-                                ) {
-                                  event.preventDefault();
-                                  setDay(cell.day);
-                                }
-                              }}
-                            >
-                              {cell.day}
-                            </div>
-                          </td>
-                        )}
-                      </For>
-                    </tr>
-                  )}
-                </For>
-              </tbody>
-            </table>
-            <div class="sb-date-picker-presets">
-              <Button size="small" variant="secondary" onClick={() => setDay(25)}>
-                Today
-              </Button>
-              <Button size="small" variant="ghost" onClick={() => setDay(30)}>
-                End of month
-              </Button>
-            </div>
-          </div>
-        </div>
       </Example>
       <Example
         title="Tooltip"

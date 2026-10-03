@@ -91,6 +91,32 @@ export {
 } from "./components/NumberField";
 export type { NumberFieldOptions } from "@simple-base/contracts";
 export {
+  DatePicker,
+  DatePickerLabel,
+  DatePickerControl,
+  DatePickerInput,
+  DatePickerTrigger,
+  DatePickerPortal,
+  DatePickerPositioner,
+  DatePickerContent,
+  DatePickerCalendar,
+  DatePickerDescription,
+  DatePickerError,
+  type DatePickerProps,
+  type DatePickerLabelProps,
+  type DatePickerControlProps,
+  type DatePickerInputProps,
+  type DatePickerTriggerProps,
+  type DatePickerPortalProps,
+  type DatePickerPositionerProps,
+  type DatePickerContentProps,
+  type DatePickerCalendarProps,
+  type DatePickerDescriptionProps,
+  type DatePickerErrorProps,
+} from "./components/DatePicker";
+export type { DatePickerOptions } from "@simple-base/contracts";
+export { parse as parseDate, type DateValue } from "@zag-js/date-picker";
+export {
   Combobox,
   ComboboxLabel,
   ComboboxControl,

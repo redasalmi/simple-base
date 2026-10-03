@@ -1,6 +1,6 @@
 {
   "name": "@simple-base/contracts",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -59,6 +59,10 @@
       "types": "./dist/numberField.d.ts",
       "import": "./dist/numberField.js"
     },
+    "./datePicker": {
+      "types": "./dist/datePicker.d.ts",
+      "import": "./dist/datePicker.js"
+    },
     "./package.json": "./package.json"
   },
   "publishConfig": {
@@ -69,6 +73,9 @@
     "build": "tsdown",
     "dev": "tsdown --watch --no-clean",
     "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@internationalized/date": "catalog:"
   },
   "devDependencies": {
     "@types/node": "catalog:",

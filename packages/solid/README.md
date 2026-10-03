@@ -68,15 +68,16 @@ import "@simple-base/css/badge";
 
 **Composable components** use named exports so bundlers can remove unused parts. Each part is prefixed with its root name:
 
-| Root          | Named parts                                                                                                                                                                                                          |
-| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `AlertDialog` | `AlertDialogTrigger`, `AlertDialogContent`, `AlertDialogIcon`, `AlertDialogHeader`, `AlertDialogKicker`, `AlertDialogTitle`, `AlertDialogDescription`, `AlertDialogFooter`, `AlertDialogCancel`, `AlertDialogAction` |
-| `Dialog`      | `DialogTrigger`, `DialogContent`, `DialogHeader`, `DialogKicker`, `DialogTitle`, `DialogDescription`, `DialogFooter`, `DialogClose`, `DialogAction`                                                                  |
-| `Field`       | `FieldLabel`, `FieldInput`, `FieldTextArea`, `FieldDescription`, `FieldError`                                                                                                                                        |
-| `Combobox`    | `ComboboxLabel`, `ComboboxControl`, `ComboboxInput`, `ComboboxTrigger`, `ComboboxPortal`, `ComboboxPositioner`, `ComboboxContent`, `ComboboxList`, `ComboboxEmpty`, `ComboboxItem`                                   |
-| `Select`      | `SelectLabel`, `SelectControl`, `SelectTrigger`, `SelectValueText`, `SelectIndicator`, `SelectPortal`, `SelectPositioner`, `SelectContent`, `SelectList`, `SelectEmpty`, `SelectItem`                                |
-| `Table`       | `TableWrap`, `TableCaption`, `TableHeader`, `TableBody`, `TableFooter`, `TableRow`, `TableColumnHeader`, `TableRowHeader`, `TableCell`                                                                               |
-| `Toaster`     | `Toast`, `ToastIcon`, `ToastContent`, `ToastTitle`, `ToastDescription`, `ToastAction`, `ToastClose`, plus `createToaster`                                                                                            |
+| Root          | Named parts                                                                                                                                                                                                                         |
+| ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `AlertDialog` | `AlertDialogTrigger`, `AlertDialogContent`, `AlertDialogIcon`, `AlertDialogHeader`, `AlertDialogKicker`, `AlertDialogTitle`, `AlertDialogDescription`, `AlertDialogFooter`, `AlertDialogCancel`, `AlertDialogAction`                |
+| `Dialog`      | `DialogTrigger`, `DialogContent`, `DialogHeader`, `DialogKicker`, `DialogTitle`, `DialogDescription`, `DialogFooter`, `DialogClose`, `DialogAction`                                                                                 |
+| `Field`       | `FieldLabel`, `FieldInput`, `FieldTextArea`, `FieldDescription`, `FieldError`                                                                                                                                                       |
+| `Combobox`    | `ComboboxLabel`, `ComboboxControl`, `ComboboxInput`, `ComboboxTrigger`, `ComboboxPortal`, `ComboboxPositioner`, `ComboboxContent`, `ComboboxList`, `ComboboxEmpty`, `ComboboxItem`                                                  |
+| `DatePicker`  | `DatePickerLabel`, `DatePickerControl`, `DatePickerInput`, `DatePickerTrigger`, `DatePickerPortal`, `DatePickerPositioner`, `DatePickerContent`, `DatePickerCalendar`, `DatePickerDescription`, `DatePickerError`, plus `parseDate` |
+| `Select`      | `SelectLabel`, `SelectControl`, `SelectTrigger`, `SelectValueText`, `SelectIndicator`, `SelectPortal`, `SelectPositioner`, `SelectContent`, `SelectList`, `SelectEmpty`, `SelectItem`                                               |
+| `Table`       | `TableWrap`, `TableCaption`, `TableHeader`, `TableBody`, `TableFooter`, `TableRow`, `TableColumnHeader`, `TableRowHeader`, `TableCell`                                                                                              |
+| `Toaster`     | `Toast`, `ToastIcon`, `ToastContent`, `ToastTitle`, `ToastDescription`, `ToastAction`, `ToastClose`, plus `createToaster`                                                                                                           |
 
 The CSS package ships more components than this adapter currently covers. Breadcrumb, disclosure, empty state, fieldset, keyboard shortcut, menu, pagination, progress, range, segmented control, status lines and alerts, tabs, and typography are available as styles with selector-level APIs.
 
@@ -234,6 +235,67 @@ import {
   </ComboboxPortal>
 </Combobox>;
 ```
+
+## DatePicker
+
+A text input and a popup calendar for one date. Values are `DateValue` objects from [`@internationalized/date`](https://react-spectrum.adobe.com/internationalized/date/); create them with `parseDate`, which this package re-exports. `id`, `required`, `disabled`, `readOnly`, and `invalid` are set on the root only, as with `Field`.
+
+```tsx
+import { createSignal } from "solid-js";
+import {
+  DatePicker,
+  DatePickerCalendar,
+  DatePickerContent,
+  DatePickerControl,
+  DatePickerDescription,
+  DatePickerError,
+  DatePickerInput,
+  DatePickerLabel,
+  DatePickerPortal,
+  DatePickerPositioner,
+  DatePickerTrigger,
+  parseDate,
+  type DateValue,
+} from "@simple-base/solid";
+
+export function DueDate() {
+  const [due, setDue] = createSignal<DateValue[]>([parseDate("2026-10-12")]);
+
+  return (
+    <DatePicker
+      value={due()}
+      onValueChange={(value) => setDue(value)}
+      min={parseDate("2026-10-05")}
+      max={parseDate("2026-11-20")}
+    >
+      <DatePickerLabel>Due date</DatePickerLabel>
+      <DatePickerControl>
+        <DatePickerInput />
+        <DatePickerTrigger />
+      </DatePickerControl>
+      <DatePickerDescription>Between October 5 and November 20.</DatePickerDescription>
+      <DatePickerError>Pick a date in range.</DatePickerError>
+      <DatePickerPortal>
+        <DatePickerPositioner>
+          <DatePickerContent>
+            <DatePickerCalendar />
+          </DatePickerContent>
+        </DatePickerPositioner>
+      </DatePickerPortal>
+    </DatePicker>
+  );
+}
+```
+
+Additional root props:
+
+- `value` and `defaultValue` take a `DateValue[]`; an empty array means no date. `onValueChange` receives the dates and the text shown in the input.
+- `min` and `max` disable the days outside the range. A typed date outside it is clamped to the nearest bound when the input loses focus; the picker never sets `invalid` on its own.
+- `locale` (default `en-US`) sets the input format, the first day of the week, and the calendar's labels. `timeZone` decides which day is today and defaults to the user's time zone.
+- `name` adds a hidden input that submits the date as `YYYY-MM-DD`, since the visible input holds locale-formatted text. `form` associates both inputs with a form elsewhere on the page.
+- `placement` picks the popup side (default `bottom-start`), `fixedWeeks` always shows six weeks so the popup keeps its height, and `onOpenChange` reports visibility.
+
+`DatePickerCalendar` renders the navigation and the day, month, and year views; select the month heading to switch views. `DatePickerTrigger` renders a calendar icon unless you pass children. `DatePickerPortal` accepts `mount`, like `SelectPortal`.
 
 ## Table
 
@@ -408,6 +470,7 @@ Every form control takes `name` and works uncontrolled inside a `<form>`. Set th
 | `Input`, `TextArea`, `FieldInput`, `FieldTextArea`, `NumberField` | `defaultValue`               |
 | `Checkbox`, `Radio`, `Switch`                                     | `defaultChecked`             |
 | `Select`, `Combobox`                                              | `defaultValue` (`""` = none) |
+| `DatePicker`                                                      | `defaultValue` (`[]` = none) |
 
 ```tsx
 <form>
@@ -423,7 +486,7 @@ Every form control takes `name` and works uncontrolled inside a `<form>`. Set th
 
 - On `Input`, `TextArea`, `Checkbox`, `Radio`, and `Switch`, Solid sets `value` and `checked` as DOM properties, so a reset clears a starting value given that way. Use `defaultValue` or `defaultChecked`.
 - `Combobox` ignores `form.reset()` and keeps its current selection. To reset it, use a controlled `value` and set it back in the form's `onReset` handler.
-- `Select` and `NumberField` reset their value even when a reset listener calls `preventDefault()` after theirs has run.
+- `Select`, `NumberField`, and `DatePicker` reset their value even when a reset listener calls `preventDefault()` after theirs has run.
 
 ## Props conventions
 

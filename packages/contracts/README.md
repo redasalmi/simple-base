@@ -2,7 +2,7 @@
 
 Framework-neutral component options and default values for Simple Base adapters.
 
-CSS owns styling. Adapters own rendering, native props, and behavior. This package holds the shared custom options that more than one adapter needs — the types you pass to a component and the defaults applied when you omit them. It has no runtime dependencies.
+CSS owns styling. Adapters own rendering, native props, and behavior. This package holds the shared custom options that more than one adapter needs — the types you pass to a component and the defaults applied when you omit them. Its one dependency is [`@internationalized/date`](https://www.npmjs.com/package/@internationalized/date), for the `DateValue` type used by the date picker options.
 
 **Most applications don't need this package directly.** Install [@simple-base/solid](https://www.npmjs.com/package/@simple-base/solid) and it re-exports the option types it uses. Install this package when you are writing an adapter for another framework, or when you need the shared option types without a renderer.
 
@@ -46,6 +46,7 @@ Subpaths: `/badge` · `/button` · `/card` · `/combobox` · `/dialog` · `/plac
 | Badge       | `BadgeVariant`, `BadgeSize`, `BadgeOptions`    | `badgeDefaults`: `default`, `medium`  |
 | Card        | `CardVariant`, `CardOptions`                   | —                                     |
 | Combobox    | `ComboboxOption`, `ComboboxOptions`            | —                                     |
+| Date picker | `DatePickerOptions`                            | —                                     |
 | Dialog      | `DialogOptions`                                | —                                     |
 | Select      | `SelectOption`, `SelectOptions`                | —                                     |
 | Status line | `StatusValue`, `StatusOptions`                 | —                                     |

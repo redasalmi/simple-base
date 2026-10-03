@@ -76,6 +76,10 @@
     cursor: not-allowed;
   }
 
+  .sb-date-picker-input:read-only {
+    color: var(--sb-semantic-color-foreground-secondary);
+  }
+
   .sb-date-picker-trigger {
     display: inline-flex;
     flex: 0 0 auto;
@@ -98,7 +102,7 @@
     border-end-end-radius: var(--sb-semantic-radius-md);
   }
 
-  .sb-date-picker-trigger:hover:where(:not(:disabled)),
+  .sb-date-picker-trigger:hover:where(:not(:disabled, .sb-date-picker[data-readonly] *)),
   .sb-date-picker-trigger[data-state="open"] {
     color: var(--sb-semantic-color-foreground-primary);
     background: var(--sb-semantic-color-background-subtle);
@@ -113,6 +117,10 @@
     cursor: not-allowed;
   }
 
+  .sb-date-picker[data-readonly] .sb-date-picker-trigger {
+    cursor: default;
+  }
+
   .sb-date-picker-trigger > svg {
     flex: 0 0 auto;
     width: var(--sb-semantic-size-icon-sm);
@@ -122,6 +130,11 @@
   .sb-date-picker-content {
     box-sizing: border-box;
     z-index: var(--sb-semantic-layer-dropdown);
+    /* Fits the seven day columns and their 1px cell padding, so every view keeps the same width. */
+    width: calc(
+      7 * (var(--sb-semantic-size-control-md) + 2px) + 2 * var(--sb-semantic-space-3) + 2 *
+        var(--sb-semantic-border-width-hairline)
+    );
     max-width: var(--available-width);
     padding: var(--sb-semantic-space-3);
     border: var(--sb-semantic-border-width-hairline) solid var(--sb-semantic-color-border-default);
@@ -181,6 +194,10 @@
     background: var(--sb-semantic-color-background-subtle);
   }
 
+  .sb-date-picker-view-trigger:disabled {
+    cursor: default;
+  }
+
   .sb-date-picker-view-trigger:focus-visible,
   .sb-date-picker-nav-trigger:focus-visible {
     outline: var(--sb-semantic-border-width-strong) solid var(--sb-semantic-color-focus-ring);
@@ -214,7 +231,7 @@
   }
 
   .sb-date-picker-table-cell {
-    padding: 1px 0;
+    padding: 1px;
     text-align: center;
   }
 
