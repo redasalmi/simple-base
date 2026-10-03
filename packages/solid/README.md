@@ -73,13 +73,21 @@ import "@simple-base/css/badge";
 | `AlertDialog` | `AlertDialogTrigger`, `AlertDialogContent`, `AlertDialogIcon`, `AlertDialogHeader`, `AlertDialogKicker`, `AlertDialogTitle`, `AlertDialogDescription`, `AlertDialogFooter`, `AlertDialogCancel`, `AlertDialogAction`                |
 | `Dialog`      | `DialogTrigger`, `DialogContent`, `DialogHeader`, `DialogKicker`, `DialogTitle`, `DialogDescription`, `DialogFooter`, `DialogClose`, `DialogAction`                                                                                 |
 | `Field`       | `FieldLabel`, `FieldInput`, `FieldTextArea`, `FieldDescription`, `FieldError`                                                                                                                                                       |
+| `NumberField` | `NumberFieldLabel`, `NumberFieldControl`, `NumberFieldInput`, `NumberFieldDecrement`, `NumberFieldIncrement`, `NumberFieldAffix`, `NumberFieldDescription`, `NumberFieldError`                                                      |
 | `Combobox`    | `ComboboxLabel`, `ComboboxControl`, `ComboboxInput`, `ComboboxTrigger`, `ComboboxPortal`, `ComboboxPositioner`, `ComboboxContent`, `ComboboxList`, `ComboboxEmpty`, `ComboboxItem`                                                  |
 | `DatePicker`  | `DatePickerLabel`, `DatePickerControl`, `DatePickerInput`, `DatePickerTrigger`, `DatePickerPortal`, `DatePickerPositioner`, `DatePickerContent`, `DatePickerCalendar`, `DatePickerDescription`, `DatePickerError`, plus `parseDate` |
 | `Select`      | `SelectLabel`, `SelectControl`, `SelectTrigger`, `SelectValueText`, `SelectIndicator`, `SelectPortal`, `SelectPositioner`, `SelectContent`, `SelectList`, `SelectEmpty`, `SelectItem`                                               |
 | `Table`       | `TableWrap`, `TableCaption`, `TableHeader`, `TableBody`, `TableFooter`, `TableRow`, `TableColumnHeader`, `TableRowHeader`, `TableCell`                                                                                              |
 | `Toaster`     | `Toast`, `ToastIcon`, `ToastContent`, `ToastTitle`, `ToastDescription`, `ToastAction`, `ToastClose`, plus `createToaster`                                                                                                           |
 
-The CSS package ships more components than this adapter currently covers. Breadcrumb, disclosure, empty state, fieldset, keyboard shortcut, menu, pagination, progress, range, segmented control, status lines and alerts, tabs, and typography are available as styles with selector-level APIs.
+The CSS package ships more components than this adapter currently covers. Until a Solid component exists, use them through their selector-level APIs:
+
+- **Planned for 1.0:** menu, tooltip, tabs, pagination, status lines and alerts, fieldset with radio and checkbox groups, and empty state.
+- **Planned after 1.0:** breadcrumb, disclosure, keyboard shortcut, progress, range, and segmented control.
+
+Typography stays CSS-only: the `.sb-display`, `.sb-heading-*`, and `.sb-text-*` classes are the API.
+
+The library styles native elements and states and leaves app-specific affordances, such as loading states and spinners, to your application.
 
 ## Field
 
@@ -110,7 +118,58 @@ export function EmailField() {
 
 `FieldInput` and `FieldTextArea` take the same props as `Input` and `TextArea`, except `id`, `required`, `disabled`, `aria-invalid`, and `aria-describedby`, which come from the root. `aria-describedby` lists the description and the error while they are rendered. `FieldError` renders only while `invalid` is set. Omit `id` to generate one.
 
-Use one control per `Field`: every control in a field gets the same `id`. `Select`, `Combobox`, `Checkbox`, `Radio`, and `Switch` carry their own labeling and are not used inside a `Field`.
+Use one control per `Field`: every control in a field gets the same `id`. `Select`, `Combobox`, `NumberField`, `DatePicker`, `Checkbox`, `Radio`, and `Switch` carry their own labeling and are not used inside a `Field`.
+
+## NumberField
+
+A numeric input with optional step buttons and affixes. `id`, `required`, `disabled`, `readOnly`, and `invalid` are set on the root only, as with `Field`.
+
+```tsx
+import { createSignal } from "solid-js";
+import {
+  NumberField,
+  NumberFieldControl,
+  NumberFieldDecrement,
+  NumberFieldDescription,
+  NumberFieldError,
+  NumberFieldIncrement,
+  NumberFieldInput,
+  NumberFieldLabel,
+} from "@simple-base/solid";
+
+export function UnitPrice() {
+  const [price, setPrice] = createSignal("120");
+
+  return (
+    <NumberField
+      name="unitPrice"
+      value={price()}
+      onValueChange={(value) => setPrice(value)}
+      min={0}
+      step={0.01}
+      formatOptions={{ style: "currency", currency: "EUR" }}
+    >
+      <NumberFieldLabel>Unit price</NumberFieldLabel>
+      <NumberFieldControl>
+        <NumberFieldInput />
+        <NumberFieldDecrement />
+        <NumberFieldIncrement />
+      </NumberFieldControl>
+      <NumberFieldDescription>Excluding VAT.</NumberFieldDescription>
+      <NumberFieldError>Enter a price of 0 or more.</NumberFieldError>
+    </NumberField>
+  );
+}
+```
+
+Additional root props:
+
+- `value` and `defaultValue` are strings, so partial input such as `1.` survives while typing. `onValueChange` receives the string and its parsed number (`NaN` when empty).
+- `min`, `max`, and `step` bound and step the value. When `invalid` is omitted, a value outside `min` and `max` is invalid and shows `NumberFieldError`.
+- `formatOptions` takes `Intl.NumberFormatOptions`, such as a currency or percent style, to format the displayed value.
+- `name` submits the value with the form; `form` associates the input with a form elsewhere on the page.
+
+`NumberFieldDecrement` and `NumberFieldIncrement` render `−` and `+` unless you pass children, and are labeled "decrease value" and "increment value" unless you pass `aria-label`. `NumberFieldAffix` renders decorative text, such as a unit, inside the control and is hidden from assistive technology, so state the unit in the label or description too. `NumberFieldError` renders only while the field is invalid.
 
 ## Select
 
@@ -335,7 +394,7 @@ import {
 </TableWrap>;
 ```
 
-`TableWrap` provides the horizontal scroll container the table styles expect.
+`TableWrap` provides the horizontal scroll container the table styles expect. `TableFooter` renders a `tfoot`, for example for totals.
 
 ## Dialog
 

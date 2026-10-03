@@ -237,6 +237,8 @@ The default Simple Base themes follow the Studio direction: warm paper neutrals,
 | Tooltip           | `.sb-tooltip-content`                                                        | `-arrow`, `-arrow-tip`                                                                                                                                                |
 | Typography        | `.sb-display`, `.sb-heading-1` … `.sb-heading-6`, `.sb-text-*`, `.sb-code-*` | —                                                                                                                                                                     |
 
+Two native states are planned for 1.0 and not styled yet: `.sb-checkbox:indeterminate`, which will draw a dash for a partly selected group, and sortable table headers driven by `aria-sort` on `th`. Until then, an indeterminate checkbox looks unchecked.
+
 ### Form text
 
 Every form component uses the same label, description, and error classes, so their text looks identical wherever it appears. Select, Combobox, Number input, and Date picker have no label, description, or error classes of their own:
@@ -274,7 +276,7 @@ These rules style the markup a component renders. Use the listed elements, or ad
 
 ### Positioned popups
 
-Menu, tooltip, and date picker content are positioned the same way as select and combobox: the [Zag.js](https://zagjs.com) popper writes `--x`, `--y`, `--z-index`, `--available-width`, `--available-height`, and `--transform-origin` on the positioner, and the content reads them. The tooltip arrow reads `--arrow-size` and `--arrow-background` from `.sb-tooltip-content`. `@simple-base/solid` provides that behavior; without it, position the content yourself.
+Select, combobox, date picker, menu, and tooltip content are positioned the same way: the [Zag.js](https://zagjs.com) popper writes `--x`, `--y`, `--z-index`, `--available-width`, `--available-height`, and `--transform-origin` on the positioner, and the content reads them. The tooltip arrow reads `--arrow-size` and `--arrow-background` from `.sb-tooltip-content`. `@simple-base/solid` provides that behavior for select, combobox, and date picker. Its menu and tooltip components are planned for 1.0; until then, and without the Solid package, position the content yourself.
 
 The native menu (`.sb-menu` on `<details>`) keeps its absolute `.sb-menu-panel` for CSS-only use. It is a disclosure of buttons, not an ARIA menu.
 

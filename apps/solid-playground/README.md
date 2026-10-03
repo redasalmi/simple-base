@@ -10,16 +10,20 @@ native section selector on small screens. Each section has a shareable hash URL
 (such as `/#buttons` or `/#alert-dialog`), usage notes, code disclosures, and a
 short API reference.
 
-- **Solid components:** Button (six variants, three sizes, disabled states), Badge
-  (nine variants, both sizes), Input, TextArea, Checkbox, Radio, Switch, and all
-  Dialog, AlertDialog, and Toast named parts. Form examples cover editable, selected,
-  disabled, read-only, and validation states where supported.
+- **Solid components:** every export of `@simple-base/solid` — Button (six
+  variants, three sizes, disabled states), Badge (nine variants, both sizes),
+  Card, Input, Field, NumberField, DatePicker, Combobox, Select, Table, TextArea,
+  Checkbox, Radio, Switch, and all Dialog, AlertDialog, and Toast named parts.
+  Form examples cover editable, selected, disabled, read-only, and validation
+  states where supported.
 - **Foundations:** the heading and body scales, display typography, text roles,
   code, and keyboard shortcuts.
-- **CSS-only patterns:** cards, status lines, alerts, progress, range,
-  selects, field grouping, segmented controls, tabs, tables, pagination,
-  breadcrumbs, disclosures, command popovers, and empty states.
-  These examples do not imply additional Solid component exports.
+- **CSS patterns:** status lines and alerts, progress and range, the native
+  select and choice lists, fieldset errors, tooltip, segmented control, tabs,
+  table selection and pagination, breadcrumb and disclosure, command popover,
+  and empty state. These use the selectors directly. Tooltip, tabs, pagination,
+  alerts, fieldsets, and empty state are planned as Solid components for 1.0
+  (see `todo.md` at the repository root); until then they are not Solid exports.
 
 Examples use local state only. Navigation resets component demonstrations; no
 form data is submitted or persisted. Dialog and AlertDialog coordinate their

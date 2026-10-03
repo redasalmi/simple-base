@@ -36,23 +36,28 @@ The same exports are available per component, which keeps imports narrow:
 import { buttonDefaults, type ButtonVariant } from "@simple-base/contracts/button";
 ```
 
-Subpaths: `/badge` · `/button` · `/card` · `/combobox` · `/dialog` · `/placement` · `/select` · `/status` · `/table`
+Subpaths: `/badge` · `/button` · `/card` · `/combobox` · `/datePicker` · `/dialog` · `/numberField` · `/placement` · `/select` · `/status` · `/table`
+
+`FieldOptions` is exported from the package root only.
 
 ## Options reference
 
-| Component   | Types                                          | Defaults                              |
-| ----------- | ---------------------------------------------- | ------------------------------------- |
-| Button      | `ButtonVariant`, `ButtonSize`, `ButtonOptions` | `buttonDefaults`: `primary`, `medium` |
-| Badge       | `BadgeVariant`, `BadgeSize`, `BadgeOptions`    | `badgeDefaults`: `default`, `medium`  |
-| Card        | `CardVariant`, `CardOptions`                   | —                                     |
-| Combobox    | `ComboboxOption`, `ComboboxOptions`            | —                                     |
-| Date picker | `DatePickerOptions`                            | —                                     |
-| Dialog      | `DialogOptions`                                | —                                     |
-| Select      | `SelectOption`, `SelectOptions`                | —                                     |
-| Status line | `StatusValue`, `StatusOptions`                 | —                                     |
-| Alert       | `AlertStatus`, `AlertOptions`                  | —                                     |
-| Toast       | `ToastStatus`, `ToastOptions`                  | `toastDefaults`: `status: "success"`  |
-| Table cell  | `TableCellVariant`, `TableCellOptions`         | —                                     |
+| Component    | Types                                          | Defaults                              |
+| ------------ | ---------------------------------------------- | ------------------------------------- |
+| Button       | `ButtonVariant`, `ButtonSize`, `ButtonOptions` | `buttonDefaults`: `primary`, `medium` |
+| Badge        | `BadgeVariant`, `BadgeSize`, `BadgeOptions`    | `badgeDefaults`: `default`, `medium`  |
+| Card         | `CardVariant`, `CardOptions`                   | —                                     |
+| Combobox     | `ComboboxOption`, `ComboboxOptions`            | —                                     |
+| Date picker  | `DatePickerOptions`                            | —                                     |
+| Dialog       | `DialogOptions`                                | —                                     |
+| Field        | `FieldOptions`                                 | —                                     |
+| Number field | `NumberFieldOptions`                           | —                                     |
+| Placement    | `Placement`                                    | —                                     |
+| Select       | `SelectOption`, `SelectOptions`                | —                                     |
+| Status line  | `StatusValue`, `StatusOptions`                 | —                                     |
+| Alert        | `AlertStatus`, `AlertOptions`                  | —                                     |
+| Toast        | `ToastStatus`, `ToastOptions`                  | `toastDefaults`: `status: "success"`  |
+| Table cell   | `TableCellVariant`, `TableCellOptions`         | —                                     |
 
 Types are erased at runtime. Only the `*Defaults` constants are runtime exports — there are no allowed-value arrays without a runtime use case.
 
@@ -62,6 +67,10 @@ Types are erased at runtime. Only the `*Defaults` constants are runtime exports 
 - **Badge variants:** `default`, `success`, `danger`, `warning`, `info`, `accent`, `command`, `outline`, `muted`. **Sizes:** `small`, `medium`.
 - **Card variants:** `flat`, `rule`. Omit `variant` for the base card; there is no explicit `default` variant. Card padding is built into `.sb-card`; see the 0.2.0 migration notes in [@simple-base/css](https://www.npmjs.com/package/@simple-base/css).
 - **Table cell variants:** `code`, `number`.
+- **Field, number field, and date picker:** `id`, `required`, `disabled`, and `invalid` (plus `readOnly` on the number field and date picker) belong to the root, which applies them to its one control, label, and messages. Omit `id` to generate one.
+- **Number field values** are strings, so partial input such as `1.` survives; `onValueChange` also receives the parsed number. `formatOptions` takes `Intl.NumberFormatOptions`.
+- **Date picker values** are `DateValue[]`; an empty array means no date. `name` submits the date as `YYYY-MM-DD`.
+- **Placement:** `top` or `bottom`, with `-start` and `-end` variants. Shared by every popup option.
 - **Dialogs:** `open` is the controlled state, `defaultOpen` provides the initial uncontrolled state, and `onOpenChange` reports requested visibility changes.
 - **Statuses are deliberately not interchangeable.** Status lines and alerts use `success`, `warning`, `danger`, `info`. Toasts use `success` and `warning`. All three are exported from `/status`.
 
