@@ -19,7 +19,7 @@ These already have styles in `@simple-base/css` unless noted.
 - [ ] **Alert and StatusLine** — thin Solid wrappers over `.sb-alert` and `.sb-status-line`.
 - [ ] **Fieldset, RadioGroup, CheckboxGroup** — Solid wrappers over the native `fieldset` with `.sb-fieldset`, `.sb-choice-list`, and `.sb-choice`.
 - [ ] **EmptyState** — thin Solid wrapper over `.sb-empty-state`.
-- [ ] **Checkbox indeterminate** — new CSS: `.sb-checkbox:indeterminate` draws a dash. `appearance: none` currently hides the native state. `indeterminate` is a DOM property, not an attribute; Solid users set it with `prop:indeterminate`.
+- [x] **Checkbox indeterminate** — new CSS: `.sb-checkbox:indeterminate` draws a dash. `appearance: none` currently hides the native state. `indeterminate` is a DOM property, not an attribute; the Solid `Checkbox` takes an `indeterminate` prop and sets it under `prop:`.
 - [ ] **Sortable table headers** — new CSS: a header button and a direction indicator driven by `aria-sort` on `th`. Sorting stays in the app.
 
 ## v1 tasks

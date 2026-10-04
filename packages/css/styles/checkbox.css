@@ -27,17 +27,23 @@
     transition: scale var(--sb-semantic-motion-duration-fast) var(--sb-semantic-motion-easing-out);
   }
 
-  .sb-checkbox:hover:where(:not(:disabled, :checked)) {
+  .sb-checkbox:hover:where(:not(:disabled, :checked, :indeterminate)) {
     border-color: var(--sb-semantic-color-foreground-muted);
   }
 
-  .sb-checkbox:checked {
+  .sb-checkbox:checked,
+  .sb-checkbox:indeterminate {
     background: var(--sb-semantic-color-accent-surface);
     border-color: var(--sb-semantic-color-accent-surface);
   }
 
-  .sb-checkbox:checked::after {
+  .sb-checkbox:checked::after,
+  .sb-checkbox:indeterminate::after {
     scale: 1;
+  }
+
+  .sb-checkbox:indeterminate::after {
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3.5' stroke-linecap='round'%3E%3Cpath d='M6 12h12'/%3E%3C/svg%3E");
   }
 
   .sb-checkbox[aria-invalid="true"] {
@@ -66,13 +72,15 @@
       background: CanvasText;
     }
 
-    .sb-checkbox:checked {
+    .sb-checkbox:checked,
+    .sb-checkbox:indeterminate {
       forced-color-adjust: none;
       background: Highlight;
       border-color: Highlight;
     }
 
-    .sb-checkbox:checked::after {
+    .sb-checkbox:checked::after,
+    .sb-checkbox:indeterminate::after {
       background: HighlightText;
     }
   }

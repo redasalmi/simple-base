@@ -237,7 +237,9 @@ The default Simple Base themes follow the Studio direction: warm paper neutrals,
 | Tooltip           | `.sb-tooltip-content`                                                        | `-arrow`, `-arrow-tip`                                                                                                                                                |
 | Typography        | `.sb-display`, `.sb-heading-1` … `.sb-heading-6`, `.sb-text-*`, `.sb-code-*` | —                                                                                                                                                                     |
 
-Two native states are planned for 1.0 and not styled yet: `.sb-checkbox:indeterminate`, which will draw a dash for a partly selected group, and sortable table headers driven by `aria-sort` on `th`. Until then, an indeterminate checkbox looks unchecked.
+`.sb-checkbox:indeterminate` draws a dash for a partly selected group. `indeterminate` is a DOM property with no HTML attribute, so set it from script (`input.indeterminate = true`); the browser clears it when the user toggles the box.
+
+Sortable table headers driven by `aria-sort` on `th` are planned for 1.0 and not styled yet.
 
 ### Form text
 

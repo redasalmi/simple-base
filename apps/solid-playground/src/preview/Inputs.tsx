@@ -207,9 +207,13 @@ export function TextAreas() {
   );
 }
 
+const exportTypes = ["Invoices", "Receipts", "Credit notes"];
+
 export function Checkboxes() {
   const [email, setEmail] = createSignal(true);
   const [activity, setActivity] = createSignal(false);
+  const [exported, setExported] = createSignal(["Invoices"]);
+  const allExported = () => exported().length === exportTypes.length;
   return (
     <>
       <Example
@@ -238,6 +242,42 @@ export function Checkboxes() {
           <p class="preview-status" role="status">
             {Number(email()) + Number(activity())} of 2 options selected.
           </p>
+        </fieldset>
+      </Example>
+      <Example
+        title="Select all"
+        description="A parent checkbox shows the mixed state while only some of its options are checked. Toggling it checks or clears them all."
+        code={
+          "<label>\n  <Checkbox checked={all()} indeterminate={some()}\n    onChange={(event) => setSelected(event.currentTarget.checked ? types : [])} />\n  All documents\n</label>"
+        }
+      >
+        <fieldset class="sb-fieldset preview-stack">
+          <legend class="sb-heading-5">Export</legend>
+          <label class="preview-choice">
+            <Checkbox
+              checked={allExported()}
+              indeterminate={exported().length > 0 && !allExported()}
+              onChange={(event) => setExported(event.currentTarget.checked ? exportTypes : [])}
+            />
+            <span>All documents</span>
+          </label>
+          <For each={exportTypes}>
+            {(type) => (
+              <label class="preview-choice" style={{ "padding-inline-start": "32px" }}>
+                <Checkbox
+                  checked={exported().includes(type)}
+                  onChange={(event) =>
+                    setExported((types) =>
+                      event.currentTarget.checked
+                        ? exportTypes.filter((t) => t === type || types.includes(t))
+                        : types.filter((t) => t !== type),
+                    )
+                  }
+                />
+                <span>{type}</span>
+              </label>
+            )}
+          </For>
         </fieldset>
       </Example>
       <Example
@@ -290,6 +330,11 @@ export function Checkboxes() {
             "Read event.currentTarget.checked. Use a label or an accessible name.",
           ],
           [
+            "indeterminate",
+            "boolean",
+            'Shows a dash for a partly selected group; assistive tech reads it as "mixed". The browser clears it when the user toggles the box, so derive it from the group state.',
+          ],
+          [
             "disabled",
             "boolean",
             "Prevents activation and removes the control from the tab order.",
@@ -297,7 +342,7 @@ export function Checkboxes() {
           [
             "…props",
             'InputHTMLAttributes (except "type")',
-            'Renders type="checkbox". No custom variants or sizes; mixed-state artwork is not provided by the current stylesheet.',
+            'Renders type="checkbox". No custom variants or sizes.',
           ],
         ]}
       />

@@ -62,7 +62,7 @@ import "@simple-base/css/badge";
 | `Card`     | `div`                  | `variant`                                                                            |
 | `Input`    | `input`                | Native input props; `type` is `text`, `email`, `password`, `search`, `tel`, or `url` |
 | `TextArea` | `textarea`             | Native props                                                                         |
-| `Checkbox` | `input[type=checkbox]` | Native props                                                                         |
+| `Checkbox` | `input[type=checkbox]` | Native props; `indeterminate` shows the mixed state                                  |
 | `Radio`    | `input[type=radio]`    | Native props                                                                         |
 | `Switch`   | `input[role=switch]`   | Native props; requires `aria-label` or `aria-labelledby`                             |
 
