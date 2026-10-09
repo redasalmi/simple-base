@@ -190,6 +190,18 @@ export {
   type TableCellVariant,
 } from "./components/Table";
 export {
+  EmptyState,
+  EmptyStateMark,
+  EmptyStateTitle,
+  EmptyStateDescription,
+  EmptyStateActions,
+  type EmptyStateRootProps,
+  type EmptyStateMarkProps,
+  type EmptyStateTitleProps,
+  type EmptyStateDescriptionProps,
+  type EmptyStateActionsProps,
+} from "./components/EmptyState";
+export {
   createToaster,
   Toaster,
   Toast,

@@ -77,12 +77,13 @@ import "@simple-base/css/badge";
 | `Combobox`    | `ComboboxLabel`, `ComboboxControl`, `ComboboxInput`, `ComboboxTrigger`, `ComboboxPortal`, `ComboboxPositioner`, `ComboboxContent`, `ComboboxList`, `ComboboxEmpty`, `ComboboxItem`                                                  |
 | `DatePicker`  | `DatePickerLabel`, `DatePickerControl`, `DatePickerInput`, `DatePickerTrigger`, `DatePickerPortal`, `DatePickerPositioner`, `DatePickerContent`, `DatePickerCalendar`, `DatePickerDescription`, `DatePickerError`, plus `parseDate` |
 | `Select`      | `SelectLabel`, `SelectControl`, `SelectTrigger`, `SelectValueText`, `SelectIndicator`, `SelectPortal`, `SelectPositioner`, `SelectContent`, `SelectList`, `SelectEmpty`, `SelectItem`                                               |
+| `EmptyState`  | `EmptyStateMark`, `EmptyStateTitle`, `EmptyStateDescription`, `EmptyStateActions`                                                                                                                                                   |
 | `Table`       | `TableWrap`, `TableCaption`, `TableHeader`, `TableBody`, `TableFooter`, `TableRow`, `TableColumnHeader`, `TableRowHeader`, `TableCell`                                                                                              |
 | `Toaster`     | `Toast`, `ToastIcon`, `ToastContent`, `ToastTitle`, `ToastDescription`, `ToastAction`, `ToastClose`, plus `createToaster`                                                                                                           |
 
 The CSS package ships more components than this adapter currently covers. Until a Solid component exists, use them through their selector-level APIs:
 
-- **Planned for 1.0:** menu, tooltip, tabs, pagination, status lines and alerts, fieldset with radio and checkbox groups, and empty state.
+- **Planned for 1.0:** menu, tooltip, tabs, pagination, status lines and alerts, and fieldset with radio and checkbox groups.
 - **Planned after 1.0:** breadcrumb, disclosure, keyboard shortcut, progress, range, and segmented control.
 
 Typography stays CSS-only: the `.sb-display`, `.sb-heading-*`, and `.sb-text-*` classes are the API.
@@ -395,6 +396,32 @@ import {
 ```
 
 `TableWrap` provides the horizontal scroll container the table styles expect. `TableFooter` renders a `tfoot`, for example for totals.
+
+## EmptyState
+
+Stands in for a list or table with nothing to show: what is missing, why, and the next action.
+
+```tsx
+import {
+  Button,
+  EmptyState,
+  EmptyStateActions,
+  EmptyStateDescription,
+  EmptyStateMark,
+  EmptyStateTitle,
+} from "@simple-base/solid";
+
+<EmptyState>
+  <EmptyStateMark>∅</EmptyStateMark>
+  <EmptyStateTitle level={3}>No invoices yet</EmptyStateTitle>
+  <EmptyStateDescription>Create an invoice to start tracking payments.</EmptyStateDescription>
+  <EmptyStateActions>
+    <Button>Create invoice</Button>
+  </EmptyStateActions>
+</EmptyState>;
+```
+
+`EmptyStateTitle` renders an `h2` unless you pass `level`; pick the level that fits the surrounding headings. `EmptyStateMark` is decorative and hidden from assistive technology, so the title carries the meaning. Every part is optional.
 
 ## Dialog
 

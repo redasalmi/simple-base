@@ -26,6 +26,7 @@ import { DatePickers } from "./preview/DatePickers";
 import { Comboboxes } from "./preview/Comboboxes";
 import { Selects } from "./preview/Selects";
 import { Tables } from "./preview/Tables";
+import { EmptyStates } from "./preview/EmptyStates";
 import { Toasts } from "./preview/Toasts";
 import { Styles } from "./preview/Styles";
 
@@ -139,6 +140,15 @@ const pages: Page[] = [
       "Display records in rows and columns. Named parts map to native table elements, with optional cell variants and a scroll container for wide data.",
     usage: 'import { Table, TableHeader, TableCell } from "@simple-base/solid";',
     component: Tables,
+  },
+  {
+    id: "empty-state",
+    label: "EmptyState",
+    group: "Components",
+    description:
+      "Stand in for a list or table with nothing to show. Say what is missing and offer the next action; named parts render the heading, text, and actions.",
+    usage: 'import { EmptyState, EmptyStateTitle, EmptyStateActions } from "@simple-base/solid";',
+    component: EmptyStates,
   },
   {
     id: "textarea",

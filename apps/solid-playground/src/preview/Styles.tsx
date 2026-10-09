@@ -9,7 +9,6 @@ export function Styles() {
   const [page, setPage] = createSignal(1);
   const [selected, setSelected] = createSignal<string[]>([]);
   const [menuAction, setMenuAction] = createSignal("Choose an example command.");
-  const [hasRecord, setHasRecord] = createSignal(false);
   const [showAlert, setShowAlert] = createSignal(true);
   const [tooltip, setTooltip] = createSignal(false);
   let menu: HTMLDetailsElement | undefined;
@@ -536,41 +535,6 @@ export function Styles() {
             {menuAction()}
           </p>
         </div>
-      </Example>
-      <Example
-        title="Empty state"
-        description="Explain what is missing and offer a relevant next action. Adding a record here only changes this local specimen."
-        code={
-          '<div class="sb-empty-state">\n  <h3 class="sb-empty-state-title">No saved views</h3>\n  <p class="sb-empty-state-description">Save a view to return to it later.</p>\n  <div class="sb-empty-state-actions">…</div>\n</div>'
-        }
-      >
-        <Show
-          when={hasRecord()}
-          fallback={
-            <div class="sb-empty-state">
-              <span class="sb-empty-state-mark" aria-hidden="true">
-                ∅
-              </span>
-              <h3 class="sb-empty-state-title">No example records</h3>
-              <p class="sb-empty-state-description">Add a record to see this specimen change.</p>
-              <div class="sb-empty-state-actions">
-                <Button onClick={() => setHasRecord(true)}>Add example record</Button>
-                <Button variant="ghost">Import from CSV</Button>
-              </div>
-            </div>
-          }
-        >
-          <div class="preview-stack">
-            <p class="sb-text-body" role="status">
-              One example record added.
-            </p>
-            <div>
-              <Button variant="secondary" onClick={() => setHasRecord(false)}>
-                Reset example
-              </Button>
-            </div>
-          </div>
-        </Show>
       </Example>
       <Api
         rows={[
