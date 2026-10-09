@@ -1,4 +1,6 @@
 export type TabsOptions = {
+  /** Id of the root element, also the base of the tab and panel ids. Generated when omitted. */
+  id?: string;
   /** Controlled selected tab value; omit for uncontrolled state. */
   value?: string;
   /** Initial tab for uncontrolled state. Set it or `value` so one tab is selected and focusable. */

@@ -1,6 +1,7 @@
-import { splitProps, type JSX } from "solid-js";
-import { cn } from "../cn";
 import { buttonDefaults, type ButtonOptions } from "@simple-base/contracts";
+import { type JSX, splitProps } from "solid-js";
+
+import { cn } from "../cn";
 
 export type { ButtonVariant, ButtonSize } from "@simple-base/contracts";
 

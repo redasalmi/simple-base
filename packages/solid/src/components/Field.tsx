@@ -1,17 +1,18 @@
+import type { FieldOptions } from "@simple-base/contracts";
 import {
+  type Accessor,
   createContext,
   createSignal,
   createUniqueId,
+  type JSX,
   onCleanup,
   onMount,
   Show,
   splitProps,
   useContext,
-  type Accessor,
-  type JSX,
 } from "solid-js";
+
 import { cn } from "../cn";
-import type { FieldOptions } from "@simple-base/contracts";
 import { Input, type InputProps } from "./Input";
 import { TextArea, type TextAreaProps } from "./TextArea";
 

@@ -36,37 +36,35 @@ The same exports are available per component, which keeps imports narrow:
 import { buttonDefaults, type ButtonVariant } from "@simple-base/contracts/button";
 ```
 
-Subpaths: `/badge` · `/button` · `/card` · `/combobox` · `/datePicker` · `/dialog` · `/fieldset` · `/menu` · `/numberField` · `/pagination` · `/placement` · `/select` · `/status` · `/table` · `/tabs` · `/tooltip`
-
-`FieldOptions` is exported from the package root only.
+Subpaths: `/badge` · `/button` · `/card` · `/combobox` · `/date-picker` · `/dialog` · `/field` · `/fieldset` · `/menu` · `/number-field` · `/pagination` · `/placement` · `/select` · `/status` · `/table` · `/tabs` · `/tooltip`
 
 ## Options reference
 
-| Component      | Types                                               | Defaults                                                  |
-| -------------- | --------------------------------------------------- | --------------------------------------------------------- |
-| Button         | `ButtonVariant`, `ButtonSize`, `ButtonOptions`      | `buttonDefaults`: `primary`, `medium`                     |
-| Badge          | `BadgeVariant`, `BadgeSize`, `BadgeOptions`         | `badgeDefaults`: `default`, `medium`                      |
-| Card           | `CardVariant`, `CardOptions`                        | —                                                         |
-| Combobox       | `ComboboxOption`, `ComboboxOptions`                 | —                                                         |
-| Date picker    | `DatePickerOptions`                                 | —                                                         |
-| Dialog         | `DialogOptions`                                     | —                                                         |
-| Field          | `FieldOptions`                                      | —                                                         |
-| Fieldset       | `FieldsetOptions`                                   | —                                                         |
-| Radio group    | `RadioGroupOptions`                                 | —                                                         |
-| Checkbox group | `CheckboxGroupOptions`                              | —                                                         |
-| Menu           | `MenuOptions`, `MenuItemOptions`, `MenuItemVariant` | —                                                         |
-| Number field   | `NumberFieldOptions`                                | —                                                         |
-| Pagination     | `PaginationOptions`                                 | `paginationDefaults`: `defaultPage: 1`, `siblingCount: 1` |
-| Placement      | `Placement`                                         | —                                                         |
-| Select         | `SelectOption`, `SelectOptions`                     | —                                                         |
-| Status line    | `StatusValue`, `StatusOptions`                      | —                                                         |
-| Alert          | `AlertStatus`, `AlertOptions`                       | —                                                         |
-| Toast          | `ToastStatus`, `ToastOptions`                       | `toastDefaults`: `status: "success"`                      |
-| Table cell     | `TableCellVariant`, `TableCellOptions`              | —                                                         |
-| Tabs           | `TabsOptions`                                       | —                                                         |
-| Tooltip        | `TooltipOptions`                                    | —                                                         |
+| Component      | Types                                               | Defaults                                                                                                        |
+| -------------- | --------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| Button         | `ButtonVariant`, `ButtonSize`, `ButtonOptions`      | `buttonDefaults`: `primary`, `medium`                                                                           |
+| Badge          | `BadgeVariant`, `BadgeSize`, `BadgeOptions`         | `badgeDefaults`: `default`, `medium`                                                                            |
+| Card           | `CardVariant`, `CardOptions`                        | —                                                                                                               |
+| Combobox       | `ComboboxOption`, `ComboboxOptions`                 | —                                                                                                               |
+| Date picker    | `DatePickerOptions`                                 | `datePickerDefaults`: `placement: "bottom-start"`                                                               |
+| Dialog         | `DialogOptions`                                     | —                                                                                                               |
+| Field          | `FieldOptions`                                      | —                                                                                                               |
+| Fieldset       | `FieldsetOptions`                                   | —                                                                                                               |
+| Radio group    | `RadioGroupOptions`                                 | —                                                                                                               |
+| Checkbox group | `CheckboxGroupOptions`                              | —                                                                                                               |
+| Menu           | `MenuOptions`, `MenuItemOptions`, `MenuItemVariant` | —                                                                                                               |
+| Number field   | `NumberFieldOptions`                                | —                                                                                                               |
+| Pagination     | `PaginationOptions`                                 | `paginationDefaults`: `defaultPage: 1`, `siblingCount: 1`; `paginationLabels`: the English accessible names     |
+| Placement      | `Placement`                                         | —                                                                                                               |
+| Select         | `SelectOption`, `SelectOptions`                     | —                                                                                                               |
+| Status line    | `StatusValue`, `StatusOptions`                      | —                                                                                                               |
+| Alert          | `AlertStatus`, `AlertOptions`                       | —                                                                                                               |
+| Toast          | `ToastStatus`, `ToastOptions`, `ToasterOptions`     | `toastDefaults`: `status: "success"`; `toasterDefaults`: `placement: "bottom-end"`, `duration: 5000`, `max: 24` |
+| Table cell     | `TableCellVariant`, `TableCellOptions`              | —                                                                                                               |
+| Tabs           | `TabsOptions`                                       | —                                                                                                               |
+| Tooltip        | `TooltipOptions`                                    | —                                                                                                               |
 
-Types are erased at runtime. Only the `*Defaults` constants are runtime exports — there are no allowed-value arrays without a runtime use case.
+Types are erased at runtime. Only the `*Defaults` constants and `paginationLabels` are runtime exports — there are no allowed-value arrays without a runtime use case.
 
 ### Values
 
@@ -78,9 +76,10 @@ Types are erased at runtime. Only the `*Defaults` constants are runtime exports 
 - **Fieldset:** `required`, `disabled`, and `invalid` belong to the root and apply to its legend, messages, and choice groups. `disabled` is the native fieldset attribute, so it reaches every control inside.
 - **Radio and checkbox groups:** a radio group's value is a string (`""` = none); a checkbox group's value is a `string[]` of the checked values in document order. `value` is controlled and `defaultValue` is the uncontrolled initial state.
 - **Number field values** are strings, so partial input such as `1.` survives; `onValueChange` also receives the parsed number. `formatOptions` takes `Intl.NumberFormatOptions`.
-- **Date picker values** are `DateValue[]`; an empty array means no date. `name` submits the date as `YYYY-MM-DD`.
+- **Date picker values** are a single `DateValue`, or `null` for no date. `name` submits the date as `YYYY-MM-DD`.
 - **Pagination:** pages start at `1`. `count` is the total number of pages, `page` is controlled, and `defaultPage` is the uncontrolled initial page. `siblingCount` is the number of pages shown on each side of the current page before an ellipsis.
 - **Menu:** `onSelect` receives the picked item's `value`, which must be unique within the menu. `open` is controlled and `defaultOpen` is the uncontrolled initial state. The only item variant is `danger`.
+- **Ids:** every option type for a stateful root takes an optional `id`, generated when omitted. Menus and tooltips render no root element, so their `id` is the base of the trigger and content ids.
 - **Placement:** `top` or `bottom`, with `-start` and `-end` variants. Shared by every popup option.
 - **Tabs:** `value` is the selected tab and is controlled; `defaultValue` is the uncontrolled initial tab. Set one of them so a tab is selected and reachable by keyboard.
 - **Dialogs and tooltips:** `open` is the controlled state, `defaultOpen` provides the initial uncontrolled state, and `onOpenChange` reports requested visibility changes.
@@ -94,14 +93,13 @@ Types are erased at runtime. Only the `*Defaults` constants are runtime exports 
 
 | Prop            | Required | Description                                                                                                                 |
 | --------------- | -------- | --------------------------------------------------------------------------------------------------------------------------- |
-| `id`            | yes      | Unique identifier for the instance.                                                                                         |
-| `label`         | yes      | Visible label text.                                                                                                         |
+| `id`            | no       | Id of the root element. Generated when omitted.                                                                             |
 | `options`       | yes      | The option list.                                                                                                            |
-| `onValueChange` | yes      | Called with the selected option's string value, or `""` when selection is cleared.                                          |
+| `onValueChange` | no       | Called with the selected option's string value, or `""` when selection is cleared.                                          |
 | `placeholder`   | no       | Rendered in place of the value text until something is selected.                                                            |
 | `value`         | no       | Controlled counterpart of `onValueChange`. `""` means no selection; omitting `value` leaves it uncontrolled.                |
 | `disabled`      | no       | Dims and blocks the field.                                                                                                  |
-| `invalid`       | no       | Switches the border and focus ring to the danger tokens.                                                                    |
+| `invalid`       | no       | Switches the border and focus ring to the danger tokens and shows the error message.                                        |
 | `required`      | no       | Adds the label marker.                                                                                                      |
 | `name`          | no       | See below — semantics differ per component.                                                                                 |
 | `placement`     | no       | Shared `top`/`bottom` union with `-start` and `-end` variants; deliberately narrower than an adapter's positioning options. |

@@ -10,7 +10,6 @@ export type ComboboxOption = {
 export type ComboboxOptions = {
   /** Id of the root element. Generated when omitted. */
   id?: string;
-  label: string;
   name?: string;
   placeholder?: string;
   options: ComboboxOption[];

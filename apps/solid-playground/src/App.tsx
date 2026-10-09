@@ -1,5 +1,3 @@
-import { For, createEffect, createSignal, onCleanup, onMount, type Component } from "solid-js";
-import { Dynamic } from "solid-js/web";
 import {
   Select,
   SelectContent,
@@ -13,28 +11,31 @@ import {
   SelectTrigger,
   SelectValueText,
 } from "@simple-base/solid";
-import { Typography } from "./preview/Typography";
-import { Buttons } from "./preview/Buttons";
-import { Badges } from "./preview/Badges";
-import { Cards } from "./preview/Cards";
-import { Dialogs } from "./preview/Dialogs";
+import { type Component, createEffect, createSignal, For, onCleanup, onMount } from "solid-js";
+import { Dynamic } from "solid-js/web";
+
 import { AlertDialogs } from "./preview/AlertDialogs";
-import { Inputs, TextAreas, Checkboxes, Radios, Switches } from "./preview/Inputs";
-import { Fields } from "./preview/Fields";
-import { Fieldsets, RadioGroups, CheckboxGroups } from "./preview/Fieldsets";
-import { NumberFields } from "./preview/NumberFields";
-import { DatePickers } from "./preview/DatePickers";
-import { Comboboxes } from "./preview/Comboboxes";
-import { Selects } from "./preview/Selects";
-import { Menus } from "./preview/Menus";
-import { Tooltips } from "./preview/Tooltips";
-import { TabLists } from "./preview/TabLists";
-import { Tables } from "./preview/Tables";
-import { Paginations } from "./preview/Paginations";
-import { EmptyStates } from "./preview/EmptyStates";
 import { Alerts, StatusLines } from "./preview/Alerts";
-import { Toasts } from "./preview/Toasts";
+import { Badges } from "./preview/Badges";
+import { Buttons } from "./preview/Buttons";
+import { Cards } from "./preview/Cards";
+import { Comboboxes } from "./preview/Comboboxes";
+import { DatePickers } from "./preview/DatePickers";
+import { Dialogs } from "./preview/Dialogs";
+import { EmptyStates } from "./preview/EmptyStates";
+import { Fields } from "./preview/Fields";
+import { CheckboxGroups, Fieldsets, RadioGroups } from "./preview/Fieldsets";
+import { Checkboxes, Inputs, Radios, Switches, TextAreas } from "./preview/Inputs";
+import { Menus } from "./preview/Menus";
+import { NumberFields } from "./preview/NumberFields";
+import { Paginations } from "./preview/Paginations";
+import { Selects } from "./preview/Selects";
 import { Styles } from "./preview/Styles";
+import { Tables } from "./preview/Tables";
+import { TabLists } from "./preview/TabLists";
+import { Toasts } from "./preview/Toasts";
+import { Tooltips } from "./preview/Tooltips";
+import { Typography } from "./preview/Typography";
 
 type Page = {
   id: string;
@@ -383,12 +384,11 @@ export default function App() {
           <div class="playground-theme">
             <Select
               id="playground-theme-select"
-              label="Theme"
               options={themeOptions}
               value={theme()}
               onValueChange={setTheme}
             >
-              <SelectLabel />
+              <SelectLabel>Theme</SelectLabel>
               <SelectControl>
                 <SelectTrigger>
                   <SelectValueText />

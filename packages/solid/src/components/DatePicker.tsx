@@ -1,9 +1,11 @@
+import { datePickerDefaults, type DatePickerOptions } from "@simple-base/contracts";
 import * as datepicker from "@zag-js/date-picker";
 import { mergeProps, normalizeProps, useMachine } from "@zag-js/solid";
 import {
   type Accessor,
   createContext,
   createMemo,
+  createSignal,
   createUniqueId,
   Index,
   type JSX,
@@ -12,10 +14,9 @@ import {
   Show,
   splitProps,
   useContext,
-  createSignal,
 } from "solid-js";
 import { Portal } from "solid-js/web";
-import type { DatePickerOptions } from "@simple-base/contracts";
+
 import { cn } from "../cn";
 
 type DatePickerContextType = {
@@ -33,9 +34,8 @@ const DatePickerContext = createContext<DatePickerContextType | null>(null);
 
 function useDatePicker() {
   const context = useContext(DatePickerContext);
-  if (!context) {
-    throw new Error("useDatePicker must be used within a DatePicker");
-  }
+  if (!context) throw new Error("DatePicker parts must be used within a DatePicker");
+
   return context;
 }
 
@@ -44,11 +44,11 @@ type WithoutOwnedProps<Props, Owned extends string> = Omit<Props, Owned> & {
   [Key in Owned]?: never;
 };
 
-export type DatePickerProps = DatePickerOptions & {
+export type DatePickerRootProps = DatePickerOptions & {
   children: JSX.Element;
 } & Omit<JSX.HTMLAttributes<HTMLDivElement>, keyof DatePickerOptions | "children">;
 
-export function DatePicker(props: DatePickerProps) {
+export function DatePicker(props: DatePickerRootProps) {
   const [local, rest] = splitProps(props, [
     "class",
     "children",
@@ -78,7 +78,9 @@ export function DatePicker(props: DatePickerProps) {
   // Zag defaults to UTC, which marks the wrong day as today for users far from it.
   const userTimeZone = new Intl.DateTimeFormat().resolvedOptions().timeZone;
   // Zag centers the calendar under the field; align it with the field's start like Select.
-  const positioning = createMemo(() => ({ placement: local.placement ?? "bottom-start" }));
+  const positioning = createMemo(() => ({
+    placement: local.placement ?? datePickerDefaults.placement,
+  }));
 
   const service = useMachine(datepicker.machine, {
     get id() {
@@ -90,10 +92,12 @@ export function DatePicker(props: DatePickerProps) {
       };
     },
     get value() {
-      return local.value;
+      if (local.value === undefined) return undefined;
+      return local.value === null ? [] : [local.value];
     },
     get defaultValue() {
-      return local.defaultValue;
+      if (local.defaultValue === undefined) return undefined;
+      return local.defaultValue === null ? [] : [local.defaultValue];
     },
     get min() {
       return local.min;
@@ -126,7 +130,7 @@ export function DatePicker(props: DatePickerProps) {
       return local.required;
     },
     onValueChange({ value, valueAsString }) {
-      local.onValueChange?.(value, valueAsString);
+      local.onValueChange?.(value[0] ?? null, valueAsString[0] ?? "");
     },
     onOpenChange({ open }) {
       local.onOpenChange?.(open);
@@ -152,7 +156,7 @@ export function DatePicker(props: DatePickerProps) {
     if (!form) return;
 
     const onReset = (event: Event) => {
-      if (!event.defaultPrevented) api().setValue(local.defaultValue ?? []);
+      if (!event.defaultPrevented) api().setValue(local.defaultValue ? [local.defaultValue] : []);
     };
     form.addEventListener("reset", onReset);
     onCleanup(() => form.removeEventListener("reset", onReset));

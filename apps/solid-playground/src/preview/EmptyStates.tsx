@@ -1,4 +1,3 @@
-import { Show, createSignal } from "solid-js";
 import {
   Button,
   Card,
@@ -8,6 +7,8 @@ import {
   EmptyStateMark,
   EmptyStateTitle,
 } from "@simple-base/solid";
+import { createSignal, Show } from "solid-js";
+
 import { Api, Example } from "./Preview";
 
 export function EmptyStates() {

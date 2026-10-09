@@ -1,4 +1,3 @@
-import { createSignal } from "solid-js";
 import {
   Field,
   FieldDescription,
@@ -7,6 +6,8 @@ import {
   FieldLabel,
   FieldTextArea,
 } from "@simple-base/solid";
+import { createSignal } from "solid-js";
+
 import { Api, Example } from "./Preview";
 
 export function Fields() {

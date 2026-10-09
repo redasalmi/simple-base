@@ -1,4 +1,3 @@
-import { For, Show, createSignal } from "solid-js";
 import {
   Alert,
   AlertActions,
@@ -15,6 +14,8 @@ import {
   StatusLineTitle,
   type StatusValue,
 } from "@simple-base/solid";
+import { createSignal, For, Show } from "solid-js";
+
 import { Api, CheckIcon, CloseIcon, Example, WarningIcon } from "./Preview";
 
 export function Alerts() {

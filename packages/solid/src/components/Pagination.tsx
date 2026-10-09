@@ -1,15 +1,20 @@
 import {
+  paginationDefaults,
+  paginationLabels,
+  type PaginationOptions,
+} from "@simple-base/contracts";
+import { mergeProps } from "@zag-js/solid";
+import {
+  type Accessor,
   createContext,
   createSignal,
   For,
+  type JSX,
   splitProps,
   useContext,
-  type Accessor,
-  type JSX,
 } from "solid-js";
-import { mergeProps } from "@zag-js/solid";
+
 import { cn } from "../cn";
-import { paginationDefaults, type PaginationOptions } from "@simple-base/contracts";
 
 type PaginationContextType = {
   page: Accessor<number>;
@@ -78,7 +83,7 @@ export function Pagination(props: PaginationRootProps) {
 
   return (
     <PaginationContext.Provider value={context}>
-      <nav aria-label="Pagination" {...rest} class={cn("sb-pagination", local.class)}>
+      <nav aria-label={paginationLabels.root} {...rest} class={cn("sb-pagination", local.class)}>
         {local.children}
       </nav>
     </PaginationContext.Provider>
@@ -104,7 +109,7 @@ export function PaginationPages(props: PaginationPagesProps) {
           <button
             type="button"
             class="sb-page-button"
-            aria-label={props.getPageLabel?.(item) ?? `Page ${item}`}
+            aria-label={(props.getPageLabel ?? paginationLabels.page)(item)}
             aria-current={page() === item ? "page" : undefined}
             onClick={() => setPage(item)}
           >
@@ -145,9 +150,9 @@ function PaginationTrigger(props: PaginationTriggerProps & { step: -1 | 1; label
 }
 
 export function PaginationPrevious(props: PaginationTriggerProps) {
-  return <PaginationTrigger {...props} step={-1} label="Previous page" />;
+  return <PaginationTrigger {...props} step={-1} label={paginationLabels.previous} />;
 }
 
 export function PaginationNext(props: PaginationTriggerProps) {
-  return <PaginationTrigger {...props} step={1} label="Next page" />;
+  return <PaginationTrigger {...props} step={1} label={paginationLabels.next} />;
 }

@@ -15,3 +15,11 @@ export const paginationDefaults = {
   defaultPage: 1,
   siblingCount: 1,
 } as const satisfies Required<Pick<PaginationOptions, "defaultPage" | "siblingCount">>;
+
+/** Accessible names used when the caller doesn't pass its own. */
+export const paginationLabels = {
+  root: "Pagination",
+  previous: "Previous page",
+  next: "Next page",
+  page: (page: number) => `Page ${page}`,
+} as const;

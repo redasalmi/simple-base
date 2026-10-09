@@ -1,4 +1,5 @@
-import { splitProps, type JSX } from "solid-js";
+import { type JSX, splitProps } from "solid-js";
+
 import { cn } from "../cn";
 
 export type CheckboxProps = Omit<JSX.InputHTMLAttributes<HTMLInputElement>, "type"> & {

@@ -1,4 +1,3 @@
-import { For, createSignal } from "solid-js";
 import {
   Checkbox,
   Field,
@@ -6,10 +5,12 @@ import {
   FieldInput,
   FieldLabel,
   FieldTextArea,
+  type InputProps,
   Radio,
   Switch,
-  type InputProps,
 } from "@simple-base/solid";
+import { createSignal, For } from "solid-js";
+
 import { Api, Example, FormDemo } from "./Preview";
 
 const inputTypes = [

@@ -76,7 +76,9 @@
   }
 
   .sb-status-line strong,
+  .sb-status-line-title,
   .sb-alert strong,
+  .sb-alert-title,
   .sb-toast strong,
   .sb-toast-title {
     display: block;

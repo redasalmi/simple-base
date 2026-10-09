@@ -77,12 +77,12 @@ import "@simple-base/css/badge";
 | `RadioGroup`    | `RadioGroupItem` (inside a `Fieldset`)                                                                                                                                                                                              |
 | `CheckboxGroup` | `CheckboxGroupItem` (inside a `Fieldset`)                                                                                                                                                                                           |
 | `NumberField`   | `NumberFieldLabel`, `NumberFieldControl`, `NumberFieldInput`, `NumberFieldDecrement`, `NumberFieldIncrement`, `NumberFieldAffix`, `NumberFieldDescription`, `NumberFieldError`                                                      |
-| `Combobox`      | `ComboboxLabel`, `ComboboxControl`, `ComboboxInput`, `ComboboxTrigger`, `ComboboxPortal`, `ComboboxPositioner`, `ComboboxContent`, `ComboboxList`, `ComboboxEmpty`, `ComboboxItem`                                                  |
+| `Combobox`      | `ComboboxLabel`, `ComboboxControl`, `ComboboxInput`, `ComboboxTrigger`, `ComboboxPortal`, `ComboboxPositioner`, `ComboboxContent`, `ComboboxList`, `ComboboxEmpty`, `ComboboxItem`, `ComboboxDescription`, `ComboboxError`          |
 | `DatePicker`    | `DatePickerLabel`, `DatePickerControl`, `DatePickerInput`, `DatePickerTrigger`, `DatePickerPortal`, `DatePickerPositioner`, `DatePickerContent`, `DatePickerCalendar`, `DatePickerDescription`, `DatePickerError`, plus `parseDate` |
 | `Menu`          | `MenuTrigger`, `MenuPortal`, `MenuPositioner`, `MenuContent`, `MenuItem`, `MenuItemShortcut`, `MenuGroup`, `MenuGroupLabel`, `MenuSeparator`                                                                                        |
 | `Tooltip`       | `TooltipTrigger`, `TooltipPortal`, `TooltipPositioner`, `TooltipContent`, `TooltipArrow`                                                                                                                                            |
 | `Tabs`          | `TabsList`, `TabsTrigger`, `TabsContent`                                                                                                                                                                                            |
-| `Select`        | `SelectLabel`, `SelectControl`, `SelectTrigger`, `SelectValueText`, `SelectIndicator`, `SelectPortal`, `SelectPositioner`, `SelectContent`, `SelectList`, `SelectEmpty`, `SelectItem`                                               |
+| `Select`        | `SelectLabel`, `SelectControl`, `SelectTrigger`, `SelectValueText`, `SelectIndicator`, `SelectPortal`, `SelectPositioner`, `SelectContent`, `SelectList`, `SelectEmpty`, `SelectItem`, `SelectDescription`, `SelectError`           |
 | `EmptyState`    | `EmptyStateMark`, `EmptyStateTitle`, `EmptyStateDescription`, `EmptyStateActions`                                                                                                                                                   |
 | `Alert`         | `AlertMark`, `AlertContent`, `AlertTitle`, `AlertDescription`, `AlertActions`, `AlertClose`                                                                                                                                         |
 | `StatusLine`    | `StatusLineDot`, `StatusLineContent`, `StatusLineTitle`, `StatusLineDescription`                                                                                                                                                    |
@@ -251,7 +251,7 @@ Additional root props:
 
 ## Select
 
-`label` and `options` are required. `onValueChange` receives the selected option's value, not its label. Omit `id` to generate one.
+`options` is required. `SelectLabel` holds the visible label, which also names the trigger and the list. `onValueChange` receives the selected option's value, not its label. Omit `id` to generate one.
 
 ```tsx
 import { createSignal } from "solid-js";
@@ -281,12 +281,11 @@ export function TimezonePicker() {
   return (
     <Select
       id="timezone"
-      label="Timezone"
       placeholder="Select a timezone"
       options={timezones}
       onValueChange={setTimezone}
     >
-      <SelectLabel />
+      <SelectLabel>Timezone</SelectLabel>
       <SelectControl>
         <SelectTrigger>
           <SelectValueText />
@@ -317,13 +316,15 @@ export function TimezonePicker() {
 
 Additional root props: `value` makes selection controlled (`""` means cleared), `defaultValue` sets the initial selection of an uncontrolled select, `name` adds a hidden native select so the value submits with the form, `disabled`, `invalid`, and `required` drive state styling and labeling, `placement` picks the popup side, and `onOpenChange` reports visibility.
 
+`SelectDescription` and `SelectError` work like `NumberFieldDescription` and `NumberFieldError`: the trigger lists them in its `aria-describedby` while they are rendered, and `SelectError` renders only while `invalid` is set.
+
 With `name` and `defaultValue`, a `Select` works uncontrolled inside a `<form>`: no `onValueChange` is needed, and `form.reset()` restores the initial selection.
 
 `SelectEmpty` renders beside `SelectList` and appears only while the popup is open with no options. `SelectPortal` accepts `mount` — pass a dialog element's node to keep the popup interactive inside a native modal.
 
 ## Combobox
 
-Same root props as `Select`, with a text input that filters options by label.
+Same root props and parts as `Select`, with a text input that filters options by label. `ComboboxDescription` and `ComboboxError` are linked to the input.
 
 ```tsx
 import {
@@ -342,12 +343,11 @@ import {
 
 <Combobox
   id="country"
-  label="Country"
   placeholder="Search countries"
   options={countries}
   onValueChange={setCountry}
 >
-  <ComboboxLabel />
+  <ComboboxLabel>Country</ComboboxLabel>
   <ComboboxControl>
     <ComboboxInput />
     <ComboboxTrigger>
@@ -396,7 +396,7 @@ import {
 } from "@simple-base/solid";
 
 export function DueDate() {
-  const [due, setDue] = createSignal<DateValue[]>([parseDate("2026-10-12")]);
+  const [due, setDue] = createSignal<DateValue | null>(parseDate("2026-10-12"));
 
   return (
     <DatePicker
@@ -426,7 +426,7 @@ export function DueDate() {
 
 Additional root props:
 
-- `value` and `defaultValue` take a `DateValue[]`; an empty array means no date. `onValueChange` receives the dates and the text shown in the input.
+- `value` and `defaultValue` take a `DateValue`, or `null` for no date. `onValueChange` receives the date (`null` when cleared) and the text shown in the input.
 - `min` and `max` disable the days outside the range. A typed date outside it is clamped to the nearest bound when the input loses focus; the picker never sets `invalid` on its own.
 - `locale` (default `en-US`) sets the input format, the first day of the week, and the calendar's labels. `timeZone` decides which day is today and defaults to the user's time zone.
 - `name` adds a hidden input that submits the date as `YYYY-MM-DD`, since the visible input holds locale-formatted text. `form` associates both inputs with a form elsewhere on the page.
@@ -472,7 +472,7 @@ export function InvoiceActions(props: { id: string }) {
 }
 ```
 
-Root props: `onSelect`, `open` with `onOpenChange` for controlled state, `defaultOpen` for uncontrolled initial state, and `placement` for the popup side (default `bottom-start`). The root renders no element of its own.
+Root props: `onSelect`, `open` with `onOpenChange` for controlled state, `defaultOpen` for uncontrolled initial state, `placement` for the popup side (default `bottom-start`), and `id`, the base of the trigger and content ids (generated when omitted). The root renders no element of its own.
 
 `MenuTrigger` takes the `Button` props, including `variant` and `size`; give an icon-only trigger an `aria-label`. `MenuItem` takes `value`, `disabled`, and `variant="danger"`. Typeahead matches the start of an item's text. Wrap items in `MenuGroup` with a `MenuGroupLabel` to name a set, and put display-only key hints in `MenuItemShortcut`; binding the keys stays in your app. Like `SelectPortal`, `MenuPortal` accepts `mount` for use inside a native modal.
 
@@ -505,7 +505,7 @@ import {
 </Tooltip>;
 ```
 
-Root props: `open` with `onOpenChange` for controlled state, `defaultOpen` for uncontrolled initial state, and `placement` for the preferred side (default `bottom`). The root renders no element of its own.
+Root props: `open` with `onOpenChange` for controlled state, `defaultOpen` for uncontrolled initial state, `placement` for the preferred side (default `bottom`), and `id`, the base of the trigger and content ids (generated when omitted). The root renders no element of its own.
 
 `TooltipTrigger` takes the `Button` props, including `variant` and `size`, and defaults to `type="button"`. The trigger points `aria-describedby` at the content only while it is open, so an icon-only trigger still needs its own `aria-label`. The content is not interactive; keep it to a short label. `TooltipArrow` is optional and goes first inside `TooltipContent`. Like `SelectPortal`, `TooltipPortal` accepts `mount` for use inside a native modal.
 
@@ -535,7 +535,7 @@ export function InvoiceFilters() {
 }
 ```
 
-Root props: `value` with `onValueChange` for controlled state, or `defaultValue` for uncontrolled initial state. Set one of them: with no tab selected, no tab can be reached with Tab. The root renders a `div` without a class of its own.
+Root props: `value` with `onValueChange` for controlled state, or `defaultValue` for uncontrolled initial state. Set one of them: with no tab selected, no tab can be reached with Tab. The root renders a `div` without a class of its own; `id` sets its id and is the base of the tab and panel ids, such as `tabs:{id}:content-{value}`. Omit `id` to generate one.
 
 Give `TabsList` an `aria-label` that names the set. Each `TabsTrigger` takes a `value` that matches its `TabsContent`, and `disabled` to keep a tab visible but unselectable. Panels stay hidden unless selected and are focusable, so keyboard users can reach panels with no focusable content.
 
@@ -752,7 +752,7 @@ import {
 </Dialog>;
 ```
 
-`DialogClose` is the icon-sized close control; give it an accessible name when it contains only an icon. `DialogAction` uses the standard button API, closes the modal, and copies its `value` to the native dialog `returnValue`.
+`DialogTitle` renders an `h2` unless you pass `level`. `DialogClose` is the icon-sized close control; give it an accessible name when it contains only an icon. `DialogAction` uses the standard button API, closes the modal, and copies its `value` to the native dialog `returnValue`.
 
 Use `open` with `onOpenChange` for controlled state, or `defaultOpen` for uncontrolled initial state. Native dialog attributes, events, and the `HTMLDialogElement` ref belong to `DialogContent`.
 
@@ -788,7 +788,7 @@ import {
 </AlertDialog>;
 ```
 
-Use `open` with `onOpenChange` for controlled state, or `defaultOpen` for uncontrolled initial state. Native dialog attributes, events, and the `HTMLDialogElement` ref belong to `AlertDialogContent`.
+Use `open` with `onOpenChange` for controlled state, or `defaultOpen` for uncontrolled initial state. Native dialog attributes, events, and the `HTMLDialogElement` ref belong to `AlertDialogContent`. `AlertDialogTitle` renders an `h2` unless you pass `level`, and `AlertDialogIcon` is always hidden from assistive technology.
 
 ## Toast
 
@@ -848,20 +848,20 @@ Toasts pause while the region is hovered or focused. `Alt+T` moves focus to the 
 
 Every form control takes `name` and works uncontrolled inside a `<form>`. Set the initial state with the default prop, not the controlled one:
 
-| Component                                                         | Initial state                |
-| ----------------------------------------------------------------- | ---------------------------- |
-| `Input`, `TextArea`, `FieldInput`, `FieldTextArea`, `NumberField` | `defaultValue`               |
-| `Checkbox`, `Radio`, `Switch`                                     | `defaultChecked`             |
-| `RadioGroup`                                                      | `defaultValue`               |
-| `CheckboxGroup`                                                   | `defaultValue` (`string[]`)  |
-| `Select`, `Combobox`                                              | `defaultValue` (`""` = none) |
-| `DatePicker`                                                      | `defaultValue` (`[]` = none) |
+| Component                                                         | Initial state                  |
+| ----------------------------------------------------------------- | ------------------------------ |
+| `Input`, `TextArea`, `FieldInput`, `FieldTextArea`, `NumberField` | `defaultValue`                 |
+| `Checkbox`, `Radio`, `Switch`                                     | `defaultChecked`               |
+| `RadioGroup`                                                      | `defaultValue`                 |
+| `CheckboxGroup`                                                   | `defaultValue` (`string[]`)    |
+| `Select`, `Combobox`                                              | `defaultValue` (`""` = none)   |
+| `DatePicker`                                                      | `defaultValue` (`null` = none) |
 
 ```tsx
 <form>
   <Input name="email" type="email" defaultValue="you@example.com" />
   <Checkbox name="newsletter" defaultChecked />
-  <Select label="Timezone" name="timezone" options={timezones} defaultValue="utc">
+  <Select name="timezone" options={timezones} defaultValue="utc">
     {/* parts */}
   </Select>
 </form>
@@ -878,6 +878,7 @@ Every form control takes `name` and works uncontrolled inside a `<form>`. Set th
 
 - `class` is reactive and merged with the component's own classes; it never replaces them.
 - Native attributes pass through, except the ones the component owns (such as `id`, `role`, and `aria-*` that describe the widget's own structure).
+- Triggers that stand on their own (`MenuTrigger`, `TooltipTrigger`, `DialogTrigger`, `AlertDialogTrigger`) render a `Button` and take its `variant` and `size`. Buttons that sit inside a control or a message (`SelectTrigger`, `ComboboxTrigger`, `DatePickerTrigger`, `ToastClose`, `AlertClose`) render a plain `<button>` styled by that component.
 - Event handlers compose: your `onClick` runs alongside the component's internal handling, not instead of it. Pass handlers as functions; Solid's `[handler, data]` array form replaces the internal handler instead of composing with it.
 - Pass `style` as an object on parts that set their own styles, such as popup positioners. A string `style` is parsed into declarations, and `!important` does not survive.
 - Shared option names and defaults come from [@simple-base/contracts](https://www.npmjs.com/package/@simple-base/contracts), and the unmodified option types are re-exported from this package.

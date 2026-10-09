@@ -1,4 +1,3 @@
-import { For, type JSX } from "solid-js";
 import {
   Tooltip,
   TooltipArrow,
@@ -7,6 +6,8 @@ import {
   TooltipPositioner,
   TooltipTrigger,
 } from "@simple-base/solid";
+import { For, type JSX } from "solid-js";
+
 import { Api, Example } from "./Preview";
 
 function Icon(props: { children: JSX.Element }) {

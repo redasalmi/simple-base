@@ -1,6 +1,6 @@
 {
   "name": "@simple-base/css",
-  "version": "0.14.2",
+  "version": "0.15.0",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -77,9 +77,9 @@
       "types": "./styles.d.ts",
       "default": "./styles/menu.css"
     },
-    "./number-input": {
+    "./number-field": {
       "types": "./styles.d.ts",
-      "default": "./styles/number-input.css"
+      "default": "./styles/number-field.css"
     },
     "./pagination": {
       "types": "./styles.d.ts",

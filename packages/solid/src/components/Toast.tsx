@@ -1,30 +1,24 @@
 import {
+  toastDefaults,
+  toasterDefaults,
+  type ToasterOptions,
+  type ToastOptions,
+} from "@simple-base/contracts";
+import { Key, mergeProps, normalizeProps, useMachine } from "@zag-js/solid";
+import * as toast from "@zag-js/toast";
+import {
+  type Accessor,
   createContext,
   createMemo,
   createUniqueId,
+  type JSX,
+  Show,
   splitProps,
   useContext,
-  Show,
-  type Accessor,
-  type JSX,
 } from "solid-js";
-import { cn } from "../cn";
-import * as toast from "@zag-js/toast";
-import { Key, mergeProps, normalizeProps, useMachine } from "@zag-js/solid";
-import { toastDefaults, type Placement, type ToastOptions } from "@simple-base/contracts";
-import { Button, type ButtonProps } from "./Button";
 
-export type ToasterOptions = {
-  /** @default "bottom-end" */
-  placement?: Placement;
-  /** Default time in milliseconds before a toast dismisses itself. @default 5000 */
-  duration?: number;
-  /**
-   * Most toasts shown at once; later ones wait in a queue. Queued toasts ignore `dismiss(id)`
-   * and updates through a reused `id` until they are shown. @default 24
-   */
-  max?: number;
-};
+import { cn } from "../cn";
+import { Button, type ButtonProps } from "./Button";
 
 export type ToastCreateOptions = ToastOptions & {
   id?: string;
@@ -45,9 +39,9 @@ const stores = new WeakMap<ToasterApi, toast.Store>();
 
 export function createToaster(options: ToasterOptions = {}): ToasterApi {
   const store = toast.createStore({
-    placement: options.placement ?? "bottom-end",
-    max: options.max,
-    duration: options.duration ?? 5000,
+    placement: options.placement ?? toasterDefaults.placement,
+    max: options.max ?? toasterDefaults.max,
+    duration: options.duration ?? toasterDefaults.duration,
   });
   const toaster: ToasterApi = {
     create: ({ status = toastDefaults.status, ...options }) =>

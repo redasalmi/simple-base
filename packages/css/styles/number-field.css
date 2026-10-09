@@ -1,7 +1,7 @@
 @import "./field.css";
 
 @layer sb {
-  .sb-number-input {
+  .sb-number-field {
     display: grid;
     /* Keep rows at their content height when a grid parent stretches the field. */
     align-content: start;
@@ -9,7 +9,7 @@
     min-width: 0;
   }
 
-  .sb-number-input-control {
+  .sb-number-field-control {
     display: flex;
     box-sizing: border-box;
     min-width: 0;
@@ -24,30 +24,30 @@
       box-shadow var(--sb-semantic-motion-duration-normal) var(--sb-semantic-motion-easing-standard);
   }
 
-  .sb-number-input-control:hover:where(:not([data-disabled])) {
+  .sb-number-field-control:hover:where(:not([data-disabled])) {
     border-color: var(--sb-semantic-color-foreground-muted);
   }
 
-  .sb-number-input-control:focus-within {
+  .sb-number-field-control:focus-within {
     border-color: var(--sb-semantic-color-focus-ring);
     outline: var(--sb-semantic-border-width-strong) solid var(--sb-semantic-color-focus-ring);
   }
 
-  .sb-number-input-control[data-invalid] {
+  .sb-number-field-control[data-invalid] {
     border-color: var(--sb-semantic-color-status-danger-base);
   }
 
-  .sb-number-input-control[data-invalid]:focus-within {
+  .sb-number-field-control[data-invalid]:focus-within {
     border-color: var(--sb-semantic-color-focus-danger-ring);
     outline: var(--sb-semantic-border-width-strong) solid var(--sb-semantic-color-focus-danger-ring);
   }
 
-  .sb-number-input-control[data-disabled] {
+  .sb-number-field-control[data-disabled] {
     cursor: not-allowed;
     opacity: var(--sb-semantic-opacity-disabled);
   }
 
-  .sb-number-input-input {
+  .sb-number-field-input {
     flex: 1;
     box-sizing: border-box;
     width: 100%;
@@ -66,30 +66,30 @@
     letter-spacing: var(--sb-semantic-typography-letter-spacing-normal);
   }
 
-  .sb-number-input-input::-webkit-inner-spin-button,
-  .sb-number-input-input::-webkit-outer-spin-button {
+  .sb-number-field-input::-webkit-inner-spin-button,
+  .sb-number-field-input::-webkit-outer-spin-button {
     margin: 0;
     appearance: none;
   }
 
-  .sb-number-input-input::placeholder {
+  .sb-number-field-input::placeholder {
     color: var(--sb-semantic-color-foreground-muted);
   }
 
-  .sb-number-input-input::selection {
+  .sb-number-field-input::selection {
     color: var(--sb-semantic-color-selection-foreground);
     background: var(--sb-semantic-color-selection-background);
   }
 
-  .sb-number-input-input:disabled {
+  .sb-number-field-input:disabled {
     cursor: not-allowed;
   }
 
-  .sb-number-input-input:read-only {
+  .sb-number-field-input:read-only {
     color: var(--sb-semantic-color-foreground-secondary);
   }
 
-  .sb-number-input-affix {
+  .sb-number-field-affix {
     display: inline-flex;
     flex: 0 0 auto;
     align-items: center;
@@ -99,15 +99,15 @@
     user-select: none;
   }
 
-  .sb-number-input-affix + .sb-number-input-input {
+  .sb-number-field-affix + .sb-number-field-input {
     padding-inline-start: 0;
   }
 
-  .sb-number-input-input + .sb-number-input-affix {
+  .sb-number-field-input + .sb-number-field-affix {
     padding-inline-start: 0;
   }
 
-  .sb-number-input-trigger {
+  .sb-number-field-trigger {
     display: inline-flex;
     flex: 0 0 auto;
     align-items: center;
@@ -126,46 +126,46 @@
       background var(--sb-semantic-motion-duration-normal) var(--sb-semantic-motion-easing-standard);
   }
 
-  .sb-number-input-trigger:last-child {
+  .sb-number-field-trigger:last-child {
     border-start-end-radius: var(--sb-semantic-radius-md);
     border-end-end-radius: var(--sb-semantic-radius-md);
   }
 
-  .sb-number-input-trigger:hover:where(:not(:disabled, [data-disabled])) {
+  .sb-number-field-trigger:hover:where(:not(:disabled, [data-disabled])) {
     color: var(--sb-semantic-color-foreground-primary);
     background: var(--sb-semantic-color-background-subtle);
   }
 
-  .sb-number-input-trigger:focus-visible {
+  .sb-number-field-trigger:focus-visible {
     outline: var(--sb-semantic-border-width-strong) solid var(--sb-semantic-color-focus-ring);
     outline-offset: calc(-1 * var(--sb-semantic-border-width-strong));
   }
 
-  .sb-number-input-trigger:disabled,
-  .sb-number-input-trigger[data-disabled] {
+  .sb-number-field-trigger:disabled,
+  .sb-number-field-trigger[data-disabled] {
     cursor: not-allowed;
     opacity: var(--sb-semantic-opacity-disabled);
   }
 
-  .sb-number-input-control[data-disabled] .sb-number-input-trigger {
+  .sb-number-field-control[data-disabled] .sb-number-field-trigger {
     opacity: 1;
   }
 
-  .sb-number-input-trigger > svg {
+  .sb-number-field-trigger > svg {
     flex: 0 0 auto;
     width: var(--sb-semantic-size-icon-sm);
     height: var(--sb-semantic-size-icon-sm);
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .sb-number-input-control,
-    .sb-number-input-trigger {
+    .sb-number-field-control,
+    .sb-number-field-trigger {
       transition: none;
     }
   }
 
   @media (forced-colors: active) {
-    .sb-number-input-control:focus-within {
+    .sb-number-field-control:focus-within {
       outline: var(--sb-semantic-border-width-strong) solid Highlight;
     }
   }

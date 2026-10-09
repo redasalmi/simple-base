@@ -1,16 +1,17 @@
+import type { TabsOptions } from "@simple-base/contracts";
+import { mergeProps, normalizeProps, useMachine } from "@zag-js/solid";
+import * as tabs from "@zag-js/tabs";
 import {
-  splitProps,
+  type Accessor,
+  createContext,
   createMemo,
   createUniqueId,
-  useContext,
-  createContext,
   type JSX,
-  type Accessor,
+  splitProps,
+  useContext,
 } from "solid-js";
+
 import { cn } from "../cn";
-import * as tabs from "@zag-js/tabs";
-import { mergeProps, normalizeProps, useMachine } from "@zag-js/solid";
-import type { TabsOptions } from "@simple-base/contracts";
 
 type TabsContextType = {
   api: Accessor<tabs.Api>;
@@ -27,13 +28,27 @@ function useTabs() {
 
 export type TabsRootProps = TabsOptions & {
   children: JSX.Element;
-} & Omit<JSX.HTMLAttributes<HTMLDivElement>, keyof TabsOptions | "id" | "children">;
+} & Omit<JSX.HTMLAttributes<HTMLDivElement>, keyof TabsOptions | "children">;
 
 export function Tabs(props: TabsRootProps) {
-  const [local, rest] = splitProps(props, ["children", "value", "defaultValue", "onValueChange"]);
+  const [local, rest] = splitProps(props, [
+    "children",
+    "id",
+    "value",
+    "defaultValue",
+    "onValueChange",
+  ]);
+
+  const fallbackId = createUniqueId();
+  const id = () => local.id ?? fallbackId;
 
   const service = useMachine(tabs.machine, {
-    id: createUniqueId(),
+    get id() {
+      return id();
+    },
+    get ids() {
+      return { root: id() };
+    },
     get value() {
       return local.value;
     },

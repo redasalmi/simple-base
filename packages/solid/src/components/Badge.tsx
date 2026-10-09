@@ -1,6 +1,7 @@
-import { type JSX, splitProps } from "solid-js";
-import { cn } from "../cn";
 import { badgeDefaults, type BadgeOptions } from "@simple-base/contracts";
+import { type JSX, splitProps } from "solid-js";
+
+import { cn } from "../cn";
 
 export type { BadgeVariant, BadgeSize } from "@simple-base/contracts";
 

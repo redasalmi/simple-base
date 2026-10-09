@@ -1,6 +1,7 @@
-import { splitProps, type JSX } from "solid-js";
-import { cn } from "../cn";
 import type { TableCellOptions } from "@simple-base/contracts";
+import { type JSX, splitProps } from "solid-js";
+
+import { cn } from "../cn";
 export type { TableCellVariant } from "@simple-base/contracts";
 
 export type TableRootProps = JSX.HTMLAttributes<HTMLTableElement>;

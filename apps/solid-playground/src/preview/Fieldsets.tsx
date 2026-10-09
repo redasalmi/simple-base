@@ -1,4 +1,3 @@
-import { createSignal } from "solid-js";
 import {
   Button,
   CheckboxGroup,
@@ -13,6 +12,8 @@ import {
   RadioGroup,
   RadioGroupItem,
 } from "@simple-base/solid";
+import { createSignal } from "solid-js";
+
 import { Api, Example, FormDemo } from "./Preview";
 
 const fieldsetApi = [

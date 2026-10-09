@@ -1,4 +1,3 @@
-import { For, createSignal } from "solid-js";
 import {
   Menu,
   MenuContent,
@@ -19,6 +18,8 @@ import {
   TableRowHeader,
   TableWrap,
 } from "@simple-base/solid";
+import { createSignal, For } from "solid-js";
+
 import { Api, Example, MoreIcon } from "./Preview";
 
 const invoices = [

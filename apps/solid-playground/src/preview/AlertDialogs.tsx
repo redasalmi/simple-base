@@ -1,4 +1,3 @@
-import { createSignal } from "solid-js";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -12,6 +11,8 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@simple-base/solid";
+import { createSignal } from "solid-js";
+
 import { Api, Example, WarningIcon } from "./Preview";
 
 export function AlertDialogs() {
@@ -112,7 +113,7 @@ export function AlertDialogs() {
           ],
           [
             "AlertDialogIcon",
-            "div; aria-hidden by default",
+            "div; always aria-hidden",
             "Optional visual warning. It does not replace the title or an accessible description.",
           ],
           [
@@ -122,7 +123,7 @@ export function AlertDialogs() {
           ],
           [
             "AlertDialogTitle / AlertDialogDescription",
-            "heading / paragraph",
+            "h2 (set level to change it) / paragraph",
             "Generated IDs are linked to the root through aria-labelledby and aria-describedby. Include both parts.",
           ],
           [

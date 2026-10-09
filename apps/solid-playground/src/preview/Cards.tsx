@@ -1,5 +1,6 @@
-import { For } from "solid-js";
 import { Badge, Button, Card } from "@simple-base/solid";
+import { For } from "solid-js";
+
 import { Api, Example } from "./Preview";
 
 const treatments = [

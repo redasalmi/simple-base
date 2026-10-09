@@ -1,4 +1,3 @@
-import { createSignal } from "solid-js";
 import {
   Dialog,
   DialogAction,
@@ -11,6 +10,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@simple-base/solid";
+import { createSignal } from "solid-js";
+
 import { Api, CloseIcon, Example } from "./Preview";
 
 export function Dialogs() {
@@ -85,7 +86,7 @@ export function Dialogs() {
           ],
           [
             "DialogTitle / DialogDescription",
-            "heading / paragraph",
+            "h2 (set level to change it) / paragraph",
             "Generated IDs connect both parts to Content through aria-labelledby and aria-describedby. Include both parts.",
           ],
           [

@@ -1,4 +1,3 @@
-import { For, createSignal } from "solid-js";
 import {
   Badge,
   Table,
@@ -14,6 +13,8 @@ import {
   TabsList,
   TabsTrigger,
 } from "@simple-base/solid";
+import { createSignal, For } from "solid-js";
+
 import { Api, Example } from "./Preview";
 
 const invoices = [

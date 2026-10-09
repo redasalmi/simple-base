@@ -1,23 +1,32 @@
-import {
-  splitProps,
-  createMemo,
-  createUniqueId,
-  useContext,
-  For,
-  Show,
-  createContext,
-  type JSX,
-  type Accessor,
-} from "solid-js";
-import { Portal } from "solid-js/web";
-import { cn } from "../cn";
+import type { SelectOption, SelectOptions } from "@simple-base/contracts";
 import * as select from "@zag-js/select";
 import { mergeProps, normalizeProps, useMachine } from "@zag-js/solid";
-import type { SelectOption, SelectOptions } from "@simple-base/contracts";
+import {
+  type Accessor,
+  createContext,
+  createMemo,
+  createSignal,
+  createUniqueId,
+  For,
+  type JSX,
+  onCleanup,
+  onMount,
+  Show,
+  splitProps,
+  useContext,
+} from "solid-js";
+import { Portal } from "solid-js/web";
+
+import { cn } from "../cn";
 import { validateWidgetOptions } from "../validateWidgetOptions";
 
 type SelectContextType = {
-  label: Accessor<string>;
+  descriptionId: Accessor<string>;
+  errorId: Accessor<string>;
+  describedBy: Accessor<string | undefined>;
+  invalid: Accessor<boolean>;
+  registerDescription: () => void;
+  registerError: () => void;
   placeholder: Accessor<string | undefined>;
   options: Accessor<SelectOption[]>;
   api: Accessor<select.Api>;
@@ -27,7 +36,7 @@ const SelectContext = createContext<SelectContextType | null>(null);
 
 function useSelect() {
   const context = useContext(SelectContext);
-  if (!context) throw new Error("useSelect must be used within a Select");
+  if (!context) throw new Error("Select parts must be used within a Select");
 
   return context;
 }
@@ -41,7 +50,6 @@ export function Select(props: SelectRootProps) {
     "class",
     "children",
     "id",
-    "label",
     "name",
     "placeholder",
     "options",
@@ -71,6 +79,9 @@ export function Select(props: SelectRootProps) {
   );
 
   const fallbackId = createUniqueId();
+  const [hasDescription, setHasDescription] = createSignal(false);
+  const [hasError, setHasError] = createSignal(false);
+
   const id = () => local.id ?? fallbackId;
 
   const service = useMachine(select.machine, {
@@ -116,10 +127,33 @@ export function Select(props: SelectRootProps) {
 
   const api = createMemo(() => select.connect(service, normalizeProps));
 
+  const descriptionId = () => `${id()}-description`;
+  const errorId = () => `${id()}-error`;
+  const invalid = () => local.invalid ?? false;
+
+  const describedBy = () => {
+    const ids = [];
+    if (hasDescription()) ids.push(descriptionId());
+    if (hasError() && invalid()) ids.push(errorId());
+
+    return ids.length > 0 ? ids.join(" ") : undefined;
+  };
+
   return (
     <SelectContext.Provider
       value={{
-        label: () => local.label,
+        descriptionId,
+        errorId,
+        describedBy,
+        invalid,
+        registerDescription() {
+          onMount(() => setHasDescription(true));
+          onCleanup(() => setHasDescription(false));
+        },
+        registerError() {
+          onMount(() => setHasError(true));
+          onCleanup(() => setHasError(false));
+        },
         placeholder: () => local.placeholder,
         options: () => local.options,
         api,
@@ -148,17 +182,15 @@ export function Select(props: SelectRootProps) {
   );
 }
 
-export type SelectLabelProps = Omit<JSX.LabelHTMLAttributes<HTMLLabelElement>, "id" | "for"> & {
-  children?: JSX.Element;
-};
+export type SelectLabelProps = Omit<JSX.LabelHTMLAttributes<HTMLLabelElement>, "id" | "for">;
 
 export function SelectLabel(props: SelectLabelProps) {
-  const { api, label } = useSelect();
+  const { api } = useSelect();
   const [local, rest] = splitProps(props, ["class", "children"]);
 
   return (
     <label {...mergeProps(api().getLabelProps(), rest)} class={cn("sb-field-label", local.class)}>
-      {local.children ?? label()}
+      {local.children}
     </label>
   );
 }
@@ -181,18 +213,18 @@ export function SelectControl(props: SelectControlProps) {
 
 export type SelectTriggerProps = Omit<
   JSX.ButtonHTMLAttributes<HTMLButtonElement>,
-  "id" | "type" | "role" | "disabled" | "aria-label"
+  "id" | "type" | "role" | "disabled" | "aria-describedby"
 >;
 
 export function SelectTrigger(props: SelectTriggerProps) {
-  const { api, label } = useSelect();
+  const { api, describedBy } = useSelect();
   const [local, rest] = splitProps(props, ["class", "children"]);
 
   return (
     <button
-      aria-label={label()}
       {...mergeProps(api().getTriggerProps(), rest)}
       class={cn("sb-select-trigger", local.class)}
+      aria-describedby={describedBy()}
     >
       {local.children}
     </button>
@@ -278,15 +310,11 @@ export type SelectListProps = Omit<
 };
 
 export function SelectList(props: SelectListProps) {
-  const { api, options, label } = useSelect();
+  const { api, options } = useSelect();
   const [local, rest] = splitProps(props, ["class", "children"]);
 
   return (
-    <ul
-      aria-label={label()}
-      {...mergeProps(api().getContentProps(), rest)}
-      class={cn("sb-select-list", local.class)}
-    >
+    <ul {...mergeProps(api().getContentProps(), rest)} class={cn("sb-select-list", local.class)}>
       <For each={options()}>{(option) => local.children(option)}</For>
     </ul>
   );
@@ -325,5 +353,31 @@ export function SelectItem(props: SelectItemProps) {
     >
       {local.option.label}
     </li>
+  );
+}
+
+export type SelectDescriptionProps = Omit<JSX.HTMLAttributes<HTMLParagraphElement>, "id">;
+
+export function SelectDescription(props: SelectDescriptionProps) {
+  const { descriptionId, registerDescription } = useSelect();
+  const [local, rest] = splitProps(props, ["class"]);
+
+  registerDescription();
+
+  return <p {...rest} class={cn("sb-field-description", local.class)} id={descriptionId()} />;
+}
+
+export type SelectErrorProps = Omit<JSX.HTMLAttributes<HTMLParagraphElement>, "id">;
+
+export function SelectError(props: SelectErrorProps) {
+  const { errorId, invalid, registerError } = useSelect();
+  const [local, rest] = splitProps(props, ["class"]);
+
+  registerError();
+
+  return (
+    <Show when={invalid()}>
+      <p {...rest} class={cn("sb-field-error", local.class)} id={errorId()} />
+    </Show>
   );
 }

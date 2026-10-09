@@ -1,5 +1,5 @@
-import { For, Show, createSignal, createUniqueId, type JSX } from "solid-js";
 import { Button } from "@simple-base/solid";
+import { createSignal, createUniqueId, For, type JSX, Show } from "solid-js";
 
 export function Example(props: {
   title: string;

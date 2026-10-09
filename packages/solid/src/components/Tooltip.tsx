@@ -1,17 +1,18 @@
+import type { TooltipOptions } from "@simple-base/contracts";
+import { mergeProps, normalizeProps, useMachine } from "@zag-js/solid";
+import * as tooltip from "@zag-js/tooltip";
 import {
-  splitProps,
+  type Accessor,
+  createContext,
   createMemo,
   createUniqueId,
-  useContext,
-  createContext,
   type JSX,
-  type Accessor,
+  splitProps,
+  useContext,
 } from "solid-js";
 import { Portal } from "solid-js/web";
+
 import { cn } from "../cn";
-import * as tooltip from "@zag-js/tooltip";
-import { mergeProps, normalizeProps, useMachine } from "@zag-js/solid";
-import type { TooltipOptions } from "@simple-base/contracts";
 import { Button, type ButtonProps } from "./Button";
 
 type TooltipContextType = {
@@ -36,8 +37,12 @@ export function Tooltip(props: TooltipRootProps) {
     props.placement ? { placement: props.placement } : undefined,
   );
 
+  const fallbackId = createUniqueId();
+
   const service = useMachine(tooltip.machine, {
-    id: createUniqueId(),
+    get id() {
+      return props.id ?? fallbackId;
+    },
     get open() {
       return props.open;
     },

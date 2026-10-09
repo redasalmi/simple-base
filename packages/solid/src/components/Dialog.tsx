@@ -1,19 +1,21 @@
+import type { DialogOptions } from "@simple-base/contracts";
+import { mergeProps } from "@zag-js/solid";
 import {
+  type Accessor,
   createContext,
   createEffect,
   createSignal,
   createUniqueId,
+  type JSX,
   onCleanup,
+  type Setter,
   splitProps,
   useContext,
-  type Accessor,
-  type JSX,
-  type Setter,
 } from "solid-js";
+import { Dynamic } from "solid-js/web";
+
 import { cn } from "../cn";
-import type { DialogOptions } from "@simple-base/contracts";
 import { Button, type ButtonProps } from "./Button";
-import { mergeProps } from "@zag-js/solid";
 
 type DialogContextType = {
   titleId: string;
@@ -164,13 +166,22 @@ export function DialogKicker(props: DialogKickerProps) {
   return <p {...rest} class={cn("sb-dialog-kicker", local.class)} />;
 }
 
-export type DialogTitleProps = Omit<JSX.HTMLAttributes<HTMLHeadingElement>, "id">;
+export type DialogTitleProps = Omit<JSX.HTMLAttributes<HTMLHeadingElement>, "id"> & {
+  level?: 1 | 2 | 3 | 4 | 5 | 6;
+};
 
 export function DialogTitle(props: DialogTitleProps) {
   const { titleId } = useDialog();
-  const [local, rest] = splitProps(props, ["class"]);
+  const [local, rest] = splitProps(props, ["class", "level"]);
 
-  return <h2 {...rest} id={titleId} class={cn("sb-dialog-title", local.class)} />;
+  return (
+    <Dynamic
+      {...rest}
+      component={`h${local.level ?? 2}`}
+      id={titleId}
+      class={cn("sb-dialog-title", local.class)}
+    />
+  );
 }
 
 export type DialogDescriptionProps = Omit<JSX.HTMLAttributes<HTMLParagraphElement>, "id">;
@@ -246,5 +257,3 @@ export function DialogAction(props: DialogActionProps) {
     </Button>
   );
 }
-
-export type DialogProps = DialogRootProps;

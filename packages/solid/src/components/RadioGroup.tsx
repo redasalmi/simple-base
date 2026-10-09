@@ -1,14 +1,15 @@
+import type { RadioGroupOptions } from "@simple-base/contracts";
+import { mergeProps } from "@zag-js/solid";
 import {
+  type Accessor,
   createContext,
   createUniqueId,
+  type JSX,
   splitProps,
   useContext,
-  type Accessor,
-  type JSX,
 } from "solid-js";
-import { mergeProps } from "@zag-js/solid";
+
 import { cn } from "../cn";
-import type { RadioGroupOptions } from "@simple-base/contracts";
 import { useFieldset } from "./Fieldset";
 import { Radio, type RadioProps } from "./Radio";
 

@@ -1,6 +1,6 @@
-import { For, createSignal } from "solid-js";
 import {
   Badge,
+  type BadgeVariant,
   Checkbox,
   Table,
   TableBody,
@@ -13,8 +13,9 @@ import {
   TableRowHeader,
   TableSortButton,
   TableWrap,
-  type BadgeVariant,
 } from "@simple-base/solid";
+import { createSignal, For } from "solid-js";
+
 import { Api, Example } from "./Preview";
 
 type Document = {

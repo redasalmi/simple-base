@@ -1,17 +1,18 @@
+import type { FieldsetOptions } from "@simple-base/contracts";
 import {
+  type Accessor,
   createContext,
   createSignal,
   createUniqueId,
+  type JSX,
   onCleanup,
   onMount,
   Show,
   splitProps,
   useContext,
-  type Accessor,
-  type JSX,
 } from "solid-js";
+
 import { cn } from "../cn";
-import type { FieldsetOptions } from "@simple-base/contracts";
 
 type FieldsetContextType = {
   descriptionId: Accessor<string>;

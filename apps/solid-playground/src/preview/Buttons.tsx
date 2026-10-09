@@ -1,5 +1,6 @@
-import { For, createSignal } from "solid-js";
 import { Button, type ButtonSize, type ButtonVariant } from "@simple-base/solid";
+import { createSignal, For } from "solid-js";
+
 import { Api, Example } from "./Preview";
 
 const variants = [

@@ -10,7 +10,6 @@ export {
   AlertDialogFooter,
   AlertDialogCancel,
   AlertDialogAction,
-  type AlertDialogProps,
   type AlertDialogRootProps,
   type AlertDialogTriggerProps,
   type AlertDialogContentProps,
@@ -34,7 +33,6 @@ export {
   DialogFooter,
   DialogClose,
   DialogAction,
-  type DialogProps,
   type DialogRootProps,
   type DialogTriggerProps,
   type DialogContentProps,
@@ -50,6 +48,7 @@ export type { DialogOptions } from "@simple-base/contracts";
 export { Badge, type BadgeProps, type BadgeVariant, type BadgeSize } from "./components/Badge";
 export { Button, type ButtonProps, type ButtonVariant, type ButtonSize } from "./components/Button";
 export { Card, type CardProps, type CardVariant } from "./components/Card";
+export type { BadgeOptions, ButtonOptions, CardOptions } from "@simple-base/contracts";
 export { Switch, type SwitchProps } from "./components/Switch";
 export { Checkbox, type CheckboxProps } from "./components/Checkbox";
 export { Input, type InputProps } from "./components/Input";
@@ -107,7 +106,7 @@ export {
   NumberFieldAffix,
   NumberFieldDescription,
   NumberFieldError,
-  type NumberFieldProps,
+  type NumberFieldRootProps,
   type NumberFieldLabelProps,
   type NumberFieldControlProps,
   type NumberFieldInputProps,
@@ -129,7 +128,7 @@ export {
   DatePickerCalendar,
   DatePickerDescription,
   DatePickerError,
-  type DatePickerProps,
+  type DatePickerRootProps,
   type DatePickerLabelProps,
   type DatePickerControlProps,
   type DatePickerInputProps,
@@ -155,6 +154,8 @@ export {
   ComboboxList,
   ComboboxEmpty,
   ComboboxItem,
+  ComboboxDescription,
+  ComboboxError,
   type ComboboxRootProps,
   type ComboboxLabelProps,
   type ComboboxControlProps,
@@ -166,7 +167,10 @@ export {
   type ComboboxListProps,
   type ComboboxEmptyProps,
   type ComboboxItemProps,
+  type ComboboxDescriptionProps,
+  type ComboboxErrorProps,
 } from "./components/Combobox";
+export type { ComboboxOption, ComboboxOptions } from "@simple-base/contracts";
 export {
   Select,
   SelectLabel,
@@ -180,6 +184,8 @@ export {
   SelectList,
   SelectEmpty,
   SelectItem,
+  SelectDescription,
+  SelectError,
   type SelectRootProps,
   type SelectLabelProps,
   type SelectControlProps,
@@ -192,7 +198,10 @@ export {
   type SelectListProps,
   type SelectEmptyProps,
   type SelectItemProps,
+  type SelectDescriptionProps,
+  type SelectErrorProps,
 } from "./components/Select";
+export type { SelectOption, SelectOptions, Placement } from "@simple-base/contracts";
 export {
   Menu,
   MenuTrigger,
@@ -268,6 +277,7 @@ export {
   type TableSortButtonProps,
   type TableCellVariant,
 } from "./components/Table";
+export type { TableCellOptions } from "@simple-base/contracts";
 export {
   Pagination,
   PaginationPrevious,
@@ -307,6 +317,7 @@ export {
   type AlertCloseProps,
   type AlertStatus,
 } from "./components/Alert";
+export type { AlertOptions } from "@simple-base/contracts";
 export {
   StatusLine,
   StatusLineDot,
@@ -320,6 +331,7 @@ export {
   type StatusLineDescriptionProps,
   type StatusValue,
 } from "./components/StatusLine";
+export type { StatusOptions } from "@simple-base/contracts";
 export {
   createToaster,
   Toaster,
@@ -330,7 +342,6 @@ export {
   ToastDescription,
   ToastAction,
   ToastClose,
-  type ToasterOptions,
   type ToasterApi,
   type ToastCreateOptions,
   type ToasterProps,
@@ -342,4 +353,4 @@ export {
   type ToastActionProps,
   type ToastCloseProps,
 } from "./components/Toast";
-export type { ToastStatus } from "@simple-base/contracts";
+export type { ToastStatus, ToastOptions, ToasterOptions } from "@simple-base/contracts";

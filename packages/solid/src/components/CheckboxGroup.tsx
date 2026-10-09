@@ -1,9 +1,10 @@
-import { createContext, splitProps, useContext, type Accessor, type JSX } from "solid-js";
-import { mergeProps } from "@zag-js/solid";
-import { cn } from "../cn";
 import type { CheckboxGroupOptions } from "@simple-base/contracts";
-import { useFieldset } from "./Fieldset";
+import { mergeProps } from "@zag-js/solid";
+import { type Accessor, createContext, type JSX, splitProps, useContext } from "solid-js";
+
+import { cn } from "../cn";
 import { Checkbox, type CheckboxProps } from "./Checkbox";
+import { useFieldset } from "./Fieldset";
 
 type CheckboxGroupContextType = {
   name: Accessor<string | undefined>;

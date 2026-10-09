@@ -10,7 +10,6 @@ export type SelectOption = {
 export type SelectOptions = {
   /** Id of the root element. Generated when omitted. */
   id?: string;
-  label: string;
   name?: string;
   placeholder?: string;
   options: SelectOption[];

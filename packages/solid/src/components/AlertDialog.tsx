@@ -1,19 +1,21 @@
+import type { DialogOptions } from "@simple-base/contracts";
+import { mergeProps } from "@zag-js/solid";
 import {
+  type Accessor,
   createContext,
   createEffect,
   createSignal,
   createUniqueId,
+  type JSX,
   onCleanup,
+  type Setter,
   splitProps,
   useContext,
-  type Accessor,
-  type Setter,
-  type JSX,
 } from "solid-js";
+import { Dynamic } from "solid-js/web";
+
 import { cn } from "../cn";
-import type { DialogOptions } from "@simple-base/contracts";
 import { Button, type ButtonProps } from "./Button";
-import { mergeProps } from "@zag-js/solid";
 
 type AlertDialogContextType = {
   titleId: string;
@@ -151,18 +153,12 @@ export function AlertDialogContent(props: AlertDialogContentProps) {
   );
 }
 
-export type AlertDialogIconProps = JSX.HTMLAttributes<HTMLDivElement>;
+export type AlertDialogIconProps = Omit<JSX.HTMLAttributes<HTMLDivElement>, "aria-hidden">;
 
 export function AlertDialogIcon(props: AlertDialogIconProps) {
-  const [local, rest] = splitProps(props, ["class", "aria-hidden"]);
+  const [local, rest] = splitProps(props, ["class"]);
 
-  return (
-    <div
-      {...rest}
-      aria-hidden={local["aria-hidden"] ?? true}
-      class={cn("sb-alert-dialog-icon", local.class)}
-    />
-  );
+  return <div {...rest} aria-hidden="true" class={cn("sb-alert-dialog-icon", local.class)} />;
 }
 
 export type AlertDialogHeaderProps = JSX.HTMLAttributes<HTMLDivElement>;
@@ -181,13 +177,22 @@ export function AlertDialogKicker(props: AlertDialogKickerProps) {
   return <p {...rest} class={cn("sb-alert-dialog-kicker", local.class)} />;
 }
 
-export type AlertDialogTitleProps = Omit<JSX.HTMLAttributes<HTMLHeadingElement>, "id">;
+export type AlertDialogTitleProps = Omit<JSX.HTMLAttributes<HTMLHeadingElement>, "id"> & {
+  level?: 1 | 2 | 3 | 4 | 5 | 6;
+};
 
 export function AlertDialogTitle(props: AlertDialogTitleProps) {
   const { titleId } = useAlertDialog();
-  const [local, rest] = splitProps(props, ["class"]);
+  const [local, rest] = splitProps(props, ["class", "level"]);
 
-  return <h3 {...rest} id={titleId} class={cn("sb-alert-dialog-title", local.class)} />;
+  return (
+    <Dynamic
+      {...rest}
+      component={`h${local.level ?? 2}`}
+      id={titleId}
+      class={cn("sb-alert-dialog-title", local.class)}
+    />
+  );
 }
 
 export type AlertDialogDescriptionProps = Omit<JSX.HTMLAttributes<HTMLParagraphElement>, "id">;
@@ -265,5 +270,3 @@ export function AlertDialogAction(props: AlertDialogActionProps) {
     </Button>
   );
 }
-
-export type AlertDialogProps = AlertDialogRootProps;

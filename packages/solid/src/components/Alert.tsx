@@ -1,5 +1,6 @@
-import { splitProps, type JSX } from "solid-js";
 import type { AlertOptions } from "@simple-base/contracts";
+import { type JSX, splitProps } from "solid-js";
+
 import { cn } from "../cn";
 
 export type { AlertStatus } from "@simple-base/contracts";
@@ -31,7 +32,9 @@ export function AlertContent(props: AlertContentProps) {
 export type AlertTitleProps = JSX.HTMLAttributes<HTMLElement>;
 
 export function AlertTitle(props: AlertTitleProps) {
-  return <strong {...props} />;
+  const [local, rest] = splitProps(props, ["class"]);
+
+  return <strong {...rest} class={cn("sb-alert-title", local.class)} />;
 }
 
 export type AlertDescriptionProps = JSX.HTMLAttributes<HTMLParagraphElement>;

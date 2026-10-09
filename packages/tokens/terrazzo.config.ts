@@ -1,9 +1,10 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+
 import { defineConfig } from "@terrazzo/cli";
 import css from "@terrazzo/plugin-css";
-import tailwind from "@terrazzo/plugin-tailwind";
 import js from "@terrazzo/plugin-js";
+import tailwind from "@terrazzo/plugin-tailwind";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const tokensResolverPath = path.join(__dirname, "src/simple-base.resolver.json");

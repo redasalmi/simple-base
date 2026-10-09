@@ -1,5 +1,6 @@
-import { splitProps, type JSX } from "solid-js";
 import type { StatusOptions } from "@simple-base/contracts";
+import { type JSX, splitProps } from "solid-js";
+
 import { cn } from "../cn";
 
 export type { StatusValue } from "@simple-base/contracts";
@@ -31,7 +32,9 @@ export function StatusLineContent(props: StatusLineContentProps) {
 export type StatusLineTitleProps = JSX.HTMLAttributes<HTMLElement>;
 
 export function StatusLineTitle(props: StatusLineTitleProps) {
-  return <strong {...props} />;
+  const [local, rest] = splitProps(props, ["class"]);
+
+  return <strong {...rest} class={cn("sb-status-line-title", local.class)} />;
 }
 
 export type StatusLineDescriptionProps = JSX.HTMLAttributes<HTMLParagraphElement>;

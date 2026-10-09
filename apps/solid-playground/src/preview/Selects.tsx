@@ -1,4 +1,3 @@
-import { createSignal } from "solid-js";
 import {
   Button,
   Select,
@@ -14,6 +13,8 @@ import {
   SelectTrigger,
   SelectValueText,
 } from "@simple-base/solid";
+import { createSignal } from "solid-js";
+
 import { Api, Example, FormDemo } from "./Preview";
 
 const timezones = [
@@ -45,18 +46,17 @@ export function Selects() {
         title="Choose a single option"
         description="Open the list with Enter, Space, or a click, then move with the arrow keys, Home, and End. Type a letter to jump to a matching option. Japan Standard Time is disabled in this demo, and Escape closes the list without changing the value."
         code={
-          'const [timezone, setTimezone] = createSignal("");\n\n<Select\n  id="timezone"\n  label="Timezone"\n  placeholder="Select a timezone"\n  options={timezones}\n  onValueChange={setTimezone}\n>\n  <SelectLabel />\n  <SelectControl>\n    <SelectTrigger>\n      <SelectValueText />\n      <SelectIndicator>\n        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">\n          <path d="m6 9 6 6 6-6" />\n        </svg>\n      </SelectIndicator>\n    </SelectTrigger>\n  </SelectControl>\n  <SelectPortal>\n    <SelectPositioner>\n      <SelectContent>\n        <SelectList>\n          {(option) => <SelectItem option={option} />}\n        </SelectList>\n      </SelectContent>\n    </SelectPositioner>\n  </SelectPortal>\n</Select>'
+          'const [timezone, setTimezone] = createSignal("");\n\n<Select\n  id="timezone"\n  placeholder="Select a timezone"\n  options={timezones}\n  onValueChange={setTimezone}\n>\n  <SelectLabel>Timezone</SelectLabel>\n  <SelectControl>\n    <SelectTrigger>\n      <SelectValueText />\n      <SelectIndicator>\n        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">\n          <path d="m6 9 6 6 6-6" />\n        </svg>\n      </SelectIndicator>\n    </SelectTrigger>\n  </SelectControl>\n  <SelectPortal>\n    <SelectPositioner>\n      <SelectContent>\n        <SelectList>\n          {(option) => <SelectItem option={option} />}\n        </SelectList>\n      </SelectContent>\n    </SelectPositioner>\n  </SelectPortal>\n</Select>'
         }
       >
         <div class="preview-stack">
           <Select
             id="preview-timezone"
-            label="Timezone"
             placeholder="Select a timezone"
             options={timezones}
             onValueChange={setTimezone}
           >
-            <SelectLabel />
+            <SelectLabel>Timezone</SelectLabel>
             <SelectControl>
               <SelectTrigger>
                 <SelectValueText />
@@ -84,12 +84,12 @@ export function Selects() {
         title="In a form"
         description="With name and defaultValue the select needs no signal or handler: a hidden native select submits the option value with the form, and Reset restores the initial selection."
         code={
-          '<form>\n  <Select\n    label="Timezone"\n    name="timezone"\n    options={timezones}\n    defaultValue="utc"\n  >\n    {/* Label, control, and popup as above. */}\n  </Select>\n  <Button type="submit">Submit</Button>\n  <Button type="reset">Reset</Button>\n</form>'
+          '<form>\n  <Select\n    name="timezone"\n    options={timezones}\n    defaultValue="utc"\n  >\n    {/* Label, control, and popup as above. */}\n  </Select>\n  <Button type="submit">Submit</Button>\n  <Button type="reset">Reset</Button>\n</form>'
         }
       >
         <FormDemo>
-          <Select label="Timezone" name="timezone" options={timezones} defaultValue="utc">
-            <SelectLabel />
+          <Select name="timezone" options={timezones} defaultValue="utc">
+            <SelectLabel>Timezone</SelectLabel>
             <SelectControl>
               <SelectTrigger>
                 <SelectValueText />
@@ -112,18 +112,17 @@ export function Selects() {
         title="Empty and updated options"
         description="Open the initially empty list to see the empty message, then load a local collection and reopen it. No request is made and no data is saved."
         code={
-          'const [loaded, setLoaded] = createSignal(false);\nconst [region, setRegion] = createSignal("");\n\n<Select\n  id="region"\n  label="Region"\n  placeholder="Select a region"\n  options={loaded() ? timezones : []}\n  onValueChange={setRegion}\n>\n  {/* Label, control, and popup as above. */}\n  <SelectPortal>\n    <SelectPositioner>\n      <SelectContent>\n        <SelectList>\n          {(option) => <SelectItem option={option} />}\n        </SelectList>\n        <SelectEmpty>\n          {loaded() ? "No regions found." : "No regions available. Load the example options."}\n        </SelectEmpty>\n      </SelectContent>\n    </SelectPositioner>\n  </SelectPortal>\n</Select>\n<Button onClick={() => setLoaded(true)} disabled={loaded()}>\n  {loaded() ? "Options loaded" : "Load example options"}\n</Button>'
+          'const [loaded, setLoaded] = createSignal(false);\nconst [region, setRegion] = createSignal("");\n\n<Select\n  id="region"\n  placeholder="Select a region"\n  options={loaded() ? timezones : []}\n  onValueChange={setRegion}\n>\n  {/* Label, control, and popup as above. */}\n  <SelectPortal>\n    <SelectPositioner>\n      <SelectContent>\n        <SelectList>\n          {(option) => <SelectItem option={option} />}\n        </SelectList>\n        <SelectEmpty>\n          {loaded() ? "No regions found." : "No regions available. Load the example options."}\n        </SelectEmpty>\n      </SelectContent>\n    </SelectPositioner>\n  </SelectPortal>\n</Select>\n<Button onClick={() => setLoaded(true)} disabled={loaded()}>\n  {loaded() ? "Options loaded" : "Load example options"}\n</Button>'
         }
       >
         <div class="preview-stack">
           <Select
             id="preview-region"
-            label="Region"
             placeholder="Select a region"
             options={loaded() ? timezones : []}
             onValueChange={setRegion}
           >
-            <SelectLabel />
+            <SelectLabel>Region</SelectLabel>
             <SelectControl>
               <SelectTrigger>
                 <SelectValueText />
@@ -163,7 +162,7 @@ export function Selects() {
         rows={[
           [
             "Select",
-            "label, options (required)",
+            "options (required)",
             "The root owns single-selection state and builds the option collection. id is generated when omitted; pass one to name the root.",
           ],
           [
@@ -189,7 +188,7 @@ export function Selects() {
           [
             "value, disabled, invalid, required, placement, onOpenChange",
             "optional",
-            "value makes selection controlled, where an empty string clears it. disabled dims and blocks the field, invalid switches to the danger border, and required adds the label marker. placement picks the popup side. onOpenChange reports popup visibility.",
+            "value makes selection controlled, where an empty string clears it. disabled dims and blocks the field, invalid switches to the danger border and shows SelectError, and required adds the label marker. placement picks the popup side. onOpenChange reports popup visibility.",
           ],
           [
             "class and native props",
@@ -199,7 +198,7 @@ export function Selects() {
           [
             "SelectLabel / SelectControl",
             "label / wrapper",
-            "Label uses the root label by default. Control provides the bordered field and the shared focus ring.",
+            "Label holds the visible text and names the trigger and the list. Control provides the bordered field and the shared focus ring.",
           ],
           [
             "SelectTrigger / SelectValueText / SelectIndicator",
@@ -220,6 +219,11 @@ export function Selects() {
             "SelectEmpty",
             "status message",
             "Place beside List inside Content. It appears only when the popup is open and the collection has no options.",
+          ],
+          [
+            "SelectDescription / SelectError",
+            "paragraph",
+            "Linked to the trigger with aria-describedby while rendered. The error renders only while invalid is set.",
           ],
           [
             "Styles",

@@ -1,16 +1,17 @@
-import { createSignal } from "solid-js";
 import {
   Button,
+  createToaster,
   Toast,
   ToastAction,
   ToastClose,
   ToastContent,
   ToastDescription,
+  Toaster,
   ToastIcon,
   ToastTitle,
-  Toaster,
-  createToaster,
 } from "@simple-base/solid";
+import { createSignal } from "solid-js";
+
 import { Api, CheckIcon, CloseIcon, Example } from "./Preview";
 
 const toaster = createToaster({ max: 3 });

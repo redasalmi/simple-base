@@ -1,4 +1,3 @@
-import { createSignal } from "solid-js";
 import {
   NumberField,
   NumberFieldAffix,
@@ -10,6 +9,8 @@ import {
   NumberFieldInput,
   NumberFieldLabel,
 } from "@simple-base/solid";
+import { createSignal } from "solid-js";
+
 import { Api, Example, FormDemo } from "./Preview";
 
 export function NumberFields() {
@@ -173,7 +174,7 @@ export function NumberFields() {
           ],
           [
             "Styles",
-            "@simple-base/css/number-input",
+            "@simple-base/css/number-field",
             "Included in the main stylesheet. For individual imports, load @simple-base/tokens/css once before the component styles.",
           ],
         ]}

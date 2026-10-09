@@ -1,9 +1,11 @@
+import type { NumberFieldOptions } from "@simple-base/contracts";
 import * as numberInput from "@zag-js/number-input";
 import { mergeProps, normalizeProps, useMachine } from "@zag-js/solid";
 import {
   type Accessor,
   createContext,
   createMemo,
+  createSignal,
   createUniqueId,
   type JSX,
   onCleanup,
@@ -11,9 +13,8 @@ import {
   Show,
   splitProps,
   useContext,
-  createSignal,
 } from "solid-js";
-import type { NumberFieldOptions } from "@simple-base/contracts";
+
 import { cn } from "../cn";
 
 type NumberFieldContextType = {
@@ -29,9 +30,8 @@ const NumberFieldContext = createContext<NumberFieldContextType | null>(null);
 
 function useNumberField() {
   const context = useContext(NumberFieldContext);
-  if (!context) {
-    throw new Error("useNumberField must be used within a NumberField");
-  }
+  if (!context) throw new Error("NumberField parts must be used within a NumberField");
+
   return context;
 }
 
@@ -40,11 +40,11 @@ type WithoutOwnedProps<Props, Owned extends string> = Omit<Props, Owned> & {
   [Key in Owned]?: never;
 };
 
-export type NumberFieldProps = NumberFieldOptions & {
+export type NumberFieldRootProps = NumberFieldOptions & {
   children: JSX.Element;
 } & Omit<JSX.HTMLAttributes<HTMLDivElement>, keyof NumberFieldOptions | "children">;
 
-export function NumberField(props: NumberFieldProps) {
+export function NumberField(props: NumberFieldRootProps) {
   const [local, rest] = splitProps(props, [
     "class",
     "children",
@@ -146,7 +146,7 @@ export function NumberField(props: NumberFieldProps) {
         },
       }}
     >
-      <div {...mergeProps(api().getRootProps(), rest)} class={cn("sb-number-input", local.class)}>
+      <div {...mergeProps(api().getRootProps(), rest)} class={cn("sb-number-field", local.class)}>
         {local.children}
       </div>
     </NumberFieldContext.Provider>
@@ -175,7 +175,7 @@ export function NumberFieldControl(props: NumberFieldControlProps) {
   return (
     <div
       {...mergeProps(api().getControlProps(), rest)}
-      class={cn("sb-number-input-control", local.class)}
+      class={cn("sb-number-field-control", local.class)}
     >
       {local.children}
     </div>
@@ -225,7 +225,7 @@ export function NumberFieldInput(props: NumberFieldInputProps) {
   return (
     <input
       {...mergeProps(inputProps(), rest)}
-      class={cn("sb-number-input-input", local.class)}
+      class={cn("sb-number-field-input", local.class)}
       aria-describedby={describedBy()}
     />
   );
@@ -243,7 +243,7 @@ export function NumberFieldDecrement(props: NumberFieldTriggerProps) {
   return (
     <button
       {...mergeProps(api().getDecrementTriggerProps(), rest)}
-      class={cn("sb-number-input-trigger", local.class)}
+      class={cn("sb-number-field-trigger", local.class)}
     >
       {local.children ?? "−"}
     </button>
@@ -257,7 +257,7 @@ export function NumberFieldIncrement(props: NumberFieldTriggerProps) {
   return (
     <button
       {...mergeProps(api().getIncrementTriggerProps(), rest)}
-      class={cn("sb-number-input-trigger", local.class)}
+      class={cn("sb-number-field-trigger", local.class)}
     >
       {local.children ?? "+"}
     </button>
@@ -269,7 +269,7 @@ export type NumberFieldAffixProps = Omit<JSX.HTMLAttributes<HTMLSpanElement>, "a
 export function NumberFieldAffix(props: NumberFieldAffixProps) {
   const [local, rest] = splitProps(props, ["class"]);
 
-  return <span {...rest} aria-hidden="true" class={cn("sb-number-input-affix", local.class)} />;
+  return <span {...rest} aria-hidden="true" class={cn("sb-number-field-affix", local.class)} />;
 }
 
 export type NumberFieldDescriptionProps = Omit<JSX.HTMLAttributes<HTMLParagraphElement>, "id">;

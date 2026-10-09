@@ -1,4 +1,5 @@
 import type { DateValue } from "@internationalized/date";
+
 import type { Placement } from "./placement";
 
 /** A date picker wraps exactly one date input; these options are applied to it and its label and messages. */
@@ -9,10 +10,10 @@ export type DatePickerOptions = {
   name?: string;
   /** Id of a form to associate the input with when it sits outside that form. */
   form?: string;
-  /** Controlled value. An empty array means no selection; omit for uncontrolled state. */
-  value?: DateValue[];
-  /** Initial value for uncontrolled state. */
-  defaultValue?: DateValue[];
+  /** Controlled value. `null` means no selection; omit for uncontrolled state. */
+  value?: DateValue | null;
+  /** Initial value for uncontrolled state. `null` means no selection. */
+  defaultValue?: DateValue | null;
   /** Earliest selectable date. */
   min?: DateValue;
   /** Latest selectable date. */
@@ -30,7 +31,11 @@ export type DatePickerOptions = {
   invalid?: boolean;
   /** Side of the field the calendar opens on. Defaults to `bottom-start`. */
   placement?: Placement;
-  /** Called with the selected dates and their formatted display strings. */
-  onValueChange?: (value: DateValue[], valueAsString: string[]) => void;
+  /** Called with the selected date and the text shown in the input, or `null` and `""` when the date is cleared. */
+  onValueChange?: (value: DateValue | null, valueAsString: string) => void;
   onOpenChange?: (open: boolean) => void;
 };
+
+export const datePickerDefaults = {
+  placement: "bottom-start",
+} as const satisfies Required<Pick<DatePickerOptions, "placement">>;

@@ -1,17 +1,18 @@
-import {
-  splitProps,
-  createMemo,
-  createUniqueId,
-  useContext,
-  createContext,
-  type JSX,
-  type Accessor,
-} from "solid-js";
-import { Portal } from "solid-js/web";
-import { cn } from "../cn";
+import type { MenuItemOptions, MenuOptions } from "@simple-base/contracts";
 import * as menu from "@zag-js/menu";
 import { mergeProps, normalizeProps, useMachine } from "@zag-js/solid";
-import type { MenuItemOptions, MenuOptions } from "@simple-base/contracts";
+import {
+  type Accessor,
+  createContext,
+  createMemo,
+  createUniqueId,
+  type JSX,
+  splitProps,
+  useContext,
+} from "solid-js";
+import { Portal } from "solid-js/web";
+
+import { cn } from "../cn";
 import { Button, type ButtonProps } from "./Button";
 
 export type { MenuItemVariant } from "@simple-base/contracts";
@@ -40,8 +41,12 @@ export function Menu(props: MenuRootProps) {
     props.placement ? { placement: props.placement } : undefined,
   );
 
+  const fallbackId = createUniqueId();
+
   const service = useMachine(menu.machine, {
-    id: createUniqueId(),
+    get id() {
+      return props.id ?? fallbackId;
+    },
     get open() {
       return props.open;
     },

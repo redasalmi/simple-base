@@ -27,7 +27,7 @@ These already have styles in `@simple-base/css` unless noted.
 - [x] Bring the package and playground READMEs up to date with the exports
 - [ ] Tokens: generate better JS consts and TS types
 - [ ] Tokens: refactor and improve the `tailwind.css` output
-- [ ] Contracts: add a `./field` subpath export (`FieldOptions` is only exported from the root)
+- [x] Contracts: add a `./field` subpath export (`FieldOptions` is only exported from the root)
 - [ ] Add behavior tests for the stateful components (Select, Combobox, DatePicker, NumberField, Toast, form reset)
 - [ ] Release 1.0.0 across all four packages and start a changelog
 
