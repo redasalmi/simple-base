@@ -28,7 +28,7 @@ type SelectContextType = {
   registerDescription: () => void;
   registerError: () => void;
   placeholder: Accessor<string | undefined>;
-  options: Accessor<SelectOption[]>;
+  options: Accessor<readonly SelectOption[]>;
   api: Accessor<select.Api>;
 };
 
@@ -51,6 +51,7 @@ export function Select(props: SelectRootProps) {
     "children",
     "id",
     "name",
+    "form",
     "placeholder",
     "options",
     "value",
@@ -94,6 +95,9 @@ export function Select(props: SelectRootProps) {
     get name() {
       return local.name;
     },
+    get form() {
+      return local.form;
+    },
     get disabled() {
       return local.disabled;
     },
@@ -105,11 +109,11 @@ export function Select(props: SelectRootProps) {
     },
     get value() {
       if (local.value === undefined) return undefined;
-      return local.value === "" ? [] : [local.value];
+      return local.value === null ? [] : [local.value];
     },
     get defaultValue() {
       if (local.defaultValue === undefined) return undefined;
-      return local.defaultValue === "" ? [] : [local.defaultValue];
+      return local.defaultValue === null ? [] : [local.defaultValue];
     },
     get positioning() {
       return positioning();
@@ -121,7 +125,7 @@ export function Select(props: SelectRootProps) {
       local.onOpenChange?.(open);
     },
     onValueChange({ value }) {
-      local.onValueChange?.(value[0] ?? "");
+      local.onValueChange?.(value[0] ?? null);
     },
   });
 

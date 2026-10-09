@@ -460,24 +460,16 @@ export function Switches() {
         title="On & off"
         description="A switch applies a setting immediately. These settings only affect their local status text and reset when you leave the page."
         code={
-          '<Switch aria-label="Live preview" checked={enabled()}\n  onChange={(event) => setEnabled(event.currentTarget.checked)} />'
+          "<label>\n  <Switch checked={enabled()}\n    onChange={(event) => setEnabled(event.currentTarget.checked)} />\n  Live preview\n</label>"
         }
       >
         <div class="preview-stack">
           <label class="preview-choice">
-            <Switch
-              aria-label="Live preview"
-              checked={sync()}
-              onChange={(event) => setSync(event.currentTarget.checked)}
-            />
+            <Switch checked={sync()} onChange={(event) => setSync(event.currentTarget.checked)} />
             <span>Live preview</span>
           </label>
           <label class="preview-choice">
-            <Switch
-              aria-label="Command hints"
-              checked={hints()}
-              onChange={(event) => setHints(event.currentTarget.checked)}
-            />
+            <Switch checked={hints()} onChange={(event) => setHints(event.currentTarget.checked)} />
             <span>Command hints</span>
           </label>
           <p class="preview-status" role="status">
@@ -489,12 +481,12 @@ export function Switches() {
         title="In a form"
         description="A switch submits like a checkbox: its name and value while on, nothing while off. defaultChecked sets the state that Reset restores."
         code={
-          '<form>\n  <label>\n    <Switch aria-label="Weekly digest" name="digest" defaultChecked />\n    Weekly digest\n  </label>\n</form>'
+          '<form>\n  <label>\n    <Switch name="digest" defaultChecked />\n    Weekly digest\n  </label>\n</form>'
         }
       >
         <FormDemo>
           <label class="preview-choice">
-            <Switch aria-label="Weekly digest" name="digest" defaultChecked />
+            <Switch name="digest" defaultChecked />
             <span>Weekly digest</span>
           </label>
         </FormDemo>
@@ -503,16 +495,16 @@ export function Switches() {
         title="Disabled states"
         description="Unavailable off and on settings. Keep the label visible to explain which preference is locked."
         code={
-          '<Switch aria-label="Unavailable setting" disabled />\n<Switch aria-label="Required setting" defaultChecked disabled />'
+          "<label><Switch disabled /> Unavailable setting</label>\n<label><Switch defaultChecked disabled /> Required setting</label>"
         }
       >
         <div class="preview-stack">
           <label class="preview-choice">
-            <Switch aria-label="Unavailable setting" disabled />
+            <Switch disabled />
             <span>Unavailable setting</span>
           </label>
           <label class="preview-choice">
-            <Switch aria-label="Required setting" defaultChecked disabled />
+            <Switch defaultChecked disabled />
             <span>Required setting</span>
           </label>
         </div>
@@ -520,9 +512,9 @@ export function Switches() {
       <Api
         rows={[
           [
-            "aria-label / aria-labelledby",
-            "one is required",
-            "The type contract requires an accessible name. Match it to the visible label.",
+            "Accessible name",
+            "label, aria-label, or aria-labelledby",
+            "Wrap the switch in a label, or point a label's for at its id, like a checkbox. Use aria-label only for a switch with no visible text.",
           ],
           [
             "checked / onChange",

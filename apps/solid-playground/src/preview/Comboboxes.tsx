@@ -38,10 +38,10 @@ function ChevronDown() {
 }
 
 export function Comboboxes() {
-  const [country, setCountry] = createSignal("");
+  const [country, setCountry] = createSignal<string | null>(null);
   const [loaded, setLoaded] = createSignal(false);
-  const [destination, setDestination] = createSignal("");
-  const [shipping, setShipping] = createSignal("FR");
+  const [destination, setDestination] = createSignal<string | null>(null);
+  const [shipping, setShipping] = createSignal<string | null>("FR");
 
   return (
     <>
@@ -49,7 +49,7 @@ export function Comboboxes() {
         title="Search and select"
         description="Type to filter countries, then use the arrow keys and Enter or click an option. Japan is disabled in this demo. Search for a nonmatching term to see the empty message; Escape closes the popup."
         code={
-          'const [country, setCountry] = createSignal("");\n\n<Combobox\n  id="country"\n  options={countries}\n  placeholder="Search countries"\n  onValueChange={setCountry}\n>\n  <ComboboxLabel>Country</ComboboxLabel>\n  <ComboboxControl>\n    <ComboboxInput />\n    <ComboboxTrigger>\n      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">\n        <path d="m6 9 6 6 6-6" />\n      </svg>\n    </ComboboxTrigger>\n  </ComboboxControl>\n  <ComboboxPortal>\n    <ComboboxPositioner>\n      <ComboboxContent>\n        <ComboboxList>\n          {(option) => <ComboboxItem option={option} />}\n        </ComboboxList>\n        <ComboboxEmpty>No countries found. Try another search.</ComboboxEmpty>\n      </ComboboxContent>\n    </ComboboxPositioner>\n  </ComboboxPortal>\n</Combobox>'
+          'const [country, setCountry] = createSignal<string | null>(null);\n\n<Combobox\n  id="country"\n  options={countries}\n  placeholder="Search countries"\n  onValueChange={setCountry}\n>\n  <ComboboxLabel>Country</ComboboxLabel>\n  <ComboboxControl>\n    <ComboboxInput />\n    <ComboboxTrigger>\n      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">\n        <path d="m6 9 6 6 6-6" />\n      </svg>\n    </ComboboxTrigger>\n  </ComboboxControl>\n  <ComboboxPortal>\n    <ComboboxPositioner>\n      <ComboboxContent>\n        <ComboboxList>\n          {(option) => <ComboboxItem option={option} />}\n        </ComboboxList>\n        <ComboboxEmpty>No countries found. Try another search.</ComboboxEmpty>\n      </ComboboxContent>\n    </ComboboxPositioner>\n  </ComboboxPortal>\n</Combobox>'
         }
       >
         <div class="preview-stack">
@@ -86,7 +86,7 @@ export function Comboboxes() {
         title="In a form"
         description="With name, a hidden native select submits the option value, not the typed text. The combobox ignores form.reset() on its own, so this example controls value and sets it back in the form's onReset."
         code={
-          'const [country, setCountry] = createSignal("FR");\n\n<form onReset={() => setCountry("FR")}>\n  <Combobox\n    name="country"\n    options={countries}\n    value={country()}\n    onValueChange={setCountry}\n  >\n    {/* Label, control, and popup as above. */}\n  </Combobox>\n  <Button type="submit">Submit</Button>\n  <Button type="reset">Reset</Button>\n</form>'
+          'const [country, setCountry] = createSignal<string | null>("FR");\n\n<form onReset={() => setCountry("FR")}>\n  <Combobox\n    name="country"\n    options={countries}\n    value={country()}\n    onValueChange={setCountry}\n  >\n    {/* Label, control, and popup as above. */}\n  </Combobox>\n  <Button type="submit">Submit</Button>\n  <Button type="reset">Reset</Button>\n</form>'
         }
       >
         <FormDemo onReset={() => setShipping("FR")}>
@@ -118,7 +118,7 @@ export function Comboboxes() {
         title="Empty and updated options"
         description="Open the initially empty list, then load a local collection to see the options update. No request is made and no data is saved."
         code={
-          'const [loaded, setLoaded] = createSignal(false);\nconst [destination, setDestination] = createSignal("");\n\n<Combobox\n  id="destination"\n  options={loaded() ? countries : []}\n  onValueChange={setDestination}\n>\n  {/* Label and control as above. */}\n  <ComboboxPortal>\n    <ComboboxPositioner>\n      <ComboboxContent>\n        <ComboboxList>\n          {(option) => <ComboboxItem option={option} />}\n        </ComboboxList>\n        <ComboboxEmpty>\n          {loaded() ? "No destinations found." : "No destinations available. Load the example options."}\n        </ComboboxEmpty>\n      </ComboboxContent>\n    </ComboboxPositioner>\n  </ComboboxPortal>\n</Combobox>\n<Button onClick={() => setLoaded(true)} disabled={loaded()}>\n  {loaded() ? "Options loaded" : "Load example options"}\n</Button>'
+          'const [loaded, setLoaded] = createSignal(false);\nconst [destination, setDestination] = createSignal<string | null>(null);\n\n<Combobox\n  id="destination"\n  options={loaded() ? countries : []}\n  onValueChange={setDestination}\n>\n  {/* Label and control as above. */}\n  <ComboboxPortal>\n    <ComboboxPositioner>\n      <ComboboxContent>\n        <ComboboxList>\n          {(option) => <ComboboxItem option={option} />}\n        </ComboboxList>\n        <ComboboxEmpty>\n          {loaded() ? "No destinations found." : "No destinations available. Load the example options."}\n        </ComboboxEmpty>\n      </ComboboxContent>\n    </ComboboxPositioner>\n  </ComboboxPortal>\n</Combobox>\n<Button onClick={() => setLoaded(true)} disabled={loaded()}>\n  {loaded() ? "Options loaded" : "Load example options"}\n</Button>'
         }
       >
         <div class="preview-stack">
@@ -172,22 +172,22 @@ export function Comboboxes() {
           [
             "options",
             "{ label: string; value: string; disabled?: boolean }[]",
-            'Values identify options and must be unique and non-empty. Empty string is reserved for "no selection." Reactive array replacements update both the list and keyboard navigation.',
+            "Values identify options and must be unique and non-empty. Reactive array replacements update both the list and keyboard navigation. Read-only arrays, such as one declared as const, are accepted.",
           ],
           [
             "onValueChange",
-            "(value: string) => void (optional)",
-            "Receives the selected option value, not its label or the search text. An empty string represents a cleared selection.",
+            "(value: string | null) => void (optional)",
+            "Receives the selected option value, not its label or the search text. null represents a cleared selection.",
           ],
           [
             "defaultValue",
-            "string (optional)",
-            'Initial selection for uncontrolled use; the input shows its label. Empty string means "no selection."',
+            "string | null (optional)",
+            "Initial selection for uncontrolled use; the input shows its label. null means no selection.",
           ],
           [
-            "value, disabled, invalid, required, name, placement, onOpenChange",
+            "value, disabled, invalid, required, name, form, placement, onOpenChange",
             "optional",
-            "value makes selection controlled, where an empty string clears it. disabled dims and blocks the field, invalid switches to the danger border and shows ComboboxError, and required adds the label marker. name submits the option value through a hidden native select, not the typed text. form.reset() leaves the selection unchanged; to reset it, control value and set it back in the form's onReset. placement picks the popup side. onOpenChange reports popup visibility.",
+            "value makes selection controlled, where null clears it. disabled dims and blocks the field, invalid switches to the danger border and shows ComboboxError, and required adds the label marker. name submits the option value through a hidden native select, not the typed text, and form associates that select with a form elsewhere on the page. form.reset() leaves the selection unchanged; to reset it, control value and set it back in the form's onReset. placement picks the popup side. onOpenChange reports popup visibility.",
           ],
           [
             "class and native props",

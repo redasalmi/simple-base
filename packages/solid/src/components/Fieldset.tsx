@@ -1,7 +1,5 @@
 import { fieldsetLabels, type FieldsetOptions } from "@simple-base/contracts";
 import {
-  type Accessor,
-  createContext,
   createSignal,
   createUniqueId,
   type JSX,
@@ -9,28 +7,10 @@ import {
   onMount,
   Show,
   splitProps,
-  useContext,
 } from "solid-js";
 
 import { cn } from "../cn";
-
-type FieldsetContextType = {
-  descriptionId: Accessor<string>;
-  errorId: Accessor<string>;
-  required: Accessor<boolean>;
-  invalid: Accessor<boolean>;
-  registerDescription: () => void;
-  registerError: () => void;
-};
-
-const FieldsetContext = createContext<FieldsetContextType | null>(null);
-
-export function useFieldset() {
-  const context = useContext(FieldsetContext);
-  if (!context) throw new Error("Fieldset parts must be used within a Fieldset");
-
-  return context;
-}
+import { FieldsetContext, type FieldsetContextType, useFieldset } from "../internal/fieldset";
 
 export type FieldsetRootProps = FieldsetOptions & {
   children: JSX.Element;
@@ -47,6 +27,7 @@ export function Fieldset(props: FieldsetRootProps) {
     "required",
     "disabled",
     "invalid",
+    "labels",
   ]);
   const fallbackId = createUniqueId();
   const [hasDescription, setHasDescription] = createSignal(false);
@@ -71,6 +52,7 @@ export function Fieldset(props: FieldsetRootProps) {
     errorId,
     required,
     invalid,
+    requiredLabel: () => local.labels?.required ?? fieldsetLabels.required,
     registerDescription() {
       onMount(() => setHasDescription(true));
       onCleanup(() => setHasDescription(false));
@@ -97,14 +79,11 @@ export function Fieldset(props: FieldsetRootProps) {
   );
 }
 
-export type FieldsetLegendProps = JSX.HTMLAttributes<HTMLLegendElement> & {
-  /** Read to assistive technology after the legend while the fieldset is required. @default "(required)" */
-  requiredLabel?: string;
-};
+export type FieldsetLegendProps = JSX.HTMLAttributes<HTMLLegendElement>;
 
 export function FieldsetLegend(props: FieldsetLegendProps) {
-  const { required } = useFieldset();
-  const [local, rest] = splitProps(props, ["class", "children", "requiredLabel"]);
+  const { required, requiredLabel } = useFieldset();
+  const [local, rest] = splitProps(props, ["class", "children"]);
 
   // The marker is hidden from assistive technology, and aria-required isn't allowed on a group.
   return (
@@ -115,7 +94,7 @@ export function FieldsetLegend(props: FieldsetLegendProps) {
     >
       {local.children}
       <Show when={required()}>
-        <span class="sb-visually-hidden"> {local.requiredLabel ?? fieldsetLabels.required}</span>
+        <span class="sb-visually-hidden"> {requiredLabel()}</span>
       </Show>
     </legend>
   );

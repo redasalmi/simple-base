@@ -118,7 +118,7 @@ const pages: Page[] = [
     description:
       "Choose a calendar date by typing it or from a popup calendar. Keyboard navigation, range limits, and locale formatting are built in, and the date submits with the form as an ISO string.",
     usage:
-      'import { DatePicker, DatePickerInput, DatePickerCalendar, parseDate } from "@simple-base/solid";',
+      'import { DatePicker, DatePickerInput, DatePickerCalendar, parseDateInput } from "@simple-base/solid";',
     component: DatePickers,
   },
   {
@@ -245,7 +245,7 @@ const pages: Page[] = [
     label: "Switch",
     group: "Components",
     description:
-      "An immediate on or off preference. A native checkbox with switch semantics and a required accessible name.",
+      "An immediate on or off preference. A native checkbox with switch semantics, named by its label like any checkbox.",
     usage: 'import { Switch } from "@simple-base/solid";',
     component: Switches,
   },

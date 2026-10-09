@@ -63,6 +63,7 @@ export function Combobox(props: ComboboxRootProps) {
     "children",
     "id",
     "name",
+    "form",
     "placeholder",
     "options",
     "value",
@@ -123,11 +124,11 @@ export function Combobox(props: ComboboxRootProps) {
     },
     get value() {
       if (local.value === undefined) return undefined;
-      return local.value === "" ? [] : [local.value];
+      return local.value === null ? [] : [local.value];
     },
     get defaultValue() {
       if (local.defaultValue === undefined) return undefined;
-      return local.defaultValue === "" ? [] : [local.defaultValue];
+      return local.defaultValue === null ? [] : [local.defaultValue];
     },
     get positioning() {
       return positioning();
@@ -143,7 +144,7 @@ export function Combobox(props: ComboboxRootProps) {
       setQuery(reason === "input-change" ? inputValue : "");
     },
     onValueChange({ value }) {
-      local.onValueChange?.(value[0] ?? "");
+      local.onValueChange?.(value[0] ?? null);
     },
   });
 
@@ -187,6 +188,7 @@ export function Combobox(props: ComboboxRootProps) {
           tabIndex={-1}
           style={visuallyHiddenStyle}
           name={local.name}
+          form={local.form}
           disabled={local.disabled}
           required={local.required}
           onFocus={() => api().focus()}

@@ -51,6 +51,10 @@
       "types": "./dist/fieldset.d.ts",
       "import": "./dist/fieldset.js"
     },
+    "./listbox": {
+      "types": "./dist/listbox.d.ts",
+      "import": "./dist/listbox.js"
+    },
     "./menu": {
       "types": "./dist/menu.d.ts",
       "import": "./dist/menu.js"
@@ -98,11 +102,12 @@
     "dev": "tsdown --watch --no-clean",
     "typecheck": "tsc --noEmit"
   },
-  "dependencies": {
-    "@internationalized/date": "catalog:"
-  },
   "devDependencies": {
+    "@internationalized/date": "catalog:",
     "@types/node": "catalog:",
     "tsdown": "catalog:"
+  },
+  "peerDependencies": {
+    "@internationalized/date": "^3.12.4"
   }
 }

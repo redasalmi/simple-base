@@ -36,9 +36,9 @@ function ChevronDown() {
 }
 
 export function Selects() {
-  const [timezone, setTimezone] = createSignal("");
+  const [timezone, setTimezone] = createSignal<string | null>(null);
   const [loaded, setLoaded] = createSignal(false);
-  const [region, setRegion] = createSignal("");
+  const [region, setRegion] = createSignal<string | null>(null);
 
   return (
     <>
@@ -46,7 +46,7 @@ export function Selects() {
         title="Choose a single option"
         description="Open the list with Enter, Space, or a click, then move with the arrow keys, Home, and End. Type a letter to jump to a matching option. Japan Standard Time is disabled in this demo, and Escape closes the list without changing the value."
         code={
-          'const [timezone, setTimezone] = createSignal("");\n\n<Select\n  id="timezone"\n  placeholder="Select a timezone"\n  options={timezones}\n  onValueChange={setTimezone}\n>\n  <SelectLabel>Timezone</SelectLabel>\n  <SelectControl>\n    <SelectTrigger>\n      <SelectValueText />\n      <SelectIndicator>\n        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">\n          <path d="m6 9 6 6 6-6" />\n        </svg>\n      </SelectIndicator>\n    </SelectTrigger>\n  </SelectControl>\n  <SelectPortal>\n    <SelectPositioner>\n      <SelectContent>\n        <SelectList>\n          {(option) => <SelectItem option={option} />}\n        </SelectList>\n      </SelectContent>\n    </SelectPositioner>\n  </SelectPortal>\n</Select>'
+          'const [timezone, setTimezone] = createSignal<string | null>(null);\n\n<Select\n  id="timezone"\n  placeholder="Select a timezone"\n  options={timezones}\n  onValueChange={setTimezone}\n>\n  <SelectLabel>Timezone</SelectLabel>\n  <SelectControl>\n    <SelectTrigger>\n      <SelectValueText />\n      <SelectIndicator>\n        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">\n          <path d="m6 9 6 6 6-6" />\n        </svg>\n      </SelectIndicator>\n    </SelectTrigger>\n  </SelectControl>\n  <SelectPortal>\n    <SelectPositioner>\n      <SelectContent>\n        <SelectList>\n          {(option) => <SelectItem option={option} />}\n        </SelectList>\n      </SelectContent>\n    </SelectPositioner>\n  </SelectPortal>\n</Select>'
         }
       >
         <div class="preview-stack">
@@ -112,7 +112,7 @@ export function Selects() {
         title="Empty and updated options"
         description="Open the initially empty list to see the empty message, then load a local collection and reopen it. No request is made and no data is saved."
         code={
-          'const [loaded, setLoaded] = createSignal(false);\nconst [region, setRegion] = createSignal("");\n\n<Select\n  id="region"\n  placeholder="Select a region"\n  options={loaded() ? timezones : []}\n  onValueChange={setRegion}\n>\n  {/* Label, control, and popup as above. */}\n  <SelectPortal>\n    <SelectPositioner>\n      <SelectContent>\n        <SelectList>\n          {(option) => <SelectItem option={option} />}\n        </SelectList>\n        <SelectEmpty>\n          {loaded() ? "No regions found." : "No regions available. Load the example options."}\n        </SelectEmpty>\n      </SelectContent>\n    </SelectPositioner>\n  </SelectPortal>\n</Select>\n<Button onClick={() => setLoaded(true)} disabled={loaded()}>\n  {loaded() ? "Options loaded" : "Load example options"}\n</Button>'
+          'const [loaded, setLoaded] = createSignal(false);\nconst [region, setRegion] = createSignal<string | null>(null);\n\n<Select\n  id="region"\n  placeholder="Select a region"\n  options={loaded() ? timezones : []}\n  onValueChange={setRegion}\n>\n  {/* Label, control, and popup as above. */}\n  <SelectPortal>\n    <SelectPositioner>\n      <SelectContent>\n        <SelectList>\n          {(option) => <SelectItem option={option} />}\n        </SelectList>\n        <SelectEmpty>\n          {loaded() ? "No regions found." : "No regions available. Load the example options."}\n        </SelectEmpty>\n      </SelectContent>\n    </SelectPositioner>\n  </SelectPortal>\n</Select>\n<Button onClick={() => setLoaded(true)} disabled={loaded()}>\n  {loaded() ? "Options loaded" : "Load example options"}\n</Button>'
         }
       >
         <div class="preview-stack">
@@ -168,27 +168,27 @@ export function Selects() {
           [
             "options",
             "{ label: string; value: string; disabled?: boolean }[]",
-            'Values identify options and must be unique and non-empty. Empty string is reserved for "no selection." Reactive array replacements update both the list and keyboard navigation.',
+            "Values identify options and must be unique and non-empty. Reactive array replacements update both the list and keyboard navigation. Read-only arrays, such as one declared as const, are accepted.",
           ],
           [
             "onValueChange",
-            "(value: string) => void (optional)",
-            "Receives the selected option value, not its label. An empty string represents a cleared selection. Not needed for uncontrolled use in a form.",
+            "(value: string | null) => void (optional)",
+            "Receives the selected option value, not its label. null represents a cleared selection. Not needed for uncontrolled use in a form.",
           ],
           [
             "defaultValue",
-            "string (optional)",
-            'Initial selection for uncontrolled use. Empty string means "no selection." form.reset() restores it.',
+            "string | null (optional)",
+            "Initial selection for uncontrolled use. null means no selection. form.reset() restores it.",
           ],
           [
-            "name",
+            "name / form",
             "string (optional)",
-            "Names the hidden native select that carries the option value, so it is submitted with the surrounding form, controlled or not. Omit it to keep the widget outside form submission.",
+            "name names the hidden native select that carries the option value, so it is submitted with the surrounding form, controlled or not. Omit it to keep the widget outside form submission. form associates it with a form elsewhere on the page.",
           ],
           [
             "value, disabled, invalid, required, placement, onOpenChange",
             "optional",
-            "value makes selection controlled, where an empty string clears it. disabled dims and blocks the field, invalid switches to the danger border and shows SelectError, and required adds the label marker. placement picks the popup side. onOpenChange reports popup visibility.",
+            "value makes selection controlled, where null clears it. disabled dims and blocks the field, invalid switches to the danger border and shows SelectError, and required adds the label marker. placement picks the popup side. onOpenChange reports popup visibility.",
           ],
           [
             "class and native props",

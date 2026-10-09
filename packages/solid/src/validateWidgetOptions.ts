@@ -10,7 +10,7 @@ export function validateWidgetOptions(widget: WidgetName, options: readonly Widg
   for (const option of options) {
     if (option.value === "") {
       throw new Error(
-        `[simple-base] ${widget} option values must be non-empty. Empty string is reserved for no selection.`,
+        `[simple-base] ${widget} option values must be non-empty. A form submits an empty string when nothing is selected.`,
       );
     }
 

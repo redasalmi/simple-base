@@ -2,7 +2,7 @@
 
 Framework-neutral component options and default values for Simple Base adapters.
 
-CSS owns styling. Adapters own rendering, native props, and behavior. This package holds the shared custom options that more than one adapter needs — the types you pass to a component and the defaults applied when you omit them. Its one dependency is [`@internationalized/date`](https://www.npmjs.com/package/@internationalized/date), for the `DateValue` type used by the date picker options.
+CSS owns styling. Adapters own rendering, native props, and behavior. This package holds the shared custom options that more than one adapter needs — the types you pass to a component and the defaults applied when you omit them. Its one peer dependency is [`@internationalized/date`](https://www.npmjs.com/package/@internationalized/date), for the `DateValue` type used by the date picker options. It is only used as a type.
 
 **Most applications don't need this package directly.** Install [@simple-base/solid](https://www.npmjs.com/package/@simple-base/solid) and it re-exports the option types it uses. Install this package when you are writing an adapter for another framework, or when you need the shared option types without a renderer.
 
@@ -36,7 +36,9 @@ The same exports are available per component, which keeps imports narrow:
 import { buttonDefaults, type ButtonVariant } from "@simple-base/contracts/button";
 ```
 
-Subpaths: `/badge` · `/button` · `/card` · `/combobox` · `/date-picker` · `/dialog` · `/field` · `/fieldset` · `/menu` · `/number-field` · `/pagination` · `/placement` · `/select` · `/status` · `/table` · `/tabs` · `/tooltip`
+Subpaths: `/badge` · `/button` · `/card` · `/combobox` · `/date-picker` · `/dialog` · `/field` · `/fieldset` · `/listbox` · `/menu` · `/number-field` · `/pagination` · `/placement` · `/select` · `/status` · `/table` · `/tabs` · `/tooltip`
+
+Subpaths without a `*Defaults` or `*Labels` constant, such as `/card`, `/dialog`, and `/select`, are type-only. Their JavaScript files are empty, so import them with `import type`.
 
 ## Options reference
 
@@ -49,9 +51,10 @@ Subpaths: `/badge` · `/button` · `/card` · `/combobox` · `/date-picker` · `
 | Date picker    | `DatePickerOptions`                                 | `datePickerDefaults`: `placement: "bottom-start"`                                                               |
 | Dialog         | `DialogOptions`                                     | —                                                                                                               |
 | Field          | `FieldOptions`                                      | —                                                                                                               |
-| Fieldset       | `FieldsetOptions`                                   | `fieldsetLabels`: the English text read after a required legend                                                 |
+| Fieldset       | `FieldsetOptions`, `FieldsetLabels`                 | `fieldsetLabels`: the English text read after a required legend                                                 |
 | Radio group    | `RadioGroupOptions`                                 | —                                                                                                               |
 | Checkbox group | `CheckboxGroupOptions`                              | —                                                                                                               |
+| Listbox        | `ListboxOption`, `ListboxOptions`                   | —                                                                                                               |
 | Menu           | `MenuOptions`, `MenuItemOptions`, `MenuItemVariant` | —                                                                                                               |
 | Number field   | `NumberFieldOptions`                                | —                                                                                                               |
 | Pagination     | `PaginationOptions`, `PaginationLabels`             | `paginationDefaults`: `defaultPage: 1`, `siblingCount: 1`; `paginationLabels`: the English accessible names     |
@@ -73,7 +76,7 @@ Types are erased at runtime. Only the `*Defaults` and `*Labels` constants are ru
 - **Card variants:** `flat`, `rule`. Omit `variant` for the base card; there is no explicit `default` variant. Card padding is built into `.sb-card`; see the 0.2.0 migration notes in [@simple-base/css](https://www.npmjs.com/package/@simple-base/css).
 - **Table cell variants:** `code`, `number`.
 - **Field, number field, and date picker:** `id`, `required`, `disabled`, and `invalid` (plus `readOnly` on the number field and date picker) belong to the root, which applies them to its one control, label, and messages. Omit `id` to generate one.
-- **Fieldset:** `required`, `disabled`, and `invalid` belong to the root and apply to its legend, messages, and choice groups. `disabled` is the native fieldset attribute, so it reaches every control inside.
+- **Fieldset:** `required`, `disabled`, and `invalid` belong to the root and apply to its legend, messages, and choice groups. `disabled` is the native fieldset attribute, so it reaches every control inside. `labels` overrides any of the `fieldsetLabels`.
 - **Radio and checkbox groups:** a radio group's value is a string (`""` = none); a checkbox group's value is a `string[]` of the checked values in document order. `value` is controlled and `defaultValue` is the uncontrolled initial state.
 - **Number field values** are strings, so partial input such as `1.` survives; `onValueChange` also receives the parsed number. `formatOptions` takes `Intl.NumberFormatOptions`.
 - **Date picker values** are a single `DateValue`, or `null` for no date. `name` submits the date as `YYYY-MM-DD`.
@@ -83,39 +86,39 @@ Types are erased at runtime. Only the `*Defaults` and `*Labels` constants are ru
 - **Placement:** `top` or `bottom`, with `-start` and `-end` variants. Shared by every popup option.
 - **Tabs:** `value` is the selected tab and is controlled; `defaultValue` is the uncontrolled initial tab. One of them is required, so a tab is selected and reachable by keyboard.
 - **Dialogs and tooltips:** `open` is the controlled state, `defaultOpen` provides the initial uncontrolled state, and `onOpenChange` reports requested visibility changes.
-- **Statuses are deliberately not interchangeable.** Status lines and alerts use `success`, `warning`, `danger`, `info`. Toasts use `success` and `warning`. All three are exported from `/status`.
+- **Statuses are deliberately not interchangeable.** Status lines and alerts use `success`, `warning`, `danger`, `info` (`AlertStatus` is `StatusValue`). Toasts use only `success` and `warning`: a toast confirms what the user just did, and errors that need attention belong in an alert that stays on the page. All three are exported from `/status`.
 
 ### Select and Combobox
 
-`SelectOption` and `ComboboxOption` both contain `label`, a unique, non-empty `value`, and optional `disabled`. Empty string is reserved for no selection and is rejected as an option value.
-
-`SelectOptions` and `ComboboxOptions` define the shared root API:
+`SelectOption` and `ComboboxOption` are aliases of `ListboxOption`: `label`, a unique, non-empty `value`, and optional `disabled`. `SelectOptions` and `ComboboxOptions` are aliases of `ListboxOptions`, the root API both pickers share:
 
 | Prop            | Required | Description                                                                                                                 |
 | --------------- | -------- | --------------------------------------------------------------------------------------------------------------------------- |
 | `id`            | no       | Id of the root element. Generated when omitted.                                                                             |
-| `options`       | yes      | The option list.                                                                                                            |
-| `onValueChange` | no       | Called with the selected option's string value, or `""` when selection is cleared.                                          |
+| `options`       | yes      | The option list. A read-only array, such as one declared `as const`, is accepted.                                           |
+| `onValueChange` | no       | Called with the selected option's value, or `null` when the selection is cleared.                                           |
 | `placeholder`   | no       | Rendered in place of the value text until something is selected.                                                            |
-| `value`         | no       | Controlled counterpart of `onValueChange`. `""` means no selection; omitting `value` leaves it uncontrolled.                |
-| `disabled`      | no       | Dims and blocks the field.                                                                                                  |
+| `value`         | no       | Controlled counterpart of `onValueChange`. `null` means no selection; omitting `value` leaves it uncontrolled.              |
+| `defaultValue`  | no       | Initial value for uncontrolled state. `null` means no selection.                                                            |
+| `name`          | no       | Submits the selected option's value with the form, or an empty string when nothing is selected.                             |
+| `form`          | no       | Id of a form to associate the control with when it sits outside that form. Read on mount.                                   |
+| `disabled`      | no       | Dims and blocks the field, and leaves it out of form submission.                                                            |
 | `invalid`       | no       | Switches the border and focus ring to the danger tokens and shows the error message.                                        |
-| `required`      | no       | Adds the label marker.                                                                                                      |
-| `name`          | no       | See below — semantics differ per component.                                                                                 |
+| `required`      | no       | Adds the label marker, and the browser requires a selection before submitting.                                              |
 | `placement`     | no       | Shared `top`/`bottom` union with `-start` and `-end` variants; deliberately narrower than an adapter's positioning options. |
 | `onOpenChange`  | no       | Reports popup visibility, for lazy loading and analytics.                                                                   |
 
-Adapters must treat `""` as a controlled empty selection, not as uncontrolled.
+`null` means "nothing selected" in every single-value picker, including the date picker. Adapters must treat `null` as a controlled empty selection, and only `undefined` as uncontrolled. An empty string is rejected as an option value, since a form submits it when nothing is selected.
 
-The two option lists stay independent so each adapter can evolve its own surface.
-
-**`name` differs per component.** Combobox applies it to the visible input, so the submitted value is the option _label_. Select keeps a hidden native select for the option _value_ and always renders it, so the label stays associated and form reset and fieldset state are tracked — `name` alone decides whether the control is submitted.
+Both pickers submit the option _value_, not its label: adapters render a hidden native select for it, because a combobox's visible input holds the label or the typed text.
 
 ## What stays in adapters
 
 Share framework-neutral configuration and value callbacks. Children, refs, framework-specific DOM events, native element prop interfaces, internal context, and accessibility implementation belong to the adapter.
 
 Adapters compose shared options with their framework's native element props, apply defaults when options are omitted, and emit the CSS classes and attributes directly. There are no class-name maps, attribute-name maps, CSS-property maps, or class-only contracts.
+
+Each adapter adds Zag's own `translations` prop to the roots built on Zag, such as the number field and the date picker, with Zag's types and defaults. It isn't part of these options, since this package doesn't depend on Zag. Other roots take `labels`, a partial `*Labels` object whose English defaults live here, such as `paginationLabels` and `fieldsetLabels`.
 
 Native-only components — checkbox, input, and the plain `.sb-select` pattern — have no shared custom options. Typography classes and the progress CSS custom property are part of the CSS package's API, not this one.
 

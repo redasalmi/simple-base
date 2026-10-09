@@ -11,7 +11,7 @@ import {
   DatePickerPositioner,
   DatePickerTrigger,
   type DateValue,
-  parseDate,
+  parseDateInput,
 } from "@simple-base/solid";
 import { createSignal } from "solid-js";
 
@@ -60,16 +60,16 @@ export function DatePickers() {
       </Example>
       <Example
         title="Limit the range"
-        description="min and max disable the days outside the range, and the month arrows stop at its edges. Type 12/31/2026 and leave the field: dates outside the range are clamped to it. Create the bounds with parseDate."
+        description="min and max disable the days outside the range, and the month arrows stop at its edges. Type 12/31/2026 and leave the field: dates outside the range are clamped to it. Create the bounds with parseDateInput."
         code={
-          '<DatePicker\n  defaultValue={parseDate("2026-10-12")}\n  min={parseDate("2026-10-05")}\n  max={parseDate("2026-11-20")}\n>\n  <DatePickerLabel>Appointment</DatePickerLabel>\n  {/* Control and popup as above. */}\n  <DatePickerDescription>Between October 5 and November 20.</DatePickerDescription>\n</DatePicker>'
+          '<DatePicker\n  defaultValue={parseDateInput("2026-10-12")}\n  min={parseDateInput("2026-10-05")}\n  max={parseDateInput("2026-11-20")}\n>\n  <DatePickerLabel>Appointment</DatePickerLabel>\n  {/* Control and popup as above. */}\n  <DatePickerDescription>Between October 5 and November 20.</DatePickerDescription>\n</DatePicker>'
         }
       >
         <div class="preview-fields">
           <DatePicker
-            defaultValue={parseDate("2026-10-12")}
-            min={parseDate("2026-10-05")}
-            max={parseDate("2026-11-20")}
+            defaultValue={parseDateInput("2026-10-12")}
+            min={parseDateInput("2026-10-05")}
+            max={parseDateInput("2026-11-20")}
           >
             <DatePickerLabel>Appointment</DatePickerLabel>
             <DatePickerControl>
@@ -85,11 +85,15 @@ export function DatePickers() {
         title="Locale and time zone"
         description="locale sets the input format, the first day of the week, and the calendar's labels. timeZone decides which day is outlined as today and defaults to the user's own, so it only needs setting when today should follow a fixed place."
         code={
-          '<DatePicker locale="fr-FR" timeZone="Europe/Paris" defaultValue={parseDate("2026-10-12")}>\n  <DatePickerLabel>Date de livraison</DatePickerLabel>\n  {/* Control and popup as above. */}\n</DatePicker>'
+          '<DatePicker locale="fr-FR" timeZone="Europe/Paris" defaultValue={parseDateInput("2026-10-12")}>\n  <DatePickerLabel>Date de livraison</DatePickerLabel>\n  {/* Control and popup as above. */}\n</DatePicker>'
         }
       >
         <div class="preview-fields">
-          <DatePicker locale="fr-FR" timeZone="Europe/Paris" defaultValue={parseDate("2026-10-12")}>
+          <DatePicker
+            locale="fr-FR"
+            timeZone="Europe/Paris"
+            defaultValue={parseDateInput("2026-10-12")}
+          >
             <DatePickerLabel>Date de livraison</DatePickerLabel>
             <DatePickerControl>
               <DatePickerInput />
@@ -126,7 +130,7 @@ export function DatePickers() {
         title="States"
         description="Required adds the label marker, read-only keeps the date visible but closed, and disabled dims the whole field. invalid shows the error, which the date picker never sets on its own."
         code={
-          '<DatePicker required>…</DatePicker>\n<DatePicker readOnly defaultValue={parseDate("2026-09-01")}>…</DatePicker>\n<DatePicker disabled defaultValue={parseDate("2027-09-01")}>…</DatePicker>\n<DatePicker invalid defaultValue={parseDate("2026-10-10")}>…</DatePicker>'
+          '<DatePicker required>…</DatePicker>\n<DatePicker readOnly defaultValue={parseDateInput("2026-09-01")}>…</DatePicker>\n<DatePicker disabled defaultValue={parseDateInput("2027-09-01")}>…</DatePicker>\n<DatePicker invalid defaultValue={parseDateInput("2026-10-10")}>…</DatePicker>'
         }
       >
         <div class="preview-fields">
@@ -138,7 +142,7 @@ export function DatePickers() {
             </DatePickerControl>
             <Popup />
           </DatePicker>
-          <DatePicker readOnly defaultValue={parseDate("2026-09-01")}>
+          <DatePicker readOnly defaultValue={parseDateInput("2026-09-01")}>
             <DatePickerLabel>Contract start</DatePickerLabel>
             <DatePickerControl>
               <DatePickerInput />
@@ -146,7 +150,7 @@ export function DatePickers() {
             </DatePickerControl>
             <Popup />
           </DatePicker>
-          <DatePicker disabled defaultValue={parseDate("2027-09-01")}>
+          <DatePicker disabled defaultValue={parseDateInput("2027-09-01")}>
             <DatePickerLabel>Renewal date</DatePickerLabel>
             <DatePickerControl>
               <DatePickerInput />
@@ -155,7 +159,7 @@ export function DatePickers() {
             <DatePickerDescription>Set by your plan.</DatePickerDescription>
             <Popup />
           </DatePicker>
-          <DatePicker invalid defaultValue={parseDate("2026-10-10")}>
+          <DatePicker invalid defaultValue={parseDateInput("2026-10-10")}>
             <DatePickerLabel>Delivery date</DatePickerLabel>
             <DatePickerControl>
               <DatePickerInput />
@@ -170,12 +174,12 @@ export function DatePickers() {
         title="In a form"
         description="With name and defaultValue the date picker needs no signal: a hidden input submits the date as an ISO string while the visible input shows it in the locale's format, and Reset restores the initial date."
         code={
-          '<form>\n  <DatePicker name="start" defaultValue={parseDate("2026-10-15")}>\n    <DatePickerLabel>Start date</DatePickerLabel>\n    {/* Control and popup as above. */}\n  </DatePicker>\n  <Button type="submit">Submit</Button>\n  <Button type="reset">Reset</Button>\n</form>'
+          '<form>\n  <DatePicker name="start" defaultValue={parseDateInput("2026-10-15")}>\n    <DatePickerLabel>Start date</DatePickerLabel>\n    {/* Control and popup as above. */}\n  </DatePicker>\n  <Button type="submit">Submit</Button>\n  <Button type="reset">Reset</Button>\n</form>'
         }
       >
         <FormDemo>
           <div class="preview-fields">
-            <DatePicker name="start" defaultValue={parseDate("2026-10-15")}>
+            <DatePicker name="start" defaultValue={parseDateInput("2026-10-15")}>
               <DatePickerLabel>Start date</DatePickerLabel>
               <DatePickerControl>
                 <DatePickerInput />
@@ -196,7 +200,7 @@ export function DatePickers() {
           [
             "value / defaultValue / onValueChange",
             "DateValue | null · (value: DateValue | null, valueAsString: string) => void",
-            'Create dates with parseDate("2026-10-03"). null means no date; valueAsString holds the text shown in the input.',
+            'Create dates with parseDateInput("2026-10-03"). null means no date; valueAsString holds the text shown in the input.',
           ],
           [
             "min / max",

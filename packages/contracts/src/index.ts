@@ -6,10 +6,12 @@ export type { DialogOptions } from "./dialog";
 export type { FieldOptions } from "./field";
 export {
   fieldsetLabels,
+  type FieldsetLabels,
   type FieldsetOptions,
   type RadioGroupOptions,
   type CheckboxGroupOptions,
 } from "./fieldset";
+export type { ListboxOption, ListboxOptions } from "./listbox";
 export type { MenuOptions, MenuItemOptions, MenuItemVariant } from "./menu";
 export type { NumberFieldOptions } from "./number-field";
 export {

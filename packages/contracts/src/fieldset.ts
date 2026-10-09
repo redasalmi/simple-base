@@ -6,12 +6,19 @@ export type FieldsetOptions = {
   disabled?: boolean;
   /** Marks the group invalid and shows the fieldset's error message. */
   invalid?: boolean;
+  /** Text read to assistive technology, for example to translate it. Each one defaults to `fieldsetLabels`. */
+  labels?: Partial<FieldsetLabels>;
+};
+
+export type FieldsetLabels = {
+  /** Read after the legend while the fieldset is required. */
+  required: string;
 };
 
 /** Text read to assistive technology when the caller doesn't pass its own. */
 export const fieldsetLabels = {
   required: "(required)",
-} as const;
+} as const satisfies FieldsetLabels;
 
 export type RadioGroupOptions = {
   /** Shared name of the radios. Generated when omitted. */

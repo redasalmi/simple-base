@@ -10,7 +10,7 @@ import {
 } from "solid-js";
 
 import { cn } from "../cn";
-import { useFieldset } from "./Fieldset";
+import { useFieldset } from "../internal/fieldset";
 import { Radio, type RadioProps } from "./Radio";
 
 type RadioGroupContextType = {

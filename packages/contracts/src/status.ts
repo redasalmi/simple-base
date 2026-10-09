@@ -6,12 +6,16 @@ export type StatusOptions = {
   status?: StatusValue;
 };
 
-export type AlertStatus = "success" | "warning" | "danger" | "info";
+export type AlertStatus = StatusValue;
 
 export type AlertOptions = {
   status?: AlertStatus;
 };
 
+/**
+ * Toasts confirm what the user just did, so they are only `success` or `warning`. Errors and
+ * information that need attention belong in an Alert, which stays on the page until it's resolved.
+ */
 export type ToastStatus = "success" | "warning";
 
 export type ToastOptions = {

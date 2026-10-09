@@ -3,8 +3,8 @@ import { mergeProps } from "@zag-js/solid";
 import { type Accessor, createContext, type JSX, splitProps, useContext } from "solid-js";
 
 import { cn } from "../cn";
+import { useFieldset } from "../internal/fieldset";
 import { Checkbox, type CheckboxProps } from "./Checkbox";
-import { useFieldset } from "./Fieldset";
 
 type CheckboxGroupContextType = {
   name: Accessor<string | undefined>;

@@ -8,7 +8,7 @@ export type DatePickerOptions = {
   id?: string;
   /** Submitted with the selected date as an ISO 8601 string (`YYYY-MM-DD`), or empty when none is selected. */
   name?: string;
-  /** Id of a form to associate the input with when it sits outside that form. */
+  /** Id of a form to associate the input with when it sits outside that form. Read on mount; later changes are not tracked. */
   form?: string;
   /** Controlled value. `null` means no selection; omit for uncontrolled state. */
   value?: DateValue | null;

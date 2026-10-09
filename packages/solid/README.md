@@ -14,7 +14,7 @@ Install the stylesheet alongside it, since the components only emit class names 
 pnpm add @simple-base/css
 ```
 
-`solid-js` is a peer dependency and is not bundled.
+`solid-js` and `@internationalized/date` are peer dependencies and are not bundled. Sharing one copy of `@internationalized/date` keeps the `DateValue` objects you create compatible with the date picker.
 
 ## Quick start
 
@@ -64,37 +64,54 @@ import "@simple-base/css/badge";
 | `TextArea` | `textarea`             | Native props                                                                         |
 | `Checkbox` | `input[type=checkbox]` | Native props; `indeterminate` shows the mixed state                                  |
 | `Radio`    | `input[type=radio]`    | Native props                                                                         |
-| `Switch`   | `input[role=switch]`   | Native props; requires `aria-label` or `aria-labelledby`                             |
+| `Switch`   | `input[role=switch]`   | Native props                                                                         |
 
 **Composable components** use named exports so bundlers can remove unused parts. Each part is prefixed with its root name:
 
-| Root            | Named parts                                                                                                                                                                                                                         |
-| --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `AlertDialog`   | `AlertDialogTrigger`, `AlertDialogContent`, `AlertDialogIcon`, `AlertDialogHeader`, `AlertDialogKicker`, `AlertDialogTitle`, `AlertDialogDescription`, `AlertDialogFooter`, `AlertDialogCancel`, `AlertDialogAction`                |
-| `Dialog`        | `DialogTrigger`, `DialogContent`, `DialogHeader`, `DialogKicker`, `DialogTitle`, `DialogDescription`, `DialogFooter`, `DialogClose`, `DialogAction`                                                                                 |
-| `Field`         | `FieldLabel`, `FieldInput`, `FieldTextArea`, `FieldDescription`, `FieldError`                                                                                                                                                       |
-| `Fieldset`      | `FieldsetLegend`, `FieldsetDescription`, `FieldsetError`                                                                                                                                                                            |
-| `RadioGroup`    | `RadioGroupItem` (inside a `Fieldset`)                                                                                                                                                                                              |
-| `CheckboxGroup` | `CheckboxGroupItem` (inside a `Fieldset`)                                                                                                                                                                                           |
-| `NumberField`   | `NumberFieldLabel`, `NumberFieldControl`, `NumberFieldInput`, `NumberFieldDecrement`, `NumberFieldIncrement`, `NumberFieldAffix`, `NumberFieldDescription`, `NumberFieldError`                                                      |
-| `Combobox`      | `ComboboxLabel`, `ComboboxControl`, `ComboboxInput`, `ComboboxTrigger`, `ComboboxPortal`, `ComboboxPositioner`, `ComboboxContent`, `ComboboxList`, `ComboboxEmpty`, `ComboboxItem`, `ComboboxDescription`, `ComboboxError`          |
-| `DatePicker`    | `DatePickerLabel`, `DatePickerControl`, `DatePickerInput`, `DatePickerTrigger`, `DatePickerPortal`, `DatePickerPositioner`, `DatePickerContent`, `DatePickerCalendar`, `DatePickerDescription`, `DatePickerError`, plus `parseDate` |
-| `Menu`          | `MenuTrigger`, `MenuPortal`, `MenuPositioner`, `MenuContent`, `MenuItem`, `MenuItemShortcut`, `MenuGroup`, `MenuGroupLabel`, `MenuSeparator`                                                                                        |
-| `Tooltip`       | `TooltipTrigger`, `TooltipPortal`, `TooltipPositioner`, `TooltipContent`, `TooltipArrow`                                                                                                                                            |
-| `Tabs`          | `TabsList`, `TabsTrigger`, `TabsContent`                                                                                                                                                                                            |
-| `Select`        | `SelectLabel`, `SelectControl`, `SelectTrigger`, `SelectValueText`, `SelectIndicator`, `SelectPortal`, `SelectPositioner`, `SelectContent`, `SelectList`, `SelectEmpty`, `SelectItem`, `SelectDescription`, `SelectError`           |
-| `EmptyState`    | `EmptyStateMark`, `EmptyStateTitle`, `EmptyStateDescription`, `EmptyStateActions`                                                                                                                                                   |
-| `Alert`         | `AlertMark`, `AlertContent`, `AlertTitle`, `AlertDescription`, `AlertActions`, `AlertClose`                                                                                                                                         |
-| `StatusLine`    | `StatusLineDot`, `StatusLineContent`, `StatusLineTitle`, `StatusLineDescription`                                                                                                                                                    |
-| `Table`         | `TableWrap`, `TableCaption`, `TableHeader`, `TableBody`, `TableFooter`, `TableRow`, `TableColumnHeader`, `TableRowHeader`, `TableCell`, `TableSortButton`                                                                           |
-| `Pagination`    | `PaginationPrevious`, `PaginationPages`, `PaginationNext`                                                                                                                                                                           |
-| `Toaster`       | `Toast`, `ToastIcon`, `ToastContent`, `ToastTitle`, `ToastDescription`, `ToastAction`, `ToastClose`, plus `createToaster`                                                                                                           |
+| Root            | Named parts                                                                                                                                                                                                                              |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `AlertDialog`   | `AlertDialogTrigger`, `AlertDialogContent`, `AlertDialogIcon`, `AlertDialogHeader`, `AlertDialogKicker`, `AlertDialogTitle`, `AlertDialogDescription`, `AlertDialogFooter`, `AlertDialogCancel`, `AlertDialogAction`                     |
+| `Dialog`        | `DialogTrigger`, `DialogContent`, `DialogHeader`, `DialogKicker`, `DialogTitle`, `DialogDescription`, `DialogFooter`, `DialogClose`, `DialogAction`                                                                                      |
+| `Field`         | `FieldLabel`, `FieldInput`, `FieldTextArea`, `FieldDescription`, `FieldError`                                                                                                                                                            |
+| `Fieldset`      | `FieldsetLegend`, `FieldsetDescription`, `FieldsetError`                                                                                                                                                                                 |
+| `RadioGroup`    | `RadioGroupItem` (inside a `Fieldset`)                                                                                                                                                                                                   |
+| `CheckboxGroup` | `CheckboxGroupItem` (inside a `Fieldset`)                                                                                                                                                                                                |
+| `NumberField`   | `NumberFieldLabel`, `NumberFieldControl`, `NumberFieldInput`, `NumberFieldDecrement`, `NumberFieldIncrement`, `NumberFieldAffix`, `NumberFieldDescription`, `NumberFieldError`                                                           |
+| `Combobox`      | `ComboboxLabel`, `ComboboxControl`, `ComboboxInput`, `ComboboxTrigger`, `ComboboxPortal`, `ComboboxPositioner`, `ComboboxContent`, `ComboboxList`, `ComboboxEmpty`, `ComboboxItem`, `ComboboxDescription`, `ComboboxError`               |
+| `DatePicker`    | `DatePickerLabel`, `DatePickerControl`, `DatePickerInput`, `DatePickerTrigger`, `DatePickerPortal`, `DatePickerPositioner`, `DatePickerContent`, `DatePickerCalendar`, `DatePickerDescription`, `DatePickerError`, plus `parseDateInput` |
+| `Menu`          | `MenuTrigger`, `MenuPortal`, `MenuPositioner`, `MenuContent`, `MenuItem`, `MenuItemShortcut`, `MenuGroup`, `MenuGroupLabel`, `MenuSeparator`                                                                                             |
+| `Tooltip`       | `TooltipTrigger`, `TooltipPortal`, `TooltipPositioner`, `TooltipContent`, `TooltipArrow`                                                                                                                                                 |
+| `Tabs`          | `TabsList`, `TabsTrigger`, `TabsContent`                                                                                                                                                                                                 |
+| `Select`        | `SelectLabel`, `SelectControl`, `SelectTrigger`, `SelectValueText`, `SelectIndicator`, `SelectPortal`, `SelectPositioner`, `SelectContent`, `SelectList`, `SelectEmpty`, `SelectItem`, `SelectDescription`, `SelectError`                |
+| `EmptyState`    | `EmptyStateMark`, `EmptyStateTitle`, `EmptyStateDescription`, `EmptyStateActions`                                                                                                                                                        |
+| `Alert`         | `AlertMark`, `AlertContent`, `AlertTitle`, `AlertDescription`, `AlertActions`, `AlertClose`                                                                                                                                              |
+| `StatusLine`    | `StatusLineDot`, `StatusLineContent`, `StatusLineTitle`, `StatusLineDescription`                                                                                                                                                         |
+| `Table`         | `TableWrap`, `TableCaption`, `TableHeader`, `TableBody`, `TableFooter`, `TableRow`, `TableColumnHeader`, `TableRowHeader`, `TableCell`, `TableSortButton`                                                                                |
+| `Pagination`    | `PaginationPrevious`, `PaginationPages`, `PaginationNext`                                                                                                                                                                                |
+| `Toaster`       | `Toast`, `ToastIcon`, `ToastContent`, `ToastTitle`, `ToastDescription`, `ToastAction`, `ToastClose`, plus `createToaster`                                                                                                                |
 
 The CSS package ships more components than this adapter currently covers. Until a Solid component exists, use them through their selector-level APIs. Breadcrumb, disclosure, keyboard shortcut, progress, range, and segmented control are planned after 1.0.
+
+`Input` deliberately accepts only text-like types. Numbers and dates have their own components, `NumberField` and `DatePicker`, and checkboxes and radios have `Checkbox` and `Radio`.
 
 Typography stays CSS-only: the `.sb-display`, `.sb-heading-*`, and `.sb-text-*` classes are the API.
 
 The library styles native elements and states and leaves app-specific affordances, such as loading states and spinners, to your application.
+
+## Switch
+
+A native checkbox with `role="switch"`, for a setting that applies immediately. Name it like a `Checkbox`: wrap it in a `<label>`, or point a `<label for>` at its `id`.
+
+```tsx
+import { Switch } from "@simple-base/solid";
+
+<label>
+  <Switch name="digest" defaultChecked />
+  Weekly digest
+</label>;
+```
+
+Give a switch with no visible text an `aria-label` instead, such as `<Switch aria-label="Live preview" />`.
 
 ## Field
 
@@ -155,7 +172,7 @@ import {
 </Fieldset>;
 ```
 
-Put `FieldsetLegend` first; `required` adds its marker, plus visually hidden text read after the legend (default "(required)", set with `requiredLabel`). The fieldset lists `FieldsetDescription`, and `FieldsetError` while it is rendered, in its `aria-describedby`. `FieldsetError` renders only while `invalid` is set. Omit `id` to generate one.
+Put `FieldsetLegend` first; `required` adds its marker, plus visually hidden text read after the legend. `labels` on the root sets that text, for example to translate it: `labels={{ required: "(obligatoire)" }}`. It defaults to "(required)" from `fieldsetLabels` in `@simple-base/contracts`. The fieldset lists `FieldsetDescription`, and `FieldsetError` while it is rendered, in its `aria-describedby`. `FieldsetError` renders only while `invalid` is set. Omit `id` to generate one.
 
 ## RadioGroup and CheckboxGroup
 
@@ -248,11 +265,11 @@ Additional root props:
 - `name` submits the value with the form; `form` associates the input with a form elsewhere on the page.
 - `translations` takes Zag's number input labels: `incrementLabel`, `decrementLabel`, and `valueText`.
 
-`NumberFieldDecrement` and `NumberFieldIncrement` render `−` and `+` unless you pass children, and are labeled "decrease value" and "increment value" unless you set `translations` or pass `aria-label`. `NumberFieldAffix` renders text, such as a unit, inside the control; the input lists each affix in its `aria-describedby`, so the unit is announced with the value. `NumberFieldError` renders only while the field is invalid.
+`NumberFieldDecrement` and `NumberFieldIncrement` render `−` and `+` unless you pass children, and are labeled "decrease value" and "increment value" unless you set `translations` or pass `aria-label`. `NumberFieldAffix` renders text, such as a unit, inside the control; the input lists each affix in its `aria-describedby`, so the unit is announced with the value. Unlike the decorative marks (`AlertMark`, `EmptyStateMark`, `StatusLineDot`), an affix is not hidden from assistive technology. `NumberFieldError` renders only while the field is invalid.
 
 ## Select
 
-`options` is required. `SelectLabel` holds the visible label, which also names the trigger and the list. `onValueChange` receives the selected option's value, not its label. Omit `id` to generate one.
+`options` is required. `SelectLabel` holds the visible label, which also names the trigger and the list, so every `Select` needs one; there is no `aria-label` fallback. `onValueChange` receives the selected option's value, not its label, or `null` when the selection is cleared. Omit `id` to generate one. `options` may be a read-only array, such as one declared `as const`.
 
 ```tsx
 import { createSignal } from "solid-js";
@@ -277,7 +294,7 @@ const timezones = [
 ];
 
 export function TimezonePicker() {
-  const [timezone, setTimezone] = createSignal("");
+  const [timezone, setTimezone] = createSignal<string | null>(null);
 
   return (
     <Select
@@ -315,7 +332,7 @@ export function TimezonePicker() {
 }
 ```
 
-Additional root props: `value` makes selection controlled (`""` means cleared), `defaultValue` sets the initial selection of an uncontrolled select, `name` adds a hidden native select so the value submits with the form, `disabled`, `invalid`, and `required` drive state styling and labeling, `placement` picks the popup side, and `onOpenChange` reports visibility.
+Additional root props: `value` makes selection controlled (`null` means nothing is selected), `defaultValue` sets the initial selection of an uncontrolled select, `name` adds a hidden native select so the value submits with the form, `form` associates it with a form elsewhere on the page, `disabled`, `invalid`, and `required` drive state styling and labeling, `placement` picks the popup side, and `onOpenChange` reports visibility.
 
 `SelectDescription` and `SelectError` work like `NumberFieldDescription` and `NumberFieldError`: the trigger lists them in its `aria-describedby` while they are rendered, and `SelectError` renders only while `invalid` is set.
 
@@ -325,7 +342,7 @@ With `name` and `defaultValue`, a `Select` works uncontrolled inside a `<form>`:
 
 ## Combobox
 
-Same root props and parts as `Select`, with a text input that filters options by label. `ComboboxDescription` and `ComboboxError` are linked to the input.
+Same root props and parts as `Select`, with a text input that filters options by label. `ComboboxLabel` names the input and the list, so every `Combobox` needs one. `ComboboxDescription` and `ComboboxError` are linked to the input. `name` adds a hidden native select that submits the option value, not the typed text.
 
 ```tsx
 import {
@@ -376,7 +393,7 @@ import {
 
 ## DatePicker
 
-A text input and a popup calendar for one date. Values are `DateValue` objects from [`@internationalized/date`](https://react-spectrum.adobe.com/internationalized/date/); create them with `parseDate`, which this package re-exports. `id`, `required`, `disabled`, `readOnly`, and `invalid` are set on the root only, as with `Field`.
+A text input and a popup calendar for one date. Values are `DateValue` objects from [`@internationalized/date`](https://react-spectrum.adobe.com/internationalized/date/); create them with `parseDateInput`, Zag's date parser, which this package re-exports. It takes an ISO date such as `"2026-10-12"`, or a `Date`, read in local time. It is not `@internationalized/date`'s `parseDate`, which only takes ISO strings. `id`, `required`, `disabled`, `readOnly`, and `invalid` are set on the root only, as with `Field`.
 
 ```tsx
 import { createSignal } from "solid-js";
@@ -392,19 +409,19 @@ import {
   DatePickerPortal,
   DatePickerPositioner,
   DatePickerTrigger,
-  parseDate,
+  parseDateInput,
   type DateValue,
 } from "@simple-base/solid";
 
 export function DueDate() {
-  const [due, setDue] = createSignal<DateValue | null>(parseDate("2026-10-12"));
+  const [due, setDue] = createSignal<DateValue | null>(parseDateInput("2026-10-12"));
 
   return (
     <DatePicker
       value={due()}
       onValueChange={(value) => setDue(value)}
-      min={parseDate("2026-10-05")}
-      max={parseDate("2026-11-20")}
+      min={parseDateInput("2026-10-05")}
+      max={parseDateInput("2026-11-20")}
     >
       <DatePickerLabel>Due date</DatePickerLabel>
       <DatePickerControl>
@@ -580,6 +597,8 @@ import {
 ```
 
 `TableWrap` provides the horizontal scroll container the table styles expect. `TableFooter` renders a `tfoot`, for example for totals.
+
+`TableHeader`, `TableBody`, `TableFooter`, `TableRow`, and `TableCaption` add no class or behavior: the styles target them as descendants of `Table`. Use them for consistent naming, or use the native `thead`, `tbody`, `tfoot`, `tr`, and `caption` instead.
 
 ### Sortable columns
 
@@ -849,7 +868,7 @@ Toasts pause while the region is hovered or focused. `Alt+T` moves focus to the 
 
 ## Forms
 
-Every form control takes `name` and works uncontrolled inside a `<form>`. Set the initial state with the default prop, not the controlled one:
+Every form control takes `name`, `form`, `required`, and `disabled`, and works uncontrolled inside a `<form>`. `Field`, `NumberField`, and `DatePicker` take `required` and `disabled` on the root. In a `RadioGroup` or `CheckboxGroup`, `name` goes on the group, `required` and `disabled` come from the `Fieldset`, and `form` and `disabled` also go on each item. Set the initial state with the default prop, not the controlled one:
 
 | Component                                                         | Initial state                  |
 | ----------------------------------------------------------------- | ------------------------------ |
@@ -857,7 +876,7 @@ Every form control takes `name` and works uncontrolled inside a `<form>`. Set th
 | `Checkbox`, `Radio`, `Switch`                                     | `defaultChecked`               |
 | `RadioGroup`                                                      | `defaultValue`                 |
 | `CheckboxGroup`                                                   | `defaultValue` (`string[]`)    |
-| `Select`, `Combobox`                                              | `defaultValue` (`""` = none)   |
+| `Select`, `Combobox`                                              | `defaultValue` (`null` = none) |
 | `DatePicker`                                                      | `defaultValue` (`null` = none) |
 
 ```tsx
@@ -893,6 +912,14 @@ const [submitted, setSubmitted] = createSignal(false);
   {/* fields */}
 </form>;
 ```
+
+## Localization
+
+Every string the components read to assistive technology has an English default you can replace:
+
+- **Zag-based roots** (`NumberField`, `DatePicker`) take Zag's own `translations`, with Zag's types and defaults.
+- **Other roots** take `labels`, a partial object whose defaults live in `@simple-base/contracts`: `Pagination` (`paginationLabels`) and `Fieldset` (`fieldsetLabels`).
+- `Toaster` takes `label`, the accessible name of its live region, like an `aria-label`.
 
 ## Props conventions
 

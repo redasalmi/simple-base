@@ -33,7 +33,6 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@internationalized/date": "catalog:",
     "@simple-base/contracts": "workspace:^",
     "@zag-js/combobox": "catalog:",
     "@zag-js/date-picker": "catalog:",
@@ -46,6 +45,7 @@
     "@zag-js/tooltip": "catalog:"
   },
   "devDependencies": {
+    "@internationalized/date": "catalog:",
     "@solidjs/testing-library": "^0.8.10",
     "@testing-library/user-event": "^14.6.7",
     "@types/node": "catalog:",
@@ -60,6 +60,7 @@
     "vitest": "^5.0.3"
   },
   "peerDependencies": {
-    "solid-js": "^1.9.12"
+    "@internationalized/date": "^3.12.4",
+    "solid-js": "^1.9.15"
   }
 }

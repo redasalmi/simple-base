@@ -33,6 +33,7 @@
           "$value": "{primitive.color.muted}"
         },
         "subtle": {
+          "$description": "Not for text: it falls below 4.5:1 in catppuccin-latte. No component uses it.",
           "$value": "{primitive.color.fg-subtle}"
         },
         "inverse": {
@@ -42,6 +43,7 @@
       "border": {
         "$type": "color",
         "default": {
+          "$description": "Decorative dividers and card edges only. It falls below 3:1 in every theme, so control boundaries use border.strong.",
           "$value": "{primitive.color.border}"
         },
         "strong": {

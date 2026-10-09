@@ -65,6 +65,11 @@ Every theme layers its surfaces the same way — `canvas` for the page, `surface
 | `status.*.base` on `*.soft` (glyphs), when text is colored | 3:1     |
 | `focus.ring`, `accent.surface`                             | 3:1     |
 
+Two roles meet no minimum, so keep them off text and control boundaries:
+
+- `foreground.subtle` falls below 4.5:1 in `catppuccin-latte`. Use `muted` for de-emphasized text.
+- `border.default` falls below 3:1 in every theme. It is for dividers and card edges; field and control outlines use `border.strong`.
+
 ### Ported palettes
 
 Catppuccin, Dracula, Tokyo Night, and Nord use only their official palette colors. Each theme file declares its palette under `$extensions["org.simple-base.theme"].palette`, and each color token names the palette color it uses in `$extensions["org.simple-base.palette"]`. Colors are never lightened or darkened to pass contrast. Instead, each role picks a palette color that passes, and the only adjustment is the opacity of tints and the modal scrim.

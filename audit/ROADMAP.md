@@ -168,21 +168,21 @@ The tools the later phases rely on.
 
 Everything that is a breaking change after 1.0. Each item updates contracts, the Solid package, the READMEs, and the playground together.
 
-- [ ] **Empty value** ([K5](#k5-empty-value)). `SelectOptions` and `ComboboxOptions`: `value?: string | null`, `defaultValue?: string | null`, `onValueChange(value: string | null)`.
-- [ ] **Translation props** ([K6](#k6-translation-props)). Add `fieldsetLabels` to the `labels` pattern: `Fieldset labels={{ required }}`, drop `FieldsetLegend requiredLabel`. Document the Zag-vs-other rule in the Solid and contracts READMEs.
-- [ ] **Contracts cleanup** ([R9](05-refactoring-helpers.md), [Q4](07-code-quality.md)).
+- [x] **Empty value** ([K5](#k5-empty-value)). `SelectOptions` and `ComboboxOptions`: `value?: string | null`, `defaultValue?: string | null`, `onValueChange(value: string | null)`.
+- [x] **Translation props** ([K6](#k6-translation-props)). Add `fieldsetLabels` to the `labels` pattern: `Fieldset labels={{ required }}`, drop `FieldsetLegend requiredLabel`. Document the Zag-vs-other rule in the Solid and contracts READMEs.
+- [x] **Contracts cleanup** ([R9](05-refactoring-helpers.md), [Q4](07-code-quality.md)).
   - `ListboxOption` and `ListboxOptions` as the base, with `SelectOption`, `ComboboxOption`, `SelectOptions`, and `ComboboxOptions` as aliases.
   - `options: readonly ListboxOption[]`.
   - `type AlertStatus = StatusValue`.
   - JSDoc for `DialogOptions`, and for `disabled`, `invalid`, `required`, `placement`, and `onOpenChange` on Select and Combobox.
   - State in `ToastStatus`'s JSDoc why it is only `success` and `warning`.
   - `DatePickerOptions.form`: "Read on mount", matching NumberField ([K3](#k3-form-reset)).
-- [ ] **Dependencies** ([B4](06-build-and-ci.md)). Raise the `solid-js` peer to `^1.9.15`, the version tested. Make `@internationalized/date` a peer dependency of `solid` and a peer plus dev dependency of `contracts`.
-- [ ] **`parseDateInput`** ([Q6](07-code-quality.md)). Rename the `parseDate` re-export of Zag's `parse` to `parseDateInput`, so it doesn't share a name with `@internationalized/date`'s `parseDate`, which has different semantics.
-- [ ] **Form options** ([K2](#k2-form-participation)). Add `form` to `SelectOptions` and `ComboboxOptions`. Check that every form control accepts `name`, `form`, `required`, and `disabled`, including RadioGroup and CheckboxGroup items.
-- [ ] **Private hooks** ([Q6](07-code-quality.md)). Move `useFieldset` to `src/internal/` so it is visibly private.
-- [ ] **Switch name** ([Q8](07-code-quality.md)). Remove the `AccessibleName` union from `Switch.tsx`, so `SwitchProps` is typed like `CheckboxProps`. A wrapping `<label>`, a `<label for>` (including `FieldLabel`), `aria-label`, and `aria-labelledby` all stay valid. In the README's Switch section, show the wrapping `<label>` first and keep `aria-label` for a switch with no visible text. Loosening isn't breaking, but doing it now keeps the 1.0 types final.
-- [ ] **Docs for intentional limits** ([Q8](07-code-quality.md), [B5](06-build-and-ci.md)). `Input`'s restricted `type`, the Table parts as optional pass-throughs, the type-only contracts subpaths, that a Select or Combobox needs its Label part, and that `NumberFieldAffix` is announced, unlike the decorative marks ([K4](#k4-numberfieldaffix)). In `tokens`, note that `foreground-subtle` fails 4.5:1 in catppuccin-latte and `border-default` fails 3:1 everywhere, so neither goes on text or control boundaries.
+- [x] **Dependencies** ([B4](06-build-and-ci.md)). Raise the `solid-js` peer to `^1.9.15`, the version tested. Make `@internationalized/date` a peer dependency of `solid` and a peer plus dev dependency of `contracts`.
+- [x] **`parseDateInput`** ([Q6](07-code-quality.md)). Rename the `parseDate` re-export of Zag's `parse` to `parseDateInput`, so it doesn't share a name with `@internationalized/date`'s `parseDate`, which has different semantics.
+- [x] **Form options** ([K2](#k2-form-participation)). Add `form` to `SelectOptions` and `ComboboxOptions`. Check that every form control accepts `name`, `form`, `required`, and `disabled`, including RadioGroup and CheckboxGroup items.
+- [x] **Private hooks** ([Q6](07-code-quality.md)). Move `useFieldset` to `src/internal/` so it is visibly private.
+- [x] **Switch name** ([Q8](07-code-quality.md)). Remove the `AccessibleName` union from `Switch.tsx`, so `SwitchProps` is typed like `CheckboxProps`. A wrapping `<label>`, a `<label for>` (including `FieldLabel`), `aria-label`, and `aria-labelledby` all stay valid. In the README's Switch section, show the wrapping `<label>` first and keep `aria-label` for a switch with no visible text. Loosening isn't breaking, but doing it now keeps the 1.0 types final.
+- [x] **Docs for intentional limits** ([Q8](07-code-quality.md), [B5](06-build-and-ci.md)). `Input`'s restricted `type`, the Table parts as optional pass-throughs, the type-only contracts subpaths, that a Select or Combobox needs its Label part, and that `NumberFieldAffix` is announced, unlike the decorative marks ([K4](#k4-numberfieldaffix)). In `tokens`, note that `foreground-subtle` fails 4.5:1 in catppuccin-latte and `border-default` fails 3:1 everywhere, so neither goes on text or control boundaries.
 
 ### Phase 2. Behavior tests
 

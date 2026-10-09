@@ -17,15 +17,15 @@ import { createSignal } from "solid-js";
 import { Api, Example, FormDemo } from "./Preview";
 
 const fieldsetApi = [
-  "required / disabled / invalid",
+  "required / disabled / invalid / labels",
   "Fieldset props",
-  "Set once on the root. required marks the legend, disabled disables the native fieldset and every control inside, and invalid shows FieldsetError.",
+  'Set once on the root. required marks the legend, disabled disables the native fieldset and every control inside, and invalid shows FieldsetError. labels sets the text read to assistive technology, such as { required: "(obligatoire)" }.',
 ] as const;
 
 const fieldsetPartsApi = [
   "FieldsetLegend / FieldsetDescription / FieldsetError",
   "legend / p / p",
-  'Put the legend first. A required fieldset adds hidden "(required)" text to the legend; set requiredLabel to change it. The fieldset lists the description, and the error while it is rendered, in aria-describedby. FieldsetError renders only while invalid is set.',
+  'Put the legend first. A required fieldset adds hidden "(required)" text to the legend; set labels.required on the Fieldset to change it. The fieldset lists the description, and the error while it is rendered, in aria-describedby. FieldsetError renders only while invalid is set.',
 ] as const;
 
 export function Fieldsets() {

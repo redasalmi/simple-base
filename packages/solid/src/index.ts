@@ -93,6 +93,7 @@ export {
 } from "./components/CheckboxGroup";
 export type {
   FieldsetOptions,
+  FieldsetLabels,
   RadioGroupOptions,
   CheckboxGroupOptions,
 } from "@simple-base/contracts";
@@ -141,7 +142,7 @@ export {
   type DatePickerErrorProps,
 } from "./components/DatePicker";
 export type { DatePickerOptions } from "@simple-base/contracts";
-export { parse as parseDate, type DateValue } from "@zag-js/date-picker";
+export { parse as parseDateInput, type DateValue } from "@zag-js/date-picker";
 export {
   Combobox,
   ComboboxLabel,
@@ -201,7 +202,13 @@ export {
   type SelectDescriptionProps,
   type SelectErrorProps,
 } from "./components/Select";
-export type { SelectOption, SelectOptions, Placement } from "@simple-base/contracts";
+export type {
+  ListboxOption,
+  ListboxOptions,
+  SelectOption,
+  SelectOptions,
+  Placement,
+} from "@simple-base/contracts";
 export {
   Menu,
   MenuTrigger,
