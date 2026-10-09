@@ -78,12 +78,14 @@ import "@simple-base/css/badge";
 | `DatePicker`  | `DatePickerLabel`, `DatePickerControl`, `DatePickerInput`, `DatePickerTrigger`, `DatePickerPortal`, `DatePickerPositioner`, `DatePickerContent`, `DatePickerCalendar`, `DatePickerDescription`, `DatePickerError`, plus `parseDate` |
 | `Select`      | `SelectLabel`, `SelectControl`, `SelectTrigger`, `SelectValueText`, `SelectIndicator`, `SelectPortal`, `SelectPositioner`, `SelectContent`, `SelectList`, `SelectEmpty`, `SelectItem`                                               |
 | `EmptyState`  | `EmptyStateMark`, `EmptyStateTitle`, `EmptyStateDescription`, `EmptyStateActions`                                                                                                                                                   |
+| `Alert`       | `AlertMark`, `AlertContent`, `AlertTitle`, `AlertDescription`, `AlertActions`, `AlertClose`                                                                                                                                         |
+| `StatusLine`  | `StatusLineDot`, `StatusLineContent`, `StatusLineTitle`, `StatusLineDescription`                                                                                                                                                    |
 | `Table`       | `TableWrap`, `TableCaption`, `TableHeader`, `TableBody`, `TableFooter`, `TableRow`, `TableColumnHeader`, `TableRowHeader`, `TableCell`                                                                                              |
 | `Toaster`     | `Toast`, `ToastIcon`, `ToastContent`, `ToastTitle`, `ToastDescription`, `ToastAction`, `ToastClose`, plus `createToaster`                                                                                                           |
 
 The CSS package ships more components than this adapter currently covers. Until a Solid component exists, use them through their selector-level APIs:
 
-- **Planned for 1.0:** menu, tooltip, tabs, pagination, status lines and alerts, and fieldset with radio and checkbox groups.
+- **Planned for 1.0:** menu, tooltip, tabs, pagination, and fieldset with radio and checkbox groups.
 - **Planned after 1.0:** breadcrumb, disclosure, keyboard shortcut, progress, range, and segmented control.
 
 Typography stays CSS-only: the `.sb-display`, `.sb-heading-*`, and `.sb-text-*` classes are the API.
@@ -422,6 +424,70 @@ import {
 ```
 
 `EmptyStateTitle` renders an `h2` unless you pass `level`; pick the level that fits the surrounding headings. `EmptyStateMark` is decorative and hidden from assistive technology, so the title carries the meaning. Every part is optional.
+
+## Alert
+
+An inline message about the page or a form, with an optional recovery action and dismiss control. `status` is `success`, `warning`, `danger`, or `info`.
+
+```tsx
+import { createSignal, Show } from "solid-js";
+import {
+  Alert,
+  AlertActions,
+  AlertClose,
+  AlertContent,
+  AlertDescription,
+  AlertMark,
+  AlertTitle,
+  Button,
+} from "@simple-base/solid";
+
+const [open, setOpen] = createSignal(true);
+
+<Show when={open()}>
+  <Alert status="warning" role="status">
+    <AlertMark>!</AlertMark>
+    <AlertContent>
+      <AlertTitle>2 invoices are overdue</AlertTitle>
+      <AlertDescription>Send a reminder or record a payment to clear them.</AlertDescription>
+      <AlertActions>
+        <Button size="small" variant="secondary">
+          Send reminders
+        </Button>
+      </AlertActions>
+    </AlertContent>
+    <AlertClose aria-label="Dismiss overdue invoices alert" onClick={() => setOpen(false)}>
+      ×
+    </AlertClose>
+  </Alert>
+</Show>;
+```
+
+`AlertMark` is decorative and hidden from assistive technology, so the title carries the meaning. `AlertClose` renders a `type="button"` that never submits a form; it does not hide the alert, so remove it from your own state and give the button an accessible name. `role` is not set for you: use `alert` for urgent messages inserted after load, `status` for polite updates, and nothing for alerts present when the page renders.
+
+## StatusLine
+
+A compact status summary: a colored dot beside a title and a short description. `status` is `success`, `warning`, `danger`, or `info`.
+
+```tsx
+import {
+  StatusLine,
+  StatusLineContent,
+  StatusLineDescription,
+  StatusLineDot,
+  StatusLineTitle,
+} from "@simple-base/solid";
+
+<StatusLine status="success">
+  <StatusLineDot />
+  <StatusLineContent>
+    <StatusLineTitle>Changes saved</StatusLineTitle>
+    <StatusLineDescription>Your preferences are up to date.</StatusLineDescription>
+  </StatusLineContent>
+</StatusLine>;
+```
+
+`StatusLineDot` is decorative and hidden from assistive technology; color only supports the title.
 
 ## Dialog
 

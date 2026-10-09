@@ -156,6 +156,12 @@
     overflow-wrap: anywhere;
   }
 
+  .sb-status-line-content {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
   .sb-alert-actions {
     display: flex;
     flex-wrap: wrap;

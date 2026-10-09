@@ -1,6 +1,6 @@
 import { For, Show, createSignal } from "solid-js";
 import { Button, Checkbox } from "@simple-base/solid";
-import { Api, CheckIcon, CloseIcon, Example, WarningIcon } from "./Preview";
+import { Api, Example } from "./Preview";
 
 export function Styles() {
   const [progress, setProgress] = createSignal(64);
@@ -9,7 +9,6 @@ export function Styles() {
   const [page, setPage] = createSignal(1);
   const [selected, setSelected] = createSignal<string[]>([]);
   const [menuAction, setMenuAction] = createSignal("Choose an example command.");
-  const [showAlert, setShowAlert] = createSignal(true);
   const [tooltip, setTooltip] = createSignal(false);
   let menu: HTMLDetailsElement | undefined;
   const tabNames = ["Overview", "Activity", "Settings"];
@@ -25,84 +24,6 @@ export function Styles() {
 
   return (
     <>
-      <Example
-        title="Status & alerts"
-        description="Status lines and alerts support success, warning, danger, and info. Keep the message specific and include a recovery path when needed."
-        code={
-          '<div class="sb-status-line" data-status="success">\n  <span class="sb-status-dot" aria-hidden="true" />\n  <div><strong>Changes saved</strong><p>Your preferences are up to date.</p></div>\n</div>'
-        }
-      >
-        <div class="preview-stack">
-          <For
-            each={[
-              ["success", "Changes saved", "Your preferences are up to date."],
-              ["warning", "Payment overdue", "INV-0042 was due 12 days ago."],
-              ["danger", "Could not save", "Check your connection and try again."],
-              ["info", "Read-only workspace", "Ask an owner for editing access."],
-            ]}
-          >
-            {([status, title, copy]) => (
-              <div class="sb-status-line" data-status={status}>
-                <span class="sb-status-dot" aria-hidden="true" />
-                <div>
-                  <strong>{title}</strong>
-                  <p>{copy}</p>
-                </div>
-              </div>
-            )}
-          </For>
-          <div class="sb-alert" data-status="danger">
-            <span class="sb-alert-mark" aria-hidden="true">
-              <WarningIcon />
-            </span>
-            <div>
-              <strong>Review your entries</strong>
-              <p>A required field is missing.</p>
-            </div>
-          </div>
-          <Show when={showAlert()}>
-            <div class="sb-alert" data-status="warning" role="status">
-              <span class="sb-alert-mark" aria-hidden="true">
-                <WarningIcon />
-              </span>
-              <div class="sb-alert-content">
-                <strong>2 invoices are overdue</strong>
-                <p>Send a reminder or record a payment to clear them.</p>
-                <div class="sb-alert-actions">
-                  <Button size="small" variant="secondary">
-                    Send reminders
-                  </Button>
-                  <Button size="small" variant="ghost">
-                    View invoices
-                  </Button>
-                </div>
-              </div>
-              <button
-                class="sb-alert-close"
-                aria-label="Dismiss overdue invoices alert"
-                onClick={() => setShowAlert(false)}
-              >
-                <CloseIcon />
-              </button>
-            </div>
-          </Show>
-          <div class="sb-alert" data-status="success">
-            <span class="sb-alert-mark" aria-hidden="true">
-              <CheckIcon />
-            </span>
-            <div>
-              <strong>Invoice sent</strong>
-              <p>The client will receive it within a few minutes.</p>
-            </div>
-          </div>
-          <div class="sb-alert" data-status="info">
-            <div>
-              <strong>Scheduled maintenance</strong>
-              <p>Editing will be unavailable during the maintenance window.</p>
-            </div>
-          </div>
-        </div>
-      </Example>
       <Example
         title="Progress & range"
         description="A native range input drives the progress specimen. Values are local, not a running upload or a fabricated metric."

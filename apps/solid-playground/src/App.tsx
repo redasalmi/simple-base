@@ -27,6 +27,7 @@ import { Comboboxes } from "./preview/Comboboxes";
 import { Selects } from "./preview/Selects";
 import { Tables } from "./preview/Tables";
 import { EmptyStates } from "./preview/EmptyStates";
+import { Alerts, StatusLines } from "./preview/Alerts";
 import { Toasts } from "./preview/Toasts";
 import { Styles } from "./preview/Styles";
 
@@ -149,6 +150,25 @@ const pages: Page[] = [
       "Stand in for a list or table with nothing to show. Say what is missing and offer the next action; named parts render the heading, text, and actions.",
     usage: 'import { EmptyState, EmptyStateTitle, EmptyStateActions } from "@simple-base/solid";',
     component: EmptyStates,
+  },
+  {
+    id: "alert",
+    label: "Alert",
+    group: "Components",
+    description:
+      "An inline message about the page or a form, with an optional recovery action and dismiss control. The status tints the border and the mark; the text carries the meaning.",
+    usage: 'import { Alert, AlertContent, AlertTitle, AlertClose } from "@simple-base/solid";',
+    component: Alerts,
+  },
+  {
+    id: "status-line",
+    label: "StatusLine",
+    group: "Components",
+    description:
+      "A compact status summary: a colored dot beside a title and a short description. Lighter than an alert, for state that needs no action.",
+    usage:
+      'import { StatusLine, StatusLineDot, StatusLineContent, StatusLineTitle } from "@simple-base/solid";',
+    component: StatusLines,
   },
   {
     id: "textarea",
