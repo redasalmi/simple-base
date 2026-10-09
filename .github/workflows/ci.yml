@@ -14,7 +14,7 @@ concurrency:
 
 jobs:
   quality:
-    name: Lint, format, typecheck, and build
+    name: Lint, format, typecheck, test, and build
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
@@ -32,6 +32,13 @@ jobs:
       # (typecheck builds its workspace dependencies first).
       - name: Run quality checks
         run: pnpm quality
+
+      # Vitest's browser tests run in Playwright's headless Chromium.
+      - name: Install Playwright Chromium
+        run: pnpm --filter @simple-base/solid exec playwright install --with-deps --only-shell chromium
+
+      - name: Run tests
+        run: pnpm test
 
       # The playground is the only consumer that isn't built by typecheck.
       - name: Build all packages

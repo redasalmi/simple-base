@@ -14,6 +14,7 @@ import {
   type JSX,
   Show,
   splitProps,
+  untrack,
   useContext,
 } from "solid-js";
 
@@ -45,8 +46,8 @@ export function createToaster(options: ToasterOptions = {}): ToasterApi {
     duration: options.duration ?? toasterDefaults.duration,
   });
   const toaster: ToasterApi = {
-    create: ({ status = toastDefaults.status, ...options }) => {
-      const data = { ...options, type: status };
+    create: ({ status = toastDefaults.status, ...toastOptions }) => {
+      const data = { ...toastOptions, type: status };
       // Keyboard and screen reader users may not reach the action before a timeout (WCAG 2.2.1).
       if (data.action && data.duration === undefined) data.duration = Infinity;
       return store.create(data);
@@ -85,7 +86,7 @@ export type ToasterProps = Omit<
 
 export function Toaster(props: ToasterProps) {
   const [local, rest] = splitProps(props, ["class", "children", "toaster", "label"]);
-  const store = stores.get(local.toaster);
+  const store = untrack(() => stores.get(local.toaster));
   if (!store) throw new Error("Toaster requires a toaster created with createToaster");
 
   const service = useMachine(toast.group.machine, { id: createUniqueId(), store });
@@ -97,8 +98,8 @@ export function Toaster(props: ToasterProps) {
       class={cn("sb-toaster", local.class)}
     >
       <Key each={api().getToasts()} by="id">
-        {(toast, index) => (
-          <ToastProvider toast={toast} index={index} parent={service}>
+        {(toastProps, index) => (
+          <ToastProvider toast={toastProps} index={index} parent={service}>
             {local.children}
           </ToastProvider>
         )}
@@ -123,7 +124,7 @@ function ToastProvider(props: ToastProviderProps) {
   const api = createMemo(() => toast.connect(service, normalizeProps));
 
   return (
-    <ToastContext.Provider value={{ api, toast: props.toast }}>
+    <ToastContext.Provider value={{ api, toast: () => props.toast() }}>
       {props.children()}
     </ToastContext.Provider>
   );
@@ -204,11 +205,11 @@ export function ToastDescription(props: ToastDescriptionProps) {
 export type ToastActionProps = Omit<ButtonProps, "type" | "children">;
 
 export function ToastAction(props: ToastActionProps) {
-  const { api, toast } = useToast();
+  const { api, toast: toastProps } = useToast();
   const [local, rest] = splitProps(props, ["class", "variant", "size"]);
 
   return (
-    <Show when={toast().action}>
+    <Show when={toastProps().action}>
       {(action) => (
         <Button
           {...mergeProps(api().getActionTriggerProps(), rest)}

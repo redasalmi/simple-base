@@ -8,6 +8,9 @@ export default defineConfig([
   },
   {
     platform: "neutral",
+    // The first config already cleans dist/ and emits index.d.ts.
+    clean: false,
+    dts: false,
     inputOptions: {
       transform: {
         jsx: "preserve",

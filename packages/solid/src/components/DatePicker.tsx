@@ -156,14 +156,14 @@ export function DatePicker(props: DatePickerRootProps) {
   };
 
   // Zag's date picker, unlike its number input, doesn't restore the initial value on a form reset.
+  const onReset = (event: Event) => {
+    if (!event.defaultPrevented) api().setValue(local.defaultValue ? [local.defaultValue] : []);
+  };
   onMount(() => {
     const input = document.getElementById(id());
     const form = input instanceof HTMLInputElement ? input.form : null;
     if (!form) return;
 
-    const onReset = (event: Event) => {
-      if (!event.defaultPrevented) api().setValue(local.defaultValue ? [local.defaultValue] : []);
-    };
     form.addEventListener("reset", onReset);
     onCleanup(() => form.removeEventListener("reset", onReset));
   });
@@ -263,8 +263,8 @@ export function DatePickerInput(props: DatePickerInputProps) {
   // live `value`. Restore it so a form reset keeps what Zag displays; Zag syncs typed text itself.
   // Solid only sets `defaultValue` as a DOM property under `prop:`.
   const inputProps = () => {
-    const { value, ...inputProps } = api().getInputProps();
-    return { ...inputProps, "prop:defaultValue": value };
+    const { value, ...zagProps } = api().getInputProps();
+    return { ...zagProps, "prop:defaultValue": value };
   };
 
   return (

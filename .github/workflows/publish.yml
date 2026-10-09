@@ -38,6 +38,13 @@ jobs:
       - name: Run quality checks
         run: pnpm quality
 
+      # Vitest's browser tests run in Playwright's headless Chromium.
+      - name: Install Playwright Chromium
+        run: pnpm --filter @simple-base/solid exec playwright install --with-deps --only-shell chromium
+
+      - name: Run tests
+        run: pnpm test
+
       # Packages ship compiled output from dist/, so build before packing.
       - name: Build packages
         run: pnpm build

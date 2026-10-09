@@ -354,12 +354,12 @@ export default function App() {
     document.title = `${current().label} · Simple Base Solid`;
   });
 
+  const navigate = () => {
+    setCurrent(pageFromHash());
+    window.scrollTo(0, 0);
+    title?.focus({ preventScroll: true });
+  };
   onMount(() => {
-    const navigate = () => {
-      setCurrent(pageFromHash());
-      window.scrollTo(0, 0);
-      title?.focus({ preventScroll: true });
-    };
     window.addEventListener("hashchange", navigate);
     onCleanup(() => window.removeEventListener("hashchange", navigate));
   });

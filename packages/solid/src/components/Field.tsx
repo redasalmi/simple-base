@@ -108,6 +108,7 @@ export function FieldLabel(props: FieldLabelProps) {
   const [local, rest] = splitProps(props, ["class"]);
 
   return (
+    // oxlint-disable-next-line jsx-a11y/label-has-associated-control -- the rule reads `htmlFor`, not Solid's `for`
     <label
       {...rest}
       class={cn("sb-field-label", local.class)}

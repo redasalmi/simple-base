@@ -162,6 +162,7 @@ export function Styles() {
       >
         <div class="preview-stack">
           <div class="preview-demo-menu">
+            {/* oxlint-disable-next-line jsx-a11y/no-noninteractive-element-interactions -- handles Escape from the summary and buttons inside */}
             <details
               ref={(element) => {
                 menu = element;

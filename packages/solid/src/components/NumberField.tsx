@@ -158,7 +158,7 @@ export function NumberField(props: NumberFieldRootProps) {
         registerAffix() {
           const affixId = createUniqueId();
           onMount(() => setAffixIds((ids) => [...ids, affixId]));
-          onCleanup(() => setAffixIds((ids) => ids.filter((id) => id !== affixId)));
+          onCleanup(() => setAffixIds((ids) => ids.filter((other) => other !== affixId)));
           return affixId;
         },
       }}
@@ -235,8 +235,8 @@ export function NumberFieldInput(props: NumberFieldInputProps) {
   // live `value`. Restore it so typing isn't overwritten and Zag syncs what's displayed.
   // Solid only sets `defaultValue` as a DOM property under `prop:`.
   const inputProps = () => {
-    const { value, ...inputProps } = api().getInputProps();
-    return { ...inputProps, "prop:defaultValue": value };
+    const { value, ...zagProps } = api().getInputProps();
+    return { ...zagProps, "prop:defaultValue": value };
   };
 
   return (

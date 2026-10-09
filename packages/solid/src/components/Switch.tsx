@@ -18,5 +18,8 @@ export type SwitchProps = Omit<
 export function Switch(props: SwitchProps) {
   const [local, rest] = splitProps(props, ["class"]);
 
-  return <input {...rest} type="checkbox" role="switch" class={cn("sb-switch", local.class)} />;
+  return (
+    // oxlint-disable-next-line jsx-a11y/role-has-required-aria-props -- the checkbox input exposes its own checked state
+    <input {...rest} type="checkbox" role="switch" class={cn("sb-switch", local.class)} />
+  );
 }

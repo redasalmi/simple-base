@@ -30,14 +30,9 @@ Each finding has a severity:
 - I computed WCAG contrast for the main foreground/background token pairs in all nine themes from `packages/tokens/dist/tokens.css`.
 - I checked the Solid guidance against docs.solidjs.com and the Zag guidance against zagjs.com.
 
-## Fix before 1.0
+## Roadmap
 
-1. **No tests at all** ([07](07-code-quality.md)). The stateful components are untested: Select, Combobox, DatePicker, NumberField, Toast, Dialog, and form reset. Most of the Zag workarounds in report 03 exist only because of behavior nobody can currently verify.
-2. **Zag workarounds** ([03](03-zag-compliance.md)). Three inputs rewrite the props Zag returns. Combobox submits through a hidden `<select>` of its own. Select and Combobox add a `hidden` wrapper instead of using Zag's `content` and `list` parts. DatePicker adds its own form reset listener. Each one needs a decision: remove it, or take it upstream.
-3. **Select and Combobox can't describe or explain an error** ([02](02-accessibility.md), [01](01-consistency.md)). They take `invalid` but have no Description or Error parts, so nothing tells a screen reader why the field is invalid.
-4. **The dual tsdown build races** ([06](06-build-and-ci.md)). Both configs clean `dist/` and both emit `index.d.ts` at the same time.
-5. **Freeze the public API names** ([01](01-consistency.md)). Root prop type names (`NumberFieldProps` vs `SelectRootProps`), contract subpaths (`./numberField` vs `./number-input`), the missing `SelectOption` and `ComboboxOption` type exports, and the array-shaped value of a single-date `DatePicker` all get harder to change after 1.0.
-6. **Ship a LICENSE in each package and add publint/attw checks** ([06](06-build-and-ci.md)).
+[ROADMAP.md](ROADMAP.md) orders every open finding into phases, settles where the reports disagree, and records the product decisions made after the audit. Reports 01 and 02 are already implemented.
 
 ## Already in good shape
 

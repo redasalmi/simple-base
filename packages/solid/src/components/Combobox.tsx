@@ -191,7 +191,12 @@ export function Combobox(props: ComboboxRootProps) {
           required={local.required}
           onFocus={() => api().focus()}
         >
-          <Show when={api().value[0]}>{(value) => <option value={value()} />}</Show>
+          <Show when={api().value[0]}>
+            {(value) => (
+              // oxlint-disable-next-line jsx-a11y/control-has-associated-label -- the select is hidden from assistive technology
+              <option value={value()} />
+            )}
+          </Show>
         </select>
         {local.children}
       </div>
@@ -249,8 +254,8 @@ export function ComboboxInput(props: ComboboxInputProps) {
   // `value`. Restore it so a form reset keeps the text; Zag syncs what's displayed.
   // Solid only sets `defaultValue` as a DOM property under `prop:`.
   const inputProps = () => {
-    const { value, ...inputProps } = api().getInputProps();
-    return { ...inputProps, "prop:defaultValue": value };
+    const { value, ...zagProps } = api().getInputProps();
+    return { ...zagProps, "prop:defaultValue": value };
   };
 
   return (

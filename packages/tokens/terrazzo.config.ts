@@ -1,14 +1,12 @@
 import path from "node:path";
-import { fileURLToPath } from "node:url";
 
 import { defineConfig } from "@terrazzo/cli";
 import css from "@terrazzo/plugin-css";
 import js from "@terrazzo/plugin-js";
 import tailwind from "@terrazzo/plugin-tailwind";
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const tokensResolverPath = path.join(__dirname, "src/simple-base.resolver.json");
-const tailwindTemplatePath = path.join(__dirname, "src/tailwind.template.css");
+const tokensResolverPath = path.join(import.meta.dirname, "src/simple-base.resolver.json");
+const tailwindTemplatePath = path.join(import.meta.dirname, "src/tailwind.template.css");
 
 const themes = [
   { name: "simple-base-dark", colorScheme: "dark", isDefault: true },

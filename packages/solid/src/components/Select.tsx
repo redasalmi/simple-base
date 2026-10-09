@@ -162,6 +162,7 @@ export function Select(props: SelectRootProps) {
       <div {...mergeProps(api().getRootProps(), rest)} class={cn("sb-select-root", local.class)}>
         <select {...api().getHiddenSelectProps()}>
           <Show when={api().value.length === 0}>
+            {/* oxlint-disable-next-line jsx-a11y/control-has-associated-label -- the select is hidden from assistive technology */}
             <option value="" />
           </Show>
           <For each={local.options}>
