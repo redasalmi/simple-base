@@ -27,6 +27,7 @@ import { DatePickers } from "./preview/DatePickers";
 import { Comboboxes } from "./preview/Comboboxes";
 import { Selects } from "./preview/Selects";
 import { Menus } from "./preview/Menus";
+import { Tooltips } from "./preview/Tooltips";
 import { Tables } from "./preview/Tables";
 import { Paginations } from "./preview/Paginations";
 import { EmptyStates } from "./preview/EmptyStates";
@@ -144,6 +145,15 @@ const pages: Page[] = [
       "A list of commands behind a button, such as the actions for a table row. Named parts provide keyboard navigation, typeahead, groups, and a portaled popup positioned like Select.",
     usage: 'import { Menu, MenuTrigger, MenuContent, MenuItem } from "@simple-base/solid";',
     component: Menus,
+  },
+  {
+    id: "tooltip",
+    label: "Tooltip",
+    group: "Components",
+    description:
+      "A short label that appears on hover or keyboard focus, most often to name an icon-only button. Named parts provide the trigger, a portaled popup positioned like Select, and an optional arrow.",
+    usage: 'import { Tooltip, TooltipTrigger, TooltipContent } from "@simple-base/solid";',
+    component: Tooltips,
   },
   {
     id: "table",

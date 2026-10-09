@@ -21,3 +21,4 @@ export {
   type ToastOptions,
 } from "./status";
 export type { DatePickerOptions } from "./datePicker";
+export type { TooltipOptions } from "./tooltip";

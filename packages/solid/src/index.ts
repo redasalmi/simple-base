@@ -218,6 +218,21 @@ export {
 } from "./components/Menu";
 export type { MenuOptions, MenuItemOptions } from "@simple-base/contracts";
 export {
+  Tooltip,
+  TooltipTrigger,
+  TooltipPortal,
+  TooltipPositioner,
+  TooltipContent,
+  TooltipArrow,
+  type TooltipRootProps,
+  type TooltipTriggerProps,
+  type TooltipPortalProps,
+  type TooltipPositionerProps,
+  type TooltipContentProps,
+  type TooltipArrowProps,
+} from "./components/Tooltip";
+export type { TooltipOptions } from "@simple-base/contracts";
+export {
   Table,
   TableWrap,
   TableCaption,

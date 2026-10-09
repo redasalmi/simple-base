@@ -80,6 +80,7 @@ import "@simple-base/css/badge";
 | `Combobox`      | `ComboboxLabel`, `ComboboxControl`, `ComboboxInput`, `ComboboxTrigger`, `ComboboxPortal`, `ComboboxPositioner`, `ComboboxContent`, `ComboboxList`, `ComboboxEmpty`, `ComboboxItem`                                                  |
 | `DatePicker`    | `DatePickerLabel`, `DatePickerControl`, `DatePickerInput`, `DatePickerTrigger`, `DatePickerPortal`, `DatePickerPositioner`, `DatePickerContent`, `DatePickerCalendar`, `DatePickerDescription`, `DatePickerError`, plus `parseDate` |
 | `Menu`          | `MenuTrigger`, `MenuPortal`, `MenuPositioner`, `MenuContent`, `MenuItem`, `MenuItemShortcut`, `MenuGroup`, `MenuGroupLabel`, `MenuSeparator`                                                                                        |
+| `Tooltip`       | `TooltipTrigger`, `TooltipPortal`, `TooltipPositioner`, `TooltipContent`, `TooltipArrow`                                                                                                                                            |
 | `Select`        | `SelectLabel`, `SelectControl`, `SelectTrigger`, `SelectValueText`, `SelectIndicator`, `SelectPortal`, `SelectPositioner`, `SelectContent`, `SelectList`, `SelectEmpty`, `SelectItem`                                               |
 | `EmptyState`    | `EmptyStateMark`, `EmptyStateTitle`, `EmptyStateDescription`, `EmptyStateActions`                                                                                                                                                   |
 | `Alert`         | `AlertMark`, `AlertContent`, `AlertTitle`, `AlertDescription`, `AlertActions`, `AlertClose`                                                                                                                                         |
@@ -90,7 +91,7 @@ import "@simple-base/css/badge";
 
 The CSS package ships more components than this adapter currently covers. Until a Solid component exists, use them through their selector-level APIs:
 
-- **Planned for 1.0:** tooltip and tabs.
+- **Planned for 1.0:** tabs.
 - **Planned after 1.0:** breadcrumb, disclosure, keyboard shortcut, progress, range, and segmented control.
 
 Typography stays CSS-only: the `.sb-display`, `.sb-heading-*`, and `.sb-text-*` classes are the API.
@@ -476,6 +477,39 @@ export function InvoiceActions(props: { id: string }) {
 Root props: `onSelect`, `open` with `onOpenChange` for controlled state, `defaultOpen` for uncontrolled initial state, and `placement` for the popup side (default `bottom-start`). The root renders no element of its own.
 
 `MenuTrigger` takes the `Button` props, including `variant` and `size`; give an icon-only trigger an `aria-label`. `MenuItem` takes `value`, `disabled`, and `variant="danger"`. Typeahead matches the start of an item's text. Wrap items in `MenuGroup` with a `MenuGroupLabel` to name a set, and put display-only key hints in `MenuItemShortcut`; binding the keys stays in your app. Like `SelectPortal`, `MenuPortal` accepts `mount` for use inside a native modal.
+
+## Tooltip
+
+A short label shown on hover or keyboard focus, most often to name an icon-only button.
+
+```tsx
+import {
+  Tooltip,
+  TooltipArrow,
+  TooltipContent,
+  TooltipPortal,
+  TooltipPositioner,
+  TooltipTrigger,
+} from "@simple-base/solid";
+
+<Tooltip>
+  <TooltipTrigger variant="ghost" aria-label="Download PDF">
+    <DownloadIcon />
+  </TooltipTrigger>
+  <TooltipPortal>
+    <TooltipPositioner>
+      <TooltipContent>
+        <TooltipArrow />
+        Download PDF
+      </TooltipContent>
+    </TooltipPositioner>
+  </TooltipPortal>
+</Tooltip>;
+```
+
+Root props: `open` with `onOpenChange` for controlled state, `defaultOpen` for uncontrolled initial state, and `placement` for the preferred side (default `bottom`). The root renders no element of its own.
+
+`TooltipTrigger` takes the `Button` props, including `variant` and `size`, and defaults to `type="button"`. The trigger points `aria-describedby` at the content only while it is open, so an icon-only trigger still needs its own `aria-label`. The content is not interactive; keep it to a short label. `TooltipArrow` is optional and goes first inside `TooltipContent`. Like `SelectPortal`, `TooltipPortal` accepts `mount` for use inside a native modal.
 
 ## Table
 

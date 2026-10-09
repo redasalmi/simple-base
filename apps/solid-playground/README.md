@@ -12,7 +12,7 @@ short API reference.
 
 - **Solid components:** every export of `@simple-base/solid` — Button (six
   variants, three sizes, disabled states), Badge (nine variants, both sizes),
-  Card, Input, Field, NumberField, DatePicker, Combobox, Select, Menu, Table (with
+  Card, Input, Field, NumberField, DatePicker, Combobox, Select, Menu, Tooltip, Table (with
   sortable columns), EmptyState, TextArea, Checkbox, Radio, Switch, and all
   Pagination, Fieldset, RadioGroup, CheckboxGroup, Alert, StatusLine, Dialog,
   AlertDialog, and Toast named parts.
@@ -20,11 +20,10 @@ short API reference.
   states where supported.
 - **Foundations:** the heading and body scales, display typography, text roles,
   code, and keyboard shortcuts.
-- **CSS patterns:** progress and range, the native select, tooltip, segmented
-  control, tabs, breadcrumb and disclosure, and command popover. These use the
-  selectors directly. Tooltip and tabs are planned as Solid components for 1.0
-  (see `todo.md` at the repository root); until then they are not Solid
-  exports.
+- **CSS patterns:** progress and range, the native select, segmented control,
+  tabs, breadcrumb and disclosure, and command popover. These use the selectors
+  directly. Tabs is planned as a Solid component for 1.0 (see `todo.md` at the
+  repository root); until then it is not a Solid export.
 
 Examples use local state only. Navigation resets component demonstrations; no
 form data is submitted or persisted. Dialog and AlertDialog coordinate their
@@ -85,7 +84,7 @@ Turbo builds workspace dependencies before checking types. `pnpm check` and
 
 ## Modal portal targets
 
-`SelectPortal`, `ComboboxPortal`, and `MenuPortal` accept `mount?: Node`. Inside a native
+`SelectPortal`, `ComboboxPortal`, `MenuPortal`, and `TooltipPortal` accept `mount?: Node`. Inside a native
 modal, mount the popup within the dialog rather than under `document.body`.
 Use a signal-backed ref (`const [dialog, setDialog] = createSignal<HTMLDialogElement>()`),
 pass `ref={setDialog}` to `AlertDialogContent`, and use `mount={dialog()}` on the portal.

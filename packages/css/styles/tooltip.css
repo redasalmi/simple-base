@@ -29,6 +29,7 @@
     margin-inline-start: var(--sb-semantic-space-2);
     border-color: color-mix(in oklch, var(--sb-semantic-color-foreground-inverse) 40%, transparent);
     color: inherit;
+    background: transparent;
   }
 
   .sb-tooltip-arrow-tip {

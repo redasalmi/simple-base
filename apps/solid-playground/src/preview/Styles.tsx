@@ -1,5 +1,4 @@
-import { For, Show, createSignal } from "solid-js";
-import { Button } from "@simple-base/solid";
+import { For, createSignal } from "solid-js";
 import { Api, Example } from "./Preview";
 
 export function Styles() {
@@ -7,7 +6,6 @@ export function Styles() {
   const [view, setView] = createSignal("List");
   const [tab, setTab] = createSignal(0);
   const [menuAction, setMenuAction] = createSignal("Choose an example command.");
-  const [tooltip, setTooltip] = createSignal(false);
   let menu: HTMLDetailsElement | undefined;
   const tabNames = ["Overview", "Activity", "Settings"];
   const tabCopy = [
@@ -106,48 +104,6 @@ export function Styles() {
                 </select>
               </span>
             </label>
-          </div>
-        </div>
-      </Example>
-      <Example
-        title="Tooltip"
-        description="A short, non-essential label for an icon-only control. The component shows it on hover and focus and positions it with an arrow; this specimen toggles it on focus and hover."
-        code={
-          '<div class="sb-tooltip-content" data-state="open">\n  Download PDF <kbd class="sb-shortcut">D</kbd>\n</div>'
-        }
-      >
-        <div class="preview-row" style={{ "min-height": "96px", "align-items": "flex-start" }}>
-          <div style={{ position: "relative" }}>
-            <Button
-              variant="secondary"
-              aria-label="Download PDF"
-              aria-describedby="tooltip-download"
-              onMouseEnter={() => setTooltip(true)}
-              onMouseLeave={() => setTooltip(false)}
-              onFocus={() => setTooltip(true)}
-              onBlur={() => setTooltip(false)}
-            >
-              ⤓
-            </Button>
-            <Show when={tooltip()}>
-              <div
-                class="sb-tooltip-content"
-                id="tooltip-download"
-                role="tooltip"
-                data-state="open"
-                style={{ position: "absolute", top: "calc(100% + 8px)", left: "0" }}
-              >
-                Download PDF <kbd class="sb-shortcut">D</kbd>
-              </div>
-            </Show>
-          </div>
-          <div
-            class="sb-tooltip-content"
-            data-state="open"
-            data-instant
-            style={{ "z-index": "auto" }}
-          >
-            Always visible specimen
           </div>
         </div>
       </Example>

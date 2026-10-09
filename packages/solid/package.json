@@ -1,6 +1,6 @@
 {
   "name": "@simple-base/solid",
-  "version": "0.15.0",
+  "version": "0.16.0",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -40,7 +40,8 @@
     "@zag-js/number-input": "catalog:",
     "@zag-js/select": "catalog:",
     "@zag-js/solid": "catalog:",
-    "@zag-js/toast": "catalog:"
+    "@zag-js/toast": "catalog:",
+    "@zag-js/tooltip": "catalog:"
   },
   "devDependencies": {
     "@types/node": "catalog:",

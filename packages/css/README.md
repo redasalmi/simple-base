@@ -280,7 +280,7 @@ These rules style the markup a component renders. Use the listed elements, or ad
 
 ### Positioned popups
 
-Select, combobox, date picker, menu, and tooltip content are positioned the same way: the [Zag.js](https://zagjs.com) popper writes `--x`, `--y`, `--z-index`, `--available-width`, `--available-height`, and `--transform-origin` on the positioner, and the content reads them. The tooltip arrow reads `--arrow-size` and `--arrow-background` from `.sb-tooltip-content`. `@simple-base/solid` provides that behavior for select, combobox, date picker, and menu. Its tooltip component is planned for 1.0; until then, and without the Solid package, position the content yourself.
+Select, combobox, date picker, menu, and tooltip content are positioned the same way: the [Zag.js](https://zagjs.com) popper writes `--x`, `--y`, `--z-index`, `--available-width`, `--available-height`, and `--transform-origin` on the positioner, and the content reads them. The tooltip arrow reads `--arrow-size` and `--arrow-background` from `.sb-tooltip-content`. `@simple-base/solid` provides that behavior for select, combobox, date picker, menu, and tooltip. Without the Solid package, position the content yourself.
 
 The native menu (`.sb-menu` on `<details>`) keeps its absolute `.sb-menu-panel` for CSS-only use. It is a disclosure of buttons, not an ARIA menu.
 

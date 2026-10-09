@@ -232,6 +232,9 @@ catalogs:
     '@zag-js/toast':
       specifier: ^1.44.0
       version: 1.44.0
+    '@zag-js/tooltip':
+      specifier: ^1.44.0
+      version: 1.44.0
     solid-js:
       specifier: ^1.9.15
       version: 1.9.15
@@ -336,6 +339,9 @@ importers:
         specifier: 'catalog:'
         version: 1.44.0(solid-js@1.9.15)
       '@zag-js/toast':
+        specifier: 'catalog:'
+        version: 1.44.0
+      '@zag-js/tooltip':
         specifier: 'catalog:'
         version: 1.44.0
     devDependencies:
@@ -1596,6 +1602,9 @@ packages:
 
   '@zag-js/toast@1.44.0':
     resolution: {integrity: sha512-rcfVWoghcoGyNs0pvGJB0qwuBdpyvtUnac5pmkIKYFW046rCAeVaSnw5hjkr9GMvt3iikvEjhFDTEP1z7j/Q7g==}
+
+  '@zag-js/tooltip@1.44.0':
+    resolution: {integrity: sha512-OnOQ3NSXDe9YAoekKWMnbEVvoAa5R3ZdXyHx3UEFxIRjPB+J5xk8+8MVNR6715ifndLmBjexVm/UR//Bf47tpA==}
 
   '@zag-js/types@1.44.0':
     resolution: {integrity: sha512-hVi+EekA3V2EDyJxhkSg1Znmk8Qhk3JRWH8atkwTvnGckpCXjQQ9YpKGsP6KSzD88ci7PgH/mYj7fU62E+GYqw==}
@@ -3291,6 +3300,16 @@ snapshots:
       '@zag-js/core': 1.44.0
       '@zag-js/dismissable': 1.44.0
       '@zag-js/dom-query': 1.44.0
+      '@zag-js/types': 1.44.0
+      '@zag-js/utils': 1.44.0
+
+  '@zag-js/tooltip@1.44.0':
+    dependencies:
+      '@zag-js/anatomy': 1.44.0
+      '@zag-js/core': 1.44.0
+      '@zag-js/dom-query': 1.44.0
+      '@zag-js/focus-visible': 1.44.0
+      '@zag-js/popper': 1.44.0
       '@zag-js/types': 1.44.0
       '@zag-js/utils': 1.44.0
 
