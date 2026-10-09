@@ -27,6 +27,7 @@ import { DatePickers } from "./preview/DatePickers";
 import { Comboboxes } from "./preview/Comboboxes";
 import { Selects } from "./preview/Selects";
 import { Tables } from "./preview/Tables";
+import { Paginations } from "./preview/Paginations";
 import { EmptyStates } from "./preview/EmptyStates";
 import { Alerts, StatusLines } from "./preview/Alerts";
 import { Toasts } from "./preview/Toasts";
@@ -139,9 +140,19 @@ const pages: Page[] = [
     label: "Table",
     group: "Components",
     description:
-      "Display records in rows and columns. Named parts map to native table elements, with optional cell variants and a scroll container for wide data.",
+      "Display records in rows and columns. Named parts map to native table elements, with optional cell variants, sortable column headers, and a scroll container for wide data.",
     usage: 'import { Table, TableHeader, TableCell } from "@simple-base/solid";',
     component: Tables,
+  },
+  {
+    id: "pagination",
+    label: "Pagination",
+    group: "Components",
+    description:
+      "Move through pages of records. Named parts render previous and next buttons and a page list that collapses long ranges with ellipses; slicing the data stays in your app.",
+    usage:
+      'import { Pagination, PaginationPrevious, PaginationPages, PaginationNext } from "@simple-base/solid";',
+    component: Paginations,
   },
   {
     id: "empty-state",

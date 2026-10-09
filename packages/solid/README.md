@@ -83,12 +83,13 @@ import "@simple-base/css/badge";
 | `EmptyState`    | `EmptyStateMark`, `EmptyStateTitle`, `EmptyStateDescription`, `EmptyStateActions`                                                                                                                                                   |
 | `Alert`         | `AlertMark`, `AlertContent`, `AlertTitle`, `AlertDescription`, `AlertActions`, `AlertClose`                                                                                                                                         |
 | `StatusLine`    | `StatusLineDot`, `StatusLineContent`, `StatusLineTitle`, `StatusLineDescription`                                                                                                                                                    |
-| `Table`         | `TableWrap`, `TableCaption`, `TableHeader`, `TableBody`, `TableFooter`, `TableRow`, `TableColumnHeader`, `TableRowHeader`, `TableCell`                                                                                              |
+| `Table`         | `TableWrap`, `TableCaption`, `TableHeader`, `TableBody`, `TableFooter`, `TableRow`, `TableColumnHeader`, `TableRowHeader`, `TableCell`, `TableSortButton`                                                                           |
+| `Pagination`    | `PaginationPrevious`, `PaginationPages`, `PaginationNext`                                                                                                                                                                           |
 | `Toaster`       | `Toast`, `ToastIcon`, `ToastContent`, `ToastTitle`, `ToastDescription`, `ToastAction`, `ToastClose`, plus `createToaster`                                                                                                           |
 
 The CSS package ships more components than this adapter currently covers. Until a Solid component exists, use them through their selector-level APIs:
 
-- **Planned for 1.0:** menu, tooltip, tabs, and pagination.
+- **Planned for 1.0:** menu, tooltip, and tabs.
 - **Planned after 1.0:** breadcrumb, disclosure, keyboard shortcut, progress, range, and segmented control.
 
 Typography stays CSS-only: the `.sb-display`, `.sb-heading-*`, and `.sb-text-*` classes are the API.
@@ -472,6 +473,57 @@ import {
 ```
 
 `TableWrap` provides the horizontal scroll container the table styles expect. `TableFooter` renders a `tfoot`, for example for totals.
+
+### Sortable columns
+
+Put a `TableSortButton` inside a column header and set `aria-sort` on the sorted header only. The button's direction indicator follows `aria-sort`; sorting the rows stays in your app.
+
+```tsx
+const [sort, setSort] = createSignal<{ key: string; direction: "ascending" | "descending" }>({
+  key: "amount",
+  direction: "descending",
+});
+const ariaSort = (key: string) => (sort().key === key ? sort().direction : undefined);
+const toggleSort = (key: string) =>
+  setSort((current) => ({
+    key,
+    direction:
+      current.key === key && current.direction === "ascending" ? "descending" : "ascending",
+  }));
+
+<TableColumnHeader aria-sort={ariaSort("amount")}>
+  <TableSortButton onClick={() => toggleSort("amount")}>Amount</TableSortButton>
+</TableColumnHeader>;
+```
+
+`TableSortButton` renders a `type="button"` followed by a decorative indicator. Keep it the only child of the header, since the indicator styles read `aria-sort` from its parent `th`.
+
+## Pagination
+
+Renders a `nav` with previous and next buttons and a page list. `count` is the total number of pages; slicing the records stays in your app.
+
+```tsx
+import { createSignal } from "solid-js";
+import {
+  Pagination,
+  PaginationNext,
+  PaginationPages,
+  PaginationPrevious,
+} from "@simple-base/solid";
+
+const [page, setPage] = createSignal(1);
+
+<Pagination aria-label="Invoice pages" count={12} page={page()} onPageChange={setPage}>
+  <PaginationPrevious>‹</PaginationPrevious>
+  <PaginationPages />
+  <PaginationNext>›</PaginationNext>
+</Pagination>;
+```
+
+- `page` is controlled and clamped to `1`–`count`. Use `defaultPage` for uncontrolled state. `onPageChange` receives the page the user picked.
+- `PaginationPages` always shows the first and last pages, plus `siblingCount` pages (default `1`) on each side of the current one, and replaces the gaps with ellipses. Its buttons are named "Page N" (override with `getPageLabel`) and the current one has `aria-current="page"`.
+- `PaginationPrevious` and `PaginationNext` are named "Previous page" and "Next page" unless you pass `aria-label`. At either end they set `aria-disabled` instead of `disabled`, so focus stays on them.
+- The `nav` is labeled "Pagination" by default. Pass `aria-label` to name it after what it pages, especially when a page has more than one.
 
 ## EmptyState
 

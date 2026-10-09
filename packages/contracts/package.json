@@ -1,6 +1,6 @@
 {
   "name": "@simple-base/contracts",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -42,6 +42,10 @@
     "./fieldset": {
       "types": "./dist/fieldset.d.ts",
       "import": "./dist/fieldset.js"
+    },
+    "./pagination": {
+      "types": "./dist/pagination.d.ts",
+      "import": "./dist/pagination.js"
     },
     "./placement": {
       "types": "./dist/placement.d.ts",

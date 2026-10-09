@@ -72,3 +72,16 @@ export function TableCell(props: TableCellProps) {
 
   return <td {...rest} data-variant={local.variant} />;
 }
+
+export type TableSortButtonProps = Omit<JSX.ButtonHTMLAttributes<HTMLButtonElement>, "type">;
+
+export function TableSortButton(props: TableSortButtonProps) {
+  const [local, rest] = splitProps(props, ["class", "children"]);
+
+  return (
+    <button {...rest} type="button" class={cn("sb-table-sort-button", local.class)}>
+      {local.children}
+      <span class="sb-table-sort-indicator" aria-hidden="true" />
+    </button>
+  );
+}

@@ -11,6 +11,7 @@ import {
   TableHeader,
   TableRow,
   TableRowHeader,
+  TableSortButton,
   TableWrap,
   type BadgeVariant,
 } from "@simple-base/solid";
@@ -70,8 +71,28 @@ const rollup = [
   },
 ];
 
+type SortKey = "name" | "owner" | "words";
+
 export function Tables() {
   const [selected, setSelected] = createSignal<string[]>([]);
+  const [sort, setSort] = createSignal<{ key: SortKey; direction: "ascending" | "descending" }>({
+    key: "name",
+    direction: "ascending",
+  });
+  const sortedDocuments = () => {
+    const { key, direction } = sort();
+    const order = direction === "ascending" ? 1 : -1;
+    return documents.toSorted((a, b) =>
+      key === "words" ? (a.words - b.words) * order : a[key].localeCompare(b[key]) * order,
+    );
+  };
+  const ariaSort = (key: SortKey) => (sort().key === key ? sort().direction : undefined);
+  const toggleSort = (key: SortKey) =>
+    setSort((current) => ({
+      key,
+      direction:
+        current.key === key && current.direction === "ascending" ? "descending" : "ascending",
+    }));
   const totalWords = () => documents.reduce((sum, document) => sum + document.words, 0);
 
   return (
@@ -248,6 +269,48 @@ export function Tables() {
           </p>
         </div>
       </Example>
+      <Example
+        title="Sortable columns"
+        description="TableSortButton fills a column header with a button and a direction indicator. Set aria-sort on the sorted header only; the indicator follows it. Sorting the rows stays in your app."
+        code={`const [sort, setSort] = createSignal({ key: "name", direction: "ascending" });
+const ariaSort = (key) => (sort().key === key ? sort().direction : undefined);
+
+<TableColumnHeader aria-sort={ariaSort("name")}>
+  <TableSortButton onClick={() => toggleSort("name")}>Document</TableSortButton>
+</TableColumnHeader>`}
+      >
+        <TableWrap role="region" aria-label="Sortable documents" tabIndex={0}>
+          <Table>
+            <TableCaption class="sb-text-caption">Fictional documents</TableCaption>
+            <TableHeader>
+              <TableRow>
+                <TableColumnHeader>ID</TableColumnHeader>
+                <TableColumnHeader aria-sort={ariaSort("name")}>
+                  <TableSortButton onClick={() => toggleSort("name")}>Document</TableSortButton>
+                </TableColumnHeader>
+                <TableColumnHeader aria-sort={ariaSort("owner")}>
+                  <TableSortButton onClick={() => toggleSort("owner")}>Owner</TableSortButton>
+                </TableColumnHeader>
+                <TableColumnHeader aria-sort={ariaSort("words")}>
+                  <TableSortButton onClick={() => toggleSort("words")}>Words</TableSortButton>
+                </TableColumnHeader>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              <For each={sortedDocuments()}>
+                {(document) => (
+                  <TableRow>
+                    <TableCell variant="code">{document.id}</TableCell>
+                    <TableRowHeader>{document.name}</TableRowHeader>
+                    <TableCell>{document.owner}</TableCell>
+                    <TableCell variant="number">{document.words.toLocaleString()}</TableCell>
+                  </TableRow>
+                )}
+              </For>
+            </TableBody>
+          </Table>
+        </TableWrap>
+      </Example>
       <Api
         rows={[
           [
@@ -284,6 +347,11 @@ export function Tables() {
             "TableCell",
             "td attributes + variant",
             "Body cells. variant=code and variant=number set data-variant, which the stylesheet styles as a code or right-aligned numeric cell.",
+          ],
+          [
+            "TableSortButton",
+            "button + indicator",
+            "Place it as the only child of a TableColumnHeader. It renders a type=button with a decorative direction indicator driven by aria-sort on the header: ascending, descending, or omitted for an unsorted column. Handle onClick to sort the rows.",
           ],
           [
             "Styles",

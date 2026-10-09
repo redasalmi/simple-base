@@ -204,6 +204,7 @@ export {
   TableColumnHeader,
   TableRowHeader,
   TableCell,
+  TableSortButton,
   type TableRootProps,
   type TableWrapProps,
   type TableCaptionProps,
@@ -214,8 +215,19 @@ export {
   type TableColumnHeaderProps,
   type TableRowHeaderProps,
   type TableCellProps,
+  type TableSortButtonProps,
   type TableCellVariant,
 } from "./components/Table";
+export {
+  Pagination,
+  PaginationPrevious,
+  PaginationPages,
+  PaginationNext,
+  type PaginationRootProps,
+  type PaginationPagesProps,
+  type PaginationTriggerProps,
+} from "./components/Pagination";
+export type { PaginationOptions } from "@simple-base/contracts";
 export {
   EmptyState,
   EmptyStateMark,

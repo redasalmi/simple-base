@@ -1,13 +1,11 @@
 import { For, Show, createSignal } from "solid-js";
-import { Button, Checkbox } from "@simple-base/solid";
+import { Button } from "@simple-base/solid";
 import { Api, Example } from "./Preview";
 
 export function Styles() {
   const [progress, setProgress] = createSignal(64);
   const [view, setView] = createSignal("List");
   const [tab, setTab] = createSignal(0);
-  const [page, setPage] = createSignal(1);
-  const [selected, setSelected] = createSignal<string[]>([]);
   const [menuAction, setMenuAction] = createSignal("Choose an example command.");
   const [tooltip, setTooltip] = createSignal(false);
   let menu: HTMLDetailsElement | undefined;
@@ -16,10 +14,6 @@ export function Styles() {
     "A summary of the example workspace.",
     "There is no recent activity in this demo.",
     "Workspace settings are managed locally in this preview.",
-  ];
-  const records = () => [
-    { id: `DOC-${page() * 2 - 1}`, name: `Document ${page() * 2 - 1}`, status: "Published" },
-    { id: `DOC-${page() * 2}`, name: `Document ${page() * 2}`, status: "Draft" },
   ];
 
   return (
@@ -240,97 +234,6 @@ export function Styles() {
               </div>
             )}
           </For>
-        </div>
-      </Example>
-      <Example
-        title="Table & pagination"
-        description="A small fictional dataset. Select rows to inspect the selected style, or change pages. The table scrolls within its specimen on narrow screens."
-        code={
-          '<div class="sb-table-wrap">\n  <table class="sb-table">…</table>\n</div>\n<nav class="sb-pagination" aria-label="Pages">\n  <button class="sb-page-button" aria-current="page">1</button>\n</nav>'
-        }
-      >
-        <div class="preview-stack">
-          <div class="sb-table-wrap" role="region" aria-label="Example records" tabIndex={0}>
-            <table class="sb-table">
-              <caption class="sb-text-caption">Fictional documents · page {page()} of 3</caption>
-              <thead>
-                <tr>
-                  <th scope="col">Select</th>
-                  <th scope="col">ID</th>
-                  <th scope="col">Document</th>
-                  <th scope="col">Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                <For each={records()}>
-                  {(record) => (
-                    <tr aria-selected={selected().includes(record.id)}>
-                      <td>
-                        <Checkbox
-                          aria-label={`Select ${record.name}`}
-                          checked={selected().includes(record.id)}
-                          onChange={(event) =>
-                            setSelected((ids) =>
-                              event.currentTarget.checked
-                                ? [...ids, record.id]
-                                : ids.filter((id) => id !== record.id),
-                            )
-                          }
-                        />
-                      </td>
-                      <td data-variant="code">{record.id}</td>
-                      <td>{record.name}</td>
-                      <td>{record.status}</td>
-                    </tr>
-                  )}
-                </For>
-              </tbody>
-            </table>
-          </div>
-          <nav class="sb-pagination" aria-label="Example record pages">
-            <button
-              class="sb-page-button"
-              aria-label="Previous page"
-              disabled={page() === 1}
-              onClick={() => setPage((value) => value - 1)}
-            >
-              ‹
-            </button>
-            <For each={[1, 2, 3]}>
-              {(number) => (
-                <button
-                  class="sb-page-button"
-                  aria-current={page() === number ? "page" : undefined}
-                  onClick={() => setPage(number)}
-                >
-                  {number}
-                </button>
-              )}
-            </For>
-            <button
-              class="sb-page-button"
-              aria-label="Next page"
-              disabled={page() === 3}
-              onClick={() => setPage((value) => value + 1)}
-            >
-              ›
-            </button>
-          </nav>
-          <nav class="sb-pagination" aria-label="Ellipsis specimen">
-            <button class="sb-page-button">1</button>
-            <span class="sb-page-ellipsis" aria-hidden="true">
-              …
-            </span>
-            <button class="sb-page-button">11</button>
-            <button class="sb-page-button" aria-current="page">
-              12
-            </button>
-            <button class="sb-page-button">13</button>
-            <span class="sb-page-ellipsis" aria-hidden="true">
-              …
-            </span>
-            <button class="sb-page-button">40</button>
-          </nav>
         </div>
       </Example>
       <Example
