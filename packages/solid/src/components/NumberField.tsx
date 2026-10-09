@@ -23,6 +23,7 @@ type NumberFieldContextType = {
   describedBy: Accessor<string | undefined>;
   registerDescription: () => void;
   registerError: () => void;
+  registerAffix: () => string;
   api: Accessor<numberInput.Api>;
 };
 
@@ -41,8 +42,13 @@ type WithoutOwnedProps<Props, Owned extends string> = Omit<Props, Owned> & {
 };
 
 export type NumberFieldRootProps = NumberFieldOptions & {
+  /** Zag's labels for the step buttons and the value text, for example to translate them. */
+  translations?: numberInput.IntlTranslations;
   children: JSX.Element;
-} & Omit<JSX.HTMLAttributes<HTMLDivElement>, keyof NumberFieldOptions | "children">;
+} & Omit<
+    JSX.HTMLAttributes<HTMLDivElement>,
+    keyof NumberFieldOptions | "translations" | "children"
+  >;
 
 export function NumberField(props: NumberFieldRootProps) {
   const [local, rest] = splitProps(props, [
@@ -61,11 +67,13 @@ export function NumberField(props: NumberFieldRootProps) {
     "disabled",
     "readOnly",
     "invalid",
+    "translations",
     "onValueChange",
   ]);
   const fallbackId = createUniqueId();
   const [hasDescription, setHasDescription] = createSignal(false);
   const [hasError, setHasError] = createSignal(false);
+  const [affixIds, setAffixIds] = createSignal<string[]>([]);
 
   const id = () => local.id ?? fallbackId;
   const service = useMachine(numberInput.machine, {
@@ -112,6 +120,9 @@ export function NumberField(props: NumberFieldRootProps) {
     get required() {
       return local.required;
     },
+    get translations() {
+      return local.translations;
+    },
     onValueChange({ value, valueAsNumber }) {
       local.onValueChange?.(value, valueAsNumber);
     },
@@ -122,7 +133,7 @@ export function NumberField(props: NumberFieldRootProps) {
   const errorId = () => `${id()}-error`;
 
   const describedBy = () => {
-    const ids = [];
+    const ids = [...affixIds()];
     if (hasDescription()) ids.push(descriptionId());
     if (hasError() && api().invalid) ids.push(errorId());
 
@@ -143,6 +154,12 @@ export function NumberField(props: NumberFieldRootProps) {
         registerError() {
           onMount(() => setHasError(true));
           onCleanup(() => setHasError(false));
+        },
+        registerAffix() {
+          const affixId = createUniqueId();
+          onMount(() => setAffixIds((ids) => [...ids, affixId]));
+          onCleanup(() => setAffixIds((ids) => ids.filter((id) => id !== affixId)));
+          return affixId;
         },
       }}
     >
@@ -264,12 +281,16 @@ export function NumberFieldIncrement(props: NumberFieldTriggerProps) {
   );
 }
 
-export type NumberFieldAffixProps = Omit<JSX.HTMLAttributes<HTMLSpanElement>, "aria-hidden">;
+export type NumberFieldAffixProps = Omit<JSX.HTMLAttributes<HTMLSpanElement>, "id">;
 
 export function NumberFieldAffix(props: NumberFieldAffixProps) {
+  const { registerAffix } = useNumberField();
   const [local, rest] = splitProps(props, ["class"]);
 
-  return <span {...rest} aria-hidden="true" class={cn("sb-number-field-affix", local.class)} />;
+  // The input lists the affix in its description, so a unit shown only here is still announced.
+  const id = registerAffix();
+
+  return <span {...rest} id={id} class={cn("sb-number-field-affix", local.class)} />;
 }
 
 export type NumberFieldDescriptionProps = Omit<JSX.HTMLAttributes<HTMLParagraphElement>, "id">;

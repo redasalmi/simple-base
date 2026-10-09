@@ -1,4 +1,4 @@
-import type { FieldsetOptions } from "@simple-base/contracts";
+import { fieldsetLabels, type FieldsetOptions } from "@simple-base/contracts";
 import {
   type Accessor,
   createContext,
@@ -97,18 +97,27 @@ export function Fieldset(props: FieldsetRootProps) {
   );
 }
 
-export type FieldsetLegendProps = JSX.HTMLAttributes<HTMLLegendElement>;
+export type FieldsetLegendProps = JSX.HTMLAttributes<HTMLLegendElement> & {
+  /** Read to assistive technology after the legend while the fieldset is required. @default "(required)" */
+  requiredLabel?: string;
+};
 
 export function FieldsetLegend(props: FieldsetLegendProps) {
   const { required } = useFieldset();
-  const [local, rest] = splitProps(props, ["class"]);
+  const [local, rest] = splitProps(props, ["class", "children", "requiredLabel"]);
 
+  // The marker is hidden from assistive technology, and aria-required isn't allowed on a group.
   return (
     <legend
       {...rest}
       class={cn("sb-field-title", local.class)}
       data-required={required() ? "" : undefined}
-    />
+    >
+      {local.children}
+      <Show when={required()}>
+        <span class="sb-visually-hidden"> {local.requiredLabel ?? fieldsetLabels.required}</span>
+      </Show>
+    </legend>
   );
 }
 

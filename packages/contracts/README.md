@@ -49,12 +49,12 @@ Subpaths: `/badge` · `/button` · `/card` · `/combobox` · `/date-picker` · `
 | Date picker    | `DatePickerOptions`                                 | `datePickerDefaults`: `placement: "bottom-start"`                                                               |
 | Dialog         | `DialogOptions`                                     | —                                                                                                               |
 | Field          | `FieldOptions`                                      | —                                                                                                               |
-| Fieldset       | `FieldsetOptions`                                   | —                                                                                                               |
+| Fieldset       | `FieldsetOptions`                                   | `fieldsetLabels`: the English text read after a required legend                                                 |
 | Radio group    | `RadioGroupOptions`                                 | —                                                                                                               |
 | Checkbox group | `CheckboxGroupOptions`                              | —                                                                                                               |
 | Menu           | `MenuOptions`, `MenuItemOptions`, `MenuItemVariant` | —                                                                                                               |
 | Number field   | `NumberFieldOptions`                                | —                                                                                                               |
-| Pagination     | `PaginationOptions`                                 | `paginationDefaults`: `defaultPage: 1`, `siblingCount: 1`; `paginationLabels`: the English accessible names     |
+| Pagination     | `PaginationOptions`, `PaginationLabels`             | `paginationDefaults`: `defaultPage: 1`, `siblingCount: 1`; `paginationLabels`: the English accessible names     |
 | Placement      | `Placement`                                         | —                                                                                                               |
 | Select         | `SelectOption`, `SelectOptions`                     | —                                                                                                               |
 | Status line    | `StatusValue`, `StatusOptions`                      | —                                                                                                               |
@@ -64,7 +64,7 @@ Subpaths: `/badge` · `/button` · `/card` · `/combobox` · `/date-picker` · `
 | Tabs           | `TabsOptions`                                       | —                                                                                                               |
 | Tooltip        | `TooltipOptions`                                    | —                                                                                                               |
 
-Types are erased at runtime. Only the `*Defaults` constants and `paginationLabels` are runtime exports — there are no allowed-value arrays without a runtime use case.
+Types are erased at runtime. Only the `*Defaults` and `*Labels` constants are runtime exports — there are no allowed-value arrays without a runtime use case.
 
 ### Values
 
@@ -77,11 +77,11 @@ Types are erased at runtime. Only the `*Defaults` constants and `paginationLabel
 - **Radio and checkbox groups:** a radio group's value is a string (`""` = none); a checkbox group's value is a `string[]` of the checked values in document order. `value` is controlled and `defaultValue` is the uncontrolled initial state.
 - **Number field values** are strings, so partial input such as `1.` survives; `onValueChange` also receives the parsed number. `formatOptions` takes `Intl.NumberFormatOptions`.
 - **Date picker values** are a single `DateValue`, or `null` for no date. `name` submits the date as `YYYY-MM-DD`.
-- **Pagination:** pages start at `1`. `count` is the total number of pages, `page` is controlled, and `defaultPage` is the uncontrolled initial page. `siblingCount` is the number of pages shown on each side of the current page before an ellipsis.
+- **Pagination:** pages start at `1`. `count` is the total number of pages, `page` is controlled, and `defaultPage` is the uncontrolled initial page. `siblingCount` is the number of pages shown on each side of the current page before an ellipsis. `labels` overrides any of the `paginationLabels`.
 - **Menu:** `onSelect` receives the picked item's `value`, which must be unique within the menu. `open` is controlled and `defaultOpen` is the uncontrolled initial state. The only item variant is `danger`.
 - **Ids:** every option type for a stateful root takes an optional `id`, generated when omitted. Menus and tooltips render no root element, so their `id` is the base of the trigger and content ids.
 - **Placement:** `top` or `bottom`, with `-start` and `-end` variants. Shared by every popup option.
-- **Tabs:** `value` is the selected tab and is controlled; `defaultValue` is the uncontrolled initial tab. Set one of them so a tab is selected and reachable by keyboard.
+- **Tabs:** `value` is the selected tab and is controlled; `defaultValue` is the uncontrolled initial tab. One of them is required, so a tab is selected and reachable by keyboard.
 - **Dialogs and tooltips:** `open` is the controlled state, `defaultOpen` provides the initial uncontrolled state, and `onOpenChange` reports requested visibility changes.
 - **Statuses are deliberately not interchangeable.** Status lines and alerts use `success`, `warning`, `danger`, `info`. Toasts use `success` and `warning`. All three are exported from `/status`.
 

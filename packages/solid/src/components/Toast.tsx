@@ -24,6 +24,7 @@ export type ToastCreateOptions = ToastOptions & {
   id?: string;
   title: string;
   description?: string;
+  /** Time in milliseconds before the toast dismisses itself. Defaults to the toaster's `duration`, or `Infinity` when the toast has an `action`. */
   duration?: number;
   action?: { label: string; onClick: () => void };
 };
@@ -44,8 +45,12 @@ export function createToaster(options: ToasterOptions = {}): ToasterApi {
     duration: options.duration ?? toasterDefaults.duration,
   });
   const toaster: ToasterApi = {
-    create: ({ status = toastDefaults.status, ...options }) =>
-      store.create({ ...options, type: status }),
+    create: ({ status = toastDefaults.status, ...options }) => {
+      const data = { ...options, type: status };
+      // Keyboard and screen reader users may not reach the action before a timeout (WCAG 2.2.1).
+      if (data.action && data.duration === undefined) data.duration = Infinity;
+      return store.create(data);
+    },
     dismiss: (id) => store.dismiss(id),
   };
   stores.set(toaster, store);

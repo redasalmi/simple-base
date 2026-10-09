@@ -124,7 +124,7 @@ export function AlertDialogs() {
           [
             "AlertDialogTitle / AlertDialogDescription",
             "h2 (set level to change it) / paragraph",
-            "Generated IDs are linked to the root through aria-labelledby and aria-describedby. Include both parts.",
+            "Generated IDs connect both parts to Content through aria-labelledby and aria-describedby while they are rendered.",
           ],
           [
             "AlertDialogFooter / AlertDialogCancel / AlertDialogAction",

@@ -45,8 +45,10 @@ type WithoutOwnedProps<Props, Owned extends string> = Omit<Props, Owned> & {
 };
 
 export type DatePickerRootProps = DatePickerOptions & {
+  /** Zag's labels for the trigger, the calendar navigation, and the day cells, for example to translate them. */
+  translations?: datepicker.IntlTranslations;
   children: JSX.Element;
-} & Omit<JSX.HTMLAttributes<HTMLDivElement>, keyof DatePickerOptions | "children">;
+} & Omit<JSX.HTMLAttributes<HTMLDivElement>, keyof DatePickerOptions | "translations" | "children">;
 
 export function DatePicker(props: DatePickerRootProps) {
   const [local, rest] = splitProps(props, [
@@ -67,6 +69,7 @@ export function DatePicker(props: DatePickerRootProps) {
     "readOnly",
     "invalid",
     "placement",
+    "translations",
     "onValueChange",
     "onOpenChange",
   ]);
@@ -128,6 +131,9 @@ export function DatePicker(props: DatePickerRootProps) {
     },
     get required() {
       return local.required;
+    },
+    get translations() {
+      return local.translations;
     },
     onValueChange({ value, valueAsString }) {
       local.onValueChange?.(value[0] ?? null, valueAsString[0] ?? "");

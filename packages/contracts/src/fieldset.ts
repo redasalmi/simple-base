@@ -8,6 +8,11 @@ export type FieldsetOptions = {
   invalid?: boolean;
 };
 
+/** Text read to assistive technology when the caller doesn't pass its own. */
+export const fieldsetLabels = {
+  required: "(required)",
+} as const;
+
 export type RadioGroupOptions = {
   /** Shared name of the radios. Generated when omitted. */
   name?: string;

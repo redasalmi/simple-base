@@ -1,5 +1,6 @@
 import {
   paginationDefaults,
+  type PaginationLabels,
   paginationLabels,
   type PaginationOptions,
 } from "@simple-base/contracts";
@@ -20,6 +21,7 @@ type PaginationContextType = {
   page: Accessor<number>;
   count: Accessor<number>;
   siblingCount: Accessor<number>;
+  labels: Accessor<PaginationLabels>;
   setPage: (page: number) => void;
 };
 
@@ -61,6 +63,7 @@ export function Pagination(props: PaginationRootProps) {
     "page",
     "defaultPage",
     "siblingCount",
+    "labels",
     "onPageChange",
   ]);
   const [uncontrolledPage, setUncontrolledPage] = createSignal(
@@ -69,11 +72,13 @@ export function Pagination(props: PaginationRootProps) {
 
   const count = () => Math.max(0, Math.floor(local.count));
   const page = () => Math.min(Math.max(local.page ?? uncontrolledPage(), 1), Math.max(count(), 1));
+  const labels = () => ({ ...paginationLabels, ...local.labels });
 
   const context = {
     page,
     count,
     siblingCount: () => Math.max(0, local.siblingCount ?? paginationDefaults.siblingCount),
+    labels,
     setPage(next) {
       if (next === page() || next < 1 || next > count()) return;
       if (local.page === undefined) setUncontrolledPage(next);
@@ -83,7 +88,7 @@ export function Pagination(props: PaginationRootProps) {
 
   return (
     <PaginationContext.Provider value={context}>
-      <nav aria-label={paginationLabels.root} {...rest} class={cn("sb-pagination", local.class)}>
+      <nav aria-label={labels().root} {...rest} class={cn("sb-pagination", local.class)}>
         {local.children}
       </nav>
     </PaginationContext.Provider>
@@ -91,12 +96,12 @@ export function Pagination(props: PaginationRootProps) {
 }
 
 export type PaginationPagesProps = {
-  /** Accessible name of each page button. Defaults to "Page N". */
+  /** Accessible name of each page button. Defaults to the root's `labels.page`, "Page N". */
   getPageLabel?: (page: number) => string;
 };
 
 export function PaginationPages(props: PaginationPagesProps) {
-  const { page, count, siblingCount, setPage } = usePagination();
+  const { page, count, siblingCount, labels, setPage } = usePagination();
 
   return (
     <For each={pageItems(page(), count(), siblingCount())}>
@@ -109,7 +114,7 @@ export function PaginationPages(props: PaginationPagesProps) {
           <button
             type="button"
             class="sb-page-button"
-            aria-label={(props.getPageLabel ?? paginationLabels.page)(item)}
+            aria-label={(props.getPageLabel ?? labels().page)(item)}
             aria-current={page() === item ? "page" : undefined}
             onClick={() => setPage(item)}
           >
@@ -126,13 +131,17 @@ export type PaginationTriggerProps = Omit<
   "type" | "disabled" | "aria-disabled"
 >;
 
-function PaginationTrigger(props: PaginationTriggerProps & { step: -1 | 1; label: string }) {
-  const { page, count, setPage } = usePagination();
+function PaginationTrigger(
+  props: PaginationTriggerProps & { step: -1 | 1; label: "previous" | "next" },
+) {
+  const { page, count, labels, setPage } = usePagination();
   const [local, rest] = splitProps(props, ["class", "step", "label"]);
   const target = () => page() + local.step;
   const unavailable = () => target() < 1 || target() > count();
   const behavior = {
-    "aria-label": local.label,
+    get "aria-label"() {
+      return labels()[local.label];
+    },
     onClick() {
       setPage(target());
     },
@@ -150,9 +159,9 @@ function PaginationTrigger(props: PaginationTriggerProps & { step: -1 | 1; label
 }
 
 export function PaginationPrevious(props: PaginationTriggerProps) {
-  return <PaginationTrigger {...props} step={-1} label={paginationLabels.previous} />;
+  return <PaginationTrigger {...props} step={-1} label="previous" />;
 }
 
 export function PaginationNext(props: PaginationTriggerProps) {
-  return <PaginationTrigger {...props} step={1} label={paginationLabels.next} />;
+  return <PaginationTrigger {...props} step={1} label="next" />;
 }

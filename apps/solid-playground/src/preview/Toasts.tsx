@@ -132,7 +132,7 @@ export function Toasts() {
           [
             "toaster.create / toaster.dismiss",
             "title · description · action · duration · id · status",
-            "create returns the toast id. Reusing an id updates that toast. dismiss closes one toast by id, or all toasts when called without one.",
+            "create returns the toast id. Reusing an id updates that toast. A toast with an action stays until dismissed unless you pass duration. dismiss closes one toast by id, or all toasts when called without one.",
           ],
           [
             "Toaster",

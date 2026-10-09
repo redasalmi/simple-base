@@ -36,6 +36,7 @@ export type RadioGroupRootProps = RadioGroupOptions & {
 export function RadioGroup(props: RadioGroupRootProps) {
   useFieldset();
   const [local, rest] = splitProps(props, [
+    "ref",
     "class",
     "children",
     "name",
@@ -44,17 +45,31 @@ export function RadioGroup(props: RadioGroupRootProps) {
     "onValueChange",
   ]);
   const fallbackName = createUniqueId();
+  let list: HTMLDivElement | undefined;
 
   const context = {
     name: () => local.name ?? fallbackName,
     value: () => local.value,
     defaultValue: () => local.defaultValue,
-    select: (value) => local.onValueChange?.(value),
+    select(value) {
+      local.onValueChange?.(value);
+      // The browser checks the radio before the parent responds; if the parent kept its value, Solid has nothing to write back.
+      if (!list || local.value === undefined) return;
+      const radios = list.querySelectorAll<HTMLInputElement>('input[type="radio"]');
+      for (const radio of Array.from(radios)) radio.checked = radio.value === local.value;
+    },
   } satisfies RadioGroupContextType;
 
   return (
     <RadioGroupContext.Provider value={context}>
-      <div {...rest} class={cn("sb-choice-list", local.class)}>
+      <div
+        {...rest}
+        class={cn("sb-choice-list", local.class)}
+        ref={(element) => {
+          list = element;
+          if (typeof local.ref === "function") local.ref(element);
+        }}
+      >
         {local.children}
       </div>
     </RadioGroupContext.Provider>

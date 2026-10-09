@@ -343,12 +343,15 @@ export function ComboboxEmpty(props: ComboboxEmptyProps) {
   const { api, options } = useCombobox();
   const [local, rest] = splitProps(props, ["class", "children"]);
 
+  // The status region stays mounted and only its content changes, so screen readers announce it.
   return (
-    <Show when={api().open && options().length === 0}>
-      <div {...rest} role="status" class={cn("sb-combobox-empty", local.class)}>
-        {local.children}
-      </div>
-    </Show>
+    <div role="status">
+      <Show when={api().open && options().length === 0}>
+        <div {...rest} class={cn("sb-combobox-empty", local.class)}>
+          {local.children}
+        </div>
+      </Show>
+    </div>
   );
 }
 

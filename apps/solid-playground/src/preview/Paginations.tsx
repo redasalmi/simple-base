@@ -113,7 +113,7 @@ export function Paginations() {
           [
             "Pagination",
             "nav",
-            'Labeled "Pagination" by default; pass aria-label to name it after what it pages, especially with more than one on a page.',
+            'Labeled "Pagination" by default; pass aria-label to name it after what it pages, especially with more than one on a page. labels sets every accessible name in one place, for example to translate them.',
           ],
           [
             "PaginationPages",

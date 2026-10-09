@@ -8,6 +8,7 @@ import {
   createUniqueId,
   type JSX,
   onCleanup,
+  onMount,
   type Setter,
   splitProps,
   useContext,
@@ -21,6 +22,10 @@ type DialogContextType = {
   titleId: string;
   descriptionId: string;
   contentId: string;
+  hasTitle: Accessor<boolean>;
+  hasDescription: Accessor<boolean>;
+  registerTitle: () => void;
+  registerDescription: () => void;
   open: Accessor<boolean>;
   setOpen: (open: boolean) => void;
   dialogRef: Accessor<HTMLDialogElement | null>;
@@ -43,6 +48,8 @@ export type DialogRootProps = DialogOptions & {
 export function Dialog(props: DialogRootProps) {
   const [uncontrolledOpen, setUncontrolledOpen] = createSignal(props.defaultOpen ?? false);
   const [dialogRef, setDialogRef] = createSignal<HTMLDialogElement | null>(null);
+  const [hasTitle, setHasTitle] = createSignal(false);
+  const [hasDescription, setHasDescription] = createSignal(false);
   const id = createUniqueId();
 
   const open = () => props.open ?? uncontrolledOpen();
@@ -56,6 +63,16 @@ export function Dialog(props: DialogRootProps) {
     titleId: `${id}-title`,
     descriptionId: `${id}-description`,
     contentId: `${id}-content`,
+    hasTitle,
+    hasDescription,
+    registerTitle() {
+      onMount(() => setHasTitle(true));
+      onCleanup(() => setHasTitle(false));
+    },
+    registerDescription() {
+      onMount(() => setHasDescription(true));
+      onCleanup(() => setHasDescription(false));
+    },
     open,
     setOpen,
     dialogRef,
@@ -88,7 +105,6 @@ export function DialogTrigger(props: DialogTriggerProps) {
       size={local.size}
       aria-haspopup="dialog"
       aria-controls={contentId}
-      aria-expanded={open()}
       data-popup-open={open() ? "" : undefined}
       ref={(element) => {
         if (typeof local.ref === "function") local.ref(element);
@@ -105,7 +121,17 @@ export type DialogContentProps = Omit<
 >;
 
 export function DialogContent(props: DialogContentProps) {
-  const { titleId, descriptionId, contentId, open, setOpen, dialogRef, setDialogRef } = useDialog();
+  const {
+    titleId,
+    descriptionId,
+    contentId,
+    hasTitle,
+    hasDescription,
+    open,
+    setOpen,
+    dialogRef,
+    setDialogRef,
+  } = useDialog();
   const [local, rest] = splitProps(props, ["class", "ref", "children"]);
   const dialogBehavior = {
     onCancel(event: Event) {
@@ -140,9 +166,8 @@ export function DialogContent(props: DialogContentProps) {
         setDialogRef(element);
         if (typeof local.ref === "function") local.ref(element);
       }}
-      role="dialog"
-      aria-labelledby={titleId}
-      aria-describedby={descriptionId}
+      aria-labelledby={hasTitle() ? titleId : undefined}
+      aria-describedby={hasDescription() ? descriptionId : undefined}
       class={cn("sb-dialog-content", local.class)}
     >
       {local.children}
@@ -171,8 +196,10 @@ export type DialogTitleProps = Omit<JSX.HTMLAttributes<HTMLHeadingElement>, "id"
 };
 
 export function DialogTitle(props: DialogTitleProps) {
-  const { titleId } = useDialog();
+  const { titleId, registerTitle } = useDialog();
   const [local, rest] = splitProps(props, ["class", "level"]);
+
+  registerTitle();
 
   return (
     <Dynamic
@@ -187,8 +214,10 @@ export function DialogTitle(props: DialogTitleProps) {
 export type DialogDescriptionProps = Omit<JSX.HTMLAttributes<HTMLParagraphElement>, "id">;
 
 export function DialogDescription(props: DialogDescriptionProps) {
-  const { descriptionId } = useDialog();
+  const { descriptionId, registerDescription } = useDialog();
   const [local, rest] = splitProps(props, ["class"]);
+
+  registerDescription();
 
   return <p {...rest} id={descriptionId} class={cn("sb-dialog-description", local.class)} />;
 }

@@ -122,7 +122,7 @@ export function TabLists() {
           [
             "value / defaultValue / onValueChange",
             "string",
-            "value is controlled. defaultValue sets the initial tab for uncontrolled use; set one of them so a tab is selected and reachable with Tab. onValueChange receives the new tab's value.",
+            "value is controlled. defaultValue sets the initial tab for uncontrolled use; one of them is required so a tab is selected and reachable with Tab. onValueChange receives the new tab's value.",
           ],
           [
             "Tabs",

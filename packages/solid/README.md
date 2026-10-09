@@ -155,7 +155,7 @@ import {
 </Fieldset>;
 ```
 
-Put `FieldsetLegend` first; `required` adds its marker. The fieldset lists `FieldsetDescription`, and `FieldsetError` while it is rendered, in its `aria-describedby`. `FieldsetError` renders only while `invalid` is set. Omit `id` to generate one.
+Put `FieldsetLegend` first; `required` adds its marker, plus visually hidden text read after the legend (default "(required)", set with `requiredLabel`). The fieldset lists `FieldsetDescription`, and `FieldsetError` while it is rendered, in its `aria-describedby`. `FieldsetError` renders only while `invalid` is set. Omit `id` to generate one.
 
 ## RadioGroup and CheckboxGroup
 
@@ -194,8 +194,8 @@ const [reminders, setReminders] = createSignal(["due"]);
 </form>;
 ```
 
-- `RadioGroup` takes a string `value` (`""` selects nothing), `defaultValue`, and `onValueChange`. `name` is shared by every radio and generated when omitted. A required fieldset makes the radios natively required.
-- `CheckboxGroup` takes a `string[]` `value`, `defaultValue`, and `onValueChange`, which receives the checked values in document order. The checkboxes are not natively required, since any one of them may satisfy the group: validate in your app, or pass `required` to a single item that must be checked.
+- `RadioGroup` takes a string `value` (`""` selects nothing), `defaultValue`, and `onValueChange`. `name` is shared by every radio and generated when omitted. A required fieldset makes the radios natively required. A controlled group shows `value` after `onValueChange` returns, so a change the parent rejects is undone.
+- `CheckboxGroup` takes a `string[]` `value`, `defaultValue`, and `onValueChange`, which receives the checked values in document order. As with `RadioGroup`, a controlled group undoes a change the parent rejects. The checkboxes are not natively required, since any one of them may satisfy the group: validate in your app, or pass `required` to a single item that must be checked.
 - On an item, `value` is required and `children` is the label text. `class` goes on the row; every other prop goes to the input. `name`, `checked`, `defaultChecked`, and `aria-invalid` (plus `required` on radios) come from the group and fieldset.
 
 ## NumberField
@@ -246,8 +246,9 @@ Additional root props:
 - `min`, `max`, and `step` bound and step the value. When `invalid` is omitted, a value outside `min` and `max` is invalid and shows `NumberFieldError`.
 - `formatOptions` takes `Intl.NumberFormatOptions`, such as a currency or percent style, to format the displayed value.
 - `name` submits the value with the form; `form` associates the input with a form elsewhere on the page.
+- `translations` takes Zag's number input labels: `incrementLabel`, `decrementLabel`, and `valueText`.
 
-`NumberFieldDecrement` and `NumberFieldIncrement` render `−` and `+` unless you pass children, and are labeled "decrease value" and "increment value" unless you pass `aria-label`. `NumberFieldAffix` renders decorative text, such as a unit, inside the control and is hidden from assistive technology, so state the unit in the label or description too. `NumberFieldError` renders only while the field is invalid.
+`NumberFieldDecrement` and `NumberFieldIncrement` render `−` and `+` unless you pass children, and are labeled "decrease value" and "increment value" unless you set `translations` or pass `aria-label`. `NumberFieldAffix` renders text, such as a unit, inside the control; the input lists each affix in its `aria-describedby`, so the unit is announced with the value. `NumberFieldError` renders only while the field is invalid.
 
 ## Select
 
@@ -428,7 +429,8 @@ Additional root props:
 
 - `value` and `defaultValue` take a `DateValue`, or `null` for no date. `onValueChange` receives the date (`null` when cleared) and the text shown in the input.
 - `min` and `max` disable the days outside the range. A typed date outside it is clamped to the nearest bound when the input loses focus; the picker never sets `invalid` on its own.
-- `locale` (default `en-US`) sets the input format, the first day of the week, and the calendar's labels. `timeZone` decides which day is today and defaults to the user's time zone.
+- `locale` (default `en-US`) sets the input format, the first day of the week, and the calendar's month and day names. `timeZone` decides which day is today and defaults to the user's time zone.
+- `translations` takes Zag's date picker labels, such as `trigger`, `prevTrigger`, `nextTrigger`, `viewTrigger`, and `dayCell`. They are English unless you set them, whatever the `locale`.
 - `name` adds a hidden input that submits the date as `YYYY-MM-DD`, since the visible input holds locale-formatted text. `form` associates both inputs with a form elsewhere on the page.
 - `placement` picks the popup side (default `bottom-start`), `fixedWeeks` always shows six weeks so the popup keeps its height, and `onOpenChange` reports visibility.
 
@@ -535,7 +537,7 @@ export function InvoiceFilters() {
 }
 ```
 
-Root props: `value` with `onValueChange` for controlled state, or `defaultValue` for uncontrolled initial state. Set one of them: with no tab selected, no tab can be reached with Tab. The root renders a `div` without a class of its own; `id` sets its id and is the base of the tab and panel ids, such as `tabs:{id}:content-{value}`. Omit `id` to generate one.
+Root props: `value` with `onValueChange` for controlled state, or `defaultValue` for uncontrolled initial state. One of them is required, since with no tab selected no tab can be reached with Tab. The root renders a `div` without a class of its own; `id` sets its id and is the base of the tab and panel ids, such as `tabs:{id}:content-{value}`. Omit `id` to generate one.
 
 Give `TabsList` an `aria-label` that names the set. Each `TabsTrigger` takes a `value` that matches its `TabsContent`, and `disabled` to keep a tab visible but unselectable. Panels stay hidden unless selected and are focusable, so keyboard users can reach panels with no focusable content.
 
@@ -629,6 +631,7 @@ const [page, setPage] = createSignal(1);
 - `PaginationPages` always shows the first and last pages, plus `siblingCount` pages (default `1`) on each side of the current one, and replaces the gaps with ellipses. Its buttons are named "Page N" (override with `getPageLabel`) and the current one has `aria-current="page"`.
 - `PaginationPrevious` and `PaginationNext` are named "Previous page" and "Next page" unless you pass `aria-label`. At either end they set `aria-disabled` instead of `disabled`, so focus stays on them.
 - The `nav` is labeled "Pagination" by default. Pass `aria-label` to name it after what it pages, especially when a page has more than one.
+- `labels` on the root sets these names in one place, for example to translate them: `{ root, previous, next, page }`, where `page` is a function of the page number. Each one you omit keeps its English default from `paginationLabels` in `@simple-base/contracts`.
 
 ## EmptyState
 
@@ -722,7 +725,7 @@ import {
 
 ## Dialog
 
-Provides controlled or uncontrolled modal state around a native `<dialog>`. Content wires `aria-labelledby` and `aria-describedby` to the title and description automatically.
+Provides controlled or uncontrolled modal state around a native `<dialog>`. Content wires `aria-labelledby` and `aria-describedby` to the title and description while they are rendered.
 
 ```tsx
 import {
@@ -758,7 +761,7 @@ Use `open` with `onOpenChange` for controlled state, or `defaultOpen` for uncont
 
 ## AlertDialog
 
-Provides controlled or uncontrolled modal state around a native `<dialog>` with `role="alertdialog"`. Content wires `aria-labelledby` and `aria-describedby` to the title and description automatically.
+Provides controlled or uncontrolled modal state around a native `<dialog>` with `role="alertdialog"`. Content wires `aria-labelledby` and `aria-describedby` to the title and description while they are rendered.
 
 ```tsx
 import {
@@ -839,7 +842,7 @@ const toaster = createToaster({ placement: "bottom-end" });
 
 `createToaster` accepts `placement` (default `bottom-end`), a default `duration` in milliseconds (default `5000`), and `max`, the most toasts shown at once (default `24`). Later toasts wait in a queue, and a queued toast ignores `dismiss(id)` and updates through a reused `id` until it is shown. The returned toaster has two methods:
 
-- `create({ title, description?, action?, duration?, id?, status? })` shows a toast and returns its id. Reusing an `id` updates that toast; `duration: Infinity` keeps it until dismissed.
+- `create({ title, description?, action?, duration?, id?, status? })` shows a toast and returns its id. Reusing an `id` updates that toast; `duration: Infinity` keeps it until dismissed. A toast with an `action` defaults to `Infinity`, so keyboard and screen reader users have time to reach the action.
 - `dismiss(id?)` dismisses one toast, or every toast when `id` is omitted.
 
 Toasts pause while the region is hovered or focused. `Alt+T` moves focus to the region, and Escape dismisses the focused toast. `ToastDescription` and `ToastAction` render nothing when the toast has no description or action; the action runs its callback, then dismisses the toast. `ToastClose` is labeled "Dismiss notification" unless you pass `aria-label`. `Toaster` accepts `label` to rename the live region (default "Notifications").
@@ -873,6 +876,23 @@ Every form control takes `name` and works uncontrolled inside a `<form>`. Set th
 - `RadioGroup` and `CheckboxGroup` restore `defaultValue` on reset without calling `onValueChange`. A controlled `value` is cleared like a `checked` prop, so set your state back in the form's `onReset` handler.
 - `Combobox` ignores `form.reset()` and keeps its current selection. To reset it, use a controlled `value` and set it back in the form's `onReset` handler.
 - `Select`, `NumberField`, and `DatePicker` reset their value even when a reset listener calls `preventDefault()` after theirs has run.
+
+Errors are not announced as they appear, since an announcement on every keystroke is noisy; each control reads its error through `aria-describedby` when it is focused. On submit, move focus to the first invalid control so its error is read:
+
+```tsx
+const [submitted, setSubmitted] = createSignal(false);
+
+<form
+  onSubmit={(event) => {
+    event.preventDefault();
+    // Each field's `invalid` reads `submitted()`, so the errors render before the query runs.
+    setSubmitted(true);
+    event.currentTarget.querySelector<HTMLElement>('[aria-invalid="true"]')?.focus();
+  }}
+>
+  {/* fields */}
+</form>;
+```
 
 ## Props conventions
 

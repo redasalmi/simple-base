@@ -45,13 +45,13 @@ export function CheckboxGroup(props: CheckboxGroupRootProps) {
     defaultValue: () => local.defaultValue,
     // Read the checked boxes from the DOM so controlled and uncontrolled groups report the same way.
     toggle() {
-      if (!list || !local.onValueChange) return;
-      const boxes = list.querySelectorAll<HTMLInputElement>('input[type="checkbox"]');
-      local.onValueChange(
-        Array.from(boxes)
-          .filter((box) => box.checked)
-          .map((box) => box.value),
-      );
+      if (!list) return;
+      const boxes = Array.from(list.querySelectorAll<HTMLInputElement>('input[type="checkbox"]'));
+      local.onValueChange?.(boxes.filter((box) => box.checked).map((box) => box.value));
+      // The browser toggles the box before the parent responds; if the parent kept its value, Solid has nothing to write back.
+      const value = local.value;
+      if (value === undefined) return;
+      for (const box of boxes) box.checked = value.includes(box.value);
     },
   } satisfies CheckboxGroupContextType;
 

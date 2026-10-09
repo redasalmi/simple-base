@@ -165,7 +165,7 @@ export function NumberFields() {
           [
             "NumberFieldAffix",
             "span",
-            "A decorative unit before or after the input, hidden from assistive technology. Name the unit in the label too.",
+            "A unit before or after the input. The input lists it in aria-describedby, so the unit is announced with the value.",
           ],
           [
             "NumberFieldDescription / NumberFieldError",

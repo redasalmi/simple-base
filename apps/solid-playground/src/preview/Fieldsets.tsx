@@ -25,7 +25,7 @@ const fieldsetApi = [
 const fieldsetPartsApi = [
   "FieldsetLegend / FieldsetDescription / FieldsetError",
   "legend / p / p",
-  "Put the legend first. The fieldset lists the description, and the error while it is rendered, in aria-describedby. FieldsetError renders only while invalid is set.",
+  'Put the legend first. A required fieldset adds hidden "(required)" text to the legend; set requiredLabel to change it. The fieldset lists the description, and the error while it is rendered, in aria-describedby. FieldsetError renders only while invalid is set.',
 ] as const;
 
 export function Fieldsets() {

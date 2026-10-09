@@ -99,10 +99,10 @@
       "muted": {
         "$value": {
           "colorSpace": "srgb",
-          "components": [0.647059, 0.678431, 0.807843]
+          "components": [0.709804, 0.74902, 0.886275]
         },
         "$extensions": {
-          "org.simple-base.palette": "subtext0"
+          "org.simple-base.palette": "subtext1"
         }
       },
       "inverse": {

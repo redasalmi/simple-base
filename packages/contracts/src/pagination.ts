@@ -9,6 +9,15 @@ export type PaginationOptions = {
   siblingCount?: number;
   /** Called with the page the user picked. */
   onPageChange?: (page: number) => void;
+  /** Accessible names of the navigation and its buttons, for example to translate them. Each one defaults to `paginationLabels`. */
+  labels?: Partial<PaginationLabels>;
+};
+
+export type PaginationLabels = {
+  root: string;
+  previous: string;
+  next: string;
+  page: (page: number) => string;
 };
 
 export const paginationDefaults = {
@@ -22,4 +31,4 @@ export const paginationLabels = {
   previous: "Previous page",
   next: "Next page",
   page: (page: number) => `Page ${page}`,
-} as const;
+} as const satisfies PaginationLabels;

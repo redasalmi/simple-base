@@ -87,7 +87,7 @@ export function Dialogs() {
           [
             "DialogTitle / DialogDescription",
             "h2 (set level to change it) / paragraph",
-            "Generated IDs connect both parts to Content through aria-labelledby and aria-describedby. Include both parts.",
+            "Generated IDs connect both parts to Content through aria-labelledby and aria-describedby while they are rendered.",
           ],
           [
             "DialogFooter / DialogAction",

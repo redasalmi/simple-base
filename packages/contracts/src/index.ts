@@ -4,10 +4,20 @@ export type { CardVariant, CardOptions } from "./card";
 export type { ComboboxOption, ComboboxOptions } from "./combobox";
 export type { DialogOptions } from "./dialog";
 export type { FieldOptions } from "./field";
-export type { FieldsetOptions, RadioGroupOptions, CheckboxGroupOptions } from "./fieldset";
+export {
+  fieldsetLabels,
+  type FieldsetOptions,
+  type RadioGroupOptions,
+  type CheckboxGroupOptions,
+} from "./fieldset";
 export type { MenuOptions, MenuItemOptions, MenuItemVariant } from "./menu";
 export type { NumberFieldOptions } from "./number-field";
-export { paginationDefaults, paginationLabels, type PaginationOptions } from "./pagination";
+export {
+  paginationDefaults,
+  paginationLabels,
+  type PaginationLabels,
+  type PaginationOptions,
+} from "./pagination";
 export type { Placement } from "./placement";
 export type { SelectOption, SelectOptions } from "./select";
 export type { TableCellVariant, TableCellOptions } from "./table";

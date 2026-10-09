@@ -328,7 +328,7 @@ export function SelectEmpty(props: SelectEmptyProps) {
 
   return (
     <Show when={api().open && options().length === 0}>
-      <div {...rest} role="status" class={cn("sb-select-empty", local.class)}>
+      <div {...rest} class={cn("sb-select-empty", local.class)}>
         {local.children}
       </div>
     </Show>
