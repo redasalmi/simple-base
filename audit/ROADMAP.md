@@ -14,6 +14,8 @@ Decided on 2026-10-09:
 - **"Nothing selected" is `null`** in every single-value picker ([K5](#k5-empty-value)).
 - **The Zag date parser is re-exported as `parseDateInput`.**
 - **Every form control restores its initial value on `form.reset()`.** Where Zag doesn't do it, an internal listener that follows Zag's own rule does, until Zag ships it ([K3](#k3-form-reset)).
+- **An empty picker submits `""`.** Select and Combobox with nothing selected submit their `name` with an empty value, like a native `<select>` with an empty placeholder option, and like DatePicker and NumberField ([K2](#k2-form-participation)).
+- **A required CheckboxGroup needs at least one box checked.** `Fieldset required` blocks submission while none is checked, as it already does for a RadioGroup ([K2](#k2-form-participation)).
 - **Switch is named like Checkbox and Radio.** A wrapping `<label>` or `<label for>` is enough, and `aria-label` is no longer required ([Q8](07-code-quality.md)).
 
 ## Status of reports 01 and 02
@@ -64,6 +66,13 @@ NumberField has the same gap. Zag puts `name` on the visible input, so with `for
 | NumberField                              | the number, `1234`     | **new** hidden input; the visible input loses its `name` |
 
 `required` stays on the visible control, because browsers don't validate hidden inputs. NumberField and DatePicker keep Zag's `required` on their text input, and Combobox keeps it on its hidden select, which is focusable for that reason.
+
+The phase 2 tests found two gaps in this table, decided on 2026-10-09:
+
+- **Empty pickers.** With nothing selected, Select and Combobox leave their `name` out of `FormData`, while DatePicker and NumberField submit `""`. Select's hidden select has an empty option that ends up unselected, and Combobox's has no option at all. Both submit `""` instead. That is what a native `<select>` with an empty placeholder option submits, it is what `validateWidgetOptions` already says ("A form submits an empty string when nothing is selected"), and it lets a server read every field the same way. `required` still works, since a selected empty first option counts as missing. `null` stays the value in the component API ([K5](#k5-empty-value)); `""` is only what the form submits.
+- **Required CheckboxGroup.** `Fieldset required` marks the legend, and screen readers announce "required", but HTML has no "at least one" rule for checkboxes, so the form submits with none checked. The group sets `required` on every item while none is checked and removes it from all of them once one is. The browser then blocks submission and focuses the first box, with its own message. The checked count has to follow `form.reset()`, which fires no `change` event, so this uses the `trackFormReset` helper from [K3](#k3-form-reset). The alternative, dropping the "required" announcement and leaving validation to the app, would make `required` mean something different on this one control.
+
+Both change what a form submits or accepts, so they land before 1.0.
 
 Also add `form` to `SelectOptions` and `ComboboxOptions` (Zag supports it for both), so every control can sit outside its form like NumberField and DatePicker. Cover each row with a `FormData` test and a native `required` test. Open upstream issues asking for hidden-input parts on combobox, date-picker, and number-input.
 
@@ -188,13 +197,15 @@ Everything that is a breaking change after 1.0. Each item updates contracts, the
 
 Pin the current behavior, including every Zag workaround, before phases 3 and 4 change the code. Each workaround test names the finding it covers, so it can be deleted with the workaround. Tests for behavior that a later phase fixes use `test.fails`, so CI stays green and the test flips when the fix lands.
 
-- [ ] **Form controls.** Typing a partial number (`1.`) and typing a date ([Z1](03-zag-compliance.md)). For every row of the [K2](#k2-form-participation) table: what `FormData` contains, native `required` validation, and `form.reset()` ([Z6](03-zag-compliance.md), [Z7](03-zag-compliance.md), [K3](#k3-form-reset)). The NumberField number and the Combobox reset are expected to fail until phase 4.
-- [ ] **Server rendering.** Every component renders with `renderToString`, and a hydration test shows no mismatch, including DatePicker with and without `timeZone` ([K8](#k8-ssr)).
-- [ ] **Controlled and uncontrolled modes.** Dialog, AlertDialog, Pagination, Tabs, Select, Combobox, RadioGroup, and CheckboxGroup, including a parent that rejects a change ([A5](02-accessibility.md)).
-- [ ] **Description and error wiring.** `aria-describedby` on Field, Fieldset, NumberField, DatePicker, Select, and Combobox as the parts mount and unmount, including two Description parts in one root (the [R1](05-refactoring-helpers.md) bug, expected to fail until phase 3).
-- [ ] **Dialogs.** `aria-labelledby` and `aria-describedby` only when the parts render ([A7](02-accessibility.md)), Escape, and `returnValue`.
-- [ ] **Toast.** Queueing, update by `id`, `dismiss`, and `Infinity` duration with an action ([A10](02-accessibility.md)).
-- [ ] **Axe.** Each component's default rendering, a Switch named only by a wrapping `<label>`, and Select and Combobox without a Label part (expected to fail, which documents the requirement).
+- [x] **Form controls.** Typing a partial number (`1.`) and typing a date ([Z1](03-zag-compliance.md)). For every row of the [K2](#k2-form-participation) table: what `FormData` contains, native `required` validation, and `form.reset()` ([Z6](03-zag-compliance.md), [Z7](03-zag-compliance.md), [K3](#k3-form-reset)). The NumberField number and the Combobox reset are expected to fail until phase 4.
+- [x] **Server rendering.** Every component renders with `renderToString`, and a hydration test shows no mismatch, including DatePicker with and without `timeZone` ([K8](#k8-ssr)).
+- [x] **Controlled and uncontrolled modes.** Dialog, AlertDialog, Pagination, Tabs, Select, Combobox, RadioGroup, and CheckboxGroup, including a parent that rejects a change ([A5](02-accessibility.md)).
+- [x] **Description and error wiring.** `aria-describedby` on Field, Fieldset, NumberField, DatePicker, Select, and Combobox as the parts mount and unmount, including two Description parts in one root (the [R1](05-refactoring-helpers.md) bug, expected to fail until phase 3).
+- [x] **Dialogs.** `aria-labelledby` and `aria-describedby` only when the parts render ([A7](02-accessibility.md)), Escape, and `returnValue`.
+- [x] **Toast.** Queueing, update by `id`, `dismiss`, and `Infinity` duration with an action ([A10](02-accessibility.md)).
+- [x] **Axe.** Each component's default rendering, a Switch named only by a wrapping `<label>`, and Select and Combobox without a Label part (expected to fail, which documents the requirement).
+
+The phase 2 tests found four problems no report covered. Each is pinned with `test.fails` and scheduled below: the dialog `close` race (R3, phase 3), and the default state missing from server HTML, the Combobox drift on a rejected change, and the date picker's view trigger name (phase 4). They also found two gaps that [K2](#k2-form-participation) now closes in phase 4, pinned with `test.fails` too: an empty Select or Combobox leaves its `name` out of `FormData`, and a required CheckboxGroup submits with no box checked.
 
 ### Phase 3. Internal helpers
 
@@ -203,7 +214,7 @@ Under `packages/solid/src/internal/`, none of them exported. The test suite from
 - [ ] **R1, registration** ([R1](05-refactoring-helpers.md)). One helper that counts mounts instead of setting a boolean. It replaces the description and error code in Field, Fieldset, NumberField, DatePicker, Select, and Combobox, the title and description registration in Dialog and AlertDialog, and NumberField's affix list. Add internal `MessageDescription` and `MessageError` parts.
 - [ ] **R2, contexts** ([R2](05-refactoring-helpers.md)). `createRequiredContext(name)` for all compound components.
 - [ ] **R4, controllable state** ([R4](05-refactoring-helpers.md)). `createControllableSignal` for Dialog, AlertDialog, and Pagination.
-- [ ] **R3, dialogs** ([R3](05-refactoring-helpers.md), [S5](08-solid-best-practices.md)). One internal `createDialog` and `DialogContentBase`. The title-tag difference R3 lists is already gone, so only `role`, the class prefix, and the button variants remain. Add the `onCleanup` that closes an open dialog on unmount.
+- [ ] **R3, dialogs** ([R3](05-refactoring-helpers.md), [S5](08-solid-best-practices.md)). One internal `createDialog` and `DialogContentBase`. The title-tag difference R3 lists is already gone, so only `role`, the class prefix, and the button variants remain. Add the `onCleanup` that closes an open dialog on unmount. Ignore a `close` event that arrives after the dialog was reopened: today the event from the previous close calls `setOpen(false)` and closes it again (`dialogs.test.tsx`).
 - [ ] **R6, handlers** ([R6](05-refactoring-helpers.md), [S8](08-solid-best-practices.md), [K11](#k11-handler-order)). `composeHandler` in Dialog, AlertDialog, Pagination, RadioGroup, and CheckboxGroup, which then stop importing `@zag-js/solid`. Document the `preventDefault()` rule in the README.
 - [ ] **R7, refs** ([R7](05-refactoring-helpers.md), [S2](08-solid-best-practices.md)). `mergeRefs` for CheckboxGroup, RadioGroup, DialogContent, and AlertDialogContent. Leave `ref` in `rest` in the parts that only forward it.
 - [ ] **R5 and R8, small helpers** ([R5](05-refactoring-helpers.md), [R8](05-refactoring-helpers.md)). `PopupPortal` behind the five portal names, the positioning memo, `dataAttr`, `ariaInvalid`, `WithoutOwnedProps`, and `toZagValue` / `fromZagValue` over `T | null`, shared by Select, Combobox, and DatePicker.
@@ -218,9 +229,14 @@ Each item either removes a workaround or keeps it with a test and an upstream is
 - [ ] **NumberField hidden input** ([K2](#k2-form-participation)). Submit the number through a hidden input and take `name` off the visible input. Open the upstream issue.
 - [ ] **Form reset** ([K3](#k3-form-reset), [Z7](03-zag-compliance.md), [S3](08-solid-best-practices.md)). Add the internal `trackFormReset`. Replace DatePicker's listener with it, and add it to Combobox, both resetting to the value captured on mount. The phase 2 reset tests for Combobox and DatePicker must pass.
 - [ ] **Form reset upstream** ([K3](#k3-form-reset)). Open the `chakra-ui/zag` issue and offer the PR adding `trackFormControl` to the combobox and date-picker machines. Link the issue in a comment at both call sites.
+- [ ] **Empty pickers submit `""`** ([K2](#k2-form-participation)). Select selects its hidden empty option while nothing is selected, and Combobox renders one. If Zag's hidden select is what leaves the option unselected, report it upstream. Do it with Z2 and Z6, which touch the same hidden selects. The K2 `test.fails` for both in `forms.test.tsx` must pass.
+- [ ] **Required CheckboxGroup** ([K2](#k2-form-participation)). `required` on every item while none is checked, tracking the checked count through `change` and `trackFormReset`, for controlled and uncontrolled groups. The K2 `test.fails` for `required` and `form.reset()` in `forms.test.tsx` must pass; add one for a rejected change ([A5](02-accessibility.md)). Say in the README that `Fieldset required` means "at least one" for a CheckboxGroup.
 - [ ] **Z6, Z8, Z9.** Keep. Open upstream issues for select reset sync, a date-picker hidden input, and `data-required` on the date-picker label. Record each issue link in a comment next to the workaround.
 - [ ] **Z10.** Keep the `placement` default. The `timeZone` default changes in phase 5 ([K8](#k8-ssr)).
 - [ ] **S1, typed `prop:` and `attr:`** ([S1](08-solid-best-practices.md), [K7](#k7-typed-prop-and-attr)). Internal `src/jsx.d.ts` for `defaultValue` and `selected`. Checkbox sets `indeterminate` directly. Confirm the augmentation doesn't appear in `dist/index.d.ts`.
+- [ ] **Default state in server HTML** ([K8](#k8-ssr)). The server leaves out every default value: `defaultValue` goes through `prop:`, which Solid's server build drops, and `defaultChecked` is written as an attribute the browser ignores. So until hydration, `Input` and `TextArea` are empty and `Checkbox`, `Radio`, `Switch`, `RadioGroup`, and `CheckboxGroup` show nothing checked. Render them as the `value` and `checked` attributes (and `TextArea`'s text), which are also what `form.reset()` restores. Decide it together with S1, since it changes which `prop:` uses remain. The hydration tests for these fixtures must pass.
+- [ ] **Combobox drift on a rejected change** ([A5](02-accessibility.md)). When a controlling parent keeps its `value`, Zag leaves the rejected option's label in the input, and only syncs the text when the value changes. Report it to `chakra-ui/zag`. Until it's fixed, restore the text the way RadioGroup re-syncs the DOM, for example with `api().syncSelectedItems()` when the value didn't change (`controlled.test.tsx`).
+- [ ] **Date picker view trigger name** (WCAG 2.5.3). Zag labels the heading button "Switch to month view" while it shows "October 2026", so its name doesn't contain its visible text, and axe fails the open calendar. Zag's `viewTrigger` translation doesn't receive the visible text. Report it upstream, and until then have `DatePickerCalendar` set an `aria-label` that starts with the visible text (`axe.test.tsx`).
 - [ ] Remove the lint TODOs from phase 0.
 
 ### Phase 5. Runtime fixes
