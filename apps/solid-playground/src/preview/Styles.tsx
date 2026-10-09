@@ -86,8 +86,8 @@ export function Styles() {
         </div>
       </Example>
       <Example
-        title="Select & choices"
-        description="Native controls with CSS wrappers for the arrow and choice hit area. The field, fieldset, help, and choice classes are available independently."
+        title="Native select"
+        description="A native select with a CSS wrapper for the arrow. The field and help classes are available independently."
         code={
           '<label class="sb-field">\n  <span class="sb-field-title">Delivery</span>\n  <span class="sb-select-wrap">\n    <select class="sb-select"><option>Daily summary</option></select>\n  </span>\n</label>'
         }
@@ -113,42 +113,7 @@ export function Styles() {
               </span>
             </label>
           </div>
-          <fieldset class="sb-fieldset">
-            <legend class="sb-field-title">Include in summary</legend>
-            <div class="sb-choice-list">
-              <label class="sb-choice">
-                <Checkbox checked />
-                <span>New documents</span>
-              </label>
-              <label class="sb-choice">
-                <Checkbox />
-                <span>Comments</span>
-              </label>
-            </div>
-          </fieldset>
         </div>
-      </Example>
-      <Example
-        title="Fieldset errors"
-        description="A required choice group with an error message. Text inputs and text areas use the Field component; fieldsets and choices stay CSS patterns."
-        code={
-          '<fieldset class="sb-fieldset">\n  <legend class="sb-field-title" data-required>Terms</legend>\n  <div class="sb-choice-list">\n    <label class="sb-choice">\n      <Checkbox aria-invalid="true" aria-describedby="terms-error" />\n      <span>I have reviewed the invoice totals</span>\n    </label>\n  </div>\n  <span class="sb-field-error" id="terms-error">Confirm the totals before sending.</span>\n</fieldset>'
-        }
-      >
-        <fieldset class="sb-fieldset">
-          <legend class="sb-field-title" data-required>
-            Terms
-          </legend>
-          <div class="sb-choice-list">
-            <label class="sb-choice">
-              <Checkbox aria-invalid="true" aria-describedby="field-terms-error" />
-              <span>I have reviewed the invoice totals</span>
-            </label>
-          </div>
-          <span class="sb-field-error" id="field-terms-error">
-            Confirm the totals before sending.
-          </span>
-        </fieldset>
       </Example>
       <Example
         title="Tooltip"

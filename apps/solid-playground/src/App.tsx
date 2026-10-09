@@ -21,6 +21,7 @@ import { Dialogs } from "./preview/Dialogs";
 import { AlertDialogs } from "./preview/AlertDialogs";
 import { Inputs, TextAreas, Checkboxes, Radios, Switches } from "./preview/Inputs";
 import { Fields } from "./preview/Fields";
+import { Fieldsets, RadioGroups, CheckboxGroups } from "./preview/Fieldsets";
 import { NumberFields } from "./preview/NumberFields";
 import { DatePickers } from "./preview/DatePickers";
 import { Comboboxes } from "./preview/Comboboxes";
@@ -205,6 +206,34 @@ const pages: Page[] = [
       "An immediate on or off preference. A native checkbox with switch semantics and a required accessible name.",
     usage: 'import { Switch } from "@simple-base/solid";',
     component: Switches,
+  },
+  {
+    id: "fieldset",
+    label: "Fieldset",
+    group: "Components",
+    description:
+      "Group related controls under one legend. Set required, disabled, and invalid on the root; the legend and messages follow, and disabled reaches every control inside.",
+    usage:
+      'import { Fieldset, FieldsetLegend, FieldsetDescription, FieldsetError } from "@simple-base/solid";',
+    component: Fieldsets,
+  },
+  {
+    id: "radio-group",
+    label: "RadioGroup",
+    group: "Components",
+    description:
+      "One choice from a short list, inside a Fieldset. Each option is a full-width row with a native radio, and the group shares a name and the selected value.",
+    usage: 'import { Fieldset, RadioGroup, RadioGroupItem } from "@simple-base/solid";',
+    component: RadioGroups,
+  },
+  {
+    id: "checkbox-group",
+    label: "CheckboxGroup",
+    group: "Components",
+    description:
+      "Any number of choices from a short list, inside a Fieldset. Each option is a full-width row with a native checkbox, and the group reports the checked values as an array.",
+    usage: 'import { Fieldset, CheckboxGroup, CheckboxGroupItem } from "@simple-base/solid";',
+    component: CheckboxGroups,
   },
   {
     id: "dialog",

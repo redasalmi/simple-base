@@ -4,6 +4,7 @@ export type { CardVariant, CardOptions } from "./card";
 export type { ComboboxOption, ComboboxOptions } from "./combobox";
 export type { DialogOptions } from "./dialog";
 export type { FieldOptions } from "./field";
+export type { FieldsetOptions, RadioGroupOptions, CheckboxGroupOptions } from "./fieldset";
 export type { NumberFieldOptions } from "./numberField";
 export type { Placement } from "./placement";
 export type { SelectOption, SelectOptions } from "./select";

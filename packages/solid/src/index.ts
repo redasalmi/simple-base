@@ -71,6 +71,33 @@ export {
 } from "./components/Field";
 export type { FieldOptions } from "@simple-base/contracts";
 export {
+  Fieldset,
+  FieldsetLegend,
+  FieldsetDescription,
+  FieldsetError,
+  type FieldsetRootProps,
+  type FieldsetLegendProps,
+  type FieldsetDescriptionProps,
+  type FieldsetErrorProps,
+} from "./components/Fieldset";
+export {
+  RadioGroup,
+  RadioGroupItem,
+  type RadioGroupRootProps,
+  type RadioGroupItemProps,
+} from "./components/RadioGroup";
+export {
+  CheckboxGroup,
+  CheckboxGroupItem,
+  type CheckboxGroupRootProps,
+  type CheckboxGroupItemProps,
+} from "./components/CheckboxGroup";
+export type {
+  FieldsetOptions,
+  RadioGroupOptions,
+  CheckboxGroupOptions,
+} from "@simple-base/contracts";
+export {
   NumberField,
   NumberFieldLabel,
   NumberFieldControl,

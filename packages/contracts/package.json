@@ -1,6 +1,6 @@
 {
   "name": "@simple-base/contracts",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -38,6 +38,10 @@
     "./dialog": {
       "types": "./dist/dialog.d.ts",
       "import": "./dist/dialog.js"
+    },
+    "./fieldset": {
+      "types": "./dist/fieldset.d.ts",
+      "import": "./dist/fieldset.js"
     },
     "./placement": {
       "types": "./dist/placement.d.ts",

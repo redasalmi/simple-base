@@ -74,6 +74,14 @@
     border: 0;
   }
 
+  .sb-fieldset > legend {
+    padding: 0;
+  }
+
+  .sb-fieldset > :is(.sb-field-description, .sb-field-error) {
+    margin: var(--sb-semantic-space-2) 0 0;
+  }
+
   .sb-choice-list {
     display: grid;
     gap: var(--sb-semantic-space-2);

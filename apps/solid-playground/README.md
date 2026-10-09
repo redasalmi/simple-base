@@ -13,18 +13,17 @@ short API reference.
 - **Solid components:** every export of `@simple-base/solid` — Button (six
   variants, three sizes, disabled states), Badge (nine variants, both sizes),
   Card, Input, Field, NumberField, DatePicker, Combobox, Select, Table,
-  EmptyState, TextArea, Checkbox, Radio, Switch, and all Alert, StatusLine,
-  Dialog, AlertDialog, and Toast named parts.
+  EmptyState, TextArea, Checkbox, Radio, Switch, and all Fieldset, RadioGroup,
+  CheckboxGroup, Alert, StatusLine, Dialog, AlertDialog, and Toast named parts.
   Form examples cover editable, selected, disabled, read-only, and validation
   states where supported.
 - **Foundations:** the heading and body scales, display typography, text roles,
   code, and keyboard shortcuts.
-- **CSS patterns:** progress and range, the native select and choice lists,
-  fieldset errors, tooltip, segmented control, tabs, table selection and
-  pagination, breadcrumb and disclosure, and command popover. These use the
-  selectors directly. Tooltip, tabs, pagination, and fieldsets are planned as
-  Solid components for 1.0 (see `todo.md` at the repository root); until then
-  they are not Solid exports.
+- **CSS patterns:** progress and range, the native select, tooltip, segmented
+  control, tabs, table selection and pagination, breadcrumb and disclosure, and
+  command popover. These use the selectors directly. Tooltip, tabs, and
+  pagination are planned as Solid components for 1.0 (see `todo.md` at the
+  repository root); until then they are not Solid exports.
 
 Examples use local state only. Navigation resets component demonstrations; no
 form data is submitted or persisted. Dialog and AlertDialog coordinate their

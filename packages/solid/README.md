@@ -68,24 +68,27 @@ import "@simple-base/css/badge";
 
 **Composable components** use named exports so bundlers can remove unused parts. Each part is prefixed with its root name:
 
-| Root          | Named parts                                                                                                                                                                                                                         |
-| ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `AlertDialog` | `AlertDialogTrigger`, `AlertDialogContent`, `AlertDialogIcon`, `AlertDialogHeader`, `AlertDialogKicker`, `AlertDialogTitle`, `AlertDialogDescription`, `AlertDialogFooter`, `AlertDialogCancel`, `AlertDialogAction`                |
-| `Dialog`      | `DialogTrigger`, `DialogContent`, `DialogHeader`, `DialogKicker`, `DialogTitle`, `DialogDescription`, `DialogFooter`, `DialogClose`, `DialogAction`                                                                                 |
-| `Field`       | `FieldLabel`, `FieldInput`, `FieldTextArea`, `FieldDescription`, `FieldError`                                                                                                                                                       |
-| `NumberField` | `NumberFieldLabel`, `NumberFieldControl`, `NumberFieldInput`, `NumberFieldDecrement`, `NumberFieldIncrement`, `NumberFieldAffix`, `NumberFieldDescription`, `NumberFieldError`                                                      |
-| `Combobox`    | `ComboboxLabel`, `ComboboxControl`, `ComboboxInput`, `ComboboxTrigger`, `ComboboxPortal`, `ComboboxPositioner`, `ComboboxContent`, `ComboboxList`, `ComboboxEmpty`, `ComboboxItem`                                                  |
-| `DatePicker`  | `DatePickerLabel`, `DatePickerControl`, `DatePickerInput`, `DatePickerTrigger`, `DatePickerPortal`, `DatePickerPositioner`, `DatePickerContent`, `DatePickerCalendar`, `DatePickerDescription`, `DatePickerError`, plus `parseDate` |
-| `Select`      | `SelectLabel`, `SelectControl`, `SelectTrigger`, `SelectValueText`, `SelectIndicator`, `SelectPortal`, `SelectPositioner`, `SelectContent`, `SelectList`, `SelectEmpty`, `SelectItem`                                               |
-| `EmptyState`  | `EmptyStateMark`, `EmptyStateTitle`, `EmptyStateDescription`, `EmptyStateActions`                                                                                                                                                   |
-| `Alert`       | `AlertMark`, `AlertContent`, `AlertTitle`, `AlertDescription`, `AlertActions`, `AlertClose`                                                                                                                                         |
-| `StatusLine`  | `StatusLineDot`, `StatusLineContent`, `StatusLineTitle`, `StatusLineDescription`                                                                                                                                                    |
-| `Table`       | `TableWrap`, `TableCaption`, `TableHeader`, `TableBody`, `TableFooter`, `TableRow`, `TableColumnHeader`, `TableRowHeader`, `TableCell`                                                                                              |
-| `Toaster`     | `Toast`, `ToastIcon`, `ToastContent`, `ToastTitle`, `ToastDescription`, `ToastAction`, `ToastClose`, plus `createToaster`                                                                                                           |
+| Root            | Named parts                                                                                                                                                                                                                         |
+| --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `AlertDialog`   | `AlertDialogTrigger`, `AlertDialogContent`, `AlertDialogIcon`, `AlertDialogHeader`, `AlertDialogKicker`, `AlertDialogTitle`, `AlertDialogDescription`, `AlertDialogFooter`, `AlertDialogCancel`, `AlertDialogAction`                |
+| `Dialog`        | `DialogTrigger`, `DialogContent`, `DialogHeader`, `DialogKicker`, `DialogTitle`, `DialogDescription`, `DialogFooter`, `DialogClose`, `DialogAction`                                                                                 |
+| `Field`         | `FieldLabel`, `FieldInput`, `FieldTextArea`, `FieldDescription`, `FieldError`                                                                                                                                                       |
+| `Fieldset`      | `FieldsetLegend`, `FieldsetDescription`, `FieldsetError`                                                                                                                                                                            |
+| `RadioGroup`    | `RadioGroupItem` (inside a `Fieldset`)                                                                                                                                                                                              |
+| `CheckboxGroup` | `CheckboxGroupItem` (inside a `Fieldset`)                                                                                                                                                                                           |
+| `NumberField`   | `NumberFieldLabel`, `NumberFieldControl`, `NumberFieldInput`, `NumberFieldDecrement`, `NumberFieldIncrement`, `NumberFieldAffix`, `NumberFieldDescription`, `NumberFieldError`                                                      |
+| `Combobox`      | `ComboboxLabel`, `ComboboxControl`, `ComboboxInput`, `ComboboxTrigger`, `ComboboxPortal`, `ComboboxPositioner`, `ComboboxContent`, `ComboboxList`, `ComboboxEmpty`, `ComboboxItem`                                                  |
+| `DatePicker`    | `DatePickerLabel`, `DatePickerControl`, `DatePickerInput`, `DatePickerTrigger`, `DatePickerPortal`, `DatePickerPositioner`, `DatePickerContent`, `DatePickerCalendar`, `DatePickerDescription`, `DatePickerError`, plus `parseDate` |
+| `Select`        | `SelectLabel`, `SelectControl`, `SelectTrigger`, `SelectValueText`, `SelectIndicator`, `SelectPortal`, `SelectPositioner`, `SelectContent`, `SelectList`, `SelectEmpty`, `SelectItem`                                               |
+| `EmptyState`    | `EmptyStateMark`, `EmptyStateTitle`, `EmptyStateDescription`, `EmptyStateActions`                                                                                                                                                   |
+| `Alert`         | `AlertMark`, `AlertContent`, `AlertTitle`, `AlertDescription`, `AlertActions`, `AlertClose`                                                                                                                                         |
+| `StatusLine`    | `StatusLineDot`, `StatusLineContent`, `StatusLineTitle`, `StatusLineDescription`                                                                                                                                                    |
+| `Table`         | `TableWrap`, `TableCaption`, `TableHeader`, `TableBody`, `TableFooter`, `TableRow`, `TableColumnHeader`, `TableRowHeader`, `TableCell`                                                                                              |
+| `Toaster`       | `Toast`, `ToastIcon`, `ToastContent`, `ToastTitle`, `ToastDescription`, `ToastAction`, `ToastClose`, plus `createToaster`                                                                                                           |
 
 The CSS package ships more components than this adapter currently covers. Until a Solid component exists, use them through their selector-level APIs:
 
-- **Planned for 1.0:** menu, tooltip, tabs, pagination, and fieldset with radio and checkbox groups.
+- **Planned for 1.0:** menu, tooltip, tabs, and pagination.
 - **Planned after 1.0:** breadcrumb, disclosure, keyboard shortcut, progress, range, and segmented control.
 
 Typography stays CSS-only: the `.sb-display`, `.sb-heading-*`, and `.sb-text-*` classes are the API.
@@ -122,6 +125,77 @@ export function EmailField() {
 `FieldInput` and `FieldTextArea` take the same props as `Input` and `TextArea`, except `id`, `required`, `disabled`, `aria-invalid`, and `aria-describedby`, which come from the root. `aria-describedby` lists the description and the error while they are rendered. `FieldError` renders only while `invalid` is set. Omit `id` to generate one.
 
 Use one control per `Field`: every control in a field gets the same `id`. `Select`, `Combobox`, `NumberField`, `DatePicker`, `Checkbox`, `Radio`, and `Switch` carry their own labeling and are not used inside a `Field`.
+
+## Fieldset
+
+Groups related controls under a native `<fieldset>` and `<legend>`. `required`, `disabled`, and `invalid` are set on the root only. `disabled` is the native attribute, so every control inside is disabled with it.
+
+```tsx
+import {
+  Field,
+  FieldInput,
+  FieldLabel,
+  Fieldset,
+  FieldsetDescription,
+  FieldsetLegend,
+} from "@simple-base/solid";
+
+<Fieldset>
+  <FieldsetLegend>Billing address</FieldsetLegend>
+  <FieldsetDescription>Printed on every invoice.</FieldsetDescription>
+  <Field>
+    <FieldLabel>Street</FieldLabel>
+    <FieldInput name="street" />
+  </Field>
+  <Field>
+    <FieldLabel>City</FieldLabel>
+    <FieldInput name="city" />
+  </Field>
+</Fieldset>;
+```
+
+Put `FieldsetLegend` first; `required` adds its marker. The fieldset lists `FieldsetDescription`, and `FieldsetError` while it is rendered, in its `aria-describedby`. `FieldsetError` renders only while `invalid` is set. Omit `id` to generate one.
+
+## RadioGroup and CheckboxGroup
+
+Render a list of choice rows inside a `Fieldset`, which names the group and supplies `required` and `invalid`. Each item is a `label` holding a native `Radio` or `Checkbox` and its text.
+
+```tsx
+import { createSignal } from "solid-js";
+import {
+  CheckboxGroup,
+  CheckboxGroupItem,
+  Fieldset,
+  FieldsetError,
+  FieldsetLegend,
+  RadioGroup,
+  RadioGroupItem,
+} from "@simple-base/solid";
+
+const [reminders, setReminders] = createSignal(["due"]);
+
+<form>
+  <Fieldset required>
+    <FieldsetLegend>Currency</FieldsetLegend>
+    <RadioGroup name="currency" defaultValue="eur">
+      <RadioGroupItem value="eur">Euro</RadioGroupItem>
+      <RadioGroupItem value="usd">US dollar</RadioGroupItem>
+    </RadioGroup>
+  </Fieldset>
+  <Fieldset invalid={reminders().length === 0}>
+    <FieldsetLegend>Payment reminders</FieldsetLegend>
+    <CheckboxGroup name="reminders" value={reminders()} onValueChange={setReminders}>
+      <CheckboxGroupItem value="before">3 days before the due date</CheckboxGroupItem>
+      <CheckboxGroupItem value="due">On the due date</CheckboxGroupItem>
+    </CheckboxGroup>
+    <FieldsetError>Pick at least one reminder.</FieldsetError>
+  </Fieldset>
+</form>;
+```
+
+- `RadioGroup` takes a string `value` (`""` selects nothing), `defaultValue`, and `onValueChange`. `name` is shared by every radio and generated when omitted. A required fieldset makes the radios natively required.
+- `CheckboxGroup` takes a `string[]` `value`, `defaultValue`, and `onValueChange`, which receives the checked values in document order. The checkboxes are not natively required, since any one of them may satisfy the group: validate in your app, or pass `required` to a single item that must be checked.
+- On an item, `value` is required and `children` is the label text. `class` goes on the row; every other prop goes to the input. `name`, `checked`, `defaultChecked`, and `aria-invalid` (plus `required` on radios) come from the group and fieldset.
 
 ## NumberField
 
@@ -621,6 +695,8 @@ Every form control takes `name` and works uncontrolled inside a `<form>`. Set th
 | ----------------------------------------------------------------- | ---------------------------- |
 | `Input`, `TextArea`, `FieldInput`, `FieldTextArea`, `NumberField` | `defaultValue`               |
 | `Checkbox`, `Radio`, `Switch`                                     | `defaultChecked`             |
+| `RadioGroup`                                                      | `defaultValue`               |
+| `CheckboxGroup`                                                   | `defaultValue` (`string[]`)  |
 | `Select`, `Combobox`                                              | `defaultValue` (`""` = none) |
 | `DatePicker`                                                      | `defaultValue` (`[]` = none) |
 
@@ -637,6 +713,7 @@ Every form control takes `name` and works uncontrolled inside a `<form>`. Set th
 `form.reset()` limitations:
 
 - On `Input`, `TextArea`, `Checkbox`, `Radio`, and `Switch`, Solid sets `value` and `checked` as DOM properties, so a reset clears a starting value given that way. Use `defaultValue` or `defaultChecked`.
+- `RadioGroup` and `CheckboxGroup` restore `defaultValue` on reset without calling `onValueChange`. A controlled `value` is cleared like a `checked` prop, so set your state back in the form's `onReset` handler.
 - `Combobox` ignores `form.reset()` and keeps its current selection. To reset it, use a controlled `value` and set it back in the form's `onReset` handler.
 - `Select`, `NumberField`, and `DatePicker` reset their value even when a reset listener calls `preventDefault()` after theirs has run.
 

@@ -272,6 +272,7 @@ These rules style the markup a component renders. Use the listed elements, or ad
 | `.sb-empty-state`                                                                         | `p`                          |
 | `.sb-status-line`, `.sb-alert`, `.sb-toast`                                               | `strong`, `p`                |
 | `.sb-field`                                                                               | `label`, `legend`, `small`   |
+| `.sb-fieldset`                                                                            | `legend`                     |
 | `.sb-choice`                                                                              | `span`, `input` (via `:has`) |
 | `.sb-progress`                                                                            | `span`                       |
 | `.sb-table`                                                                               | `th`, `td`, `tbody`, `tr`    |
