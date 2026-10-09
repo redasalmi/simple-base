@@ -79,6 +79,7 @@ import "@simple-base/css/badge";
 | `NumberField`   | `NumberFieldLabel`, `NumberFieldControl`, `NumberFieldInput`, `NumberFieldDecrement`, `NumberFieldIncrement`, `NumberFieldAffix`, `NumberFieldDescription`, `NumberFieldError`                                                      |
 | `Combobox`      | `ComboboxLabel`, `ComboboxControl`, `ComboboxInput`, `ComboboxTrigger`, `ComboboxPortal`, `ComboboxPositioner`, `ComboboxContent`, `ComboboxList`, `ComboboxEmpty`, `ComboboxItem`                                                  |
 | `DatePicker`    | `DatePickerLabel`, `DatePickerControl`, `DatePickerInput`, `DatePickerTrigger`, `DatePickerPortal`, `DatePickerPositioner`, `DatePickerContent`, `DatePickerCalendar`, `DatePickerDescription`, `DatePickerError`, plus `parseDate` |
+| `Menu`          | `MenuTrigger`, `MenuPortal`, `MenuPositioner`, `MenuContent`, `MenuItem`, `MenuItemShortcut`, `MenuGroup`, `MenuGroupLabel`, `MenuSeparator`                                                                                        |
 | `Select`        | `SelectLabel`, `SelectControl`, `SelectTrigger`, `SelectValueText`, `SelectIndicator`, `SelectPortal`, `SelectPositioner`, `SelectContent`, `SelectList`, `SelectEmpty`, `SelectItem`                                               |
 | `EmptyState`    | `EmptyStateMark`, `EmptyStateTitle`, `EmptyStateDescription`, `EmptyStateActions`                                                                                                                                                   |
 | `Alert`         | `AlertMark`, `AlertContent`, `AlertTitle`, `AlertDescription`, `AlertActions`, `AlertClose`                                                                                                                                         |
@@ -89,7 +90,7 @@ import "@simple-base/css/badge";
 
 The CSS package ships more components than this adapter currently covers. Until a Solid component exists, use them through their selector-level APIs:
 
-- **Planned for 1.0:** menu, tooltip, and tabs.
+- **Planned for 1.0:** tooltip and tabs.
 - **Planned after 1.0:** breadcrumb, disclosure, keyboard shortcut, progress, range, and segmented control.
 
 Typography stays CSS-only: the `.sb-display`, `.sb-heading-*`, and `.sb-text-*` classes are the API.
@@ -433,6 +434,48 @@ Additional root props:
 - `placement` picks the popup side (default `bottom-start`), `fixedWeeks` always shows six weeks so the popup keeps its height, and `onOpenChange` reports visibility.
 
 `DatePickerCalendar` renders the navigation and the day, month, and year views; select the month heading to switch views. `DatePickerTrigger` renders a calendar icon unless you pass children. `DatePickerPortal` accepts `mount`, like `SelectPortal`.
+
+## Menu
+
+A button that opens a list of commands, such as the actions for a table row. `onSelect` receives the picked item's `value`; the menu then closes and returns focus to the trigger.
+
+```tsx
+import {
+  Menu,
+  MenuContent,
+  MenuItem,
+  MenuPortal,
+  MenuPositioner,
+  MenuSeparator,
+  MenuTrigger,
+} from "@simple-base/solid";
+
+export function InvoiceActions(props: { id: string }) {
+  return (
+    <Menu placement="bottom-end" onSelect={(action) => runAction(props.id, action)}>
+      <MenuTrigger variant="ghost" size="small" aria-label={`Actions for ${props.id}`}>
+        ⋯
+      </MenuTrigger>
+      <MenuPortal>
+        <MenuPositioner>
+          <MenuContent>
+            <MenuItem value="edit">Edit</MenuItem>
+            <MenuItem value="duplicate">Duplicate</MenuItem>
+            <MenuSeparator />
+            <MenuItem value="delete" variant="danger">
+              Delete
+            </MenuItem>
+          </MenuContent>
+        </MenuPositioner>
+      </MenuPortal>
+    </Menu>
+  );
+}
+```
+
+Root props: `onSelect`, `open` with `onOpenChange` for controlled state, `defaultOpen` for uncontrolled initial state, and `placement` for the popup side (default `bottom-start`). The root renders no element of its own.
+
+`MenuTrigger` takes the `Button` props, including `variant` and `size`; give an icon-only trigger an `aria-label`. `MenuItem` takes `value`, `disabled`, and `variant="danger"`. Typeahead matches the start of an item's text. Wrap items in `MenuGroup` with a `MenuGroupLabel` to name a set, and put display-only key hints in `MenuItemShortcut`; binding the keys stays in your app. Like `SelectPortal`, `MenuPortal` accepts `mount` for use inside a native modal.
 
 ## Table
 

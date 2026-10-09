@@ -36,32 +36,33 @@ The same exports are available per component, which keeps imports narrow:
 import { buttonDefaults, type ButtonVariant } from "@simple-base/contracts/button";
 ```
 
-Subpaths: `/badge` · `/button` · `/card` · `/combobox` · `/datePicker` · `/dialog` · `/fieldset` · `/numberField` · `/pagination` · `/placement` · `/select` · `/status` · `/table`
+Subpaths: `/badge` · `/button` · `/card` · `/combobox` · `/datePicker` · `/dialog` · `/fieldset` · `/menu` · `/numberField` · `/pagination` · `/placement` · `/select` · `/status` · `/table`
 
 `FieldOptions` is exported from the package root only.
 
 ## Options reference
 
-| Component      | Types                                          | Defaults                                                  |
-| -------------- | ---------------------------------------------- | --------------------------------------------------------- |
-| Button         | `ButtonVariant`, `ButtonSize`, `ButtonOptions` | `buttonDefaults`: `primary`, `medium`                     |
-| Badge          | `BadgeVariant`, `BadgeSize`, `BadgeOptions`    | `badgeDefaults`: `default`, `medium`                      |
-| Card           | `CardVariant`, `CardOptions`                   | —                                                         |
-| Combobox       | `ComboboxOption`, `ComboboxOptions`            | —                                                         |
-| Date picker    | `DatePickerOptions`                            | —                                                         |
-| Dialog         | `DialogOptions`                                | —                                                         |
-| Field          | `FieldOptions`                                 | —                                                         |
-| Fieldset       | `FieldsetOptions`                              | —                                                         |
-| Radio group    | `RadioGroupOptions`                            | —                                                         |
-| Checkbox group | `CheckboxGroupOptions`                         | —                                                         |
-| Number field   | `NumberFieldOptions`                           | —                                                         |
-| Pagination     | `PaginationOptions`                            | `paginationDefaults`: `defaultPage: 1`, `siblingCount: 1` |
-| Placement      | `Placement`                                    | —                                                         |
-| Select         | `SelectOption`, `SelectOptions`                | —                                                         |
-| Status line    | `StatusValue`, `StatusOptions`                 | —                                                         |
-| Alert          | `AlertStatus`, `AlertOptions`                  | —                                                         |
-| Toast          | `ToastStatus`, `ToastOptions`                  | `toastDefaults`: `status: "success"`                      |
-| Table cell     | `TableCellVariant`, `TableCellOptions`         | —                                                         |
+| Component      | Types                                               | Defaults                                                  |
+| -------------- | --------------------------------------------------- | --------------------------------------------------------- |
+| Button         | `ButtonVariant`, `ButtonSize`, `ButtonOptions`      | `buttonDefaults`: `primary`, `medium`                     |
+| Badge          | `BadgeVariant`, `BadgeSize`, `BadgeOptions`         | `badgeDefaults`: `default`, `medium`                      |
+| Card           | `CardVariant`, `CardOptions`                        | —                                                         |
+| Combobox       | `ComboboxOption`, `ComboboxOptions`                 | —                                                         |
+| Date picker    | `DatePickerOptions`                                 | —                                                         |
+| Dialog         | `DialogOptions`                                     | —                                                         |
+| Field          | `FieldOptions`                                      | —                                                         |
+| Fieldset       | `FieldsetOptions`                                   | —                                                         |
+| Radio group    | `RadioGroupOptions`                                 | —                                                         |
+| Checkbox group | `CheckboxGroupOptions`                              | —                                                         |
+| Menu           | `MenuOptions`, `MenuItemOptions`, `MenuItemVariant` | —                                                         |
+| Number field   | `NumberFieldOptions`                                | —                                                         |
+| Pagination     | `PaginationOptions`                                 | `paginationDefaults`: `defaultPage: 1`, `siblingCount: 1` |
+| Placement      | `Placement`                                         | —                                                         |
+| Select         | `SelectOption`, `SelectOptions`                     | —                                                         |
+| Status line    | `StatusValue`, `StatusOptions`                      | —                                                         |
+| Alert          | `AlertStatus`, `AlertOptions`                       | —                                                         |
+| Toast          | `ToastStatus`, `ToastOptions`                       | `toastDefaults`: `status: "success"`                      |
+| Table cell     | `TableCellVariant`, `TableCellOptions`              | —                                                         |
 
 Types are erased at runtime. Only the `*Defaults` constants are runtime exports — there are no allowed-value arrays without a runtime use case.
 
@@ -77,6 +78,7 @@ Types are erased at runtime. Only the `*Defaults` constants are runtime exports 
 - **Number field values** are strings, so partial input such as `1.` survives; `onValueChange` also receives the parsed number. `formatOptions` takes `Intl.NumberFormatOptions`.
 - **Date picker values** are `DateValue[]`; an empty array means no date. `name` submits the date as `YYYY-MM-DD`.
 - **Pagination:** pages start at `1`. `count` is the total number of pages, `page` is controlled, and `defaultPage` is the uncontrolled initial page. `siblingCount` is the number of pages shown on each side of the current page before an ellipsis.
+- **Menu:** `onSelect` receives the picked item's `value`, which must be unique within the menu. `open` is controlled and `defaultOpen` is the uncontrolled initial state. The only item variant is `danger`.
 - **Placement:** `top` or `bottom`, with `-start` and `-end` variants. Shared by every popup option.
 - **Dialogs:** `open` is the controlled state, `defaultOpen` provides the initial uncontrolled state, and `onOpenChange` reports requested visibility changes.
 - **Statuses are deliberately not interchangeable.** Status lines and alerts use `success`, `warning`, `danger`, `info`. Toasts use `success` and `warning`. All three are exported from `/status`.

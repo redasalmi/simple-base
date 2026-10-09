@@ -5,6 +5,7 @@ export type { ComboboxOption, ComboboxOptions } from "./combobox";
 export type { DialogOptions } from "./dialog";
 export type { FieldOptions } from "./field";
 export type { FieldsetOptions, RadioGroupOptions, CheckboxGroupOptions } from "./fieldset";
+export type { MenuOptions, MenuItemOptions, MenuItemVariant } from "./menu";
 export type { NumberFieldOptions } from "./numberField";
 export { paginationDefaults, type PaginationOptions } from "./pagination";
 export type { Placement } from "./placement";

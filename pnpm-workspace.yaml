@@ -6,6 +6,7 @@ catalog:
   "@types/node": ^24.19.0
   "@zag-js/combobox": ^1.44.0
   "@zag-js/date-picker": ^1.44.0
+  "@zag-js/menu": ^1.44.0
   "@zag-js/number-input": ^1.44.0
   "@zag-js/select": ^1.44.0
   "@zag-js/solid": ^1.44.0

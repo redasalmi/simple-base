@@ -26,6 +26,7 @@ import { NumberFields } from "./preview/NumberFields";
 import { DatePickers } from "./preview/DatePickers";
 import { Comboboxes } from "./preview/Comboboxes";
 import { Selects } from "./preview/Selects";
+import { Menus } from "./preview/Menus";
 import { Tables } from "./preview/Tables";
 import { Paginations } from "./preview/Paginations";
 import { EmptyStates } from "./preview/EmptyStates";
@@ -134,6 +135,15 @@ const pages: Page[] = [
       "Pick a single option from a known list. Named parts provide a labeled trigger, keyboard typeahead, and a portaled popup that shares the combobox popup styling.",
     usage: 'import { Select, SelectTrigger, SelectItem } from "@simple-base/solid";',
     component: Selects,
+  },
+  {
+    id: "menu",
+    label: "Menu",
+    group: "Components",
+    description:
+      "A list of commands behind a button, such as the actions for a table row. Named parts provide keyboard navigation, typeahead, groups, and a portaled popup positioned like Select.",
+    usage: 'import { Menu, MenuTrigger, MenuContent, MenuItem } from "@simple-base/solid";',
+    component: Menus,
   },
   {
     id: "table",

@@ -1,6 +1,6 @@
 {
   "name": "@simple-base/solid",
-  "version": "0.14.0",
+  "version": "0.15.0",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -36,6 +36,7 @@
     "@simple-base/contracts": "workspace:^",
     "@zag-js/combobox": "catalog:",
     "@zag-js/date-picker": "catalog:",
+    "@zag-js/menu": "catalog:",
     "@zag-js/number-input": "catalog:",
     "@zag-js/select": "catalog:",
     "@zag-js/solid": "catalog:",

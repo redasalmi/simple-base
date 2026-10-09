@@ -194,6 +194,30 @@ export {
   type SelectItemProps,
 } from "./components/Select";
 export {
+  Menu,
+  MenuTrigger,
+  MenuPortal,
+  MenuPositioner,
+  MenuContent,
+  MenuItem,
+  MenuItemShortcut,
+  MenuGroup,
+  MenuGroupLabel,
+  MenuSeparator,
+  type MenuRootProps,
+  type MenuTriggerProps,
+  type MenuPortalProps,
+  type MenuPositionerProps,
+  type MenuContentProps,
+  type MenuItemProps,
+  type MenuItemShortcutProps,
+  type MenuGroupProps,
+  type MenuGroupLabelProps,
+  type MenuSeparatorProps,
+  type MenuItemVariant,
+} from "./components/Menu";
+export type { MenuOptions, MenuItemOptions } from "@simple-base/contracts";
+export {
   Table,
   TableWrap,
   TableCaption,

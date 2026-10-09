@@ -12,7 +12,7 @@ short API reference.
 
 - **Solid components:** every export of `@simple-base/solid` — Button (six
   variants, three sizes, disabled states), Badge (nine variants, both sizes),
-  Card, Input, Field, NumberField, DatePicker, Combobox, Select, Table (with
+  Card, Input, Field, NumberField, DatePicker, Combobox, Select, Menu, Table (with
   sortable columns), EmptyState, TextArea, Checkbox, Radio, Switch, and all
   Pagination, Fieldset, RadioGroup, CheckboxGroup, Alert, StatusLine, Dialog,
   AlertDialog, and Toast named parts.
@@ -85,7 +85,7 @@ Turbo builds workspace dependencies before checking types. `pnpm check` and
 
 ## Modal portal targets
 
-Both `SelectPortal` and `ComboboxPortal` accept `mount?: Node`. Inside a native
+`SelectPortal`, `ComboboxPortal`, and `MenuPortal` accept `mount?: Node`. Inside a native
 modal, mount the popup within the dialog rather than under `document.body`.
 Use a signal-backed ref (`const [dialog, setDialog] = createSignal<HTMLDialogElement>()`),
 pass `ref={setDialog}` to `AlertDialogContent`, and use `mount={dialog()}` on the portal.
