@@ -6,7 +6,7 @@ v1 covers `@simple-base/tokens`, `@simple-base/css`, `@simple-base/contracts`, a
 
 ## Shipped
 
-Solid components with styles: Button, Badge, Card, Input, TextArea, Checkbox, Radio, Switch, Field, NumberField, DatePicker (single date), Select, Combobox, Menu, Tooltip, Table (with sortable headers), Pagination, EmptyState, Alert, StatusLine, Fieldset, RadioGroup, CheckboxGroup, Dialog, AlertDialog, Toast.
+Solid components with styles: Button, Badge, Card, Input, TextArea, Checkbox, Radio, Switch, Field, NumberField, DatePicker (single date), Select, Combobox, Menu, Tooltip, Tabs, Table (with sortable headers), Pagination, EmptyState, Alert, StatusLine, Fieldset, RadioGroup, CheckboxGroup, Dialog, AlertDialog, Toast.
 
 ## v1 components
 
@@ -14,7 +14,7 @@ These already have styles in `@simple-base/css` unless noted.
 
 - [x] **Menu** — Solid component for the popup menu (`.sb-menu-content`), positioned like Select. Row actions on lists.
 - [x] **Tooltip** — Solid component, positioned like Select. Names icon-only buttons.
-- [ ] **Tabs** — Solid component over `.sb-tabs`, `.sb-tab`, `.sb-tab-panel`. Status filters and settings pages.
+- [x] **Tabs** — Solid component over `.sb-tabs`, `.sb-tab`, `.sb-tab-panel`. Status filters and settings pages.
 - [x] **Pagination** — Solid component over `.sb-pagination` and `.sb-page-button`.
 - [x] **Alert and StatusLine** — thin Solid wrappers over `.sb-alert` and `.sb-status-line`, plus new CSS: `.sb-status-line-content`.
 - [x] **Fieldset, RadioGroup, CheckboxGroup** — Solid wrappers over the native `fieldset` with `.sb-fieldset`, `.sb-choice-list`, and `.sb-choice`.

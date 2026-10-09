@@ -11,6 +11,7 @@ export { paginationDefaults, type PaginationOptions } from "./pagination";
 export type { Placement } from "./placement";
 export type { SelectOption, SelectOptions } from "./select";
 export type { TableCellVariant, TableCellOptions } from "./table";
+export type { TabsOptions } from "./tabs";
 export {
   toastDefaults,
   type StatusValue,

@@ -81,6 +81,7 @@ import "@simple-base/css/badge";
 | `DatePicker`    | `DatePickerLabel`, `DatePickerControl`, `DatePickerInput`, `DatePickerTrigger`, `DatePickerPortal`, `DatePickerPositioner`, `DatePickerContent`, `DatePickerCalendar`, `DatePickerDescription`, `DatePickerError`, plus `parseDate` |
 | `Menu`          | `MenuTrigger`, `MenuPortal`, `MenuPositioner`, `MenuContent`, `MenuItem`, `MenuItemShortcut`, `MenuGroup`, `MenuGroupLabel`, `MenuSeparator`                                                                                        |
 | `Tooltip`       | `TooltipTrigger`, `TooltipPortal`, `TooltipPositioner`, `TooltipContent`, `TooltipArrow`                                                                                                                                            |
+| `Tabs`          | `TabsList`, `TabsTrigger`, `TabsContent`                                                                                                                                                                                            |
 | `Select`        | `SelectLabel`, `SelectControl`, `SelectTrigger`, `SelectValueText`, `SelectIndicator`, `SelectPortal`, `SelectPositioner`, `SelectContent`, `SelectList`, `SelectEmpty`, `SelectItem`                                               |
 | `EmptyState`    | `EmptyStateMark`, `EmptyStateTitle`, `EmptyStateDescription`, `EmptyStateActions`                                                                                                                                                   |
 | `Alert`         | `AlertMark`, `AlertContent`, `AlertTitle`, `AlertDescription`, `AlertActions`, `AlertClose`                                                                                                                                         |
@@ -89,10 +90,7 @@ import "@simple-base/css/badge";
 | `Pagination`    | `PaginationPrevious`, `PaginationPages`, `PaginationNext`                                                                                                                                                                           |
 | `Toaster`       | `Toast`, `ToastIcon`, `ToastContent`, `ToastTitle`, `ToastDescription`, `ToastAction`, `ToastClose`, plus `createToaster`                                                                                                           |
 
-The CSS package ships more components than this adapter currently covers. Until a Solid component exists, use them through their selector-level APIs:
-
-- **Planned for 1.0:** tabs.
-- **Planned after 1.0:** breadcrumb, disclosure, keyboard shortcut, progress, range, and segmented control.
+The CSS package ships more components than this adapter currently covers. Until a Solid component exists, use them through their selector-level APIs. Breadcrumb, disclosure, keyboard shortcut, progress, range, and segmented control are planned after 1.0.
 
 Typography stays CSS-only: the `.sb-display`, `.sb-heading-*`, and `.sb-text-*` classes are the API.
 
@@ -510,6 +508,36 @@ import {
 Root props: `open` with `onOpenChange` for controlled state, `defaultOpen` for uncontrolled initial state, and `placement` for the preferred side (default `bottom`). The root renders no element of its own.
 
 `TooltipTrigger` takes the `Button` props, including `variant` and `size`, and defaults to `type="button"`. The trigger points `aria-describedby` at the content only while it is open, so an icon-only trigger still needs its own `aria-label`. The content is not interactive; keep it to a short label. `TooltipArrow` is optional and goes first inside `TooltipContent`. Like `SelectPortal`, `TooltipPortal` accepts `mount` for use inside a native modal.
+
+## Tabs
+
+A set of tabs, each showing its own panel. Arrow keys move between tabs and select them as they go; Home and End jump to the ends.
+
+```tsx
+import { createSignal } from "solid-js";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@simple-base/solid";
+
+export function InvoiceFilters() {
+  const [status, setStatus] = createSignal("all");
+
+  return (
+    <Tabs value={status()} onValueChange={setStatus}>
+      <TabsList aria-label="Invoice status">
+        <TabsTrigger value="all">All</TabsTrigger>
+        <TabsTrigger value="paid">Paid</TabsTrigger>
+        <TabsTrigger value="overdue">Overdue</TabsTrigger>
+      </TabsList>
+      <TabsContent value="all">…</TabsContent>
+      <TabsContent value="paid">…</TabsContent>
+      <TabsContent value="overdue">…</TabsContent>
+    </Tabs>
+  );
+}
+```
+
+Root props: `value` with `onValueChange` for controlled state, or `defaultValue` for uncontrolled initial state. Set one of them: with no tab selected, no tab can be reached with Tab. The root renders a `div` without a class of its own.
+
+Give `TabsList` an `aria-label` that names the set. Each `TabsTrigger` takes a `value` that matches its `TabsContent`, and `disabled` to keep a tab visible but unselectable. Panels stay hidden unless selected and are focusable, so keyboard users can reach panels with no focusable content.
 
 ## Table
 

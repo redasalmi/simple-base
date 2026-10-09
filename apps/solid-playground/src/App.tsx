@@ -28,6 +28,7 @@ import { Comboboxes } from "./preview/Comboboxes";
 import { Selects } from "./preview/Selects";
 import { Menus } from "./preview/Menus";
 import { Tooltips } from "./preview/Tooltips";
+import { TabLists } from "./preview/TabLists";
 import { Tables } from "./preview/Tables";
 import { Paginations } from "./preview/Paginations";
 import { EmptyStates } from "./preview/EmptyStates";
@@ -154,6 +155,15 @@ const pages: Page[] = [
       "A short label that appears on hover or keyboard focus, most often to name an icon-only button. Named parts provide the trigger, a portaled popup positioned like Select, and an optional arrow.",
     usage: 'import { Tooltip, TooltipTrigger, TooltipContent } from "@simple-base/solid";',
     component: Tooltips,
+  },
+  {
+    id: "tabs",
+    label: "Tabs",
+    group: "Components",
+    description:
+      "Switch between related views in one place, such as status filters or settings sections. Named parts render the tab list, its tabs, and their panels, with arrow-key navigation built in.",
+    usage: 'import { Tabs, TabsList, TabsTrigger, TabsContent } from "@simple-base/solid";',
+    component: TabLists,
   },
   {
     id: "table",

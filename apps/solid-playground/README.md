@@ -12,7 +12,7 @@ short API reference.
 
 - **Solid components:** every export of `@simple-base/solid` — Button (six
   variants, three sizes, disabled states), Badge (nine variants, both sizes),
-  Card, Input, Field, NumberField, DatePicker, Combobox, Select, Menu, Tooltip, Table (with
+  Card, Input, Field, NumberField, DatePicker, Combobox, Select, Menu, Tooltip, Tabs, Table (with
   sortable columns), EmptyState, TextArea, Checkbox, Radio, Switch, and all
   Pagination, Fieldset, RadioGroup, CheckboxGroup, Alert, StatusLine, Dialog,
   AlertDialog, and Toast named parts.
@@ -21,15 +21,13 @@ short API reference.
 - **Foundations:** the heading and body scales, display typography, text roles,
   code, and keyboard shortcuts.
 - **CSS patterns:** progress and range, the native select, segmented control,
-  tabs, breadcrumb and disclosure, and command popover. These use the selectors
-  directly. Tabs is planned as a Solid component for 1.0 (see `todo.md` at the
-  repository root); until then it is not a Solid export.
+  breadcrumb and disclosure, and command popover. These use the selectors
+  directly and are not Solid exports.
 
 Examples use local state only. Navigation resets component demonstrations; no
 form data is submitted or persisted. Dialog and AlertDialog coordinate their
 triggers and native modal content through controlled or uncontrolled state.
-Keyboard behavior is demonstrated with native controls, focusable navigation,
-and a local accessible tabs example.
+Keyboard behavior is demonstrated with native controls and focusable navigation.
 
 The visual structure is a reference workbench: compact masthead, an indexed
 navigation rail, and ruled documentation sections beside live specimens. It

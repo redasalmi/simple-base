@@ -233,6 +233,17 @@ export {
 } from "./components/Tooltip";
 export type { TooltipOptions } from "@simple-base/contracts";
 export {
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+  type TabsRootProps,
+  type TabsListProps,
+  type TabsTriggerProps,
+  type TabsContentProps,
+} from "./components/Tabs";
+export type { TabsOptions } from "@simple-base/contracts";
+export {
   Table,
   TableWrap,
   TableCaption,

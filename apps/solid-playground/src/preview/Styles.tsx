@@ -4,15 +4,8 @@ import { Api, Example } from "./Preview";
 export function Styles() {
   const [progress, setProgress] = createSignal(64);
   const [view, setView] = createSignal("List");
-  const [tab, setTab] = createSignal(0);
   const [menuAction, setMenuAction] = createSignal("Choose an example command.");
   let menu: HTMLDetailsElement | undefined;
-  const tabNames = ["Overview", "Activity", "Settings"];
-  const tabCopy = [
-    "A summary of the example workspace.",
-    "There is no recent activity in this demo.",
-    "Workspace settings are managed locally in this preview.",
-  ];
 
   return (
     <>
@@ -133,63 +126,6 @@ export function Styles() {
           <p class="preview-status" role="status">
             Selected view: {view()}.
           </p>
-        </div>
-      </Example>
-      <Example
-        title="Tabs"
-        description="Tabs reveal their associated content. Arrow keys, Home, and End move through the set; Tab proceeds into the selected panel."
-        code={
-          '<div class="sb-tabs" role="tablist" aria-label="Workspace">\n  <button class="sb-tab" role="tab" aria-selected="true"\n    id="overview-tab" aria-controls="overview">Overview</button>\n</div>\n<div class="sb-tab-panel" role="tabpanel" id="overview"\n  aria-labelledby="overview-tab">Workspace summary</div>'
-        }
-      >
-        <div class="preview-tabs">
-          <div
-            class="sb-tabs"
-            role="tablist"
-            aria-label="Example workspace"
-            onKeyDown={(event) => {
-              let next = tab();
-              if (event.key === "ArrowRight") next = (next + 1) % tabNames.length;
-              else if (event.key === "ArrowLeft")
-                next = (next + tabNames.length - 1) % tabNames.length;
-              else if (event.key === "Home") next = 0;
-              else if (event.key === "End") next = tabNames.length - 1;
-              else return;
-              event.preventDefault();
-              setTab(next);
-              document.getElementById(`pattern-tab-${next}`)?.focus();
-            }}
-          >
-            <For each={tabNames}>
-              {(name, index) => (
-                <button
-                  class="sb-tab"
-                  role="tab"
-                  id={`pattern-tab-${index()}`}
-                  aria-controls={`pattern-panel-${index()}`}
-                  aria-selected={tab() === index()}
-                  tabIndex={tab() === index() ? 0 : -1}
-                  onClick={() => setTab(index())}
-                >
-                  {name}
-                </button>
-              )}
-            </For>
-          </div>
-          <For each={tabCopy}>
-            {(copy, index) => (
-              <div
-                class="sb-tab-panel"
-                role="tabpanel"
-                id={`pattern-panel-${index()}`}
-                aria-labelledby={`pattern-tab-${index()}`}
-                hidden={tab() !== index()}
-                tabIndex={0}
-              >
-                {copy}
-              </div>
-            )}
-          </For>
         </div>
       </Example>
       <Example

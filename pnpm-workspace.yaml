@@ -9,6 +9,7 @@ catalog:
   "@zag-js/menu": ^1.44.0
   "@zag-js/number-input": ^1.44.0
   "@zag-js/select": ^1.44.0
+  "@zag-js/tabs": ^1.44.0
   "@zag-js/solid": ^1.44.0
   "@zag-js/toast": ^1.44.0
   "@zag-js/tooltip": ^1.44.0

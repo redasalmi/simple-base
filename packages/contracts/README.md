@@ -36,7 +36,7 @@ The same exports are available per component, which keeps imports narrow:
 import { buttonDefaults, type ButtonVariant } from "@simple-base/contracts/button";
 ```
 
-Subpaths: `/badge` · `/button` · `/card` · `/combobox` · `/datePicker` · `/dialog` · `/fieldset` · `/menu` · `/numberField` · `/pagination` · `/placement` · `/select` · `/status` · `/table` · `/tooltip`
+Subpaths: `/badge` · `/button` · `/card` · `/combobox` · `/datePicker` · `/dialog` · `/fieldset` · `/menu` · `/numberField` · `/pagination` · `/placement` · `/select` · `/status` · `/table` · `/tabs` · `/tooltip`
 
 `FieldOptions` is exported from the package root only.
 
@@ -63,6 +63,7 @@ Subpaths: `/badge` · `/button` · `/card` · `/combobox` · `/datePicker` · `/
 | Alert          | `AlertStatus`, `AlertOptions`                       | —                                                         |
 | Toast          | `ToastStatus`, `ToastOptions`                       | `toastDefaults`: `status: "success"`                      |
 | Table cell     | `TableCellVariant`, `TableCellOptions`              | —                                                         |
+| Tabs           | `TabsOptions`                                       | —                                                         |
 | Tooltip        | `TooltipOptions`                                    | —                                                         |
 
 Types are erased at runtime. Only the `*Defaults` constants are runtime exports — there are no allowed-value arrays without a runtime use case.
@@ -81,6 +82,7 @@ Types are erased at runtime. Only the `*Defaults` constants are runtime exports 
 - **Pagination:** pages start at `1`. `count` is the total number of pages, `page` is controlled, and `defaultPage` is the uncontrolled initial page. `siblingCount` is the number of pages shown on each side of the current page before an ellipsis.
 - **Menu:** `onSelect` receives the picked item's `value`, which must be unique within the menu. `open` is controlled and `defaultOpen` is the uncontrolled initial state. The only item variant is `danger`.
 - **Placement:** `top` or `bottom`, with `-start` and `-end` variants. Shared by every popup option.
+- **Tabs:** `value` is the selected tab and is controlled; `defaultValue` is the uncontrolled initial tab. Set one of them so a tab is selected and reachable by keyboard.
 - **Dialogs and tooltips:** `open` is the controlled state, `defaultOpen` provides the initial uncontrolled state, and `onOpenChange` reports requested visibility changes.
 - **Statuses are deliberately not interchangeable.** Status lines and alerts use `success`, `warning`, `danger`, `info`. Toasts use `success` and `warning`. All three are exported from `/status`.
 
