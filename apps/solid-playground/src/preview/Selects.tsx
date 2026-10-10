@@ -82,7 +82,7 @@ export function Selects() {
       </Example>
       <Example
         title="In a form"
-        description="With name and defaultValue the select needs no signal or handler: a hidden native select submits the option value with the form, and Reset restores the initial selection."
+        description="With name and defaultValue the select needs no signal or handler: a hidden native select submits the option value with the form, or an empty value while nothing is selected, and Reset restores the initial selection."
         code={
           '<form>\n  <Select\n    name="timezone"\n    options={timezones}\n    defaultValue="utc"\n  >\n    {/* Label, control, and popup as above. */}\n  </Select>\n  <Button type="submit">Submit</Button>\n  <Button type="reset">Reset</Button>\n</form>'
         }
@@ -112,7 +112,7 @@ export function Selects() {
         title="Empty and updated options"
         description="Open the initially empty list to see the empty message, then load a local collection and reopen it. No request is made and no data is saved."
         code={
-          'const [loaded, setLoaded] = createSignal(false);\nconst [region, setRegion] = createSignal<string | null>(null);\n\n<Select\n  id="region"\n  placeholder="Select a region"\n  options={loaded() ? timezones : []}\n  onValueChange={setRegion}\n>\n  {/* Label, control, and popup as above. */}\n  <SelectPortal>\n    <SelectPositioner>\n      <SelectContent>\n        <SelectList>\n          {(option) => <SelectItem option={option} />}\n        </SelectList>\n        <SelectEmpty>\n          {loaded() ? "No regions found." : "No regions available. Load the example options."}\n        </SelectEmpty>\n      </SelectContent>\n    </SelectPositioner>\n  </SelectPortal>\n</Select>\n<Button onClick={() => setLoaded(true)} disabled={loaded()}>\n  {loaded() ? "Options loaded" : "Load example options"}\n</Button>'
+          'const [loaded, setLoaded] = createSignal(false);\nconst [region, setRegion] = createSignal<string | null>(null);\n\n<Select\n  id="region"\n  placeholder="Select a region"\n  options={loaded() ? timezones : []}\n  onValueChange={setRegion}\n>\n  {/* Label, control, and popup as above. */}\n  <SelectPortal>\n    <SelectPositioner>\n      <SelectContent>\n        <SelectList>\n          {(option) => <SelectItem option={option} />}\n        </SelectList>\n      </SelectContent>\n      <SelectEmpty>\n        {loaded() ? "No regions found." : "No regions available. Load the example options."}\n      </SelectEmpty>\n    </SelectPositioner>\n  </SelectPortal>\n</Select>\n<Button onClick={() => setLoaded(true)} disabled={loaded()}>\n  {loaded() ? "Options loaded" : "Load example options"}\n</Button>'
         }
       >
         <div class="preview-stack">
@@ -135,12 +135,12 @@ export function Selects() {
               <SelectPositioner>
                 <SelectContent>
                   <SelectList>{(option) => <SelectItem option={option} />}</SelectList>
-                  <SelectEmpty>
-                    {loaded()
-                      ? "No regions found."
-                      : "No regions available. Load the example options."}
-                  </SelectEmpty>
                 </SelectContent>
+                <SelectEmpty>
+                  {loaded()
+                    ? "No regions found."
+                    : "No regions available. Load the example options."}
+                </SelectEmpty>
               </SelectPositioner>
             </SelectPortal>
           </Select>
@@ -208,17 +208,17 @@ export function Selects() {
           [
             "SelectPortal / SelectPositioner / SelectContent",
             "popup composition",
-            "Portal mounts under document.body by default. Inside a native modal dialog, pass mount={dialog()} using a signal-backed dialog ref to keep the popup interactive. Positioner anchors it to the control, and Content hides all popup children when closed.",
+            "Portal mounts under document.body by default. Inside a native modal dialog, pass mount={dialog()} using a signal-backed dialog ref to keep the popup interactive. Positioner anchors it to the control. Content is the listbox and is hidden while closed.",
           ],
           [
             "SelectList / SelectItem",
             "render callback / option",
-            "List supplies the options and listbox semantics. Render an Item with its option prop; disabled options cannot be selected.",
+            "List renders the options inside Content. Render an Item with its option prop; disabled options cannot be selected.",
           ],
           [
             "SelectEmpty",
             "status message",
-            "Place beside List inside Content. It appears only when the popup is open and the collection has no options.",
+            "Place after Content inside Positioner, since the listbox may only hold options. It appears only when the popup is open and the collection has no options.",
           ],
           [
             "SelectDescription / SelectError",

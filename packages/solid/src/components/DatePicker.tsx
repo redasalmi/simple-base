@@ -7,14 +7,14 @@ import {
   createUniqueId,
   Index,
   type JSX,
-  onCleanup,
-  onMount,
   Show,
   splitProps,
+  untrack,
 } from "solid-js";
 
 import { cn } from "../cn";
 import { createRequiredContext } from "../internal/context";
+import { trackFormReset } from "../internal/form";
 import {
   createMessages,
   MessageDescription,
@@ -23,12 +23,13 @@ import {
   type Messages,
 } from "../internal/messages";
 import { createPositioning, PopupPortal, type PopupPortalProps } from "../internal/popup";
-import { dataAttr, type WithoutOwnedProps } from "../internal/props";
+import { dataAttr, mergeRefs, type WithoutOwnedProps } from "../internal/props";
 import { fromZagValue, toZagValue } from "../internal/zagValue";
 
 type DatePickerContextType = Messages & {
   required: Accessor<boolean>;
   form: Accessor<string | undefined>;
+  setInput: (input: HTMLInputElement) => void;
   api: Accessor<datepicker.Api>;
 };
 
@@ -129,30 +130,28 @@ export function DatePicker(props: DatePickerRootProps) {
   });
   const api = createMemo(() => datepicker.connect(service, normalizeProps));
 
-  // Zag's date picker, unlike its number input, doesn't restore the initial value on a form reset.
-  const onReset = (event: Event) => {
-    if (!event.defaultPrevented) api().setValue(local.defaultValue ? [local.defaultValue] : []);
-  };
-  onMount(() => {
-    const input = document.getElementById(id());
-    const form = input instanceof HTMLInputElement ? input.form : null;
-    if (!form) return;
-
-    form.addEventListener("reset", onReset);
-    onCleanup(() => form.removeEventListener("reset", onReset));
-  });
+  let input: HTMLInputElement | undefined;
+  const initialValue = untrack(() => api().value);
+  // Zag's date picker, unlike its number input, doesn't restore its initial value on a form reset
+  // (Z7, U4 in audit/zag-issues.md).
+  trackFormReset(
+    () => input,
+    () => api().setValue(initialValue),
+  );
 
   const context = {
     ...createMessages(id, () => api().invalid),
     required: () => local.required ?? false,
     form: () => local.form,
+    setInput: (element) => (input = element),
     api,
   } satisfies DatePickerContextType;
 
   return (
     <DatePickerProvider value={context}>
       <div {...mergeProps(api().getRootProps(), rest)} class={cn("sb-date-picker", local.class)}>
-        {/* The visible input holds locale-formatted text, so the form submits the ISO date instead. */}
+        {/* The visible input holds locale-formatted text, so the form submits the ISO date instead
+            (Z8, U3 in audit/zag-issues.md). */}
         <Show when={local.name}>
           <input
             type="hidden"
@@ -177,7 +176,8 @@ export function DatePickerLabel(props: DatePickerLabelProps) {
   return (
     <label
       {...mergeProps(api().getLabelProps(), rest)}
-      // Zag's date picker label, unlike its number input label, doesn't mark required.
+      // Zag's date picker label, unlike its number input label, doesn't mark required
+      // (Z9, U7 in audit/zag-issues.md).
       data-required={dataAttr(required())}
       class={cn("sb-field-label", local.class)}
     >
@@ -220,20 +220,19 @@ export type DatePickerInputProps = WithoutOwnedProps<
 >;
 
 export function DatePickerInput(props: DatePickerInputProps) {
-  const { api, describedBy, form } = useDatePicker();
-  const [local, rest] = splitProps(props, ["class"]);
+  const { api, describedBy, form, setInput } = useDatePicker();
+  const [local, rest] = splitProps(props, ["class", "ref"]);
 
-  // Zag passes the formatted value as `defaultValue`, which Solid's normalizer renames to a
-  // live `value`. Restore it so a form reset keeps what Zag displays; Zag syncs typed text itself.
-  // Solid only sets `defaultValue` as a DOM property under `prop:`.
-  const inputProps = () => {
-    const { value, ...zagProps } = api().getInputProps();
-    return { ...zagProps, "prop:defaultValue": value };
-  };
+  const inputProps = () => api().getInputProps();
 
   return (
     <input
       {...mergeProps(inputProps(), rest)}
+      // Zag's Solid adapter renders the text as a live `value`, which a form reset doesn't read, so
+      // keep it as the default value too. A reset then shows Zag's text instead of an empty input,
+      // even when the value didn't change (Z1, U11 in audit/zag-issues.md).
+      prop:defaultValue={String(inputProps().value ?? "")}
+      ref={mergeRefs(setInput, local.ref)}
       class={cn("sb-date-picker-input", local.class)}
       form={form()}
       aria-describedby={describedBy()}
@@ -306,6 +305,13 @@ const GRID_COLUMNS = 4;
 export function DatePickerCalendar(props: DatePickerCalendarProps) {
   const { api } = useDatePicker();
 
+  // Zag's label, such as "Switch to month view", leaves out the heading the button shows, so its
+  // name wouldn't contain its visible text (WCAG 2.5.3, U9 in audit/zag-issues.md).
+  const viewTriggerProps = (view: datepicker.DateView, text: string) => {
+    const zagProps = api().getViewTriggerProps({ view });
+    return { ...zagProps, "aria-label": `${text}, ${zagProps["aria-label"]}` };
+  };
+
   return (
     <div {...props}>
       <div {...api().getViewProps({ view: "day" })}>
@@ -317,7 +323,7 @@ export function DatePickerCalendar(props: DatePickerCalendarProps) {
             <ChevronIcon direction="prev" />
           </button>
           <button
-            {...api().getViewTriggerProps({ view: "day" })}
+            {...viewTriggerProps("day", api().visibleRangeText.start)}
             class="sb-date-picker-view-trigger"
           >
             {api().visibleRangeText.start}
@@ -382,7 +388,7 @@ export function DatePickerCalendar(props: DatePickerCalendarProps) {
             <ChevronIcon direction="prev" />
           </button>
           <button
-            {...api().getViewTriggerProps({ view: "month" })}
+            {...viewTriggerProps("month", String(api().visibleRange.start.year))}
             class="sb-date-picker-view-trigger"
           >
             {api().visibleRange.start.year}
@@ -438,7 +444,7 @@ export function DatePickerCalendar(props: DatePickerCalendarProps) {
           </button>
           {/* Year is the last view, so Zag disables this trigger; it only labels the decade. */}
           <button
-            {...api().getViewTriggerProps({ view: "year" })}
+            {...viewTriggerProps("year", `${api().getDecade().start} – ${api().getDecade().end}`)}
             class="sb-date-picker-view-trigger"
           >
             {api().getDecade().start} – {api().getDecade().end}

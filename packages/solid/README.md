@@ -212,7 +212,7 @@ const [reminders, setReminders] = createSignal(["due"]);
 ```
 
 - `RadioGroup` takes a string `value` (`""` selects nothing), `defaultValue`, and `onValueChange`. `name` is shared by every radio and generated when omitted. A required fieldset makes the radios natively required. A controlled group shows `value` after `onValueChange` returns, so a change the parent rejects is undone.
-- `CheckboxGroup` takes a `string[]` `value`, `defaultValue`, and `onValueChange`, which receives the checked values in document order. As with `RadioGroup`, a controlled group undoes a change the parent rejects. The checkboxes are not natively required, since any one of them may satisfy the group: validate in your app, or pass `required` to a single item that must be checked.
+- `CheckboxGroup` takes a `string[]` `value`, `defaultValue`, and `onValueChange`, which receives the checked values in document order. As with `RadioGroup`, a controlled group undoes a change the parent rejects. A required fieldset means "at least one": while no box is checked, every box is natively required, so the browser blocks submission and points at the first one; once a box is checked, none is. Pass `required` to a single item that must be checked whatever the others.
 - On an item, `value` is required and `children` is the label text. `class` goes on the row; every other prop goes to the input. `name`, `checked`, `defaultChecked`, and `aria-invalid` (plus `required` on radios) come from the group and fieldset.
 
 ## NumberField
@@ -262,7 +262,7 @@ Additional root props:
 - `value` and `defaultValue` are strings, so partial input such as `1.` survives while typing. `onValueChange` receives the string and its parsed number (`NaN` when empty).
 - `min`, `max`, and `step` bound and step the value. When `invalid` is omitted, a value outside `min` and `max` is invalid and shows `NumberFieldError`.
 - `formatOptions` takes `Intl.NumberFormatOptions`, such as a currency or percent style, to format the displayed value.
-- `name` submits the value with the form; `form` associates the input with a form elsewhere on the page.
+- `name` adds a hidden input that submits the number, such as `1234`, rather than the formatted text, such as `€1,234.00`; it is empty while the field is. `form` associates both inputs with a form elsewhere on the page.
 - `translations` takes Zag's number input labels: `incrementLabel`, `decrementLabel`, and `valueText`.
 
 `NumberFieldDecrement` and `NumberFieldIncrement` render `−` and `+` unless you pass children, and are labeled "decrease value" and "increment value" unless you set `translations` or pass `aria-label`. `NumberFieldAffix` renders text, such as a unit, inside the control; the input lists each affix in its `aria-describedby`, so the unit is announced with the value. Unlike the decorative marks (`AlertMark`, `EmptyStateMark`, `StatusLineDot`), an affix is not hidden from assistive technology. `NumberFieldError` renders only while the field is invalid.
@@ -332,17 +332,17 @@ export function TimezonePicker() {
 }
 ```
 
-Additional root props: `value` makes selection controlled (`null` means nothing is selected), `defaultValue` sets the initial selection of an uncontrolled select, `name` adds a hidden native select so the value submits with the form, `form` associates it with a form elsewhere on the page, `disabled`, `invalid`, and `required` drive state styling and labeling, `placement` picks the popup side, and `onOpenChange` reports visibility.
+Additional root props: `value` makes selection controlled (`null` means nothing is selected), `defaultValue` sets the initial selection of an uncontrolled select, `name` adds a hidden native select so the value submits with the form (an empty value while nothing is selected, like a native placeholder option), `form` associates it with a form elsewhere on the page, `disabled`, `invalid`, and `required` drive state styling and labeling, `placement` picks the popup side, and `onOpenChange` reports visibility.
 
 `SelectDescription` and `SelectError` work like `NumberFieldDescription` and `NumberFieldError`: the trigger lists them in its `aria-describedby` while they are rendered, and `SelectError` renders only while `invalid` is set.
 
 With `name` and `defaultValue`, a `Select` works uncontrolled inside a `<form>`: no `onValueChange` is needed, and `form.reset()` restores the initial selection.
 
-`SelectEmpty` renders beside `SelectList` and appears only while the popup is open with no options. `SelectPortal` accepts `mount` — pass a dialog element's node to keep the popup interactive inside a native modal.
+`SelectContent` is the listbox, so it holds only `SelectList` and its items. `SelectEmpty` goes after it, inside `SelectPositioner`, and appears only while the popup is open with no options; the empty content then draws no box. `SelectPortal` accepts `mount` — pass a dialog element's node to keep the popup interactive inside a native modal.
 
 ## Combobox
 
-Same root props and parts as `Select`, with a text input that filters options by label. `ComboboxLabel` names the input and the list, so every `Combobox` needs one. `ComboboxDescription` and `ComboboxError` are linked to the input. `name` adds a hidden native select that submits the option value, not the typed text.
+Same root props and parts as `Select`, with a text input that filters options by label. `ComboboxLabel` names the input and the list, so every `Combobox` needs one. `ComboboxDescription` and `ComboboxError` are linked to the input. `name` adds a hidden native select that submits the option value, not the typed text, or an empty value while nothing is selected. `ComboboxEmpty` goes after `ComboboxContent`, as with `SelectEmpty`, and announces itself through a status region when a search has no matches.
 
 ```tsx
 import {
@@ -384,8 +384,8 @@ import {
     <ComboboxPositioner>
       <ComboboxContent>
         <ComboboxList>{(option) => <ComboboxItem option={option} />}</ComboboxList>
-        <ComboboxEmpty>No countries found. Try another search.</ComboboxEmpty>
       </ComboboxContent>
+      <ComboboxEmpty>No countries found. Try another search.</ComboboxEmpty>
     </ComboboxPositioner>
   </ComboboxPortal>
 </Combobox>;
@@ -451,7 +451,7 @@ Additional root props:
 - `name` adds a hidden input that submits the date as `YYYY-MM-DD`, since the visible input holds locale-formatted text. `form` associates both inputs with a form elsewhere on the page.
 - `placement` picks the popup side (default `bottom-start`), `fixedWeeks` always shows six weeks so the popup keeps its height, and `onOpenChange` reports visibility.
 
-`DatePickerCalendar` renders the navigation and the day, month, and year views; select the month heading to switch views. `DatePickerTrigger` renders a calendar icon unless you pass children. `DatePickerPortal` accepts `mount`, like `SelectPortal`.
+`DatePickerCalendar` renders the navigation and the day, month, and year views; select the month heading to switch views. Each heading's name starts with the text it shows, followed by the `viewTrigger` translation, such as "October 2026, Switch to month view". `DatePickerTrigger` renders a calendar icon unless you pass children. `DatePickerPortal` accepts `mount`, like `SelectPortal`.
 
 ## Menu
 
@@ -893,8 +893,7 @@ Every form control takes `name`, `form`, `required`, and `disabled`, and works u
 
 - On `Input`, `TextArea`, `Checkbox`, `Radio`, and `Switch`, Solid sets `value` and `checked` as DOM properties, so a reset clears a starting value given that way. Use `defaultValue` or `defaultChecked`.
 - `RadioGroup` and `CheckboxGroup` restore `defaultValue` on reset without calling `onValueChange`. A controlled `value` is cleared like a `checked` prop, so set your state back in the form's `onReset` handler.
-- `Combobox` ignores `form.reset()` and keeps its current selection. To reset it, use a controlled `value` and set it back in the form's `onReset` handler.
-- `Select`, `NumberField`, and `DatePicker` reset their value even when a reset listener calls `preventDefault()` after theirs has run.
+- `Select`, `Combobox`, `NumberField`, and `DatePicker` restore their initial value even when a reset listener calls `preventDefault()` after theirs has run.
 
 Errors are not announced as they appear, since an announcement on every keystroke is noisy; each control reads its error through `aria-describedby` when it is focused. On submit, move focus to the first invalid control so its error is read:
 

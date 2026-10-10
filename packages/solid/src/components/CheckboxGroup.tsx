@@ -1,9 +1,18 @@
 import type { CheckboxGroupOptions } from "@simple-base/contracts";
-import { type Accessor, type JSX, splitProps } from "solid-js";
+import {
+  type Accessor,
+  createEffect,
+  createSignal,
+  type JSX,
+  on,
+  splitProps,
+  untrack,
+} from "solid-js";
 
 import { cn } from "../cn";
 import { createRequiredContext } from "../internal/context";
 import { useFieldset } from "../internal/fieldset";
+import { trackFormReset } from "../internal/form";
 import { ariaInvalid, composeHandler, mergeRefs, type WithoutOwnedProps } from "../internal/props";
 import { Checkbox, type CheckboxProps } from "./Checkbox";
 
@@ -11,6 +20,7 @@ type CheckboxGroupContextType = {
   name: Accessor<string | undefined>;
   value: Accessor<string[] | undefined>;
   defaultValue: Accessor<string[] | undefined>;
+  required: Accessor<boolean>;
   toggle: () => void;
 };
 
@@ -22,7 +32,7 @@ export type CheckboxGroupRootProps = CheckboxGroupOptions & {
 } & Omit<JSX.HTMLAttributes<HTMLDivElement>, keyof CheckboxGroupOptions | "children">;
 
 export function CheckboxGroup(props: CheckboxGroupRootProps) {
-  useFieldset();
+  const fieldset = useFieldset();
   const [local, rest] = splitProps(props, [
     "ref",
     "class",
@@ -33,20 +43,38 @@ export function CheckboxGroup(props: CheckboxGroupRootProps) {
     "onValueChange",
   ]);
   let list: HTMLDivElement | undefined;
+  const boxes = () =>
+    list ? Array.from(list.querySelectorAll<HTMLInputElement>('input[type="checkbox"]')) : [];
+
+  // HTML has no "at least one" rule for checkboxes, so a required group requires every box while
+  // none is checked. The count is read from the DOM, like the reported value.
+  const [anyChecked, setAnyChecked] = createSignal(
+    untrack(() => (local.value ?? local.defaultValue ?? []).length > 0),
+  );
+  const recount = () => setAnyChecked(boxes().some((box) => box.checked));
+  createEffect(on(() => local.value, recount, { defer: true }));
+  // The form fires `reset` before it restores the boxes.
+  trackFormReset(
+    () => boxes()[0],
+    () => queueMicrotask(recount),
+  );
 
   const context = {
     name: () => local.name,
     value: () => local.value,
     defaultValue: () => local.defaultValue,
+    required: () => fieldset.required() && !anyChecked(),
     // Read the checked boxes from the DOM so controlled and uncontrolled groups report the same way.
     toggle() {
-      if (!list) return;
-      const boxes = Array.from(list.querySelectorAll<HTMLInputElement>('input[type="checkbox"]'));
-      local.onValueChange?.(boxes.filter((box) => box.checked).map((box) => box.value));
+      local.onValueChange?.(
+        boxes()
+          .filter((box) => box.checked)
+          .map((box) => box.value),
+      );
       // The browser toggles the box before the parent responds; if the parent kept its value, Solid has nothing to write back.
       const value = local.value;
-      if (value === undefined) return;
-      for (const box of boxes) box.checked = value.includes(box.value);
+      if (value !== undefined) for (const box of boxes()) box.checked = value.includes(box.value);
+      recount();
     },
   } satisfies CheckboxGroupContextType;
 
@@ -77,7 +105,7 @@ export type CheckboxGroupItemProps = WithoutOwnedProps<
 export function CheckboxGroupItem(props: CheckboxGroupItemProps) {
   const fieldset = useFieldset();
   const group = useCheckboxGroup();
-  const [local, rest] = splitProps(props, ["class", "children", "value", "onChange"]);
+  const [local, rest] = splitProps(props, ["class", "children", "value", "required", "onChange"]);
 
   return (
     <label class={cn("sb-choice", local.class)}>
@@ -91,6 +119,7 @@ export function CheckboxGroupItem(props: CheckboxGroupItemProps) {
         value={local.value}
         checked={group.value()?.includes(local.value)}
         defaultChecked={group.defaultValue()?.includes(local.value) ?? false}
+        required={local.required || group.required()}
         aria-invalid={ariaInvalid(fieldset.invalid())}
       />
       <span>{local.children}</span>

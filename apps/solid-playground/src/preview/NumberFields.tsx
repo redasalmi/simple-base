@@ -117,7 +117,7 @@ export function NumberFields() {
       </Example>
       <Example
         title="In a form"
-        description="With name and defaultValue the field needs no signal: it submits its value with the form, and Reset restores the initial value."
+        description="With name and defaultValue the field needs no signal: a hidden input submits the number, not the formatted text, and Reset restores the initial value."
         code={
           '<form>\n  <NumberField name="quantity" defaultValue="2" min={1} max={10}>\n    <NumberFieldLabel>Licenses</NumberFieldLabel>\n    <NumberFieldControl>\n      <NumberFieldInput />\n      <NumberFieldDecrement />\n      <NumberFieldIncrement />\n    </NumberFieldControl>\n  </NumberField>\n  <Button type="submit">Submit</Button>\n  <Button type="reset">Reset</Button>\n</form>'
         }
@@ -140,7 +140,7 @@ export function NumberFields() {
           [
             "NumberField",
             "id · name · form · required · disabled · readOnly · invalid",
-            "Set on the root; the label, input, steppers, and messages read them. id is the input's id and is generated when omitted.",
+            "Set on the root; the label, input, steppers, and messages read them. id is the input's id and is generated when omitted. name submits the number, such as 1234, through a hidden input, whatever the formatting.",
           ],
           [
             "value / defaultValue / onValueChange",
@@ -155,7 +155,7 @@ export function NumberFields() {
           [
             "NumberFieldLabel / NumberFieldControl / NumberFieldInput",
             "label / group / text input",
-            "Control draws the bordered field. The input owns id, name, min, max, step, and its ARIA attributes; set those on the root.",
+            "Control draws the bordered field. The input owns id, min, max, step, and its ARIA attributes; set those on the root.",
           ],
           [
             "NumberFieldDecrement / NumberFieldIncrement",

@@ -149,25 +149,11 @@ async function expectNoMismatch(name: FixtureName) {
   expect(errors).toEqual([]);
 }
 
-// Z1: these inputs set `defaultValue` through `prop:`, which the server leaves out, so the server's
-// inputs are empty until hydration. Phase 4 spreads Zag's props, which render `value` on the server.
-const z1: FixtureName[] = ["Combobox", "DatePicker", "NumberField"];
 // K8: without `timeZone`, the server marks today in its own zone and the browser in the user's.
 // Phase 5 renders in UTC on the server and during hydration, then switches to the user's zone.
 const k8: FixtureName[] = ["DatePickerCalendar"];
-// The server drops `prop:defaultValue` and writes `defaultChecked` as an attribute the browser
-// ignores, so default values and choices are missing until hydration. Phase 4 fixes it.
-const nativeDefaults: FixtureName[] = [
-  "Checkbox",
-  "CheckboxGroup",
-  "Fieldset",
-  "Input",
-  "Radio",
-  "RadioGroup",
-  "TextArea",
-];
 
-const expectedToFail = new Set([...z1, ...k8, ...nativeDefaults]);
+const expectedToFail = new Set(k8);
 const matching = (Object.keys(fixtures) as FixtureName[]).filter(
   (name) => !expectedToFail.has(name),
 );
@@ -175,12 +161,5 @@ const matching = (Object.keys(fixtures) as FixtureName[]).filter(
 describe("hydration", () => {
   test.each(matching)("%s hydrates without a mismatch", expectNoMismatch);
 
-  test.fails.each(z1)("%s hydrates without a mismatch (Z1)", expectNoMismatch);
-
   test.fails.each(k8)("%s without `timeZone` hydrates without a mismatch (K8)", expectNoMismatch);
-
-  test.fails.each(nativeDefaults)(
-    "%s hydrates without a mismatch (default state)",
-    expectNoMismatch,
-  );
 });

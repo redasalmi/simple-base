@@ -3,6 +3,7 @@ import * as select from "@zag-js/select";
 import { mergeProps, normalizeProps, useMachine } from "@zag-js/solid";
 import {
   type Accessor,
+  createEffect,
   createMemo,
   createUniqueId,
   For,
@@ -21,6 +22,7 @@ import {
   type Messages,
 } from "../internal/messages";
 import { createPositioning, PopupPortal, type PopupPortalProps } from "../internal/popup";
+import type { WithoutOwnedProps } from "../internal/props";
 import { fromZagValue, toZagValue } from "../internal/zagValue";
 import { validateWidgetOptions } from "../validateWidgetOptions";
 
@@ -115,6 +117,14 @@ export function Select(props: SelectRootProps) {
 
   const api = createMemo(() => select.connect(service, normalizeProps));
 
+  let hiddenSelect: HTMLSelectElement | undefined;
+  // Zag unselects every option of its hidden select while nothing is selected, so the form would
+  // leave the name out. Select the empty option after Zag's sync, so it submits "" (K2, U6 in
+  // audit/zag-issues.md).
+  createEffect(() => {
+    if (hiddenSelect && api().value.length === 0) hiddenSelect.selectedIndex = 0;
+  });
+
   const context = {
     ...createMessages(id, () => local.invalid ?? false),
     placeholder: () => local.placeholder,
@@ -125,18 +135,16 @@ export function Select(props: SelectRootProps) {
   return (
     <SelectProvider value={context}>
       <div {...mergeProps(api().getRootProps(), rest)} class={cn("sb-select-root", local.class)}>
-        <select {...api().getHiddenSelectProps()}>
-          <Show when={api().value.length === 0}>
-            {/* oxlint-disable-next-line jsx-a11y/control-has-associated-label -- the select is hidden from assistive technology */}
-            <option value="" />
-          </Show>
+        <select ref={(element) => (hiddenSelect = element)} {...api().getHiddenSelectProps()}>
+          {/* Selected while nothing is, like a native placeholder option, so a form reset selects it too. */}
+          {/* oxlint-disable-next-line jsx-a11y/control-has-associated-label -- the select is hidden from assistive technology */}
+          <option value="" bool:selected={api().value.length === 0} />
           <For each={local.options}>
             {(option) => (
-              <option
-                value={option.value}
-                // The `selected` attribute, unlike the property, is what a native form reset restores.
-                {...{ "attr:selected": api().value.includes(option.value) ? "" : undefined }}
-              >
+              // The `selected` attribute, unlike the property, is what a native form reset
+              // restores, so the hidden select follows Zag's reset even when the value didn't
+              // change (Z6, U5 in audit/zag-issues.md).
+              <option value={option.value} bool:selected={api().value.includes(option.value)}>
                 {option.label}
               </option>
             )}
@@ -250,37 +258,44 @@ export function SelectPositioner(props: SelectPositionerProps) {
   );
 }
 
-export type SelectContentProps = Omit<JSX.HTMLAttributes<HTMLDivElement>, "hidden">;
+export type SelectContentProps = WithoutOwnedProps<
+  JSX.HTMLAttributes<HTMLDivElement>,
+  "id" | "hidden" | "role" | "tabIndex" | "aria-activedescendant" | "aria-labelledby"
+>;
 
 export function SelectContent(props: SelectContentProps) {
   const { api } = useSelect();
   const [local, rest] = splitProps(props, ["class", "children"]);
 
   return (
-    <div hidden={!api().open} {...rest} class={cn("sb-select-content", local.class)}>
+    <div
+      {...mergeProps(api().getContentProps(), rest)}
+      class={cn("sb-select-content", local.class)}
+    >
       {local.children}
     </div>
   );
 }
 
-export type SelectListProps = Omit<
-  JSX.HTMLAttributes<HTMLUListElement>,
-  "id" | "role" | "tabIndex" | "children"
-> & {
+export type SelectListProps = Omit<JSX.HTMLAttributes<HTMLUListElement>, "role" | "children"> & {
   children: (option: SelectOption) => JSX.Element;
 };
 
 export function SelectList(props: SelectListProps) {
-  const { api, options } = useSelect();
+  const { options } = useSelect();
   const [local, rest] = splitProps(props, ["class", "children"]);
 
+  // Only a layout wrapper, since the content is the listbox and owns the options. Zag's list props
+  // would name it, and make it focusable, which puts an element the listbox doesn't allow between it
+  // and its options (U10 in audit/zag-issues.md).
   return (
-    <ul {...mergeProps(api().getContentProps(), rest)} class={cn("sb-select-list", local.class)}>
+    <ul {...rest} role="presentation" class={cn("sb-select-list", local.class)}>
       <For each={options()}>{(option) => local.children(option)}</For>
     </ul>
   );
 }
 
+// Outside the content, which is the listbox, since a listbox may only hold options.
 export type SelectEmptyProps = JSX.HTMLAttributes<HTMLDivElement>;
 
 export function SelectEmpty(props: SelectEmptyProps) {

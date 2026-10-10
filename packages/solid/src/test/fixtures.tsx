@@ -237,8 +237,8 @@ export const fixtures = {
         <ComboboxPositioner>
           <ComboboxContent>
             <ComboboxList>{(option) => <ComboboxItem option={option} />}</ComboboxList>
-            <ComboboxEmpty>No currencies found.</ComboboxEmpty>
           </ComboboxContent>
+          <ComboboxEmpty>No currencies found.</ComboboxEmpty>
         </ComboboxPositioner>
       </ComboboxPortal>
     </Combobox>
@@ -412,8 +412,8 @@ export const fixtures = {
         <SelectPositioner>
           <SelectContent>
             <SelectList>{(option) => <SelectItem option={option} />}</SelectList>
-            <SelectEmpty>No currencies.</SelectEmpty>
           </SelectContent>
+          <SelectEmpty>No currencies.</SelectEmpty>
         </SelectPositioner>
       </SelectPortal>
     </Select>

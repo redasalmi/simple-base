@@ -10,10 +10,12 @@ import {
   type JSX,
   Show,
   splitProps,
+  untrack,
 } from "solid-js";
 
 import { cn } from "../cn";
 import { createRequiredContext } from "../internal/context";
+import { trackFormReset } from "../internal/form";
 import {
   createMessages,
   MessageDescription,
@@ -22,6 +24,7 @@ import {
   type Messages,
 } from "../internal/messages";
 import { createPositioning, PopupPortal, type PopupPortalProps } from "../internal/popup";
+import type { WithoutOwnedProps } from "../internal/props";
 import { fromZagValue, toZagValue } from "../internal/zagValue";
 import { validateWidgetOptions } from "../validateWidgetOptions";
 
@@ -131,10 +134,27 @@ export function Combobox(props: ComboboxRootProps) {
     },
     onValueChange({ value }) {
       local.onValueChange?.(fromZagValue(value));
+      // Zag writes the chosen label into the input and only syncs it again when the value changes,
+      // so put back the label of the value a controlling parent kept (U8 in audit/zag-issues.md).
+      if (local.value !== undefined && local.value !== fromZagValue(value)) {
+        api().syncSelectedItems();
+      }
     },
   });
 
   const api = createMemo(() => combobox.connect(service, normalizeProps));
+
+  let hiddenSelect: HTMLSelectElement | undefined;
+  const initialValue = untrack(() => api().value);
+  // Zag's combobox, unlike its select, doesn't restore its initial value on a form reset
+  // (K3, U4 in audit/zag-issues.md).
+  trackFormReset(
+    () => hiddenSelect,
+    () => {
+      setQuery("");
+      api().setValue(initialValue);
+    },
+  );
 
   const context = {
     ...createMessages(id, () => local.invalid ?? false),
@@ -145,8 +165,10 @@ export function Combobox(props: ComboboxRootProps) {
   return (
     <ComboboxProvider value={context}>
       <div {...mergeProps(api().getRootProps(), rest)} class={cn("sb-combobox", local.class)}>
-        {/* Zag names the text input, which would submit the typed text instead of the value. */}
+        {/* Zag names the text input, which would submit the typed text instead of the value
+            (Z2, U1 in audit/zag-issues.md). */}
         <select
+          ref={(element) => (hiddenSelect = element)}
           aria-hidden="true"
           tabIndex={-1}
           style={visuallyHiddenStyle}
@@ -156,12 +178,9 @@ export function Combobox(props: ComboboxRootProps) {
           required={local.required}
           onFocus={() => api().focus()}
         >
-          <Show when={api().value[0]}>
-            {(value) => (
-              // oxlint-disable-next-line jsx-a11y/control-has-associated-label -- the select is hidden from assistive technology
-              <option value={value()} />
-            )}
-          </Show>
+          {/* Empty while nothing is selected, so the form submits "" like a native placeholder option. */}
+          {/* oxlint-disable-next-line jsx-a11y/control-has-associated-label -- the select is hidden from assistive technology */}
+          <option value={api().value[0] ?? ""} />
         </select>
         {local.children}
       </div>
@@ -215,17 +234,15 @@ export function ComboboxInput(props: ComboboxInputProps) {
   const { api, describedBy } = useCombobox();
   const [local, rest] = splitProps(props, ["class"]);
 
-  // Zag passes the input text as `defaultValue`, which Solid's normalizer renames to a live
-  // `value`. Restore it so a form reset keeps the text; Zag syncs what's displayed.
-  // Solid only sets `defaultValue` as a DOM property under `prop:`.
-  const inputProps = () => {
-    const { value, ...zagProps } = api().getInputProps();
-    return { ...zagProps, "prop:defaultValue": value };
-  };
+  const inputProps = () => api().getInputProps();
 
   return (
     <input
       {...mergeProps(inputProps(), rest)}
+      // Zag's Solid adapter renders the text as a live `value`, which a form reset doesn't read, so
+      // keep it as the default value too. A reset then shows Zag's text instead of an empty input,
+      // even when the value didn't change (Z1, U11 in audit/zag-issues.md).
+      prop:defaultValue={String(inputProps().value ?? "")}
       class={cn("sb-combobox-input", local.class)}
       aria-describedby={describedBy()}
     />
@@ -271,37 +288,44 @@ export function ComboboxPositioner(props: ComboboxPositionerProps) {
   );
 }
 
-export type ComboboxContentProps = Omit<JSX.HTMLAttributes<HTMLDivElement>, "hidden">;
+export type ComboboxContentProps = WithoutOwnedProps<
+  JSX.HTMLAttributes<HTMLDivElement>,
+  "id" | "hidden" | "role" | "tabIndex" | "aria-labelledby"
+>;
 
 export function ComboboxContent(props: ComboboxContentProps) {
   const { api } = useCombobox();
   const [local, rest] = splitProps(props, ["class", "children"]);
 
   return (
-    <div hidden={!api().open} {...rest} class={cn("sb-combobox-content", local.class)}>
+    <div
+      {...mergeProps(api().getContentProps(), rest)}
+      class={cn("sb-combobox-content", local.class)}
+    >
       {local.children}
     </div>
   );
 }
 
-export type ComboboxListProps = Omit<
-  JSX.HTMLAttributes<HTMLUListElement>,
-  "id" | "role" | "tabIndex" | "children"
-> & {
+export type ComboboxListProps = Omit<JSX.HTMLAttributes<HTMLUListElement>, "role" | "children"> & {
   children: (option: ComboboxOption) => JSX.Element;
 };
 
 export function ComboboxList(props: ComboboxListProps) {
-  const { api, options } = useCombobox();
+  const { options } = useCombobox();
   const [local, rest] = splitProps(props, ["class", "children"]);
 
+  // Only a layout wrapper, since the content is the listbox and owns the options. Zag's list props
+  // would name it, which puts an element the listbox doesn't allow between it and its options
+  // (U10 in audit/zag-issues.md).
   return (
-    <ul {...mergeProps(api().getContentProps(), rest)} class={cn("sb-combobox-list", local.class)}>
+    <ul {...rest} role="presentation" class={cn("sb-combobox-list", local.class)}>
       <For each={options()}>{(option) => local.children(option)}</For>
     </ul>
   );
 }
 
+// Outside the content, which is the listbox, since a listbox may only hold options.
 export type ComboboxEmptyProps = JSX.HTMLAttributes<HTMLDivElement>;
 
 export function ComboboxEmpty(props: ComboboxEmptyProps) {

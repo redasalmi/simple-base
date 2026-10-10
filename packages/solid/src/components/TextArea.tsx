@@ -10,12 +10,10 @@ export type TextAreaProps = JSX.TextareaHTMLAttributes<HTMLTextAreaElement> & {
 export function TextArea(props: TextAreaProps) {
   const [local, rest] = splitProps(props, ["class", "defaultValue"]);
 
+  // The text holds the default value, so the server renders it and a reset restores it.
   return (
-    <textarea
-      {...rest}
-      // Solid only sets `defaultValue` as a DOM property under `prop:`, which its types omit.
-      {...(local.defaultValue === undefined ? {} : { "prop:defaultValue": local.defaultValue })}
-      class={cn("sb-textarea", local.class)}
-    />
+    <textarea {...rest} class={cn("sb-textarea", local.class)}>
+      {local.defaultValue}
+    </textarea>
   );
 }

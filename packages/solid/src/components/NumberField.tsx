@@ -1,7 +1,7 @@
 import type { NumberFieldOptions } from "@simple-base/contracts";
 import * as numberInput from "@zag-js/number-input";
 import { mergeProps, normalizeProps, useMachine } from "@zag-js/solid";
-import { type Accessor, createMemo, createUniqueId, type JSX, splitProps } from "solid-js";
+import { type Accessor, createMemo, createUniqueId, type JSX, Show, splitProps } from "solid-js";
 
 import { cn } from "../cn";
 import { createRequiredContext } from "../internal/context";
@@ -63,9 +63,6 @@ export function NumberField(props: NumberFieldRootProps) {
     get ids() {
       return { input: id() };
     },
-    get name() {
-      return local.name;
-    },
     get form() {
       return local.form;
     },
@@ -123,6 +120,17 @@ export function NumberField(props: NumberFieldRootProps) {
   return (
     <NumberFieldProvider value={context}>
       <div {...mergeProps(api().getRootProps(), rest)} class={cn("sb-number-field", local.class)}>
+        {/* Zag names the visible input, which would submit the formatted text, such as "€1,234.00",
+            so the form submits the number instead (K2, U2 in audit/zag-issues.md). */}
+        <Show when={local.name}>
+          <input
+            type="hidden"
+            name={local.name}
+            form={local.form}
+            disabled={local.disabled}
+            value={Number.isNaN(api().valueAsNumber) ? "" : String(api().valueAsNumber)}
+          />
+        </Show>
         {local.children}
       </div>
     </NumberFieldProvider>
@@ -190,17 +198,15 @@ export function NumberFieldInput(props: NumberFieldInputProps) {
   const { api, describedBy } = useNumberField();
   const [local, rest] = splitProps(props, ["class"]);
 
-  // Zag passes the formatted value as `defaultValue`, which Solid's normalizer renames to a
-  // live `value`. Restore it so typing isn't overwritten and Zag syncs what's displayed.
-  // Solid only sets `defaultValue` as a DOM property under `prop:`.
-  const inputProps = () => {
-    const { value, ...zagProps } = api().getInputProps();
-    return { ...zagProps, "prop:defaultValue": value };
-  };
+  const inputProps = () => api().getInputProps();
 
   return (
     <input
       {...mergeProps(inputProps(), rest)}
+      // Zag's Solid adapter renders the text as a live `value`, which a form reset doesn't read, so
+      // keep it as the default value too. A reset then shows Zag's text instead of an empty input,
+      // even when the value didn't change (Z1, U11 in audit/zag-issues.md).
+      prop:defaultValue={String(inputProps().value ?? "")}
       class={cn("sb-number-field-input", local.class)}
       aria-describedby={describedBy()}
     />

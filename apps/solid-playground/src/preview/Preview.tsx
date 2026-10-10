@@ -32,7 +32,7 @@ export function Example(props: {
 }
 
 /** A native form that reports its submitted data, for uncontrolled examples. */
-export function FormDemo(props: { children: JSX.Element; onReset?: () => void }) {
+export function FormDemo(props: { children: JSX.Element }) {
   const [status, setStatus] = createSignal("Submit the form to see the data it sends.");
 
   return (
@@ -45,10 +45,7 @@ export function FormDemo(props: { children: JSX.Element; onReset?: () => void })
         );
         setStatus(entries.length > 0 ? `Submitted ${entries.join(", ")}` : "Submitted no data.");
       }}
-      onReset={() => {
-        props.onReset?.();
-        setStatus("Form reset.");
-      }}
+      onReset={() => setStatus("Form reset.")}
     >
       {props.children}
       <div class="preview-row">

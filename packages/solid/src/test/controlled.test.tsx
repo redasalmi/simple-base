@@ -359,8 +359,8 @@ describe("Combobox", () => {
   });
 
   // Zag writes the chosen label into the input and only syncs it again when the value changes, so
-  // a rejected choice stays visible. Z1 doesn't change it; phase 4 restores the text.
-  test.fails("follows `value` when the parent rejects", async () => {
+  // the component puts back the kept value's label (U8 in audit/zag-issues.md).
+  test("follows `value` when the parent rejects", async () => {
     const state = parentState<string | null>("eur", "rejects");
     render(() => <TestCombobox value={state.value()} onValueChange={state.onChange} />);
 

@@ -1,7 +1,7 @@
 import { render, screen } from "@solidjs/testing-library";
 import userEvent from "@testing-library/user-event";
-import type { JSX } from "solid-js";
-import { describe, expect, test } from "vitest";
+import { createSignal, type JSX } from "solid-js";
+import { describe, expect, test, vi } from "vitest";
 
 import {
   Checkbox,
@@ -338,9 +338,8 @@ describe("CheckboxGroup", () => {
     expect(entries()).toEqual([]);
   });
 
-  // K2: HTML has no "at least one" rule for checkboxes, so today Fieldset `required` only marks the
-  // legend. Phase 4 sets `required` on every item while none is checked.
-  test.fails("is required through its Fieldset until one box is checked (K2)", async () => {
+  // K2: HTML has no "at least one" rule for checkboxes, so every item is required while none is checked.
+  test("is required through its Fieldset until one box is checked (K2)", async () => {
     const user = userEvent.setup();
     const { form } = renderForm(() => <TestCheckboxGroup required />);
     const email = screen.getByRole("checkbox", { name: "Email" });
@@ -353,7 +352,7 @@ describe("CheckboxGroup", () => {
     expect(email).not.toBeRequired();
   });
 
-  test.fails("is required again when form.reset() unchecks every box (K2)", async () => {
+  test("is required again when form.reset() unchecks every box (K2)", async () => {
     const user = userEvent.setup();
     const { form } = renderForm(() => (
       <Fieldset required>
@@ -369,6 +368,28 @@ describe("CheckboxGroup", () => {
     form.reset();
 
     await expect.poll(() => form.checkValidity(), { timeout: 200 }).toBe(false);
+  });
+
+  // A5: the browser checks the box before the parent responds.
+  test("stays required when the parent rejects the first box (K2, A5)", async () => {
+    const user = userEvent.setup();
+    const onValueChange = vi.fn();
+    const { form } = renderForm(() => (
+      <Fieldset required>
+        <FieldsetLegend>Notify by</FieldsetLegend>
+        <CheckboxGroup name="notify" value={[]} onValueChange={onValueChange}>
+          <CheckboxGroupItem value="email">Email</CheckboxGroupItem>
+        </CheckboxGroup>
+      </Fieldset>
+    ));
+    const email = screen.getByRole("checkbox", { name: "Email" });
+
+    await user.click(email);
+
+    expect(onValueChange).toHaveBeenLastCalledWith(["email"]);
+    expect(email).not.toBeChecked();
+    expect(email).toBeRequired();
+    expect(form.checkValidity()).toBe(false);
   });
 
   test("restores defaultValue on form.reset()", async () => {
@@ -404,12 +425,21 @@ describe("Select", () => {
     expect(entries()).toEqual([["currency", "usd"]]);
   });
 
-  // K2: the hidden select's empty option ends up unselected, so the form leaves the name out.
-  // Phase 4 submits "" like a native select with an empty placeholder option.
-  test.fails("submits an empty value while nothing is selected (K2)", () => {
+  // K2: like a native select with an empty placeholder option.
+  test("submits an empty value while nothing is selected (K2)", () => {
     const { entries } = renderForm(() => <TestSelect name="currency" />);
 
     expect(entries()).toEqual([["currency", ""]]);
+  });
+
+  test("submits an empty value once the selection is cleared (K2)", async () => {
+    const [value, setValue] = createSignal<string | null>("usd");
+    const { entries } = renderForm(() => <TestSelect name="currency" value={value()} />);
+    expect(entries()).toEqual([["currency", "usd"]]);
+
+    setValue(null);
+
+    await expect.poll(entries).toEqual([["currency", ""]]);
   });
 
   test("leaves out a disabled select", () => {
@@ -438,6 +468,17 @@ describe("Select", () => {
 
     await expect.poll(entries).toEqual([["currency", "usd"]]);
     expect(trigger).toHaveTextContent("US dollar");
+  });
+
+  test("returns to the empty value on form.reset() (K2)", async () => {
+    const { form, entries } = renderForm(() => <TestSelect name="currency" />);
+    const trigger = screen.getByRole("combobox", { name: "Currency" });
+    await selectOption(trigger, "Euro");
+
+    form.reset();
+
+    await expect.poll(entries).toEqual([["currency", ""]]);
+    expect(trigger).toHaveTextContent("Select a currency");
   });
 
   // Z6: the `selected` attribute is what the browser restores when Zag's value hasn't changed.
@@ -476,11 +517,21 @@ describe("Combobox", () => {
     expect(entries()).toEqual([["currency", "usd"]]);
   });
 
-  // K2: the hidden select has no option while nothing is selected. Phase 4 adds an empty one.
-  test.fails("submits an empty value while nothing is selected (K2)", () => {
+  // K2: like a native select with an empty placeholder option.
+  test("submits an empty value while nothing is selected (K2)", () => {
     const { entries } = renderForm(() => <TestCombobox name="currency" />);
 
     expect(entries()).toEqual([["currency", ""]]);
+  });
+
+  test("submits an empty value once the selection is cleared (K2)", async () => {
+    const [value, setValue] = createSignal<string | null>("usd");
+    const { entries } = renderForm(() => <TestCombobox name="currency" value={value()} />);
+    expect(entries()).toEqual([["currency", "usd"]]);
+
+    setValue(null);
+
+    await expect.poll(entries).toEqual([["currency", ""]]);
   });
 
   test("leaves out a disabled combobox", () => {
@@ -502,8 +553,8 @@ describe("Combobox", () => {
     expect(form.checkValidity()).toBe(true);
   });
 
-  // K3: Zag's combobox has no form reset tracking; phase 4 adds `trackFormReset`.
-  test.fails("restores defaultValue on form.reset() (K3)", async () => {
+  // K3: Zag's combobox has no form reset tracking, so the component adds a listener.
+  test("restores defaultValue on form.reset() (K3)", async () => {
     const user = userEvent.setup();
     const { form, entries } = renderForm(() => <TestCombobox name="currency" defaultValue="usd" />);
     const input = screen.getByRole("combobox", { name: "Currency" });
@@ -516,6 +567,43 @@ describe("Combobox", () => {
 
     await expect.poll(entries, { timeout: 200 }).toEqual([["currency", "usd"]]);
     expect(input).toHaveValue("US dollar");
+  });
+
+  // Z1: Zag's Solid adapter sets the text as a live `value`, which a reset would clear.
+  test("keeps its text on form.reset() when nothing changed (Z1)", async () => {
+    const { form } = renderForm(() => <TestCombobox name="currency" defaultValue="usd" />);
+    const input = screen.getByRole("combobox", { name: "Currency" });
+
+    form.reset();
+    await new Promise(requestAnimationFrame);
+
+    expect(input).toHaveValue("US dollar");
+  });
+
+  test("restores the label of an unchanged value on form.reset() (K3)", async () => {
+    const user = userEvent.setup();
+    const { form, entries } = renderForm(() => <TestCombobox name="currency" defaultValue="usd" />);
+    const input = screen.getByRole("combobox", { name: "Currency" });
+    await user.clear(input);
+    await user.type(input, "eu");
+
+    form.reset();
+
+    await expect.poll(() => input).toHaveValue("US dollar");
+    expect(entries()).toEqual([["currency", "usd"]]);
+  });
+
+  test("returns to the empty value on form.reset() (K3)", async () => {
+    const user = userEvent.setup();
+    const { form, entries } = renderForm(() => <TestCombobox name="currency" />);
+    const input = screen.getByRole("combobox", { name: "Currency" });
+    await user.type(input, "eu");
+    await user.click(await screen.findByRole("option", { name: "Euro" }));
+
+    form.reset();
+
+    await expect.poll(entries).toEqual([["currency", ""]]);
+    expect(input).toHaveValue("");
   });
 
   test("joins a form elsewhere on the page through `form`", () => {
@@ -558,8 +646,8 @@ describe("NumberField", () => {
     expect(entries()).toEqual([["amount", "1234"]]);
   });
 
-  // K2: Zag names the visible input, so a formatted field submits its text; phase 4 adds a hidden input.
-  test.fails("submits the number, not the formatted text (K2)", () => {
+  // K2: Zag names the visible input, which holds the formatted text, so a hidden input submits the number.
+  test("submits the number, not the formatted text (K2)", () => {
     const { entries } = renderForm(() => (
       <TestNumberField
         name="amount"
@@ -603,6 +691,23 @@ describe("NumberField", () => {
 
     await expect.poll(() => input).toHaveValue("1234");
     expect(entries()).toEqual([["amount", "1234"]]);
+  });
+
+  // Z1: Zag's Solid adapter sets the text as a live `value`, which a reset would clear.
+  test("keeps its text on form.reset() when nothing changed (Z1)", async () => {
+    const { form } = renderForm(() => (
+      <TestNumberField
+        name="amount"
+        defaultValue="1234"
+        formatOptions={{ style: "currency", currency: "EUR" }}
+      />
+    ));
+    const input = screen.getByRole("spinbutton", { name: "Amount" });
+
+    form.reset();
+    await new Promise(requestAnimationFrame);
+
+    expect(input).toHaveValue("€1,234.00");
   });
 
   test("joins a form elsewhere on the page through `form`", () => {
@@ -668,8 +773,8 @@ describe("DatePicker", () => {
     expect(form.checkValidity()).toBe(true);
   });
 
-  // Z7: Zag's date picker has no form reset tracking, so the component adds a listener.
-  test("restores defaultValue on form.reset() (Z7)", async () => {
+  // Z7, K3: Zag's date picker has no form reset tracking, so the component adds a listener.
+  test("restores defaultValue on form.reset() (Z7, K3)", async () => {
     const user = userEvent.setup();
     const { form, entries } = renderForm(() => (
       <TestDatePicker name="due" defaultValue={parseDateInput("2026-10-12")} />
@@ -683,6 +788,19 @@ describe("DatePicker", () => {
     form.reset();
 
     await expect.poll(entries).toEqual([["due", "2026-10-12"]]);
+    expect(input).toHaveValue("10/12/2026");
+  });
+
+  // Z1: Zag's Solid adapter sets the text as a live `value`, which a reset would clear.
+  test("keeps its text on form.reset() when nothing changed (Z1)", async () => {
+    const { form } = renderForm(() => (
+      <TestDatePicker name="due" defaultValue={parseDateInput("2026-10-12")} />
+    ));
+    const input = screen.getByRole("textbox", { name: "Due date" });
+
+    form.reset();
+    await new Promise(requestAnimationFrame);
+
     expect(input).toHaveValue("10/12/2026");
   });
 

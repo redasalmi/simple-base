@@ -222,10 +222,26 @@
     opacity: var(--sb-semantic-opacity-disabled);
   }
 
+  /* With no options the content draws no box; the empty part, beside it, says why. */
+  .sb-select-content:not(:has(.sb-select-item)) {
+    padding: 0;
+    border: 0;
+    box-shadow: none;
+  }
+
   .sb-select-empty {
+    box-sizing: border-box;
+    width: var(--reference-width);
+    max-width: var(--available-width);
     padding: var(--sb-semantic-space-3);
+    border: var(--sb-semantic-border-width-hairline) solid var(--sb-semantic-color-border-default);
+    border-radius: var(--sb-semantic-radius-md);
     color: var(--sb-semantic-color-foreground-muted);
+    background: var(--sb-semantic-color-background-surface);
+    box-shadow: var(--sb-semantic-shadow-overlay);
+    font-family: var(--sb-semantic-typography-family-body);
     font-size: var(--sb-semantic-typography-size-sm);
+    line-height: var(--sb-semantic-typography-line-height-normal);
     overflow-wrap: anywhere;
   }
 

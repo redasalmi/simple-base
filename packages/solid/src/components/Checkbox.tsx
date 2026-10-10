@@ -10,13 +10,13 @@ export type CheckboxProps = Omit<JSX.InputHTMLAttributes<HTMLInputElement>, "typ
 };
 
 export function Checkbox(props: CheckboxProps) {
-  const [local, rest] = splitProps(props, ["class", "indeterminate"]);
+  const [local, rest] = splitProps(props, ["class", "defaultChecked"]);
 
   return (
     <input
       {...rest}
-      // `indeterminate` is a DOM property with no attribute; Solid's types omit `prop:` for it.
-      {...(local.indeterminate === undefined ? {} : { "prop:indeterminate": local.indeterminate })}
+      // The `checked` attribute holds the default state, so the server renders it and a reset restores it.
+      bool:checked={local.defaultChecked}
       type="checkbox"
       class={cn("sb-checkbox", local.class)}
     />

@@ -90,8 +90,8 @@ describe("open popups", () => {
   });
 
   // label-content-name-mismatch (WCAG 2.5.3): Zag labels the month heading "Switch to month view"
-  // while it shows "October 2026". Phase 4 gives it a name that starts with the visible text.
-  test.fails("DatePicker", async () => {
+  // while it shows "October 2026", so the calendar puts the visible text first (U9 in audit/zag-issues.md).
+  test("DatePicker", async () => {
     const user = userEvent.setup();
     render(fixtures.DatePicker);
 

@@ -16,8 +16,8 @@ export function Input(props: InputProps) {
   return (
     <input
       {...rest}
-      // Solid only sets `defaultValue` as a DOM property under `prop:`, which its types omit.
-      {...(local.defaultValue === undefined ? {} : { "prop:defaultValue": local.defaultValue })}
+      // The `value` attribute holds the default value, so the server renders it and a reset restores it.
+      attr:value={local.defaultValue}
       class={cn("sb-input", local.class)}
     />
   );

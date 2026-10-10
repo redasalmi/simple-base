@@ -255,13 +255,14 @@ export function CheckboxGroups() {
       </Example>
       <Example
         title="Required with an error"
-        description="A required fieldset marks the legend, but the checkboxes are not natively required, since any one of them may satisfy the group. Validate in your app; give a single must-check box its own required."
+        description="required means at least one checked box: while none is, every box is natively required. This form sets noValidate so FieldsetError replaces the browser's message; submit without a check to show it."
         code={
           '<Fieldset required invalid={submitted() && confirmed().length === 0}>\n  <FieldsetLegend>Terms</FieldsetLegend>\n  <CheckboxGroup value={confirmed()} onValueChange={setConfirmed}>\n    <CheckboxGroupItem value="totals">I have reviewed the invoice totals</CheckboxGroupItem>\n  </CheckboxGroup>\n  <FieldsetError>Confirm the totals before sending.</FieldsetError>\n</Fieldset>'
         }
       >
         <form
           class="preview-stack"
+          noValidate
           onSubmit={(event) => {
             event.preventDefault();
             setSubmitted(true);
@@ -301,7 +302,7 @@ export function CheckboxGroups() {
           [
             "CheckboxGroupItem",
             "label > Checkbox + span",
-            "value is required and children is the label. class goes on the label; every other prop, including required and indeterminate, goes to the checkbox. name, checked, and aria-invalid come from the group and fieldset.",
+            "value is required and children is the label. class goes on the label; every other prop, including required and indeterminate, goes to the checkbox. name, checked, and aria-invalid come from the group and fieldset, and a required fieldset makes every box required while none is checked.",
           ],
           fieldsetApi,
           fieldsetPartsApi,

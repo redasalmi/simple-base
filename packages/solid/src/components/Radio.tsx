@@ -8,7 +8,15 @@ export type RadioProps = Omit<JSX.InputHTMLAttributes<HTMLInputElement>, "type">
 };
 
 export function Radio(props: RadioProps) {
-  const [local, rest] = splitProps(props, ["class"]);
+  const [local, rest] = splitProps(props, ["class", "defaultChecked"]);
 
-  return <input {...rest} type="radio" class={cn("sb-radio", local.class)} />;
+  return (
+    <input
+      {...rest}
+      // The `checked` attribute holds the default state, so the server renders it and a reset restores it.
+      bool:checked={local.defaultChecked}
+      type="radio"
+      class={cn("sb-radio", local.class)}
+    />
+  );
 }

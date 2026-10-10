@@ -11,10 +11,17 @@ export type SwitchProps = Omit<
 };
 
 export function Switch(props: SwitchProps) {
-  const [local, rest] = splitProps(props, ["class"]);
+  const [local, rest] = splitProps(props, ["class", "defaultChecked"]);
 
   return (
-    // oxlint-disable-next-line jsx-a11y/role-has-required-aria-props -- the checkbox input exposes its own checked state
-    <input {...rest} type="checkbox" role="switch" class={cn("sb-switch", local.class)} />
+    <input
+      {...rest}
+      // The `checked` attribute holds the default state, so the server renders it and a reset restores it.
+      bool:checked={local.defaultChecked}
+      type="checkbox"
+      // oxlint-disable-next-line jsx-a11y/role-has-required-aria-props -- the checkbox input exposes its own checked state
+      role="switch"
+      class={cn("sb-switch", local.class)}
+    />
   );
 }
