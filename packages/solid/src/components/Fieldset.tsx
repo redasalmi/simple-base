@@ -1,16 +1,15 @@
 import { fieldsetLabels, type FieldsetOptions } from "@simple-base/contracts";
-import {
-  createSignal,
-  createUniqueId,
-  type JSX,
-  onCleanup,
-  onMount,
-  Show,
-  splitProps,
-} from "solid-js";
+import { createUniqueId, type JSX, Show, splitProps } from "solid-js";
 
 import { cn } from "../cn";
-import { FieldsetContext, type FieldsetContextType, useFieldset } from "../internal/fieldset";
+import { type FieldsetContextType, FieldsetProvider, useFieldset } from "../internal/fieldset";
+import {
+  createMessages,
+  MessageDescription,
+  MessageError,
+  type MessageProps,
+} from "../internal/messages";
+import { dataAttr } from "../internal/props";
 
 export type FieldsetRootProps = FieldsetOptions & {
   children: JSX.Element;
@@ -30,52 +29,29 @@ export function Fieldset(props: FieldsetRootProps) {
     "labels",
   ]);
   const fallbackId = createUniqueId();
-  const [hasDescription, setHasDescription] = createSignal(false);
-  const [hasError, setHasError] = createSignal(false);
 
   const id = () => local.id ?? fallbackId;
-  const descriptionId = () => `${id()}-description`;
-  const errorId = () => `${id()}-error`;
-  const required = () => local.required ?? false;
   const invalid = () => local.invalid ?? false;
 
-  const describedBy = () => {
-    const ids = [];
-    if (hasDescription()) ids.push(descriptionId());
-    if (hasError() && invalid()) ids.push(errorId());
-
-    return ids.length > 0 ? ids.join(" ") : undefined;
-  };
-
   const context = {
-    descriptionId,
-    errorId,
-    required,
-    invalid,
+    ...createMessages(id, invalid),
+    required: () => local.required ?? false,
     requiredLabel: () => local.labels?.required ?? fieldsetLabels.required,
-    registerDescription() {
-      onMount(() => setHasDescription(true));
-      onCleanup(() => setHasDescription(false));
-    },
-    registerError() {
-      onMount(() => setHasError(true));
-      onCleanup(() => setHasError(false));
-    },
   } satisfies FieldsetContextType;
 
   return (
-    <FieldsetContext.Provider value={context}>
+    <FieldsetProvider value={context}>
       <fieldset
         {...rest}
         id={id()}
         class={cn("sb-fieldset", local.class)}
         disabled={local.disabled}
-        aria-describedby={describedBy()}
-        data-invalid={invalid() ? "" : undefined}
+        aria-describedby={context.describedBy()}
+        data-invalid={dataAttr(invalid())}
       >
         {local.children}
       </fieldset>
-    </FieldsetContext.Provider>
+    </FieldsetProvider>
   );
 }
 
@@ -90,7 +66,7 @@ export function FieldsetLegend(props: FieldsetLegendProps) {
     <legend
       {...rest}
       class={cn("sb-field-title", local.class)}
-      data-required={required() ? "" : undefined}
+      data-required={dataAttr(required())}
     >
       {local.children}
       <Show when={required()}>
@@ -100,28 +76,18 @@ export function FieldsetLegend(props: FieldsetLegendProps) {
   );
 }
 
-export type FieldsetDescriptionProps = Omit<JSX.HTMLAttributes<HTMLParagraphElement>, "id">;
+export type FieldsetDescriptionProps = MessageProps;
 
 export function FieldsetDescription(props: FieldsetDescriptionProps) {
-  const { descriptionId, registerDescription } = useFieldset();
-  const [local, rest] = splitProps(props, ["class"]);
+  const messages = useFieldset();
 
-  registerDescription();
-
-  return <p {...rest} class={cn("sb-field-description", local.class)} id={descriptionId()} />;
+  return <MessageDescription {...props} messages={messages} />;
 }
 
-export type FieldsetErrorProps = Omit<JSX.HTMLAttributes<HTMLParagraphElement>, "id">;
+export type FieldsetErrorProps = MessageProps;
 
 export function FieldsetError(props: FieldsetErrorProps) {
-  const { errorId, invalid, registerError } = useFieldset();
-  const [local, rest] = splitProps(props, ["class"]);
+  const messages = useFieldset();
 
-  registerError();
-
-  return (
-    <Show when={invalid()}>
-      <p {...rest} class={cn("sb-field-error", local.class)} id={errorId()} />
-    </Show>
-  );
+  return <MessageError {...props} messages={messages} />;
 }

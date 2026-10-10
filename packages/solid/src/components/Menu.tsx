@@ -1,18 +1,11 @@
 import type { MenuItemOptions, MenuOptions } from "@simple-base/contracts";
 import * as menu from "@zag-js/menu";
 import { mergeProps, normalizeProps, useMachine } from "@zag-js/solid";
-import {
-  type Accessor,
-  createContext,
-  createMemo,
-  createUniqueId,
-  type JSX,
-  splitProps,
-  useContext,
-} from "solid-js";
-import { Portal } from "solid-js/web";
+import { type Accessor, createMemo, createUniqueId, type JSX, splitProps } from "solid-js";
 
 import { cn } from "../cn";
+import { createRequiredContext } from "../internal/context";
+import { createPositioning, PopupPortal, type PopupPortalProps } from "../internal/popup";
 import { Button, type ButtonProps } from "./Button";
 
 export type { MenuItemVariant } from "@simple-base/contracts";
@@ -21,25 +14,16 @@ type MenuContextType = {
   api: Accessor<menu.Api>;
 };
 
-const MenuContext = createContext<MenuContextType | null>(null);
+const [MenuProvider, useMenu] = createRequiredContext<MenuContextType>("Menu");
 
-function useMenu() {
-  const context = useContext(MenuContext);
-  if (!context) throw new Error("Menu parts must be used within a Menu");
-
-  return context;
-}
-
-const MenuGroupContext = createContext<string>();
+const [MenuGroupProvider, useMenuGroup] = createRequiredContext<string>("MenuGroup");
 
 export type MenuRootProps = MenuOptions & {
   children: JSX.Element;
 };
 
 export function Menu(props: MenuRootProps) {
-  const positioning = createMemo(() =>
-    props.placement ? { placement: props.placement } : undefined,
-  );
+  const positioning = createPositioning(() => props.placement);
 
   const fallbackId = createUniqueId();
 
@@ -66,7 +50,7 @@ export function Menu(props: MenuRootProps) {
 
   const api = createMemo(() => menu.connect(service, normalizeProps));
 
-  return <MenuContext.Provider value={{ api }}>{props.children}</MenuContext.Provider>;
+  return <MenuProvider value={{ api }}>{props.children}</MenuProvider>;
 }
 
 export type MenuTriggerProps = Omit<
@@ -90,14 +74,9 @@ export function MenuTrigger(props: MenuTriggerProps) {
   );
 }
 
-export type MenuPortalProps = {
-  children: JSX.Element;
-  mount?: Node;
-};
+export type MenuPortalProps = PopupPortalProps;
 
-export function MenuPortal(props: MenuPortalProps) {
-  return <Portal mount={props.mount}>{props.children}</Portal>;
-}
+export const MenuPortal = PopupPortal;
 
 export type MenuPositionerProps = Omit<JSX.HTMLAttributes<HTMLDivElement>, "id" | "style">;
 
@@ -165,9 +144,9 @@ export function MenuGroup(props: MenuGroupProps) {
   const id = createUniqueId();
 
   return (
-    <MenuGroupContext.Provider value={id}>
+    <MenuGroupProvider value={id}>
       <div {...mergeProps(api().getItemGroupProps({ id }), rest)}>{local.children}</div>
-    </MenuGroupContext.Provider>
+    </MenuGroupProvider>
   );
 }
 
@@ -175,8 +154,7 @@ export type MenuGroupLabelProps = Omit<JSX.HTMLAttributes<HTMLDivElement>, "id">
 
 export function MenuGroupLabel(props: MenuGroupLabelProps) {
   const { api } = useMenu();
-  const groupId = useContext(MenuGroupContext);
-  if (!groupId) throw new Error("MenuGroupLabel must be used within a MenuGroup");
+  const groupId = useMenuGroup();
   const [local, rest] = splitProps(props, ["class"]);
 
   return (

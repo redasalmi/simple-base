@@ -4,18 +4,12 @@ import {
   paginationLabels,
   type PaginationOptions,
 } from "@simple-base/contracts";
-import { mergeProps } from "@zag-js/solid";
-import {
-  type Accessor,
-  createContext,
-  createSignal,
-  For,
-  type JSX,
-  splitProps,
-  useContext,
-} from "solid-js";
+import { type Accessor, For, type JSX, splitProps } from "solid-js";
 
 import { cn } from "../cn";
+import { createRequiredContext } from "../internal/context";
+import { createControllableSignal } from "../internal/controllable";
+import { composeHandler } from "../internal/props";
 
 type PaginationContextType = {
   page: Accessor<number>;
@@ -25,14 +19,8 @@ type PaginationContextType = {
   setPage: (page: number) => void;
 };
 
-const PaginationContext = createContext<PaginationContextType | null>(null);
-
-function usePagination() {
-  const context = useContext(PaginationContext);
-  if (!context) throw new Error("Pagination parts must be used within a Pagination");
-
-  return context;
-}
+const [PaginationProvider, usePagination] =
+  createRequiredContext<PaginationContextType>("Pagination");
 
 function range(start: number, end: number) {
   return Array.from({ length: end - start + 1 }, (_, index) => start + index);
@@ -66,12 +54,14 @@ export function Pagination(props: PaginationRootProps) {
     "labels",
     "onPageChange",
   ]);
-  const [uncontrolledPage, setUncontrolledPage] = createSignal(
-    local.defaultPage ?? paginationDefaults.defaultPage,
-  );
+  const [currentPage, setCurrentPage] = createControllableSignal({
+    value: () => local.page,
+    defaultValue: local.defaultPage ?? paginationDefaults.defaultPage,
+    onChange: (page) => local.onPageChange?.(page),
+  });
 
   const count = () => Math.max(0, Math.floor(local.count));
-  const page = () => Math.min(Math.max(local.page ?? uncontrolledPage(), 1), Math.max(count(), 1));
+  const page = () => Math.min(Math.max(currentPage(), 1), Math.max(count(), 1));
   const labels = () => ({ ...paginationLabels, ...local.labels });
 
   const context = {
@@ -81,17 +71,16 @@ export function Pagination(props: PaginationRootProps) {
     labels,
     setPage(next) {
       if (next === page() || next < 1 || next > count()) return;
-      if (local.page === undefined) setUncontrolledPage(next);
-      local.onPageChange?.(next);
+      setCurrentPage(next);
     },
   } satisfies PaginationContextType;
 
   return (
-    <PaginationContext.Provider value={context}>
+    <PaginationProvider value={context}>
       <nav aria-label={labels().root} {...rest} class={cn("sb-pagination", local.class)}>
         {local.children}
       </nav>
-    </PaginationContext.Provider>
+    </PaginationProvider>
   );
 }
 
@@ -135,22 +124,19 @@ function PaginationTrigger(
   props: PaginationTriggerProps & { step: -1 | 1; label: "previous" | "next" },
 ) {
   const { page, count, labels, setPage } = usePagination();
-  const [local, rest] = splitProps(props, ["class", "step", "label"]);
+  const [local, rest] = splitProps(props, ["class", "step", "label", "onClick"]);
   const target = () => page() + local.step;
   const unavailable = () => target() < 1 || target() > count();
-  const behavior = {
-    get "aria-label"() {
-      return labels()[local.label];
-    },
-    onClick() {
-      setPage(target());
-    },
-  };
 
   // aria-disabled keeps focus on the button when it reaches the first or last page.
   return (
     <button
-      {...mergeProps(behavior, rest)}
+      aria-label={labels()[local.label]}
+      {...rest}
+      onClick={composeHandler(
+        () => local.onClick,
+        () => setPage(target()),
+      )}
       type="button"
       class={cn("sb-page-button", local.class)}
       aria-disabled={unavailable() ? "true" : undefined}

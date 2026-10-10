@@ -1,41 +1,26 @@
 import type { FieldOptions } from "@simple-base/contracts";
-import {
-  type Accessor,
-  createContext,
-  createSignal,
-  createUniqueId,
-  type JSX,
-  onCleanup,
-  onMount,
-  Show,
-  splitProps,
-  useContext,
-} from "solid-js";
+import { type Accessor, createUniqueId, type JSX, splitProps } from "solid-js";
 
 import { cn } from "../cn";
+import { createRequiredContext } from "../internal/context";
+import {
+  createMessages,
+  MessageDescription,
+  MessageError,
+  type MessageProps,
+  type Messages,
+} from "../internal/messages";
+import { ariaInvalid, dataAttr, type WithoutOwnedProps } from "../internal/props";
 import { Input, type InputProps } from "./Input";
 import { TextArea, type TextAreaProps } from "./TextArea";
 
-type FieldContextType = {
+type FieldContextType = Messages & {
   id: Accessor<string>;
-  descriptionId: Accessor<string>;
-  errorId: Accessor<string>;
-  describedBy: Accessor<string | undefined>;
   required: Accessor<boolean>;
   disabled: Accessor<boolean>;
-  invalid: Accessor<boolean>;
-  registerDescription: () => void;
-  registerError: () => void;
 };
 
-const FieldContext = createContext<FieldContextType | null>(null);
-
-function useField() {
-  const context = useContext(FieldContext);
-  if (!context) throw new Error("Field parts must be used within a Field");
-
-  return context;
-}
+const [FieldProvider, useField] = createRequiredContext<FieldContextType>("Field");
 
 export type FieldRootProps = FieldOptions & {
   children: JSX.Element;
@@ -51,53 +36,30 @@ export function Field(props: FieldRootProps) {
     "invalid",
   ]);
   const fallbackId = createUniqueId();
-  const [hasDescription, setHasDescription] = createSignal(false);
-  const [hasError, setHasError] = createSignal(false);
 
   const id = () => local.id ?? fallbackId;
-  const descriptionId = () => `${id()}-description`;
-  const errorId = () => `${id()}-error`;
   const required = () => local.required ?? false;
   const disabled = () => local.disabled ?? false;
   const invalid = () => local.invalid ?? false;
 
-  const describedBy = () => {
-    const ids = [];
-    if (hasDescription()) ids.push(descriptionId());
-    if (hasError() && invalid()) ids.push(errorId());
-
-    return ids.length > 0 ? ids.join(" ") : undefined;
-  };
-
   const context = {
+    ...createMessages(id, invalid),
     id,
-    descriptionId,
-    errorId,
-    describedBy,
     required,
     disabled,
-    invalid,
-    registerDescription() {
-      onMount(() => setHasDescription(true));
-      onCleanup(() => setHasDescription(false));
-    },
-    registerError() {
-      onMount(() => setHasError(true));
-      onCleanup(() => setHasError(false));
-    },
   } satisfies FieldContextType;
 
   return (
-    <FieldContext.Provider value={context}>
+    <FieldProvider value={context}>
       <div
         {...rest}
         class={cn("sb-field", local.class)}
-        data-disabled={disabled() ? "" : undefined}
-        data-invalid={invalid() ? "" : undefined}
+        data-disabled={dataAttr(disabled())}
+        data-invalid={dataAttr(invalid())}
       >
         {local.children}
       </div>
-    </FieldContext.Provider>
+    </FieldProvider>
   );
 }
 
@@ -113,19 +75,14 @@ export function FieldLabel(props: FieldLabelProps) {
       {...rest}
       class={cn("sb-field-label", local.class)}
       for={id()}
-      data-required={required() ? "" : undefined}
+      data-required={dataAttr(required())}
     />
   );
 }
 
 type FieldOwnedProps = "id" | "required" | "disabled" | "aria-invalid" | "aria-describedby";
 
-// JSX accepts any hyphenated attribute that a type omits, so aria-* must be typed as never to be rejected.
-type WithoutFieldOwnedProps<Props> = Omit<Props, FieldOwnedProps> & {
-  [Key in FieldOwnedProps]?: never;
-};
-
-export type FieldInputProps = WithoutFieldOwnedProps<InputProps>;
+export type FieldInputProps = WithoutOwnedProps<InputProps, FieldOwnedProps>;
 
 export function FieldInput(props: FieldInputProps) {
   const field = useField();
@@ -136,13 +93,13 @@ export function FieldInput(props: FieldInputProps) {
       id={field.id()}
       required={field.required()}
       disabled={field.disabled()}
-      aria-invalid={field.invalid() || undefined}
+      aria-invalid={ariaInvalid(field.invalid())}
       aria-describedby={field.describedBy()}
     />
   );
 }
 
-export type FieldTextAreaProps = WithoutFieldOwnedProps<TextAreaProps>;
+export type FieldTextAreaProps = WithoutOwnedProps<TextAreaProps, FieldOwnedProps>;
 
 export function FieldTextArea(props: FieldTextAreaProps) {
   const field = useField();
@@ -153,34 +110,24 @@ export function FieldTextArea(props: FieldTextAreaProps) {
       id={field.id()}
       required={field.required()}
       disabled={field.disabled()}
-      aria-invalid={field.invalid() || undefined}
+      aria-invalid={ariaInvalid(field.invalid())}
       aria-describedby={field.describedBy()}
     />
   );
 }
 
-export type FieldDescriptionProps = Omit<JSX.HTMLAttributes<HTMLParagraphElement>, "id">;
+export type FieldDescriptionProps = MessageProps;
 
 export function FieldDescription(props: FieldDescriptionProps) {
-  const { descriptionId, registerDescription } = useField();
-  const [local, rest] = splitProps(props, ["class"]);
+  const messages = useField();
 
-  registerDescription();
-
-  return <p {...rest} class={cn("sb-field-description", local.class)} id={descriptionId()} />;
+  return <MessageDescription {...props} messages={messages} />;
 }
 
-export type FieldErrorProps = Omit<JSX.HTMLAttributes<HTMLParagraphElement>, "id">;
+export type FieldErrorProps = MessageProps;
 
 export function FieldError(props: FieldErrorProps) {
-  const { errorId, invalid, registerError } = useField();
-  const [local, rest] = splitProps(props, ["class"]);
+  const messages = useField();
 
-  registerError();
-
-  return (
-    <Show when={invalid()}>
-      <p {...rest} class={cn("sb-field-error", local.class)} id={errorId()} />
-    </Show>
-  );
+  return <MessageError {...props} messages={messages} />;
 }

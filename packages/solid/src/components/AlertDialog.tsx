@@ -1,180 +1,58 @@
 import type { DialogOptions } from "@simple-base/contracts";
-import { mergeProps } from "@zag-js/solid";
-import {
-  type Accessor,
-  createContext,
-  createEffect,
-  createSignal,
-  createUniqueId,
-  type JSX,
-  onCleanup,
-  onMount,
-  type Setter,
-  splitProps,
-  useContext,
-} from "solid-js";
+import { type JSX, splitProps } from "solid-js";
 import { Dynamic } from "solid-js/web";
 
 import { cn } from "../cn";
+import { createRequiredContext } from "../internal/context";
+import {
+  createDialog,
+  DialogContentBase,
+  type DialogContentBaseProps,
+  type DialogState,
+  DialogTriggerBase,
+  type DialogTriggerBaseProps,
+} from "../internal/dialog";
+import { composeHandler } from "../internal/props";
 import { Button, type ButtonProps } from "./Button";
 
-type AlertDialogContextType = {
-  titleId: string;
-  descriptionId: string;
-  contentId: string;
-  hasTitle: Accessor<boolean>;
-  hasDescription: Accessor<boolean>;
-  registerTitle: () => void;
-  registerDescription: () => void;
-  open: Accessor<boolean>;
-  setOpen: (open: boolean) => void;
-  dialogRef: Accessor<HTMLDialogElement | null>;
-  setDialogRef: Setter<HTMLDialogElement | null>;
-};
-
-const AlertDialogContext = createContext<AlertDialogContextType | null>(null);
-
-function useAlertDialog() {
-  const context = useContext(AlertDialogContext);
-  if (!context) throw new Error("AlertDialog parts must be used within an AlertDialog");
-
-  return context;
-}
+const [AlertDialogProvider, useAlertDialog] = createRequiredContext<DialogState>("AlertDialog");
 
 export type AlertDialogRootProps = DialogOptions & {
   children: JSX.Element;
 };
 
 export function AlertDialog(props: AlertDialogRootProps) {
-  const [uncontrolledOpen, setUncontrolledOpen] = createSignal(props.defaultOpen ?? false);
-  const [dialogRef, setDialogRef] = createSignal<HTMLDialogElement | null>(null);
-  const [hasTitle, setHasTitle] = createSignal(false);
-  const [hasDescription, setHasDescription] = createSignal(false);
-  const id = createUniqueId();
+  const dialog = createDialog(props);
 
-  const open = () => props.open ?? uncontrolledOpen();
-  const setOpen = (nextOpen: boolean) => {
-    if (open() === nextOpen) return;
-    if (props.open === undefined) setUncontrolledOpen(nextOpen);
-    props.onOpenChange?.(nextOpen);
-  };
-
-  const context = {
-    titleId: `${id}-title`,
-    descriptionId: `${id}-description`,
-    contentId: `${id}-content`,
-    hasTitle,
-    hasDescription,
-    registerTitle() {
-      onMount(() => setHasTitle(true));
-      onCleanup(() => setHasTitle(false));
-    },
-    registerDescription() {
-      onMount(() => setHasDescription(true));
-      onCleanup(() => setHasDescription(false));
-    },
-    open,
-    setOpen,
-    dialogRef,
-    setDialogRef,
-  } satisfies AlertDialogContextType;
-
-  return (
-    <AlertDialogContext.Provider value={context}>{props.children}</AlertDialogContext.Provider>
-  );
+  return <AlertDialogProvider value={dialog}>{props.children}</AlertDialogProvider>;
 }
 
-export type AlertDialogTriggerProps = Omit<
-  ButtonProps,
-  "aria-controls" | "aria-expanded" | "aria-haspopup"
->;
+export type AlertDialogTriggerProps = DialogTriggerBaseProps;
 
 export function AlertDialogTrigger(props: AlertDialogTriggerProps) {
-  const { contentId, open, setOpen } = useAlertDialog();
-  const [local, rest] = splitProps(props, ["ref", "class", "variant", "size", "children"]);
-  const triggerBehavior = {
-    type: "button" as const,
-    onClick(event: MouseEvent) {
-      if (!event.defaultPrevented) setOpen(true);
-    },
-  };
+  const dialog = useAlertDialog();
 
   return (
-    <Button
-      {...mergeProps(triggerBehavior, rest)}
-      class={cn("sb-alert-dialog-trigger", local.class)}
-      variant={local.variant}
-      size={local.size}
-      aria-haspopup="dialog"
-      aria-controls={contentId}
-      data-popup-open={open() ? "" : undefined}
-      ref={(element) => {
-        if (typeof local.ref === "function") local.ref(element);
-      }}
-    >
-      {local.children}
-    </Button>
+    <DialogTriggerBase
+      {...props}
+      dialog={dialog}
+      class={cn("sb-alert-dialog-trigger", props.class)}
+    />
   );
 }
 
-export type AlertDialogContentProps = Omit<
-  JSX.DialogHtmlAttributes<HTMLDialogElement>,
-  "id" | "open" | "role" | "aria-labelledby" | "aria-describedby"
->;
+export type AlertDialogContentProps = DialogContentBaseProps;
 
 export function AlertDialogContent(props: AlertDialogContentProps) {
-  const {
-    titleId,
-    descriptionId,
-    contentId,
-    hasTitle,
-    hasDescription,
-    open,
-    setOpen,
-    dialogRef,
-    setDialogRef,
-  } = useAlertDialog();
-  const [local, rest] = splitProps(props, ["class", "ref", "children"]);
-  const dialogBehavior = {
-    onCancel(event: Event) {
-      if (event.defaultPrevented) return;
-      event.preventDefault();
-      setOpen(false);
-    },
-    onClose() {
-      if (open()) setOpen(false);
-    },
-  };
-
-  createEffect(() => {
-    const dialog = dialogRef();
-    const nextOpen = open();
-    if (!dialog?.isConnected) return;
-
-    if (nextOpen && !dialog.open) {
-      dialog.returnValue = "";
-      dialog.showModal();
-    }
-    if (!nextOpen && dialog.open) dialog.close();
-  });
-
-  onCleanup(() => setDialogRef(null));
+  const dialog = useAlertDialog();
 
   return (
-    <dialog
-      {...mergeProps(dialogBehavior, rest)}
-      id={contentId}
-      ref={(element) => {
-        setDialogRef(element);
-        if (typeof local.ref === "function") local.ref(element);
-      }}
+    <DialogContentBase
+      {...props}
+      dialog={dialog}
       role="alertdialog"
-      aria-labelledby={hasTitle() ? titleId : undefined}
-      aria-describedby={hasDescription() ? descriptionId : undefined}
-      class={cn("sb-alert-dialog-content", local.class)}
-    >
-      {local.children}
-    </dialog>
+      class={cn("sb-alert-dialog-content", props.class)}
+    />
   );
 }
 
@@ -244,58 +122,40 @@ export function AlertDialogFooter(props: AlertDialogFooterProps) {
 export type AlertDialogCancelProps = ButtonProps;
 
 export function AlertDialogCancel(props: AlertDialogCancelProps) {
-  const { dialogRef, setOpen } = useAlertDialog();
-  const [local, rest] = splitProps(props, ["ref", "class", "variant", "autofocus", "children"]);
-  const buttonBehavior = {
-    type: "button" as const,
-    onClick(event: MouseEvent & { currentTarget: HTMLButtonElement }) {
-      if (event.defaultPrevented) return;
-      const dialog = dialogRef();
-      if (dialog) dialog.returnValue = event.currentTarget.value;
-      setOpen(false);
-    },
-  };
+  const { close } = useAlertDialog();
+  const [local, rest] = splitProps(props, ["class", "variant", "autofocus", "onClick"]);
 
   return (
     <Button
-      {...mergeProps(buttonBehavior, rest)}
+      type="button"
+      {...rest}
+      onClick={composeHandler(
+        () => local.onClick,
+        (event) => close(event.currentTarget.value),
+      )}
       class={cn("sb-alert-dialog-cancel", local.class)}
       autofocus={local.autofocus ?? true}
       variant={local.variant ?? "secondary"}
-      ref={(element) => {
-        if (typeof local.ref === "function") local.ref(element);
-      }}
-    >
-      {local.children}
-    </Button>
+    />
   );
 }
 
 export type AlertDialogActionProps = ButtonProps;
 
 export function AlertDialogAction(props: AlertDialogActionProps) {
-  const { dialogRef, setOpen } = useAlertDialog();
-  const [local, rest] = splitProps(props, ["ref", "class", "variant", "children"]);
-  const buttonBehavior = {
-    type: "button" as const,
-    onClick(event: MouseEvent & { currentTarget: HTMLButtonElement }) {
-      if (event.defaultPrevented) return;
-      const dialog = dialogRef();
-      if (dialog) dialog.returnValue = event.currentTarget.value;
-      setOpen(false);
-    },
-  };
+  const { close } = useAlertDialog();
+  const [local, rest] = splitProps(props, ["class", "variant", "onClick"]);
 
   return (
     <Button
-      {...mergeProps(buttonBehavior, rest)}
+      type="button"
+      {...rest}
+      onClick={composeHandler(
+        () => local.onClick,
+        (event) => close(event.currentTarget.value),
+      )}
       class={cn("sb-alert-dialog-action", local.class)}
       variant={local.variant ?? "danger"}
-      ref={(element) => {
-        if (typeof local.ref === "function") local.ref(element);
-      }}
-    >
-      {local.children}
-    </Button>
+    />
   );
 }

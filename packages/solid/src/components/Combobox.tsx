@@ -3,21 +3,26 @@ import * as combobox from "@zag-js/combobox";
 import { mergeProps, normalizeProps, useMachine } from "@zag-js/solid";
 import {
   type Accessor,
-  createContext,
   createMemo,
   createSignal,
   createUniqueId,
   For,
   type JSX,
-  onCleanup,
-  onMount,
   Show,
   splitProps,
-  useContext,
 } from "solid-js";
-import { Portal } from "solid-js/web";
 
 import { cn } from "../cn";
+import { createRequiredContext } from "../internal/context";
+import {
+  createMessages,
+  MessageDescription,
+  MessageError,
+  type MessageProps,
+  type Messages,
+} from "../internal/messages";
+import { createPositioning, PopupPortal, type PopupPortalProps } from "../internal/popup";
+import { fromZagValue, toZagValue } from "../internal/zagValue";
 import { validateWidgetOptions } from "../validateWidgetOptions";
 
 // Matches Zag's hidden select: out of view, but focusable so native validation can report on it.
@@ -33,25 +38,12 @@ const visuallyHiddenStyle = {
   "white-space": "nowrap",
 } satisfies JSX.CSSProperties;
 
-type ComboboxContextType = {
-  descriptionId: Accessor<string>;
-  errorId: Accessor<string>;
-  describedBy: Accessor<string | undefined>;
-  invalid: Accessor<boolean>;
-  registerDescription: () => void;
-  registerError: () => void;
+type ComboboxContextType = Messages & {
   options: Accessor<ComboboxOption[]>;
   api: Accessor<combobox.Api>;
 };
 
-const ComboboxContext = createContext<ComboboxContextType | null>(null);
-
-function useCombobox() {
-  const context = useContext(ComboboxContext);
-  if (!context) throw new Error("Combobox parts must be used within a Combobox");
-
-  return context;
-}
+const [ComboboxProvider, useCombobox] = createRequiredContext<ComboboxContextType>("Combobox");
 
 export type ComboboxRootProps = ComboboxOptions & {
   children: JSX.Element;
@@ -76,8 +68,6 @@ export function Combobox(props: ComboboxRootProps) {
     "onOpenChange",
   ]);
   const [query, setQuery] = createSignal("");
-  const [hasDescription, setHasDescription] = createSignal(false);
-  const [hasError, setHasError] = createSignal(false);
   const validatedOptions = createMemo(() => {
     validateWidgetOptions("Combobox", local.options);
     return local.options;
@@ -96,9 +86,7 @@ export function Combobox(props: ComboboxRootProps) {
     }),
   );
 
-  const positioning = createMemo(() =>
-    local.placement ? { placement: local.placement } : undefined,
-  );
+  const positioning = createPositioning(() => local.placement);
 
   const fallbackId = createUniqueId();
   const id = () => local.id ?? fallbackId;
@@ -123,12 +111,10 @@ export function Combobox(props: ComboboxRootProps) {
       return local.required;
     },
     get value() {
-      if (local.value === undefined) return undefined;
-      return local.value === null ? [] : [local.value];
+      return toZagValue(local.value);
     },
     get defaultValue() {
-      if (local.defaultValue === undefined) return undefined;
-      return local.defaultValue === null ? [] : [local.defaultValue];
+      return toZagValue(local.defaultValue);
     },
     get positioning() {
       return positioning();
@@ -144,43 +130,20 @@ export function Combobox(props: ComboboxRootProps) {
       setQuery(reason === "input-change" ? inputValue : "");
     },
     onValueChange({ value }) {
-      local.onValueChange?.(value[0] ?? null);
+      local.onValueChange?.(fromZagValue(value));
     },
   });
 
   const api = createMemo(() => combobox.connect(service, normalizeProps));
 
-  const descriptionId = () => `${id()}-description`;
-  const errorId = () => `${id()}-error`;
-  const invalid = () => local.invalid ?? false;
-
-  const describedBy = () => {
-    const ids = [];
-    if (hasDescription()) ids.push(descriptionId());
-    if (hasError() && invalid()) ids.push(errorId());
-
-    return ids.length > 0 ? ids.join(" ") : undefined;
-  };
+  const context = {
+    ...createMessages(id, () => local.invalid ?? false),
+    options,
+    api,
+  } satisfies ComboboxContextType;
 
   return (
-    <ComboboxContext.Provider
-      value={{
-        descriptionId,
-        errorId,
-        describedBy,
-        invalid,
-        registerDescription() {
-          onMount(() => setHasDescription(true));
-          onCleanup(() => setHasDescription(false));
-        },
-        registerError() {
-          onMount(() => setHasError(true));
-          onCleanup(() => setHasError(false));
-        },
-        options,
-        api,
-      }}
-    >
+    <ComboboxProvider value={context}>
       <div {...mergeProps(api().getRootProps(), rest)} class={cn("sb-combobox", local.class)}>
         {/* Zag names the text input, which would submit the typed text instead of the value. */}
         <select
@@ -202,7 +165,7 @@ export function Combobox(props: ComboboxRootProps) {
         </select>
         {local.children}
       </div>
-    </ComboboxContext.Provider>
+    </ComboboxProvider>
   );
 }
 
@@ -288,14 +251,9 @@ export function ComboboxTrigger(props: ComboboxTriggerProps) {
   );
 }
 
-export type ComboboxPortalProps = {
-  children: JSX.Element;
-  mount?: Node;
-};
+export type ComboboxPortalProps = PopupPortalProps;
 
-export function ComboboxPortal(props: ComboboxPortalProps) {
-  return <Portal mount={props.mount}>{props.children}</Portal>;
-}
+export const ComboboxPortal = PopupPortal;
 
 export type ComboboxPositionerProps = Omit<JSX.HTMLAttributes<HTMLDivElement>, "id" | "style">;
 
@@ -383,28 +341,18 @@ export function ComboboxItem(props: ComboboxItemProps) {
   );
 }
 
-export type ComboboxDescriptionProps = Omit<JSX.HTMLAttributes<HTMLParagraphElement>, "id">;
+export type ComboboxDescriptionProps = MessageProps;
 
 export function ComboboxDescription(props: ComboboxDescriptionProps) {
-  const { descriptionId, registerDescription } = useCombobox();
-  const [local, rest] = splitProps(props, ["class"]);
+  const messages = useCombobox();
 
-  registerDescription();
-
-  return <p {...rest} class={cn("sb-field-description", local.class)} id={descriptionId()} />;
+  return <MessageDescription {...props} messages={messages} />;
 }
 
-export type ComboboxErrorProps = Omit<JSX.HTMLAttributes<HTMLParagraphElement>, "id">;
+export type ComboboxErrorProps = MessageProps;
 
 export function ComboboxError(props: ComboboxErrorProps) {
-  const { errorId, invalid, registerError } = useCombobox();
-  const [local, rest] = splitProps(props, ["class"]);
+  const messages = useCombobox();
 
-  registerError();
-
-  return (
-    <Show when={invalid()}>
-      <p {...rest} class={cn("sb-field-error", local.class)} id={errorId()} />
-    </Show>
-  );
+  return <MessageError {...props} messages={messages} />;
 }

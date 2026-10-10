@@ -1,30 +1,16 @@
 import type { TabsOptions } from "@simple-base/contracts";
 import { mergeProps, normalizeProps, useMachine } from "@zag-js/solid";
 import * as tabs from "@zag-js/tabs";
-import {
-  type Accessor,
-  createContext,
-  createMemo,
-  createUniqueId,
-  type JSX,
-  splitProps,
-  useContext,
-} from "solid-js";
+import { type Accessor, createMemo, createUniqueId, type JSX, splitProps } from "solid-js";
 
 import { cn } from "../cn";
+import { createRequiredContext } from "../internal/context";
 
 type TabsContextType = {
   api: Accessor<tabs.Api>;
 };
 
-const TabsContext = createContext<TabsContextType | null>(null);
-
-function useTabs() {
-  const context = useContext(TabsContext);
-  if (!context) throw new Error("Tabs parts must be used within a Tabs");
-
-  return context;
-}
+const [TabsProvider, useTabs] = createRequiredContext<TabsContextType>("Tabs");
 
 export type TabsRootProps = TabsOptions & {
   children: JSX.Element;
@@ -63,9 +49,9 @@ export function Tabs(props: TabsRootProps) {
   const api = createMemo(() => tabs.connect(service, normalizeProps));
 
   return (
-    <TabsContext.Provider value={{ api }}>
+    <TabsProvider value={{ api }}>
       <div {...mergeProps(api().getRootProps(), rest)}>{local.children}</div>
-    </TabsContext.Provider>
+    </TabsProvider>
   );
 }
 

@@ -1,41 +1,25 @@
 import type { TooltipOptions } from "@simple-base/contracts";
 import { mergeProps, normalizeProps, useMachine } from "@zag-js/solid";
 import * as tooltip from "@zag-js/tooltip";
-import {
-  type Accessor,
-  createContext,
-  createMemo,
-  createUniqueId,
-  type JSX,
-  splitProps,
-  useContext,
-} from "solid-js";
-import { Portal } from "solid-js/web";
+import { type Accessor, createMemo, createUniqueId, type JSX, splitProps } from "solid-js";
 
 import { cn } from "../cn";
+import { createRequiredContext } from "../internal/context";
+import { createPositioning, PopupPortal, type PopupPortalProps } from "../internal/popup";
 import { Button, type ButtonProps } from "./Button";
 
 type TooltipContextType = {
   api: Accessor<tooltip.Api>;
 };
 
-const TooltipContext = createContext<TooltipContextType | null>(null);
-
-function useTooltip() {
-  const context = useContext(TooltipContext);
-  if (!context) throw new Error("Tooltip parts must be used within a Tooltip");
-
-  return context;
-}
+const [TooltipProvider, useTooltip] = createRequiredContext<TooltipContextType>("Tooltip");
 
 export type TooltipRootProps = TooltipOptions & {
   children: JSX.Element;
 };
 
 export function Tooltip(props: TooltipRootProps) {
-  const positioning = createMemo(() =>
-    props.placement ? { placement: props.placement } : undefined,
-  );
+  const positioning = createPositioning(() => props.placement);
 
   const fallbackId = createUniqueId();
 
@@ -59,7 +43,7 @@ export function Tooltip(props: TooltipRootProps) {
 
   const api = createMemo(() => tooltip.connect(service, normalizeProps));
 
-  return <TooltipContext.Provider value={{ api }}>{props.children}</TooltipContext.Provider>;
+  return <TooltipProvider value={{ api }}>{props.children}</TooltipProvider>;
 }
 
 export type TooltipTriggerProps = Omit<ButtonProps, "id" | "aria-describedby">;
@@ -81,14 +65,9 @@ export function TooltipTrigger(props: TooltipTriggerProps) {
   );
 }
 
-export type TooltipPortalProps = {
-  children: JSX.Element;
-  mount?: Node;
-};
+export type TooltipPortalProps = PopupPortalProps;
 
-export function TooltipPortal(props: TooltipPortalProps) {
-  return <Portal mount={props.mount}>{props.children}</Portal>;
-}
+export const TooltipPortal = PopupPortal;
 
 export type TooltipPositionerProps = Omit<JSX.HTMLAttributes<HTMLDivElement>, "id" | "style">;
 

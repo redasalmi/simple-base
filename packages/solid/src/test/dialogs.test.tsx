@@ -83,6 +83,79 @@ describe.each(variants.map((variant) => [variant.name, variant] as const))(
       expect(dialog()).not.toHaveAttribute("aria-describedby");
     });
 
+    // R1: registration counts mounted parts, so unmounting one of two titles keeps the other.
+    test("keeps the title while a second one unmounts (R1)", () => {
+      const [titles, setTitles] = createSignal(2);
+      render(() => (
+        <Root defaultOpen>
+          <Content>
+            <Title>Delete project?</Title>
+            <Show when={titles() > 1}>
+              <Title>Second title</Title>
+            </Show>
+          </Content>
+        </Root>
+      ));
+
+      setTitles(1);
+
+      expect(dialog()).toHaveAttribute("aria-labelledby");
+    });
+
+    test("forwards its ref to the dialog element (R7)", () => {
+      let element: HTMLDialogElement | undefined;
+      render(() => (
+        <Root>
+          <Content ref={(el) => (element = el)}>
+            <Title>Delete project?</Title>
+          </Content>
+        </Root>
+      ));
+
+      expect(element).toBe(dialog());
+    });
+
+    test("stays closed when the trigger's onClick calls preventDefault() (K11)", async () => {
+      const user = userEvent.setup();
+      const onOpenChange = vi.fn();
+      render(() => (
+        <Root onOpenChange={onOpenChange}>
+          <Trigger onClick={(event) => event.preventDefault()}>Open</Trigger>
+          <Content>
+            <Title>Delete project?</Title>
+          </Content>
+        </Root>
+      ));
+
+      await user.click(screen.getByRole("button", { name: "Open" }));
+
+      expect(onOpenChange).not.toHaveBeenCalled();
+      expect(dialog().open).toBe(false);
+    });
+
+    // S5: an unmounted dialog must not stay in the top layer, and its late `close` event changes nothing.
+    test("closes when its content unmounts while open (S5)", async () => {
+      const [mounted, setMounted] = createSignal(true);
+      const onOpenChange = vi.fn();
+      render(() => (
+        <Root defaultOpen onOpenChange={onOpenChange}>
+          <Show when={mounted()}>
+            <Content>
+              <Title>Delete project?</Title>
+            </Content>
+          </Show>
+        </Root>
+      ));
+      const element = dialog();
+      expect(element.open).toBe(true);
+
+      setMounted(false);
+      await new Promise((resolve) => setTimeout(resolve, 50));
+
+      expect(element.open).toBe(false);
+      expect(onOpenChange).not.toHaveBeenCalled();
+    });
+
     test("closes on Escape", async () => {
       const onOpenChange = vi.fn();
       render(() => (
@@ -154,9 +227,8 @@ describe.each(variants.map((variant) => [variant.name, variant] as const))(
       expect(onClose.mock.results.map((result) => result.value)).toEqual(["confirm", "cancel", ""]);
     });
 
-    // The `close` event of the previous close arrives after the reopen and closes the dialog again.
-    // Phase 3 fixes it in R3's shared `createDialog`.
-    test.fails("stays open when reopened before the last close event arrives", async () => {
+    // R3: the `close` event of the previous close arrives after the reopen, and must not close it again.
+    test("stays open when reopened before the last close event arrives", async () => {
       const [open, setOpen] = createSignal(true);
       render(() => (
         <Root open={open()} onOpenChange={setOpen}>

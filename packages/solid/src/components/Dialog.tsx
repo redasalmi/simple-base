@@ -1,177 +1,49 @@
 import type { DialogOptions } from "@simple-base/contracts";
-import { mergeProps } from "@zag-js/solid";
-import {
-  type Accessor,
-  createContext,
-  createEffect,
-  createSignal,
-  createUniqueId,
-  type JSX,
-  onCleanup,
-  onMount,
-  type Setter,
-  splitProps,
-  useContext,
-} from "solid-js";
+import { type JSX, splitProps } from "solid-js";
 import { Dynamic } from "solid-js/web";
 
 import { cn } from "../cn";
+import { createRequiredContext } from "../internal/context";
+import {
+  createDialog,
+  DialogContentBase,
+  type DialogContentBaseProps,
+  type DialogState,
+  DialogTriggerBase,
+  type DialogTriggerBaseProps,
+} from "../internal/dialog";
+import { composeHandler } from "../internal/props";
 import { Button, type ButtonProps } from "./Button";
 
-type DialogContextType = {
-  titleId: string;
-  descriptionId: string;
-  contentId: string;
-  hasTitle: Accessor<boolean>;
-  hasDescription: Accessor<boolean>;
-  registerTitle: () => void;
-  registerDescription: () => void;
-  open: Accessor<boolean>;
-  setOpen: (open: boolean) => void;
-  dialogRef: Accessor<HTMLDialogElement | null>;
-  setDialogRef: Setter<HTMLDialogElement | null>;
-};
-
-const DialogContext = createContext<DialogContextType | null>(null);
-
-function useDialog() {
-  const context = useContext(DialogContext);
-  if (!context) throw new Error("Dialog parts must be used within a Dialog");
-
-  return context;
-}
+const [DialogProvider, useDialog] = createRequiredContext<DialogState>("Dialog");
 
 export type DialogRootProps = DialogOptions & {
   children: JSX.Element;
 };
 
 export function Dialog(props: DialogRootProps) {
-  const [uncontrolledOpen, setUncontrolledOpen] = createSignal(props.defaultOpen ?? false);
-  const [dialogRef, setDialogRef] = createSignal<HTMLDialogElement | null>(null);
-  const [hasTitle, setHasTitle] = createSignal(false);
-  const [hasDescription, setHasDescription] = createSignal(false);
-  const id = createUniqueId();
+  const dialog = createDialog(props);
 
-  const open = () => props.open ?? uncontrolledOpen();
-  const setOpen = (nextOpen: boolean) => {
-    if (open() === nextOpen) return;
-    if (props.open === undefined) setUncontrolledOpen(nextOpen);
-    props.onOpenChange?.(nextOpen);
-  };
-
-  const context = {
-    titleId: `${id}-title`,
-    descriptionId: `${id}-description`,
-    contentId: `${id}-content`,
-    hasTitle,
-    hasDescription,
-    registerTitle() {
-      onMount(() => setHasTitle(true));
-      onCleanup(() => setHasTitle(false));
-    },
-    registerDescription() {
-      onMount(() => setHasDescription(true));
-      onCleanup(() => setHasDescription(false));
-    },
-    open,
-    setOpen,
-    dialogRef,
-    setDialogRef,
-  } satisfies DialogContextType;
-
-  return <DialogContext.Provider value={context}>{props.children}</DialogContext.Provider>;
+  return <DialogProvider value={dialog}>{props.children}</DialogProvider>;
 }
 
-export type DialogTriggerProps = Omit<
-  ButtonProps,
-  "aria-controls" | "aria-expanded" | "aria-haspopup"
->;
+export type DialogTriggerProps = DialogTriggerBaseProps;
 
 export function DialogTrigger(props: DialogTriggerProps) {
-  const { contentId, open, setOpen } = useDialog();
-  const [local, rest] = splitProps(props, ["ref", "class", "variant", "size", "children"]);
-  const triggerBehavior = {
-    type: "button" as const,
-    onClick(event: MouseEvent) {
-      if (!event.defaultPrevented) setOpen(true);
-    },
-  };
+  const dialog = useDialog();
 
   return (
-    <Button
-      {...mergeProps(triggerBehavior, rest)}
-      class={cn("sb-dialog-trigger", local.class)}
-      variant={local.variant}
-      size={local.size}
-      aria-haspopup="dialog"
-      aria-controls={contentId}
-      data-popup-open={open() ? "" : undefined}
-      ref={(element) => {
-        if (typeof local.ref === "function") local.ref(element);
-      }}
-    >
-      {local.children}
-    </Button>
+    <DialogTriggerBase {...props} dialog={dialog} class={cn("sb-dialog-trigger", props.class)} />
   );
 }
 
-export type DialogContentProps = Omit<
-  JSX.DialogHtmlAttributes<HTMLDialogElement>,
-  "id" | "open" | "role" | "aria-labelledby" | "aria-describedby"
->;
+export type DialogContentProps = DialogContentBaseProps;
 
 export function DialogContent(props: DialogContentProps) {
-  const {
-    titleId,
-    descriptionId,
-    contentId,
-    hasTitle,
-    hasDescription,
-    open,
-    setOpen,
-    dialogRef,
-    setDialogRef,
-  } = useDialog();
-  const [local, rest] = splitProps(props, ["class", "ref", "children"]);
-  const dialogBehavior = {
-    onCancel(event: Event) {
-      if (event.defaultPrevented) return;
-      event.preventDefault();
-      setOpen(false);
-    },
-    onClose() {
-      if (open()) setOpen(false);
-    },
-  };
-
-  createEffect(() => {
-    const dialog = dialogRef();
-    const nextOpen = open();
-    if (!dialog?.isConnected) return;
-
-    if (nextOpen && !dialog.open) {
-      dialog.returnValue = "";
-      dialog.showModal();
-    }
-    if (!nextOpen && dialog.open) dialog.close();
-  });
-
-  onCleanup(() => setDialogRef(null));
+  const dialog = useDialog();
 
   return (
-    <dialog
-      {...mergeProps(dialogBehavior, rest)}
-      id={contentId}
-      ref={(element) => {
-        setDialogRef(element);
-        if (typeof local.ref === "function") local.ref(element);
-      }}
-      aria-labelledby={hasTitle() ? titleId : undefined}
-      aria-describedby={hasDescription() ? descriptionId : undefined}
-      class={cn("sb-dialog-content", local.class)}
-    >
-      {local.children}
-    </dialog>
+    <DialogContentBase {...props} dialog={dialog} class={cn("sb-dialog-content", props.class)} />
   );
 }
 
@@ -233,56 +105,37 @@ export function DialogFooter(props: DialogFooterProps) {
 export type DialogCloseProps = JSX.ButtonHTMLAttributes<HTMLButtonElement>;
 
 export function DialogClose(props: DialogCloseProps) {
-  const { dialogRef, setOpen } = useDialog();
-  const [local, rest] = splitProps(props, ["ref", "class", "children"]);
-  const buttonBehavior = {
-    type: "button" as const,
-    onClick(event: MouseEvent & { currentTarget: HTMLButtonElement }) {
-      if (event.defaultPrevented) return;
-      const dialog = dialogRef();
-      if (dialog) dialog.returnValue = event.currentTarget.value;
-      setOpen(false);
-    },
-  };
+  const { close } = useDialog();
+  const [local, rest] = splitProps(props, ["class", "onClick"]);
 
   return (
     <button
-      {...mergeProps(buttonBehavior, rest)}
+      type="button"
+      {...rest}
+      onClick={composeHandler(
+        () => local.onClick,
+        (event) => close(event.currentTarget.value),
+      )}
       class={cn("sb-dialog-close", local.class)}
-      ref={(element) => {
-        if (typeof local.ref === "function") local.ref(element);
-      }}
-    >
-      {local.children}
-    </button>
+    />
   );
 }
 
 export type DialogActionProps = ButtonProps;
 
 export function DialogAction(props: DialogActionProps) {
-  const { dialogRef, setOpen } = useDialog();
-  const [local, rest] = splitProps(props, ["ref", "class", "variant", "children"]);
-  const buttonBehavior = {
-    type: "button" as const,
-    onClick(event: MouseEvent & { currentTarget: HTMLButtonElement }) {
-      if (event.defaultPrevented) return;
-      const dialog = dialogRef();
-      if (dialog) dialog.returnValue = event.currentTarget.value;
-      setOpen(false);
-    },
-  };
+  const { close } = useDialog();
+  const [local, rest] = splitProps(props, ["class", "onClick"]);
 
   return (
     <Button
-      {...mergeProps(buttonBehavior, rest)}
+      type="button"
+      {...rest}
+      onClick={composeHandler(
+        () => local.onClick,
+        (event) => close(event.currentTarget.value),
+      )}
       class={cn("sb-dialog-action", local.class)}
-      variant={local.variant}
-      ref={(element) => {
-        if (typeof local.ref === "function") local.ref(element);
-      }}
-    >
-      {local.children}
-    </Button>
+    />
   );
 }

@@ -32,7 +32,7 @@
         "solid/no-react-deps": "error",
         "solid/no-react-specific-props": "error",
         "solid/prefer-for": "error",
-        "solid/reactivity": "error",
+        "solid/reactivity": ["error", { "customReactiveFunctions": ["composeHandler"] }],
         "solid/self-closing-comp": "error",
         "solid/style-prop": "error"
       }

@@ -1,45 +1,27 @@
 import type { NumberFieldOptions } from "@simple-base/contracts";
 import * as numberInput from "@zag-js/number-input";
 import { mergeProps, normalizeProps, useMachine } from "@zag-js/solid";
-import {
-  type Accessor,
-  createContext,
-  createMemo,
-  createSignal,
-  createUniqueId,
-  type JSX,
-  onCleanup,
-  onMount,
-  Show,
-  splitProps,
-  useContext,
-} from "solid-js";
+import { type Accessor, createMemo, createUniqueId, type JSX, splitProps } from "solid-js";
 
 import { cn } from "../cn";
+import { createRequiredContext } from "../internal/context";
+import {
+  createMessages,
+  MessageDescription,
+  MessageError,
+  type MessageProps,
+  type Messages,
+} from "../internal/messages";
+import type { WithoutOwnedProps } from "../internal/props";
+import { createRegistry } from "../internal/registry";
 
-type NumberFieldContextType = {
-  descriptionId: Accessor<string>;
-  errorId: Accessor<string>;
-  describedBy: Accessor<string | undefined>;
-  registerDescription: () => void;
-  registerError: () => void;
-  registerAffix: () => string;
+type NumberFieldContextType = Messages & {
+  registerAffix: (id: string) => void;
   api: Accessor<numberInput.Api>;
 };
 
-const NumberFieldContext = createContext<NumberFieldContextType | null>(null);
-
-function useNumberField() {
-  const context = useContext(NumberFieldContext);
-  if (!context) throw new Error("NumberField parts must be used within a NumberField");
-
-  return context;
-}
-
-// JSX accepts any hyphenated attribute that a type omits, so aria-* must be typed as never to be rejected.
-type WithoutOwnedProps<Props, Owned extends string> = Omit<Props, Owned> & {
-  [Key in Owned]?: never;
-};
+const [NumberFieldProvider, useNumberField] =
+  createRequiredContext<NumberFieldContextType>("NumberField");
 
 export type NumberFieldRootProps = NumberFieldOptions & {
   /** Zag's labels for the step buttons and the value text, for example to translate them. */
@@ -71,9 +53,7 @@ export function NumberField(props: NumberFieldRootProps) {
     "onValueChange",
   ]);
   const fallbackId = createUniqueId();
-  const [hasDescription, setHasDescription] = createSignal(false);
-  const [hasError, setHasError] = createSignal(false);
-  const [affixIds, setAffixIds] = createSignal<string[]>([]);
+  const affixes = createRegistry<string>();
 
   const id = () => local.id ?? fallbackId;
   const service = useMachine(numberInput.machine, {
@@ -129,44 +109,23 @@ export function NumberField(props: NumberFieldRootProps) {
   });
   const api = createMemo(() => numberInput.connect(service, normalizeProps));
 
-  const descriptionId = () => `${id()}-description`;
-  const errorId = () => `${id()}-error`;
+  const messages = createMessages(id, () => api().invalid);
 
-  const describedBy = () => {
-    const ids = [...affixIds()];
-    if (hasDescription()) ids.push(descriptionId());
-    if (hasError() && api().invalid) ids.push(errorId());
-
-    return ids.length > 0 ? ids.join(" ") : undefined;
-  };
+  const context = {
+    ...messages,
+    // The affixes come first, so a unit is read before the description.
+    describedBy: () =>
+      [...affixes.entries(), messages.describedBy()].filter(Boolean).join(" ") || undefined,
+    registerAffix: affixes.register,
+    api,
+  } satisfies NumberFieldContextType;
 
   return (
-    <NumberFieldContext.Provider
-      value={{
-        api,
-        descriptionId,
-        errorId,
-        describedBy,
-        registerDescription() {
-          onMount(() => setHasDescription(true));
-          onCleanup(() => setHasDescription(false));
-        },
-        registerError() {
-          onMount(() => setHasError(true));
-          onCleanup(() => setHasError(false));
-        },
-        registerAffix() {
-          const affixId = createUniqueId();
-          onMount(() => setAffixIds((ids) => [...ids, affixId]));
-          onCleanup(() => setAffixIds((ids) => ids.filter((other) => other !== affixId)));
-          return affixId;
-        },
-      }}
-    >
+    <NumberFieldProvider value={context}>
       <div {...mergeProps(api().getRootProps(), rest)} class={cn("sb-number-field", local.class)}>
         {local.children}
       </div>
-    </NumberFieldContext.Provider>
+    </NumberFieldProvider>
   );
 }
 
@@ -288,33 +247,24 @@ export function NumberFieldAffix(props: NumberFieldAffixProps) {
   const [local, rest] = splitProps(props, ["class"]);
 
   // The input lists the affix in its description, so a unit shown only here is still announced.
-  const id = registerAffix();
+  const id = createUniqueId();
+  registerAffix(id);
 
   return <span {...rest} id={id} class={cn("sb-number-field-affix", local.class)} />;
 }
 
-export type NumberFieldDescriptionProps = Omit<JSX.HTMLAttributes<HTMLParagraphElement>, "id">;
+export type NumberFieldDescriptionProps = MessageProps;
 
 export function NumberFieldDescription(props: NumberFieldDescriptionProps) {
-  const { descriptionId, registerDescription } = useNumberField();
-  const [local, rest] = splitProps(props, ["class"]);
+  const messages = useNumberField();
 
-  registerDescription();
-
-  return <p {...rest} class={cn("sb-field-description", local.class)} id={descriptionId()} />;
+  return <MessageDescription {...props} messages={messages} />;
 }
 
-export type NumberFieldErrorProps = Omit<JSX.HTMLAttributes<HTMLParagraphElement>, "id">;
+export type NumberFieldErrorProps = MessageProps;
 
 export function NumberFieldError(props: NumberFieldErrorProps) {
-  const { api, errorId, registerError } = useNumberField();
-  const [local, rest] = splitProps(props, ["class"]);
+  const messages = useNumberField();
 
-  registerError();
-
-  return (
-    <Show when={api().invalid}>
-      <p {...rest} class={cn("sb-field-error", local.class)} id={errorId()} />
-    </Show>
-  );
+  return <MessageError {...props} messages={messages} />;
 }

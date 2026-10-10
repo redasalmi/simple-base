@@ -227,8 +227,8 @@ describe.each(cases.map((testCase) => [testCase.name, testCase] as const))("%s",
     expect(describedBy()).toBe("x-description");
   });
 
-  // R1: registration is a boolean, so unmounting one of two descriptions drops both.
-  test.fails("keeps the description while a second one unmounts (R1)", () => {
+  // R1: registration counts mounted parts, so unmounting one of two descriptions keeps the other.
+  test("keeps the description while a second one unmounts (R1)", () => {
     const { describedBy, setDescriptions } = renderCase(testCase, { descriptions: 2 });
     expect(describedBy()).toBe("x-description");
 

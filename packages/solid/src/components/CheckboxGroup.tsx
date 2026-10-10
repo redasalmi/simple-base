@@ -1,9 +1,10 @@
 import type { CheckboxGroupOptions } from "@simple-base/contracts";
-import { mergeProps } from "@zag-js/solid";
-import { type Accessor, createContext, type JSX, splitProps, useContext } from "solid-js";
+import { type Accessor, type JSX, splitProps } from "solid-js";
 
 import { cn } from "../cn";
+import { createRequiredContext } from "../internal/context";
 import { useFieldset } from "../internal/fieldset";
+import { ariaInvalid, composeHandler, mergeRefs, type WithoutOwnedProps } from "../internal/props";
 import { Checkbox, type CheckboxProps } from "./Checkbox";
 
 type CheckboxGroupContextType = {
@@ -13,14 +14,8 @@ type CheckboxGroupContextType = {
   toggle: () => void;
 };
 
-const CheckboxGroupContext = createContext<CheckboxGroupContextType | null>(null);
-
-function useCheckboxGroup() {
-  const context = useContext(CheckboxGroupContext);
-  if (!context) throw new Error("CheckboxGroupItem must be used within a CheckboxGroup");
-
-  return context;
-}
+const [CheckboxGroupProvider, useCheckboxGroup] =
+  createRequiredContext<CheckboxGroupContextType>("CheckboxGroup");
 
 export type CheckboxGroupRootProps = CheckboxGroupOptions & {
   children: JSX.Element;
@@ -56,30 +51,24 @@ export function CheckboxGroup(props: CheckboxGroupRootProps) {
   } satisfies CheckboxGroupContextType;
 
   return (
-    <CheckboxGroupContext.Provider value={context}>
+    <CheckboxGroupProvider value={context}>
       <div
         {...rest}
         class={cn("sb-choice-list", local.class)}
-        ref={(element) => {
-          list = element;
-          if (typeof local.ref === "function") local.ref(element);
-        }}
+        ref={mergeRefs((element: HTMLDivElement) => (list = element), local.ref)}
       >
         {local.children}
       </div>
-    </CheckboxGroupContext.Provider>
+    </CheckboxGroupProvider>
   );
 }
 
 type CheckboxGroupOwnedProps = "name" | "checked" | "defaultChecked" | "aria-invalid";
 
-// JSX accepts any hyphenated attribute that a type omits, so aria-* must be typed as never to be rejected.
-export type CheckboxGroupItemProps = Omit<
-  CheckboxProps,
-  CheckboxGroupOwnedProps | "value" | "children"
+export type CheckboxGroupItemProps = WithoutOwnedProps<
+  Omit<CheckboxProps, "value" | "children">,
+  CheckboxGroupOwnedProps
 > & {
-  [Key in CheckboxGroupOwnedProps]?: never;
-} & {
   value: string;
   /** The option's label, rendered beside the checkbox. */
   children?: JSX.Element;
@@ -88,20 +77,21 @@ export type CheckboxGroupItemProps = Omit<
 export function CheckboxGroupItem(props: CheckboxGroupItemProps) {
   const fieldset = useFieldset();
   const group = useCheckboxGroup();
-  const [local, rest] = splitProps(props, ["class", "children", "value"]);
-  const selection = {
-    onChange: () => group.toggle(),
-  };
+  const [local, rest] = splitProps(props, ["class", "children", "value", "onChange"]);
 
   return (
     <label class={cn("sb-choice", local.class)}>
       <Checkbox
-        {...mergeProps(selection, rest)}
+        {...rest}
+        onChange={composeHandler(
+          () => local.onChange,
+          () => group.toggle(),
+        )}
         name={group.name()}
         value={local.value}
         checked={group.value()?.includes(local.value)}
         defaultChecked={group.defaultValue()?.includes(local.value) ?? false}
-        aria-invalid={fieldset.invalid() || undefined}
+        aria-invalid={ariaInvalid(fieldset.invalid())}
       />
       <span>{local.children}</span>
     </label>

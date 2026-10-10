@@ -1,16 +1,10 @@
 import type { RadioGroupOptions } from "@simple-base/contracts";
-import { mergeProps } from "@zag-js/solid";
-import {
-  type Accessor,
-  createContext,
-  createUniqueId,
-  type JSX,
-  splitProps,
-  useContext,
-} from "solid-js";
+import { type Accessor, createUniqueId, type JSX, splitProps } from "solid-js";
 
 import { cn } from "../cn";
+import { createRequiredContext } from "../internal/context";
 import { useFieldset } from "../internal/fieldset";
+import { ariaInvalid, composeHandler, mergeRefs, type WithoutOwnedProps } from "../internal/props";
 import { Radio, type RadioProps } from "./Radio";
 
 type RadioGroupContextType = {
@@ -20,14 +14,8 @@ type RadioGroupContextType = {
   select: (value: string) => void;
 };
 
-const RadioGroupContext = createContext<RadioGroupContextType | null>(null);
-
-function useRadioGroup() {
-  const context = useContext(RadioGroupContext);
-  if (!context) throw new Error("RadioGroupItem must be used within a RadioGroup");
-
-  return context;
-}
+const [RadioGroupProvider, useRadioGroup] =
+  createRequiredContext<RadioGroupContextType>("RadioGroup");
 
 export type RadioGroupRootProps = RadioGroupOptions & {
   children: JSX.Element;
@@ -61,27 +49,24 @@ export function RadioGroup(props: RadioGroupRootProps) {
   } satisfies RadioGroupContextType;
 
   return (
-    <RadioGroupContext.Provider value={context}>
+    <RadioGroupProvider value={context}>
       <div
         {...rest}
         class={cn("sb-choice-list", local.class)}
-        ref={(element) => {
-          list = element;
-          if (typeof local.ref === "function") local.ref(element);
-        }}
+        ref={mergeRefs((element: HTMLDivElement) => (list = element), local.ref)}
       >
         {local.children}
       </div>
-    </RadioGroupContext.Provider>
+    </RadioGroupProvider>
   );
 }
 
 type RadioGroupOwnedProps = "name" | "checked" | "defaultChecked" | "required" | "aria-invalid";
 
-// JSX accepts any hyphenated attribute that a type omits, so aria-* must be typed as never to be rejected.
-export type RadioGroupItemProps = Omit<RadioProps, RadioGroupOwnedProps | "value" | "children"> & {
-  [Key in RadioGroupOwnedProps]?: never;
-} & {
+export type RadioGroupItemProps = WithoutOwnedProps<
+  Omit<RadioProps, "value" | "children">,
+  RadioGroupOwnedProps
+> & {
   value: string;
   /** The option's label, rendered beside the radio. */
   children?: JSX.Element;
@@ -90,21 +75,22 @@ export type RadioGroupItemProps = Omit<RadioProps, RadioGroupOwnedProps | "value
 export function RadioGroupItem(props: RadioGroupItemProps) {
   const fieldset = useFieldset();
   const group = useRadioGroup();
-  const [local, rest] = splitProps(props, ["class", "children", "value"]);
-  const selection = {
-    onChange: () => group.select(local.value),
-  };
+  const [local, rest] = splitProps(props, ["class", "children", "value", "onChange"]);
 
   return (
     <label class={cn("sb-choice", local.class)}>
       <Radio
-        {...mergeProps(selection, rest)}
+        {...rest}
+        onChange={composeHandler(
+          () => local.onChange,
+          () => group.select(local.value),
+        )}
         name={group.name()}
         value={local.value}
         checked={group.value() === undefined ? undefined : group.value() === local.value}
         defaultChecked={group.defaultValue() === local.value}
         required={fieldset.required()}
-        aria-invalid={fieldset.invalid() || undefined}
+        aria-invalid={ariaInvalid(fieldset.invalid())}
       />
       <span>{local.children}</span>
     </label>

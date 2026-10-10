@@ -8,17 +8,16 @@ import { Key, mergeProps, normalizeProps, useMachine } from "@zag-js/solid";
 import * as toast from "@zag-js/toast";
 import {
   type Accessor,
-  createContext,
   createMemo,
   createUniqueId,
   type JSX,
   Show,
   splitProps,
   untrack,
-  useContext,
 } from "solid-js";
 
 import { cn } from "../cn";
+import { createRequiredContext } from "../internal/context";
 import { Button, type ButtonProps } from "./Button";
 
 export type ToastCreateOptions = ToastOptions & {
@@ -64,14 +63,10 @@ type ToastContextType = {
   toast: Accessor<toast.Props>;
 };
 
-const ToastContext = createContext<ToastContextType | null>(null);
-
-function useToast() {
-  const context = useContext(ToastContext);
-  if (!context) throw new Error("Toast parts must be used within a Toaster");
-
-  return context;
-}
+const [ToastContextProvider, useToast] = createRequiredContext<ToastContextType>(
+  "Toast",
+  "Toaster",
+);
 
 export type ToasterProps = Omit<
   JSX.HTMLAttributes<HTMLDivElement>,
@@ -124,9 +119,9 @@ function ToastProvider(props: ToastProviderProps) {
   const api = createMemo(() => toast.connect(service, normalizeProps));
 
   return (
-    <ToastContext.Provider value={{ api, toast: () => props.toast() }}>
+    <ToastContextProvider value={{ api, toast: () => props.toast() }}>
       {props.children()}
-    </ToastContext.Provider>
+    </ToastContextProvider>
   );
 }
 

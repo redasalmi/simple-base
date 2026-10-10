@@ -3,43 +3,34 @@ import * as select from "@zag-js/select";
 import { mergeProps, normalizeProps, useMachine } from "@zag-js/solid";
 import {
   type Accessor,
-  createContext,
   createMemo,
-  createSignal,
   createUniqueId,
   For,
   type JSX,
-  onCleanup,
-  onMount,
   Show,
   splitProps,
-  useContext,
 } from "solid-js";
-import { Portal } from "solid-js/web";
 
 import { cn } from "../cn";
+import { createRequiredContext } from "../internal/context";
+import {
+  createMessages,
+  MessageDescription,
+  MessageError,
+  type MessageProps,
+  type Messages,
+} from "../internal/messages";
+import { createPositioning, PopupPortal, type PopupPortalProps } from "../internal/popup";
+import { fromZagValue, toZagValue } from "../internal/zagValue";
 import { validateWidgetOptions } from "../validateWidgetOptions";
 
-type SelectContextType = {
-  descriptionId: Accessor<string>;
-  errorId: Accessor<string>;
-  describedBy: Accessor<string | undefined>;
-  invalid: Accessor<boolean>;
-  registerDescription: () => void;
-  registerError: () => void;
+type SelectContextType = Messages & {
   placeholder: Accessor<string | undefined>;
   options: Accessor<readonly SelectOption[]>;
   api: Accessor<select.Api>;
 };
 
-const SelectContext = createContext<SelectContextType | null>(null);
-
-function useSelect() {
-  const context = useContext(SelectContext);
-  if (!context) throw new Error("Select parts must be used within a Select");
-
-  return context;
-}
+const [SelectProvider, useSelect] = createRequiredContext<SelectContextType>("Select");
 
 export type SelectRootProps = SelectOptions & {
   children: JSX.Element;
@@ -75,14 +66,9 @@ export function Select(props: SelectRootProps) {
     });
   });
 
-  const positioning = createMemo(() =>
-    local.placement ? { placement: local.placement } : undefined,
-  );
+  const positioning = createPositioning(() => local.placement);
 
   const fallbackId = createUniqueId();
-  const [hasDescription, setHasDescription] = createSignal(false);
-  const [hasError, setHasError] = createSignal(false);
-
   const id = () => local.id ?? fallbackId;
 
   const service = useMachine(select.machine, {
@@ -108,12 +94,10 @@ export function Select(props: SelectRootProps) {
       return local.required;
     },
     get value() {
-      if (local.value === undefined) return undefined;
-      return local.value === null ? [] : [local.value];
+      return toZagValue(local.value);
     },
     get defaultValue() {
-      if (local.defaultValue === undefined) return undefined;
-      return local.defaultValue === null ? [] : [local.defaultValue];
+      return toZagValue(local.defaultValue);
     },
     get positioning() {
       return positioning();
@@ -125,44 +109,21 @@ export function Select(props: SelectRootProps) {
       local.onOpenChange?.(open);
     },
     onValueChange({ value }) {
-      local.onValueChange?.(value[0] ?? null);
+      local.onValueChange?.(fromZagValue(value));
     },
   });
 
   const api = createMemo(() => select.connect(service, normalizeProps));
 
-  const descriptionId = () => `${id()}-description`;
-  const errorId = () => `${id()}-error`;
-  const invalid = () => local.invalid ?? false;
-
-  const describedBy = () => {
-    const ids = [];
-    if (hasDescription()) ids.push(descriptionId());
-    if (hasError() && invalid()) ids.push(errorId());
-
-    return ids.length > 0 ? ids.join(" ") : undefined;
-  };
+  const context = {
+    ...createMessages(id, () => local.invalid ?? false),
+    placeholder: () => local.placeholder,
+    options: () => local.options,
+    api,
+  } satisfies SelectContextType;
 
   return (
-    <SelectContext.Provider
-      value={{
-        descriptionId,
-        errorId,
-        describedBy,
-        invalid,
-        registerDescription() {
-          onMount(() => setHasDescription(true));
-          onCleanup(() => setHasDescription(false));
-        },
-        registerError() {
-          onMount(() => setHasError(true));
-          onCleanup(() => setHasError(false));
-        },
-        placeholder: () => local.placeholder,
-        options: () => local.options,
-        api,
-      }}
-    >
+    <SelectProvider value={context}>
       <div {...mergeProps(api().getRootProps(), rest)} class={cn("sb-select-root", local.class)}>
         <select {...api().getHiddenSelectProps()}>
           <Show when={api().value.length === 0}>
@@ -183,7 +144,7 @@ export function Select(props: SelectRootProps) {
         </select>
         {local.children}
       </div>
-    </SelectContext.Provider>
+    </SelectProvider>
   );
 }
 
@@ -269,14 +230,9 @@ export function SelectIndicator(props: SelectIndicatorProps) {
   );
 }
 
-export type SelectPortalProps = {
-  children: JSX.Element;
-  mount?: Node;
-};
+export type SelectPortalProps = PopupPortalProps;
 
-export function SelectPortal(props: SelectPortalProps) {
-  return <Portal mount={props.mount}>{props.children}</Portal>;
-}
+export const SelectPortal = PopupPortal;
 
 export type SelectPositionerProps = Omit<JSX.HTMLAttributes<HTMLDivElement>, "id" | "style">;
 
@@ -361,28 +317,18 @@ export function SelectItem(props: SelectItemProps) {
   );
 }
 
-export type SelectDescriptionProps = Omit<JSX.HTMLAttributes<HTMLParagraphElement>, "id">;
+export type SelectDescriptionProps = MessageProps;
 
 export function SelectDescription(props: SelectDescriptionProps) {
-  const { descriptionId, registerDescription } = useSelect();
-  const [local, rest] = splitProps(props, ["class"]);
+  const messages = useSelect();
 
-  registerDescription();
-
-  return <p {...rest} class={cn("sb-field-description", local.class)} id={descriptionId()} />;
+  return <MessageDescription {...props} messages={messages} />;
 }
 
-export type SelectErrorProps = Omit<JSX.HTMLAttributes<HTMLParagraphElement>, "id">;
+export type SelectErrorProps = MessageProps;
 
 export function SelectError(props: SelectErrorProps) {
-  const { errorId, invalid, registerError } = useSelect();
-  const [local, rest] = splitProps(props, ["class"]);
+  const messages = useSelect();
 
-  registerError();
-
-  return (
-    <Show when={invalid()}>
-      <p {...rest} class={cn("sb-field-error", local.class)} id={errorId()} />
-    </Show>
-  );
+  return <MessageError {...props} messages={messages} />;
 }

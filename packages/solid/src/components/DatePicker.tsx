@@ -3,9 +3,7 @@ import * as datepicker from "@zag-js/date-picker";
 import { mergeProps, normalizeProps, useMachine } from "@zag-js/solid";
 import {
   type Accessor,
-  createContext,
   createMemo,
-  createSignal,
   createUniqueId,
   Index,
   type JSX,
@@ -13,36 +11,29 @@ import {
   onMount,
   Show,
   splitProps,
-  useContext,
 } from "solid-js";
-import { Portal } from "solid-js/web";
 
 import { cn } from "../cn";
+import { createRequiredContext } from "../internal/context";
+import {
+  createMessages,
+  MessageDescription,
+  MessageError,
+  type MessageProps,
+  type Messages,
+} from "../internal/messages";
+import { createPositioning, PopupPortal, type PopupPortalProps } from "../internal/popup";
+import { dataAttr, type WithoutOwnedProps } from "../internal/props";
+import { fromZagValue, toZagValue } from "../internal/zagValue";
 
-type DatePickerContextType = {
-  descriptionId: Accessor<string>;
-  errorId: Accessor<string>;
-  describedBy: Accessor<string | undefined>;
+type DatePickerContextType = Messages & {
   required: Accessor<boolean>;
   form: Accessor<string | undefined>;
-  registerDescription: () => void;
-  registerError: () => void;
   api: Accessor<datepicker.Api>;
 };
 
-const DatePickerContext = createContext<DatePickerContextType | null>(null);
-
-function useDatePicker() {
-  const context = useContext(DatePickerContext);
-  if (!context) throw new Error("DatePicker parts must be used within a DatePicker");
-
-  return context;
-}
-
-// JSX accepts any hyphenated attribute that a type omits, so aria-* must be typed as never to be rejected.
-type WithoutOwnedProps<Props, Owned extends string> = Omit<Props, Owned> & {
-  [Key in Owned]?: never;
-};
+const [DatePickerProvider, useDatePicker] =
+  createRequiredContext<DatePickerContextType>("DatePicker");
 
 export type DatePickerRootProps = DatePickerOptions & {
   /** Zag's labels for the trigger, the calendar navigation, and the day cells, for example to translate them. */
@@ -74,16 +65,12 @@ export function DatePicker(props: DatePickerRootProps) {
     "onOpenChange",
   ]);
   const fallbackId = createUniqueId();
-  const [hasDescription, setHasDescription] = createSignal(false);
-  const [hasError, setHasError] = createSignal(false);
 
   const id = () => local.id ?? fallbackId;
   // Zag defaults to UTC, which marks the wrong day as today for users far from it.
   const userTimeZone = new Intl.DateTimeFormat().resolvedOptions().timeZone;
   // Zag centers the calendar under the field; align it with the field's start like Select.
-  const positioning = createMemo(() => ({
-    placement: local.placement ?? datePickerDefaults.placement,
-  }));
+  const positioning = createPositioning(() => local.placement ?? datePickerDefaults.placement);
 
   const service = useMachine(datepicker.machine, {
     get id() {
@@ -95,12 +82,10 @@ export function DatePicker(props: DatePickerRootProps) {
       };
     },
     get value() {
-      if (local.value === undefined) return undefined;
-      return local.value === null ? [] : [local.value];
+      return toZagValue(local.value);
     },
     get defaultValue() {
-      if (local.defaultValue === undefined) return undefined;
-      return local.defaultValue === null ? [] : [local.defaultValue];
+      return toZagValue(local.defaultValue);
     },
     get min() {
       return local.min;
@@ -136,24 +121,13 @@ export function DatePicker(props: DatePickerRootProps) {
       return local.translations;
     },
     onValueChange({ value, valueAsString }) {
-      local.onValueChange?.(value[0] ?? null, valueAsString[0] ?? "");
+      local.onValueChange?.(fromZagValue(value), valueAsString[0] ?? "");
     },
     onOpenChange({ open }) {
       local.onOpenChange?.(open);
     },
   });
   const api = createMemo(() => datepicker.connect(service, normalizeProps));
-
-  const descriptionId = () => `${id()}-description`;
-  const errorId = () => `${id()}-error`;
-
-  const describedBy = () => {
-    const ids = [];
-    if (hasDescription()) ids.push(descriptionId());
-    if (hasError() && api().invalid) ids.push(errorId());
-
-    return ids.length > 0 ? ids.join(" ") : undefined;
-  };
 
   // Zag's date picker, unlike its number input, doesn't restore the initial value on a form reset.
   const onReset = (event: Event) => {
@@ -168,25 +142,15 @@ export function DatePicker(props: DatePickerRootProps) {
     onCleanup(() => form.removeEventListener("reset", onReset));
   });
 
+  const context = {
+    ...createMessages(id, () => api().invalid),
+    required: () => local.required ?? false,
+    form: () => local.form,
+    api,
+  } satisfies DatePickerContextType;
+
   return (
-    <DatePickerContext.Provider
-      value={{
-        api,
-        descriptionId,
-        errorId,
-        describedBy,
-        required: () => local.required ?? false,
-        form: () => local.form,
-        registerDescription() {
-          onMount(() => setHasDescription(true));
-          onCleanup(() => setHasDescription(false));
-        },
-        registerError() {
-          onMount(() => setHasError(true));
-          onCleanup(() => setHasError(false));
-        },
-      }}
-    >
+    <DatePickerProvider value={context}>
       <div {...mergeProps(api().getRootProps(), rest)} class={cn("sb-date-picker", local.class)}>
         {/* The visible input holds locale-formatted text, so the form submits the ISO date instead. */}
         <Show when={local.name}>
@@ -200,7 +164,7 @@ export function DatePicker(props: DatePickerRootProps) {
         </Show>
         {local.children}
       </div>
-    </DatePickerContext.Provider>
+    </DatePickerProvider>
   );
 }
 
@@ -214,7 +178,7 @@ export function DatePickerLabel(props: DatePickerLabelProps) {
     <label
       {...mergeProps(api().getLabelProps(), rest)}
       // Zag's date picker label, unlike its number input label, doesn't mark required.
-      data-required={required() ? "" : undefined}
+      data-required={dataAttr(required())}
       class={cn("sb-field-label", local.class)}
     >
       {local.children}
@@ -296,14 +260,9 @@ export function DatePickerTrigger(props: DatePickerTriggerProps) {
   );
 }
 
-export type DatePickerPortalProps = {
-  children: JSX.Element;
-  mount?: Node;
-};
+export type DatePickerPortalProps = PopupPortalProps;
 
-export function DatePickerPortal(props: DatePickerPortalProps) {
-  return <Portal mount={props.mount}>{props.children}</Portal>;
-}
+export const DatePickerPortal = PopupPortal;
 
 export type DatePickerPositionerProps = Omit<JSX.HTMLAttributes<HTMLDivElement>, "id" | "style">;
 
@@ -528,30 +487,20 @@ export function DatePickerCalendar(props: DatePickerCalendarProps) {
   );
 }
 
-export type DatePickerDescriptionProps = Omit<JSX.HTMLAttributes<HTMLParagraphElement>, "id">;
+export type DatePickerDescriptionProps = MessageProps;
 
 export function DatePickerDescription(props: DatePickerDescriptionProps) {
-  const { descriptionId, registerDescription } = useDatePicker();
-  const [local, rest] = splitProps(props, ["class"]);
+  const messages = useDatePicker();
 
-  registerDescription();
-
-  return <p {...rest} class={cn("sb-field-description", local.class)} id={descriptionId()} />;
+  return <MessageDescription {...props} messages={messages} />;
 }
 
-export type DatePickerErrorProps = Omit<JSX.HTMLAttributes<HTMLParagraphElement>, "id">;
+export type DatePickerErrorProps = MessageProps;
 
 export function DatePickerError(props: DatePickerErrorProps) {
-  const { api, errorId, registerError } = useDatePicker();
-  const [local, rest] = splitProps(props, ["class"]);
+  const messages = useDatePicker();
 
-  registerError();
-
-  return (
-    <Show when={api().invalid}>
-      <p {...rest} class={cn("sb-field-error", local.class)} id={errorId()} />
-    </Show>
-  );
+  return <MessageError {...props} messages={messages} />;
 }
 
 function CalendarIcon() {
