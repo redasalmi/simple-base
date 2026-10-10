@@ -11,6 +11,7 @@ import {
   Show,
   splitProps,
 } from "solid-js";
+import { isDev } from "solid-js/web";
 
 import { cn } from "../cn";
 import { createRequiredContext } from "../internal/context";
@@ -58,7 +59,7 @@ export function Select(props: SelectRootProps) {
   ]);
 
   const collection = createMemo(() => {
-    validateWidgetOptions("Select", local.options);
+    if (isDev) validateWidgetOptions("Select", local.options);
 
     return select.collection({
       items: local.options,

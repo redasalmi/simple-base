@@ -248,11 +248,17 @@ The code for every item above has landed; the unchecked ones only wait for their
 
 ### Phase 5. Runtime fixes
 
-- [ ] **Dev-only validation** ([P2](04-performance.md), [Q3](07-code-quality.md)). Guard `validateWidgetOptions` with `isDev` from `solid-js/web`.
-- [ ] **Calendar** ([P1](04-performance.md), [Q8](07-code-quality.md)). Wrap each `DatePickerCalendar` view in `<Show>` on `api().view`, read `getDecade()` once, and give the calendar root a class and `splitProps`. Test that keyboard focus moves correctly between views.
-- [ ] **Combobox filter** ([P3](04-performance.md)). `Intl.Collator(locale, { sensitivity: "base" })` so "e" matches "é". Precomputing lowercased labels isn't needed at invoice-app sizes.
-- [ ] **Time zone** ([P5](04-performance.md), [S6](08-solid-best-practices.md), [K8](#k8-ssr)). The `timeZone` prop or UTC on the server and during hydration, the user's zone after mount, cached per module on the client only. Document passing `timeZone` from the request.
-- [ ] **SSR docs** ([K8](#k8-ssr)). A README section: SSR goes through the `solid` export condition, `aria-describedby` completes after hydration, and DatePicker's time zone behavior.
+- [x] **Dev-only validation** ([P2](04-performance.md), [Q3](07-code-quality.md)). Guard `validateWidgetOptions` with `isDev` from `solid-js/web`.
+- [x] **Calendar** ([P1](04-performance.md), [Q8](07-code-quality.md)). Wrap each `DatePickerCalendar` view in `<Show>` on `api().view`, read `getDecade()` once, and give the calendar root a class and `splitProps`. Test that keyboard focus moves correctly between views.
+- [x] **Combobox filter** ([P3](04-performance.md)). `Intl.Collator(locale, { sensitivity: "base" })` so "e" matches "é". Precomputing lowercased labels isn't needed at invoice-app sizes.
+- [x] **Time zone** ([P5](04-performance.md), [S6](08-solid-best-practices.md), [K8](#k8-ssr)). The `timeZone` prop or UTC on the server and during hydration, the user's zone after mount, cached per module on the client only. Document passing `timeZone` from the request.
+- [x] **SSR docs** ([K8](#k8-ssr)). A README section: SSR goes through the `solid` export condition, `aria-describedby` completes after hydration, and DatePicker's time zone behavior.
+
+The implementation settled three things the items above didn't:
+
+- **The focused day follows the zone switch.** Zag picks the calendar's focused day once, from today in the zone it starts with, so after the switch from UTC it could sit one day away from today's outline. When there is no value and no `timeZone`, DatePicker moves the focus to the user's today after mount (hydration test).
+- **No `isServer` guard.** The user's zone is read only in `onMount`, which never runs on the server, so the module cache needs no other guard.
+- **The filter uses the runtime's locale.** `ComboboxOptions` has no `locale`, so the collator uses the default one. Base sensitivity ignores accents in every locale that treats them as marks, such as French; a `locale` option can be added later without a breaking change.
 
 ### Phase 6. Packaging
 

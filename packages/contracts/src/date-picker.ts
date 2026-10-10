@@ -20,7 +20,7 @@ export type DatePickerOptions = {
   max?: DateValue;
   /** BCP 47 language tag for the input format, the first day of the week, and the calendar's labels. Defaults to `en-US`. */
   locale?: string;
-  /** IANA time zone that decides which day is today, e.g. `Europe/Paris`. Defaults to the user's time zone. */
+  /** IANA time zone that decides which day is today, e.g. `Europe/Paris`. Defaults to the user's time zone once mounted, and to UTC on the server and while hydrating. */
   timeZone?: string;
   /** Always shows six weeks, so the calendar keeps the same height from month to month. */
   fixedWeeks?: boolean;

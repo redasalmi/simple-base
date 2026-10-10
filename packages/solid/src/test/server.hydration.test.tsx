@@ -133,6 +133,7 @@ async function renderBothSides(name: FixtureName) {
   renderFirstPass(hydrate, fixtures[name], hydrated);
 
   return {
+    hydrated,
     server: snapshot(server),
     client: snapshot(client),
     /** Server elements that hydration replaced instead of reusing. */
@@ -149,17 +150,20 @@ async function expectNoMismatch(name: FixtureName) {
   expect(errors).toEqual([]);
 }
 
-// K8: without `timeZone`, the server marks today in its own zone and the browser in the user's.
-// Phase 5 renders in UTC on the server and during hydration, then switches to the user's zone.
-const k8: FixtureName[] = ["DatePickerCalendar"];
-
-const expectedToFail = new Set(k8);
-const matching = (Object.keys(fixtures) as FixtureName[]).filter(
-  (name) => !expectedToFail.has(name),
-);
-
 describe("hydration", () => {
-  test.each(matching)("%s hydrates without a mismatch", expectNoMismatch);
+  test.each(Object.keys(fixtures) as FixtureName[])(
+    "%s hydrates without a mismatch",
+    expectNoMismatch,
+  );
 
-  test.fails.each(k8)("%s without `timeZone` hydrates without a mismatch (K8)", expectNoMismatch);
+  // K8: without `timeZone`, the server and the hydration pass use UTC, then the picker switches to
+  // the user's zone, where it is already October 10.
+  test("DatePickerCalendar moves today to the user's time zone after hydration (K8)", async () => {
+    const { hydrated } = await renderBothSides("DatePickerCalendar");
+    const cell = (state: string) =>
+      hydrated.querySelector(`.sb-date-picker-cell-trigger[${state}]`)?.getAttribute("data-value");
+
+    expect(cell("data-today")).toBe("2026-10-10");
+    expect(cell("data-focus")).toBe("2026-10-10");
+  });
 });

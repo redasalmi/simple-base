@@ -34,6 +34,7 @@ const renderFixture: BrowserCommand<[name: string, options: RenderFixtureOptions
 // Pre-bundled up front, so Vite doesn't discover them mid-run and reload the browser tests.
 const optimizeDeps = {
   include: [
+    "@internationalized/date",
     "@zag-js/combobox",
     "@zag-js/date-picker",
     "@zag-js/menu",

@@ -12,6 +12,7 @@ import {
   splitProps,
   untrack,
 } from "solid-js";
+import { isDev } from "solid-js/web";
 
 import { cn } from "../cn";
 import { createRequiredContext } from "../internal/context";
@@ -40,6 +41,19 @@ const visuallyHiddenStyle = {
   clip: "rect(0 0 0 0)",
   "white-space": "nowrap",
 } satisfies JSX.CSSProperties;
+
+// Base sensitivity ignores case and accents, so "e" finds "é".
+const collator = new Intl.Collator(undefined, { sensitivity: "base" });
+
+function contains(text: string, search: string) {
+  const normalizedText = text.normalize("NFC");
+  const normalizedSearch = search.normalize("NFC");
+  for (let start = 0; start + normalizedSearch.length <= normalizedText.length; start++) {
+    const slice = normalizedText.slice(start, start + normalizedSearch.length);
+    if (collator.compare(slice, normalizedSearch) === 0) return true;
+  }
+  return false;
+}
 
 type ComboboxContextType = Messages & {
   options: Accessor<ComboboxOption[]>;
@@ -72,12 +86,12 @@ export function Combobox(props: ComboboxRootProps) {
   ]);
   const [query, setQuery] = createSignal("");
   const validatedOptions = createMemo(() => {
-    validateWidgetOptions("Combobox", local.options);
+    if (isDev) validateWidgetOptions("Combobox", local.options);
     return local.options;
   });
   const options = createMemo(() => {
-    const search = query().toLowerCase();
-    return validatedOptions().filter((option) => option.label.toLowerCase().includes(search));
+    const search = query();
+    return validatedOptions().filter((option) => contains(option.label, search));
   });
 
   const collection = createMemo(() =>

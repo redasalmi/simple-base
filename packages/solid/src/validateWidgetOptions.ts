@@ -4,6 +4,7 @@ type WidgetOption = {
   value: string;
 };
 
+/** Throws on developer mistakes. Call it behind `isDev`, so production builds leave it out. */
 export function validateWidgetOptions(widget: WidgetName, options: readonly WidgetOption[]): void {
   const values = new Set<string>();
 

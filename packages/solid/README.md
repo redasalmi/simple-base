@@ -342,7 +342,7 @@ With `name` and `defaultValue`, a `Select` works uncontrolled inside a `<form>`:
 
 ## Combobox
 
-Same root props and parts as `Select`, with a text input that filters options by label. `ComboboxLabel` names the input and the list, so every `Combobox` needs one. `ComboboxDescription` and `ComboboxError` are linked to the input. `name` adds a hidden native select that submits the option value, not the typed text, or an empty value while nothing is selected. `ComboboxEmpty` goes after `ComboboxContent`, as with `SelectEmpty`, and announces itself through a status region when a search has no matches.
+Same root props and parts as `Select`, with a text input that filters options by label, ignoring case and accents, so "etienne" finds "Saint-Étienne". `ComboboxLabel` names the input and the list, so every `Combobox` needs one. `ComboboxDescription` and `ComboboxError` are linked to the input. `name` adds a hidden native select that submits the option value, not the typed text, or an empty value while nothing is selected. `ComboboxEmpty` goes after `ComboboxContent`, as with `SelectEmpty`, and announces itself through a status region when a search has no matches.
 
 ```tsx
 import {
@@ -446,12 +446,12 @@ Additional root props:
 
 - `value` and `defaultValue` take a `DateValue`, or `null` for no date. `onValueChange` receives the date (`null` when cleared) and the text shown in the input.
 - `min` and `max` disable the days outside the range. A typed date outside it is clamped to the nearest bound when the input loses focus; the picker never sets `invalid` on its own.
-- `locale` (default `en-US`) sets the input format, the first day of the week, and the calendar's month and day names. `timeZone` decides which day is today and defaults to the user's time zone.
+- `locale` (default `en-US`) sets the input format, the first day of the week, and the calendar's month and day names. `timeZone` decides which day is today and defaults to the user's time zone, which is only known once the picker has mounted; see [Server rendering](#server-rendering).
 - `translations` takes Zag's date picker labels, such as `trigger`, `prevTrigger`, `nextTrigger`, `viewTrigger`, and `dayCell`. They are English unless you set them, whatever the `locale`.
 - `name` adds a hidden input that submits the date as `YYYY-MM-DD`, since the visible input holds locale-formatted text. `form` associates both inputs with a form elsewhere on the page.
 - `placement` picks the popup side (default `bottom-start`), `fixedWeeks` always shows six weeks so the popup keeps its height, and `onOpenChange` reports visibility.
 
-`DatePickerCalendar` renders the navigation and the day, month, and year views; select the month heading to switch views. Each heading's name starts with the text it shows, followed by the `viewTrigger` translation, such as "October 2026, Switch to month view". `DatePickerTrigger` renders a calendar icon unless you pass children. `DatePickerPortal` accepts `mount`, like `SelectPortal`.
+`DatePickerCalendar` renders the navigation and the current view, day, month, or year; select the month heading to switch views. Each heading's name starts with the text it shows, followed by the `viewTrigger` translation, such as "October 2026, Switch to month view". `DatePickerTrigger` renders a calendar icon unless you pass children. `DatePickerPortal` accepts `mount`, like `SelectPortal`.
 
 ## Menu
 
@@ -919,6 +919,14 @@ Every string the components read to assistive technology has an English default 
 - **Zag-based roots** (`NumberField`, `DatePicker`) take Zag's own `translations`, with Zag's types and defaults.
 - **Other roots** take `labels`, a partial object whose defaults live in `@simple-base/contracts`: `Pagination` (`paginationLabels`) and `Fieldset` (`fieldsetLabels`).
 - `Toaster` takes `label`, the accessible name of its live region, like an `aria-label`.
+
+## Server rendering
+
+Every component renders on the server and hydrates without a mismatch, for example in SolidStart.
+
+- Server rendering goes through the `solid` export condition, which points at `dist/index.jsx`: JSX left untransformed, so your app's `vite-plugin-solid` compiles it for the server and for the client. Vite with `vite-plugin-solid` and SolidStart pick that condition on their own. The `default` condition is compiled for the browser only and can't render on a server.
+- `aria-describedby` on `Field`, `Fieldset`, `NumberField`, `DatePicker`, `Select`, and `Combobox`, and `aria-labelledby` and `aria-describedby` on dialog content, list their parts once the parts have mounted. The server's HTML leaves them out, and hydration adds them. The first client render matches the server, so this causes no mismatch.
+- The server can't know the user's time zone. Without `timeZone`, `DatePicker` uses UTC on the server and while hydrating, then switches to the user's zone once mounted. Where the user's date differs from UTC's, today's outline, and the day the calendar focuses when there is no value, move by one day after hydration. To render the user's day from the start, pass `timeZone` from the request, for example from a cookie the browser sets to `Intl.DateTimeFormat().resolvedOptions().timeZone`.
 
 ## Props conventions
 

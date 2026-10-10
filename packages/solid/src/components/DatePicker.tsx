@@ -1,12 +1,15 @@
+import { today } from "@internationalized/date";
 import { datePickerDefaults, type DatePickerOptions } from "@simple-base/contracts";
 import * as datepicker from "@zag-js/date-picker";
 import { mergeProps, normalizeProps, useMachine } from "@zag-js/solid";
 import {
   type Accessor,
   createMemo,
+  createSignal,
   createUniqueId,
   Index,
   type JSX,
+  onMount,
   Show,
   splitProps,
   untrack,
@@ -35,6 +38,13 @@ type DatePickerContextType = Messages & {
 
 const [DatePickerProvider, useDatePicker] =
   createRequiredContext<DatePickerContextType>("DatePicker");
+
+let cachedUserTimeZone: string | undefined;
+
+// Called after mount only, since on a server it would return the server's zone.
+function getUserTimeZone() {
+  return (cachedUserTimeZone ??= new Intl.DateTimeFormat().resolvedOptions().timeZone);
+}
 
 export type DatePickerRootProps = DatePickerOptions & {
   /** Zag's labels for the trigger, the calendar navigation, and the day cells, for example to translate them. */
@@ -68,8 +78,9 @@ export function DatePicker(props: DatePickerRootProps) {
   const fallbackId = createUniqueId();
 
   const id = () => local.id ?? fallbackId;
-  // Zag defaults to UTC, which marks the wrong day as today for users far from it.
-  const userTimeZone = new Intl.DateTimeFormat().resolvedOptions().timeZone;
+  // The server can't know the user's zone, so without `timeZone` the server and the first client
+  // render use UTC, Zag's default, and the picker switches to the user's zone once mounted (K8).
+  const [fallbackTimeZone, setFallbackTimeZone] = createSignal("UTC");
   // Zag centers the calendar under the field; align it with the field's start like Select.
   const positioning = createPositioning(() => local.placement ?? datePickerDefaults.placement);
 
@@ -98,7 +109,7 @@ export function DatePicker(props: DatePickerRootProps) {
       return local.locale;
     },
     get timeZone() {
-      return local.timeZone ?? userTimeZone;
+      return local.timeZone ?? fallbackTimeZone();
     },
     get fixedWeeks() {
       return local.fixedWeeks;
@@ -129,6 +140,15 @@ export function DatePicker(props: DatePickerRootProps) {
     },
   });
   const api = createMemo(() => datepicker.connect(service, normalizeProps));
+
+  onMount(() => {
+    const userTimeZone = getUserTimeZone();
+    setFallbackTimeZone(userTimeZone);
+    // Zag picks the focused day once, from today in UTC, when there is no value to start from.
+    if (local.timeZone === undefined && api().value.length === 0) {
+      api().setFocusedValue(today(userTimeZone));
+    }
+  });
 
   let input: HTMLInputElement | undefined;
   const initialValue = untrack(() => api().value);
@@ -304,191 +324,212 @@ const GRID_COLUMNS = 4;
 
 export function DatePickerCalendar(props: DatePickerCalendarProps) {
   const { api } = useDatePicker();
+  const [local, rest] = splitProps(props, ["class"]);
 
-  // Zag's label, such as "Switch to month view", leaves out the heading the button shows, so its
-  // name wouldn't contain its visible text (WCAG 2.5.3, U9 in audit/zag-issues.md).
-  const viewTriggerProps = (view: datepicker.DateView, text: string) => {
-    const zagProps = api().getViewTriggerProps({ view });
-    return { ...zagProps, "aria-label": `${text}, ${zagProps["aria-label"]}` };
-  };
+  // Only the current view renders, so moving through the days doesn't rebuild the month and year
+  // grids.
+  return (
+    <div {...rest} class={cn("sb-date-picker-calendar", local.class)}>
+      <Show when={api().view === "day"}>
+        <DayView />
+      </Show>
+      <Show when={api().view === "month"}>
+        <MonthView />
+      </Show>
+      <Show when={api().view === "year"}>
+        <YearView />
+      </Show>
+    </div>
+  );
+}
+
+// Zag's label, such as "Switch to month view", leaves out the heading the button shows, so its
+// name wouldn't contain its visible text (WCAG 2.5.3, U9 in audit/zag-issues.md).
+function viewTriggerProps(api: datepicker.Api, view: datepicker.DateView, text: string) {
+  const zagProps = api.getViewTriggerProps({ view });
+  return { ...zagProps, "aria-label": `${text}, ${zagProps["aria-label"]}` };
+}
+
+function DayView() {
+  const { api } = useDatePicker();
 
   return (
-    <div {...props}>
-      <div {...api().getViewProps({ view: "day" })}>
-        <div {...api().getViewControlProps({ view: "day" })} class="sb-date-picker-view-control">
-          <button
-            {...api().getPrevTriggerProps({ view: "day" })}
-            class="sb-date-picker-nav-trigger"
-          >
-            <ChevronIcon direction="prev" />
-          </button>
-          <button
-            {...viewTriggerProps("day", api().visibleRangeText.start)}
-            class="sb-date-picker-view-trigger"
-          >
-            {api().visibleRangeText.start}
-          </button>
-          <button
-            {...api().getNextTriggerProps({ view: "day" })}
-            class="sb-date-picker-nav-trigger"
-          >
-            <ChevronIcon direction="next" />
-          </button>
-        </div>
-
-        <table {...api().getTableProps({ view: "day" })} class="sb-date-picker-table">
-          <thead {...api().getTableHeadProps({ view: "day" })}>
-            <tr {...api().getTableRowProps({ view: "day" })}>
-              <Index each={api().weekDays}>
-                {(day) => (
-                  <th
-                    {...api().getTableHeaderProps({ view: "day" })}
-                    scope="col"
-                    aria-label={day().long}
-                    class="sb-date-picker-table-header"
-                  >
-                    {day().narrow}
-                  </th>
-                )}
-              </Index>
-            </tr>
-          </thead>
-          <tbody {...api().getTableBodyProps({ view: "day" })}>
-            <Index each={api().weeks}>
-              {(week) => (
-                <tr {...api().getTableRowProps({ view: "day" })}>
-                  <Index each={week()}>
-                    {(value) => (
-                      <td
-                        {...api().getDayTableCellProps({ value: value() })}
-                        class="sb-date-picker-table-cell"
-                      >
-                        <div
-                          {...api().getDayTableCellTriggerProps({ value: value() })}
-                          class="sb-date-picker-cell-trigger"
-                        >
-                          {value().day}
-                        </div>
-                      </td>
-                    )}
-                  </Index>
-                </tr>
-              )}
-            </Index>
-          </tbody>
-        </table>
-      </div>
-
-      <div {...api().getViewProps({ view: "month" })}>
-        <div {...api().getViewControlProps({ view: "month" })} class="sb-date-picker-view-control">
-          <button
-            {...api().getPrevTriggerProps({ view: "month" })}
-            class="sb-date-picker-nav-trigger"
-          >
-            <ChevronIcon direction="prev" />
-          </button>
-          <button
-            {...viewTriggerProps("month", String(api().visibleRange.start.year))}
-            class="sb-date-picker-view-trigger"
-          >
-            {api().visibleRange.start.year}
-          </button>
-          <button
-            {...api().getNextTriggerProps({ view: "month" })}
-            class="sb-date-picker-nav-trigger"
-          >
-            <ChevronIcon direction="next" />
-          </button>
-        </div>
-
-        <table
-          {...api().getTableProps({ view: "month", columns: GRID_COLUMNS })}
-          class="sb-date-picker-table"
+    <div {...api().getViewProps({ view: "day" })}>
+      <div {...api().getViewControlProps({ view: "day" })} class="sb-date-picker-view-control">
+        <button {...api().getPrevTriggerProps({ view: "day" })} class="sb-date-picker-nav-trigger">
+          <ChevronIcon direction="prev" />
+        </button>
+        <button
+          {...viewTriggerProps(api(), "day", api().visibleRangeText.start)}
+          class="sb-date-picker-view-trigger"
         >
-          <tbody {...api().getTableBodyProps({ view: "month" })}>
-            <Index each={api().getMonthsGrid({ columns: GRID_COLUMNS, format: "short" })}>
-              {(months) => (
-                <tr {...api().getTableRowProps({ view: "month" })}>
-                  <Index each={months()}>
-                    {(month) => (
-                      <td
-                        {...api().getMonthTableCellProps({ ...month(), columns: GRID_COLUMNS })}
-                        class="sb-date-picker-table-cell"
-                      >
-                        <div
-                          {...api().getMonthTableCellTriggerProps({
-                            ...month(),
-                            columns: GRID_COLUMNS,
-                          })}
-                          class="sb-date-picker-cell-trigger"
-                        >
-                          {month().label}
-                        </div>
-                      </td>
-                    )}
-                  </Index>
-                </tr>
-              )}
-            </Index>
-          </tbody>
-        </table>
+          {api().visibleRangeText.start}
+        </button>
+        <button {...api().getNextTriggerProps({ view: "day" })} class="sb-date-picker-nav-trigger">
+          <ChevronIcon direction="next" />
+        </button>
       </div>
 
-      <div {...api().getViewProps({ view: "year" })}>
-        <div {...api().getViewControlProps({ view: "year" })} class="sb-date-picker-view-control">
-          <button
-            {...api().getPrevTriggerProps({ view: "year" })}
-            class="sb-date-picker-nav-trigger"
-          >
-            <ChevronIcon direction="prev" />
-          </button>
-          {/* Year is the last view, so Zag disables this trigger; it only labels the decade. */}
-          <button
-            {...viewTriggerProps("year", `${api().getDecade().start} – ${api().getDecade().end}`)}
-            class="sb-date-picker-view-trigger"
-          >
-            {api().getDecade().start} – {api().getDecade().end}
-          </button>
-          <button
-            {...api().getNextTriggerProps({ view: "year" })}
-            class="sb-date-picker-nav-trigger"
-          >
-            <ChevronIcon direction="next" />
-          </button>
-        </div>
+      <table {...api().getTableProps({ view: "day" })} class="sb-date-picker-table">
+        <thead {...api().getTableHeadProps({ view: "day" })}>
+          <tr {...api().getTableRowProps({ view: "day" })}>
+            <Index each={api().weekDays}>
+              {(day) => (
+                <th
+                  {...api().getTableHeaderProps({ view: "day" })}
+                  scope="col"
+                  aria-label={day().long}
+                  class="sb-date-picker-table-header"
+                >
+                  {day().narrow}
+                </th>
+              )}
+            </Index>
+          </tr>
+        </thead>
+        <tbody {...api().getTableBodyProps({ view: "day" })}>
+          <Index each={api().weeks}>
+            {(week) => (
+              <tr {...api().getTableRowProps({ view: "day" })}>
+                <Index each={week()}>
+                  {(value) => (
+                    <td
+                      {...api().getDayTableCellProps({ value: value() })}
+                      class="sb-date-picker-table-cell"
+                    >
+                      <div
+                        {...api().getDayTableCellTriggerProps({ value: value() })}
+                        class="sb-date-picker-cell-trigger"
+                      >
+                        {value().day}
+                      </div>
+                    </td>
+                  )}
+                </Index>
+              </tr>
+            )}
+          </Index>
+        </tbody>
+      </table>
+    </div>
+  );
+}
 
-        <table
-          {...api().getTableProps({ view: "year", columns: GRID_COLUMNS })}
-          class="sb-date-picker-table"
+function MonthView() {
+  const { api } = useDatePicker();
+
+  return (
+    <div {...api().getViewProps({ view: "month" })}>
+      <div {...api().getViewControlProps({ view: "month" })} class="sb-date-picker-view-control">
+        <button
+          {...api().getPrevTriggerProps({ view: "month" })}
+          class="sb-date-picker-nav-trigger"
         >
-          <tbody {...api().getTableBodyProps({ view: "year" })}>
-            <Index each={api().getYearsGrid({ columns: GRID_COLUMNS })}>
-              {(years) => (
-                <tr {...api().getTableRowProps({ view: "year" })}>
-                  <Index each={years()}>
-                    {(year) => (
-                      <td
-                        {...api().getYearTableCellProps({ ...year(), columns: GRID_COLUMNS })}
-                        class="sb-date-picker-table-cell"
-                      >
-                        <div
-                          {...api().getYearTableCellTriggerProps({
-                            ...year(),
-                            columns: GRID_COLUMNS,
-                          })}
-                          class="sb-date-picker-cell-trigger"
-                        >
-                          {year().label}
-                        </div>
-                      </td>
-                    )}
-                  </Index>
-                </tr>
-              )}
-            </Index>
-          </tbody>
-        </table>
+          <ChevronIcon direction="prev" />
+        </button>
+        <button
+          {...viewTriggerProps(api(), "month", String(api().visibleRange.start.year))}
+          class="sb-date-picker-view-trigger"
+        >
+          {api().visibleRange.start.year}
+        </button>
+        <button
+          {...api().getNextTriggerProps({ view: "month" })}
+          class="sb-date-picker-nav-trigger"
+        >
+          <ChevronIcon direction="next" />
+        </button>
       </div>
+
+      <table
+        {...api().getTableProps({ view: "month", columns: GRID_COLUMNS })}
+        class="sb-date-picker-table"
+      >
+        <tbody {...api().getTableBodyProps({ view: "month" })}>
+          <Index each={api().getMonthsGrid({ columns: GRID_COLUMNS, format: "short" })}>
+            {(months) => (
+              <tr {...api().getTableRowProps({ view: "month" })}>
+                <Index each={months()}>
+                  {(month) => (
+                    <td
+                      {...api().getMonthTableCellProps({ ...month(), columns: GRID_COLUMNS })}
+                      class="sb-date-picker-table-cell"
+                    >
+                      <div
+                        {...api().getMonthTableCellTriggerProps({
+                          ...month(),
+                          columns: GRID_COLUMNS,
+                        })}
+                        class="sb-date-picker-cell-trigger"
+                      >
+                        {month().label}
+                      </div>
+                    </td>
+                  )}
+                </Index>
+              </tr>
+            )}
+          </Index>
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+function YearView() {
+  const { api } = useDatePicker();
+  const decade = createMemo(() => api().getDecade());
+  const decadeText = () => `${decade().start} – ${decade().end}`;
+
+  return (
+    <div {...api().getViewProps({ view: "year" })}>
+      <div {...api().getViewControlProps({ view: "year" })} class="sb-date-picker-view-control">
+        <button {...api().getPrevTriggerProps({ view: "year" })} class="sb-date-picker-nav-trigger">
+          <ChevronIcon direction="prev" />
+        </button>
+        {/* Year is the last view, so Zag disables this trigger; it only labels the decade. */}
+        <button
+          {...viewTriggerProps(api(), "year", decadeText())}
+          class="sb-date-picker-view-trigger"
+        >
+          {decadeText()}
+        </button>
+        <button {...api().getNextTriggerProps({ view: "year" })} class="sb-date-picker-nav-trigger">
+          <ChevronIcon direction="next" />
+        </button>
+      </div>
+
+      <table
+        {...api().getTableProps({ view: "year", columns: GRID_COLUMNS })}
+        class="sb-date-picker-table"
+      >
+        <tbody {...api().getTableBodyProps({ view: "year" })}>
+          <Index each={api().getYearsGrid({ columns: GRID_COLUMNS })}>
+            {(years) => (
+              <tr {...api().getTableRowProps({ view: "year" })}>
+                <Index each={years()}>
+                  {(year) => (
+                    <td
+                      {...api().getYearTableCellProps({ ...year(), columns: GRID_COLUMNS })}
+                      class="sb-date-picker-table-cell"
+                    >
+                      <div
+                        {...api().getYearTableCellTriggerProps({
+                          ...year(),
+                          columns: GRID_COLUMNS,
+                        })}
+                        class="sb-date-picker-cell-trigger"
+                      >
+                        {year().label}
+                      </div>
+                    </td>
+                  )}
+                </Index>
+              </tr>
+            )}
+          </Index>
+        </tbody>
+      </table>
     </div>
   );
 }
