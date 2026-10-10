@@ -1,7 +1,20 @@
 {
   "name": "@simple-base/css",
-  "version": "0.15.4",
+  "version": "0.15.5",
+  "description": "Plain CSS component styles and typography for Simple Base.",
+  "keywords": [
+    "components",
+    "css",
+    "design-system",
+    "simple-base",
+    "styles"
+  ],
+  "homepage": "https://github.com/redasalmi/simple-base/tree/main/packages/css#readme",
+  "bugs": {
+    "url": "https://github.com/redasalmi/simple-base/issues"
+  },
   "license": "MIT",
+  "author": "Reda Salmi",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/redasalmi/simple-base.git",

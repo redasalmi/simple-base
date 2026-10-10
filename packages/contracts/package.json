@@ -1,7 +1,20 @@
 {
   "name": "@simple-base/contracts",
-  "version": "0.17.0",
+  "version": "0.18.0",
+  "description": "Framework-neutral component options and defaults shared by Simple Base adapters.",
+  "keywords": [
+    "components",
+    "contracts",
+    "design-system",
+    "simple-base",
+    "types"
+  ],
+  "homepage": "https://github.com/redasalmi/simple-base/tree/main/packages/contracts#readme",
+  "bugs": {
+    "url": "https://github.com/redasalmi/simple-base/issues"
+  },
   "license": "MIT",
+  "author": "Reda Salmi",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/redasalmi/simple-base.git",
@@ -17,79 +30,79 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+      "default": "./dist/index.js"
     },
     "./badge": {
       "types": "./dist/badge.d.ts",
-      "import": "./dist/badge.js"
+      "default": "./dist/badge.js"
     },
     "./button": {
       "types": "./dist/button.d.ts",
-      "import": "./dist/button.js"
+      "default": "./dist/button.js"
     },
     "./card": {
       "types": "./dist/card.d.ts",
-      "import": "./dist/card.js"
+      "default": "./dist/card.js"
     },
     "./combobox": {
       "types": "./dist/combobox.d.ts",
-      "import": "./dist/combobox.js"
+      "default": "./dist/combobox.js"
     },
     "./date-picker": {
       "types": "./dist/date-picker.d.ts",
-      "import": "./dist/date-picker.js"
+      "default": "./dist/date-picker.js"
     },
     "./dialog": {
       "types": "./dist/dialog.d.ts",
-      "import": "./dist/dialog.js"
+      "default": "./dist/dialog.js"
     },
     "./field": {
       "types": "./dist/field.d.ts",
-      "import": "./dist/field.js"
+      "default": "./dist/field.js"
     },
     "./fieldset": {
       "types": "./dist/fieldset.d.ts",
-      "import": "./dist/fieldset.js"
+      "default": "./dist/fieldset.js"
     },
     "./listbox": {
       "types": "./dist/listbox.d.ts",
-      "import": "./dist/listbox.js"
+      "default": "./dist/listbox.js"
     },
     "./menu": {
       "types": "./dist/menu.d.ts",
-      "import": "./dist/menu.js"
+      "default": "./dist/menu.js"
     },
     "./number-field": {
       "types": "./dist/number-field.d.ts",
-      "import": "./dist/number-field.js"
+      "default": "./dist/number-field.js"
     },
     "./pagination": {
       "types": "./dist/pagination.d.ts",
-      "import": "./dist/pagination.js"
+      "default": "./dist/pagination.js"
     },
     "./placement": {
       "types": "./dist/placement.d.ts",
-      "import": "./dist/placement.js"
+      "default": "./dist/placement.js"
     },
     "./select": {
       "types": "./dist/select.d.ts",
-      "import": "./dist/select.js"
+      "default": "./dist/select.js"
     },
     "./status": {
       "types": "./dist/status.d.ts",
-      "import": "./dist/status.js"
+      "default": "./dist/status.js"
     },
     "./table": {
       "types": "./dist/table.d.ts",
-      "import": "./dist/table.js"
+      "default": "./dist/table.js"
     },
     "./tabs": {
       "types": "./dist/tabs.d.ts",
-      "import": "./dist/tabs.js"
+      "default": "./dist/tabs.js"
     },
     "./tooltip": {
       "types": "./dist/tooltip.d.ts",
-      "import": "./dist/tooltip.js"
+      "default": "./dist/tooltip.js"
     },
     "./package.json": "./package.json"
   },
@@ -103,8 +116,10 @@
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
+    "@arethetypeswrong/core": "catalog:",
     "@internationalized/date": "catalog:",
     "@types/node": "catalog:",
+    "publint": "catalog:",
     "tsdown": "catalog:"
   },
   "peerDependencies": {

@@ -262,13 +262,22 @@ The implementation settled three things the items above didn't:
 
 ### Phase 6. Packaging
 
-- [ ] **Package contents** ([B5](06-build-and-ci.md)). A LICENSE in each package, `description`, `keywords`, `homepage`, `bugs`, and `author` in each manifest, and a `default` condition next to `import` in `contracts` and `tokens`.
-- [ ] **Published-shape checks** ([B5](06-build-and-ci.md)). publint and attw through tsdown for `contracts` and `solid`. Check the option names in the installed tsdown docs.
-- [ ] **Declarations** ([B3](06-build-and-ci.md)). Diff `dist/index.d.ts` from TypeScript 7 against one from the stable compiler tsdown fully supports. If they differ, emit declarations with the stable one. Consider `isolatedDeclarations` for `contracts` ([B8](06-build-and-ci.md)), which lets declarations skip the TypeScript API altogether.
-- [ ] **tsconfig** ([B8](06-build-and-ci.md), [B2](06-build-and-ci.md)). A shared `tsconfig.base.json` with `verbatimModuleSyntax` and the unused checks. Drop `@types/node`, `allowJs`, and `strictNullChecks` from `solid`. Make the preserve build's `jsx` override explicit so the build log is quiet.
-- [ ] **Turbo** ([B7](06-build-and-ci.md)). A `typecheck` script for `tokens`, and no `.env*` in the `build` inputs. No source export condition ([K9](#k9-source-export-condition)).
-- [ ] **Leftovers** ([B9](06-build-and-ci.md)). Delete `packages/solid/.gitignore` and the empty `.npmrc`.
-- [ ] **Smoke test** ([B6](06-build-and-ci.md)). Pack the four packages, install them in a scratch Vite and Solid app, build it, and check that `Button` and `Select` render and the CSS resolves `@simple-base/tokens/css`. Do it a second time with server rendering and hydration, through Vite SSR or SolidStart ([K8](#k8-ssr)).
+- [x] **Package contents** ([B5](06-build-and-ci.md)). A LICENSE in each package, `description`, `keywords`, `homepage`, `bugs`, and `author` in each manifest, and a `default` condition next to `import` in `contracts` and `tokens`.
+- [x] **Published-shape checks** ([B5](06-build-and-ci.md)). publint and attw through tsdown for `contracts` and `solid`. Check the option names in the installed tsdown docs.
+- [x] **Declarations** ([B3](06-build-and-ci.md)). Diff `dist/index.d.ts` from TypeScript 7 against one from the stable compiler tsdown fully supports. If they differ, emit declarations with the stable one. Consider `isolatedDeclarations` for `contracts` ([B8](06-build-and-ci.md)), which lets declarations skip the TypeScript API altogether.
+- [x] **tsconfig** ([B8](06-build-and-ci.md), [B2](06-build-and-ci.md)). A shared `tsconfig.base.json` with `verbatimModuleSyntax` and the unused checks. Drop `@types/node`, `allowJs`, and `strictNullChecks` from `solid`. Make the preserve build's `jsx` override explicit so the build log is quiet.
+- [x] **Turbo** ([B7](06-build-and-ci.md)). A `typecheck` script for `tokens`, and no `.env*` in the `build` inputs. No source export condition ([K9](#k9-source-export-condition)).
+- [x] **Leftovers** ([B9](06-build-and-ci.md)). Delete `packages/solid/.gitignore` and the empty `.npmrc`.
+- [x] **Smoke test** ([B6](06-build-and-ci.md)). Pack the four packages, install them in a scratch Vite and Solid app, build it, and check that `Button` and `Select` render and the CSS resolves `@simple-base/tokens/css`. Do it a second time with server rendering and hydration, through Vite SSR or SolidStart ([K8](#k8-ssr)).
+
+The implementation settled six things the items above didn't:
+
+- **Declarations stay on TypeScript 7.** A copy of the repo with TypeScript 6.0.3, where tsdown emits with `tsc`, produced byte-identical `.d.ts` files for `contracts` and `solid`. tsdown's "no stable API" warning stays in the log as the reminder to diff again when either changes.
+- **No `isolatedDeclarations` for `contracts`.** It rejects every `as const satisfies` defaults object, so adopting it means dropping those `satisfies` checks or repeating each literal type, for a build that already takes about 150 ms.
+- **`default` replaces `import`** in `contracts` and `tokens` rather than sitting next to it. Both pointed at the same file, and `solid` and `css` already use `default` alone.
+- **The preserve build passes `tsconfig: false` to rolldown.** That removes the `jsx` conflict warning without turning off rolldown's conflict check, and the output is byte-identical.
+- **Node types still reach `solid`'s typecheck.** The package no longer depends on `@types/node` or asks for it, but the tests import `vitest`, whose types pull it in, and `vitest.config.ts` needs it. The library code uses no Node API. Keeping them out entirely would need a separate tsconfig for the tests.
+- **The smoke test is `pnpm test:smoke`** (`scripts/smoke/`), with Vite SSR rather than SolidStart. It reuses the solid package's Playwright, so it needs no browser of its own. Solid's production build doesn't report a hydration mismatch, so the test holds the scripts back, records the server's elements, and checks that hydration kept them and added no copies. CI runs it from phase 7.
 
 ### Phase 7. CI and release
 

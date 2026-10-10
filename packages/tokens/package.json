@@ -1,7 +1,20 @@
 {
   "name": "@simple-base/tokens",
-  "version": "0.2.4",
+  "version": "0.2.5",
+  "description": "Design tokens and color themes for Simple Base, as CSS custom properties and JavaScript.",
+  "keywords": [
+    "css-variables",
+    "design-system",
+    "design-tokens",
+    "simple-base",
+    "themes"
+  ],
+  "homepage": "https://github.com/redasalmi/simple-base/tree/main/packages/tokens#readme",
+  "bugs": {
+    "url": "https://github.com/redasalmi/simple-base/issues"
+  },
   "license": "MIT",
+  "author": "Reda Salmi",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/redasalmi/simple-base.git",
@@ -17,7 +30,7 @@
   "exports": {
     ".": {
       "types": "./dist/tokens.d.ts",
-      "import": "./dist/tokens.js"
+      "default": "./dist/tokens.js"
     },
     "./css": "./dist/tokens.css",
     "./tailwind": "./dist/tailwind.css"
@@ -28,7 +41,8 @@
   },
   "scripts": {
     "check": "tz check",
-    "build": "tz build"
+    "build": "tz build",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@terrazzo/token-types": "^2.7.1"

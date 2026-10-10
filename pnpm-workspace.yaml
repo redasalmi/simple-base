@@ -2,6 +2,7 @@ packages:
   - "apps/*"
   - "packages/*"
 catalog:
+  "@arethetypeswrong/core": ^0.18.5
   "@internationalized/date": ^3.12.4
   "@types/node": ^24.19.0
   "@zag-js/combobox": 1.44.0
@@ -13,6 +14,7 @@ catalog:
   "@zag-js/solid": 1.44.0
   "@zag-js/toast": 1.44.0
   "@zag-js/tooltip": 1.44.0
+  publint: ^0.3.25
   solid-js: ^1.9.15
   tsdown: ^0.23.0
   typescript: ~7.0.2

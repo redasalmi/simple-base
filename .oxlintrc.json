@@ -8,7 +8,7 @@
   },
   "rules": {
     "sort-imports": ["error", { "ignoreCase": true, "ignoreDeclarationSort": true }],
-    "import/no-unassigned-import": ["error", { "allow": ["**/*.css"] }],
+    "import/no-unassigned-import": ["error", { "allow": ["**/*.css", "@simple-base/css"] }],
     "jsx-a11y/label-has-associated-control": [
       "error",
       { "controlComponents": ["Checkbox", "Input", "Radio", "Switch", "TextArea"] }
