@@ -7,4 +7,8 @@ export default defineConfig({
   resolve: {
     dedupe: ["solid-js"],
   },
+  // The playground is one page that includes the source of every example.
+  build: {
+    chunkSizeWarningLimit: 1000,
+  },
 });

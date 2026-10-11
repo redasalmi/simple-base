@@ -220,6 +220,9 @@ a {
   background: var(--sb-semantic-color-background-surface);
   box-shadow: var(--sb-semantic-shadow-card);
 }
+.preview-stage > .preview-status {
+  margin-top: 20px;
+}
 .preview-source {
   margin-top: 12px;
 }

@@ -1,101 +1,24 @@
-import {
-  Checkbox,
-  Field,
-  FieldError,
-  FieldInput,
-  FieldLabel,
-  FieldTextArea,
-  type InputProps,
-  Radio,
-  Switch,
-} from "@simple-base/solid";
-import { createSignal, For } from "solid-js";
-
-import { Api, Example, FormDemo } from "./Preview";
-
-const inputTypes = [
-  ["text", "Text", "Workspace name"],
-  ["search", "Search", "Search components"],
-  ["email", "Email", "alex@example.com"],
-  ["password", "Password", "Enter a password"],
-  ["url", "URL", "https://example.com"],
-  ["tel", "Telephone", "+1 555 0100"],
-] as const satisfies readonly (readonly [NonNullable<InputProps["type"]>, string, string])[];
+import { Api, Example } from "./Preview";
 
 export function Inputs() {
-  const [name, setName] = createSignal("AB");
-  const invalid = () => name().trim().length < 3;
   return (
     <>
       <Example
         title="Field states"
         description="Default, filled, read-only, disabled, and invalid, each labeled with Field. Edit the short workspace name to resolve the example error."
-        code={
-          "<Field invalid={invalid()}>\n  <FieldLabel>Workspace name</FieldLabel>\n  <FieldInput value={name()}\n    onInput={(event) => setName(event.currentTarget.value)} />\n  <FieldError>Use at least three characters.</FieldError>\n</Field>"
-        }
-      >
-        <div class="preview-fields">
-          <Field>
-            <FieldLabel>Default</FieldLabel>
-            <FieldInput placeholder="Workspace name" />
-          </Field>
-          <Field>
-            <FieldLabel>Filled</FieldLabel>
-            <FieldInput defaultValue="Design system" />
-          </Field>
-          <Field>
-            <FieldLabel>Read-only</FieldLabel>
-            <FieldInput defaultValue="workspace/design" readOnly />
-          </Field>
-          <Field disabled>
-            <FieldLabel>Disabled</FieldLabel>
-            <FieldInput defaultValue="Managed by your team" />
-          </Field>
-          <Field invalid={invalid()}>
-            <FieldLabel>Workspace name</FieldLabel>
-            <FieldInput value={name()} onInput={(event) => setName(event.currentTarget.value)} />
-            <FieldError>Use at least three characters.</FieldError>
-          </Field>
-        </div>
-      </Example>
+        example="input/FieldStates"
+      />
       <Example
         title="In a form"
         description="Uncontrolled inputs need no signals. name submits each value with the form, and defaultValue is what Reset restores."
-        code={
-          '<form>\n  <Field>\n    <FieldLabel>Workspace name</FieldLabel>\n    <FieldInput name="workspace" defaultValue="Design system" />\n  </Field>\n  <Button type="submit">Submit</Button>\n  <Button type="reset">Reset</Button>\n</form>'
-        }
-      >
-        <FormDemo>
-          <div class="preview-fields">
-            <Field>
-              <FieldLabel>Workspace name</FieldLabel>
-              <FieldInput name="workspace" defaultValue="Design system" />
-            </Field>
-            <Field>
-              <FieldLabel>Contact email</FieldLabel>
-              <FieldInput type="email" name="email" defaultValue="alex@example.com" />
-            </Field>
-          </div>
-        </FormDemo>
-      </Example>
+        example="input/InForm"
+        form
+      />
       <Example
         title="Native input types"
         description="Text-entry types retain browser validation and mobile keyboards. Their exact appearance depends on your browser."
-        code={
-          '<Field>\n  <FieldLabel>Email</FieldLabel>\n  <FieldInput type="email" placeholder="alex@example.com" />\n</Field>'
-        }
-      >
-        <div class="preview-fields">
-          <For each={inputTypes}>
-            {([type, label, placeholder]) => (
-              <Field>
-                <FieldLabel>{label}</FieldLabel>
-                <FieldInput type={type} placeholder={placeholder} />
-              </Field>
-            )}
-          </For>
-        </div>
-      </Example>
+        example="input/NativeTypes"
+      />
       <Api
         rows={[
           [
@@ -135,50 +58,18 @@ export function Inputs() {
 }
 
 export function TextAreas() {
-  const [note, setNote] = createSignal("");
   return (
     <>
       <Example
         title="Field states"
         description="An empty field, existing content, a read-only note, and a disabled field, each labeled with Field. Drag the lower corner to resize vertically."
-        code={
-          '<Field>\n  <FieldLabel>Read-only</FieldLabel>\n  <FieldTextArea defaultValue="A read-only note." readOnly />\n</Field>'
-        }
-      >
-        <div class="preview-fields">
-          <Field>
-            <FieldLabel>Default</FieldLabel>
-            <FieldTextArea placeholder="Add a note…" />
-          </Field>
-          <Field>
-            <FieldLabel>Filled</FieldLabel>
-            <FieldTextArea defaultValue="Document the decision, not just the outcome." />
-          </Field>
-          <Field>
-            <FieldLabel>Read-only</FieldLabel>
-            <FieldTextArea defaultValue="This note is part of the archived record." readOnly />
-          </Field>
-          <Field disabled>
-            <FieldLabel>Disabled</FieldLabel>
-            <FieldTextArea defaultValue="Editing is unavailable for this example." />
-          </Field>
-        </div>
-      </Example>
+        example="textarea/FieldStates"
+      />
       <Example
         title="Validation & feedback"
         description="This local example requires a note. The error clears when text is entered."
-        code={
-          "<Field invalid={!note().trim()}>\n  <FieldLabel>Decision note</FieldLabel>\n  <FieldTextArea value={note()}\n    onInput={(event) => setNote(event.currentTarget.value)} />\n  <FieldError>Add a note before continuing.</FieldError>\n</Field>"
-        }
-      >
-        <div class="preview-stack">
-          <Field invalid={!note().trim()}>
-            <FieldLabel>Decision note</FieldLabel>
-            <FieldTextArea value={note()} onInput={(event) => setNote(event.currentTarget.value)} />
-            <FieldError>Add a note before continuing.</FieldError>
-          </Field>
-        </div>
-      </Example>
+        example="textarea/Validation"
+      />
       <Api
         rows={[
           [
@@ -208,116 +99,30 @@ export function TextAreas() {
   );
 }
 
-const exportTypes = ["Invoices", "Receipts", "Credit notes"];
-
 export function Checkboxes() {
-  const [email, setEmail] = createSignal(true);
-  const [activity, setActivity] = createSignal(false);
-  const [exported, setExported] = createSignal(["Invoices"]);
-  const allExported = () => exported().length === exportTypes.length;
   return (
     <>
       <Example
         title="Independent choices"
         description="Each option is independent. Click the label or press Space on a focused checkbox to toggle it."
-        code={
-          "<label>\n  <Checkbox checked={email()}\n    onChange={(event) => setEmail(event.currentTarget.checked)} />\n  Email updates\n</label>"
-        }
-      >
-        <fieldset class="sb-fieldset preview-stack">
-          <legend class="sb-heading-5">Notifications</legend>
-          <label class="preview-choice">
-            <Checkbox
-              checked={email()}
-              onChange={(event) => setEmail(event.currentTarget.checked)}
-            />
-            <span>Email updates</span>
-          </label>
-          <label class="preview-choice">
-            <Checkbox
-              checked={activity()}
-              onChange={(event) => setActivity(event.currentTarget.checked)}
-            />
-            <span>Activity summary</span>
-          </label>
-          <p class="preview-status" role="status">
-            {Number(email()) + Number(activity())} of 2 options selected.
-          </p>
-        </fieldset>
-      </Example>
+        example="checkbox/IndependentChoices"
+      />
       <Example
         title="Select all"
         description="A parent checkbox shows the mixed state while only some of its options are checked. Toggling it checks or clears them all."
-        code={
-          "<label>\n  <Checkbox checked={all()} indeterminate={some()}\n    onChange={(event) => setSelected(event.currentTarget.checked ? types : [])} />\n  All documents\n</label>"
-        }
-      >
-        <fieldset class="sb-fieldset preview-stack">
-          <legend class="sb-heading-5">Export</legend>
-          <label class="preview-choice">
-            <Checkbox
-              checked={allExported()}
-              indeterminate={exported().length > 0 && !allExported()}
-              onChange={(event) => setExported(event.currentTarget.checked ? exportTypes : [])}
-            />
-            <span>All documents</span>
-          </label>
-          <For each={exportTypes}>
-            {(type) => (
-              <label class="preview-choice" style={{ "padding-inline-start": "32px" }}>
-                <Checkbox
-                  checked={exported().includes(type)}
-                  onChange={(event) =>
-                    setExported((types) =>
-                      event.currentTarget.checked
-                        ? exportTypes.filter((t) => t === type || types.includes(t))
-                        : types.filter((t) => t !== type),
-                    )
-                  }
-                />
-                <span>{type}</span>
-              </label>
-            )}
-          </For>
-        </fieldset>
-      </Example>
+        example="checkbox/SelectAll"
+      />
       <Example
         title="In a form"
         description="Checked boxes submit their name and value; unchecked ones submit nothing. defaultChecked sets the initial state that Reset restores."
-        code={
-          '<form>\n  <label>\n    <Checkbox name="notify" value="email" defaultChecked />\n    Email updates\n  </label>\n  <label>\n    <Checkbox name="notify" value="activity" />\n    Activity summary\n  </label>\n</form>'
-        }
-      >
-        <FormDemo>
-          <fieldset class="sb-fieldset preview-stack">
-            <legend class="sb-heading-5">Notifications</legend>
-            <label class="preview-choice">
-              <Checkbox name="notify" value="email" defaultChecked />
-              <span>Email updates</span>
-            </label>
-            <label class="preview-choice">
-              <Checkbox name="notify" value="activity" />
-              <span>Activity summary</span>
-            </label>
-          </fieldset>
-        </FormDemo>
-      </Example>
+        example="checkbox/InForm"
+        form
+      />
       <Example
         title="Disabled states"
         description="Both unchecked and checked disabled states are shown. Disabled controls retain their value but cannot be changed."
-        code={"<Checkbox disabled />\n<Checkbox defaultChecked disabled />"}
-      >
-        <div class="preview-stack">
-          <label class="preview-choice">
-            <Checkbox disabled />
-            <span>Unavailable option</span>
-          </label>
-          <label class="preview-choice">
-            <Checkbox defaultChecked disabled />
-            <span>Required by your team</span>
-          </label>
-        </div>
-      </Example>
+        example="checkbox/Disabled"
+      />
       <Api
         rows={[
           [
@@ -352,81 +157,24 @@ export function Checkboxes() {
 }
 
 export function Radios() {
-  const [density, setDensity] = createSignal("comfortable");
   return (
     <>
       <Example
         title="One selection"
         description="A shared name keeps the options exclusive. Use arrow keys within the group to change the selection."
-        code={
-          '<fieldset>\n  <legend>Row spacing</legend>\n  <label><Radio name="density" value="comfortable" defaultChecked /> Comfortable</label>\n  <label><Radio name="density" value="compact" /> Compact</label>\n</fieldset>'
-        }
-      >
-        <fieldset class="sb-fieldset preview-stack">
-          <legend class="sb-heading-5">Row spacing</legend>
-          <For
-            each={[
-              ["comfortable", "Comfortable"],
-              ["compact", "Compact"],
-              ["dense", "Dense"],
-            ]}
-          >
-            {([value, label]) => (
-              <label class="preview-choice">
-                <Radio
-                  name="density"
-                  value={value}
-                  checked={density() === value}
-                  onChange={() => setDensity(value!)}
-                />
-                <span>{label}</span>
-              </label>
-            )}
-          </For>
-          <p class="preview-status" role="status">
-            Selected: {density()}.
-          </p>
-        </fieldset>
-      </Example>
+        example="radio/OneSelection"
+      />
       <Example
         title="In a form"
         description="The checked radio submits its value under the group's name. defaultChecked picks the initial choice that Reset restores."
-        code={
-          '<form>\n  <label><Radio name="plan" value="starter" /> Starter</label>\n  <label><Radio name="plan" value="team" defaultChecked /> Team</label>\n</form>'
-        }
-      >
-        <FormDemo>
-          <fieldset class="sb-fieldset preview-stack">
-            <legend class="sb-heading-5">Plan</legend>
-            <label class="preview-choice">
-              <Radio name="plan" value="starter" />
-              <span>Starter</span>
-            </label>
-            <label class="preview-choice">
-              <Radio name="plan" value="team" defaultChecked />
-              <span>Team</span>
-            </label>
-          </fieldset>
-        </FormDemo>
-      </Example>
+        example="radio/InForm"
+        form
+      />
       <Example
         title="Disabled states"
         description="An unavailable option and a locked selection. These specimens use separate groups so the selected state remains unambiguous."
-        code={
-          '<Radio name="unavailable" disabled />\n<Radio name="locked" defaultChecked disabled />'
-        }
-      >
-        <div class="preview-stack">
-          <label class="preview-choice">
-            <Radio name="unavailable" disabled />
-            <span>Unavailable option</span>
-          </label>
-          <label class="preview-choice">
-            <Radio name="locked" defaultChecked disabled />
-            <span>Locked selection</span>
-          </label>
-        </div>
-      </Example>
+        example="radio/Disabled"
+      />
       <Api
         rows={[
           ["name", "string", "Use the same name for choices belonging to one decision."],
@@ -452,63 +200,24 @@ export function Radios() {
 }
 
 export function Switches() {
-  const [sync, setSync] = createSignal(true);
-  const [hints, setHints] = createSignal(false);
   return (
     <>
       <Example
         title="On & off"
         description="A switch applies a setting immediately. These settings only affect their local status text and reset when you leave the page."
-        code={
-          "<label>\n  <Switch checked={enabled()}\n    onChange={(event) => setEnabled(event.currentTarget.checked)} />\n  Live preview\n</label>"
-        }
-      >
-        <div class="preview-stack">
-          <label class="preview-choice">
-            <Switch checked={sync()} onChange={(event) => setSync(event.currentTarget.checked)} />
-            <span>Live preview</span>
-          </label>
-          <label class="preview-choice">
-            <Switch checked={hints()} onChange={(event) => setHints(event.currentTarget.checked)} />
-            <span>Command hints</span>
-          </label>
-          <p class="preview-status" role="status">
-            Live preview {sync() ? "on" : "off"}; command hints {hints() ? "on" : "off"}.
-          </p>
-        </div>
-      </Example>
+        example="switch/OnAndOff"
+      />
       <Example
         title="In a form"
         description="A switch submits like a checkbox: its name and value while on, nothing while off. defaultChecked sets the state that Reset restores."
-        code={
-          '<form>\n  <label>\n    <Switch name="digest" defaultChecked />\n    Weekly digest\n  </label>\n</form>'
-        }
-      >
-        <FormDemo>
-          <label class="preview-choice">
-            <Switch name="digest" defaultChecked />
-            <span>Weekly digest</span>
-          </label>
-        </FormDemo>
-      </Example>
+        example="switch/InForm"
+        form
+      />
       <Example
         title="Disabled states"
         description="Unavailable off and on settings. Keep the label visible to explain which preference is locked."
-        code={
-          "<label><Switch disabled /> Unavailable setting</label>\n<label><Switch defaultChecked disabled /> Required setting</label>"
-        }
-      >
-        <div class="preview-stack">
-          <label class="preview-choice">
-            <Switch disabled />
-            <span>Unavailable setting</span>
-          </label>
-          <label class="preview-choice">
-            <Switch defaultChecked disabled />
-            <span>Required setting</span>
-          </label>
-        </div>
-      </Example>
+        example="switch/Disabled"
+      />
       <Api
         rows={[
           [

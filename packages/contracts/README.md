@@ -122,6 +122,10 @@ Each adapter adds Zag's own `translations` prop to the roots built on Zag, such 
 
 Native-only components — checkbox, input, and the plain `.sb-select` pattern — have no shared custom options. Typography classes and the progress CSS custom property are part of the CSS package's API, not this one.
 
+## Versioning
+
+Simple Base is on 0.x. All its packages go to 1.0.0 together, once `@simple-base/react` ships the same components as `@simple-base/solid`. Until then a minor release can include breaking changes.
+
 ## Links
 
 - [Repository](https://github.com/redasalmi/simple-base)

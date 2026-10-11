@@ -1,59 +1,4 @@
-import {
-  Tooltip,
-  TooltipArrow,
-  TooltipContent,
-  TooltipPortal,
-  TooltipPositioner,
-  TooltipTrigger,
-} from "@simple-base/solid";
-import { For, type JSX } from "solid-js";
-
 import { Api, Example } from "./Preview";
-
-function Icon(props: { children: JSX.Element }) {
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    >
-      {props.children}
-    </svg>
-  );
-}
-
-const actions = [
-  {
-    label: "Download PDF",
-    icon: () => (
-      <Icon>
-        <path d="M12 4v11M7 10l5 5 5-5M5 20h14" />
-      </Icon>
-    ),
-  },
-  {
-    label: "Duplicate",
-    icon: () => (
-      <Icon>
-        <rect x="8" y="8" width="12" height="12" rx="2" />
-        <path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" />
-      </Icon>
-    ),
-  },
-  {
-    label: "Send by email",
-    icon: () => (
-      <Icon>
-        <rect x="3" y="5" width="18" height="14" rx="2" />
-        <path d="m3 7 9 6 9-6" />
-      </Icon>
-    ),
-  },
-];
 
 export function Tooltips() {
   return (
@@ -61,62 +6,13 @@ export function Tooltips() {
       <Example
         title="Name icon-only buttons"
         description="Hover a button, or move focus to it with Tab, to show its tooltip. The tooltip repeats the button's aria-label for sighted users; Escape, a click, or moving away hides it. After the first tooltip opens, moving to the next button shows its tooltip at once."
-        code={
-          '<Tooltip>\n  <TooltipTrigger variant="ghost" aria-label="Download PDF">\n    <DownloadIcon />\n  </TooltipTrigger>\n  <TooltipPortal>\n    <TooltipPositioner>\n      <TooltipContent>\n        <TooltipArrow />\n        Download PDF\n      </TooltipContent>\n    </TooltipPositioner>\n  </TooltipPortal>\n</Tooltip>'
-        }
-      >
-        <div class="preview-row">
-          <For each={actions}>
-            {(action) => (
-              <Tooltip>
-                <TooltipTrigger variant="ghost" aria-label={action.label}>
-                  {action.icon()}
-                </TooltipTrigger>
-                <TooltipPortal>
-                  <TooltipPositioner>
-                    <TooltipContent>
-                      <TooltipArrow />
-                      {action.label}
-                    </TooltipContent>
-                  </TooltipPositioner>
-                </TooltipPortal>
-              </Tooltip>
-            )}
-          </For>
-        </div>
-      </Example>
+        example="tooltip/IconButtons"
+      />
       <Example
         title="Placement and shortcuts"
         description="placement picks the preferred side; the tooltip flips when there is no room. A keyboard shortcut inside the content takes the inverse tooltip colors. Binding the key stays in your app."
-        code={
-          '<Tooltip placement="top">\n  <TooltipTrigger variant="secondary">Save draft</TooltipTrigger>\n  <TooltipPortal>\n    <TooltipPositioner>\n      <TooltipContent>\n        <TooltipArrow />\n        Save without sending <kbd class="sb-shortcut">S</kbd>\n      </TooltipContent>\n    </TooltipPositioner>\n  </TooltipPortal>\n</Tooltip>'
-        }
-      >
-        <div class="preview-row">
-          <Tooltip placement="top">
-            <TooltipTrigger variant="secondary">Save draft</TooltipTrigger>
-            <TooltipPortal>
-              <TooltipPositioner>
-                <TooltipContent>
-                  <TooltipArrow />
-                  Save without sending <kbd class="sb-shortcut">S</kbd>
-                </TooltipContent>
-              </TooltipPositioner>
-            </TooltipPortal>
-          </Tooltip>
-          <Tooltip placement="bottom-start">
-            <TooltipTrigger variant="secondary">Bottom start</TooltipTrigger>
-            <TooltipPortal>
-              <TooltipPositioner>
-                <TooltipContent>
-                  <TooltipArrow />
-                  Aligned to the start of the trigger
-                </TooltipContent>
-              </TooltipPositioner>
-            </TooltipPortal>
-          </Tooltip>
-        </div>
-      </Example>
+        example="tooltip/Placement"
+      />
       <Api
         rows={[
           [

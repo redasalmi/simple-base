@@ -1,7 +1,10 @@
 # Solid Playground
 
 Vite app for previewing the components exported by `@simple-base/solid` and the
-styles from `@simple-base/css`. Preview examples live in `src/preview/`.
+styles from `@simple-base/css`. Each section lives in `src/preview/`, and each of
+its examples is a component in `src/examples/<section>/` that the page both
+renders and shows as source, so every example type-checks. `pnpm test` builds the
+playground and runs axe on every section in every theme (`scripts/axe.js`).
 
 ## Reference coverage
 

@@ -1,161 +1,24 @@
-import {
-  Button,
-  Combobox,
-  ComboboxContent,
-  ComboboxControl,
-  ComboboxEmpty,
-  ComboboxInput,
-  ComboboxItem,
-  ComboboxLabel,
-  ComboboxList,
-  ComboboxPortal,
-  ComboboxPositioner,
-  ComboboxTrigger,
-} from "@simple-base/solid";
-import { createSignal } from "solid-js";
-
-import { Api, Example, FormDemo } from "./Preview";
-
-const countries = [
-  { label: "Canada", value: "CA" },
-  { label: "Finland", value: "FI" },
-  { label: "France", value: "FR" },
-  { label: "Germany", value: "DE" },
-  { label: "Japan (unavailable in this demo)", value: "JP", disabled: true },
-  { label: "New Zealand", value: "NZ" },
-  { label: "Spain", value: "ES" },
-  { label: "United Kingdom of Great Britain and Northern Ireland", value: "GB" },
-  { label: "United States", value: "US" },
-  { label: "Zambia", value: "ZM" },
-];
-
-function ChevronDown() {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <path d="m6 9 6 6 6-6" />
-    </svg>
-  );
-}
+import { Api, Example } from "./Preview";
 
 export function Comboboxes() {
-  const [country, setCountry] = createSignal<string | null>(null);
-  const [loaded, setLoaded] = createSignal(false);
-  const [destination, setDestination] = createSignal<string | null>(null);
-
   return (
     <>
       <Example
         title="Search and select"
         description="Type to filter countries, then use the arrow keys and Enter or click an option. Japan is disabled in this demo. Search for a nonmatching term to see the empty message; Escape closes the popup."
-        code={
-          'const [country, setCountry] = createSignal<string | null>(null);\n\n<Combobox\n  id="country"\n  options={countries}\n  placeholder="Search countries"\n  onValueChange={setCountry}\n>\n  <ComboboxLabel>Country</ComboboxLabel>\n  <ComboboxControl>\n    <ComboboxInput />\n    <ComboboxTrigger>\n      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">\n        <path d="m6 9 6 6 6-6" />\n      </svg>\n    </ComboboxTrigger>\n  </ComboboxControl>\n  <ComboboxPortal>\n    <ComboboxPositioner>\n      <ComboboxContent>\n        <ComboboxList>\n          {(option) => <ComboboxItem option={option} />}\n        </ComboboxList>\n      </ComboboxContent>\n      <ComboboxEmpty>No countries found. Try another search.</ComboboxEmpty>\n    </ComboboxPositioner>\n  </ComboboxPortal>\n</Combobox>'
-        }
-      >
-        <div class="preview-stack">
-          <Combobox
-            id="preview-country"
-            options={countries}
-            placeholder="Search countries"
-            onValueChange={setCountry}
-          >
-            <ComboboxLabel>Country</ComboboxLabel>
-            <ComboboxControl>
-              <ComboboxInput />
-              <ComboboxTrigger>
-                <ChevronDown />
-              </ComboboxTrigger>
-            </ComboboxControl>
-            <ComboboxPortal>
-              <ComboboxPositioner>
-                <ComboboxContent>
-                  <ComboboxList>{(option) => <ComboboxItem option={option} />}</ComboboxList>
-                </ComboboxContent>
-                <ComboboxEmpty>No countries found. Try another search.</ComboboxEmpty>
-              </ComboboxPositioner>
-            </ComboboxPortal>
-          </Combobox>
-          <p class="preview-status" role="status">
-            {country()
-              ? `Selected value: ${country()}`
-              : "No country selected. Typing only filters the list."}
-          </p>
-        </div>
-      </Example>
+        example="combobox/SearchAndSelect"
+      />
       <Example
         title="In a form"
         description="With name, a hidden native select submits the option value, not the typed text, or an empty value while nothing is selected. form.reset() restores defaultValue."
-        code={
-          '<form>\n  <Combobox name="country" options={countries} defaultValue="FR">\n    {/* Label, control, and popup as above. */}\n  </Combobox>\n  <Button type="submit">Submit</Button>\n  <Button type="reset">Reset</Button>\n</form>'
-        }
-      >
-        <FormDemo>
-          <Combobox name="country" options={countries} defaultValue="FR">
-            <ComboboxLabel>Shipping country</ComboboxLabel>
-            <ComboboxControl>
-              <ComboboxInput />
-              <ComboboxTrigger>
-                <ChevronDown />
-              </ComboboxTrigger>
-            </ComboboxControl>
-            <ComboboxPortal>
-              <ComboboxPositioner>
-                <ComboboxContent>
-                  <ComboboxList>{(option) => <ComboboxItem option={option} />}</ComboboxList>
-                </ComboboxContent>
-                <ComboboxEmpty>No countries found. Try another search.</ComboboxEmpty>
-              </ComboboxPositioner>
-            </ComboboxPortal>
-          </Combobox>
-        </FormDemo>
-      </Example>
+        example="combobox/InForm"
+        form
+      />
       <Example
         title="Empty and updated options"
         description="Open the initially empty list, then load a local collection to see the options update. No request is made and no data is saved."
-        code={
-          'const [loaded, setLoaded] = createSignal(false);\nconst [destination, setDestination] = createSignal<string | null>(null);\n\n<Combobox\n  id="destination"\n  options={loaded() ? countries : []}\n  onValueChange={setDestination}\n>\n  {/* Label and control as above. */}\n  <ComboboxPortal>\n    <ComboboxPositioner>\n      <ComboboxContent>\n        <ComboboxList>\n          {(option) => <ComboboxItem option={option} />}\n        </ComboboxList>\n      </ComboboxContent>\n      <ComboboxEmpty>\n        {loaded() ? "No destinations found." : "No destinations available. Load the example options."}\n      </ComboboxEmpty>\n    </ComboboxPositioner>\n  </ComboboxPortal>\n</Combobox>\n<Button onClick={() => setLoaded(true)} disabled={loaded()}>\n  {loaded() ? "Options loaded" : "Load example options"}\n</Button>'
-        }
-      >
-        <div class="preview-stack">
-          <Combobox
-            id="preview-destination"
-            options={loaded() ? countries : []}
-            placeholder="Search destinations"
-            onValueChange={setDestination}
-          >
-            <ComboboxLabel>Destination</ComboboxLabel>
-            <ComboboxControl>
-              <ComboboxInput />
-              <ComboboxTrigger>
-                <ChevronDown />
-              </ComboboxTrigger>
-            </ComboboxControl>
-            <ComboboxPortal>
-              <ComboboxPositioner>
-                <ComboboxContent>
-                  <ComboboxList>{(option) => <ComboboxItem option={option} />}</ComboboxList>
-                </ComboboxContent>
-                <ComboboxEmpty>
-                  {loaded()
-                    ? "No destinations found. Try another search."
-                    : "No destinations available. Load the example options."}
-                </ComboboxEmpty>
-              </ComboboxPositioner>
-            </ComboboxPortal>
-          </Combobox>
-          <div>
-            <Button variant="secondary" disabled={loaded()} onClick={() => setLoaded(true)}>
-              {loaded() ? "Options loaded" : "Load example options"}
-            </Button>
-          </div>
-          <p class="preview-status" role="status">
-            {destination()
-              ? `Selected value: ${destination()}`
-              : loaded()
-                ? "Example options loaded. Choose a destination."
-                : "The collection is empty."}
-          </p>
-        </div>
-      </Example>
+        example="combobox/UpdatedOptions"
+      />
       <Api
         rows={[
           [

@@ -16,30 +16,45 @@ jobs:
   quality:
     name: Lint, format, typecheck, test, and build
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - name: Check out repository
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Set up pnpm and Node.js
-        uses: pnpm/setup@v2
+        uses: pnpm/setup@703c52620218391530e48b9e8870d5c0082e1b9b # v2.1.0
         with:
           # pnpm version comes from devEngines.packageManager in package.json.
           runtime: node@24
           cache: true
           require-lockfile: true # runs pnpm install --frozen-lockfile
 
+      # Turbo's local cache, so tasks whose inputs didn't change are replayed instead of rerun.
+      - name: Restore Turborepo cache
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: .turbo/cache
+          key: turbo-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}-${{ github.sha }}
+          restore-keys: |
+            turbo-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}-
+
       # Lints, checks formatting and tokens, and typechecks every package
       # (typecheck builds its workspace dependencies first).
       - name: Run quality checks
         run: pnpm quality
 
-      # Vitest's browser tests run in Playwright's headless Chromium.
+      # The tests, the playground's axe check, and the smoke test all drive Playwright's Chromium.
       - name: Install Playwright Chromium
         run: pnpm --filter @simple-base/solid exec playwright install --with-deps --only-shell chromium
 
+      # The solid package's Vitest projects, and axe on every playground section in every theme.
       - name: Run tests
         run: pnpm test
 
-      # The playground is the only consumer that isn't built by typecheck.
+      # The contracts and solid builds also run publint and attw on their packed tarballs.
       - name: Build all packages
         run: pnpm build
+
+      # Installs the packed packages in a scratch app, client-only and server-rendered.
+      - name: Run smoke test
+        run: pnpm test:smoke

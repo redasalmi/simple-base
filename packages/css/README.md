@@ -288,6 +288,10 @@ The native menu (`.sb-menu` on `<details>`) keeps its absolute `.sb-menu-panel` 
 
 Toast styles ship with `status`. Inside `.sb-toaster`, toasts are positioned by the `--x`, `--y`, `--scale`, `--height`, `--opacity`, and `--z-index` variables that the [Zag.js toast machine](https://zagjs.com/components/solid/toast) writes; `@simple-base/solid` provides that behavior. Outside a region, `.sb-toast` is a static surface for CSS-only use inside `.sb-live-region`.
 
+## Versioning
+
+Simple Base is on 0.x. All its packages go to 1.0.0 together, once `@simple-base/react` ships the same components as `@simple-base/solid`. Until then a minor release can include breaking changes.
+
 ## Links
 
 - [Repository](https://github.com/redasalmi/simple-base)

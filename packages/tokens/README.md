@@ -129,6 +129,10 @@ tokens["semantic.color.foreground.primary"].$value;
 
 **Primitives versus semantic roles.** Primitive tokens such as `--sb-primitive-color-accent` are raw values. Semantic tokens name a purpose and are the stable public surface — prefer them in application and component styles, since a theme changes semantics rather than primitives.
 
+## Versioning
+
+Simple Base is on 0.x. All its packages go to 1.0.0 together, once `@simple-base/react` ships the same components as `@simple-base/solid`. Until then a minor release can include breaking changes.
+
 ## Links
 
 - [Repository](https://github.com/redasalmi/simple-base)

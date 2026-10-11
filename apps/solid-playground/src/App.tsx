@@ -14,6 +14,7 @@ import {
 import { type Component, createEffect, createSignal, For, onCleanup, onMount } from "solid-js";
 import { Dynamic } from "solid-js/web";
 
+import { ChevronDownIcon } from "./examples/icons";
 import { AlertDialogs } from "./preview/AlertDialogs";
 import { Alerts, StatusLines } from "./preview/Alerts";
 import { Badges } from "./preview/Badges";
@@ -36,6 +37,7 @@ import { TabLists } from "./preview/TabLists";
 import { Toasts } from "./preview/Toasts";
 import { Tooltips } from "./preview/Tooltips";
 import { Typography } from "./preview/Typography";
+import { themes } from "./themes";
 
 type Page = {
   id: string;
@@ -316,27 +318,7 @@ const pages: Page[] = [
   },
 ];
 
-const themes = [
-  ["simple-base-dark", "Simple Base dark"],
-  ["simple-base-light", "Simple Base light"],
-  ["catppuccin-latte", "Catppuccin Latte"],
-  ["catppuccin-frappe", "Catppuccin Frappé"],
-  ["catppuccin-macchiato", "Catppuccin Macchiato"],
-  ["catppuccin-mocha", "Catppuccin Mocha"],
-  ["dracula", "Dracula"],
-  ["tokyo-night", "Tokyo Night"],
-  ["nord", "Nord"],
-] as const;
-
 const themeOptions = themes.map(([value, label]) => ({ label, value }));
-
-function ChevronDown() {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <path d="m6 9 6 6 6-6" />
-    </svg>
-  );
-}
 
 function pageFromHash() {
   return pages.find((page) => page.id === window.location.hash.slice(1)) ?? pages[1]!;
@@ -393,7 +375,7 @@ export default function App() {
                 <SelectTrigger>
                   <SelectValueText />
                   <SelectIndicator>
-                    <ChevronDown />
+                    <ChevronDownIcon />
                   </SelectIndicator>
                 </SelectTrigger>
               </SelectControl>

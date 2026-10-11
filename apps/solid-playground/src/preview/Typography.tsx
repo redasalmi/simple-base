@@ -1,23 +1,4 @@
-import { For } from "solid-js";
-
 import { Api, Example } from "./Preview";
-
-const headings = [
-  ["sb-heading-1", "36px serif", "Workspace settings"],
-  ["sb-heading-2", "28px serif", "Account preferences"],
-  ["sb-heading-3", "24px serif", "Notification delivery"],
-  ["sb-heading-4", "20px", "Email summary"],
-  ["sb-heading-5", "18px", "Delivery schedule"],
-  ["sb-heading-6", "16px", "Time zone"],
-] as const;
-const bodyStyles = [
-  ["sb-text-body-lg", "A little more room for an introduction."],
-  ["sb-text-body", "The default reading style for interface descriptions and supporting content."],
-  ["sb-text-body-sm", "Smaller supporting text for a compact interface."],
-  ["sb-text-caption", "Caption text adds context without competing with the content."],
-  ["sb-text-label", "A visible label for a field or control"],
-] as const;
-const colors = ["primary", "secondary", "muted", "accent", "danger", "success"] as const;
 
 export function Typography() {
   return (
@@ -25,89 +6,28 @@ export function Typography() {
       <Example
         title="Utility headings"
         description="Page and section titles use the Young Serif display face; smaller groups switch to the body face. Choose the HTML heading level for structure and the class for visual size."
-        code={
-          '<h1 class="sb-heading-1">Workspace settings</h1>\n<h2 class="sb-heading-3">Notification delivery</h2>'
-        }
-      >
-        <div class="preview-stack">
-          <For each={headings}>
-            {([style, size, text]) => (
-              <div class="preview-type-row">
-                <code>
-                  {style}
-                  <br />
-                  {size}
-                </code>
-                <p class={style}>{text}</p>
-              </div>
-            )}
-          </For>
-        </div>
-      </Example>
+        example="typography/Headings"
+      />
       <Example
         title="Body & labels"
         description="Captions use sentence case and the body family. Save monospace for information that actually benefits from it."
-        code={
-          '<p class="sb-text-body">Supporting content.</p>\n<p class="sb-text-caption">Additional context.</p>\n<label class="sb-text-label">Workspace name</label>'
-        }
-      >
-        <div class="preview-stack">
-          <For each={bodyStyles}>
-            {([style, text]) => (
-              <div class="preview-type-row">
-                <code>{style}</code>
-                <p class={style}>{text}</p>
-              </div>
-            )}
-          </For>
-        </div>
-      </Example>
+        example="typography/Body"
+      />
       <Example
         title="Display"
         description="The same serif at its largest, for landing moments and empty screens. It scales from 44 to 72px with a tight line height."
-        code={'<h1 class="sb-display">Type with purpose.</h1>'}
-      >
-        <p class="sb-display">Type with purpose.</p>
-      </Example>
+        example="typography/Display"
+      />
       <Example
         title="Text roles"
         description="Semantic color roles follow the selected theme. Use danger and success for meaningful status, not emphasis alone."
-        code={
-          '<p class="sb-text-secondary">Supporting information</p>\n<p class="sb-text-danger">A descriptive error message</p>'
-        }
-      >
-        <div class="preview-stack">
-          <For each={colors}>
-            {(color) => (
-              <p class={`sb-text-${color}`}>{color[0].toUpperCase() + color.slice(1)} text color</p>
-            )}
-          </For>
-        </div>
-      </Example>
+        example="typography/TextRoles"
+      />
       <Example
         title="Code & shortcuts"
         description="Inline code identifies a technical value. Blocks preserve formatting; keyboard shortcuts use a separate keycap treatment."
-        code={
-          '<code class="sb-code-text">variant="primary"</code>\n<kbd class="sb-shortcut">⌘</kbd> <kbd class="sb-shortcut">K</kbd>'
-        }
-      >
-        <div class="preview-stack">
-          <p class="sb-text-body">
-            Use <code class="sb-code-text">variant="primary"</code> for the main action.
-          </p>
-          <pre class="sb-code-block">
-            <code>
-              {'import "@simple-base/css";\nimport { Button } from "@simple-base/solid";'}
-            </code>
-          </pre>
-          <p class="preview-row">
-            <span>Example shortcut</span>
-            <kbd class="sb-shortcut">Ctrl</kbd>
-            <kbd class="sb-shortcut">K</kbd>
-          </p>
-          <p class="preview-note">The keycaps are a visual specimen; no shortcut is registered.</p>
-        </div>
-      </Example>
+        example="typography/CodeAndShortcuts"
+      />
       <Api
         rows={[
           [

@@ -1,163 +1,24 @@
-import {
-  Button,
-  Select,
-  SelectContent,
-  SelectControl,
-  SelectEmpty,
-  SelectIndicator,
-  SelectItem,
-  SelectLabel,
-  SelectList,
-  SelectPortal,
-  SelectPositioner,
-  SelectTrigger,
-  SelectValueText,
-} from "@simple-base/solid";
-import { createSignal } from "solid-js";
-
-import { Api, Example, FormDemo } from "./Preview";
-
-const timezones = [
-  { label: "Central European Time (UTC+01:00)", value: "cet" },
-  { label: "Eastern Time (UTC−05:00)", value: "et" },
-  { label: "Greenwich Mean Time (UTC+00:00)", value: "gmt" },
-  { label: "India Standard Time (UTC+05:30)", value: "ist" },
-  { label: "Japan Standard Time (unavailable in this demo)", value: "jst", disabled: true },
-  { label: "Pacific Time (UTC−08:00)", value: "pt" },
-  { label: "Coordinated Universal Time", value: "utc" },
-];
-
-function ChevronDown() {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <path d="m6 9 6 6 6-6" />
-    </svg>
-  );
-}
+import { Api, Example } from "./Preview";
 
 export function Selects() {
-  const [timezone, setTimezone] = createSignal<string | null>(null);
-  const [loaded, setLoaded] = createSignal(false);
-  const [region, setRegion] = createSignal<string | null>(null);
-
   return (
     <>
       <Example
         title="Choose a single option"
         description="Open the list with Enter, Space, or a click, then move with the arrow keys, Home, and End. Type a letter to jump to a matching option. Japan Standard Time is disabled in this demo, and Escape closes the list without changing the value."
-        code={
-          'const [timezone, setTimezone] = createSignal<string | null>(null);\n\n<Select\n  id="timezone"\n  placeholder="Select a timezone"\n  options={timezones}\n  onValueChange={setTimezone}\n>\n  <SelectLabel>Timezone</SelectLabel>\n  <SelectControl>\n    <SelectTrigger>\n      <SelectValueText />\n      <SelectIndicator>\n        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">\n          <path d="m6 9 6 6 6-6" />\n        </svg>\n      </SelectIndicator>\n    </SelectTrigger>\n  </SelectControl>\n  <SelectPortal>\n    <SelectPositioner>\n      <SelectContent>\n        <SelectList>\n          {(option) => <SelectItem option={option} />}\n        </SelectList>\n      </SelectContent>\n    </SelectPositioner>\n  </SelectPortal>\n</Select>'
-        }
-      >
-        <div class="preview-stack">
-          <Select
-            id="preview-timezone"
-            placeholder="Select a timezone"
-            options={timezones}
-            onValueChange={setTimezone}
-          >
-            <SelectLabel>Timezone</SelectLabel>
-            <SelectControl>
-              <SelectTrigger>
-                <SelectValueText />
-                <SelectIndicator>
-                  <ChevronDown />
-                </SelectIndicator>
-              </SelectTrigger>
-            </SelectControl>
-            <SelectPortal>
-              <SelectPositioner>
-                <SelectContent>
-                  <SelectList>{(option) => <SelectItem option={option} />}</SelectList>
-                </SelectContent>
-              </SelectPositioner>
-            </SelectPortal>
-          </Select>
-          <p class="preview-status" role="status">
-            {timezone()
-              ? `Selected value: ${timezone()}`
-              : "No timezone selected. The placeholder shows until a value is chosen."}
-          </p>
-        </div>
-      </Example>
+        example="select/SingleValue"
+      />
       <Example
         title="In a form"
         description="With name and defaultValue the select needs no signal or handler: a hidden native select submits the option value with the form, or an empty value while nothing is selected, and Reset restores the initial selection."
-        code={
-          '<form>\n  <Select\n    name="timezone"\n    options={timezones}\n    defaultValue="utc"\n  >\n    {/* Label, control, and popup as above. */}\n  </Select>\n  <Button type="submit">Submit</Button>\n  <Button type="reset">Reset</Button>\n</form>'
-        }
-      >
-        <FormDemo>
-          <Select name="timezone" options={timezones} defaultValue="utc">
-            <SelectLabel>Timezone</SelectLabel>
-            <SelectControl>
-              <SelectTrigger>
-                <SelectValueText />
-                <SelectIndicator>
-                  <ChevronDown />
-                </SelectIndicator>
-              </SelectTrigger>
-            </SelectControl>
-            <SelectPortal>
-              <SelectPositioner>
-                <SelectContent>
-                  <SelectList>{(option) => <SelectItem option={option} />}</SelectList>
-                </SelectContent>
-              </SelectPositioner>
-            </SelectPortal>
-          </Select>
-        </FormDemo>
-      </Example>
+        example="select/InForm"
+        form
+      />
       <Example
         title="Empty and updated options"
         description="Open the initially empty list to see the empty message, then load a local collection and reopen it. No request is made and no data is saved."
-        code={
-          'const [loaded, setLoaded] = createSignal(false);\nconst [region, setRegion] = createSignal<string | null>(null);\n\n<Select\n  id="region"\n  placeholder="Select a region"\n  options={loaded() ? timezones : []}\n  onValueChange={setRegion}\n>\n  {/* Label, control, and popup as above. */}\n  <SelectPortal>\n    <SelectPositioner>\n      <SelectContent>\n        <SelectList>\n          {(option) => <SelectItem option={option} />}\n        </SelectList>\n      </SelectContent>\n      <SelectEmpty>\n        {loaded() ? "No regions found." : "No regions available. Load the example options."}\n      </SelectEmpty>\n    </SelectPositioner>\n  </SelectPortal>\n</Select>\n<Button onClick={() => setLoaded(true)} disabled={loaded()}>\n  {loaded() ? "Options loaded" : "Load example options"}\n</Button>'
-        }
-      >
-        <div class="preview-stack">
-          <Select
-            id="preview-region"
-            placeholder="Select a region"
-            options={loaded() ? timezones : []}
-            onValueChange={setRegion}
-          >
-            <SelectLabel>Region</SelectLabel>
-            <SelectControl>
-              <SelectTrigger>
-                <SelectValueText />
-                <SelectIndicator>
-                  <ChevronDown />
-                </SelectIndicator>
-              </SelectTrigger>
-            </SelectControl>
-            <SelectPortal>
-              <SelectPositioner>
-                <SelectContent>
-                  <SelectList>{(option) => <SelectItem option={option} />}</SelectList>
-                </SelectContent>
-                <SelectEmpty>
-                  {loaded()
-                    ? "No regions found."
-                    : "No regions available. Load the example options."}
-                </SelectEmpty>
-              </SelectPositioner>
-            </SelectPortal>
-          </Select>
-          <div>
-            <Button variant="secondary" disabled={loaded()} onClick={() => setLoaded(true)}>
-              {loaded() ? "Options loaded" : "Load example options"}
-            </Button>
-          </div>
-          <p class="preview-status" role="status">
-            {region()
-              ? `Selected value: ${region()}`
-              : loaded()
-                ? "Example options loaded. Choose a region."
-                : "The collection is empty."}
-          </p>
-        </div>
-      </Example>
+        example="select/UpdatedOptions"
+      />
       <Api
         rows={[
           [

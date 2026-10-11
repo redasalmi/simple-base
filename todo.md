@@ -2,7 +2,9 @@
 
 Simple Base stays as close to native HTML as possible. Components style and wire native elements and ARIA states; app-specific affordances such as loading states, spinners, and skeletons belong in the consuming app.
 
-v1 covers `@simple-base/tokens`, `@simple-base/css`, `@simple-base/contracts`, and `@simple-base/solid`. The first consumer is an invoicing app, so v1 is scoped to what it needs.
+v1 covers `@simple-base/tokens`, `@simple-base/css`, `@simple-base/contracts`, `@simple-base/solid`, and `@simple-base/react`. The first consumer is an invoicing app, so v1 is scoped to what it needs.
+
+The packages stay on 0.x until `@simple-base/react` is finished, with the same components as `@simple-base/solid`. Then all five go to 1.0.0 together.
 
 ## Shipped
 
@@ -28,8 +30,10 @@ These already have styles in `@simple-base/css` unless noted.
 - [ ] Tokens: generate better JS consts and TS types
 - [ ] Tokens: refactor and improve the `tailwind.css` output
 - [x] Contracts: add a `./field` subpath export (`FieldOptions` is only exported from the root)
-- [ ] Add behavior tests for the stateful components (Select, Combobox, DatePicker, NumberField, Toast, form reset)
-- [ ] Release 1.0.0 across all four packages and start a changelog
+- [x] Add behavior tests for the stateful components (Select, Combobox, DatePicker, NumberField, Toast, form reset)
+- [ ] Start a changelog
+- [ ] React adapter with every Solid component, and a React playground
+- [ ] Release 1.0.0 across all five packages
 
 ## After v1
 
@@ -42,7 +46,6 @@ Components:
 
 Packages and tooling (see `structure.md`):
 
-- React adapter and React playground
 - Vanilla playground
 - Documentation site
 - End-to-end and package-consumer tests

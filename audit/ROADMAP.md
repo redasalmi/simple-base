@@ -18,6 +18,10 @@ Decided on 2026-10-09:
 - **A required CheckboxGroup needs at least one box checked.** `Fieldset required` blocks submission while none is checked, as it already does for a RadioGroup ([K2](#k2-form-participation)).
 - **Switch is named like Checkbox and Radio.** A wrapping `<label>` or `<label for>` is enough, and `aria-label` is no longer required ([Q8](07-code-quality.md)).
 
+Decided on 2026-10-10:
+
+- **1.0 waits for the React adapter.** Phase 7 doesn't release 1.0.0. The packages stay on `0.x` until `@simple-base/react` exists and ships the same components as `@simple-base/solid`; then all five packages go to 1.0.0 together ([Before 1.0](#before-10)). Until then a breaking change is a minor bump.
+
 ## Status of reports 01 and 02
 
 Every finding in 01 and 02 has landed. The ones below need a follow-up, listed in the phase that handles it.
@@ -281,10 +285,23 @@ The implementation settled six things the items above didn't:
 
 ### Phase 7. CI and release
 
-- [ ] **CI** ([B10](06-build-and-ci.md), [B11](06-build-and-ci.md)). Run tests, publint and attw, the smoke test, and axe on the playground. Pin actions to commit SHAs, add `timeout-minutes`, and cache `.turbo`.
-- [ ] **Examples** ([Q7](07-code-quality.md)). Move the playground code strings into real `.tsx` files that are both rendered and shown as source, so the examples are type-checked and the axe run in CI covers them.
-- [ ] **Publishing** ([B12](06-build-and-ci.md)). npm trusted publishing instead of `NPM_TOKEN`, after confirming the pinned pnpm supports it. Changesets for versions and changelogs. Keep the `dry_run` default.
-- [ ] **Release 1.0.0** across the four packages (`todo.md`).
+- [x] **CI** ([B10](06-build-and-ci.md), [B11](06-build-and-ci.md)). Run tests, publint and attw, the smoke test, and axe on the playground. Pin actions to commit SHAs, add `timeout-minutes`, and cache `.turbo`.
+- [x] **Examples** ([Q7](07-code-quality.md)). Move the playground code strings into real `.tsx` files that are both rendered and shown as source, so the examples are type-checked and the axe run in CI covers them.
+- [x] **Publishing** ([B12](06-build-and-ci.md)). npm trusted publishing instead of `NPM_TOKEN`, after confirming the pinned pnpm supports it. Keep the `dry_run` default.
+- [x] **No 1.0.0 yet.** The release moves to [Before 1.0](#before-10), after the React adapter. The versions stay as they are.
+
+The implementation settled five things the items above didn't:
+
+- **The axe run covers every theme.** `pnpm test` builds the playground, opens each section in Chromium, and runs axe in all nine themes (`apps/solid-playground/scripts/axe.js`). It emulates reduced motion, because the color transitions otherwise leave the page between two themes and axe reports contrast for colors no theme has. It blocks the Google Fonts requests, so it doesn't need the network.
+- **Disabled descriptions are exempt from contrast.** axe flagged one thing: the description of a disabled Field, NumberField, or DatePicker, which the CSS dims with the label. WCAG 1.4.3 sets no minimum for an inactive control, and axe already skips the dimmed label, so the run skips contrast on `.sb-field-description` inside a disabled field or fieldset and nothing else. Keeping descriptions at full contrast would be a CSS change instead.
+- **Examples live in `src/examples/<section>/`**, one component per file. `Example` takes the file's name and loads both the component and its `?raw` source with `import.meta.glob`, so what the page shows is the file that type-checks. Form examples are plain `<form>`s; the `form` prop makes `Example` report the `FormData` instead of submitting. Examples that shared state (the button status line, the alert dialog result) now each keep their own, and the toast examples share one `toaster.ts`, as an app would. The sources push the bundle past Vite's 500 kB warning, so the playground raises the limit.
+- **pnpm publishes with OIDC itself.** pnpm 11.25 trades the GitHub OIDC token for a short-lived npm token in `pnpm publish` (read in the installed pnpm; it skips OIDC only with `--batch`, which the workflow doesn't use). Each package still has to name `publish.yml` as its trusted publisher on npmjs.com, and the `NPM_TOKEN` secret can go once that works. On npmjs.com, add `redasalmi/simple-base` with the workflow `publish.yml` as the trusted publisher of each of the four packages.
+- **Pinned versions.** `actions/checkout` v7.0.1, `pnpm/setup` v2.1.0, and `actions/cache` v6.1.0, each by commit SHA. `pnpm/setup` v3 exists and wasn't adopted here. `playwright` and `axe-core` moved to the catalog, so the solid tests, the playground's axe run, and the smoke test share one Chromium. The publish job doesn't restore the turbo cache, so a release is always built from scratch.
+
+## Before 1.0
+
+- [ ] **React adapter.** `@simple-base/react` with every component `@simple-base/solid` exports, on the same contracts, with the same behavior tests, server rendering, and form participation. A React playground with the same examples, covered by the same axe run.
+- [ ] **Release 1.0.0** across the five packages.
 
 ## After 1.0
 

@@ -1,13 +1,16 @@
 # Repository structure
 
-## Current (v1)
+## Current
 
 ```text
 simple-base/
 ├── apps/
 │   └── solid-playground/       # Vite preview of every Solid component and CSS pattern
+│       ├── scripts/
+│       │   └── axe.js          # axe on every section in every theme (its `test` task)
 │       ├── src/
 │       │   ├── App.tsx
+│       │   ├── examples/       # One component per example, rendered and shown as source
 │       │   └── preview/        # One file per section
 │       ├── index.html
 │       ├── vite.config.ts
@@ -41,9 +44,11 @@ simple-base/
 │       ├── tsdown.config.ts
 │       └── package.json
 │
+├── scripts/smoke/              # Installs the packed packages in a scratch Vite app
+│
 ├── .github/workflows/
-│   ├── ci.yml                  # Lint, format, typecheck, build
-│   └── publish.yml             # npm publish on release
+│   ├── ci.yml                  # Lint, format, typecheck, test, build, smoke test
+│   └── publish.yml             # npm trusted publishing on release, or by hand as a dry run
 ├── .oxfmtrc.json
 ├── pnpm-workspace.yaml
 ├── turbo.json
@@ -52,18 +57,28 @@ simple-base/
 
 Linting uses oxlint and formatting uses oxfmt, both run from the root.
 
+## Planned for v1
+
+The packages go to 1.0.0 once the React adapter has every component the Solid adapter has. See `todo.md`.
+
+```text
+apps/
+└── react-playground/
+
+packages/
+└── react/                      # @simple-base/react, same contracts and components as the Solid adapter
+```
+
 ## Planned after v1
 
-These are not part of v1. See `todo.md` for the component roadmap.
+See `todo.md` for the component roadmap.
 
 ```text
 apps/
 ├── docs/                       # Documentation site with React and Solid examples
-├── react-playground/
 └── vanilla-playground/
 
 packages/
-├── react/                      # @simple-base/react, same contracts as the Solid adapter
 └── testing/                    # Shared component, keyboard, and theme cases
 
 tests/

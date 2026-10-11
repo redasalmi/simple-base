@@ -19,6 +19,11 @@
       "outputs": [],
       "passThroughEnv": ["PLAYWRIGHT_*"]
     },
+    "solid-playground#test": {
+      "dependsOn": ["build"],
+      "outputs": [],
+      "passThroughEnv": ["PLAYWRIGHT_*"]
+    },
     "//#lint": {
       "outputs": []
     },

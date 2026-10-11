@@ -958,6 +958,10 @@ Themes come from the token layer. Set `data-theme` on the root or any nested reg
 <html data-theme="nord"></html>
 ```
 
+## Versioning
+
+Simple Base is on 0.x. All its packages go to 1.0.0 together, once `@simple-base/react` ships the same components as `@simple-base/solid`. Until then a minor release can include breaking changes.
+
 ## Links
 
 - [Repository](https://github.com/redasalmi/simple-base)

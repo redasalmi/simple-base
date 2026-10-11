@@ -1,72 +1,13 @@
-import {
-  Dialog,
-  DialogAction,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogKicker,
-  DialogTitle,
-  DialogTrigger,
-} from "@simple-base/solid";
-import { createSignal } from "solid-js";
-
-import { Api, CloseIcon, Example } from "./Preview";
+import { Api, Example } from "./Preview";
 
 export function Dialogs() {
-  let dialog: HTMLDialogElement | undefined;
-  const [result, setResult] = createSignal("The dialog has not been opened yet.");
-
   return (
     <>
-      <Dialog>
-        <Example
-          title="Try the dialog"
-          description="Open a neutral modal for supporting information or a focused task. Escape, the close control, or Done dismisses it and returns focus to the trigger."
-          code={
-            '<Dialog>\n  <DialogTrigger variant="secondary">\n    View workspace details\n  </DialogTrigger>\n  <DialogContent>\n    <DialogHeader>\n      <div>\n        <DialogKicker>Workspace</DialogKicker>\n        <DialogTitle>Workspace details</DialogTitle>\n      </div>\n      <DialogClose aria-label="Close workspace details">\n        <CloseIcon />\n      </DialogClose>\n    </DialogHeader>\n    <DialogDescription>\n      Review the workspace settings before continuing.\n    </DialogDescription>\n    <DialogFooter>\n      <DialogAction value="done">Done</DialogAction>\n    </DialogFooter>\n  </DialogContent>\n</Dialog>'
-          }
-        >
-          <div class="preview-stack">
-            <div>
-              <DialogTrigger variant="secondary">View workspace details</DialogTrigger>
-            </div>
-            <p class="preview-status" role="status">
-              {result()}
-            </p>
-          </div>
-        </Example>
-        <DialogContent
-          ref={(element) => {
-            dialog = element;
-          }}
-          onClose={() =>
-            setResult(
-              dialog?.returnValue === "done"
-                ? "Workspace details reviewed."
-                : "Dialog dismissed without an action.",
-            )
-          }
-        >
-          <DialogHeader>
-            <div>
-              <DialogKicker>Workspace</DialogKicker>
-              <DialogTitle>Workspace details</DialogTitle>
-            </div>
-            <DialogClose aria-label="Close workspace details">
-              <CloseIcon />
-            </DialogClose>
-          </DialogHeader>
-          <DialogDescription>
-            This workspace is visible to twelve members. Billing and access settings are managed by
-            workspace owners.
-          </DialogDescription>
-          <DialogFooter>
-            <DialogAction value="done">Done</DialogAction>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+      <Example
+        title="Try the dialog"
+        description="Open a neutral modal for supporting information or a focused task. Escape, the close control, or Done dismisses it and returns focus to the trigger."
+        example="dialog/WorkspaceDetails"
+      />
       <Api
         rows={[
           [
