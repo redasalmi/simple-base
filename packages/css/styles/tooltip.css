@@ -4,9 +4,9 @@
     --arrow-background: var(--sb-semantic-color-foreground-primary);
 
     box-sizing: border-box;
-    z-index: var(--sb-semantic-layer-overlay);
+    z-index: var(--sb-semantic-layer-tooltip);
     width: max-content;
-    max-width: min(280px, var(--available-width, 100vw));
+    max-width: min(17.5rem, var(--available-width, 100vw));
     padding: var(--sb-semantic-space-1) var(--sb-semantic-space-2);
     border-radius: var(--sb-semantic-radius-sm);
     color: var(--sb-semantic-color-foreground-inverse);
@@ -25,7 +25,7 @@
   }
 
   .sb-tooltip-content .sb-shortcut {
-    min-height: 18px;
+    min-height: 1.125rem;
     margin-inline-start: var(--sb-semantic-space-2);
     border-color: color-mix(in oklch, var(--sb-semantic-color-foreground-inverse) 40%, transparent);
     color: inherit;

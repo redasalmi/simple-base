@@ -21,12 +21,6 @@
           "value": 400,
           "unit": "ms"
         }
-      },
-      "spinner": {
-        "$value": {
-          "value": 900,
-          "unit": "ms"
-        }
       }
     },
     "easing": {

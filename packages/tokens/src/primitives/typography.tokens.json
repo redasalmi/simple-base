@@ -1,6 +1,6 @@
 {
   "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
-  "$description": "Typography primitives and stable semantic roles.",
+  "$description": "Typography primitives.",
   "primitive": {
     "font-family": {
       "$type": "fontFamily",
@@ -50,62 +50,62 @@
       "$type": "dimension",
       "xs": {
         "$value": {
-          "value": 12,
-          "unit": "px"
+          "value": 0.75,
+          "unit": "rem"
         }
       },
       "sm": {
         "$value": {
-          "value": 14,
-          "unit": "px"
+          "value": 0.875,
+          "unit": "rem"
         }
       },
       "md": {
         "$value": {
-          "value": 16,
-          "unit": "px"
+          "value": 1,
+          "unit": "rem"
         }
       },
       "lg": {
         "$value": {
-          "value": 18,
-          "unit": "px"
+          "value": 1.125,
+          "unit": "rem"
         }
       },
       "xl": {
         "$value": {
-          "value": 20,
-          "unit": "px"
+          "value": 1.25,
+          "unit": "rem"
         }
       },
       "2xl": {
         "$value": {
-          "value": 24,
-          "unit": "px"
+          "value": 1.5,
+          "unit": "rem"
         }
       },
       "3xl": {
         "$value": {
-          "value": 28,
-          "unit": "px"
+          "value": 1.75,
+          "unit": "rem"
         }
       },
       "4xl": {
         "$value": {
-          "value": 36,
-          "unit": "px"
+          "value": 2.25,
+          "unit": "rem"
         }
       },
       "5xl": {
         "$value": {
-          "value": 52,
-          "unit": "px"
+          "value": 3.25,
+          "unit": "rem"
         }
       },
       "display": {
         "$value": {
-          "value": 72,
-          "unit": "px"
+          "value": 4.5,
+          "unit": "rem"
         }
       }
     },
@@ -129,25 +129,21 @@
     },
     "letter-spacing": {
       "$type": "number",
+      "$description": "Letter spacing in em, relative to the font size. The CSS output adds the em unit; other outputs keep the plain number.",
       "tight": {
-        "$value": -0.03,
-        "$description": "Relative em value."
+        "$value": -0.03
       },
       "snug": {
-        "$value": -0.02,
-        "$description": "Relative em value."
+        "$value": -0.02
       },
       "normal": {
-        "$value": 0,
-        "$description": "Relative em value."
+        "$value": 0
       },
       "wide": {
-        "$value": 0.02,
-        "$description": "Relative em value."
+        "$value": 0.02
       },
       "wider": {
-        "$value": 0.06,
-        "$description": "Relative em value."
+        "$value": 0.06
       }
     }
   }

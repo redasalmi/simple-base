@@ -8,7 +8,7 @@
     overflow-x: auto;
     border: var(--sb-semantic-border-width-hairline) solid var(--sb-semantic-color-border-default);
     border-radius: var(--sb-semantic-radius-md);
-    background: var(--sb-semantic-color-background-raised);
+    background: var(--sb-semantic-color-background-muted);
   }
 
   .sb-tab {

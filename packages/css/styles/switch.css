@@ -4,8 +4,8 @@
 
     position: relative;
     box-sizing: border-box;
-    width: 48px;
-    height: 28px;
+    width: 3rem;
+    height: 1.75rem;
     flex: 0 0 auto;
     margin: 0;
     border: var(--sb-semantic-border-width-strong) solid var(--sb-semantic-color-border-strong);
@@ -26,10 +26,10 @@
   .sb-switch::before,
   .sb-switch::after {
     position: absolute;
-    top: 3px;
-    left: 3px;
-    width: 18px;
-    height: 18px;
+    top: calc(0.3125rem - var(--sb-semantic-border-width-strong));
+    left: calc(0.3125rem - var(--sb-semantic-border-width-strong));
+    width: 1.125rem;
+    height: 1.125rem;
     content: "";
     transition:
       translate var(--sb-semantic-motion-duration-normal) var(--sb-semantic-motion-easing-out),
@@ -43,7 +43,7 @@
 
   .sb-switch::after {
     background: var(--sb-semantic-color-background-surface);
-    mask: var(--sb-switch-glyph) center / 10px no-repeat;
+    mask: var(--sb-switch-glyph) center / 0.625rem no-repeat;
   }
 
   .sb-switch:checked {
@@ -55,12 +55,12 @@
 
   .sb-switch:checked::before {
     background: var(--sb-semantic-color-accent-on-surface);
-    translate: 20px 0;
+    translate: 1.25rem 0;
   }
 
   .sb-switch:checked::after {
     background: var(--sb-semantic-color-accent-surface);
-    translate: 20px 0;
+    translate: 1.25rem 0;
   }
 
   .sb-switch:focus-visible {

@@ -13,7 +13,7 @@
 
   .sb-table {
     width: 100%;
-    min-width: 640px;
+    min-width: 40rem;
     border-collapse: collapse;
     font-size: var(--sb-semantic-typography-size-sm);
     font-variant-numeric: tabular-nums;
@@ -37,7 +37,7 @@
 
   .sb-table thead th {
     color: var(--sb-semantic-color-foreground-secondary);
-    background: var(--sb-semantic-color-background-raised);
+    background: var(--sb-semantic-color-background-muted);
     font-family: var(--sb-semantic-typography-family-body);
     font-size: var(--sb-semantic-typography-size-sm);
     font-weight: var(--sb-semantic-typography-weight-semibold);
@@ -55,7 +55,7 @@
   .sb-table tbody tr:hover > :is(th, td) {
     background: color-mix(
       in oklab,
-      var(--sb-semantic-color-background-raised) 60%,
+      var(--sb-semantic-color-background-muted) 60%,
       var(--sb-semantic-color-background-surface)
     );
   }
@@ -66,7 +66,7 @@
 
   .sb-table tfoot :is(th, td) {
     color: var(--sb-semantic-color-foreground-secondary);
-    background: var(--sb-semantic-color-background-raised);
+    background: var(--sb-semantic-color-background-muted);
     font-weight: var(--sb-semantic-typography-weight-semibold);
   }
 

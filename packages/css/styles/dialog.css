@@ -1,7 +1,7 @@
 @layer sb {
   .sb-dialog-content {
     box-sizing: border-box;
-    width: min(560px, calc(100vw - 40px));
+    width: min(35rem, calc(100vw - 2.5rem));
     max-width: none;
     margin: auto;
     padding: var(--sb-semantic-space-6);
@@ -72,7 +72,7 @@
 
   .sb-dialog-close:hover {
     color: var(--sb-semantic-color-foreground-primary);
-    background: var(--sb-semantic-color-background-raised);
+    background: var(--sb-semantic-color-background-muted);
   }
 
   .sb-dialog-close > svg {
@@ -85,7 +85,7 @@
     outline-offset: 0;
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: 30rem) {
     .sb-dialog-footer {
       align-items: stretch;
       flex-direction: column;

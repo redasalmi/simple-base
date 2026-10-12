@@ -52,7 +52,7 @@
 
   .sb-input:read-only {
     color: var(--sb-semantic-color-foreground-secondary);
-    background: var(--sb-semantic-color-background-raised);
+    background: var(--sb-semantic-color-background-muted);
     border-color: var(--sb-semantic-color-border-default);
   }
 
@@ -66,7 +66,7 @@
   .sb-input:disabled {
     cursor: not-allowed;
     color: var(--sb-semantic-color-foreground-muted);
-    background: var(--sb-semantic-color-background-raised);
+    background: var(--sb-semantic-color-background-muted);
     border-style: dashed;
     border-color: var(--sb-semantic-color-border-strong);
   }

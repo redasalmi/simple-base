@@ -57,7 +57,7 @@
   }
 
   .sb-button[data-variant="secondary"]:not(:disabled):not([aria-disabled="true"]):hover {
-    background: var(--sb-semantic-color-background-raised);
+    background: var(--sb-semantic-color-background-muted);
     border-color: var(--sb-semantic-color-foreground-muted);
   }
 
@@ -80,7 +80,7 @@
   }
 
   .sb-button[data-variant="ghost"]:not(:disabled):not([aria-disabled="true"]):hover {
-    background: var(--sb-semantic-color-background-raised);
+    background: var(--sb-semantic-color-background-muted);
   }
 
   .sb-button[data-variant="danger"] {
@@ -116,7 +116,7 @@
   .sb-button[aria-disabled="true"] {
     cursor: not-allowed;
     color: var(--sb-semantic-color-foreground-muted);
-    background: var(--sb-semantic-color-background-raised);
+    background: var(--sb-semantic-color-background-muted);
     border-color: var(--sb-semantic-color-border-default);
   }
 

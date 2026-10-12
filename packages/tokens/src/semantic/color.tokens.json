@@ -6,138 +6,158 @@
       "background": {
         "$type": "color",
         "canvas": {
-          "$value": "{primitive.color.canvas}"
+          "$description": "The page background.",
+          "$value": "{primitive.color.bg-canvas}"
         },
         "surface": {
-          "$value": "{primitive.color.surface}"
+          "$description": "Cards, fields, menus, and dialogs.",
+          "$value": "{primitive.color.bg-surface}"
         },
-        "raised": {
-          "$value": "{primitive.color.raised}"
+        "muted": {
+          "$description": "An opaque fill one step from surface toward the foreground: table headers, code blocks, and read-only fields.",
+          "$value": "{primitive.color.bg-muted}"
         },
-        "overlay": {
-          "$value": "{primitive.color.overlay}"
+        "strong": {
+          "$description": "An opaque fill one step further than muted: neutral badges, inline code, and progress tracks.",
+          "$value": "{primitive.color.bg-strong}"
         },
         "subtle": {
+          "$description": "A translucent tint of the foreground that works over any background: hover states and quiet badges.",
           "$value": "{primitive.color.bg-subtle}"
         }
       },
       "foreground": {
         "$type": "color",
         "primary": {
-          "$value": "{primitive.color.fg}"
+          "$value": "{primitive.color.fg-primary}"
         },
         "secondary": {
-          "$value": "{primitive.color.secondary}"
+          "$value": "{primitive.color.fg-secondary}"
         },
         "muted": {
-          "$value": "{primitive.color.muted}"
-        },
-        "subtle": {
-          "$description": "Not for text: it falls below 4.5:1 in catppuccin-latte. No component uses it.",
-          "$value": "{primitive.color.fg-subtle}"
+          "$value": "{primitive.color.fg-muted}"
         },
         "inverse": {
-          "$value": "{primitive.color.inverse}"
+          "$description": "Text on a foreground.primary fill, such as a tooltip.",
+          "$value": "{primitive.color.fg-inverse}"
         }
       },
       "border": {
         "$type": "color",
         "default": {
-          "$description": "Decorative dividers and card edges only. It falls below 3:1 in every theme, so control boundaries use border.strong.",
+          "$description": "Decorative dividers and card edges only: it is below 3:1 by design. Control boundaries use border.strong.",
           "$value": "{primitive.color.border}"
         },
         "strong": {
+          "$description": "Boundaries a user needs to see to find a control: fields, checkboxes, and switches.",
           "$value": "{primitive.color.border-strong}"
-        },
-        "subtle": {
-          "$value": "{primitive.color.border-subtle}"
         }
       },
       "accent": {
         "$type": "color",
         "surface": {
+          "$description": "The accent fill, such as a primary button.",
           "$value": "{primitive.color.accent}"
         },
         "text": {
-          "$value": "{primitive.color.accent-readable}"
+          "$description": "Accent-colored text and icons, such as links.",
+          "$value": "{primitive.color.accent-text}"
         },
         "soft": {
+          "$description": "An accent tint behind text: highlighted options and selected rows.",
           "$value": "{primitive.color.accent-soft}"
         },
         "on-surface": {
-          "$value": "{primitive.color.inverse}"
+          "$description": "Text on accent.surface.",
+          "$value": "{primitive.color.fg-inverse}"
         }
       },
       "status": {
         "danger": {
           "$type": "color",
           "base": {
+            "$description": "Status glyphs, invalid field borders, and the danger focus ring.",
             "$value": "{primitive.color.danger}"
           },
           "surface": {
+            "$description": "The status fill, such as a danger button or a progress bar.",
             "$value": "{primitive.color.danger-surface}"
           },
           "text": {
             "$value": "{primitive.color.danger-text}"
           },
           "on-surface": {
+            "$description": "Text on status.danger.surface.",
             "$value": "{primitive.color.danger-on}"
           },
           "soft": {
+            "$description": "A status tint behind status text and glyphs: alerts and badges.",
             "$value": "{primitive.color.danger-soft}"
           }
         },
         "success": {
           "$type": "color",
           "base": {
+            "$description": "Status glyphs and borders.",
             "$value": "{primitive.color.success}"
           },
           "surface": {
+            "$description": "The status fill, such as a progress bar.",
             "$value": "{primitive.color.success-surface}"
           },
           "text": {
             "$value": "{primitive.color.success-text}"
           },
           "on-surface": {
+            "$description": "Text on status.success.surface.",
             "$value": "{primitive.color.success-on}"
           },
           "soft": {
+            "$description": "A status tint behind status text and glyphs: alerts and badges.",
             "$value": "{primitive.color.success-soft}"
           }
         },
         "warning": {
           "$type": "color",
           "base": {
+            "$description": "Status glyphs and borders.",
             "$value": "{primitive.color.warning}"
           },
           "surface": {
+            "$description": "The status fill, such as a progress bar.",
             "$value": "{primitive.color.warning-surface}"
           },
           "text": {
             "$value": "{primitive.color.warning-text}"
           },
           "on-surface": {
+            "$description": "Text on status.warning.surface.",
             "$value": "{primitive.color.warning-on}"
           },
           "soft": {
+            "$description": "A status tint behind status text and glyphs: alerts and badges.",
             "$value": "{primitive.color.warning-soft}"
           }
         },
         "info": {
           "$type": "color",
           "base": {
+            "$description": "Status glyphs and borders.",
             "$value": "{primitive.color.info}"
           },
           "surface": {
+            "$description": "The status fill, such as a progress bar.",
             "$value": "{primitive.color.info-surface}"
           },
           "text": {
             "$value": "{primitive.color.info-text}"
           },
           "on-surface": {
+            "$description": "Text on status.info.surface.",
             "$value": "{primitive.color.info-on}"
           },
           "soft": {
+            "$description": "A status tint behind status text and glyphs: alerts and badges.",
             "$value": "{primitive.color.info-soft}"
           }
         }
@@ -148,13 +168,13 @@
           "$value": "{primitive.color.accent}"
         },
         "foreground": {
-          "$value": "{primitive.color.inverse}"
+          "$value": "{primitive.color.fg-inverse}"
         }
       },
       "focus": {
         "$type": "color",
         "ring": {
-          "$value": "{primitive.color.accent-readable}"
+          "$value": "{primitive.color.accent-text}"
         },
         "danger-ring": {
           "$value": "{primitive.color.danger}"
@@ -163,6 +183,7 @@
       "overlay": {
         "$type": "color",
         "scrim": {
+          "$description": "The backdrop behind modal dialogs.",
           "$value": "{primitive.color.scrim}"
         }
       }

@@ -10,49 +10,56 @@
     "color": {
       "$type": "color",
       "$description": "Raw simple-base-dark palette. Product components must not reference this group directly.",
-      "canvas": {
+      "bg-canvas": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.090196, 0.086275, 0.070588]
         }
       },
-      "surface": {
+      "bg-surface": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.129412, 0.121569, 0.101961]
         }
       },
-      "raised": {
+      "bg-muted": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.164706, 0.156863, 0.133333]
         }
       },
-      "overlay": {
+      "bg-strong": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.2, 0.184314, 0.156863]
         }
       },
-      "fg": {
+      "bg-subtle": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.941176, 0.921569, 0.878431],
+          "alpha": 0.05
+        }
+      },
+      "fg-primary": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.941176, 0.921569, 0.878431]
         }
       },
-      "secondary": {
+      "fg-secondary": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.776471, 0.74902, 0.690196]
         }
       },
-      "muted": {
+      "fg-muted": {
         "$value": {
           "colorSpace": "srgb",
-          "components": [0.631373, 0.603922, 0.545098]
+          "components": [0.639216, 0.611765, 0.552941]
         }
       },
-      "inverse": {
+      "fg-inverse": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.070588, 0.066667, 0.054902]
@@ -76,19 +83,19 @@
           "components": [0.576471, 0.819608, 0.690196]
         }
       },
-      "accent-readable": {
+      "accent-text": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.576471, 0.819608, 0.690196]
         }
       },
-      "danger": {
+      "accent-soft": {
         "$value": {
           "colorSpace": "srgb",
-          "components": [0.94902, 0.54902, 0.47451]
+          "components": [0.121569, 0.227451, 0.176471]
         }
       },
-      "danger-text": {
+      "danger": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.94902, 0.54902, 0.47451]
@@ -100,13 +107,25 @@
           "components": [0.94902, 0.54902, 0.47451]
         }
       },
-      "success": {
+      "danger-text": {
         "$value": {
           "colorSpace": "srgb",
-          "components": [0.560784, 0.815686, 0.65098]
+          "components": [0.94902, 0.54902, 0.47451]
         }
       },
-      "success-text": {
+      "danger-soft": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.270588, 0.133333, 0.105882]
+        }
+      },
+      "danger-on": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.070588, 0.066667, 0.054902]
+        }
+      },
+      "success": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.560784, 0.815686, 0.65098]
@@ -118,13 +137,25 @@
           "components": [0.560784, 0.815686, 0.65098]
         }
       },
-      "warning": {
+      "success-text": {
         "$value": {
           "colorSpace": "srgb",
-          "components": [0.913725, 0.741176, 0.384314]
+          "components": [0.560784, 0.815686, 0.65098]
         }
       },
-      "warning-text": {
+      "success-soft": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.117647, 0.207843, 0.14902]
+        }
+      },
+      "success-on": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.070588, 0.066667, 0.054902]
+        }
+      },
+      "warning": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.913725, 0.741176, 0.384314]
@@ -136,13 +167,25 @@
           "components": [0.913725, 0.741176, 0.384314]
         }
       },
-      "info": {
+      "warning-text": {
         "$value": {
           "colorSpace": "srgb",
-          "components": [0.560784, 0.721569, 0.878431]
+          "components": [0.913725, 0.741176, 0.384314]
         }
       },
-      "info-text": {
+      "warning-soft": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.239216, 0.188235, 0.086275]
+        }
+      },
+      "warning-on": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.070588, 0.066667, 0.054902]
+        }
+      },
+      "info": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.560784, 0.721569, 0.878431]
@@ -154,49 +197,10 @@
           "components": [0.560784, 0.721569, 0.878431]
         }
       },
-      "fg-subtle": {
+      "info-text": {
         "$value": {
           "colorSpace": "srgb",
-          "components": [0.941176, 0.921569, 0.878431],
-          "alpha": 0.72
-        }
-      },
-      "bg-subtle": {
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [0.941176, 0.921569, 0.878431],
-          "alpha": 0.05
-        }
-      },
-      "border-subtle": {
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [0.941176, 0.921569, 0.878431],
-          "alpha": 0.1
-        }
-      },
-      "accent-soft": {
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [0.121569, 0.227451, 0.176471]
-        }
-      },
-      "danger-soft": {
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [0.270588, 0.133333, 0.105882]
-        }
-      },
-      "success-soft": {
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [0.117647, 0.207843, 0.14902]
-        }
-      },
-      "warning-soft": {
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [0.239216, 0.188235, 0.086275]
+          "components": [0.560784, 0.721569, 0.878431]
         }
       },
       "info-soft": {
@@ -205,35 +209,17 @@
           "components": [0.113725, 0.172549, 0.231373]
         }
       },
-      "scrim": {
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [0.0, 0.0, 0.0],
-          "alpha": 0.55
-        }
-      },
-      "danger-on": {
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [0.070588, 0.066667, 0.054902]
-        }
-      },
-      "success-on": {
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [0.070588, 0.066667, 0.054902]
-        }
-      },
-      "warning-on": {
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [0.070588, 0.066667, 0.054902]
-        }
-      },
       "info-on": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.070588, 0.066667, 0.054902]
+        }
+      },
+      "scrim": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0, 0, 0],
+          "alpha": 0.55
         }
       }
     }

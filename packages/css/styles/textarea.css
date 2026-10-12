@@ -1,7 +1,7 @@
 @layer sb {
   .sb-textarea {
     width: 100%;
-    min-height: 120px;
+    min-height: 7.5rem;
     padding: var(--sb-semantic-space-3);
     resize: vertical;
     border: var(--sb-semantic-border-width-hairline) solid var(--sb-semantic-color-border-strong);
@@ -54,14 +54,14 @@
 
   .sb-textarea:read-only {
     color: var(--sb-semantic-color-foreground-secondary);
-    background: var(--sb-semantic-color-background-raised);
+    background: var(--sb-semantic-color-background-muted);
     border-color: var(--sb-semantic-color-border-default);
   }
 
   .sb-textarea:disabled {
     cursor: not-allowed;
     color: var(--sb-semantic-color-foreground-muted);
-    background: var(--sb-semantic-color-background-raised);
+    background: var(--sb-semantic-color-background-muted);
     border-style: dashed;
     border-color: var(--sb-semantic-color-border-strong);
   }

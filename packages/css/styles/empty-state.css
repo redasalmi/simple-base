@@ -2,7 +2,7 @@
   .sb-empty-state {
     display: grid;
     place-items: center;
-    min-height: 210px;
+    min-height: 13.125rem;
     padding: var(--sb-semantic-space-8);
     text-align: center;
   }

@@ -1,4 +1,3 @@
-@import "tailwindcss";
 @import "./tokens.css";
 
 /* Inline aliases resolve semantic CSS roles in each element's theme scope. */
@@ -6,13 +5,35 @@
   @tz (theme: "simple-base-dark");
 }
 
-/* Theme variants match the data-theme selectors emitted in tokens.css. */
-@custom-variant simple-base-dark ([data-theme="simple-base-dark"] &);
-@custom-variant simple-base-light ([data-theme="simple-base-light"] &);
-@custom-variant catppuccin-latte ([data-theme="catppuccin-latte"] &);
-@custom-variant catppuccin-frappe ([data-theme="catppuccin-frappe"] &);
-@custom-variant catppuccin-macchiato ([data-theme="catppuccin-macchiato"] &);
-@custom-variant catppuccin-mocha ([data-theme="catppuccin-mocha"] &);
-@custom-variant dracula ([data-theme="dracula"] &);
-@custom-variant tokyo-night ([data-theme="tokyo-night"] &);
-@custom-variant nord ([data-theme="nord"] &);
+/*
+ * Theme variants match the selectors in tokens.css. A root without data-theme follows the system
+ * color scheme, so the simple-base-dark and simple-base-light variants also match there, outside
+ * any nested data-theme region.
+ */
+@custom-variant simple-base-dark {
+  &:where([data-theme="simple-base-dark"], [data-theme="simple-base-dark"] *) {
+    @slot;
+  }
+  @media (prefers-color-scheme: dark) {
+    &:where(:root:not([data-theme]), :root:not([data-theme]) :not([data-theme], [data-theme] *)) {
+      @slot;
+    }
+  }
+}
+@custom-variant simple-base-light {
+  &:where([data-theme="simple-base-light"], [data-theme="simple-base-light"] *) {
+    @slot;
+  }
+  @media (prefers-color-scheme: light) {
+    &:where(:root:not([data-theme]), :root:not([data-theme]) :not([data-theme], [data-theme] *)) {
+      @slot;
+    }
+  }
+}
+@custom-variant catppuccin-latte (&:where([data-theme="catppuccin-latte"], [data-theme="catppuccin-latte"] *));
+@custom-variant catppuccin-frappe (&:where([data-theme="catppuccin-frappe"], [data-theme="catppuccin-frappe"] *));
+@custom-variant catppuccin-macchiato (&:where([data-theme="catppuccin-macchiato"], [data-theme="catppuccin-macchiato"] *));
+@custom-variant catppuccin-mocha (&:where([data-theme="catppuccin-mocha"], [data-theme="catppuccin-mocha"] *));
+@custom-variant dracula (&:where([data-theme="dracula"], [data-theme="dracula"] *));
+@custom-variant tokyo-night (&:where([data-theme="tokyo-night"], [data-theme="tokyo-night"] *));
+@custom-variant nord (&:where([data-theme="nord"], [data-theme="nord"] *));

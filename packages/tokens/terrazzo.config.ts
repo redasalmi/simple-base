@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import path from "node:path";
 
 import { defineConfig } from "@terrazzo/cli";
@@ -5,20 +6,33 @@ import css from "@terrazzo/plugin-css";
 import js from "@terrazzo/plugin-js";
 import tailwind from "@terrazzo/plugin-tailwind";
 
-const tokensResolverPath = path.join(import.meta.dirname, "src/simple-base.resolver.json");
-const tailwindTemplatePath = path.join(import.meta.dirname, "src/tailwind.template.css");
+const srcPath = path.join(import.meta.dirname, "src");
+const tokensResolverPath = path.join(srcPath, "simple-base.resolver.json");
+const tailwindTemplatePath = path.join(srcPath, "tailwind.template.css");
 
-const themes = [
-  { name: "simple-base-dark", colorScheme: "dark", isDefault: true },
-  { name: "simple-base-light", colorScheme: "light", isDefault: false },
-  { name: "catppuccin-latte", colorScheme: "light", isDefault: false },
-  { name: "catppuccin-frappe", colorScheme: "dark", isDefault: false },
-  { name: "catppuccin-macchiato", colorScheme: "dark", isDefault: false },
-  { name: "catppuccin-mocha", colorScheme: "dark", isDefault: false },
-  { name: "dracula", colorScheme: "dark", isDefault: false },
-  { name: "tokyo-night", colorScheme: "dark", isDefault: false },
-  { name: "nord", colorScheme: "dark", isDefault: false },
-] as const;
+const readJson = (file: string) => JSON.parse(readFileSync(file, "utf8"));
+
+// Each theme context lists its theme file first; the file records the theme's color scheme.
+const themeContexts: Record<string, { $ref: string }[]> =
+  readJson(tokensResolverPath).modifiers.theme.contexts;
+const themes = Object.entries(themeContexts).map(([name, [themeFile]]) => ({
+  name,
+  colorScheme: readJson(path.join(srcPath, themeFile.$ref)).$extensions["org.simple-base.theme"]
+    .colorScheme as "light" | "dark",
+}));
+
+// Only colors and shadows change between themes. Everything else is declared once on :root, so an
+// override of a spacing or type token there isn't undone inside a scoped theme.
+const themedTokens = [
+  "primitive.color.**",
+  "semantic.color.**",
+  "primitive.shadow.**",
+  "semantic.shadow.**",
+];
+
+function themeBlock(selector: string, colorScheme: string) {
+  return (contents: string) => `${selector} {\n  color-scheme: ${colorScheme};\n  ${contents}\n}`;
+}
 
 export default defineConfig({
   tokens: [tokensResolverPath],
@@ -29,13 +43,32 @@ export default defineConfig({
       transform: (token) =>
         token.id.startsWith("primitive.letter-spacing.") ? `${token.$value}em` : undefined,
       variableName: (token) => `--sb-${token.id.replaceAll(".", "-")}`,
-      permutations: themes.map(({ name, colorScheme, isDefault }) => ({
-        input: { theme: name },
-        prepare: (contents) => {
-          const selector = isDefault ? `:root,\n[data-theme="${name}"]` : `[data-theme="${name}"]`;
-          return `${selector} {\n  color-scheme: ${colorScheme};\n  ${contents}\n}`;
+      permutations: [
+        {
+          input: { theme: "simple-base-dark" },
+          exclude: themedTokens,
+          prepare: (contents) => `:root {\n  ${contents}\n}`,
         },
-      })),
+        // Without a data-theme, the root follows the system color scheme.
+        {
+          input: { theme: "simple-base-dark" },
+          include: themedTokens,
+          prepare: themeBlock(`:root,\n[data-theme="simple-base-dark"]`, "dark"),
+        },
+        {
+          input: { theme: "simple-base-light" },
+          include: themedTokens,
+          prepare: (contents) =>
+            `@media (prefers-color-scheme: light) {\n  :root:not([data-theme]) {\n    color-scheme: light;\n    ${contents}\n  }\n}`,
+        },
+        ...themes
+          .filter(({ name }) => name !== "simple-base-dark")
+          .map(({ name, colorScheme }) => ({
+            input: { theme: name },
+            include: themedTokens,
+            prepare: themeBlock(`[data-theme="${name}"]`, colorScheme),
+          })),
+      ],
     }),
     tailwind({
       template: tailwindTemplatePath,

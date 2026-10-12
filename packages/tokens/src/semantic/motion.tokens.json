@@ -13,9 +13,6 @@
         },
         "slow": {
           "$value": "{primitive.duration.slow}"
-        },
-        "spinner": {
-          "$value": "{primitive.duration.spinner}"
         }
       },
       "easing": {

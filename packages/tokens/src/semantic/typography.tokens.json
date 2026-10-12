@@ -1,6 +1,6 @@
 {
   "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
-  "$description": "Typography primitives and stable semantic roles.",
+  "$description": "Typography roles.",
   "semantic": {
     "typography": {
       "family": {
@@ -83,6 +83,7 @@
       },
       "letter-spacing": {
         "$type": "number",
+        "$description": "Letter spacing in em, relative to the font size. The CSS output adds the em unit; other outputs keep the plain number.",
         "tight": {
           "$value": "{primitive.letter-spacing.tight}"
         },

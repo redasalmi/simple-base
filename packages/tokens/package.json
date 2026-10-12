@@ -40,7 +40,7 @@
     "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
-    "check": "tz check",
+    "check": "tz check && node scripts/check-themes.js",
     "build": "tz build",
     "typecheck": "tsc --noEmit"
   },

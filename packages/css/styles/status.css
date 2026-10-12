@@ -54,7 +54,7 @@
     width: var(--sb-semantic-space-2);
     height: var(--sb-semantic-space-2);
     flex: 0 0 auto;
-    margin-top: 6px;
+    margin-top: 0.375rem;
     border-radius: var(--sb-semantic-radius-full);
     background: currentcolor;
   }
@@ -197,7 +197,7 @@
   .sb-alert-close:hover,
   .sb-toast-close:hover {
     color: var(--sb-semantic-color-foreground-primary);
-    background: var(--sb-semantic-color-background-raised);
+    background: var(--sb-semantic-color-background-muted);
   }
 
   .sb-alert-close svg,
@@ -215,7 +215,7 @@
 
   .sb-toaster {
     width: min(
-      360px,
+      22.5rem,
       calc(100% - var(--viewport-offset-left, 1rem) - var(--viewport-offset-right, 1rem))
     );
     margin-inline: auto;
@@ -259,7 +259,7 @@
     right: var(--sb-semantic-space-5);
     bottom: var(--sb-semantic-space-5);
     z-index: var(--sb-semantic-layer-toast);
-    width: min(360px, calc(100vw - 40px));
+    width: min(22.5rem, calc(100vw - 2.5rem));
   }
 
   @media (prefers-reduced-motion: reduce) {

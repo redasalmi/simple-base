@@ -15,7 +15,7 @@
     gap: var(--sb-semantic-space-1);
     min-width: var(--sb-semantic-size-target-minimum);
     min-height: var(--sb-semantic-size-target-minimum);
-    padding-inline: 10px;
+    padding-inline: 0.625rem;
     border: var(--sb-semantic-border-width-hairline) solid transparent;
     border-radius: var(--sb-semantic-radius-md);
     color: var(--sb-semantic-color-foreground-secondary);
@@ -32,7 +32,7 @@
 
   .sb-page-button:hover:where(:not(:disabled, [aria-disabled="true"], [data-disabled])) {
     color: var(--sb-semantic-color-foreground-primary);
-    background: var(--sb-semantic-color-background-raised);
+    background: var(--sb-semantic-color-background-muted);
   }
 
   .sb-page-button[aria-current="page"] {

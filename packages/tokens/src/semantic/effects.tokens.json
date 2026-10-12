@@ -9,30 +9,18 @@
       },
       "subtle": {
         "$value": "{primitive.opacity.subtle}"
-      },
-      "invisible": {
-        "$value": "{primitive.opacity.invisible}"
-      },
-      "opaque": {
-        "$value": "{primitive.opacity.opaque}"
       }
     },
     "layer": {
       "$type": "number",
-      "base": {
-        "$value": "{primitive.z-index.base}"
-      },
       "sticky": {
         "$value": "{primitive.z-index.sticky}"
       },
       "dropdown": {
         "$value": "{primitive.z-index.dropdown}"
       },
-      "overlay": {
-        "$value": "{primitive.z-index.overlay}"
-      },
-      "modal": {
-        "$value": "{primitive.z-index.modal}"
+      "tooltip": {
+        "$value": "{primitive.z-index.tooltip}"
       },
       "toast": {
         "$value": "{primitive.z-index.toast}"

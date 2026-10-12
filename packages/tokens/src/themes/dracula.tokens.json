@@ -31,7 +31,7 @@
     "color": {
       "$type": "color",
       "$description": "Raw Dracula palette colors; each token names the palette color it uses. Product components must not reference this group directly.",
-      "canvas": {
+      "bg-canvas": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.129412, 0.133333, 0.172549]
@@ -40,7 +40,7 @@
           "org.simple-base.palette": "background-darker"
         }
       },
-      "surface": {
+      "bg-surface": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.156863, 0.164706, 0.211765]
@@ -49,7 +49,7 @@
           "org.simple-base.palette": "background"
         }
       },
-      "raised": {
+      "bg-muted": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.203922, 0.215686, 0.27451]
@@ -58,16 +58,26 @@
           "org.simple-base.palette": "background-lighter"
         }
       },
-      "overlay": {
+      "bg-strong": {
         "$value": {
           "colorSpace": "srgb",
-          "components": [0.266667, 0.278431, 0.352941]
+          "components": [0.258824, 0.266667, 0.313725]
         },
         "$extensions": {
-          "org.simple-base.palette": "current-line"
+          "org.simple-base.palette": "background-light"
         }
       },
-      "fg": {
+      "bg-subtle": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.972549, 0.972549, 0.94902],
+          "alpha": 0.06
+        },
+        "$extensions": {
+          "org.simple-base.palette": "foreground"
+        }
+      },
+      "fg-primary": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.972549, 0.972549, 0.94902]
@@ -76,7 +86,7 @@
           "org.simple-base.palette": "foreground"
         }
       },
-      "secondary": {
+      "fg-secondary": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.972549, 0.972549, 0.94902]
@@ -85,7 +95,7 @@
           "org.simple-base.palette": "foreground"
         }
       },
-      "muted": {
+      "fg-muted": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.972549, 0.972549, 0.94902]
@@ -94,7 +104,7 @@
           "org.simple-base.palette": "foreground"
         }
       },
-      "inverse": {
+      "fg-inverse": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.156863, 0.164706, 0.211765]
@@ -130,7 +140,7 @@
           "org.simple-base.palette": "purple"
         }
       },
-      "accent-readable": {
+      "accent-text": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.741176, 0.576471, 0.976471]
@@ -139,19 +149,20 @@
           "org.simple-base.palette": "purple"
         }
       },
+      "accent-soft": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.741176, 0.576471, 0.976471],
+          "alpha": 0.14
+        },
+        "$extensions": {
+          "org.simple-base.palette": "purple"
+        }
+      },
       "danger": {
         "$value": {
           "colorSpace": "srgb",
-          "components": [1.0, 0.333333, 0.333333]
-        },
-        "$extensions": {
-          "org.simple-base.palette": "red"
-        }
-      },
-      "danger-text": {
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [1.0, 0.333333, 0.333333]
+          "components": [1, 0.333333, 0.333333]
         },
         "$extensions": {
           "org.simple-base.palette": "red"
@@ -160,22 +171,40 @@
       "danger-surface": {
         "$value": {
           "colorSpace": "srgb",
-          "components": [1.0, 0.333333, 0.333333]
+          "components": [1, 0.333333, 0.333333]
         },
         "$extensions": {
           "org.simple-base.palette": "red"
         }
       },
-      "success": {
+      "danger-text": {
         "$value": {
           "colorSpace": "srgb",
-          "components": [0.313725, 0.980392, 0.482353]
+          "components": [1, 0.333333, 0.333333]
         },
         "$extensions": {
-          "org.simple-base.palette": "green"
+          "org.simple-base.palette": "red"
         }
       },
-      "success-text": {
+      "danger-soft": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.098039, 0.101961, 0.129412]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "background-darkest"
+        }
+      },
+      "danger-on": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.098039, 0.101961, 0.129412]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "background-darkest"
+        }
+      },
+      "success": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.313725, 0.980392, 0.482353]
@@ -193,16 +222,35 @@
           "org.simple-base.palette": "green"
         }
       },
-      "warning": {
+      "success-text": {
         "$value": {
           "colorSpace": "srgb",
-          "components": [0.945098, 0.980392, 0.54902]
+          "components": [0.313725, 0.980392, 0.482353]
         },
         "$extensions": {
-          "org.simple-base.palette": "yellow"
+          "org.simple-base.palette": "green"
         }
       },
-      "warning-text": {
+      "success-soft": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.313725, 0.980392, 0.482353],
+          "alpha": 0.12
+        },
+        "$extensions": {
+          "org.simple-base.palette": "green"
+        }
+      },
+      "success-on": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.098039, 0.101961, 0.129412]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "background-darkest"
+        }
+      },
+      "warning": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.945098, 0.980392, 0.54902]
@@ -220,16 +268,35 @@
           "org.simple-base.palette": "yellow"
         }
       },
-      "info": {
+      "warning-text": {
         "$value": {
           "colorSpace": "srgb",
-          "components": [0.545098, 0.913725, 0.992157]
+          "components": [0.945098, 0.980392, 0.54902]
         },
         "$extensions": {
-          "org.simple-base.palette": "cyan"
+          "org.simple-base.palette": "yellow"
         }
       },
-      "info-text": {
+      "warning-soft": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.945098, 0.980392, 0.54902],
+          "alpha": 0.12
+        },
+        "$extensions": {
+          "org.simple-base.palette": "yellow"
+        }
+      },
+      "warning-on": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.098039, 0.101961, 0.129412]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "background-darkest"
+        }
+      },
+      "info": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.545098, 0.913725, 0.992157]
@@ -247,73 +314,13 @@
           "org.simple-base.palette": "cyan"
         }
       },
-      "fg-subtle": {
+      "info-text": {
         "$value": {
           "colorSpace": "srgb",
-          "components": [0.972549, 0.972549, 0.94902],
-          "alpha": 0.72
+          "components": [0.545098, 0.913725, 0.992157]
         },
         "$extensions": {
-          "org.simple-base.palette": "foreground"
-        }
-      },
-      "bg-subtle": {
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [0.972549, 0.972549, 0.94902],
-          "alpha": 0.06
-        },
-        "$extensions": {
-          "org.simple-base.palette": "foreground"
-        }
-      },
-      "border-subtle": {
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [0.972549, 0.972549, 0.94902],
-          "alpha": 0.12
-        },
-        "$extensions": {
-          "org.simple-base.palette": "foreground"
-        }
-      },
-      "accent-soft": {
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [0.741176, 0.576471, 0.976471],
-          "alpha": 0.14
-        },
-        "$extensions": {
-          "org.simple-base.palette": "purple"
-        }
-      },
-      "danger-soft": {
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [0.098039, 0.101961, 0.129412]
-        },
-        "$extensions": {
-          "org.simple-base.palette": "background-darkest"
-        }
-      },
-      "success-soft": {
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [0.313725, 0.980392, 0.482353],
-          "alpha": 0.12
-        },
-        "$extensions": {
-          "org.simple-base.palette": "green"
-        }
-      },
-      "warning-soft": {
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [0.945098, 0.980392, 0.54902],
-          "alpha": 0.12
-        },
-        "$extensions": {
-          "org.simple-base.palette": "yellow"
+          "org.simple-base.palette": "cyan"
         }
       },
       "info-soft": {
@@ -326,47 +333,20 @@
           "org.simple-base.palette": "cyan"
         }
       },
+      "info-on": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.098039, 0.101961, 0.129412]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "background-darkest"
+        }
+      },
       "scrim": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.098039, 0.101961, 0.129412],
           "alpha": 0.72
-        },
-        "$extensions": {
-          "org.simple-base.palette": "background-darkest"
-        }
-      },
-      "danger-on": {
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [0.098039, 0.101961, 0.129412]
-        },
-        "$extensions": {
-          "org.simple-base.palette": "background-darkest"
-        }
-      },
-      "success-on": {
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [0.098039, 0.101961, 0.129412]
-        },
-        "$extensions": {
-          "org.simple-base.palette": "background-darkest"
-        }
-      },
-      "warning-on": {
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [0.098039, 0.101961, 0.129412]
-        },
-        "$extensions": {
-          "org.simple-base.palette": "background-darkest"
-        }
-      },
-      "info-on": {
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [0.098039, 0.101961, 0.129412]
         },
         "$extensions": {
           "org.simple-base.palette": "background-darkest"

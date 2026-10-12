@@ -7,7 +7,7 @@
     align-items: center;
     justify-content: center;
     min-height: var(--sb-semantic-space-6);
-    gap: 6px;
+    gap: 0.375rem;
     padding: 0 var(--sb-semantic-space-2);
     border: var(--sb-semantic-border-width-hairline) solid transparent;
     border-radius: var(--sb-semantic-radius-sm);
@@ -39,7 +39,7 @@
   .sb-badge,
   .sb-badge[data-variant="default"] {
     color: var(--sb-semantic-color-foreground-primary);
-    background: var(--sb-semantic-color-background-overlay);
+    background: var(--sb-semantic-color-background-strong);
   }
 
   .sb-badge[data-variant="success"] {
@@ -85,7 +85,7 @@
 
   .sb-badge[data-variant="command"] {
     color: var(--sb-semantic-color-foreground-primary);
-    background: var(--sb-semantic-color-background-raised);
+    background: var(--sb-semantic-color-background-muted);
     border-color: var(--sb-semantic-color-border-default);
     font-family: var(--sb-semantic-typography-family-code);
     font-weight: var(--sb-semantic-typography-weight-medium);
@@ -105,7 +105,7 @@
   .sb-badge[data-size="small"] {
     min-height: var(--sb-semantic-space-5);
     gap: var(--sb-semantic-space-1);
-    padding-inline: 6px;
+    padding-inline: 0.375rem;
   }
 
   .sb-badge[data-size="medium"] {

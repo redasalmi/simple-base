@@ -8,7 +8,7 @@
   .sb-select {
     width: 100%;
     min-height: var(--sb-semantic-size-control-md);
-    padding: 0 36px 0 var(--sb-semantic-space-3);
+    padding: 0 2.25rem 0 var(--sb-semantic-space-3);
     border: var(--sb-semantic-border-width-hairline) solid var(--sb-semantic-color-border-strong);
     border-radius: var(--sb-semantic-radius-md);
     outline: 0;
@@ -22,7 +22,7 @@
   .sb-select-wrap::after {
     position: absolute;
     top: 50%;
-    right: 14px;
+    right: 0.875rem;
     color: var(--sb-semantic-color-foreground-muted);
     content: "⌄";
     pointer-events: none;

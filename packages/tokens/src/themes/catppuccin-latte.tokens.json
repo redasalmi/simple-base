@@ -71,7 +71,7 @@
     "color": {
       "$type": "color",
       "$description": "Raw Catppuccin Latte palette colors; each token names the palette color it uses. Product components must not reference this group directly.",
-      "canvas": {
+      "bg-canvas": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.937255, 0.945098, 0.960784]
@@ -80,7 +80,7 @@
           "org.simple-base.palette": "base"
         }
       },
-      "surface": {
+      "bg-surface": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.937255, 0.945098, 0.960784]
@@ -89,7 +89,7 @@
           "org.simple-base.palette": "base"
         }
       },
-      "raised": {
+      "bg-muted": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.901961, 0.913725, 0.937255]
@@ -98,7 +98,7 @@
           "org.simple-base.palette": "mantle"
         }
       },
-      "overlay": {
+      "bg-strong": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.862745, 0.878431, 0.909804]
@@ -107,7 +107,17 @@
           "org.simple-base.palette": "crust"
         }
       },
-      "fg": {
+      "bg-subtle": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.298039, 0.309804, 0.411765],
+          "alpha": 0.06
+        },
+        "$extensions": {
+          "org.simple-base.palette": "text"
+        }
+      },
+      "fg-primary": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.298039, 0.309804, 0.411765]
@@ -116,7 +126,7 @@
           "org.simple-base.palette": "text"
         }
       },
-      "secondary": {
+      "fg-secondary": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.360784, 0.372549, 0.466667]
@@ -125,7 +135,7 @@
           "org.simple-base.palette": "subtext1"
         }
       },
-      "muted": {
+      "fg-muted": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.360784, 0.372549, 0.466667]
@@ -134,7 +144,7 @@
           "org.simple-base.palette": "subtext1"
         }
       },
-      "inverse": {
+      "fg-inverse": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.937255, 0.945098, 0.960784]
@@ -170,16 +180,38 @@
           "org.simple-base.palette": "mauve"
         }
       },
-      "accent-readable": {
+      "accent-text": {
         "$value": {
           "colorSpace": "srgb",
-          "components": [0.533333, 0.223529, 0.937255]
+          "components": [0.494118, 0.160784, 0.886275]
+        },
+        "$extensions": {
+          "org.simple-base.palette": {
+            "color": "mauve",
+            "exception": "mauve, darkened so accent text reaches 4.5:1 on mantle and on the accent tint."
+          }
+        }
+      },
+      "accent-soft": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.533333, 0.223529, 0.937255],
+          "alpha": 0.14
         },
         "$extensions": {
           "org.simple-base.palette": "mauve"
         }
       },
       "danger": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.823529, 0.058824, 0.223529]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "red"
+        }
+      },
+      "danger-surface": {
         "$value": {
           "colorSpace": "srgb",
           "components": [0.823529, 0.058824, 0.223529]
@@ -197,22 +229,47 @@
           "org.simple-base.palette": "text"
         }
       },
-      "danger-surface": {
+      "danger-soft": {
         "$value": {
           "colorSpace": "srgb",
-          "components": [0.823529, 0.058824, 0.223529]
+          "components": [0.823529, 0.058824, 0.223529],
+          "alpha": 0.12
         },
         "$extensions": {
           "org.simple-base.palette": "red"
         }
       },
+      "danger-on": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.937255, 0.945098, 0.960784]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "base"
+        }
+      },
       "success": {
         "$value": {
           "colorSpace": "srgb",
-          "components": [0.25098, 0.627451, 0.168627]
+          "components": [0.129412, 0.498039, 0.007843]
         },
         "$extensions": {
-          "org.simple-base.palette": "green"
+          "org.simple-base.palette": {
+            "color": "green",
+            "exception": "green, darkened so the glyph reaches 3:1 on its tint and the progress fill 3:1 on crust."
+          }
+        }
+      },
+      "success-surface": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.129412, 0.498039, 0.007843]
+        },
+        "$extensions": {
+          "org.simple-base.palette": {
+            "color": "green",
+            "exception": "green, darkened so base text reaches 4.5:1 on it and it reaches 3:1 on crust."
+          }
         }
       },
       "success-text": {
@@ -222,119 +279,6 @@
         },
         "$extensions": {
           "org.simple-base.palette": "text"
-        }
-      },
-      "success-surface": {
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [0.25098, 0.627451, 0.168627]
-        },
-        "$extensions": {
-          "org.simple-base.palette": "green"
-        }
-      },
-      "warning": {
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [0.87451, 0.556863, 0.113725]
-        },
-        "$extensions": {
-          "org.simple-base.palette": "yellow"
-        }
-      },
-      "warning-text": {
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [0.298039, 0.309804, 0.411765]
-        },
-        "$extensions": {
-          "org.simple-base.palette": "text"
-        }
-      },
-      "warning-surface": {
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [0.87451, 0.556863, 0.113725]
-        },
-        "$extensions": {
-          "org.simple-base.palette": "yellow"
-        }
-      },
-      "info": {
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [0.117647, 0.4, 0.960784]
-        },
-        "$extensions": {
-          "org.simple-base.palette": "blue"
-        }
-      },
-      "info-text": {
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [0.298039, 0.309804, 0.411765]
-        },
-        "$extensions": {
-          "org.simple-base.palette": "text"
-        }
-      },
-      "info-surface": {
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [0.117647, 0.4, 0.960784]
-        },
-        "$extensions": {
-          "org.simple-base.palette": "blue"
-        }
-      },
-      "fg-subtle": {
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [0.298039, 0.309804, 0.411765],
-          "alpha": 0.72
-        },
-        "$extensions": {
-          "org.simple-base.palette": "text"
-        }
-      },
-      "bg-subtle": {
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [0.298039, 0.309804, 0.411765],
-          "alpha": 0.06
-        },
-        "$extensions": {
-          "org.simple-base.palette": "text"
-        }
-      },
-      "border-subtle": {
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [0.298039, 0.309804, 0.411765],
-          "alpha": 0.12
-        },
-        "$extensions": {
-          "org.simple-base.palette": "text"
-        }
-      },
-      "accent-soft": {
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [0.533333, 0.223529, 0.937255],
-          "alpha": 0.14
-        },
-        "$extensions": {
-          "org.simple-base.palette": "mauve"
-        }
-      },
-      "danger-soft": {
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [0.823529, 0.058824, 0.223529],
-          "alpha": 0.12
-        },
-        "$extensions": {
-          "org.simple-base.palette": "red"
         }
       },
       "success-soft": {
@@ -347,6 +291,48 @@
           "org.simple-base.palette": "green"
         }
       },
+      "success-on": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.937255, 0.945098, 0.960784]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "base"
+        }
+      },
+      "warning": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.615686, 0.376471, 0]
+        },
+        "$extensions": {
+          "org.simple-base.palette": {
+            "color": "yellow",
+            "exception": "yellow, darkened so the glyph reaches 3:1 on its tint and the progress fill 3:1 on crust."
+          }
+        }
+      },
+      "warning-surface": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.615686, 0.376471, 0]
+        },
+        "$extensions": {
+          "org.simple-base.palette": {
+            "color": "yellow",
+            "exception": "yellow, darkened so base text reaches 4.5:1 on it and it reaches 3:1 on crust."
+          }
+        }
+      },
+      "warning-text": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.298039, 0.309804, 0.411765]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "text"
+        }
+      },
       "warning-soft": {
         "$value": {
           "colorSpace": "srgb",
@@ -355,6 +341,45 @@
         },
         "$extensions": {
           "org.simple-base.palette": "yellow"
+        }
+      },
+      "warning-on": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.937255, 0.945098, 0.960784]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "base"
+        }
+      },
+      "info": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.117647, 0.4, 0.960784]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "blue"
+        }
+      },
+      "info-surface": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.105882, 0.388235, 0.94902]
+        },
+        "$extensions": {
+          "org.simple-base.palette": {
+            "color": "blue",
+            "exception": "blue, darkened so base text reaches 4.5:1 on it."
+          }
+        }
+      },
+      "info-text": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.298039, 0.309804, 0.411765]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "text"
         }
       },
       "info-soft": {
@@ -367,6 +392,15 @@
           "org.simple-base.palette": "blue"
         }
       },
+      "info-on": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.937255, 0.945098, 0.960784]
+        },
+        "$extensions": {
+          "org.simple-base.palette": "base"
+        }
+      },
       "scrim": {
         "$value": {
           "colorSpace": "srgb",
@@ -375,42 +409,6 @@
         },
         "$extensions": {
           "org.simple-base.palette": "text"
-        }
-      },
-      "danger-on": {
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [0.937255, 0.945098, 0.960784]
-        },
-        "$extensions": {
-          "org.simple-base.palette": "base"
-        }
-      },
-      "success-on": {
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [0.937255, 0.945098, 0.960784]
-        },
-        "$extensions": {
-          "org.simple-base.palette": "base"
-        }
-      },
-      "warning-on": {
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [0.298039, 0.309804, 0.411765]
-        },
-        "$extensions": {
-          "org.simple-base.palette": "text"
-        }
-      },
-      "info-on": {
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [0.937255, 0.945098, 0.960784]
-        },
-        "$extensions": {
-          "org.simple-base.palette": "base"
         }
       }
     }

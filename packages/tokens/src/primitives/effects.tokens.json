@@ -9,30 +9,18 @@
       },
       "subtle": {
         "$value": 0.72
-      },
-      "invisible": {
-        "$value": 0
-      },
-      "opaque": {
-        "$value": 1
       }
     },
     "z-index": {
       "$type": "number",
-      "base": {
-        "$value": 0
-      },
       "sticky": {
         "$value": 200
       },
       "dropdown": {
         "$value": 400
       },
-      "overlay": {
+      "tooltip": {
         "$value": 600
-      },
-      "modal": {
-        "$value": 700
       },
       "toast": {
         "$value": 900
@@ -67,7 +55,7 @@
         }
       },
       "overlay": {
-        "$description": "Soft elevation reserved for overlays; light themes override this shadow.",
+        "$description": "Soft elevation for menus, popovers, dialogs, and toasts. Light themes override it.",
         "$value": {
           "offsetX": {
             "value": 0,

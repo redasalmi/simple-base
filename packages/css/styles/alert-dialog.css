@@ -1,7 +1,7 @@
 @layer sb {
   .sb-alert-dialog-content {
     box-sizing: border-box;
-    width: min(560px, calc(100vw - 40px));
+    width: min(35rem, calc(100vw - 2.5rem));
     max-width: 100%;
     margin: auto;
     padding: var(--sb-semantic-space-6);
@@ -77,7 +77,7 @@
     margin-top: var(--sb-semantic-space-4);
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: 30rem) {
     .sb-alert-dialog-footer {
       align-items: stretch;
       flex-direction: column;
