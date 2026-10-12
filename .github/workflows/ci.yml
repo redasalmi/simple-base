@@ -48,8 +48,10 @@ jobs:
         run: pnpm --filter @simple-base/solid exec playwright install --with-deps --only-shell chromium
 
       # The solid package's Vitest projects, and axe on every playground section in every theme.
+      # One task at a time: run together, they starve each other on the runner and the first
+      # hydration test times out.
       - name: Run tests
-        run: pnpm test
+        run: pnpm test --concurrency=1
 
       # The contracts and solid builds also run publint and attw on their packed tarballs.
       - name: Build all packages
