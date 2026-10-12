@@ -31,10 +31,7 @@ export type ToasterOptions = {
   placement?: Placement;
   /** Default time in milliseconds before a toast dismisses itself. Defaults to `5000`. */
   duration?: number;
-  /**
-   * Most toasts shown at once; later ones wait in a queue. Queued toasts ignore `dismiss(id)`
-   * and updates through a reused `id` until they are shown. Defaults to `24`.
-   */
+  /** Most toasts shown at once; later ones wait in a queue. Defaults to `24`. */
   max?: number;
 };
 

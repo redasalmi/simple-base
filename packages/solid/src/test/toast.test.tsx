@@ -83,14 +83,27 @@ describe("Toast", () => {
     const { toaster, titles } = renderToaster({ max: 1 });
 
     const first = toaster.create({ title: "First" });
-    const queued = toaster.create({ title: "Queued" });
+    toaster.create({ title: "Queued" });
     await expect.poll(titles).toEqual(["First"]);
 
-    // A queued toast ignores dismiss(id) until it is shown.
-    toaster.dismiss(queued);
     toaster.dismiss(first);
 
     await expect.poll(titles).toEqual(["Queued"]);
+  });
+
+  test("dismisses and updates a queued toast", async () => {
+    const { toaster, titles } = renderToaster({ max: 1 });
+
+    const first = toaster.create({ title: "First" });
+    const dismissed = toaster.create({ title: "Dismissed" });
+    const updated = toaster.create({ title: "Queued" });
+    await expect.poll(titles).toEqual(["First"]);
+
+    toaster.dismiss(dismissed);
+    toaster.create({ id: updated, title: "Updated" });
+    toaster.dismiss(first);
+
+    await expect.poll(titles).toEqual(["Updated"]);
   });
 
   test("dismisses itself after `duration`", async () => {

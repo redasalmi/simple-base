@@ -118,8 +118,8 @@ Give a switch with no visible text an `aria-label` instead, such as `<Switch ari
 Wraps one `FieldInput` or `FieldTextArea` with its label, description, and error. `id`, `required`, `disabled`, and `invalid` are set on the root only; the control, label, and messages read them from it.
 
 ```tsx
-import { createSignal } from "solid-js";
 import { Field, FieldDescription, FieldError, FieldInput, FieldLabel } from "@simple-base/solid";
+import { createSignal } from "solid-js";
 
 export function EmailField() {
   const [email, setEmail] = createSignal("");
@@ -179,7 +179,6 @@ Put `FieldsetLegend` first; `required` adds its marker, plus visually hidden tex
 Render a list of choice rows inside a `Fieldset`, which names the group and supplies `required` and `invalid`. Each item is a `label` holding a native `Radio` or `Checkbox` and its text.
 
 ```tsx
-import { createSignal } from "solid-js";
 import {
   CheckboxGroup,
   CheckboxGroupItem,
@@ -189,6 +188,7 @@ import {
   RadioGroup,
   RadioGroupItem,
 } from "@simple-base/solid";
+import { createSignal } from "solid-js";
 
 const [reminders, setReminders] = createSignal(["due"]);
 
@@ -220,7 +220,6 @@ const [reminders, setReminders] = createSignal(["due"]);
 A numeric input with optional step buttons and affixes. `id`, `required`, `disabled`, `readOnly`, and `invalid` are set on the root only, as with `Field`.
 
 ```tsx
-import { createSignal } from "solid-js";
 import {
   NumberField,
   NumberFieldControl,
@@ -231,6 +230,7 @@ import {
   NumberFieldInput,
   NumberFieldLabel,
 } from "@simple-base/solid";
+import { createSignal } from "solid-js";
 
 export function UnitPrice() {
   const [price, setPrice] = createSignal("120");
@@ -272,7 +272,6 @@ Additional root props:
 `options` is required. `SelectLabel` holds the visible label, which also names the trigger and the list, so every `Select` needs one; there is no `aria-label` fallback. `onValueChange` receives the selected option's value, not its label, or `null` when the selection is cleared. Omit `id` to generate one. `options` may be a read-only array, such as one declared `as const`.
 
 ```tsx
-import { createSignal } from "solid-js";
 import {
   Select,
   SelectContent,
@@ -286,6 +285,7 @@ import {
   SelectTrigger,
   SelectValueText,
 } from "@simple-base/solid";
+import { createSignal } from "solid-js";
 
 const timezones = [
   { label: "Central European Time (UTC+01:00)", value: "cet" },
@@ -396,7 +396,6 @@ import {
 A text input and a popup calendar for one date. Values are `DateValue` objects from [`@internationalized/date`](https://react-spectrum.adobe.com/internationalized/date/); create them with `parseDateInput`, Zag's date parser, which this package re-exports. It takes an ISO date such as `"2026-10-12"`, or a `Date`, read in local time. It is not `@internationalized/date`'s `parseDate`, which only takes ISO strings. `id`, `required`, `disabled`, `readOnly`, and `invalid` are set on the root only, as with `Field`.
 
 ```tsx
-import { createSignal } from "solid-js";
 import {
   DatePicker,
   DatePickerCalendar,
@@ -412,6 +411,7 @@ import {
   parseDateInput,
   type DateValue,
 } from "@simple-base/solid";
+import { createSignal } from "solid-js";
 
 export function DueDate() {
   const [due, setDue] = createSignal<DateValue | null>(parseDateInput("2026-10-12"));
@@ -533,8 +533,8 @@ Root props: `open` with `onOpenChange` for controlled state, `defaultOpen` for u
 A set of tabs, each showing its own panel. Arrow keys move between tabs and select them as they go; Home and End jump to the ends.
 
 ```tsx
-import { createSignal } from "solid-js";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@simple-base/solid";
+import { createSignal } from "solid-js";
 
 export function InvoiceFilters() {
   const [status, setStatus] = createSignal("all");
@@ -629,13 +629,13 @@ const toggleSort = (key: string) =>
 Renders a `nav` with previous and next buttons and a page list. `count` is the total number of pages; slicing the records stays in your app.
 
 ```tsx
-import { createSignal } from "solid-js";
 import {
   Pagination,
   PaginationNext,
   PaginationPages,
   PaginationPrevious,
 } from "@simple-base/solid";
+import { createSignal } from "solid-js";
 
 const [page, setPage] = createSignal(1);
 
@@ -683,7 +683,6 @@ import {
 An inline message about the page or a form, with an optional recovery action and dismiss control. `status` is `success`, `warning`, `danger`, or `info`.
 
 ```tsx
-import { createSignal, Show } from "solid-js";
 import {
   Alert,
   AlertActions,
@@ -694,6 +693,7 @@ import {
   AlertTitle,
   Button,
 } from "@simple-base/solid";
+import { createSignal, Show } from "solid-js";
 
 const [open, setOpen] = createSignal(true);
 
@@ -859,7 +859,7 @@ const toaster = createToaster({ placement: "bottom-end" });
 </Button>;
 ```
 
-`createToaster` accepts `placement` (default `bottom-end`), a default `duration` in milliseconds (default `5000`), and `max`, the most toasts shown at once (default `24`). Later toasts wait in a queue, and a queued toast ignores `dismiss(id)` and updates through a reused `id` until it is shown. The returned toaster has two methods:
+`createToaster` accepts `placement` (default `bottom-end`), a default `duration` in milliseconds (default `5000`), and `max`, the most toasts shown at once (default `24`). Later toasts wait in a queue. The returned toaster has two methods:
 
 - `create({ title, description?, action?, duration?, id?, status? })` shows a toast and returns its id. Reusing an `id` updates that toast; `duration: Infinity` keeps it until dismissed. A toast with an `action` defaults to `Infinity`, so keyboard and screen reader users have time to reach the action.
 - `dismiss(id?)` dismisses one toast, or every toast when `id` is omitted.

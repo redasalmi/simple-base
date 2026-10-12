@@ -23,7 +23,7 @@ export function Toasts() {
           [
             "createToaster",
             "placement · duration · max",
-            "Creates the toast store. Placement defaults to bottom-end, duration to 5000ms, and max to 24 visible toasts. Later toasts wait in a queue, and a queued toast ignores dismiss(id) and id updates until it is shown.",
+            "Creates the toast store. Placement defaults to bottom-end, duration to 5000ms, and max to 24 visible toasts. Later toasts wait in a queue.",
           ],
           [
             "toaster.create / toaster.dismiss",

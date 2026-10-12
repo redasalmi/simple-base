@@ -44,7 +44,7 @@ Components:
 - Popover, Drawer, Avatar, file upload
 - Compact density mode
 
-Packages and tooling (see `structure.md`):
+Packages and tooling:
 
 - Vanilla playground
 - Documentation site

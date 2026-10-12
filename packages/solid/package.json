@@ -71,7 +71,7 @@
     "rolldown-plugin-solid": "^0.2.1",
     "solid-js": "catalog:",
     "tsdown": "catalog:",
-    "vite": "^8.3.1",
+    "vite": "^8.3.4",
     "vite-plugin-solid": "^2.11.14",
     "vitest": "^5.0.3"
   },

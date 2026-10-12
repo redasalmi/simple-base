@@ -17,9 +17,9 @@
   },
   "devDependencies": {
     "eslint-plugin-solid": "^0.18.1",
-    "oxfmt": "^0.71.0",
-    "oxlint": "^1.86.0",
-    "turbo": "^2.11.5",
+    "oxfmt": "^0.72.0",
+    "oxlint": "^1.87.0",
+    "turbo": "^2.11.7",
     "typescript": "catalog:"
   },
   "devEngines": {
