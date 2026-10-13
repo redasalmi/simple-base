@@ -76,6 +76,7 @@ import {
   FieldsetLegend,
   FieldTextArea,
   Input,
+  Kbd,
   type ListboxOption,
   Menu,
   MenuContent,
@@ -336,6 +337,11 @@ export const fixtures = {
     </Fieldset>
   ),
   Input: () => <Input aria-label="Search" type="search" name="q" defaultValue="Northwind" />,
+  Kbd: () => (
+    <p>
+      Press <Kbd>Ctrl</Kbd> <Kbd>K</Kbd> to search.
+    </p>
+  ),
   Menu: () => (
     <Menu>
       <MenuTrigger variant="secondary">Actions</MenuTrigger>

@@ -1,8 +1,10 @@
 @layer sb {
   .sb-dialog-content {
+    --sb-dialog-width: 35rem;
+
     box-sizing: border-box;
-    width: min(35rem, calc(100vw - 2.5rem));
-    max-width: none;
+    width: min(var(--sb-dialog-width), calc(100vw - 2 * var(--sb-semantic-space-5)));
+    max-width: 100%;
     margin: auto;
     padding: var(--sb-semantic-space-6);
     border: var(--sb-semantic-border-width-hairline) solid var(--sb-semantic-color-border-default);
@@ -38,12 +40,14 @@
     font-size: var(--sb-semantic-typography-size-3xl);
     font-weight: var(--sb-semantic-typography-weight-regular);
     line-height: var(--sb-semantic-typography-line-height-snug);
+    letter-spacing: var(--sb-semantic-typography-letter-spacing-normal);
     text-wrap: balance;
   }
 
   .sb-dialog-description {
     margin: var(--sb-semantic-space-3) 0 0;
     color: var(--sb-semantic-color-foreground-secondary);
+    font-size: var(--sb-semantic-typography-size-md);
     line-height: var(--sb-semantic-typography-line-height-relaxed);
   }
 
@@ -60,7 +64,8 @@
     width: var(--sb-semantic-size-target-minimum);
     height: var(--sb-semantic-size-target-minimum);
     padding: 0;
-    margin: calc(-1 * var(--sb-semantic-space-2)) calc(-1 * var(--sb-semantic-space-2)) 0 0;
+    margin-block: calc(-1 * var(--sb-semantic-space-2)) 0;
+    margin-inline: 0 calc(-1 * var(--sb-semantic-space-2));
     border: 0;
     border-radius: var(--sb-semantic-radius-md);
     color: var(--sb-semantic-color-foreground-muted);
@@ -85,7 +90,8 @@
     outline-offset: 0;
   }
 
-  @media (max-width: 30rem) {
+  /* 40rem is --sb-semantic-breakpoint-sm; media queries can't read custom properties. */
+  @media (max-width: 40rem) {
     .sb-dialog-footer {
       align-items: stretch;
       flex-direction: column;

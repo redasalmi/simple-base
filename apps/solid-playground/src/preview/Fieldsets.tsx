@@ -37,7 +37,7 @@ export function Fieldsets() {
           [
             "Styles",
             "@simple-base/css/field",
-            "Included in the main stylesheet. The .sb-fieldset, .sb-choice-list, and .sb-choice classes stay available for plain HTML.",
+            "Included in the main stylesheet. The .sb-fieldset, .sb-choice-list, and .sb-choice-list-item classes stay available for plain HTML.",
           ],
         ]}
       />

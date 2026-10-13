@@ -96,13 +96,13 @@ export function PaginationPages(props: PaginationPagesProps) {
     <For each={pageItems(page(), count(), siblingCount())}>
       {(item) =>
         item === "ellipsis" ? (
-          <span class="sb-page-ellipsis" aria-hidden="true">
+          <span class="sb-pagination-ellipsis" aria-hidden="true">
             …
           </span>
         ) : (
           <button
             type="button"
-            class="sb-page-button"
+            class="sb-pagination-button"
             aria-label={(props.getPageLabel ?? labels().page)(item)}
             aria-current={page() === item ? "page" : undefined}
             onClick={() => setPage(item)}
@@ -138,7 +138,7 @@ function PaginationTrigger(
         () => setPage(target()),
       )}
       type="button"
-      class={cn("sb-page-button", local.class)}
+      class={cn("sb-pagination-button", local.class)}
       aria-disabled={unavailable() ? "true" : undefined}
     />
   );

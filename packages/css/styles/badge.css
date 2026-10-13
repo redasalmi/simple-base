@@ -1,13 +1,14 @@
 @layer sb {
   .sb-badge {
     --sb-badge-glyph: none;
-    --sb-badge-glyph-color: currentColor;
+    --sb-badge-glyph-color: currentcolor;
 
     display: inline-flex;
+    box-sizing: border-box;
     align-items: center;
     justify-content: center;
     min-height: var(--sb-semantic-space-6);
-    gap: 0.375rem;
+    gap: var(--sb-semantic-space-1);
     padding: 0 var(--sb-semantic-space-2);
     border: var(--sb-semantic-border-width-hairline) solid transparent;
     border-radius: var(--sb-semantic-radius-sm);
@@ -104,8 +105,7 @@
 
   .sb-badge[data-size="small"] {
     min-height: var(--sb-semantic-space-5);
-    gap: var(--sb-semantic-space-1);
-    padding-inline: 0.375rem;
+    padding-inline: var(--sb-semantic-space-2);
   }
 
   .sb-badge[data-size="medium"] {

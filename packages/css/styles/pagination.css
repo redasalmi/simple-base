@@ -6,8 +6,8 @@
     gap: var(--sb-semantic-space-1);
   }
 
-  .sb-page-button,
-  .sb-page-ellipsis {
+  .sb-pagination-button,
+  .sb-pagination-ellipsis {
     display: inline-flex;
     box-sizing: border-box;
     align-items: center;
@@ -15,7 +15,7 @@
     gap: var(--sb-semantic-space-1);
     min-width: var(--sb-semantic-size-target-minimum);
     min-height: var(--sb-semantic-size-target-minimum);
-    padding-inline: 0.625rem;
+    padding-inline: var(--sb-semantic-space-2);
     border: var(--sb-semantic-border-width-hairline) solid transparent;
     border-radius: var(--sb-semantic-radius-md);
     color: var(--sb-semantic-color-foreground-secondary);
@@ -25,47 +25,45 @@
     font-variant-numeric: tabular-nums;
   }
 
-  .sb-page-button {
+  .sb-pagination-button {
     cursor: pointer;
     text-decoration: none;
   }
 
-  .sb-page-button:hover:where(:not(:disabled, [aria-disabled="true"], [data-disabled])) {
+  .sb-pagination-button:hover:where(:not([aria-disabled="true"])) {
     color: var(--sb-semantic-color-foreground-primary);
     background: var(--sb-semantic-color-background-muted);
   }
 
-  .sb-page-button[aria-current="page"] {
+  .sb-pagination-button[aria-current="page"] {
     color: var(--sb-semantic-color-accent-on-surface);
     background: var(--sb-semantic-color-accent-surface);
     font-weight: var(--sb-semantic-typography-weight-semibold);
   }
 
-  .sb-page-button:focus-visible {
+  .sb-pagination-button:focus-visible {
     outline: var(--sb-semantic-border-width-strong) solid var(--sb-semantic-color-focus-ring);
     outline-offset: var(--sb-semantic-border-width-strong);
   }
 
-  .sb-page-button:disabled,
-  .sb-page-button[aria-disabled="true"],
-  .sb-page-button[data-disabled] {
+  .sb-pagination-button[aria-disabled="true"] {
     cursor: not-allowed;
     opacity: var(--sb-semantic-opacity-disabled);
   }
 
-  .sb-page-button > svg {
+  .sb-pagination-button > svg {
     flex: 0 0 auto;
     width: var(--sb-semantic-size-icon-sm);
     height: var(--sb-semantic-size-icon-sm);
   }
 
-  .sb-page-ellipsis {
+  .sb-pagination-ellipsis {
     padding-inline: 0;
     user-select: none;
   }
 
   @media (forced-colors: active) {
-    .sb-page-button:focus-visible {
+    .sb-pagination-button:focus-visible {
       outline: var(--sb-semantic-border-width-strong) solid Highlight;
     }
   }

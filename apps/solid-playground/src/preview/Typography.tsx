@@ -15,7 +15,7 @@ export function Typography() {
       />
       <Example
         title="Display"
-        description="The same serif at its largest, for landing moments and empty screens. It scales from 44 to 72px with a tight line height."
+        description="The same serif at its largest, for landing moments and empty screens. It scales from 36 to 72px with a tight line height."
         example="typography/Display"
       />
       <Example
@@ -24,9 +24,9 @@ export function Typography() {
         example="typography/TextRoles"
       />
       <Example
-        title="Code & shortcuts"
-        description="Inline code identifies a technical value. Blocks preserve formatting; keyboard shortcuts use a separate keycap treatment."
-        example="typography/CodeAndShortcuts"
+        title="Code"
+        description="Inline code identifies a technical value. Blocks preserve formatting. For keys the user presses, use the Kbd component."
+        example="typography/Code"
       />
       <Api
         rows={[

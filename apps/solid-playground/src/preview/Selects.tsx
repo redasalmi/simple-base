@@ -89,7 +89,7 @@ export function Selects() {
           [
             "Styles",
             "@simple-base/css/select",
-            "Included in the main stylesheet. The native .sb-select pattern remains available for plain HTML forms. For individual imports, load @simple-base/tokens/css once before the component styles.",
+            "Included in the main stylesheet. For individual imports, load @simple-base/tokens/css once before the component styles.",
           ],
         ]}
       />

@@ -40,7 +40,9 @@ export function AlertTitle(props: AlertTitleProps) {
 export type AlertDescriptionProps = JSX.HTMLAttributes<HTMLParagraphElement>;
 
 export function AlertDescription(props: AlertDescriptionProps) {
-  return <p {...props} />;
+  const [local, rest] = splitProps(props, ["class"]);
+
+  return <p {...rest} class={cn("sb-alert-description", local.class)} />;
 }
 
 export type AlertActionsProps = JSX.HTMLAttributes<HTMLDivElement>;

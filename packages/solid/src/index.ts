@@ -48,6 +48,7 @@ export type { DialogOptions } from "@simple-base/contracts";
 export { Badge, type BadgeProps, type BadgeVariant, type BadgeSize } from "./components/Badge";
 export { Button, type ButtonProps, type ButtonVariant, type ButtonSize } from "./components/Button";
 export { Card, type CardProps, type CardVariant } from "./components/Card";
+export { Kbd, type KbdProps } from "./components/Kbd";
 export type { BadgeOptions, ButtonOptions, CardOptions } from "@simple-base/contracts";
 export { Switch, type SwitchProps } from "./components/Switch";
 export { Checkbox, type CheckboxProps } from "./components/Checkbox";

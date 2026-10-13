@@ -120,7 +120,7 @@ Adapters compose shared options with their framework's native element props, app
 
 Each adapter adds Zag's own `translations` prop to the roots built on Zag, such as the number field and the date picker, with Zag's types and defaults. It isn't part of these options, since this package doesn't depend on Zag. Other roots take `labels`, a partial `*Labels` object whose English defaults live here, such as `paginationLabels` and `fieldsetLabels`.
 
-Native-only components — checkbox, input, and the plain `.sb-select` pattern — have no shared custom options. Typography classes and the progress CSS custom property are part of the CSS package's API, not this one.
+Native-only components — checkbox, input, and kbd — have no shared custom options. Typography classes are part of the CSS package's API, not this one.
 
 ## Versioning
 

@@ -135,7 +135,7 @@ export function Select(props: SelectRootProps) {
 
   return (
     <SelectProvider value={context}>
-      <div {...mergeProps(api().getRootProps(), rest)} class={cn("sb-select-root", local.class)}>
+      <div {...mergeProps(api().getRootProps(), rest)} class={cn("sb-select", local.class)}>
         <select ref={(element) => (hiddenSelect = element)} {...api().getHiddenSelectProps()}>
           {/* Selected while nothing is, like a native placeholder option, so a form reset selects it too. */}
           {/* oxlint-disable-next-line jsx-a11y/control-has-associated-label -- the select is hidden from assistive technology */}

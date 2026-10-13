@@ -18,6 +18,7 @@ export type TabsRootProps = TabsOptions & {
 
 export function Tabs(props: TabsRootProps) {
   const [local, rest] = splitProps(props, [
+    "class",
     "children",
     "id",
     "value",
@@ -50,7 +51,9 @@ export function Tabs(props: TabsRootProps) {
 
   return (
     <TabsProvider value={{ api }}>
-      <div {...mergeProps(api().getRootProps(), rest)}>{local.children}</div>
+      <div {...mergeProps(api().getRootProps(), rest)} class={cn("sb-tabs", local.class)}>
+        {local.children}
+      </div>
     </TabsProvider>
   );
 }
@@ -62,7 +65,7 @@ export function TabsList(props: TabsListProps) {
   const [local, rest] = splitProps(props, ["class", "children"]);
 
   return (
-    <div {...mergeProps(api().getListProps(), rest)} class={cn("sb-tabs", local.class)}>
+    <div {...mergeProps(api().getListProps(), rest)} class={cn("sb-tabs-list", local.class)}>
       {local.children}
     </div>
   );
@@ -84,7 +87,7 @@ export function TabsTrigger(props: TabsTriggerProps) {
   return (
     <button
       {...mergeProps(api().getTriggerProps({ value: local.value, disabled: local.disabled }), rest)}
-      class={cn("sb-tab", local.class)}
+      class={cn("sb-tabs-trigger", local.class)}
     >
       {local.children}
     </button>
@@ -105,7 +108,7 @@ export function TabsContent(props: TabsContentProps) {
   return (
     <div
       {...mergeProps(api().getContentProps({ value: local.value }), rest)}
-      class={cn("sb-tab-panel", local.class)}
+      class={cn("sb-tabs-content", local.class)}
     >
       {local.children}
     </div>

@@ -24,7 +24,7 @@ export function Badges() {
           [
             "…props",
             "HTMLAttributes<HTMLSpanElement>",
-            "Renders a span. Use a Button for interactive behavior and a keyboard shortcut style for actual key combinations.",
+            "Renders a span. Use a Button for interactive behavior and Kbd for keys the user presses.",
           ],
         ]}
       />

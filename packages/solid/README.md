@@ -60,6 +60,7 @@ import "@simple-base/css/badge";
 | `Button`   | `button`               | `variant`, `size`                                                                    |
 | `Badge`    | `span`                 | `variant`, `size`                                                                    |
 | `Card`     | `div`                  | `variant`                                                                            |
+| `Kbd`      | `kbd`                  | Native props; one key per `Kbd`                                                      |
 | `Input`    | `input`                | Native input props; `type` is `text`, `email`, `password`, `search`, `tel`, or `url` |
 | `TextArea` | `textarea`             | Native props                                                                         |
 | `Checkbox` | `input[type=checkbox]` | Native props; `indeterminate` shows the mixed state                                  |
@@ -90,11 +91,11 @@ import "@simple-base/css/badge";
 | `Pagination`    | `PaginationPrevious`, `PaginationPages`, `PaginationNext`                                                                                                                                                                                |
 | `Toaster`       | `Toast`, `ToastIcon`, `ToastContent`, `ToastTitle`, `ToastDescription`, `ToastAction`, `ToastClose`, plus `createToaster`                                                                                                                |
 
-The CSS package ships more components than this adapter currently covers. Until a Solid component exists, use them through their selector-level APIs. Breadcrumb, disclosure, keyboard shortcut, progress, range, and segmented control are planned after 1.0.
+Breadcrumb, disclosure, progress, range, and segmented control are planned after 1.0.
 
 `Input` deliberately accepts only text-like types. Numbers and dates have their own components, `NumberField` and `DatePicker`, and checkboxes and radios have `Checkbox` and `Radio`.
 
-Typography stays CSS-only: the `.sb-display`, `.sb-heading-*`, and `.sb-text-*` classes are the API.
+Typography stays CSS-only: the `.sb-display`, `.sb-heading-*`, `.sb-text-*`, and `.sb-code-*` classes are the API.
 
 The library styles native elements and states and leaves app-specific affordances, such as loading states and spinners, to your application.
 

@@ -1,5 +1,6 @@
 @layer sb {
   .sb-input {
+    box-sizing: border-box;
     width: 100%;
     min-height: var(--sb-semantic-size-control-md);
     padding: 0 var(--sb-semantic-space-3);

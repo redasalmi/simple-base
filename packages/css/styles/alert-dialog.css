@@ -1,7 +1,9 @@
 @layer sb {
   .sb-alert-dialog-content {
+    --sb-alert-dialog-width: 35rem;
+
     box-sizing: border-box;
-    width: min(35rem, calc(100vw - 2.5rem));
+    width: min(var(--sb-alert-dialog-width), calc(100vw - 2 * var(--sb-semantic-space-5)));
     max-width: 100%;
     margin: auto;
     padding: var(--sb-semantic-space-6);
@@ -77,7 +79,8 @@
     margin-top: var(--sb-semantic-space-4);
   }
 
-  @media (max-width: 30rem) {
+  /* 40rem is --sb-semantic-breakpoint-sm; media queries can't read custom properties. */
+  @media (max-width: 40rem) {
     .sb-alert-dialog-footer {
       align-items: stretch;
       flex-direction: column;

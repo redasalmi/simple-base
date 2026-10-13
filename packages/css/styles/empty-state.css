@@ -1,14 +1,15 @@
 @layer sb {
   .sb-empty-state {
+    --sb-empty-state-min-height: 13.125rem;
+
     display: grid;
     place-items: center;
-    min-height: 13.125rem;
+    min-height: var(--sb-empty-state-min-height);
     padding: var(--sb-semantic-space-8);
     text-align: center;
   }
 
-  .sb-empty-state-mark,
-  .sb-empty-mark {
+  .sb-empty-state-mark {
     display: grid;
     place-items: center;
     width: var(--sb-semantic-size-target-minimum);
@@ -20,8 +21,7 @@
     font-family: var(--sb-semantic-typography-family-code);
   }
 
-  .sb-empty-state-mark > svg,
-  .sb-empty-mark > svg {
+  .sb-empty-state-mark > svg {
     width: var(--sb-semantic-size-icon-md);
     height: var(--sb-semantic-size-icon-md);
   }
@@ -36,7 +36,6 @@
     text-wrap: balance;
   }
 
-  .sb-empty-state p,
   .sb-empty-state-description {
     max-width: 34ch;
     margin: var(--sb-semantic-space-2) 0 0;

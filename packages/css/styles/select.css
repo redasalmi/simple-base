@@ -1,49 +1,7 @@
 @import "./field.css";
 
 @layer sb {
-  .sb-select-wrap {
-    position: relative;
-  }
-
   .sb-select {
-    width: 100%;
-    min-height: var(--sb-semantic-size-control-md);
-    padding: 0 2.25rem 0 var(--sb-semantic-space-3);
-    border: var(--sb-semantic-border-width-hairline) solid var(--sb-semantic-color-border-strong);
-    border-radius: var(--sb-semantic-radius-md);
-    outline: 0;
-    appearance: none;
-    color: var(--sb-semantic-color-foreground-primary);
-    background: var(--sb-semantic-color-background-surface);
-    font: inherit;
-    cursor: pointer;
-  }
-
-  .sb-select-wrap::after {
-    position: absolute;
-    top: 50%;
-    right: 0.875rem;
-    color: var(--sb-semantic-color-foreground-muted);
-    content: "⌄";
-    pointer-events: none;
-    transform: translateY(-55%);
-  }
-
-  .sb-select:hover:not(:disabled) {
-    border-color: var(--sb-semantic-color-foreground-muted);
-  }
-
-  .sb-select:focus-visible {
-    border-color: var(--sb-semantic-color-focus-ring);
-    outline: var(--sb-semantic-border-width-strong) solid var(--sb-semantic-color-focus-ring);
-  }
-
-  .sb-select:disabled {
-    cursor: not-allowed;
-    opacity: var(--sb-semantic-opacity-disabled);
-  }
-
-  .sb-select-root {
     display: grid;
     gap: var(--sb-semantic-space-2);
     min-width: 0;
@@ -195,8 +153,8 @@
     width: var(--sb-semantic-space-1);
     height: var(--sb-semantic-space-2);
     margin-inline: var(--sb-semantic-space-1);
-    border-right: var(--sb-semantic-border-width-strong) solid currentColor;
-    border-bottom: var(--sb-semantic-border-width-strong) solid currentColor;
+    border-right: var(--sb-semantic-border-width-strong) solid currentcolor;
+    border-bottom: var(--sb-semantic-border-width-strong) solid currentcolor;
     visibility: hidden;
     content: "";
     transform: rotate(45deg);

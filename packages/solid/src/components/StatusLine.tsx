@@ -18,7 +18,7 @@ export type StatusLineDotProps = Omit<JSX.HTMLAttributes<HTMLSpanElement>, "aria
 export function StatusLineDot(props: StatusLineDotProps) {
   const [local, rest] = splitProps(props, ["class"]);
 
-  return <span {...rest} aria-hidden="true" class={cn("sb-status-dot", local.class)} />;
+  return <span {...rest} aria-hidden="true" class={cn("sb-status-line-dot", local.class)} />;
 }
 
 export type StatusLineContentProps = JSX.HTMLAttributes<HTMLDivElement>;
@@ -40,5 +40,7 @@ export function StatusLineTitle(props: StatusLineTitleProps) {
 export type StatusLineDescriptionProps = JSX.HTMLAttributes<HTMLParagraphElement>;
 
 export function StatusLineDescription(props: StatusLineDescriptionProps) {
-  return <p {...props} />;
+  const [local, rest] = splitProps(props, ["class"]);
+
+  return <p {...rest} class={cn("sb-status-line-description", local.class)} />;
 }

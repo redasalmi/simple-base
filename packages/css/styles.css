@@ -7,8 +7,8 @@
 @import "./styles/alert-dialog.css";
 @import "./styles/button.css";
 @import "./styles/badge.css";
+@import "./styles/kbd.css";
 @import "./styles/status.css";
-@import "./styles/progress.css";
 @import "./styles/field.css";
 @import "./styles/input.css";
 @import "./styles/select.css";
@@ -19,13 +19,8 @@
 @import "./styles/checkbox.css";
 @import "./styles/radio.css";
 @import "./styles/switch.css";
-@import "./styles/range.css";
-@import "./styles/segmented-control.css";
 @import "./styles/tabs.css";
-@import "./styles/keyboard-shortcut.css";
-@import "./styles/breadcrumb.css";
 @import "./styles/pagination.css";
-@import "./styles/disclosure.css";
 @import "./styles/menu.css";
 @import "./styles/tooltip.css";
 @import "./styles/table.css";

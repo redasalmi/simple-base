@@ -85,6 +85,12 @@
           "unit": "px"
         }
       },
+      "xs": {
+        "$value": {
+          "value": 0.375,
+          "unit": "rem"
+        }
+      },
       "sm": {
         "$value": {
           "value": 0.5,

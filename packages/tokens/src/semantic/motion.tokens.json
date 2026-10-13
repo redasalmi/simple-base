@@ -13,6 +13,10 @@
         },
         "slow": {
           "$value": "{primitive.duration.slow}"
+        },
+        "loop": {
+          "$description": "One cycle of a repeating animation, such as an indeterminate progress bar.",
+          "$value": "{primitive.duration.loop}"
         }
       },
       "easing": {
@@ -22,6 +26,17 @@
         },
         "standard": {
           "$value": "{primitive.easing.standard}"
+        }
+      },
+      "scale": {
+        "$type": "number",
+        "pressed": {
+          "$description": "Scale of a control while it is pressed.",
+          "$value": "{primitive.scale.pressed}"
+        },
+        "enter": {
+          "$description": "Starting scale of a popup as it appears.",
+          "$value": "{primitive.scale.enter}"
         }
       }
     }

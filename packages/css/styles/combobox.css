@@ -162,8 +162,8 @@
     width: var(--sb-semantic-space-1);
     height: var(--sb-semantic-space-2);
     margin-inline: var(--sb-semantic-space-1);
-    border-right: var(--sb-semantic-border-width-strong) solid currentColor;
-    border-bottom: var(--sb-semantic-border-width-strong) solid currentColor;
+    border-right: var(--sb-semantic-border-width-strong) solid currentcolor;
+    border-bottom: var(--sb-semantic-border-width-strong) solid currentcolor;
     visibility: hidden;
     content: "";
     transform: rotate(45deg);

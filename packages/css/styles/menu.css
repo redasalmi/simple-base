@@ -1,21 +1,10 @@
 @layer sb {
-  .sb-menu {
-    position: relative;
-  }
-
-  .sb-menu summary {
-    list-style: none;
-  }
-
-  .sb-menu summary::-webkit-details-marker {
-    display: none;
-  }
-
-  .sb-menu-panel,
   .sb-menu-content {
+    --sb-menu-min-width: 12.5rem;
+
     box-sizing: border-box;
     z-index: var(--sb-semantic-layer-dropdown);
-    min-width: 12.5rem;
+    min-width: var(--sb-menu-min-width);
     padding: var(--sb-semantic-space-1);
     border: var(--sb-semantic-border-width-hairline) solid var(--sb-semantic-color-border-default);
     border-radius: var(--sb-semantic-radius-md);
@@ -24,15 +13,6 @@
     box-shadow: var(--sb-semantic-shadow-overlay);
     font-family: var(--sb-semantic-typography-family-body);
     line-height: var(--sb-semantic-typography-line-height-normal);
-  }
-
-  .sb-menu-panel {
-    position: absolute;
-    top: calc(100% + var(--sb-semantic-space-2));
-    right: 0;
-  }
-
-  .sb-menu-content {
     max-width: var(--available-width);
     max-height: var(--available-height);
     overflow-y: auto;
@@ -67,15 +47,11 @@
     color: var(--sb-semantic-color-foreground-muted);
   }
 
-  .sb-menu-panel .sb-menu-item:hover:not(:disabled),
-  .sb-menu-panel .sb-menu-item:focus-visible,
   .sb-menu-item[data-highlighted]:not([data-disabled]) {
     color: var(--sb-semantic-color-foreground-primary);
     background: var(--sb-semantic-color-accent-soft);
   }
 
-  .sb-menu-panel .sb-menu-item:hover:not(:disabled) > svg,
-  .sb-menu-panel .sb-menu-item:focus-visible > svg,
   .sb-menu-item[data-highlighted]:not([data-disabled]) > svg {
     color: var(--sb-semantic-color-foreground-secondary);
   }
@@ -85,14 +61,11 @@
     color: var(--sb-semantic-color-status-danger-text);
   }
 
-  .sb-menu-panel .sb-menu-item[data-variant="danger"]:hover:not(:disabled),
-  .sb-menu-panel .sb-menu-item[data-variant="danger"]:focus-visible,
   .sb-menu-item[data-variant="danger"][data-highlighted]:not([data-disabled]) {
     color: var(--sb-semantic-color-status-danger-text);
     background: var(--sb-semantic-color-status-danger-soft);
   }
 
-  .sb-menu-item:disabled,
   .sb-menu-item[data-disabled] {
     cursor: not-allowed;
     opacity: var(--sb-semantic-opacity-disabled);
@@ -122,7 +95,6 @@
   }
 
   @media (forced-colors: active) {
-    .sb-menu-panel .sb-menu-item:focus-visible,
     .sb-menu-item[data-highlighted]:not([data-disabled]) {
       outline: var(--sb-semantic-border-width-strong) solid Highlight;
       outline-offset: calc(-1 * var(--sb-semantic-border-width-strong));

@@ -108,7 +108,7 @@ export function CheckboxGroupItem(props: CheckboxGroupItemProps) {
   const [local, rest] = splitProps(props, ["class", "children", "value", "required", "onChange"]);
 
   return (
-    <label class={cn("sb-choice", local.class)}>
+    <label class={cn("sb-choice-list-item", local.class)}>
       <Checkbox
         {...rest}
         onChange={composeHandler(

@@ -16,13 +16,14 @@ These already have styles in `@simple-base/css` unless noted.
 
 - [x] **Menu** — Solid component for the popup menu (`.sb-menu-content`), positioned like Select. Row actions on lists.
 - [x] **Tooltip** — Solid component, positioned like Select. Names icon-only buttons.
-- [x] **Tabs** — Solid component over `.sb-tabs`, `.sb-tab`, `.sb-tab-panel`. Status filters and settings pages.
-- [x] **Pagination** — Solid component over `.sb-pagination` and `.sb-page-button`.
+- [x] **Tabs** — Solid component over `.sb-tabs`, `.sb-tabs-list`, `.sb-tabs-trigger`, `.sb-tabs-content`. Status filters and settings pages.
+- [x] **Pagination** — Solid component over `.sb-pagination` and `.sb-pagination-button`.
 - [x] **Alert and StatusLine** — thin Solid wrappers over `.sb-alert` and `.sb-status-line`, plus new CSS: `.sb-status-line-content`.
-- [x] **Fieldset, RadioGroup, CheckboxGroup** — Solid wrappers over the native `fieldset` with `.sb-fieldset`, `.sb-choice-list`, and `.sb-choice`.
+- [x] **Fieldset, RadioGroup, CheckboxGroup** — Solid wrappers over the native `fieldset` with `.sb-fieldset`, `.sb-choice-list`, and `.sb-choice-list-item`.
 - [x] **EmptyState** — thin Solid wrapper over `.sb-empty-state`.
 - [x] **Checkbox indeterminate** — new CSS: `.sb-checkbox:indeterminate` draws a dash. `appearance: none` currently hides the native state. `indeterminate` is a DOM property, not an attribute; the Solid `Checkbox` takes an `indeterminate` prop and sets it under `prop:`.
 - [x] **Sortable table headers** — new CSS: a header button and a direction indicator driven by `aria-sort` on `th`. Sorting stays in the app.
+- [x] **Kbd** — Solid component over `.sb-kbd`, one keycap per key. Shortcuts in tooltips and help text.
 
 ## v1 tasks
 
@@ -38,7 +39,7 @@ These already have styles in `@simple-base/css` unless noted.
 Components:
 
 - DatePicker range selection and presets (the styles already exist)
-- Segmented control, Breadcrumb, Disclosure, Progress, Range, Keyboard shortcut as Solid components (the styles already exist)
+- Segmented control, Breadcrumb, Disclosure, Progress, Range as Solid components, each with its styles in `@simple-base/css` (their earlier CSS-only styles are in the git history)
 - Popover, Drawer, Avatar, file upload
 - Compact density mode
 

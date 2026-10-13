@@ -1,5 +1,17 @@
 @layer sb {
   .sb-tabs {
+    display: grid;
+    /* Without this, the track grows to a panel's widest content, such as a scrolling table. */
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--sb-semantic-space-5);
+    min-width: 0;
+  }
+
+  .sb-tabs[hidden] {
+    display: none;
+  }
+
+  .sb-tabs-list {
     display: flex;
     width: fit-content;
     max-width: 100%;
@@ -11,7 +23,7 @@
     background: var(--sb-semantic-color-background-muted);
   }
 
-  .sb-tab {
+  .sb-tabs-trigger {
     display: inline-flex;
     flex: 0 0 auto;
     align-items: center;
@@ -29,53 +41,53 @@
     cursor: pointer;
   }
 
-  .sb-tab:hover:where(:not(:disabled, [aria-disabled="true"], [data-disabled])) {
+  .sb-tabs-trigger:hover:where(:not(:disabled, [aria-disabled="true"], [data-disabled])) {
     color: var(--sb-semantic-color-foreground-primary);
   }
 
-  .sb-tab[aria-selected="true"] {
+  .sb-tabs-trigger[aria-selected="true"] {
     color: var(--sb-semantic-color-foreground-primary);
     background: var(--sb-semantic-color-background-surface);
     box-shadow:
       0 0 0 var(--sb-semantic-border-width-hairline) var(--sb-semantic-color-border-strong),
-      0 1px 0 var(--sb-semantic-border-width-hairline) var(--sb-semantic-color-border-strong);
+      0 var(--sb-semantic-border-width-hairline) 0 var(--sb-semantic-border-width-hairline)
+        var(--sb-semantic-color-border-strong);
   }
 
-  .sb-tab:focus-visible {
+  .sb-tabs-trigger:focus-visible {
     outline: var(--sb-semantic-border-width-strong) solid var(--sb-semantic-color-focus-ring);
     outline-offset: calc(-1 * var(--sb-semantic-border-width-strong));
   }
 
-  .sb-tab:disabled,
-  .sb-tab[aria-disabled="true"],
-  .sb-tab[data-disabled] {
+  .sb-tabs-trigger:disabled,
+  .sb-tabs-trigger[aria-disabled="true"],
+  .sb-tabs-trigger[data-disabled] {
     cursor: not-allowed;
     opacity: var(--sb-semantic-opacity-disabled);
   }
 
-  .sb-tab > svg {
+  .sb-tabs-trigger > svg {
     width: var(--sb-semantic-size-icon-sm);
     height: var(--sb-semantic-size-icon-sm);
   }
 
-  .sb-tab-panel {
-    padding-top: var(--sb-semantic-space-5);
+  .sb-tabs-content {
     border-radius: var(--sb-semantic-radius-sm);
     color: var(--sb-semantic-color-foreground-secondary);
   }
 
-  .sb-tab-panel:focus-visible {
+  .sb-tabs-content:focus-visible {
     outline: var(--sb-semantic-border-width-strong) solid var(--sb-semantic-color-focus-ring);
     outline-offset: var(--sb-semantic-border-width-strong);
   }
 
   @media (forced-colors: active) {
-    .sb-tab:focus-visible,
-    .sb-tab-panel:focus-visible {
+    .sb-tabs-trigger:focus-visible,
+    .sb-tabs-content:focus-visible {
       outline: var(--sb-semantic-border-width-strong) solid Highlight;
     }
 
-    .sb-tab[aria-selected="true"] {
+    .sb-tabs-trigger[aria-selected="true"] {
       outline: var(--sb-semantic-border-width-hairline) solid SelectedItem;
     }
   }

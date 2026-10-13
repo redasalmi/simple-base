@@ -78,7 +78,7 @@ export function RadioGroupItem(props: RadioGroupItemProps) {
   const [local, rest] = splitProps(props, ["class", "children", "value", "onChange"]);
 
   return (
-    <label class={cn("sb-choice", local.class)}>
+    <label class={cn("sb-choice-list-item", local.class)}>
       <Radio
         {...rest}
         onChange={composeHandler(

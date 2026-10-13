@@ -27,11 +27,11 @@ import { EmptyStates } from "./preview/EmptyStates";
 import { Fields } from "./preview/Fields";
 import { CheckboxGroups, Fieldsets, RadioGroups } from "./preview/Fieldsets";
 import { Checkboxes, Inputs, Radios, Switches, TextAreas } from "./preview/Inputs";
+import { Kbds } from "./preview/Kbds";
 import { Menus } from "./preview/Menus";
 import { NumberFields } from "./preview/NumberFields";
 import { Paginations } from "./preview/Paginations";
 import { Selects } from "./preview/Selects";
-import { Styles } from "./preview/Styles";
 import { Tables } from "./preview/Tables";
 import { TabLists } from "./preview/TabLists";
 import { Toasts } from "./preview/Toasts";
@@ -75,6 +75,15 @@ const pages: Page[] = [
       "Short, non-interactive labels for status and metadata. Status variants add a glyph, and the text carries the meaning; color is supporting information.",
     usage: 'import { Badge } from "@simple-base/solid";',
     component: Badges,
+  },
+  {
+    id: "kbd",
+    label: "Kbd",
+    group: "Components",
+    description:
+      "A keycap for one key the user presses. Write a shortcut as one Kbd per key; binding the keys stays in your app.",
+    usage: 'import { Kbd } from "@simple-base/solid";',
+    component: Kbds,
   },
   {
     id: "card",
@@ -307,15 +316,6 @@ const pages: Page[] = [
     usage: 'import { createToaster, Toaster, Toast, ToastTitle } from "@simple-base/solid";',
     component: Toasts,
   },
-  {
-    id: "styles",
-    label: "CSS patterns",
-    group: "Styles",
-    description:
-      "The rest of the stylesheet collection, using native HTML and local demo state. These patterns are not exported Solid components.",
-    usage: 'import "@simple-base/css";',
-    component: Styles,
-  },
 ];
 
 const themeOptions = themes.map(([value, label]) => ({ label, value }));
@@ -393,7 +393,7 @@ export default function App() {
       <div class="playground-layout">
         <aside class="playground-sidebar">
           <nav aria-label="Reference">
-            <For each={["Foundations", "Components", "Styles"]}>
+            <For each={["Foundations", "Components"]}>
               {(group) => (
                 <div class="playground-nav-group">
                   <h2>{group}</h2>
@@ -419,9 +419,9 @@ export default function App() {
         </aside>
         <label class="playground-mobile-nav">
           <span>Browse reference</span>
-          <span class="sb-select-wrap">
+          <span class="preview-native-select">
             <select
-              class="sb-select"
+              class="preview-native-select-control"
               aria-label="Browse reference"
               value={current().id}
               onChange={(event) => {

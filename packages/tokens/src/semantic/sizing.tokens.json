@@ -46,6 +46,9 @@
       "none": {
         "$value": "{primitive.radius.none}"
       },
+      "xs": {
+        "$value": "{primitive.radius.xs}"
+      },
       "sm": {
         "$value": "{primitive.radius.sm}"
       },

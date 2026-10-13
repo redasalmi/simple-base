@@ -21,6 +21,12 @@
           "value": 400,
           "unit": "ms"
         }
+      },
+      "loop": {
+        "$value": {
+          "value": 1400,
+          "unit": "ms"
+        }
       }
     },
     "easing": {
@@ -30,6 +36,15 @@
       },
       "standard": {
         "$value": [0.2, 0, 0, 1]
+      }
+    },
+    "scale": {
+      "$type": "number",
+      "pressed": {
+        "$value": 0.98
+      },
+      "enter": {
+        "$value": 0.96
       }
     }
   }

@@ -1,7 +1,10 @@
 @layer sb {
   .sb-textarea {
+    --sb-textarea-min-height: 7.5rem;
+
+    box-sizing: border-box;
     width: 100%;
-    min-height: 7.5rem;
+    min-height: var(--sb-textarea-min-height);
     padding: var(--sb-semantic-space-3);
     resize: vertical;
     border: var(--sb-semantic-border-width-hairline) solid var(--sb-semantic-color-border-strong);

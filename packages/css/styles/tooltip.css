@@ -2,11 +2,12 @@
   .sb-tooltip-content {
     --arrow-size: var(--sb-semantic-space-2);
     --arrow-background: var(--sb-semantic-color-foreground-primary);
+    --sb-tooltip-max-width: 17.5rem;
 
     box-sizing: border-box;
     z-index: var(--sb-semantic-layer-tooltip);
     width: max-content;
-    max-width: min(17.5rem, var(--available-width, 100vw));
+    max-width: min(var(--sb-tooltip-max-width), var(--available-width, 100vw));
     padding: var(--sb-semantic-space-1) var(--sb-semantic-space-2);
     border-radius: var(--sb-semantic-radius-sm);
     color: var(--sb-semantic-color-foreground-inverse);
@@ -24,22 +25,18 @@
       var(--sb-semantic-motion-easing-out);
   }
 
-  .sb-tooltip-content .sb-shortcut {
-    min-height: 1.125rem;
+  .sb-tooltip-content .sb-kbd {
+    min-height: var(--sb-semantic-space-5);
     margin-inline-start: var(--sb-semantic-space-2);
     border-color: color-mix(in oklch, var(--sb-semantic-color-foreground-inverse) 40%, transparent);
     color: inherit;
     background: transparent;
   }
 
-  .sb-tooltip-arrow-tip {
-    border-radius: 1px;
-  }
-
   @keyframes sb-tooltip-in {
     from {
       opacity: 0;
-      scale: 0.96;
+      scale: var(--sb-semantic-motion-scale-enter);
     }
   }
 

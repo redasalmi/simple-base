@@ -10,7 +10,7 @@ export function Tooltips() {
       />
       <Example
         title="Placement and shortcuts"
-        description="placement picks the preferred side; the tooltip flips when there is no room. A keyboard shortcut inside the content takes the inverse tooltip colors. Binding the key stays in your app."
+        description="placement picks the preferred side; the tooltip flips when there is no room. A Kbd inside the content takes the inverse tooltip colors. Binding the key stays in your app."
         example="tooltip/Placement"
       />
       <Api

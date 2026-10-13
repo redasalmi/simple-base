@@ -1,11 +1,14 @@
 @layer sb {
   .sb-switch {
     --sb-switch-glyph: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round'%3E%3Cpath d='M8 8l8 8M16 8l-8 8'/%3E%3C/svg%3E");
+    --sb-switch-width: 3rem;
+    --sb-switch-height: 1.75rem;
+    --sb-switch-thumb-size: 1.125rem;
 
     position: relative;
     box-sizing: border-box;
-    width: 3rem;
-    height: 1.75rem;
+    width: var(--sb-switch-width);
+    height: var(--sb-switch-height);
     flex: 0 0 auto;
     margin: 0;
     border: var(--sb-semantic-border-width-strong) solid var(--sb-semantic-color-border-strong);
@@ -26,10 +29,17 @@
   .sb-switch::before,
   .sb-switch::after {
     position: absolute;
-    top: calc(0.3125rem - var(--sb-semantic-border-width-strong));
-    left: calc(0.3125rem - var(--sb-semantic-border-width-strong));
-    width: 1.125rem;
-    height: 1.125rem;
+    /* Centers the thumb inside the track's border. */
+    inset-block-start: calc(
+      (var(--sb-switch-height) - var(--sb-switch-thumb-size)) / 2 -
+        var(--sb-semantic-border-width-strong)
+    );
+    inset-inline-start: calc(
+      (var(--sb-switch-height) - var(--sb-switch-thumb-size)) / 2 -
+        var(--sb-semantic-border-width-strong)
+    );
+    width: var(--sb-switch-thumb-size);
+    height: var(--sb-switch-thumb-size);
     content: "";
     transition:
       translate var(--sb-semantic-motion-duration-normal) var(--sb-semantic-motion-easing-out),
@@ -43,7 +53,8 @@
 
   .sb-switch::after {
     background: var(--sb-semantic-color-background-surface);
-    mask: var(--sb-switch-glyph) center / 0.625rem no-repeat;
+    mask: var(--sb-switch-glyph) center /
+      calc(var(--sb-switch-thumb-size) - 2 * var(--sb-semantic-space-1)) no-repeat;
   }
 
   .sb-switch:checked {
@@ -55,12 +66,21 @@
 
   .sb-switch:checked::before {
     background: var(--sb-semantic-color-accent-on-surface);
-    translate: 1.25rem 0;
   }
 
   .sb-switch:checked::after {
     background: var(--sb-semantic-color-accent-surface);
-    translate: 1.25rem 0;
+  }
+
+  /* The thumb travels the track length left over after its own inset on both ends. */
+  .sb-switch:checked::before,
+  .sb-switch:checked::after {
+    translate: calc(var(--sb-switch-width) - var(--sb-switch-height)) 0;
+  }
+
+  .sb-switch:checked:dir(rtl)::before,
+  .sb-switch:checked:dir(rtl)::after {
+    translate: calc(var(--sb-switch-height) - var(--sb-switch-width)) 0;
   }
 
   .sb-switch:focus-visible {

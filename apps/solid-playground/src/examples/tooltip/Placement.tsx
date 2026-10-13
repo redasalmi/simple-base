@@ -1,4 +1,5 @@
 import {
+  Kbd,
   Tooltip,
   TooltipArrow,
   TooltipContent,
@@ -16,7 +17,7 @@ export default function Placement() {
           <TooltipPositioner>
             <TooltipContent>
               <TooltipArrow />
-              Save without sending <kbd class="sb-shortcut">S</kbd>
+              Save without sending <Kbd>S</Kbd>
             </TooltipContent>
           </TooltipPositioner>
         </TooltipPortal>

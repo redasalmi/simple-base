@@ -1,6 +1,7 @@
 @layer sb {
   .sb-button {
     display: inline-flex;
+    box-sizing: border-box;
     align-items: center;
     justify-content: center;
     min-height: var(--sb-semantic-size-control-md);
@@ -34,7 +35,7 @@
   }
 
   .sb-button:not(:disabled):not([aria-disabled="true"]):active {
-    scale: 0.98;
+    scale: var(--sb-semantic-motion-scale-pressed);
   }
 
   .sb-button[data-variant="primary"] {

@@ -38,10 +38,6 @@
       "types": "./styles.d.ts",
       "default": "./styles/badge.css"
     },
-    "./breadcrumb": {
-      "types": "./styles.d.ts",
-      "default": "./styles/breadcrumb.css"
-    },
     "./button": {
       "types": "./styles.d.ts",
       "default": "./styles/button.css"
@@ -66,10 +62,6 @@
       "types": "./styles.d.ts",
       "default": "./styles/dialog.css"
     },
-    "./disclosure": {
-      "types": "./styles.d.ts",
-      "default": "./styles/disclosure.css"
-    },
     "./empty-state": {
       "types": "./styles.d.ts",
       "default": "./styles/empty-state.css"
@@ -82,9 +74,9 @@
       "types": "./styles.d.ts",
       "default": "./styles/input.css"
     },
-    "./keyboard-shortcut": {
+    "./kbd": {
       "types": "./styles.d.ts",
-      "default": "./styles/keyboard-shortcut.css"
+      "default": "./styles/kbd.css"
     },
     "./menu": {
       "types": "./styles.d.ts",
@@ -98,21 +90,9 @@
       "types": "./styles.d.ts",
       "default": "./styles/pagination.css"
     },
-    "./progress": {
-      "types": "./styles.d.ts",
-      "default": "./styles/progress.css"
-    },
     "./radio": {
       "types": "./styles.d.ts",
       "default": "./styles/radio.css"
-    },
-    "./range": {
-      "types": "./styles.d.ts",
-      "default": "./styles/range.css"
-    },
-    "./segmented-control": {
-      "types": "./styles.d.ts",
-      "default": "./styles/segmented-control.css"
     },
     "./select": {
       "types": "./styles.d.ts",
