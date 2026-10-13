@@ -3,14 +3,24 @@ import type { Placement } from "./placement";
 export type StatusValue = "success" | "warning" | "danger" | "info";
 
 export type StatusOptions = {
+  /** Defaults to `info`. */
   status?: StatusValue;
 };
+
+export const statusLineDefaults = {
+  status: "info",
+} as const satisfies Required<StatusOptions>;
 
 export type AlertStatus = StatusValue;
 
 export type AlertOptions = {
+  /** Defaults to `info`. */
   status?: AlertStatus;
 };
+
+export const alertDefaults = {
+  status: "info",
+} as const satisfies Required<AlertOptions>;
 
 /**
  * Toasts confirm what the user just did, so they are only `success` or `warning`. Errors and
@@ -19,6 +29,7 @@ export type AlertOptions = {
 export type ToastStatus = "success" | "warning";
 
 export type ToastOptions = {
+  /** Defaults to `success`. */
   status?: ToastStatus;
 };
 

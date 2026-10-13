@@ -81,7 +81,6 @@ export function DatePicker(props: DatePickerRootProps) {
   // The server can't know the user's zone, so without `timeZone` the server and the first client
   // render use UTC, Zag's default, and the picker switches to the user's zone once mounted (K8).
   const [fallbackTimeZone, setFallbackTimeZone] = createSignal("UTC");
-  // Zag centers the calendar under the field; align it with the field's start like Select.
   const positioning = createPositioning(() => local.placement ?? datePickerDefaults.placement);
 
   const service = useMachine(datepicker.machine, {
@@ -106,7 +105,7 @@ export function DatePicker(props: DatePickerRootProps) {
       return local.max;
     },
     get locale() {
-      return local.locale;
+      return local.locale ?? datePickerDefaults.locale;
     },
     get timeZone() {
       return local.timeZone ?? fallbackTimeZone();

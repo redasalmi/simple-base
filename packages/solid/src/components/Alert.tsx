@@ -1,4 +1,4 @@
-import type { AlertOptions } from "@simple-base/contracts";
+import { alertDefaults, type AlertOptions } from "@simple-base/contracts";
 import { type JSX, splitProps } from "solid-js";
 
 import { cn } from "../cn";
@@ -10,7 +10,13 @@ export type AlertRootProps = JSX.HTMLAttributes<HTMLDivElement> & AlertOptions;
 export function Alert(props: AlertRootProps) {
   const [local, rest] = splitProps(props, ["class", "status"]);
 
-  return <div {...rest} class={cn("sb-alert", local.class)} data-status={local.status} />;
+  return (
+    <div
+      {...rest}
+      class={cn("sb-alert", local.class)}
+      data-status={local.status ?? alertDefaults.status}
+    />
+  );
 }
 
 export type AlertMarkProps = Omit<JSX.HTMLAttributes<HTMLSpanElement>, "aria-hidden">;

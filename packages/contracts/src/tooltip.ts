@@ -7,6 +7,11 @@ export type TooltipOptions = {
   open?: boolean;
   /** Initial open state for uncontrolled state. */
   defaultOpen?: boolean;
+  /** Side of the trigger the tooltip opens on. Defaults to `bottom`. */
   placement?: Placement;
   onOpenChange?: (open: boolean) => void;
 };
+
+export const tooltipDefaults = {
+  placement: "bottom",
+} as const satisfies Required<Pick<TooltipOptions, "placement">>;

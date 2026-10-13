@@ -1,4 +1,4 @@
-import type { NumberFieldOptions } from "@simple-base/contracts";
+import { numberFieldDefaults, type NumberFieldOptions } from "@simple-base/contracts";
 import * as numberInput from "@zag-js/number-input";
 import { mergeProps, normalizeProps, useMachine } from "@zag-js/solid";
 import { type Accessor, createMemo, createUniqueId, type JSX, Show, splitProps } from "solid-js";
@@ -44,6 +44,7 @@ export function NumberField(props: NumberFieldRootProps) {
     "min",
     "max",
     "step",
+    "locale",
     "formatOptions",
     "required",
     "disabled",
@@ -80,6 +81,9 @@ export function NumberField(props: NumberFieldRootProps) {
     },
     get step() {
       return local.step;
+    },
+    get locale() {
+      return local.locale ?? numberFieldDefaults.locale;
     },
     get formatOptions() {
       return local.formatOptions;

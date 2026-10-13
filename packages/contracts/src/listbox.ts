@@ -27,7 +27,7 @@ export type ListboxOptions = {
   invalid?: boolean;
   /** Marks the label required and makes the browser require a selection before submitting. */
   required?: boolean;
-  /** Side of the control the popup opens on. */
+  /** Side of the control the popup opens on. Defaults to `bottom-start`. */
   placement?: Placement;
   /** Called with the selected option's value, or `null` when the selection is cleared. */
   onValueChange?: (value: string | null) => void;

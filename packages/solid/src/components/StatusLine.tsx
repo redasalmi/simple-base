@@ -1,4 +1,4 @@
-import type { StatusOptions } from "@simple-base/contracts";
+import { statusLineDefaults, type StatusOptions } from "@simple-base/contracts";
 import { type JSX, splitProps } from "solid-js";
 
 import { cn } from "../cn";
@@ -10,7 +10,13 @@ export type StatusLineRootProps = JSX.HTMLAttributes<HTMLDivElement> & StatusOpt
 export function StatusLine(props: StatusLineRootProps) {
   const [local, rest] = splitProps(props, ["class", "status"]);
 
-  return <div {...rest} class={cn("sb-status-line", local.class)} data-status={local.status} />;
+  return (
+    <div
+      {...rest}
+      class={cn("sb-status-line", local.class)}
+      data-status={local.status ?? statusLineDefaults.status}
+    />
+  );
 }
 
 export type StatusLineDotProps = Omit<JSX.HTMLAttributes<HTMLSpanElement>, "aria-hidden">;

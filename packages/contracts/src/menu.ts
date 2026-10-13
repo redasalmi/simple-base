@@ -7,11 +7,16 @@ export type MenuOptions = {
   open?: boolean;
   /** Initial open state for uncontrolled state. */
   defaultOpen?: boolean;
+  /** Side of the trigger the menu opens on. Defaults to `bottom-start`. */
   placement?: Placement;
   /** Called with the value of the item the user picked. */
   onSelect?: (value: string) => void;
   onOpenChange?: (open: boolean) => void;
 };
+
+export const menuDefaults = {
+  placement: "bottom-start",
+} as const satisfies Required<Pick<MenuOptions, "placement">>;
 
 export type MenuItemVariant = "danger";
 

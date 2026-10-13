@@ -35,9 +35,9 @@ export type CheckboxGroupOptions = {
   /** Shared name of the checkboxes. */
   name?: string;
   /** Controlled values of the checked boxes; omit for uncontrolled state. */
-  value?: string[];
+  value?: readonly string[];
   /** Initial checked values for uncontrolled state. */
-  defaultValue?: string[];
+  defaultValue?: readonly string[];
   /** Called with the values of the checked boxes, in document order. */
   onValueChange?: (value: string[]) => void;
 };

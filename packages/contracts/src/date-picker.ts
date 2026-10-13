@@ -37,5 +37,6 @@ export type DatePickerOptions = {
 };
 
 export const datePickerDefaults = {
+  locale: "en-US",
   placement: "bottom-start",
-} as const satisfies Required<Pick<DatePickerOptions, "placement">>;
+} as const satisfies Required<Pick<DatePickerOptions, "locale" | "placement">>;

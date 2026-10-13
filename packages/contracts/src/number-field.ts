@@ -12,6 +12,8 @@ export type NumberFieldOptions = {
   min?: number;
   max?: number;
   step?: number;
+  /** BCP 47 language tag used to format and parse the value, together with `formatOptions`. Without them, the field takes plain numbers such as `1.5`. Defaults to `en-US`. */
+  locale?: string;
   /** Formats the displayed value, e.g. `{ style: "currency", currency: "EUR" }`. */
   formatOptions?: Intl.NumberFormatOptions;
   required?: boolean;
@@ -22,3 +24,7 @@ export type NumberFieldOptions = {
   /** Called with the input's string value and its parsed number (`NaN` when empty). */
   onValueChange?: (value: string, valueAsNumber: number) => void;
 };
+
+export const numberFieldDefaults = {
+  locale: "en-US",
+} as const satisfies Required<Pick<NumberFieldOptions, "locale">>;

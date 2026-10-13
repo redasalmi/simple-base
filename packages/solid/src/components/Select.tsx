@@ -1,4 +1,4 @@
-import type { SelectOption, SelectOptions } from "@simple-base/contracts";
+import { selectDefaults, type SelectOption, type SelectOptions } from "@simple-base/contracts";
 import * as select from "@zag-js/select";
 import { mergeProps, normalizeProps, useMachine } from "@zag-js/solid";
 import {
@@ -69,7 +69,7 @@ export function Select(props: SelectRootProps) {
     });
   });
 
-  const positioning = createPositioning(() => local.placement);
+  const positioning = createPositioning(() => local.placement ?? selectDefaults.placement);
 
   const fallbackId = createUniqueId();
   const id = () => local.id ?? fallbackId;

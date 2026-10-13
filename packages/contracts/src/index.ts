@@ -1,7 +1,7 @@
 export { badgeDefaults, type BadgeVariant, type BadgeSize, type BadgeOptions } from "./badge";
 export { buttonDefaults, type ButtonVariant, type ButtonSize, type ButtonOptions } from "./button";
 export type { CardVariant, CardOptions } from "./card";
-export type { ComboboxOption, ComboboxOptions } from "./combobox";
+export { comboboxDefaults, type ComboboxOption, type ComboboxOptions } from "./combobox";
 export type { DialogOptions } from "./dialog";
 export type { FieldOptions } from "./field";
 export {
@@ -12,8 +12,8 @@ export {
   type CheckboxGroupOptions,
 } from "./fieldset";
 export type { ListboxOption, ListboxOptions } from "./listbox";
-export type { MenuOptions, MenuItemOptions, MenuItemVariant } from "./menu";
-export type { NumberFieldOptions } from "./number-field";
+export { menuDefaults, type MenuOptions, type MenuItemOptions, type MenuItemVariant } from "./menu";
+export { numberFieldDefaults, type NumberFieldOptions } from "./number-field";
 export {
   paginationDefaults,
   paginationLabels,
@@ -21,10 +21,12 @@ export {
   type PaginationOptions,
 } from "./pagination";
 export type { Placement } from "./placement";
-export type { SelectOption, SelectOptions } from "./select";
+export { selectDefaults, type SelectOption, type SelectOptions } from "./select";
 export type { TableCellVariant, TableCellOptions } from "./table";
 export type { TabsOptions } from "./tabs";
 export {
+  alertDefaults,
+  statusLineDefaults,
   toastDefaults,
   toasterDefaults,
   type StatusValue,
@@ -36,4 +38,4 @@ export {
   type ToasterOptions,
 } from "./status";
 export { datePickerDefaults, type DatePickerOptions } from "./date-picker";
-export type { TooltipOptions } from "./tooltip";
+export { tooltipDefaults, type TooltipOptions } from "./tooltip";

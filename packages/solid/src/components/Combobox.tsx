@@ -1,4 +1,8 @@
-import type { ComboboxOption, ComboboxOptions } from "@simple-base/contracts";
+import {
+  comboboxDefaults,
+  type ComboboxOption,
+  type ComboboxOptions,
+} from "@simple-base/contracts";
 import * as combobox from "@zag-js/combobox";
 import { mergeProps, normalizeProps, useMachine } from "@zag-js/solid";
 import {
@@ -103,7 +107,7 @@ export function Combobox(props: ComboboxRootProps) {
     }),
   );
 
-  const positioning = createPositioning(() => local.placement);
+  const positioning = createPositioning(() => local.placement ?? comboboxDefaults.placement);
 
   const fallbackId = createUniqueId();
   const id = () => local.id ?? fallbackId;

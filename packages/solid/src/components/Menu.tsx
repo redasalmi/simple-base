@@ -1,4 +1,4 @@
-import type { MenuItemOptions, MenuOptions } from "@simple-base/contracts";
+import { menuDefaults, type MenuItemOptions, type MenuOptions } from "@simple-base/contracts";
 import * as menu from "@zag-js/menu";
 import { mergeProps, normalizeProps, useMachine } from "@zag-js/solid";
 import { type Accessor, createMemo, createUniqueId, type JSX, splitProps } from "solid-js";
@@ -23,7 +23,7 @@ export type MenuRootProps = MenuOptions & {
 };
 
 export function Menu(props: MenuRootProps) {
-  const positioning = createPositioning(() => props.placement);
+  const positioning = createPositioning(() => props.placement ?? menuDefaults.placement);
 
   const fallbackId = createUniqueId();
 

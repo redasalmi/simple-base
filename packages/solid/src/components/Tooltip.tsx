@@ -1,4 +1,4 @@
-import type { TooltipOptions } from "@simple-base/contracts";
+import { tooltipDefaults, type TooltipOptions } from "@simple-base/contracts";
 import { mergeProps, normalizeProps, useMachine } from "@zag-js/solid";
 import * as tooltip from "@zag-js/tooltip";
 import { type Accessor, createMemo, createUniqueId, type JSX, splitProps } from "solid-js";
@@ -19,7 +19,7 @@ export type TooltipRootProps = TooltipOptions & {
 };
 
 export function Tooltip(props: TooltipRootProps) {
-  const positioning = createPositioning(() => props.placement);
+  const positioning = createPositioning(() => props.placement ?? tooltipDefaults.placement);
 
   const fallbackId = createUniqueId();
 

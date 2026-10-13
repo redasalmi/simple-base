@@ -17,6 +17,8 @@ All of them were checked against Zag 1.44.0, the version pinned in the catalog. 
 | U9  | date-picker           | View trigger's name doesn't contain its visible text                 | `DatePickerCalendar` prefixes the label              |
 | U10 | select, combobox      | List props name the list (and select's focus it) in composite mode   | `SelectList` and `ComboboxList` don't spread them    |
 | U11 | solid adapter         | `defaultValue` becomes a live `value`, so `form.reset()` blanks text | `prop:defaultValue` beside Zag's input props (Z1)    |
+| U12 | number-input          | Unparseable text such as `.` passes `required` when submitted        | None; documented in the Solid README                 |
+| U13 | number-input          | `locale` is ignored without `formatOptions`                          | None; documented in the Solid README                 |
 
 ## U1. combobox: a hidden input that submits the value
 
@@ -93,3 +95,19 @@ Ask: in composite mode, leave `aria-labelledby` and `tabIndex` off the list, so 
 Repro, Solid: a number-input with `defaultValue: "1234"` in a form. Call `form.reset()` without editing: the input is empty, and `api.value` is still `1234`.
 
 Ask: keep the default value in sync as well, for example by mapping `defaultValue` to both `value` and `prop:defaultValue` in the Solid adapter, or re-sync the input element in each machine's `onFormReset`.
+
+## U12. number-input: unparseable text passes `required`
+
+With `formatOptions` set, `getInputProps()` drops the native `pattern`, and nothing else marks text that doesn't parse, such as `.` or `-`, as invalid. Zag clears that text on blur and on Enter, but `syncInputElement` writes it to the input in a `requestAnimationFrame`. A submit in the same task still sees the text, so a required input passes constraint validation and the form submits an empty value. Enter submits right after its keydown, and a tap blurs the input and clicks the submit button in one task. Checked against Zag 1.46.0.
+
+Repro: a number-input with `required`, `name="amount"`, and `formatOptions: {}`, in a form with a submit button. Type `.` and press Enter: the form submits, with an empty value on the visible input.
+
+Ask: write the cleared text to the input synchronously on blur and Enter, or set a custom validity on the input while its text doesn't parse.
+
+## U13. number-input: `locale` is ignored without `formatOptions`
+
+`parseValue` and `formatValue` fall back to `parseFloat` and `toString()` when `formatOptions` is unset, so `locale` has no effect. The input's `onBeforeInput` check uses the locale-aware parser either way, so it accepts text that `parseFloat` then misreads. Checked against Zag 1.46.0.
+
+Repro: a number-input with `locale: "fr-FR"`, `name="amount"`, and no `formatOptions`. Type `1,5`: the input shows `1,5`, and `valueAsNumber` is `1`.
+
+Ask: parse and format with the locale whenever `locale` is set, or default `formatOptions` to options that format like `toString()`, such as `{ useGrouping: false, maximumSignificantDigits: 21 }`, while keeping the native `pattern` for unparseable text.

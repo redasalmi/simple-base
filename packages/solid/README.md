@@ -213,7 +213,7 @@ const [reminders, setReminders] = createSignal(["due"]);
 ```
 
 - `RadioGroup` takes a string `value` (`""` selects nothing), `defaultValue`, and `onValueChange`. `name` is shared by every radio and generated when omitted. A required fieldset makes the radios natively required. A controlled group shows `value` after `onValueChange` returns, so a change the parent rejects is undone.
-- `CheckboxGroup` takes a `string[]` `value`, `defaultValue`, and `onValueChange`, which receives the checked values in document order. As with `RadioGroup`, a controlled group undoes a change the parent rejects. A required fieldset means "at least one": while no box is checked, every box is natively required, so the browser blocks submission and points at the first one; once a box is checked, none is. Pass `required` to a single item that must be checked whatever the others.
+- `CheckboxGroup` takes a `string[]` `value` and `defaultValue`, which may be read-only arrays, and `onValueChange`, which receives the checked values in document order. As with `RadioGroup`, a controlled group undoes a change the parent rejects. A required fieldset means "at least one": while no box is checked, every box is natively required, so the browser blocks submission and points at the first one; once a box is checked, none is. Pass `required` to a single item that must be checked whatever the others.
 - On an item, `value` is required and `children` is the label text. `class` goes on the row; every other prop goes to the input. `name`, `checked`, `defaultChecked`, and `aria-invalid` (plus `required` on radios) come from the group and fieldset.
 
 ## NumberField
@@ -262,9 +262,10 @@ Additional root props:
 
 - `value` and `defaultValue` are strings, so partial input such as `1.` survives while typing. `onValueChange` receives the string and its parsed number (`NaN` when empty).
 - `min`, `max`, and `step` bound and step the value. When `invalid` is omitted, a value outside `min` and `max` is invalid and shows `NumberFieldError`.
-- `formatOptions` takes `Intl.NumberFormatOptions`, such as a currency or percent style, to format the displayed value.
+- `formatOptions` takes `Intl.NumberFormatOptions`, such as a currency or percent style, to format the displayed value. `locale` (default `en-US`) sets the separators and symbol placement used to format and parse it, so `fr-FR` shows `1 234,00 €`. `locale` only applies with `formatOptions`: without them, the field takes plain numbers such as `1.5`, whatever the locale.
 - `name` adds a hidden input that submits the number, such as `1234`, rather than the formatted text, such as `€1,234.00`; it is empty while the field is. `form` associates both inputs with a form elsewhere on the page.
 - `translations` takes Zag's number input labels: `incrementLabel`, `decrementLabel`, and `valueText`.
+- With `formatOptions`, `required` doesn't block text that isn't a number yet, such as `.` or `-`, when the form is submitted straight from the field with Enter or a tap. Zag clears that text a frame later, so the form submits an empty value; check `required` on the server too.
 
 `NumberFieldDecrement` and `NumberFieldIncrement` render `−` and `+` unless you pass children, and are labeled "decrease value" and "increment value" unless you set `translations` or pass `aria-label`. `NumberFieldAffix` renders text, such as a unit, inside the control; the input lists each affix in its `aria-describedby`, so the unit is announced with the value. Unlike the decorative marks (`AlertMark`, `EmptyStateMark`, `StatusLineDot`), an affix is not hidden from assistive technology. `NumberFieldError` renders only while the field is invalid.
 
@@ -333,7 +334,7 @@ export function TimezonePicker() {
 }
 ```
 
-Additional root props: `value` makes selection controlled (`null` means nothing is selected), `defaultValue` sets the initial selection of an uncontrolled select, `name` adds a hidden native select so the value submits with the form (an empty value while nothing is selected, like a native placeholder option), `form` associates it with a form elsewhere on the page, `disabled`, `invalid`, and `required` drive state styling and labeling, `placement` picks the popup side, and `onOpenChange` reports visibility.
+Additional root props: `value` makes selection controlled (`null` means nothing is selected), `defaultValue` sets the initial selection of an uncontrolled select, `name` adds a hidden native select so the value submits with the form (an empty value while nothing is selected, like a native placeholder option), `form` associates it with a form elsewhere on the page, `disabled`, `invalid`, and `required` drive state styling and labeling, `placement` picks the popup side (default `bottom-start`), and `onOpenChange` reports visibility.
 
 `SelectDescription` and `SelectError` work like `NumberFieldDescription` and `NumberFieldError`: the trigger lists them in its `aria-describedby` while they are rendered, and `SelectError` renders only while `invalid` is set.
 
@@ -681,7 +682,7 @@ import {
 
 ## Alert
 
-An inline message about the page or a form, with an optional recovery action and dismiss control. `status` is `success`, `warning`, `danger`, or `info`.
+An inline message about the page or a form, with an optional recovery action and dismiss control. `status` is `success`, `warning`, `danger`, or `info` (default `info`).
 
 ```tsx
 import {
@@ -721,7 +722,7 @@ const [open, setOpen] = createSignal(true);
 
 ## StatusLine
 
-A compact status summary: a colored dot beside a title and a short description. `status` is `success`, `warning`, `danger`, or `info`.
+A compact status summary: a colored dot beside a title and a short description. `status` is `success`, `warning`, `danger`, or `info` (default `info`).
 
 ```tsx
 import {

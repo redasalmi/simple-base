@@ -18,8 +18,8 @@ import { Checkbox, type CheckboxProps } from "./Checkbox";
 
 type CheckboxGroupContextType = {
   name: Accessor<string | undefined>;
-  value: Accessor<string[] | undefined>;
-  defaultValue: Accessor<string[] | undefined>;
+  value: Accessor<readonly string[] | undefined>;
+  defaultValue: Accessor<readonly string[] | undefined>;
   required: Accessor<boolean>;
   toggle: () => void;
 };
