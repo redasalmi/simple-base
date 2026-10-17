@@ -63,8 +63,8 @@
     "@arethetypeswrong/core": "catalog:",
     "@internationalized/date": "catalog:",
     "@solidjs/testing-library": "^0.8.10",
-    "@testing-library/user-event": "^14.6.7",
-    "@vitest/browser-playwright": "^5.0.3",
+    "@testing-library/user-event": "^14.6.8",
+    "@vitest/browser-playwright": "^5.0.5",
     "axe-core": "catalog:",
     "playwright": "catalog:",
     "publint": "catalog:",
@@ -73,7 +73,7 @@
     "tsdown": "catalog:",
     "vite": "^8.3.4",
     "vite-plugin-solid": "^2.11.14",
-    "vitest": "^5.0.3"
+    "vitest": "^5.0.5"
   },
   "peerDependencies": {
     "@internationalized/date": "^3.12.4",

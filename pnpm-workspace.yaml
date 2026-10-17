@@ -15,10 +15,18 @@ catalog:
   "@zag-js/solid": 1.46.0
   "@zag-js/toast": 1.46.0
   "@zag-js/tooltip": 1.46.0
-  playwright: ^1.64.0
+  playwright: ^1.64.1
   publint: ^0.3.25
   solid-js: ^1.9.17
   tsdown: ^0.23.1
   typescript: ~7.0.2
 allowBuilds:
   esbuild: false
+minimumReleaseAgeExclude:
+  - "@turbo/darwin-64@2.11.9"
+  - "@turbo/darwin-arm64@2.11.9"
+  - "@turbo/linux-64@2.11.9"
+  - "@turbo/linux-arm64@2.11.9"
+  - "@turbo/windows-64@2.11.9"
+  - "@turbo/windows-arm64@2.11.9"
+  - turbo@2.11.9

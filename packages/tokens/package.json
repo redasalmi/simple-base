@@ -45,13 +45,13 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@terrazzo/token-types": "^2.7.1"
+    "@terrazzo/token-types": "^2.9.0"
   },
   "devDependencies": {
-    "@terrazzo/cli": "^2.7.1",
-    "@terrazzo/plugin-css": "^2.7.1",
-    "@terrazzo/plugin-js": "^2.7.1",
-    "@terrazzo/plugin-tailwind": "^2.7.1",
+    "@terrazzo/cli": "^2.9.0",
+    "@terrazzo/plugin-css": "^2.9.0",
+    "@terrazzo/plugin-js": "^2.9.0",
+    "@terrazzo/plugin-tailwind": "^2.9.0",
     "@types/node": "catalog:"
   }
 }
