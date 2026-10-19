@@ -1,0 +1,60 @@
+---
+title: CheckboxGroup
+description: "Any number of choices from a short list, inside a Fieldset. Each option is a full-width row with a native checkbox, and the group reports the checked values as an array."
+---
+
+import ApiTable from "../../../components/ApiTable.astro";
+import Example from "../../../components/Example.astro";
+import FrameworkCode from "../../../components/FrameworkCode.astro";
+
+Any number of choices from a short list, inside a Fieldset. Each option is a full-width row with a native checkbox, and the group reports the checked values as an array.
+
+<FrameworkCode
+  code={'import { Fieldset, CheckboxGroup, CheckboxGroupItem } from "@simple-base/solid";'}
+/>
+
+## Controlled
+
+value and onValueChange hold the checked values as an array, in the order the boxes appear.
+
+<Example name="checkbox-group/Controlled" />
+
+## In a form
+
+Each checked box submits its value under the group's name; unchecked boxes submit nothing. defaultValue sets the initial state that Reset restores.
+
+<Example name="checkbox-group/InForm" form />
+
+## Required with an error
+
+required means at least one checked box: while none is, every box is natively required. This form sets noValidate so FieldsetError replaces the browser's message; submit without a check to show it.
+
+<Example name="checkbox-group/Required" />
+
+## API
+
+<ApiTable
+  rows={[
+    [
+      "value / defaultValue / onValueChange",
+      "string[]",
+      "value is controlled. defaultValue sets the initial checked values for uncontrolled groups, which form.reset() restores. onValueChange receives the checked values in document order.",
+    ],
+    ["name", "string", "Shared by every checkbox and submitted once per checked value."],
+    [
+      "CheckboxGroupItem",
+      "label > Checkbox + span",
+      "value is required and children is the label. class goes on the label; every other prop, including required and indeterminate, goes to the checkbox. name, checked, and aria-invalid come from the group and fieldset, and a required fieldset makes every box required while none is checked.",
+    ],
+    [
+      "required / disabled / invalid / labels",
+      "Fieldset props",
+      'Set once on the root. required marks the legend, disabled disables the native fieldset and every control inside, and invalid shows FieldsetError. labels sets the text read to assistive technology, such as { required: "(obligatoire)" }.',
+    ],
+    [
+      "FieldsetLegend / FieldsetDescription / FieldsetError",
+      "legend / p / p",
+      'Put the legend first. A required fieldset adds hidden "(required)" text to the legend; set labels.required on the Fieldset to change it. The fieldset lists the description, and the error while it is rendered, in aria-describedby. FieldsetError renders only while invalid is set.',
+    ],
+  ]}
+/>

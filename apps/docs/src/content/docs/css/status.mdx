@@ -1,0 +1,31 @@
+---
+title: Status
+description: "Alerts, status lines, and toasts."
+---
+
+import CssReference from "../../../components/CssReference.astro";
+import HtmlExample from "../../../components/HtmlExample.astro";
+
+Alerts, status lines, and toasts. The components [Alert](/components/alert/), [StatusLine](/components/status-line/), and [Toast](/components/toast/) render this markup for you.
+
+```css
+@import "@simple-base/css/status";
+```
+
+## Alert
+
+An inline message with an optional mark, actions, and close button. `data-status` tints the border and the mark; the title carries the meaning.
+
+<HtmlExample name="status/Alert" />
+
+## Status line
+
+A compact status: a colored dot beside a title and a short description.
+
+<HtmlExample name="status/StatusLine" />
+
+## Reference
+
+<CssReference sheet="status" />
+
+Inside `.sb-toaster`, toasts are positioned by the variables the [Zag.js toast machine](https://zagjs.com) writes; outside a toaster, `.sb-toast` is a static surface. See [Toast region](/css/conventions/#toast-region).

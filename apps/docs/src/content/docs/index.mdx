@@ -1,0 +1,36 @@
+---
+title: Simple Base
+description: Design tokens, plain CSS, and accessible components built on native elements, for Solid and React.
+template: splash
+hero:
+  tagline: Design tokens, plain CSS, and accessible components that stay close to native HTML. The same components in Solid and React.
+  actions:
+    - text: Browse the components
+      link: /components/
+      icon: right-arrow
+    - text: Start with the CSS
+      link: /css/
+      variant: minimal
+---
+
+import { CardGrid, LinkCard } from "@astrojs/starlight/components";
+
+Simple Base styles and wires native elements and ARIA states. App-specific affordances, such as loading states, spinners, and skeletons, belong in your app. Every package is on 0.x until `@simple-base/react` ships the same components as `@simple-base/solid`; then they all go to 1.0.0 together.
+
+<CardGrid>
+  <LinkCard
+    title="Tokens"
+    href="/tokens/"
+    description="@simple-base/tokens: colors, type, spacing, and motion as CSS variables, a Tailwind theme, and JavaScript, in nine themes."
+  />
+  <LinkCard
+    title="CSS"
+    href="/css/"
+    description="@simple-base/css: plain CSS for every component and the typography. The selectors are the API, so any HTML can use them."
+  />
+  <LinkCard
+    title="Components"
+    href="/components/"
+    description="@simple-base/solid, and @simple-base/react to come: accessible components with the same names and options."
+  />
+</CardGrid>

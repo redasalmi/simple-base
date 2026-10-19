@@ -1,0 +1,67 @@
+---
+title: Input
+description: "Single-line entry with native input types, validation, and familiar browser behavior. Always pair the control with a visible label."
+---
+
+import ApiTable from "../../../components/ApiTable.astro";
+import Example from "../../../components/Example.astro";
+import FrameworkCode from "../../../components/FrameworkCode.astro";
+
+Single-line entry with native input types, validation, and familiar browser behavior. Always pair the control with a visible label.
+
+<FrameworkCode code={'import { Input } from "@simple-base/solid";'} />
+
+## Field states
+
+Default, filled, read-only, disabled, and invalid, each labeled with Field. Edit the short workspace name to resolve the example error.
+
+<Example name="input/FieldStates" />
+
+## In a form
+
+Uncontrolled inputs need no signals. name submits each value with the form, and defaultValue is what Reset restores.
+
+<Example name="input/InForm" form />
+
+## Native input types
+
+Text-entry types retain browser validation and mobile keyboards. Their exact appearance depends on your browser.
+
+<Example name="input/NativeTypes" />
+
+## API
+
+<ApiTable
+  rows={[
+    [
+      "type",
+      '"text" | "email" | "password" | "search" | "tel" | "url"; defaults to "text"',
+      "Only text-entry types. Use Checkbox and Radio for choices, Button for actions, and the CSS range style for sliders.",
+    ],
+    [
+      "defaultValue",
+      "string",
+      "Initial value for uncontrolled inputs; form.reset() restores it. A value given through value is cleared by a reset.",
+    ],
+    [
+      "value / onInput",
+      "native value and event",
+      "Use a signal when the rest of your interface depends on the entered value.",
+    ],
+    [
+      "readOnly / disabled",
+      "boolean",
+      "Read-only fields remain focusable and selectable. Disabled fields cannot be edited or focused.",
+    ],
+    [
+      "aria-invalid",
+      "boolean",
+      "Applies error styling. Inside a Field, set invalid on the root instead; it also links the error message.",
+    ],
+    [
+      "…props",
+      "InputHTMLAttributes",
+      "Native attributes, ref, events, and class pass through. No custom size or variant props.",
+    ],
+  ]}
+/>

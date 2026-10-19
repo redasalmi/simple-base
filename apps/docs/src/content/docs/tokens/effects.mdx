@@ -1,0 +1,32 @@
+---
+title: Effects and motion
+description: Shadows, opacity, stacking layers, durations, easings, and scales.
+sidebar:
+  order: 5
+---
+
+import TokenTable from "../../../components/TokenTable.astro";
+
+## Shadow
+
+Depth comes from edges, not blur: cards sit on a 1px baseline, and blurred shadows are reserved for menus, popovers, dialogs, and toasts. Light themes override the overlay shadow.
+
+<TokenTable prefix="semantic.shadow" />
+
+## Opacity
+
+<TokenTable prefix="semantic.opacity" />
+
+## Layer
+
+<TokenTable prefix="semantic.layer" />
+
+## Motion
+
+Under `prefers-reduced-motion`, the component styles drop their movement: transitions and scaling turn off, and toasts only fade.
+
+<TokenTable prefix="semantic.motion.duration" />
+
+<TokenTable prefix="semantic.motion.easing" />
+
+<TokenTable prefix="semantic.motion.scale" />

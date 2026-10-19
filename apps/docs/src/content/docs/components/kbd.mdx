@@ -1,0 +1,30 @@
+---
+title: Kbd
+description: "A keycap for one key the user presses. Write a shortcut as one Kbd per key; binding the keys stays in your app."
+---
+
+import ApiTable from "../../../components/ApiTable.astro";
+import Example from "../../../components/Example.astro";
+import FrameworkCode from "../../../components/FrameworkCode.astro";
+
+A keycap for one key the user presses. Write a shortcut as one Kbd per key; binding the keys stays in your app.
+
+<FrameworkCode code={'import { Kbd } from "@simple-base/solid";'} />
+
+## Shortcuts in text
+
+One Kbd per key, set in the code face on a keycap. A Kbd inside a tooltip takes the tooltip's inverse colors.
+
+<Example name="kbd/Shortcuts" />
+
+## API
+
+<ApiTable
+  rows={[
+    [
+      "…props",
+      "HTMLAttributes<HTMLElement>",
+      "Renders a kbd. Binding the keys stays in your app; menus show their shortcuts with MenuItemShortcut.",
+    ],
+  ]}
+/>

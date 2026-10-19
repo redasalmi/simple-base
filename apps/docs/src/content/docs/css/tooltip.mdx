@@ -1,0 +1,22 @@
+---
+title: Tooltip
+description: "A short label shown on hover or focus."
+---
+
+import CssReference from "../../../components/CssReference.astro";
+
+A short label shown on hover or focus. The component [Tooltip](/components/tooltip/) renders this markup for you.
+
+```css
+@import "@simple-base/css/tooltip";
+```
+
+It needs the state that [Tooltip](/components/tooltip/) manages, so its live example is on the component page.
+
+## Reference
+
+<CssReference sheet="tooltip" />
+
+The popup is positioned by [Zag.js](https://zagjs.com): its positioner gets `--x`, `--y`, `--z-index`, `--available-width`, `--available-height`, `--reference-width`, and `--transform-origin`, and the content reads them. The component packages provide that behavior; without them, position the content yourself. See [Positioned popups](/css/conventions/#positioned-popups).
+
+The tooltip sets `--arrow-size` and `--arrow-background` for the Zag arrow, and `[data-instant]` skips the enter animation.

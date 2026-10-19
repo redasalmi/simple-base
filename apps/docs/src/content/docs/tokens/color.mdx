@@ -1,0 +1,54 @@
+---
+title: Color
+description: Theme-resolved color roles. Components use only these.
+sidebar:
+  order: 2
+---
+
+import TokenTable from "../../../components/TokenTable.astro";
+
+Every color is a role that each theme fills in, so the previews follow the theme picker. The value column names the primitive a role points at; the primitive's value changes with the theme.
+
+## Background
+
+<TokenTable prefix="semantic.color.background" />
+
+## Foreground
+
+<TokenTable prefix="semantic.color.foreground" />
+
+## Border
+
+<TokenTable prefix="semantic.color.border" />
+
+## Accent
+
+<TokenTable prefix="semantic.color.accent" />
+
+## Status
+
+Each status has a `base` for glyphs and dots, a `soft` tint, a `text` color for labels, a `surface` fill, and an `on-surface` color for text on that fill.
+
+### Success
+
+<TokenTable prefix="semantic.color.status.success" />
+
+### Warning
+
+<TokenTable prefix="semantic.color.status.warning" />
+
+### Danger
+
+<TokenTable prefix="semantic.color.status.danger" />
+
+### Info
+
+<TokenTable prefix="semantic.color.status.info" />
+
+## Focus, selection, and overlay
+
+<TokenTable prefix="semantic.color.focus" />
+
+<TokenTable prefix="semantic.color.selection" />
+
+<TokenTable prefix="semantic.color.overlay" />

@@ -1,0 +1,32 @@
+---
+interface Props {
+  rows: readonly (readonly [name: string, value: string, description: string])[];
+}
+
+const { rows } = Astro.props;
+---
+
+<table class="api-table">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Value</th>
+      <th scope="col">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    {
+      rows.map(([name, value, description]) => (
+        <tr>
+          <th scope="row">
+            <code>{name}</code>
+          </th>
+          <td>
+            <code>{value}</code>
+          </td>
+          <td>{description}</td>
+        </tr>
+      ))
+    }
+  </tbody>
+</table>

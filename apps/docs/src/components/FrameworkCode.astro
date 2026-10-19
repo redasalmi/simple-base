@@ -1,0 +1,28 @@
+---
+import { Code } from "@astrojs/starlight/components";
+
+import { frameworks } from "../frameworks";
+
+interface Props {
+  /** Code written for @simple-base/solid; each framework gets it with its own package name. */
+  code: string;
+  lang?: string;
+}
+
+const { code, lang = "ts" } = Astro.props;
+---
+
+{
+  frameworks.map(({ id, package: packageName, released }) => (
+    <div data-framework-only={id}>
+      {released ? (
+        <Code code={code.replaceAll("@simple-base/solid", packageName)} lang={lang} />
+      ) : (
+        <p>
+          <code>{packageName}</code> is in progress. It will have the same components, with the
+          same names and options.
+        </p>
+      )}
+    </div>
+  ))
+}

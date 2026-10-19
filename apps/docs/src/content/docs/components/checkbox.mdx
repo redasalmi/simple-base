@@ -1,0 +1,64 @@
+---
+title: Checkbox
+description: "Independent choices that can be combined. A native checkbox, styled by the system and labeled by its surrounding content."
+---
+
+import ApiTable from "../../../components/ApiTable.astro";
+import Example from "../../../components/Example.astro";
+import FrameworkCode from "../../../components/FrameworkCode.astro";
+
+Independent choices that can be combined. A native checkbox, styled by the system and labeled by its surrounding content.
+
+<FrameworkCode code={'import { Checkbox } from "@simple-base/solid";'} />
+
+## Independent choices
+
+Each option is independent. Click the label or press Space on a focused checkbox to toggle it.
+
+<Example name="checkbox/IndependentChoices" />
+
+## Select all
+
+A parent checkbox shows the mixed state while only some of its options are checked. Toggling it checks or clears them all.
+
+<Example name="checkbox/SelectAll" />
+
+## In a form
+
+Checked boxes submit their name and value; unchecked ones submit nothing. defaultChecked sets the initial state that Reset restores.
+
+<Example name="checkbox/InForm" form />
+
+## Disabled states
+
+Both unchecked and checked disabled states are shown. Disabled controls retain their value but cannot be changed.
+
+<Example name="checkbox/Disabled" />
+
+## API
+
+<ApiTable
+  rows={[
+    [
+      "defaultChecked",
+      "boolean",
+      "Initial state for uncontrolled checkboxes; form.reset() restores it. A state given through checked is cleared by a reset.",
+    ],
+    [
+      "checked / onChange",
+      "boolean / native event",
+      "Read event.currentTarget.checked. Use a label or an accessible name.",
+    ],
+    [
+      "indeterminate",
+      "boolean",
+      'Shows a dash for a partly selected group; assistive tech reads it as "mixed". The browser clears it when the user toggles the box, so derive it from the group state.',
+    ],
+    ["disabled", "boolean", "Prevents activation and removes the control from the tab order."],
+    [
+      "…props",
+      'InputHTMLAttributes (except "type")',
+      'Renders type="checkbox". No custom variants or sizes.',
+    ],
+  ]}
+/>

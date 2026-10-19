@@ -1,0 +1,100 @@
+---
+title: Components
+description: Accessible components built on native elements and Zag, with the same names and options in Solid and React.
+sidebar:
+  label: Overview
+  order: 0
+---
+
+import Framework from "../../../components/Framework.astro";
+import FrameworkCode from "../../../components/FrameworkCode.astro";
+
+Accessible components with native element behavior, a small props surface, and styling that lives in plain CSS. The Solid and React packages have the same components, with the same names and options: pick yours with the framework selector in the header, and every example and snippet on this site follows it.
+
+<Framework only="react">
+
+`@simple-base/react` is in progress. Until it ships, the pages show the Solid examples' place with a note, and the option tables describe both packages.
+
+</Framework>
+
+## Install
+
+<FrameworkCode code="pnpm add @simple-base/solid @simple-base/css" lang="sh" />
+
+The components only emit class names and attributes, so they need the stylesheets from [`@simple-base/css`](/css/).
+
+<Framework only="solid">
+
+`solid-js` and `@internationalized/date` are peer dependencies and are not bundled. Sharing one copy of `@internationalized/date` keeps the `DateValue` objects you create compatible with the date picker.
+
+</Framework>
+
+## Quick start
+
+Import the stylesheet once in your entry point:
+
+```ts
+import "@simple-base/css";
+```
+
+Then use the components. Every component accepts `class` plus the native attributes for the element it renders:
+
+<Framework only="solid">
+
+```tsx
+import { Badge, Button, Input } from "@simple-base/solid";
+
+export function Toolbar() {
+  return (
+    <form>
+      <Input name="email" type="email" placeholder="you@example.com" required />
+      <Button type="submit">Save</Button>
+      <Button variant="ghost" size="small">
+        Cancel
+      </Button>
+      <Badge variant="success">Active</Badge>
+    </form>
+  );
+}
+```
+
+</Framework>
+
+Prefer importing only the stylesheets you use:
+
+```ts
+import "@simple-base/tokens/css";
+import "@simple-base/css/button";
+import "@simple-base/css/badge";
+```
+
+The stylesheets name fonts but don't download them. Load Atkinson Hyperlegible Next, Atkinson Hyperlegible Mono, and Young Serif in your app, or the system fallbacks apply.
+
+## Simple components
+
+These render one element and take native props.
+
+| Component                           | Renders                | Options                                                                              |
+| ----------------------------------- | ---------------------- | ------------------------------------------------------------------------------------ |
+| [`Button`](/components/button/)     | `button`               | `variant`, `size`                                                                    |
+| [`Badge`](/components/badge/)       | `span`                 | `variant`, `size`                                                                    |
+| [`Card`](/components/card/)         | `div`                  | `variant`                                                                            |
+| [`Kbd`](/components/kbd/)           | `kbd`                  | Native props; one key per `Kbd`                                                      |
+| [`Input`](/components/input/)       | `input`                | Native input props; `type` is `text`, `email`, `password`, `search`, `tel`, or `url` |
+| [`TextArea`](/components/textarea/) | `textarea`             | Native props                                                                         |
+| [`Checkbox`](/components/checkbox/) | `input[type=checkbox]` | Native props; `indeterminate` shows the mixed state                                  |
+| [`Radio`](/components/radio/)       | `input[type=radio]`    | Native props                                                                         |
+| [`Switch`](/components/switch/)     | `input[role=switch]`   | Native props                                                                         |
+
+## Composable components
+
+These use named exports so bundlers can remove unused parts. Each part is prefixed with its root name, and each page lists them.
+
+- **Forms:** [Field](/components/field/), [Fieldset](/components/fieldset/), [RadioGroup](/components/radio-group/), [CheckboxGroup](/components/checkbox-group/), [NumberField](/components/number-field/), [DatePicker](/components/date-picker/), [Select](/components/select/), [Combobox](/components/combobox/)
+- **Overlays:** [Dialog](/components/dialog/), [AlertDialog](/components/alert-dialog/), [Menu](/components/menu/), [Tooltip](/components/tooltip/)
+- **Navigation and data:** [Tabs](/components/tabs/), [Table](/components/table/), [Pagination](/components/pagination/)
+- **Feedback:** [Alert](/components/alert/), [StatusLine](/components/status-line/), [Toast](/components/toast/), [EmptyState](/components/empty-state/)
+
+`Input` deliberately accepts only text-like types. Numbers and dates have their own components, `NumberField` and `DatePicker`, and checkboxes and radios have `Checkbox` and `Radio`. Typography stays CSS-only: see [Typography](/css/typography/).
+
+The library styles native elements and states and leaves app-specific affordances, such as loading states and spinners, to your application. Breadcrumb, disclosure, progress, range, and segmented control are planned after 1.0.

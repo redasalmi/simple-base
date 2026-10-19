@@ -1,0 +1,55 @@
+---
+title: Fieldset
+description: "Group related controls under one legend. Set required, disabled, and invalid on the root; the legend and messages follow, and disabled reaches every control inside."
+---
+
+import ApiTable from "../../../components/ApiTable.astro";
+import Example from "../../../components/Example.astro";
+import FrameworkCode from "../../../components/FrameworkCode.astro";
+
+Group related controls under one legend. Set required, disabled, and invalid on the root; the legend and messages follow, and disabled reaches every control inside.
+
+<FrameworkCode
+  code={
+    'import { Fieldset, FieldsetLegend, FieldsetDescription, FieldsetError } from "@simple-base/solid";'
+  }
+/>
+
+## Grouped fields
+
+A legend names related controls, and the description applies to the whole group. Each control keeps its own Field for its label and messages.
+
+<Example name="fieldset/Grouped" />
+
+## Disabled
+
+disabled uses the native fieldset attribute: every control inside is disabled and skipped by Tab, and the legend and description dim.
+
+<Example name="fieldset/Disabled" />
+
+## API
+
+<ApiTable
+  rows={[
+    [
+      "required / disabled / invalid / labels",
+      "Fieldset props",
+      'Set once on the root. required marks the legend, disabled disables the native fieldset and every control inside, and invalid shows FieldsetError. labels sets the text read to assistive technology, such as { required: "(obligatoire)" }.',
+    ],
+    [
+      "FieldsetLegend / FieldsetDescription / FieldsetError",
+      "legend / p / p",
+      'Put the legend first. A required fieldset adds hidden "(required)" text to the legend; set labels.required on the Fieldset to change it. The fieldset lists the description, and the error while it is rendered, in aria-describedby. FieldsetError renders only while invalid is set.',
+    ],
+    [
+      "RadioGroup / CheckboxGroup",
+      "choice lists",
+      "Render inside a Fieldset. They read required and invalid from it.",
+    ],
+    [
+      "Styles",
+      "@simple-base/css/field",
+      "Included in the main stylesheet. The .sb-fieldset, .sb-choice-list, and .sb-choice-list-item classes stay available for plain HTML.",
+    ],
+  ]}
+/>

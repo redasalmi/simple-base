@@ -1,0 +1,71 @@
+---
+import Select from "@astrojs/starlight/components/Select.astro";
+
+import { frameworks } from "../../frameworks";
+import { themes } from "../../themes";
+---
+
+<sb-docs-pickers>
+  <span data-picker="framework">
+    <Select
+      icon="random"
+      label="Framework"
+      options={frameworks.map(({ id, label }, index) => ({
+        label,
+        value: id,
+        selected: index === 0,
+      }))}
+      width="6em"
+    />
+  </span>
+  <span data-picker="theme">
+    <Select
+      icon="sun"
+      label="Theme"
+      options={themes.map(([value, label], index) => ({ label, value, selected: index === 0 }))}
+      width="11.5em"
+    />
+  </span>
+</sb-docs-pickers>
+
+{/* Inline so the pickers show the stored choices before the first paint. */}
+<script is:inline>
+  for (const picker of document.querySelectorAll("[data-picker]")) {
+    picker.querySelector("select").value = document.documentElement.dataset[picker.dataset.picker];
+  }
+</script>
+
+<script>
+  declare global {
+    interface Window {
+      SimpleBaseDocs: { setTheme(theme: string): void; setFramework(framework: string): void };
+    }
+  }
+
+  class Pickers extends HTMLElement {
+    constructor() {
+      super();
+      for (const picker of this.querySelectorAll<HTMLElement>("[data-picker]")) {
+        const name = picker.dataset.picker as "theme" | "framework";
+        picker.querySelector("select")?.addEventListener("change", (event) => {
+          const { value } = event.currentTarget as HTMLSelectElement;
+          if (name === "theme") window.SimpleBaseDocs.setTheme(value);
+          else window.SimpleBaseDocs.setFramework(value);
+          // The header and the mobile menu each render the pickers.
+          for (const select of document.querySelectorAll<HTMLSelectElement>(
+            `[data-picker="${name}"] select`,
+          ))
+            select.value = value;
+        });
+      }
+    }
+  }
+  customElements.define("sb-docs-pickers", Pickers);
+</script>
+
+<style>
+  sb-docs-pickers {
+    display: flex;
+    gap: 1rem;
+  }
+</style>

@@ -1,0 +1,23 @@
+---
+title: JavaScript
+description: The token resolver and full token types, for tooling.
+sidebar:
+  order: 7
+---
+
+The package root exposes the token resolver and full token types:
+
+```ts
+import { resolver, type Tokens } from "@simple-base/tokens";
+
+const tokens: Tokens = resolver.apply({ theme: "dracula" });
+
+tokens["semantic.color.foreground.primary"].$value;
+```
+
+| Export                        | Description                                                                      |
+| ----------------------------- | -------------------------------------------------------------------------------- |
+| `resolver.apply()`            | Resolves a permutation (for example `{ theme: "nord" }`) and returns its tokens. |
+| `resolver.listPermutations()` | Lists every available permutation.                                               |
+| `PERMUTATIONS`                | All permutations keyed by their serialized input.                                |
+| `Tokens`                      | Type of a resolved token set; individual value types are exported too.           |

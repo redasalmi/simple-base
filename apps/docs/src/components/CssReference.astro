@@ -1,0 +1,73 @@
+---
+import { readFileSync } from "node:fs";
+import { createRequire } from "node:module";
+
+interface Props {
+  /** A stylesheet subpath of @simple-base/css, such as "button". */
+  sheet: string;
+}
+
+const { sheet } = Astro.props;
+
+// Read from the published stylesheet, so the reference can't drift from what the package ships.
+const css = readFileSync(createRequire(import.meta.url).resolve(`@simple-base/css/${sheet}`), "utf8");
+const unique = (pattern: RegExp) => [...new Set([...css.matchAll(pattern)].map(([match]) => match))];
+
+const classes = unique(/\.sb-[\w-]+/g);
+const attributes = unique(/\[(?:data|aria)-[\w-]+(?:="[^"]*")?\]/g).toSorted();
+const variables = unique(/--sb-(?!semantic-|primitive-)[\w-]+(?=:)/g);
+const tokens = unique(/--sb-semantic-[\w-]+/g).toSorted();
+const imports = [...css.matchAll(/@import "\.\/([\w-]+)\.css"/g)].map(([, name]) => name!);
+---
+
+<dl class="css-reference">
+  <dt>Classes</dt>
+  <dd>{classes.map((name) => <code>{name}</code>)}</dd>
+  {
+    attributes.length > 0 && (
+      <>
+        <dt>Options and states</dt>
+        <dd>{attributes.map((name) => <code>{name}</code>)}</dd>
+      </>
+    )
+  }
+  {
+    variables.length > 0 && (
+      <>
+        <dt>Component variables</dt>
+        <dd>{variables.map((name) => <code>{name}</code>)}</dd>
+      </>
+    )
+  }
+  {
+    imports.length > 0 && (
+      <>
+        <dt>Also loads</dt>
+        <dd>
+          {imports.map((name) => (
+            <a href={`/css/${name}/`}>
+              <code>{name}</code>
+            </a>
+          ))}
+        </dd>
+      </>
+    )
+  }
+</dl>
+
+<details class="css-reference-tokens">
+  <summary>Tokens it reads ({tokens.length})</summary>
+  <p>{tokens.map((name) => <code>{name}</code>)}</p>
+</details>
+
+<style>
+  .css-reference dd,
+  .css-reference-tokens p {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 0.5rem;
+  }
+  .css-reference-tokens summary {
+    cursor: pointer;
+  }
+</style>

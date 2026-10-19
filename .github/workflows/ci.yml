@@ -43,11 +43,11 @@ jobs:
       - name: Run quality checks
         run: pnpm quality
 
-      # The tests, the playground's axe check, and the smoke test all drive Playwright's Chromium.
+      # The tests, the docs' axe check, and the smoke test all drive Playwright's Chromium.
       - name: Install Playwright Chromium
         run: pnpm --filter @simple-base/solid exec playwright install --with-deps --only-shell chromium
 
-      # The solid package's Vitest projects, and axe on every playground section in every theme.
+      # The solid package's Vitest projects, and axe on every docs page in every theme.
       # One task at a time: run together, they starve each other on the runner and the first
       # hydration test times out.
       - name: Run tests

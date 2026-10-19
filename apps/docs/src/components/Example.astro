@@ -1,0 +1,89 @@
+---
+import { Code } from "@astrojs/starlight/components";
+
+import SolidDemo from "../examples/solid/Demo";
+import { frameworks } from "../frameworks";
+
+interface Props {
+  /** The file under src/examples/<framework>, without its extension, such as "select/SingleValue". */
+  name: string;
+  /** Reports what a form in the example submits, instead of submitting it. */
+  form?: boolean;
+}
+
+const { name, form = false } = Astro.props;
+
+// Every framework has the same example under the same name. The page renders each one; CSS shows
+// the selected framework's, and client:visible hydrates only the one on screen.
+const sources: Record<string, Record<string, string>> = {
+  solid: import.meta.glob("../examples/solid/*/*.tsx", {
+    query: "?raw",
+    import: "default",
+    eager: true,
+  }),
+  react: import.meta.glob("../examples/react/*/*.tsx", {
+    query: "?raw",
+    import: "default",
+    eager: true,
+  }),
+};
+
+const variants = frameworks.map((framework) => {
+  const source = sources[framework.id]?.[`../examples/${framework.id}/${name}.tsx`];
+  if (!source && framework.released)
+    throw new Error(`No example at src/examples/${framework.id}/${name}.tsx`);
+  return { framework, source };
+});
+---
+
+<div class="example not-content" data-example-form={form ? "" : undefined}>
+  {
+    variants.map(({ framework: { id, label, package: packageName }, source }) => (
+      <div data-framework-only={id}>
+        {source ? (
+          <>
+            <div class="example-stage">
+              {id === "solid" && <SolidDemo client:visible name={name} />}
+              {form && (
+                <p class="preview-status" role="status">
+                  Submit the form to see the data it sends.
+                </p>
+              )}
+            </div>
+            <details class="example-source">
+              <summary>View {label} code</summary>
+              <Code code={source} lang="tsx" />
+            </details>
+          </>
+        ) : (
+          <div class="example-stage">
+            <p class="example-unavailable">
+              This example arrives with <code>{packageName}</code>.
+            </p>
+          </div>
+        )}
+      </div>
+    ))
+  }
+</div>
+
+<script>
+  // Shows what a form example submits, instead of submitting it. Plain DOM events, so it works the
+  // same for every framework.
+  const status = (form: EventTarget | null) =>
+    (form as HTMLElement).closest("[data-framework-only]")!.querySelector(".preview-status")!;
+
+  for (const example of document.querySelectorAll<HTMLElement>("[data-example-form]")) {
+    example.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const entries = [...new FormData(event.target as HTMLFormElement)].map(
+        ([name, value]) => `${name}=${String(value)}`,
+      );
+      status(event.target).textContent =
+        entries.length > 0 ? `Submitted ${entries.join(", ")}` : "Submitted no data.";
+    });
+    example.addEventListener("reset", (event) => {
+      status(event.target).textContent = "Form reset.";
+    });
+  }
+</script>

@@ -1,0 +1,111 @@
+---
+import { aliasOf, cssValue, semanticTokens } from "../lib/tokens";
+
+interface Props {
+  /** A token path prefix, such as "semantic.color.background". */
+  prefix: string;
+}
+
+const tokens = semanticTokens(Astro.props.prefix);
+if (tokens.length === 0) throw new Error(`No semantic tokens under ${Astro.props.prefix}`);
+
+// Colors and shadows change with the theme, so their previews read the live variable and the value
+// column names the primitive behind it.
+const themed = (type: string) => type === "color" || type === "shadow";
+---
+
+<table class="token-table">
+  <thead>
+    <tr>
+      <th scope="col">Token</th>
+      <th scope="col">Value</th>
+      <th scope="col"><span class="sb-visually-hidden">Preview</span></th>
+    </tr>
+  </thead>
+  <tbody>
+    {
+      tokens.map(({ id, cssVar, type, description }) => (
+        <tr>
+          <th scope="row">
+            <code>{cssVar}</code>
+            {description && <p>{description}</p>}
+          </th>
+          <td>
+            <code>{themed(type) ? (aliasOf(cssVar) ?? "per theme") : cssValue(cssVar)}</code>
+          </td>
+          <td class="not-content">
+            {type === "color" && (
+              <span class="token-swatch" style={`background: var(${cssVar})`} aria-hidden="true" />
+            )}
+            {type === "shadow" && (
+              <span class="token-shadow" style={`box-shadow: var(${cssVar})`} aria-hidden="true" />
+            )}
+            {type === "dimension" && id.includes(".radius.") && (
+              <span class="token-radius" style={`border-radius: var(${cssVar})`} aria-hidden="true" />
+            )}
+            {type === "dimension" && /\.(space|size)\./.test(id) && (
+              <span class="token-bar" style={`width: var(${cssVar})`} aria-hidden="true" />
+            )}
+            {type === "dimension" && id.includes(".border-width.") && (
+              <span class="token-border" style={`border-top-width: var(${cssVar})`} aria-hidden="true" />
+            )}
+            {(type === "fontFamily" || type === "fontWeight" || id.includes(".typography.size.")) && (
+              <span
+                class="token-type"
+                style={`${type === "fontFamily" ? "font-family" : type === "fontWeight" ? "font-weight" : "font-size"}: var(${cssVar})`}
+                aria-hidden="true"
+              >
+                Aa
+              </span>
+            )}
+          </td>
+        </tr>
+      ))
+    }
+  </tbody>
+</table>
+
+<style>
+  .token-table th[scope="row"] {
+    font-weight: inherit;
+  }
+  .token-table th p {
+    margin: 0.25rem 0 0;
+    color: var(--sb-semantic-color-foreground-muted);
+    font-size: var(--sb-semantic-typography-size-sm);
+  }
+  .token-table code {
+    overflow-wrap: anywhere;
+  }
+  .token-swatch,
+  .token-shadow,
+  .token-radius {
+    display: block;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 1px solid var(--sb-semantic-color-border-strong);
+    border-radius: var(--sb-semantic-radius-sm);
+  }
+  .token-shadow {
+    border-color: var(--sb-semantic-color-border-default);
+    background: var(--sb-semantic-color-background-surface);
+  }
+  .token-radius {
+    background: var(--sb-semantic-color-background-muted);
+  }
+  .token-bar {
+    display: block;
+    max-width: 8rem;
+    height: 0.75rem;
+    background: var(--sb-semantic-color-accent-surface);
+  }
+  .token-border {
+    display: block;
+    width: 2.5rem;
+    border-top: 0 solid var(--sb-semantic-color-foreground-primary);
+  }
+  .token-type {
+    color: var(--sb-semantic-color-foreground-primary);
+    line-height: 1;
+  }
+</style>

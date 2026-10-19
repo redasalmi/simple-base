@@ -1,0 +1,52 @@
+---
+title: TextArea
+description: "Room for longer answers. A vertically resizable text field with the same focus, validation, and disabled treatments as Input."
+---
+
+import ApiTable from "../../../components/ApiTable.astro";
+import Example from "../../../components/Example.astro";
+import FrameworkCode from "../../../components/FrameworkCode.astro";
+
+Room for longer answers. A vertically resizable text field with the same focus, validation, and disabled treatments as Input.
+
+<FrameworkCode code={'import { TextArea } from "@simple-base/solid";'} />
+
+## Field states
+
+An empty field, existing content, a read-only note, and a disabled field, each labeled with Field. Drag the lower corner to resize vertically.
+
+<Example name="textarea/FieldStates" />
+
+## Validation & feedback
+
+This local example requires a note. The error clears when text is entered.
+
+<Example name="textarea/Validation" />
+
+## API
+
+<ApiTable
+  rows={[
+    [
+      "defaultValue",
+      "string",
+      "Initial content for uncontrolled text areas; form.reset() restores it.",
+    ],
+    [
+      "value / onInput",
+      "native value and event",
+      "Use a signal for controlled content. No autosizing or validation logic is added.",
+    ],
+    ["readOnly / disabled", "boolean", "Native field states, with shared Input styling."],
+    [
+      "aria-invalid",
+      "boolean",
+      "Marks the field visually. Inside a Field, set invalid on the root instead; it also links the error message.",
+    ],
+    [
+      "…props",
+      "TextareaHTMLAttributes",
+      "Includes placeholder, required, maxLength, rows, ref, and class. The stylesheet sets a 120px minimum height.",
+    ],
+  ]}
+/>

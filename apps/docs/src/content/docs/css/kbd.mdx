@@ -1,0 +1,23 @@
+---
+title: Kbd
+description: "A keycap for one key the user presses."
+---
+
+import CssReference from "../../../components/CssReference.astro";
+import HtmlExample from "../../../components/HtmlExample.astro";
+
+A keycap for one key the user presses. The component [Kbd](/components/kbd/) renders this markup for you.
+
+```css
+@import "@simple-base/css/kbd";
+```
+
+## Shortcut
+
+Write a shortcut as one `kbd.sb-kbd` per key, such as `Ctrl` and `K`. Inside a tooltip, the key takes the tooltip's inverse colors.
+
+<HtmlExample name="kbd/Shortcut" />
+
+## Reference
+
+<CssReference sheet="kbd" />

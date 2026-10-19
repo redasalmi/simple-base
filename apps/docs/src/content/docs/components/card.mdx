@@ -1,0 +1,57 @@
+---
+title: Card
+description: "Group related content on a bordered surface, or drop the surface for content that already sits on one. Cards sit on a 1px baseline instead of a blurred shadow and have no interactive behavior."
+---
+
+import ApiTable from "../../../components/ApiTable.astro";
+import Example from "../../../components/Example.astro";
+import FrameworkCode from "../../../components/FrameworkCode.astro";
+
+Group related content on a bordered surface, or drop the surface for content that already sits on one. Cards sit on a 1px baseline instead of a blurred shadow and have no interactive behavior.
+
+<FrameworkCode code={'import { Card } from "@simple-base/solid";'} />
+
+## Base card
+
+A div with the sb-card surface: hairline border, large radius, a 1px baseline instead of a blurred shadow, and its own interior padding. Omit variant for this treatment.
+
+<Example name="card/Base" />
+
+## Surfaces and variants
+
+Base cards carry the border and surface. flat removes both for content that already sits on a surface, and rule keeps only a top border for stacked sections. Every card is padded by the stylesheet; there is no padding prop to set.
+
+<Example name="card/Variants" />
+
+## Nested sections
+
+A padded base card can hold rule sections. The outer border groups the surface while each rule separates one setting from the next, and the rule resets the interior padding to a top gap.
+
+<Example name="card/NestedSections" />
+
+## API
+
+<ApiTable
+  rows={[
+    [
+      "variant",
+      '"flat" | "rule" (optional)',
+      'Omit variant for the base surface card. "flat" removes the border, surface, and shadow; "rule" keeps only a top border, no radius, and a top-only gap.',
+    ],
+    [
+      "padding",
+      "not a prop",
+      "Every .sb-card is padded by the stylesheet and rule cards keep only their top gap. Override the .sb-card class from application CSS when a layout needs different spacing.",
+    ],
+    [
+      "…props",
+      "JSX.HTMLAttributes<HTMLDivElement>",
+      "Renders a div and passes native attributes through. class merges with sb-card instead of replacing it.",
+    ],
+    [
+      "Styles",
+      "@simple-base/css/card",
+      "Included in the main stylesheet. The .sb-card class and its flat and rule variants stay available for plain HTML.",
+    ],
+  ]}
+/>

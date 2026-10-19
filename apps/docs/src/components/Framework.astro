@@ -1,0 +1,10 @@
+---
+import type { Framework } from "../frameworks";
+
+interface Props {
+  /** The framework this content applies to. It is hidden while another one is selected. */
+  only: Framework;
+}
+---
+
+<div data-framework-only={Astro.props.only}><slot /></div>

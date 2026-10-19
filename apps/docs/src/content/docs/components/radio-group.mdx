@@ -1,0 +1,64 @@
+---
+title: RadioGroup
+description: "One choice from a short list, inside a Fieldset. Each option is a full-width row with a native radio, and the group shares a name and the selected value."
+---
+
+import ApiTable from "../../../components/ApiTable.astro";
+import Example from "../../../components/Example.astro";
+import FrameworkCode from "../../../components/FrameworkCode.astro";
+
+One choice from a short list, inside a Fieldset. Each option is a full-width row with a native radio, and the group shares a name and the selected value.
+
+<FrameworkCode
+  code={'import { Fieldset, RadioGroup, RadioGroupItem } from "@simple-base/solid";'}
+/>
+
+## Controlled
+
+value and onValueChange keep the selection in your state. Arrow keys move the selection within the group.
+
+<Example name="radio-group/Controlled" />
+
+## In a form
+
+The checked radio submits its value under the group's name. defaultValue picks the initial choice that Reset restores.
+
+<Example name="radio-group/InForm" form />
+
+## Required with an error
+
+required makes every radio natively required. This form sets noValidate so FieldsetError replaces the browser's message; submit without a choice to show it.
+
+<Example name="radio-group/Required" />
+
+## API
+
+<ApiTable
+  rows={[
+    [
+      "value / defaultValue / onValueChange",
+      "string",
+      "value is controlled; an empty string selects nothing. defaultValue sets the initial choice for uncontrolled groups, which form.reset() restores.",
+    ],
+    [
+      "name",
+      "string",
+      "Shared by every radio and submitted with the checked value. Generated when omitted.",
+    ],
+    [
+      "RadioGroupItem",
+      "label > Radio + span",
+      "value is required and children is the label. class goes on the label; every other prop goes to the radio. name, checked, required, and aria-invalid come from the group and fieldset.",
+    ],
+    [
+      "required / disabled / invalid / labels",
+      "Fieldset props",
+      'Set once on the root. required marks the legend, disabled disables the native fieldset and every control inside, and invalid shows FieldsetError. labels sets the text read to assistive technology, such as { required: "(obligatoire)" }.',
+    ],
+    [
+      "FieldsetLegend / FieldsetDescription / FieldsetError",
+      "legend / p / p",
+      'Put the legend first. A required fieldset adds hidden "(required)" text to the legend; set labels.required on the Fieldset to change it. The fieldset lists the description, and the error while it is rendered, in aria-describedby. FieldsetError renders only while invalid is set.',
+    ],
+  ]}
+/>

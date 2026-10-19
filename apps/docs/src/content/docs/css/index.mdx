@@ -1,0 +1,110 @@
+---
+title: CSS
+description: Plain CSS component styles and typography for Simple Base. No build step, no runtime; the selectors are the API.
+sidebar:
+  label: Overview
+  order: 0
+---
+
+`@simple-base/css` holds the styles for every component and its parts, and the typography of the design system. It is plain CSS with no build step and no runtime, so the selectors are the API: the component packages render these classes, and any HTML can use them directly. Page layouts, component galleries, and showcase helpers belong in your application.
+
+## Install
+
+```sh
+pnpm add @simple-base/css
+```
+
+## Quick start
+
+The package root includes the tokens and every component stylesheet. Import it once for its side effects, from JavaScript or from CSS:
+
+```ts
+import "@simple-base/css";
+```
+
+```css
+@import "@simple-base/css";
+```
+
+To load only what you use, import the tokens first and then the stylesheets you need:
+
+```css
+@import "@simple-base/tokens/css";
+@import "@simple-base/css/button";
+@import "@simple-base/css/badge";
+@import "@simple-base/css/table";
+```
+
+Then apply the root class and configuration attributes:
+
+```html
+<button class="sb-button" data-variant="primary" data-size="medium">Save</button>
+<span class="sb-badge" data-variant="success" data-size="small">Active</span>
+```
+
+Each stylesheet has a page in this section with its classes, options, states, and the tokens it reads. Each entry point is an explicit, extensionless subpath; the internal `styles/` directory and `.css` filenames are not public import paths.
+
+The stylesheets name the Atkinson Hyperlegible Next, Atkinson Hyperlegible Mono, and Young Serif font families but don't download them. Load the fonts in your app, or the system fallbacks apply.
+
+## Theming
+
+Colors come from [`@simple-base/tokens`](/tokens/), which ships [nine themes](/tokens/themes/). Without `data-theme`, the page follows the system color scheme, with `simple-base-dark` or `simple-base-light`. Set `data-theme` on the root or on any nested region to pick a theme:
+
+```html
+<html data-theme="nord"></html>
+```
+
+## Cascade layer
+
+Every Simple Base rule lives in the `sb` cascade layer. The library declares that layer; your application decides where it sits by declaring the full order before the imports:
+
+```css
+@layer theme, base, sb, components, utilities;
+
+@import "tailwindcss";
+@import "@simple-base/css";
+```
+
+That order keeps resets out of the way and puts your own styles last:
+
+| Layer        | Holds                    | Relative to `sb` |
+| ------------ | ------------------------ | ---------------- |
+| `theme`      | Tailwind theme variables | before           |
+| `base`       | Tailwind preflight reset | before           |
+| `sb`         | Every Simple Base rule   | —                |
+| `components` | Application components   | after            |
+| `utilities`  | Tailwind utilities       | after            |
+
+Layer priority is compared before specificity for normal declarations, so a later layer wins a conflict even when the earlier rule is more specific. Tailwind's preflight `padding: 0` on `*` cannot strip a card's padding, while `p-0` on that same card can set it.
+
+Customize anything the library styles with one of these. None of them needs `!important`:
+
+```html
+<!-- Tailwind utility -->
+<div class="sb-card p-0">…</div>
+```
+
+```css
+/* Application component, in the components layer */
+@layer components {
+  .card-flush {
+    padding: 0;
+  }
+}
+```
+
+```css
+/* Unlayered application CSS — always wins */
+.checkout .sb-card {
+  padding: var(--sb-semantic-space-4);
+}
+```
+
+```html
+<!-- Inline style -->
+<div class="sb-card" style="padding: 1rem">…</div>
+```
+
+The library sits before all of your layers, so it never needs `!important`. Reserve that for conflicts between your own styles, such as one utility that has to beat another.
+
+If another layered framework shares the page, name its layers in the same statement and place them deliberately instead of relying on import order. This site does the same with Starlight's layer: `@layer starlight, sb;`.

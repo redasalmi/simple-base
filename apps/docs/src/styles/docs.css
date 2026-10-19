@@ -1,0 +1,252 @@
+/* Simple Base sits after Starlight, so its component styles win over Starlight's reset. */
+@layer starlight, sb;
+
+@import "@simple-base/css";
+
+/* Starlight's interface takes its colors and fonts from the selected token theme, which
+   ThemeProvider sets on <html data-theme>. */
+:root {
+  --sl-font: var(--sb-semantic-typography-family-body);
+  --sl-font-mono: var(--sb-semantic-typography-family-code);
+
+  --sl-color-white: var(--sb-semantic-color-foreground-primary);
+  --sl-color-gray-1: var(--sb-semantic-color-foreground-primary);
+  --sl-color-gray-2: var(--sb-semantic-color-foreground-secondary);
+  --sl-color-gray-3: var(--sb-semantic-color-foreground-muted);
+  --sl-color-gray-4: var(--sb-semantic-color-border-strong);
+  --sl-color-gray-5: var(--sb-semantic-color-border-default);
+  --sl-color-gray-6: var(--sb-semantic-color-background-muted);
+  --sl-color-gray-7: var(--sb-semantic-color-background-surface);
+  --sl-color-black: var(--sb-semantic-color-background-canvas);
+
+  --sl-color-accent-low: var(--sb-semantic-color-accent-soft);
+  --sl-color-accent: var(--sb-semantic-color-accent-surface);
+  --sl-color-accent-high: var(--sb-semantic-color-accent-text);
+  --sl-color-orange-low: var(--sb-semantic-color-status-warning-soft);
+  --sl-color-orange: var(--sb-semantic-color-status-warning-base);
+  --sl-color-orange-high: var(--sb-semantic-color-status-warning-text);
+  --sl-color-green-low: var(--sb-semantic-color-status-success-soft);
+  --sl-color-green: var(--sb-semantic-color-status-success-base);
+  --sl-color-green-high: var(--sb-semantic-color-status-success-text);
+  --sl-color-blue-low: var(--sb-semantic-color-status-info-soft);
+  --sl-color-blue: var(--sb-semantic-color-status-info-base);
+  --sl-color-blue-high: var(--sb-semantic-color-status-info-text);
+  --sl-color-red-low: var(--sb-semantic-color-status-danger-soft);
+  --sl-color-red: var(--sb-semantic-color-status-danger-base);
+  --sl-color-red-high: var(--sb-semantic-color-status-danger-text);
+  --sl-color-purple-low: var(--sb-semantic-color-accent-soft);
+  --sl-color-purple: var(--sb-semantic-color-accent-surface);
+  --sl-color-purple-high: var(--sb-semantic-color-accent-text);
+
+  --sl-color-text: var(--sb-semantic-color-foreground-secondary);
+  --sl-color-text-accent: var(--sb-semantic-color-accent-text);
+  --sl-color-text-invert: var(--sb-semantic-color-accent-on-surface);
+  --sl-color-bg: var(--sb-semantic-color-background-canvas);
+  --sl-color-bg-nav: var(--sb-semantic-color-background-canvas);
+  --sl-color-bg-sidebar: var(--sb-semantic-color-background-canvas);
+  --sl-color-bg-inline-code: var(--sb-semantic-color-background-muted);
+  --sl-color-bg-accent: var(--sb-semantic-color-accent-surface);
+  --sl-color-hairline-light: var(--sb-semantic-color-border-default);
+  --sl-color-hairline: var(--sb-semantic-color-border-default);
+  --sl-color-hairline-shade: var(--sb-semantic-color-border-default);
+  --sl-color-backdrop-overlay: var(--sb-semantic-color-overlay-scrim);
+
+  --sl-shadow-sm: var(--sb-semantic-shadow-card);
+  --sl-shadow-md: var(--sb-semantic-shadow-overlay);
+  --sl-shadow-lg: var(--sb-semantic-shadow-overlay);
+}
+
+/* The current page in the sidebar is filled with the accent, so its text needs the accent's
+   on-surface color. */
+.sidebar-content a[aria-current="page"] {
+  color: var(--sb-semantic-color-accent-on-surface);
+  background-color: var(--sb-semantic-color-accent-surface);
+}
+
+/* Only the selected framework's examples, code, and notes are shown. */
+:root:not([data-framework="react"]) [data-framework-only="react"],
+:root[data-framework="react"] [data-framework-only="solid"] {
+  display: none;
+}
+
+/* An example: a live specimen and its source. */
+.example {
+  margin-block: 1.5rem 2.5rem;
+}
+.example-stage {
+  min-width: 0;
+  padding: 1.5rem;
+  border: 1px solid var(--sb-semantic-color-border-default);
+  border-radius: var(--sb-semantic-radius-lg);
+  background: var(--sb-semantic-color-background-surface);
+  box-shadow: var(--sb-semantic-shadow-card);
+  color: var(--sb-semantic-color-foreground-primary);
+  font-size: var(--sb-semantic-typography-size-md);
+  line-height: var(--sb-semantic-typography-line-height-relaxed);
+}
+.example-stage > .preview-status {
+  margin-top: 1.25rem;
+}
+.example-source {
+  margin-top: 0.75rem;
+}
+.example-source summary {
+  width: fit-content;
+  color: var(--sb-semantic-color-foreground-secondary);
+  font-size: var(--sb-semantic-typography-size-sm);
+  cursor: pointer;
+}
+.example-source summary:focus-visible {
+  outline: 2px solid var(--sb-semantic-color-focus-ring);
+  outline-offset: 3px;
+}
+.example-source .expressive-code {
+  margin-top: 0.75rem;
+}
+.example-unavailable {
+  margin: 0;
+  color: var(--sb-semantic-color-foreground-secondary);
+}
+@media (max-width: 30rem) {
+  .example-stage {
+    padding: 1rem;
+  }
+}
+
+/* Layout helpers for the examples. They stay in the docs, not the CSS package. */
+.preview-stack {
+  display: grid;
+  gap: 1.25rem;
+  min-width: 0;
+}
+.preview-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+.preview-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+.preview-choice {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 2.75rem;
+}
+.preview-choice span {
+  color: var(--sb-semantic-color-foreground-secondary);
+}
+.preview-status {
+  min-height: 1.375rem;
+  margin: 0;
+  color: var(--sb-semantic-color-foreground-muted);
+  font-size: var(--sb-semantic-typography-size-xs);
+}
+.preview-note {
+  margin: 0;
+  color: var(--sb-semantic-color-foreground-secondary);
+  font-size: var(--sb-semantic-typography-size-sm);
+}
+.preview-button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 1.5rem;
+  align-items: flex-end;
+}
+.preview-sample {
+  display: grid;
+  justify-items: start;
+  gap: 0.5rem;
+}
+.preview-sample > span {
+  color: var(--sb-semantic-color-foreground-muted);
+  font-size: var(--sb-semantic-typography-size-xs);
+}
+.preview-variant {
+  padding-block: 1.25rem;
+  border-top: 1px solid var(--sb-semantic-color-border-default);
+}
+.preview-variant:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+.preview-variant:last-child {
+  padding-bottom: 0;
+}
+.preview-variant h3 {
+  margin: 0 0 0.25rem;
+  font-size: var(--sb-semantic-typography-size-sm);
+  font-weight: var(--sb-semantic-typography-weight-semibold);
+}
+.preview-variant p {
+  margin: 0 0 1rem;
+  font-size: var(--sb-semantic-typography-size-xs);
+  color: var(--sb-semantic-color-foreground-muted);
+}
+.preview-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13.75rem, 1fr));
+  gap: 1.25rem;
+  min-width: 0;
+}
+.preview-badge-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 6rem 6.5rem;
+  gap: 1rem;
+  align-items: center;
+}
+.preview-badge-row > span:first-child {
+  font-size: var(--sb-semantic-typography-size-sm);
+  color: var(--sb-semantic-color-foreground-secondary);
+}
+.preview-badge-row .sb-badge {
+  justify-self: start;
+}
+.preview-type-row {
+  display: grid;
+  grid-template-columns: 6.75rem minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: baseline;
+}
+.preview-type-row > code {
+  font-family: var(--sb-semantic-typography-family-code);
+  font-size: var(--sb-semantic-typography-size-xs);
+  color: var(--sb-semantic-color-foreground-muted);
+  overflow-wrap: anywhere;
+}
+.preview-type-row > :last-child {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.preview-tabs {
+  min-width: 0;
+}
+@media (max-width: 30rem) {
+  .preview-fields {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .preview-type-row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.5rem;
+  }
+  .preview-badge-row {
+    grid-template-columns: minmax(0, 1fr) 4.75rem 5.25rem;
+    gap: 0.5rem;
+  }
+}
+
+/* Page and section titles use the display face, like .sb-heading-1 to .sb-heading-3. */
+h1#_top,
+.sl-markdown-content h2 {
+  font-family: var(--sb-semantic-typography-family-display);
+  font-weight: var(--sb-semantic-typography-weight-regular);
+  letter-spacing: var(--sb-semantic-typography-letter-spacing-snug);
+}
+
+/* The API tables hold long option lists and types. */
+.api-table code {
+  overflow-wrap: anywhere;
+}

@@ -1,0 +1,20 @@
+---
+title: Menu
+description: "A popup list of commands behind a button."
+---
+
+import CssReference from "../../../components/CssReference.astro";
+
+A popup list of commands behind a button. The component [Menu](/components/menu/) renders this markup for you.
+
+```css
+@import "@simple-base/css/menu";
+```
+
+It needs the state that [Menu](/components/menu/) manages, so its live example is on the component page.
+
+## Reference
+
+<CssReference sheet="menu" />
+
+The popup is positioned by [Zag.js](https://zagjs.com): its positioner gets `--x`, `--y`, `--z-index`, `--available-width`, `--available-height`, `--reference-width`, and `--transform-origin`, and the content reads them. The component packages provide that behavior; without them, position the content yourself. See [Positioned popups](/css/conventions/#positioned-popups).

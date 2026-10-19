@@ -1,0 +1,62 @@
+---
+title: Typography
+description: A legible type scale for interfaces, as classes. Atkinson Hyperlegible for the work, Young Serif for headings and figures.
+sidebar:
+  order: 2
+---
+
+import CssReference from "../../../components/CssReference.astro";
+import HtmlExample from "../../../components/HtmlExample.astro";
+
+A legible type scale for interfaces. Atkinson Hyperlegible for the work, Young Serif for headings and figures. Typography stays CSS-only in every framework: these classes are the API, and there are no typography components.
+
+```css
+@import "@simple-base/css/typography";
+```
+
+## Headings
+
+`.sb-heading-1` to `.sb-heading-3` use the Young Serif display face at a regular weight; `.sb-heading-4` to `.sb-heading-6` stay in the body face. They are sized 2.25, 1.75, 1.5, 1.25, 1.125, and 1rem. Choose the HTML heading level for structure and the class for visual size.
+
+<HtmlExample name="typography/Headings" />
+
+## Body and labels
+
+Captions use sentence case and the body family. Save monospace for information that actually benefits from it.
+
+<HtmlExample name="typography/Body" />
+
+## Display
+
+The same serif at its largest, for landing moments and empty screens. It scales from 2.25 to 4.5rem with a tight line height.
+
+<HtmlExample name="typography/Display" />
+
+## Text roles
+
+Semantic color roles follow the selected theme. Use danger and success for meaningful status, not emphasis alone.
+
+<HtmlExample name="typography/TextRoles" />
+
+## Code
+
+Inline code identifies a technical value. Blocks preserve formatting. For keys the user presses, use [Kbd](/css/kbd/).
+
+<HtmlExample name="typography/Code" />
+
+## Reference
+
+<CssReference sheet="typography" />
+
+## Fonts
+
+The tokens name Atkinson Hyperlegible Next, Young Serif, and Atkinson Hyperlegible Mono, with system fallbacks. The package does not download web fonts; this site loads them from Google Fonts:
+
+```html
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:wght@400;500;600&family=Atkinson+Hyperlegible+Next:wght@400;500;600;700&family=Young+Serif&display=swap"
+/>
+```

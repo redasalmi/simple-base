@@ -1,0 +1,63 @@
+---
+title: Alert
+description: "An inline message about the page or a form, with an optional recovery action and dismiss control. The status tints the border and the mark; the text carries the meaning."
+---
+
+import ApiTable from "../../../components/ApiTable.astro";
+import Example from "../../../components/Example.astro";
+import FrameworkCode from "../../../components/FrameworkCode.astro";
+
+An inline message about the page or a form, with an optional recovery action and dismiss control. The status tints the border and the mark; the text carries the meaning.
+
+<FrameworkCode
+  code={'import { Alert, AlertContent, AlertTitle, AlertClose } from "@simple-base/solid";'}
+/>
+
+## Statuses
+
+Alerts support success, warning, danger, and info. The status tints the border and the mark; the title and description carry the meaning. Without a status, the alert keeps the neutral border and a danger mark.
+
+<Example name="alert/Statuses" />
+
+## Actions and dismissal
+
+AlertActions holds the recovery path. AlertClose is a plain type=button control: name it with aria-label and remove the alert from your own state. Dismissing here only hides this local specimen.
+
+<Example name="alert/Dismissible" />
+
+## API
+
+<ApiTable
+  rows={[
+    [
+      "Alert status",
+      "success | warning | danger | info",
+      "Sets data-status. Omit it for a neutral border with a danger mark.",
+    ],
+    [
+      "Alert role",
+      "alert | status",
+      "Not set by default. Use role=alert for urgent messages inserted after load and role=status for polite updates; leave it off for alerts present when the page renders.",
+    ],
+    [
+      "AlertMark",
+      "span, aria-hidden",
+      "A decorative icon tile tinted by the status. It is hidden from assistive technology, so the title carries the meaning.",
+    ],
+    [
+      "AlertClose",
+      "button, type=button",
+      "Never submits a form. It does not hide the alert; handle onClick and give it an accessible name when it contains only an icon.",
+    ],
+    [
+      "Parts",
+      "div · span · div · strong · p · div · button",
+      "Alert, AlertMark, AlertContent, AlertTitle, AlertDescription, AlertActions, and AlertClose pass native attributes through. class merges with the part's class.",
+    ],
+    [
+      "Styles",
+      "@simple-base/css/status",
+      "Included in the main stylesheet. The .sb-alert classes stay available for plain HTML.",
+    ],
+  ]}
+/>

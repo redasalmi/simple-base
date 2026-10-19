@@ -1,0 +1,49 @@
+---
+title: StatusLine
+description: "A compact status summary: a colored dot beside a title and a short description. Lighter than an alert, for state that needs no action."
+---
+
+import ApiTable from "../../../components/ApiTable.astro";
+import Example from "../../../components/Example.astro";
+import FrameworkCode from "../../../components/FrameworkCode.astro";
+
+A compact status summary: a colored dot beside a title and a short description. Lighter than an alert, for state that needs no action.
+
+<FrameworkCode
+  code={
+    'import { StatusLine, StatusLineDot, StatusLineContent, StatusLineTitle } from "@simple-base/solid";'
+  }
+/>
+
+## Statuses
+
+Status lines support success, warning, danger, and info. The dot is colored by the status and hidden from assistive technology, so keep the title specific.
+
+<Example name="status-line/Statuses" />
+
+## API
+
+<ApiTable
+  rows={[
+    [
+      "StatusLine status",
+      "success | warning | danger | info",
+      "Sets data-status, which tints the border and colors the dot.",
+    ],
+    [
+      "StatusLineDot",
+      "span, aria-hidden",
+      "A decorative status dot. Color is supporting information; the title carries the meaning.",
+    ],
+    [
+      "Parts",
+      "div · span · div · strong · p",
+      "StatusLine, StatusLineDot, StatusLineContent, StatusLineTitle, and StatusLineDescription pass native attributes through. class merges with the part's class.",
+    ],
+    [
+      "Styles",
+      "@simple-base/css/status",
+      "Included in the main stylesheet. The .sb-status-line classes stay available for plain HTML.",
+    ],
+  ]}
+/>

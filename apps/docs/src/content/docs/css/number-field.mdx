@@ -1,0 +1,20 @@
+---
+title: Number field
+description: "Numeric entry with steppers and an optional unit."
+---
+
+import CssReference from "../../../components/CssReference.astro";
+
+Numeric entry with steppers and an optional unit. The component [NumberField](/components/number-field/) renders this markup for you.
+
+```css
+@import "@simple-base/css/number-field";
+```
+
+It needs the state that [NumberField](/components/number-field/) manages, so its live example is on the component page.
+
+## Reference
+
+<CssReference sheet="number-field" />
+
+Its label, description, and error use the `.sb-field-label`, `.sb-field-description`, and `.sb-field-error` classes from the `field` stylesheet, which this stylesheet imports itself. See [Form text](/css/conventions/#form-text).

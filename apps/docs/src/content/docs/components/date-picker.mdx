@@ -1,0 +1,114 @@
+---
+title: DatePicker
+description: "Choose a calendar date by typing it or from a popup calendar. Keyboard navigation, range limits, and locale formatting are built in, and the date submits with the form as an ISO string."
+---
+
+import ApiTable from "../../../components/ApiTable.astro";
+import Example from "../../../components/Example.astro";
+import FrameworkCode from "../../../components/FrameworkCode.astro";
+
+Choose a calendar date by typing it or from a popup calendar. Keyboard navigation, range limits, and locale formatting are built in, and the date submits with the form as an ISO string.
+
+<FrameworkCode
+  code={
+    'import { DatePicker, DatePickerInput, DatePickerCalendar, parseDateInput } from "@simple-base/solid";'
+  }
+/>
+
+## Pick a date
+
+Type a date and press Enter, or open the calendar with the trigger. Arrow keys move by day, Page Up and Page Down by month (add Shift for a year), and Home and End jump to the start and end of the month. Select the month heading to switch to the month and year views; Escape closes the calendar.
+
+<Example name="date-picker/PickDate" />
+
+## Limit the range
+
+min and max disable the days outside the range, and the month arrows stop at its edges. Type 12/31/2026 and leave the field: dates outside the range are clamped to it. Create the bounds with parseDateInput.
+
+<Example name="date-picker/Range" />
+
+## Locale and time zone
+
+locale sets the input format, the first day of the week, and the calendar's labels. timeZone decides which day is outlined as today and defaults to the user's own, so it only needs setting when today should follow a fixed place.
+
+<Example name="date-picker/Locale" />
+
+## Popup placement and height
+
+placement opens the calendar above the field here, and fixedWeeks always shows six weeks so the popup keeps its height as you change months. onOpenChange reports when the calendar opens and closes.
+
+<Example name="date-picker/Placement" />
+
+## States
+
+Required adds the label marker, read-only keeps the date visible but closed, and disabled dims the whole field. invalid shows the error, which the date picker never sets on its own.
+
+<Example name="date-picker/States" />
+
+## In a form
+
+With name and defaultValue the date picker needs no signal: a hidden input submits the date as an ISO string while the visible input shows it in the locale's format, and Reset restores the initial date.
+
+<Example name="date-picker/InForm" form />
+
+## API
+
+<ApiTable
+  rows={[
+    [
+      "DatePicker",
+      "id · name · form · required · disabled · readOnly · invalid",
+      "Set on the root; the label, input, trigger, and messages read them. id is the input's id and is generated when omitted. name submits the date as YYYY-MM-DD through a hidden input.",
+    ],
+    [
+      "value / defaultValue / onValueChange",
+      "DateValue | null · (value: DateValue | null, valueAsString: string) => void",
+      'Create dates with parseDateInput("2026-10-03"). null means no date; valueAsString holds the text shown in the input.',
+    ],
+    [
+      "min / max",
+      "DateValue",
+      "Days outside the range are disabled and navigation stops at its edges. Typed dates outside it are clamped to the nearest bound when the input loses focus.",
+    ],
+    [
+      "locale / timeZone",
+      "string",
+      "locale (default en-US) sets the input format, week start, and labels. timeZone decides which day is today and defaults to the user's time zone.",
+    ],
+    [
+      "placement / fixedWeeks / onOpenChange",
+      "Placement · boolean · (open: boolean) => void",
+      "placement picks the popup side (default bottom-start). fixedWeeks keeps six weeks on screen. onOpenChange reports when the calendar opens and closes.",
+    ],
+    [
+      "DatePickerLabel / DatePickerControl / DatePickerInput",
+      "label / group / text input",
+      "Control draws the bordered field. The input owns id, name, and its ARIA attributes; set those on the root.",
+    ],
+    [
+      "DatePickerTrigger",
+      "button",
+      "Opens and closes the calendar. Renders a calendar icon by default; pass an icon as children.",
+    ],
+    [
+      "DatePickerPortal / DatePickerPositioner / DatePickerContent",
+      "portal / positioned popup",
+      "Content stays hidden until the calendar opens. Pass mount to the portal to render inside a modal.",
+    ],
+    [
+      "DatePickerCalendar",
+      "day, month, and year grids",
+      "Navigation and all three views, labeled for assistive technology. Only the active view is shown.",
+    ],
+    [
+      "DatePickerDescription / DatePickerError",
+      "paragraph",
+      "Linked to the input with aria-describedby while rendered. The error renders only while invalid is set.",
+    ],
+    [
+      "Styles",
+      "@simple-base/css/date-picker",
+      "Included in the main stylesheet. For individual imports, load @simple-base/tokens/css once before the component styles.",
+    ],
+  ]}
+/>

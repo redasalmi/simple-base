@@ -1,0 +1,31 @@
+---
+title: Field
+description: "Labels, descriptions, and errors for every form control, plus fieldsets and choice lists."
+---
+
+import CssReference from "../../../components/CssReference.astro";
+import HtmlExample from "../../../components/HtmlExample.astro";
+
+Labels, descriptions, and errors for every form control, plus fieldsets and choice lists. The components [Field](/components/field/), [Fieldset](/components/fieldset/), [RadioGroup](/components/radio-group/), and [CheckboxGroup](/components/checkbox-group/) render this markup for you.
+
+```css
+@import "@simple-base/css/field";
+```
+
+## Label, description, and error
+
+`data-required` on the label adds the required marker, and `data-disabled` on the field or any ancestor dims its text. Link the description and error to the control with `aria-describedby`.
+
+<HtmlExample name="field/DescriptionAndError" />
+
+## Fieldset and choice list
+
+`.sb-fieldset` groups controls under a legend. `.sb-choice-list` lays out full-width options, each a `label.sb-choice-list-item` with its control and a `span`.
+
+<HtmlExample name="field/ChoiceList" />
+
+## Reference
+
+<CssReference sheet="field" />
+
+Select, combobox, number field, and date picker use these classes for their text; see [Form text](/css/conventions/#form-text). `.sb-visually-hidden` hides text visually and keeps it for assistive technology.

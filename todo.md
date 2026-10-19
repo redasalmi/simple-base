@@ -31,7 +31,8 @@ These already have styles in `@simple-base/css` unless noted.
 - [x] Tokens: refactor and improve the `tailwind.css` output
 - [x] Contracts: add a `./field` subpath export (`FieldOptions` is only exported from the root)
 - [x] Add behavior tests for the stateful components (Select, Combobox, DatePicker, NumberField, Toast, form reset)
-- [ ] React adapter with every Solid component, and a React playground
+- [x] Documentation site in `apps/docs`, replacing the Solid playground
+- [ ] React adapter with every Solid component, and its examples in the docs
 - [ ] Release 1.0.0 across all five packages
 
 ## After v1
@@ -47,7 +48,6 @@ Packages and tooling:
 
 - Tokens: generate better JS consts and TS types — a `themes` list with each color scheme, a token-to-CSS-variable map, and an API that doesn't expose Terrazzo's generated output (`PERMUTATIONS` keyed by JSON strings, `resolver.apply()` returning `undefined` for an unknown theme, the `Number` type, and the `@terrazzo/token-types` dependency)
 - Vanilla playground
-- Documentation site
 - End-to-end and package-consumer tests
 
 ## Out of scope

@@ -1,0 +1,62 @@
+---
+title: Dialog
+description: "A neutral modal for focused information or tasks. Named parts compose a native dialog with linked title and description."
+---
+
+import ApiTable from "../../../components/ApiTable.astro";
+import Example from "../../../components/Example.astro";
+import FrameworkCode from "../../../components/FrameworkCode.astro";
+
+A neutral modal for focused information or tasks. Named parts compose a native dialog with linked title and description.
+
+<FrameworkCode
+  code={'import { Dialog, DialogTrigger, DialogContent } from "@simple-base/solid";'}
+/>
+
+## Try the dialog
+
+Open a neutral modal for supporting information or a focused task. Escape, the close control, or Done dismisses it and returns focus to the trigger.
+
+<Example name="dialog/WorkspaceDetails" />
+
+## API
+
+<ApiTable
+  rows={[
+    [
+      "Dialog",
+      "state and context root",
+      "Supports controlled open or uncontrolled defaultOpen state and does not render a DOM element.",
+    ],
+    [
+      "DialogTrigger / DialogContent",
+      "button / native dialog",
+      "Trigger opens the modal. Content owns native dialog attributes, events, and the forwarded HTMLDialogElement ref.",
+    ],
+    [
+      "DialogHeader / DialogKicker",
+      "div / paragraph",
+      "Header arranges its content and close control. The kicker is optional supporting context.",
+    ],
+    [
+      "DialogTitle / DialogDescription",
+      "h2 (set level to change it) / paragraph",
+      "Generated IDs connect both parts to Content through aria-labelledby and aria-describedby while they are rendered.",
+    ],
+    [
+      "DialogFooter / DialogAction",
+      "div / button",
+      "Footer holds actions. DialogAction closes the dialog and records its value as the native returnValue.",
+    ],
+    [
+      "DialogClose",
+      "button",
+      "The icon-sized close control dismisses the dialog. Provide an accessible name when its child is only an icon.",
+    ],
+    [
+      "…props",
+      "native attributes",
+      "Button props pass through Trigger and Action; native dialog and button props pass through Content and Close.",
+    ],
+  ]}
+/>

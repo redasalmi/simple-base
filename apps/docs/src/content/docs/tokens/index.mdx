@@ -1,0 +1,68 @@
+---
+title: Tokens
+description: Design tokens for Simple Base, as CSS custom properties, a Tailwind CSS theme, and JavaScript.
+sidebar:
+  label: Overview
+  order: 0
+---
+
+`@simple-base/tokens` holds the design tokens: primitives, semantic roles, and nine color themes, generated with [Terrazzo](https://terrazzo.app/). Every token is a CSS custom property named `--sb-<token-path>`, and the full set is also available as JavaScript objects for tooling.
+
+## Install
+
+```sh
+pnpm add @simple-base/tokens
+```
+
+`@simple-base/css` already depends on it and imports it, so you only install it yourself to use the tokens without the component styles.
+
+## Quick start
+
+Load the token stylesheet once, before component or application styles:
+
+```css
+@import "@simple-base/tokens/css";
+```
+
+Then use the custom properties anywhere:
+
+```css
+.panel {
+  background: var(--sb-semantic-color-background-surface);
+  color: var(--sb-semantic-color-foreground-primary);
+  border: 1px solid var(--sb-semantic-color-border-default);
+  border-radius: var(--sb-semantic-radius-md);
+}
+```
+
+The tokens name the Atkinson Hyperlegible Next, Atkinson Hyperlegible Mono, and Young Serif font families but don't load them. Load the fonts in your app, or the system fallbacks apply.
+
+## Naming
+
+Dots in a token path become hyphens: `semantic.color.foreground.primary` becomes `--sb-semantic-color-foreground-primary`.
+
+Primitive tokens such as `--sb-primitive-color-accent` are raw values; semantic tokens name a purpose. Both are public API and follow semver. Prefer semantic tokens in application and component styles: they say what a value is for, and the components use only them. The pages in this section list the semantic tokens; the color tables name the primitive each one points at.
+
+## Sizing
+
+Font sizes, spacing, radii, control and icon sizes, and breakpoints are in `rem`, so they grow together when a user raises the browser's default font size. At the default of 16px, `1rem` is 16px and the spacing scale keeps its 4px steps (`semantic.space.1` is `0.25rem`). Border widths, the `full` radius, and shadows stay in `px`. Letter spacing is in `em`, relative to the font size.
+
+## Customizing
+
+Override any token on `:root`, after the token stylesheet. Only colors and shadows are redeclared in each theme scope, so an override of anything else holds inside every theme:
+
+```css
+:root {
+  --sb-semantic-radius-md: 0.5rem;
+}
+```
+
+Colors are redeclared in each theme scope, so override a color with the same selector as the theme it changes, after the token stylesheet:
+
+```css
+[data-theme="nord"] {
+  --sb-semantic-color-accent-text: #8fbcbb;
+}
+```
+
+The system default uses `:root` for `simple-base-dark` and `@media (prefers-color-scheme: light) { :root:not([data-theme]) { … } }` for `simple-base-light`. Keep an override within the [theme contract](/tokens/themes/#theme-contract).

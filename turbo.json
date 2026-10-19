@@ -19,7 +19,7 @@
       "outputs": [],
       "passThroughEnv": ["PLAYWRIGHT_*"]
     },
-    "solid-playground#test": {
+    "docs#test": {
       "dependsOn": ["build"],
       "outputs": [],
       "passThroughEnv": ["PLAYWRIGHT_*"]
@@ -46,7 +46,7 @@
       "cache": false,
       "persistent": true
     },
-    "solid-playground#dev": {
+    "docs#dev": {
       "dependsOn": ["^build"],
       "with": ["@simple-base/solid#dev"],
       "cache": false,

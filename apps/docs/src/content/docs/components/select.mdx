@@ -1,0 +1,107 @@
+---
+title: Select
+description: "Pick a single option from a known list. Named parts provide a labeled trigger, keyboard typeahead, and a portaled popup that shares the combobox popup styling."
+---
+
+import ApiTable from "../../../components/ApiTable.astro";
+import Example from "../../../components/Example.astro";
+import FrameworkCode from "../../../components/FrameworkCode.astro";
+
+Pick a single option from a known list. Named parts provide a labeled trigger, keyboard typeahead, and a portaled popup that shares the combobox popup styling.
+
+<FrameworkCode code={'import { Select, SelectTrigger, SelectItem } from "@simple-base/solid";'} />
+
+## Choose a single option
+
+Open the list with Enter, Space, or a click, then move with the arrow keys, Home, and End. Type a letter to jump to a matching option. Japan Standard Time is disabled in this demo, and Escape closes the list without changing the value.
+
+<Example name="select/SingleValue" />
+
+## In a form
+
+With name and defaultValue the select needs no signal or handler: a hidden native select submits the option value with the form, or an empty value while nothing is selected, and Reset restores the initial selection.
+
+<Example name="select/InForm" form />
+
+## Empty and updated options
+
+Open the initially empty list to see the empty message, then load a local collection and reopen it. No request is made and no data is saved.
+
+<Example name="select/UpdatedOptions" />
+
+## API
+
+<ApiTable
+  rows={[
+    [
+      "Select",
+      "options (required)",
+      "The root owns single-selection state and builds the option collection. id is generated when omitted; pass one to name the root.",
+    ],
+    [
+      "options",
+      "{ label: string; value: string; disabled?: boolean }[]",
+      "Values identify options and must be unique and non-empty. Reactive array replacements update both the list and keyboard navigation. Read-only arrays, such as one declared as const, are accepted.",
+    ],
+    [
+      "onValueChange",
+      "(value: string | null) => void (optional)",
+      "Receives the selected option value, not its label. null represents a cleared selection. Not needed for uncontrolled use in a form.",
+    ],
+    [
+      "defaultValue",
+      "string | null (optional)",
+      "Initial selection for uncontrolled use. null means no selection. form.reset() restores it.",
+    ],
+    [
+      "name / form",
+      "string (optional)",
+      "name names the hidden native select that carries the option value, so it is submitted with the surrounding form, controlled or not. Omit it to keep the widget outside form submission. form associates it with a form elsewhere on the page.",
+    ],
+    [
+      "value, disabled, invalid, required, placement, onOpenChange",
+      "optional",
+      "value makes selection controlled, where null clears it. disabled dims and blocks the field, invalid switches to the danger border and shows SelectError, and required adds the label marker. placement picks the popup side. onOpenChange reports popup visibility.",
+    ],
+    [
+      "class and native props",
+      "every part",
+      "Each part accepts reactive class and native attributes. Consumer event handlers run alongside widget handlers, not instead of them. Attributes the widget owns, such as id and role, are excluded.",
+    ],
+    [
+      "SelectLabel / SelectControl",
+      "label / wrapper",
+      "Label holds the visible text and names the trigger and the list. Control provides the bordered field and the shared focus ring.",
+    ],
+    [
+      "SelectTrigger / SelectValueText / SelectIndicator",
+      "button / selected text / icon slot",
+      "The trigger is the native button that opens the listbox. ValueText shows the selected label or the placeholder, and Indicator wraps the decorative icon.",
+    ],
+    [
+      "SelectPortal / SelectPositioner / SelectContent",
+      "popup composition",
+      "Portal mounts under document.body by default. Inside a native modal dialog, pass mount={dialog()} using a signal-backed dialog ref to keep the popup interactive. Positioner anchors it to the control. Content is the listbox and is hidden while closed.",
+    ],
+    [
+      "SelectList / SelectItem",
+      "render callback / option",
+      "List renders the options inside Content. Render an Item with its option prop; disabled options cannot be selected.",
+    ],
+    [
+      "SelectEmpty",
+      "status message",
+      "Place after Content inside Positioner, since the listbox may only hold options. It appears only when the popup is open and the collection has no options.",
+    ],
+    [
+      "SelectDescription / SelectError",
+      "paragraph",
+      "Linked to the trigger with aria-describedby while rendered. The error renders only while invalid is set.",
+    ],
+    [
+      "Styles",
+      "@simple-base/css/select",
+      "Included in the main stylesheet. For individual imports, load @simple-base/tokens/css once before the component styles.",
+    ],
+  ]}
+/>

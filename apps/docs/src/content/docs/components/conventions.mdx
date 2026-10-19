@@ -1,0 +1,60 @@
+---
+title: Conventions
+description: How the components take props and handlers, render on the server, mount popups, and translate their labels.
+sidebar:
+  order: 2
+---
+
+import Framework from "../../../components/Framework.astro";
+
+## Props
+
+- `class` is reactive and merged with the component's own classes; it never replaces them.
+- Native attributes pass through, except the ones the component owns (such as `id`, `role`, and `aria-*` that describe the widget's own structure).
+- Triggers that stand on their own (`MenuTrigger`, `TooltipTrigger`, `DialogTrigger`, `AlertDialogTrigger`) render a `Button` and take its `variant` and `size`. Buttons that sit inside a control or a message (`SelectTrigger`, `ComboboxTrigger`, `DatePickerTrigger`, `ToastClose`, `AlertClose`) render a plain `<button>` styled by that component.
+- Event handlers compose: your handler runs first, then the component's internal handling. Call `event.preventDefault()` in your handler to skip the built-in behavior, for example to keep a dialog closed when its trigger is clicked.
+- Shared option names and defaults come from `@simple-base/contracts`, which both adapters build on, and the unmodified option types are re-exported from each adapter.
+
+<Framework only="solid">
+
+- Parts built on Zag (`Select`, `Combobox`, `NumberField`, `DatePicker`, `Menu`, `Tooltip`, `Tabs`, and `Toast`) follow Zag's handlers, which honor `preventDefault()` for many events but not all, and replace the internal handler when you pass Solid's `[handler, data]` array form. Pass handlers as functions there.
+- Pass `style` as an object on parts that set their own styles, such as popup positioners. A string `style` is parsed into declarations, and `!important` does not survive.
+
+</Framework>
+
+## Popups inside a modal
+
+`SelectPortal`, `ComboboxPortal`, `DatePickerPortal`, `MenuPortal`, and `TooltipPortal` mount under `document.body` and accept `mount?: Node`. Inside a native modal dialog, mount the popup within the dialog so it stays interactive.
+
+<Framework only="solid">
+
+Use a signal-backed ref (`const [dialog, setDialog] = createSignal<HTMLDialogElement>()`), pass `ref={setDialog}` to `AlertDialogContent`, and use `mount={dialog()}` on the portal. The reactive ref lets the portal follow the dialog once its element is assigned.
+
+</Framework>
+
+## Localization
+
+Every string the components read to assistive technology has an English default you can replace:
+
+- **Zag-based roots** (`NumberField`, `DatePicker`) take Zag's own `translations`, with Zag's types and defaults.
+- **Other roots** take `labels`, a partial object whose defaults live in `@simple-base/contracts`: `Pagination` (`paginationLabels`) and `Fieldset` (`fieldsetLabels`).
+- `Toaster` takes `label`, the accessible name of its live region, like an `aria-label`.
+
+## Server rendering
+
+Every component renders on the server and hydrates without a mismatch. This site renders every example on the server and hydrates it in the browser.
+
+<Framework only="solid">
+
+- Server rendering goes through the `solid` export condition, which points at `dist/index.jsx`: JSX left untransformed, so your app's `vite-plugin-solid` compiles it for the server and for the client. Vite with `vite-plugin-solid` and SolidStart pick that condition on their own. The `default` condition is compiled for the browser only and can't render on a server.
+
+</Framework>
+
+- `aria-describedby` on `Field`, `Fieldset`, `NumberField`, `DatePicker`, `Select`, and `Combobox`, and `aria-labelledby` and `aria-describedby` on dialog content, list their parts once the parts have mounted. The server's HTML leaves them out, and hydration adds them. The first client render matches the server, so this causes no mismatch.
+- The server can't know the user's time zone. Without `timeZone`, `DatePicker` uses UTC on the server and while hydrating, then switches to the user's zone once mounted. Where the user's date differs from UTC's, today's outline, and the day the calendar focuses when there is no value, move by one day after hydration. To render the user's day from the start, pass `timeZone` from the request, for example from a cookie the browser sets to `Intl.DateTimeFormat().resolvedOptions().timeZone`.
+
+## Tailwind CSS and themes
+
+The components emit only class names and `data-*` attributes, so Tailwind utilities can override them, provided the cascade layers are ordered before the imports. See [Cascade layer](/css/#cascade-layer).
+
+Themes come from the tokens. Set `data-theme` on the root or any nested region; see [Themes](/tokens/themes/).

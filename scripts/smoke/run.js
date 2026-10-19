@@ -40,7 +40,6 @@ for (const name of packages) {
 }
 
 const solid = readJson(join(root, "packages/solid/package.json"));
-const playground = readJson(join(root, "apps/solid-playground/package.json"));
 await cp(join(import.meta.dirname, "app"), appDir, { recursive: true });
 await writeFile(
   join(appDir, "package.json"),
@@ -55,8 +54,8 @@ await writeFile(
       "solid-js": solid.peerDependencies["solid-js"],
     },
     devDependencies: {
-      vite: playground.devDependencies.vite,
-      "vite-plugin-solid": playground.devDependencies["vite-plugin-solid"],
+      vite: solid.devDependencies.vite,
+      "vite-plugin-solid": solid.devDependencies["vite-plugin-solid"],
     },
   }),
 );

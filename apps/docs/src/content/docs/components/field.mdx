@@ -1,0 +1,59 @@
+---
+title: Field
+description: "A label, description, and error around one Input or TextArea. Set required, disabled, and invalid on the root; ids and ARIA links are wired for you."
+---
+
+import ApiTable from "../../../components/ApiTable.astro";
+import Example from "../../../components/Example.astro";
+import FrameworkCode from "../../../components/FrameworkCode.astro";
+
+A label, description, and error around one Input or TextArea. Set required, disabled, and invalid on the root; ids and ARIA links are wired for you.
+
+<FrameworkCode
+  code={'import { Field, FieldLabel, FieldInput, FieldError } from "@simple-base/solid";'}
+/>
+
+## Label, description & error
+
+The root sets id, required, and invalid once; the label, input, and messages are linked from it. Enter a full address to clear the error.
+
+<Example name="field/DescriptionAndError" />
+
+## States
+
+Required, read-only, and disabled. A disabled field dims its label and description with the control.
+
+<Example name="field/States" />
+
+## Text area
+
+FieldTextArea takes the same wiring. This local example requires a note; the character count updates as you type.
+
+<Example name="field/TextArea" />
+
+## API
+
+<ApiTable
+  rows={[
+    [
+      "id / required / disabled / invalid",
+      "Field props",
+      "Set once on the root. The label, control, and messages read them; an id is generated when omitted.",
+    ],
+    [
+      "FieldInput / FieldTextArea",
+      "Input / TextArea props",
+      "Except id, required, disabled, aria-invalid, and aria-describedby, which come from the root. name and defaultValue pass through for uncontrolled forms. Use one control per Field.",
+    ],
+    [
+      "FieldLabel",
+      "LabelHTMLAttributes (except for)",
+      "Points at the control and shows the required marker.",
+    ],
+    [
+      "FieldDescription / FieldError",
+      "HTMLAttributes (except id)",
+      "Linked to the control with aria-describedby while rendered. FieldError renders only while the root is invalid.",
+    ],
+  ]}
+/>

@@ -1,0 +1,29 @@
+---
+title: Tailwind CSS
+description: A Tailwind CSS v4 theme that maps the semantic tokens onto utilities and adds a variant per theme.
+sidebar:
+  order: 6
+---
+
+For Tailwind CSS v4, import Tailwind and then the generated theme, instead of the token stylesheet. The theme imports the tokens and maps the semantic roles onto Tailwind theme variables:
+
+```css
+@import "tailwindcss";
+@import "@simple-base/tokens/tailwind";
+```
+
+```html
+<div class="bg-background-surface text-foreground-primary rounded-md">…</div>
+```
+
+Utility names follow the token paths, so `bg-background-surface` uses `--sb-semantic-color-background-surface`. Utilities resolve the same semantic CSS variables as the component styles, so they follow `data-theme` too. Each theme also gets a variant for conditional utilities, which matches the element that sets `data-theme` and everything inside it:
+
+```html
+<div class="nord:bg-background-muted">…</div>
+```
+
+`simple-base-dark:` and `simple-base-light:` also match a page without `data-theme` when the system color scheme selects that theme. Tailwind's own `dark:` still follows the system color scheme alone, so prefer the theme variants when a page sets `data-theme`. A variant matches any ancestor with that theme, so in a theme nested inside another theme, both themes' variants apply.
+
+Breakpoints are generated as literal `rem` values, the same as Tailwind's defaults, because media queries cannot resolve custom properties.
+
+With `@simple-base/css`, order the cascade layers before the imports so utilities can override the components; see [Cascade layer](/css/#cascade-layer).

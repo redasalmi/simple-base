@@ -1,0 +1,22 @@
+---
+title: Combobox
+description: "A text input that filters a list of options in a popup."
+---
+
+import CssReference from "../../../components/CssReference.astro";
+
+A text input that filters a list of options in a popup. The component [Combobox](/components/combobox/) renders this markup for you.
+
+```css
+@import "@simple-base/css/combobox";
+```
+
+It needs the state that [Combobox](/components/combobox/) manages, so its live example is on the component page.
+
+## Reference
+
+<CssReference sheet="combobox" />
+
+The popup is positioned by [Zag.js](https://zagjs.com): its positioner gets `--x`, `--y`, `--z-index`, `--available-width`, `--available-height`, `--reference-width`, and `--transform-origin`, and the content reads them. The component packages provide that behavior; without them, position the content yourself. See [Positioned popups](/css/conventions/#positioned-popups).
+
+Its label, description, and error use the `.sb-field-label`, `.sb-field-description`, and `.sb-field-error` classes from the `field` stylesheet, which this stylesheet imports itself. See [Form text](/css/conventions/#form-text).

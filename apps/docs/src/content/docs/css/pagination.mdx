@@ -1,0 +1,23 @@
+---
+title: Pagination
+description: "Previous and next buttons around a list of pages."
+---
+
+import CssReference from "../../../components/CssReference.astro";
+import HtmlExample from "../../../components/HtmlExample.astro";
+
+Previous and next buttons around a list of pages. The component [Pagination](/components/pagination/) renders this markup for you.
+
+```css
+@import "@simple-base/css/pagination";
+```
+
+## Pages
+
+`aria-current="page"` marks the current page, and ellipses stand in for long ranges. At either end, set `aria-disabled="true"` on Previous or Next instead of `disabled`, so focus stays on it.
+
+<HtmlExample name="pagination/Pages" />
+
+## Reference
+
+<CssReference sheet="pagination" />

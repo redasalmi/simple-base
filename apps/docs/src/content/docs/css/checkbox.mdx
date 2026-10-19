@@ -1,0 +1,25 @@
+---
+title: Checkbox
+description: "A native checkbox, styled by the system."
+---
+
+import CssReference from "../../../components/CssReference.astro";
+import HtmlExample from "../../../components/HtmlExample.astro";
+
+A native checkbox, styled by the system. The components [Checkbox](/components/checkbox/) and [CheckboxGroup](/components/checkbox-group/) render this markup for you.
+
+```css
+@import "@simple-base/css/checkbox";
+```
+
+## Choices
+
+Put the checkbox in its label so the label toggles it. `aria-invalid="true"` draws the error state.
+
+<HtmlExample name="checkbox/Choices" />
+
+## Reference
+
+<CssReference sheet="checkbox" />
+
+`.sb-checkbox:indeterminate` draws a dash for a partly selected group. `indeterminate` is a DOM property with no HTML attribute, so set it from script (`input.indeterminate = true`); the browser clears it when the user toggles the box.

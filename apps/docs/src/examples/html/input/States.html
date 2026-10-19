@@ -1,0 +1,26 @@
+<div class="preview-fields">
+  <div class="sb-field">
+    <label class="sb-field-label" for="css-input-name" data-required>Workspace name</label>
+    <input class="sb-input" id="css-input-name" type="text" value="Northwind" required />
+  </div>
+  <div class="sb-field">
+    <label class="sb-field-label" for="css-input-slug">Workspace URL</label>
+    <input class="sb-input" id="css-input-slug" type="text" value="northwind" readonly />
+  </div>
+  <div class="sb-field" data-disabled>
+    <label class="sb-field-label" for="css-input-plan">Plan</label>
+    <input class="sb-input" id="css-input-plan" type="text" value="Team" disabled />
+  </div>
+  <div class="sb-field">
+    <label class="sb-field-label" for="css-input-code">Invite code</label>
+    <input
+      class="sb-input"
+      id="css-input-code"
+      type="text"
+      value="AB"
+      aria-invalid="true"
+      aria-describedby="css-input-code-error"
+    />
+    <p class="sb-field-error" id="css-input-code-error">Enter all six characters.</p>
+  </div>
+</div>

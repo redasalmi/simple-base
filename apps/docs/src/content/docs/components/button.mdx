@@ -1,0 +1,47 @@
+---
+title: Button
+description: "Actions with a clear order of importance. Six variants, three sizes, and native button behavior, with a small press response and no decorative effects."
+---
+
+import ApiTable from "../../../components/ApiTable.astro";
+import Example from "../../../components/Example.astro";
+import FrameworkCode from "../../../components/FrameworkCode.astro";
+
+Actions with a clear order of importance. Six variants, three sizes, and native button behavior, with a small press response and no decorative effects.
+
+<FrameworkCode code={'import { Button } from "@simple-base/solid";'} />
+
+## Variants & sizes
+
+Every variant at each supported size, alongside its disabled state. These demo buttons only update the message below.
+
+<Example name="button/Variants" />
+
+## In context
+
+Keep the primary action unmistakable. Use Tab to inspect focus; buttons stay in place on hover and scale down slightly when pressed.
+
+<Example name="button/InContext" />
+
+## API
+
+<ApiTable
+  rows={[
+    [
+      "variant",
+      '"primary" (default)',
+      "primary · secondary · tertiary · ghost · danger · danger-subtle",
+    ],
+    ["size", '"medium" (default)', "small (34px) · medium (42px) · large (50px) minimum height"],
+    [
+      "disabled",
+      "boolean",
+      "Native disabled behavior: unavailable to pointer and keyboard activation.",
+    ],
+    [
+      "…props",
+      "ButtonHTMLAttributes",
+      'Native events, type, form attributes, and class pass through. Set type="button" for non-submit actions inside forms.',
+    ],
+  ]}
+/>

@@ -1,0 +1,85 @@
+---
+title: Forms
+description: Every form control submits a usable value by name, works uncontrolled, and restores its initial value on reset.
+sidebar:
+  order: 1
+---
+
+import Framework from "../../../components/Framework.astro";
+
+Every form control takes `name`, `form`, `required`, and `disabled`, and works uncontrolled inside a `<form>`. `Field`, `NumberField`, and `DatePicker` take `required` and `disabled` on the root. In a `RadioGroup` or `CheckboxGroup`, `name` goes on the group, `required` and `disabled` come from the `Fieldset`, and `form` and `disabled` also go on each item.
+
+## Initial state
+
+Set the initial state with the default prop, not the controlled one. `form.reset()` restores it.
+
+| Component                                                         | Initial state                  |
+| ----------------------------------------------------------------- | ------------------------------ |
+| `Input`, `TextArea`, `FieldInput`, `FieldTextArea`, `NumberField` | `defaultValue`                 |
+| `Checkbox`, `Radio`, `Switch`                                     | `defaultChecked`               |
+| `RadioGroup`                                                      | `defaultValue`                 |
+| `CheckboxGroup`                                                   | `defaultValue` (`string[]`)    |
+| `Select`, `Combobox`                                              | `defaultValue` (`null` = none) |
+| `DatePicker`                                                      | `defaultValue` (`null` = none) |
+
+<Framework only="solid">
+
+```tsx
+<form>
+  <Input name="email" type="email" defaultValue="you@example.com" />
+  <Checkbox name="newsletter" defaultChecked />
+  <Select name="timezone" options={timezones} defaultValue="utc">
+    {/* parts */}
+  </Select>
+</form>
+```
+
+</Framework>
+
+## What each control submits
+
+Every control submits a machine-readable value, whatever it shows:
+
+| Control                                  | Submits                                        |
+| ---------------------------------------- | ---------------------------------------------- |
+| Input, TextArea, Checkbox, Radio, Switch | The native value                               |
+| RadioGroup, CheckboxGroup                | The native values, under the group's `name`    |
+| Select, Combobox                         | The option value, or `""` while none is chosen |
+| DatePicker                               | The ISO date, such as `2026-10-09`             |
+| NumberField                              | The number, such as `1234`, not formatted text |
+
+`required` stays on the visible control, because browsers don't validate hidden inputs. A required `CheckboxGroup` needs at least one box checked.
+
+## Reset
+
+<Framework only="solid">
+
+- On `Input`, `TextArea`, `Checkbox`, `Radio`, and `Switch`, Solid sets `value` and `checked` as DOM properties, so a reset clears a starting value given that way. Use `defaultValue` or `defaultChecked`.
+- `RadioGroup` and `CheckboxGroup` restore `defaultValue` on reset without calling `onValueChange`. A controlled `value` is cleared like a `checked` prop, so set your state back in the form's `onReset` handler.
+
+</Framework>
+
+`Select`, `Combobox`, `NumberField`, and `DatePicker` restore their initial value even when a reset listener calls `preventDefault()` after theirs has run.
+
+## Errors
+
+Errors are not announced as they appear, since an announcement on every keystroke is noisy; each control reads its error through `aria-describedby` when it is focused. On submit, move focus to the first invalid control so its error is read:
+
+<Framework only="solid">
+
+```tsx
+const [submitted, setSubmitted] = createSignal(false);
+
+<form
+  onSubmit={(event) => {
+    event.preventDefault();
+    // Each field's `invalid` reads `submitted()`, so the errors render before the query runs.
+    setSubmitted(true);
+    event.currentTarget.querySelector<HTMLElement>('[aria-invalid="true"]')?.focus();
+  }}
+>
+  {/* fields */}
+</form>;
+```
+
+</Framework>

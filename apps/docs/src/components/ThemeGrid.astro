@@ -1,0 +1,96 @@
+---
+import { colorSchemes } from "../lib/tokens";
+import { themes } from "../themes";
+
+// The roles that set a theme apart. Each card scopes its theme with data-theme, the same way an
+// app themes a region of a page.
+const swatches = [
+  "background-canvas",
+  "background-surface",
+  "background-muted",
+  "background-strong",
+  "foreground-primary",
+  "foreground-secondary",
+  "foreground-muted",
+  "accent-surface",
+  "status-success-base",
+  "status-warning-base",
+  "status-danger-base",
+  "status-info-base",
+];
+---
+
+<div class="theme-grid not-content">
+  {
+    themes.map(([theme, label]) => (
+      <section class="theme-card" data-theme={theme} aria-labelledby={`theme-${theme}`}>
+        <h3 id={`theme-${theme}`} class="sb-heading-5">
+          {label}
+        </h3>
+        <p class="sb-text-caption">
+          <code class="sb-code-text">{theme}</code> · {colorSchemes[theme]}
+        </p>
+        <div class="theme-swatches" aria-hidden="true">
+          {swatches.map((role) => (
+            <span style={`background: var(--sb-semantic-color-${role})`} title={role} />
+          ))}
+        </div>
+        <p class="sb-text-body-sm">
+          Primary text, <span class="sb-text-secondary">secondary</span>,{" "}
+          <span class="sb-text-muted">muted</span>, and <span class="sb-text-accent">accent</span>.
+        </p>
+        <div class="theme-badges">
+          <span class="sb-badge" data-variant="success" data-size="small">
+            Paid
+          </span>
+          <span class="sb-badge" data-variant="warning" data-size="small">
+            Due
+          </span>
+          <span class="sb-badge" data-variant="danger" data-size="small">
+            Overdue
+          </span>
+          <span class="sb-badge" data-variant="info" data-size="small">
+            Draft
+          </span>
+        </div>
+      </section>
+    ))
+  }
+</div>
+
+<style>
+  .theme-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    gap: 1rem;
+    margin-block: 1.5rem;
+  }
+  .theme-card {
+    display: grid;
+    gap: 0.75rem;
+    padding: 1.25rem;
+    border: 1px solid var(--sb-semantic-color-border-default);
+    border-radius: var(--sb-semantic-radius-lg);
+    color: var(--sb-semantic-color-foreground-primary);
+    background: var(--sb-semantic-color-background-canvas);
+  }
+  .theme-card p,
+  .theme-card h3 {
+    margin: 0;
+  }
+  .theme-swatches {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0.25rem;
+  }
+  .theme-swatches span {
+    aspect-ratio: 1;
+    border: 1px solid var(--sb-semantic-color-border-strong);
+    border-radius: var(--sb-semantic-radius-xs);
+  }
+  .theme-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+  }
+</style>

@@ -1,0 +1,53 @@
+---
+title: Radio
+description: "One choice from a related set. Group radios with a shared name and describe the decision with a fieldset and legend."
+---
+
+import ApiTable from "../../../components/ApiTable.astro";
+import Example from "../../../components/Example.astro";
+import FrameworkCode from "../../../components/FrameworkCode.astro";
+
+One choice from a related set. Group radios with a shared name and describe the decision with a fieldset and legend.
+
+<FrameworkCode code={'import { Radio } from "@simple-base/solid";'} />
+
+## One selection
+
+A shared name keeps the options exclusive. Use arrow keys within the group to change the selection.
+
+<Example name="radio/OneSelection" />
+
+## In a form
+
+The checked radio submits its value under the group's name. defaultChecked picks the initial choice that Reset restores.
+
+<Example name="radio/InForm" form />
+
+## Disabled states
+
+An unavailable option and a locked selection. These specimens use separate groups so the selected state remains unambiguous.
+
+<Example name="radio/Disabled" />
+
+## API
+
+<ApiTable
+  rows={[
+    ["name", "string", "Use the same name for choices belonging to one decision."],
+    [
+      "value / checked / onChange",
+      "native input props",
+      "The selected radio contributes its value to a native form.",
+    ],
+    [
+      "defaultChecked",
+      "boolean",
+      "Initial choice for uncontrolled groups; form.reset() restores it.",
+    ],
+    [
+      "…props",
+      'InputHTMLAttributes (except "type")',
+      'Renders type="radio". Supports disabled, required, ref, and class; no custom variants or sizes.',
+    ],
+  ]}
+/>

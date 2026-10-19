@@ -1,0 +1,25 @@
+---
+title: Card
+description: "A bordered surface for related content, with its own interior padding."
+---
+
+import CssReference from "../../../components/CssReference.astro";
+import HtmlExample from "../../../components/HtmlExample.astro";
+
+A bordered surface for related content, with its own interior padding. The component [Card](/components/card/) renders this markup for you.
+
+```css
+@import "@simple-base/css/card";
+```
+
+## Variants
+
+The base card has a border, a surface, and a 1px baseline. `data-variant="flat"` removes them for content already on a surface, and `"rule"` keeps only a top border for stacked sections.
+
+<HtmlExample name="card/Variants" />
+
+## Reference
+
+<CssReference sheet="card" />
+
+Every `.sb-card` ships its own interior padding; override `.sb-card` from application CSS when a layout needs different spacing.

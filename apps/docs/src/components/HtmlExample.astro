@@ -1,0 +1,27 @@
+---
+import { Code } from "@astrojs/starlight/components";
+
+interface Props {
+  /** The file under src/examples/html, without its extension, such as "button/Variants". */
+  name: string;
+}
+
+// Plain HTML that uses the classes directly, for apps without a component package. It renders as
+// written and is shown as its own source.
+const examples: Record<string, string> = import.meta.glob("../examples/html/*/*.html", {
+  query: "?raw",
+  import: "default",
+  eager: true,
+});
+
+const html = examples[`../examples/html/${Astro.props.name}.html`];
+if (!html) throw new Error(`No example at src/examples/html/${Astro.props.name}.html`);
+---
+
+<div class="example not-content">
+  <div class="example-stage" set:html={html} />
+  <details class="example-source">
+    <summary>View HTML</summary>
+    <Code code={html.trimEnd()} lang="html" />
+  </details>
+</div>

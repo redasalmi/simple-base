@@ -1,0 +1,42 @@
+---
+title: Badge
+description: "Short, non-interactive labels for status and metadata. Status variants add a glyph, and the text carries the meaning; color is supporting information."
+---
+
+import ApiTable from "../../../components/ApiTable.astro";
+import Example from "../../../components/Example.astro";
+import FrameworkCode from "../../../components/FrameworkCode.astro";
+
+Short, non-interactive labels for status and metadata. Status variants add a glyph, and the text carries the meaning; color is supporting information.
+
+<FrameworkCode code={'import { Badge } from "@simple-base/solid";'} />
+
+## All treatments
+
+Nine variants in both sizes. The label describes the state and success, danger, warning, and info add a glyph, so color is never the only cue.
+
+<Example name="badge/Variants" />
+
+## Supporting content
+
+Keep badges beside the information they qualify. They are labels, not buttons, links, or filters.
+
+<Example name="badge/SupportingContent" />
+
+## API
+
+<ApiTable
+  rows={[
+    [
+      "variant",
+      '"default" (default)',
+      "default · success · danger · warning · info · accent · command · outline · muted",
+    ],
+    ["size", '"medium" (default)', "small (20px) · medium (24px) minimum height"],
+    [
+      "…props",
+      "HTMLAttributes<HTMLSpanElement>",
+      "Renders a span. Use a Button for interactive behavior and Kbd for keys the user presses.",
+    ],
+  ]}
+/>

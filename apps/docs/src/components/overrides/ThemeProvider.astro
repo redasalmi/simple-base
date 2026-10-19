@@ -1,0 +1,63 @@
+---
+// Replaces Starlight's light and dark switch. <html data-theme> holds a @simple-base/tokens theme,
+// so the docs and every example use it, and data-color-scheme holds that theme's light or dark
+// scheme for the code blocks. data-framework picks the component examples to show.
+import { frameworks } from "../../frameworks";
+import { colorSchemes } from "../../lib/tokens";
+
+const config = { schemes: colorSchemes, frameworks: frameworks.map(({ id }) => id) };
+---
+
+{/* Inline so the theme and framework apply before the first paint. */}
+<script is:inline define:vars={{ config }}>
+  const root = document.documentElement;
+
+  function read(key) {
+    try {
+      return localStorage.getItem(key);
+    } catch {
+      return null;
+    }
+  }
+  function write(key, value) {
+    try {
+      localStorage.setItem(key, value);
+    } catch {}
+  }
+
+  function applyTheme(theme) {
+    const system = matchMedia("(prefers-color-scheme: light)").matches
+      ? "simple-base-light"
+      : "simple-base-dark";
+    const valid = Object.hasOwn(config.schemes, theme) ? theme : system;
+    root.dataset.theme = valid;
+    root.dataset.colorScheme = config.schemes[valid];
+  }
+  function applyFramework(framework) {
+    root.dataset.framework = config.frameworks.includes(framework)
+      ? framework
+      : config.frameworks[0];
+  }
+
+  // Until a theme is picked, follow the system color scheme.
+  applyTheme(read("sb-docs-theme"));
+  matchMedia("(prefers-color-scheme: light)").addEventListener("change", () => {
+    if (!read("sb-docs-theme")) applyTheme(null);
+  });
+
+  // A ?framework= link picks the framework and keeps it for the next pages.
+  const linked = new URLSearchParams(location.search).get("framework");
+  if (config.frameworks.includes(linked)) write("sb-docs-framework", linked);
+  applyFramework(read("sb-docs-framework"));
+
+  window.SimpleBaseDocs = {
+    setTheme(theme) {
+      write("sb-docs-theme", theme);
+      applyTheme(theme);
+    },
+    setFramework(framework) {
+      write("sb-docs-framework", framework);
+      applyFramework(framework);
+    },
+  };
+</script>

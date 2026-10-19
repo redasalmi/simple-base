@@ -1,0 +1,25 @@
+---
+title: Table
+description: "Native tables with code and number cells, selected rows, and sortable columns."
+---
+
+import CssReference from "../../../components/CssReference.astro";
+import HtmlExample from "../../../components/HtmlExample.astro";
+
+Native tables with code and number cells, selected rows, and sortable columns. The component [Table](/components/table/) renders this markup for you.
+
+```css
+@import "@simple-base/css/table";
+```
+
+## Sortable columns
+
+`data-variant="code"` and `"number"` style a cell, and `aria-selected="true"` highlights a row. Wrap a wide table in a focusable, named `.sb-table-wrap` region so keyboard users can scroll it.
+
+<HtmlExample name="table/Sortable" />
+
+## Reference
+
+<CssReference sheet="table" />
+
+For a sortable column, put a `button.sb-table-sort-button` as the only child of the `th`, ending with an empty `span.sb-table-sort-indicator` marked `aria-hidden`. The indicator shows both directions while unsorted and an arrow when the `th` has `aria-sort="ascending"` or `"descending"`. Set `aria-sort` on the sorted column only; sorting stays in your app.

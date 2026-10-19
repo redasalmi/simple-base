@@ -1,0 +1,20 @@
+---
+title: Tabs
+description: "A tab list and its panels."
+---
+
+import CssReference from "../../../components/CssReference.astro";
+
+A tab list and its panels. The component [Tabs](/components/tabs/) renders this markup for you.
+
+```css
+@import "@simple-base/css/tabs";
+```
+
+It needs the state that [Tabs](/components/tabs/) manages, so its live example is on the component page.
+
+## Reference
+
+<CssReference sheet="tabs" />
+
+`.sb-tabs` wraps the list and its panels. The selected tab has `aria-selected="true"`, and a disabled tab `aria-disabled="true"` or `data-disabled`. Arrow-key navigation comes from the component packages.

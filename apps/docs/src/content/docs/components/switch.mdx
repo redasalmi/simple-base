@@ -1,0 +1,57 @@
+---
+title: Switch
+description: "An immediate on or off preference. A native checkbox with switch semantics, named by its label like any checkbox."
+---
+
+import ApiTable from "../../../components/ApiTable.astro";
+import Example from "../../../components/Example.astro";
+import FrameworkCode from "../../../components/FrameworkCode.astro";
+
+An immediate on or off preference. A native checkbox with switch semantics, named by its label like any checkbox.
+
+<FrameworkCode code={'import { Switch } from "@simple-base/solid";'} />
+
+## On & off
+
+A switch applies a setting immediately. These settings only affect their local status text and reset when you leave the page.
+
+<Example name="switch/OnAndOff" />
+
+## In a form
+
+A switch submits like a checkbox: its name and value while on, nothing while off. defaultChecked sets the state that Reset restores.
+
+<Example name="switch/InForm" form />
+
+## Disabled states
+
+Unavailable off and on settings. Keep the label visible to explain which preference is locked.
+
+<Example name="switch/Disabled" />
+
+## API
+
+<ApiTable
+  rows={[
+    [
+      "Accessible name",
+      "label, aria-label, or aria-labelledby",
+      "Wrap the switch in a label, or point a label's for at its id, like a checkbox. Use aria-label only for a switch with no visible text.",
+    ],
+    [
+      "checked / onChange",
+      "boolean / native event",
+      'Uses checkbox state and role="switch". Do not provide aria-checked separately.',
+    ],
+    [
+      "defaultChecked",
+      "boolean",
+      "Initial state for uncontrolled switches; form.reset() restores it.",
+    ],
+    [
+      "…props",
+      'InputHTMLAttributes (except "type", "role", "aria-checked")',
+      "Supports disabled, name, value, ref, and class. No custom variants or sizes.",
+    ],
+  ]}
+/>

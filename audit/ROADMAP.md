@@ -300,7 +300,7 @@ The implementation settled five things the items above didn't:
 
 ## Before 1.0
 
-- [ ] **React adapter.** `@simple-base/react` with every component `@simple-base/solid` exports, on the same contracts, with the same behavior tests, server rendering, and form participation. A React playground with the same examples, covered by the same axe run.
+- [ ] **React adapter.** `@simple-base/react` with every component `@simple-base/solid` exports, on the same contracts, with the same behavior tests, server rendering, and form participation. Its examples in the docs, next to the Solid ones, covered by the same axe run.
 - [ ] **Release 1.0.0** across the five packages.
 
 ## After 1.0
