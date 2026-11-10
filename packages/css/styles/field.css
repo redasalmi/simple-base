@@ -146,10 +146,4 @@
   .sb-choice-list-item span {
     font-size: var(--sb-semantic-typography-size-md);
   }
-
-  @media (prefers-reduced-motion: reduce) {
-    .sb-choice-list-item {
-      transition: none;
-    }
-  }
 }

@@ -1,9 +1,42 @@
 import solid from "@astrojs/solid-js";
 import starlight from "@astrojs/starlight";
-import { defineConfig } from "astro/config";
+import { defineConfig, fontProviders } from "astro/config";
 import starlightSidebarTopics from "starlight-sidebar-topics";
 
 export default defineConfig({
+  // The CSS package names these families but doesn't download them. Astro self-hosts them and adds
+  // metric-matched fallbacks, which docs.css swaps into the font tokens.
+  fonts: [
+    {
+      provider: fontProviders.google(),
+      name: "Atkinson Hyperlegible Next",
+      cssVariable: "--font-atkinson-hyperlegible-next",
+      weights: [400, 500, 600, 700],
+      fallbacks: [
+        "Atkinson Hyperlegible",
+        "ui-sans-serif",
+        "system-ui",
+        "-apple-system",
+        "BlinkMacSystemFont",
+        "Segoe UI",
+        "sans-serif",
+      ],
+    },
+    {
+      provider: fontProviders.google(),
+      name: "Atkinson Hyperlegible Mono",
+      cssVariable: "--font-atkinson-hyperlegible-mono",
+      weights: [400, 500, 600],
+      fallbacks: ["ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "monospace"],
+    },
+    {
+      provider: fontProviders.google(),
+      name: "Young Serif",
+      cssVariable: "--font-young-serif",
+      weights: [400],
+      fallbacks: ["Iowan Old Style", "Charter", "Georgia", "serif"],
+    },
+  ],
   integrations: [
     starlight({
       title: "Simple Base",
@@ -13,22 +46,8 @@ export default defineConfig({
         { icon: "github", label: "GitHub", href: "https://github.com/redasalmi/simple-base" },
       ],
       customCss: ["./src/styles/docs.css"],
-      // The CSS package names these families but doesn't download them.
-      head: [
-        { tag: "link", attrs: { rel: "preconnect", href: "https://fonts.googleapis.com" } },
-        {
-          tag: "link",
-          attrs: { rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: true },
-        },
-        {
-          tag: "link",
-          attrs: {
-            rel: "stylesheet",
-            href: "https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:wght@400;500;600&family=Atkinson+Hyperlegible+Next:wght@400;500;600;700&family=Young+Serif&display=swap",
-          },
-        },
-      ],
       components: {
+        Head: "./src/components/overrides/Head.astro",
         ThemeProvider: "./src/components/overrides/ThemeProvider.astro",
         ThemeSelect: "./src/components/overrides/ThemeSelect.astro",
       },

@@ -147,10 +147,6 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .sb-button {
-      transition: none;
-    }
-
     .sb-button:not(:disabled):not([aria-disabled="true"]):active {
       scale: none;
     }

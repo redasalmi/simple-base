@@ -33,7 +33,7 @@ import type { WithoutOwnedProps } from "../internal/props";
 import { fromZagValue, toZagValue } from "../internal/zagValue";
 import { validateWidgetOptions } from "../validateWidgetOptions";
 
-// Matches Zag's hidden select: out of view, but focusable so native validation can report on it.
+// Like Zag's hidden select: out of view, but focusable so native validation can report on it.
 const visuallyHiddenStyle = {
   position: "absolute",
   width: "1px",
@@ -42,7 +42,7 @@ const visuallyHiddenStyle = {
   padding: "0",
   border: "0",
   overflow: "hidden",
-  clip: "rect(0 0 0 0)",
+  "clip-path": "inset(50%)",
   "white-space": "nowrap",
 } satisfies JSX.CSSProperties;
 

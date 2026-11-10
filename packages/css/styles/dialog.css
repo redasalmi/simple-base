@@ -2,6 +2,7 @@
   .sb-dialog-content {
     --sb-dialog-width: 35rem;
 
+    container: sb-dialog / inline-size;
     box-sizing: border-box;
     width: min(var(--sb-dialog-width), calc(100vw - 2 * var(--sb-semantic-space-5)));
     max-width: 100%;
@@ -12,10 +13,69 @@
     color: var(--sb-semantic-color-foreground-primary);
     background: var(--sb-semantic-color-background-surface);
     box-shadow: var(--sb-semantic-shadow-overlay);
+    opacity: 0;
+    scale: var(--sb-semantic-motion-scale-enter);
+    transition-property: opacity, scale;
+    transition-duration: var(--sb-semantic-motion-duration-normal);
+    transition-timing-function: var(--sb-semantic-motion-easing-out);
+  }
+
+  .sb-dialog-content[open] {
+    opacity: 1;
+    scale: 1;
+  }
+
+  .sb-dialog-content:modal {
+    overscroll-behavior: contain;
   }
 
   .sb-dialog-content::backdrop {
+    overflow: hidden;
+    overscroll-behavior: contain;
+    background: transparent;
+    transition-property: background-color;
+    transition-duration: var(--sb-semantic-motion-duration-normal);
+    transition-timing-function: var(--sb-semantic-motion-easing-standard);
+  }
+
+  .sb-dialog-content[open]::backdrop {
     background: var(--sb-semantic-color-overlay-scrim);
+  }
+
+  @starting-style {
+    .sb-dialog-content[open] {
+      opacity: 0;
+      scale: var(--sb-semantic-motion-scale-enter);
+    }
+
+    .sb-dialog-content[open]::backdrop {
+      background: transparent;
+    }
+  }
+
+  /* Without `overlay`, a closing dialog leaves the top layer at once, so the exit can't animate. */
+  @supports (overlay: auto) {
+    .sb-dialog-content {
+      transition-property: opacity, scale, display, overlay;
+      transition-behavior: allow-discrete;
+    }
+
+    .sb-dialog-content::backdrop {
+      transition-property: background-color, display, overlay;
+      transition-behavior: allow-discrete;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sb-dialog-content {
+      scale: none;
+    }
+
+    @starting-style {
+      .sb-dialog-content[open] {
+        scale: none;
+      }
+    }
   }
 
   .sb-dialog-header {
@@ -90,8 +150,7 @@
     outline-offset: 0;
   }
 
-  /* 40rem is --sb-semantic-breakpoint-sm; media queries can't read custom properties. */
-  @media (max-width: 40rem) {
+  @container sb-dialog (inline-size < 24rem) {
     .sb-dialog-footer {
       align-items: stretch;
       flex-direction: column;

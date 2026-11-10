@@ -203,12 +203,6 @@
     overflow-wrap: anywhere;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .sb-select-control {
-      transition: none;
-    }
-  }
-
   @media (forced-colors: active) {
     .sb-select-control:focus-within {
       outline: var(--sb-semantic-border-width-strong) solid Highlight;

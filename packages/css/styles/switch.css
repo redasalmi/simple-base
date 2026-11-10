@@ -94,10 +94,10 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .sb-switch,
     .sb-switch::before,
     .sb-switch::after {
-      transition: none;
+      transition: background var(--sb-semantic-motion-duration-normal)
+        var(--sb-semantic-motion-easing-standard);
     }
   }
 

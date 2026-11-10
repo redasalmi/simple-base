@@ -2,6 +2,7 @@
   .sb-alert-dialog-content {
     --sb-alert-dialog-width: 35rem;
 
+    container: sb-alert-dialog / inline-size;
     box-sizing: border-box;
     width: min(var(--sb-alert-dialog-width), calc(100vw - 2 * var(--sb-semantic-space-5)));
     max-width: 100%;
@@ -12,16 +13,72 @@
     color: var(--sb-semantic-color-foreground-primary);
     background: var(--sb-semantic-color-background-surface);
     box-shadow: var(--sb-semantic-shadow-overlay);
+    opacity: 0;
+    scale: var(--sb-semantic-motion-scale-enter);
+    transition-property: opacity, scale;
+    transition-duration: var(--sb-semantic-motion-duration-normal);
+    transition-timing-function: var(--sb-semantic-motion-easing-out);
   }
 
   .sb-alert-dialog-content[open] {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
     gap: var(--sb-semantic-space-4);
+    opacity: 1;
+    scale: 1;
+  }
+
+  .sb-alert-dialog-content:modal {
+    overscroll-behavior: contain;
   }
 
   .sb-alert-dialog-content::backdrop {
+    overflow: hidden;
+    overscroll-behavior: contain;
+    background: transparent;
+    transition-property: background-color;
+    transition-duration: var(--sb-semantic-motion-duration-normal);
+    transition-timing-function: var(--sb-semantic-motion-easing-standard);
+  }
+
+  .sb-alert-dialog-content[open]::backdrop {
     background: var(--sb-semantic-color-overlay-scrim);
+  }
+
+  @starting-style {
+    .sb-alert-dialog-content[open] {
+      opacity: 0;
+      scale: var(--sb-semantic-motion-scale-enter);
+    }
+
+    .sb-alert-dialog-content[open]::backdrop {
+      background: transparent;
+    }
+  }
+
+  /* Without `overlay`, a closing dialog leaves the top layer at once, so the exit can't animate. */
+  @supports (overlay: auto) {
+    .sb-alert-dialog-content {
+      transition-property: opacity, scale, display, overlay;
+      transition-behavior: allow-discrete;
+    }
+
+    .sb-alert-dialog-content::backdrop {
+      transition-property: background-color, display, overlay;
+      transition-behavior: allow-discrete;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sb-alert-dialog-content {
+      scale: none;
+    }
+
+    @starting-style {
+      .sb-alert-dialog-content[open] {
+        scale: none;
+      }
+    }
   }
 
   .sb-alert-dialog-icon {
@@ -79,8 +136,7 @@
     margin-top: var(--sb-semantic-space-4);
   }
 
-  /* 40rem is --sb-semantic-breakpoint-sm; media queries can't read custom properties. */
-  @media (max-width: 40rem) {
+  @container sb-alert-dialog (inline-size < 24rem) {
     .sb-alert-dialog-footer {
       align-items: stretch;
       flex-direction: column;

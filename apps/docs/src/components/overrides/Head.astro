@@ -1,0 +1,9 @@
+---
+import Default from "@astrojs/starlight/components/Head.astro";
+import { Font } from "astro:assets";
+---
+
+<Default />
+<Font cssVariable="--font-atkinson-hyperlegible-next" preload={[{ weight: 400, style: "normal" }]} />
+<Font cssVariable="--font-atkinson-hyperlegible-mono" />
+<Font cssVariable="--font-young-serif" />

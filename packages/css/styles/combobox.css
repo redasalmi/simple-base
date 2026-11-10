@@ -212,13 +212,6 @@
     overflow-wrap: anywhere;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .sb-combobox-control,
-    .sb-combobox-trigger {
-      transition: none;
-    }
-  }
-
   @media (forced-colors: active) {
     .sb-combobox-control:focus-within {
       outline: var(--sb-semantic-border-width-strong) solid Highlight;

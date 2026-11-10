@@ -17,4 +17,4 @@ It needs the state that [Dialog](/components/dialog/) manages, so its live examp
 
 <CssReference sheet="dialog" />
 
-The content is a native `<dialog>`. Modal backdrops separate context with a scrim, not blur.
+The content is a native `<dialog>`. Modal backdrops separate context with a scrim, not blur. It fades and scales in when it opens. Browsers that support the `overlay` property also animate the close; the others close it at once. While it's open, scrolling inside it or over the backdrop doesn't scroll the page, in browsers that contain scrolling on non-scrollable boxes. The footer stacks its buttons when the content box is narrower than 24rem.

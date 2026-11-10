@@ -37,7 +37,7 @@
     outline: var(--sb-semantic-border-width-strong) solid var(--sb-semantic-color-focus-ring);
   }
 
-  .sb-input[aria-invalid="true"] {
+  .sb-input:is([aria-invalid="true"], :user-invalid) {
     border-color: var(--sb-semantic-color-status-danger-base);
     background: color-mix(
       in oklab,
@@ -46,7 +46,7 @@
     );
   }
 
-  .sb-input[aria-invalid="true"]:focus-visible {
+  .sb-input:is([aria-invalid="true"], :user-invalid):focus-visible {
     border-color: var(--sb-semantic-color-focus-danger-ring);
     outline-color: var(--sb-semantic-color-focus-danger-ring);
   }
@@ -57,11 +57,19 @@
     border-color: var(--sb-semantic-color-border-default);
   }
 
-  .sb-input:autofill,
-  .sb-input:-webkit-autofill {
-    box-shadow: 0 0 0 1000px var(--sb-semantic-color-background-surface) inset;
+  /* The fill replaces the browser's autofill tint, so a thicker inner ring marks the field instead. */
+  .sb-input:is(:autofill, :-webkit-autofill) {
+    box-shadow:
+      inset 0 0 0 var(--sb-semantic-border-width-strong) var(--sb-semantic-color-accent-surface),
+      inset 0 0 0 100vmax var(--sb-semantic-color-background-surface);
     caret-color: var(--sb-semantic-color-accent-text);
     -webkit-text-fill-color: var(--sb-semantic-color-foreground-primary);
+  }
+
+  .sb-input:is([aria-invalid="true"], :user-invalid):is(:autofill, :-webkit-autofill) {
+    box-shadow:
+      inset 0 0 0 var(--sb-semantic-border-width-strong) var(--sb-semantic-color-status-danger-base),
+      inset 0 0 0 100vmax var(--sb-semantic-color-background-surface);
   }
 
   .sb-input:disabled {
@@ -70,11 +78,5 @@
     background: var(--sb-semantic-color-background-muted);
     border-style: dashed;
     border-color: var(--sb-semantic-color-border-strong);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .sb-input {
-      transition: none;
-    }
   }
 }

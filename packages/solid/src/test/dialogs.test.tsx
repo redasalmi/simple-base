@@ -246,3 +246,23 @@ describe.each(variants.map((variant) => [variant.name, variant] as const))(
     });
   },
 );
+
+describe("Dialog", () => {
+  test('closes on a click outside with closedby="any"', async () => {
+    const onOpenChange = vi.fn();
+    render(() => (
+      <Dialog defaultOpen onOpenChange={onOpenChange}>
+        <DialogContent closedby="any">
+          <DialogTitle>Workspace details</DialogTitle>
+        </DialogContent>
+      </Dialog>
+    ));
+    const dialog = screen.getByRole<HTMLDialogElement>("dialog");
+
+    // Above and left of the dialog's box, on its backdrop.
+    await browserUserEvent.click(dialog, { position: { x: -10, y: -10 } });
+
+    await expect.poll(() => dialog.open).toBe(false);
+    expect(onOpenChange.mock.calls).toEqual([[false]]);
+  });
+});

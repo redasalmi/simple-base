@@ -778,7 +778,7 @@ import {
 
 `DialogTitle` renders an `h2` unless you pass `level`. `DialogClose` is the icon-sized close control; give it an accessible name when it contains only an icon. `DialogAction` uses the standard button API, closes the modal, and copies its `value` to the native dialog `returnValue`.
 
-Use `open` with `onOpenChange` for controlled state, or `defaultOpen` for uncontrolled initial state. Native dialog attributes, events, and the `HTMLDialogElement` ref belong to `DialogContent`.
+Use `open` with `onOpenChange` for controlled state, or `defaultOpen` for uncontrolled initial state. Native dialog attributes, events, and the `HTMLDialogElement` ref belong to `DialogContent`. Pass `closedby="any"` to `DialogContent` to also close the dialog on a click outside it; browsers without `closedby`, such as Safari, still close it with Escape and its own controls.
 
 ## AlertDialog
 
@@ -812,7 +812,7 @@ import {
 </AlertDialog>;
 ```
 
-Use `open` with `onOpenChange` for controlled state, or `defaultOpen` for uncontrolled initial state. Native dialog attributes, events, and the `HTMLDialogElement` ref belong to `AlertDialogContent`. `AlertDialogTitle` renders an `h2` unless you pass `level`, and `AlertDialogIcon` is always hidden from assistive technology.
+Use `open` with `onOpenChange` for controlled state, or `defaultOpen` for uncontrolled initial state. Native dialog attributes, events, and the `HTMLDialogElement` ref belong to `AlertDialogContent`, except `closedby`: a click outside never dismisses an alert dialog. `AlertDialogTitle` renders an `h2` unless you pass `level`, and `AlertDialogIcon` is always hidden from assistive technology.
 
 ## Toast
 

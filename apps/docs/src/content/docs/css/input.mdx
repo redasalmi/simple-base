@@ -14,7 +14,7 @@ Single-line text entry with native validation. The component [Input](/components
 
 ## States
 
-Filled, read-only, disabled, and invalid. `aria-invalid="true"` draws the error state.
+Filled, read-only, disabled, and invalid. `aria-invalid="true"` draws the error state. So does a failed native check, such as `required` or `type="email"`, once the user has edited the field or tried to submit (`:user-invalid`).
 
 <HtmlExample name="input/States" />
 

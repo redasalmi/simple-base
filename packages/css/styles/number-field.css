@@ -157,13 +157,6 @@
     height: var(--sb-semantic-size-icon-sm);
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .sb-number-field-control,
-    .sb-number-field-trigger {
-      transition: none;
-    }
-  }
-
   @media (forced-colors: active) {
     .sb-number-field-control:focus-within {
       outline: var(--sb-semantic-border-width-strong) solid Highlight;

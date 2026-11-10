@@ -6,6 +6,10 @@
 /* Starlight's interface takes its colors and fonts from the selected token theme, which
    ThemeProvider sets on <html data-theme>. */
 :root {
+  --sb-primitive-font-family-sans: var(--font-atkinson-hyperlegible-next);
+  --sb-primitive-font-family-mono: var(--font-atkinson-hyperlegible-mono);
+  --sb-primitive-font-family-display: var(--font-young-serif);
+
   --sl-font: var(--sb-semantic-typography-family-body);
   --sl-font-mono: var(--sb-semantic-typography-family-code);
 

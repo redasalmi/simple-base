@@ -285,13 +285,6 @@
     text-decoration: line-through;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .sb-date-picker-control,
-    .sb-date-picker-trigger {
-      transition: none;
-    }
-  }
-
   @media (forced-colors: active) {
     .sb-date-picker-control:focus-within,
     .sb-date-picker-cell-trigger:focus-visible {

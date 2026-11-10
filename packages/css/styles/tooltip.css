@@ -40,9 +40,15 @@
     }
   }
 
+  @keyframes sb-tooltip-fade-in {
+    from {
+      opacity: 0;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .sb-tooltip-content[data-state="open"]:not([data-instant]) {
-      animation: none;
+      animation-name: sb-tooltip-fade-in;
     }
   }
 

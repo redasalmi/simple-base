@@ -41,7 +41,7 @@
     outline: var(--sb-semantic-border-width-strong) solid var(--sb-semantic-color-focus-ring);
   }
 
-  .sb-textarea[aria-invalid="true"] {
+  .sb-textarea:is([aria-invalid="true"], :user-invalid) {
     border-color: var(--sb-semantic-color-status-danger-base);
     background: color-mix(
       in oklab,
@@ -50,7 +50,7 @@
     );
   }
 
-  .sb-textarea[aria-invalid="true"]:focus-visible {
+  .sb-textarea:is([aria-invalid="true"], :user-invalid):focus-visible {
     border-color: var(--sb-semantic-color-focus-danger-ring);
     outline-color: var(--sb-semantic-color-focus-danger-ring);
   }
@@ -67,11 +67,5 @@
     background: var(--sb-semantic-color-background-muted);
     border-style: dashed;
     border-color: var(--sb-semantic-color-border-strong);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .sb-textarea {
-      transition: none;
-    }
   }
 }

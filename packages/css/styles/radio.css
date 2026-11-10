@@ -39,7 +39,7 @@
     scale: 1;
   }
 
-  .sb-radio[aria-invalid="true"] {
+  .sb-radio:is([aria-invalid="true"], :user-invalid) {
     border-color: var(--sb-semantic-color-status-danger-base);
   }
 
@@ -54,7 +54,6 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .sb-radio,
     .sb-radio::after {
       transition: none;
     }

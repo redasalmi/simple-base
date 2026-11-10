@@ -41,7 +41,7 @@ export function AlertDialogTrigger(props: AlertDialogTriggerProps) {
   );
 }
 
-export type AlertDialogContentProps = DialogContentBaseProps;
+export type AlertDialogContentProps = Omit<DialogContentBaseProps, "closedby">;
 
 export function AlertDialogContent(props: AlertDialogContentProps) {
   const dialog = useAlertDialog();
