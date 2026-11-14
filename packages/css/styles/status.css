@@ -55,7 +55,7 @@
     height: var(--sb-semantic-space-2);
     flex: 0 0 auto;
     /* Centers the dot on the first line of the title. */
-    margin-top: calc(
+    margin-block-start: calc(
       (
           var(--sb-semantic-typography-size-md) * var(--sb-semantic-typography-line-height-snug) -
             var(--sb-semantic-space-2)
@@ -157,7 +157,7 @@
   .sb-toast-content {
     flex: 1 1 auto;
     min-width: 0;
-    padding-top: var(--sb-semantic-space-1);
+    padding-block-start: var(--sb-semantic-space-1);
     overflow-wrap: anywhere;
   }
 
@@ -171,11 +171,11 @@
     display: flex;
     flex-wrap: wrap;
     gap: var(--sb-semantic-space-2);
-    margin-top: var(--sb-semantic-space-3);
+    margin-block-start: var(--sb-semantic-space-3);
   }
 
   .sb-toast-action {
-    margin-top: var(--sb-semantic-space-3);
+    margin-block-start: var(--sb-semantic-space-3);
   }
 
   .sb-alert-close,

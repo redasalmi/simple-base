@@ -133,7 +133,7 @@
     display: flex;
     justify-content: flex-end;
     gap: var(--sb-semantic-space-3);
-    margin-top: var(--sb-semantic-space-4);
+    margin-block-start: var(--sb-semantic-space-4);
   }
 
   @container sb-alert-dialog (inline-size < 24rem) {

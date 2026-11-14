@@ -6,7 +6,7 @@
     justify-content: center;
     min-height: var(--sb-semantic-size-control-md);
     gap: var(--sb-semantic-space-2);
-    padding: 0 var(--sb-semantic-space-5);
+    padding: var(--sb-semantic-space-1) var(--sb-semantic-space-5);
     border: var(--sb-semantic-border-width-hairline) solid transparent;
     border-radius: var(--sb-semantic-radius-md);
     appearance: none;
@@ -16,10 +16,9 @@
     font: inherit;
     font-size: var(--sb-semantic-typography-size-md);
     font-weight: var(--sb-semantic-typography-weight-semibold);
-    line-height: var(--sb-semantic-typography-line-height-none);
+    line-height: var(--sb-semantic-typography-line-height-snug);
     letter-spacing: var(--sb-semantic-typography-letter-spacing-normal);
     text-decoration: none;
-    white-space: nowrap;
     user-select: none;
     transition:
       background var(--sb-semantic-motion-duration-fast) var(--sb-semantic-motion-easing-standard),

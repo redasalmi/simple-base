@@ -14,7 +14,7 @@
     place-items: center;
     width: var(--sb-semantic-size-target-minimum);
     height: var(--sb-semantic-size-target-minimum);
-    margin-bottom: var(--sb-semantic-space-4);
+    margin-block-end: var(--sb-semantic-space-4);
     border-radius: var(--sb-semantic-radius-md);
     color: var(--sb-semantic-color-accent-text);
     background: var(--sb-semantic-color-accent-soft);
@@ -48,6 +48,6 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: var(--sb-semantic-space-2);
-    margin-top: var(--sb-semantic-space-5);
+    margin-block-start: var(--sb-semantic-space-5);
   }
 }

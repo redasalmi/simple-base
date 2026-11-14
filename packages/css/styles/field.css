@@ -55,7 +55,7 @@
     width: var(--sb-semantic-size-icon-sm);
     height: var(--sb-semantic-size-icon-sm);
     /* Centers the glyph on the first line of text. */
-    margin-top: calc(
+    margin-block-start: calc(
       (
           var(--sb-semantic-typography-size-sm) * var(--sb-semantic-typography-line-height-normal) -
             var(--sb-semantic-size-icon-sm)
@@ -94,7 +94,7 @@
   .sb-choice-list {
     display: grid;
     gap: var(--sb-semantic-space-2);
-    margin-top: var(--sb-semantic-space-3);
+    margin-block-start: var(--sb-semantic-space-3);
   }
 
   .sb-choice-list-item {

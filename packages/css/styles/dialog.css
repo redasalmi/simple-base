@@ -115,7 +115,7 @@
     display: flex;
     justify-content: flex-end;
     gap: var(--sb-semantic-space-3);
-    margin-top: var(--sb-semantic-space-8);
+    margin-block-start: var(--sb-semantic-space-8);
   }
 
   .sb-dialog-close {

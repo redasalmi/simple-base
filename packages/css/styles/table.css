@@ -29,7 +29,7 @@
   .sb-table th,
   .sb-table td {
     padding: var(--sb-semantic-space-3) var(--sb-semantic-space-4);
-    border-bottom: var(--sb-semantic-border-width-hairline) solid
+    border-block-end: var(--sb-semantic-border-width-hairline) solid
       var(--sb-semantic-color-border-default);
     text-align: start;
     vertical-align: middle;
@@ -49,7 +49,7 @@
   }
 
   .sb-table-wrap .sb-table > :last-child > tr:last-child > :is(th, td) {
-    border-bottom: 0;
+    border-block-end: 0;
   }
 
   .sb-table tbody tr:hover > :is(th, td) {
